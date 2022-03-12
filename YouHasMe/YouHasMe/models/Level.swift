@@ -1,10 +1,3 @@
-//
-//  Level.swift
-//  YouHasMe
-//
-//  Created by Jia Cheng Sun on 12/3/22.
-//
-
 import Foundation
 
 class Rectangle {
@@ -27,45 +20,7 @@ class Level {
 
 extension Level: LevelLayerDelegate {}
 
-protocol OutletDelegate: AnyObject {
-    var dimensions: Rectangle { get }
-}
-
-enum RectangleEdge {
-    case topEdge
-    case bottomEdge
-    case leftEdge
-    case rightEdge
-}
-
-class Outlet {
-    var connector: Connector?
-    // outlet lies on the boundaries
-    var edge: RectangleEdge
-    var position: ClosedRange<Int>
-    init(edge: RectangleEdge, position: ClosedRange<Int>) {
-        self.edge = edge
-        self.position = position
-    }
-}
-
-protocol LevelLayerDelegate: AnyObject {
-    var dimensions: Rectangle { get }
-}
-
-class LevelLayer {
-    weak var delegate: LevelLayerDelegate?
-    var outlets: [Outlet] = []
-    var tiles: [Tile] = []
-    func getTileAt(x: Int, y: Int) -> Tile {
-        guard let delegate = delegate else {
-            fatalError("should not be nil")
-        }
-
-        return tiles[x + y * delegate.dimensions.width]
-    }
-    
-    // To be generalized, each cell could have more than one entity
+class LevelLayer: AbstractLevelLayer {
     func getAbstractRepresentation() -> EntityBlock {
         guard let delegate = delegate else {
             fatalError()

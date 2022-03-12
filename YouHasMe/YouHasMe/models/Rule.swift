@@ -1,15 +1,6 @@
-//
-//  Rule.swift
-//  YouHasMe
-//
-//  Created by Jia Cheng Sun on 12/3/22.
-//
-
 import Foundation
 
 typealias EntityBlock = [[Set<EntityType>?]]
-
-
 
 class RuleParser {
     enum AutomataState {
@@ -25,7 +16,7 @@ class RuleParser {
         case reject
     }
     class RuleParserState {
-        var dfaState: AutomataState = .epsilon
+        var automataState: AutomataState = .epsilon
         var receivers: [Noun] = []
         var properties: [Property] = []
         var hasObjects: [Noun] = []
@@ -44,14 +35,13 @@ class RuleParser {
         }
     }
     
-    
     func transition(ruleParserState: RuleParserState, entityType: EntityType) {
-        switch ruleParserState.dfaState {
+        switch ruleParserState.automataState {
         case .epsilon:
             switch entityType {
             case .noun(let noun):
                 ruleParserState.receivers.append(noun)
-                ruleParserState.dfaState = .noun
+                ruleParserState.automataState = .noun
                 return
             default:
                 break
@@ -61,13 +51,13 @@ class RuleParser {
             case .verb(let verb):
                 switch verb {
                 case .vIs:
-                    ruleParserState.dfaState = .isVerb
+                    ruleParserState.automataState = .isVerb
                 case .vHas:
-                    ruleParserState.dfaState = .hasVerb
+                    ruleParserState.automataState = .hasVerb
                 }
                 return
             case .connective(let connectiveType) where connectiveType == .and:
-                ruleParserState.dfaState = .noun_concat_and
+                ruleParserState.automataState = .noun_concat_and
                 return
             default:
                 break
@@ -76,18 +66,18 @@ class RuleParser {
         case .noun_concat_and:
             if case .noun(let noun) = entityType {
                 ruleParserState.receivers.append(noun)
-                ruleParserState.dfaState = .noun
+                ruleParserState.automataState = .noun
                 return
             }
         case .isVerb:
             switch entityType {
             case .noun(let noun):
                 ruleParserState.properties.append(.equalTo(noun))
-                ruleParserState.dfaState = .isVerb_concat_nounProp
+                ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             case .property(let property):
                 ruleParserState.properties.append(property)
-                ruleParserState.dfaState = .isVerb_concat_nounProp
+                ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             default:
                 break
@@ -96,28 +86,28 @@ class RuleParser {
             switch entityType {
             case .noun(let noun):
                 ruleParserState.properties.append(.equalTo(noun))
-                ruleParserState.dfaState = .isVerb_concat_nounProp
+                ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             case .property(let property):
                 ruleParserState.properties.append(property)
-                ruleParserState.dfaState = .isVerb_concat_nounProp
+                ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             case .verb(let verbType) where verbType == .vHas:
-                ruleParserState.dfaState = .hasVerb
+                ruleParserState.automataState = .hasVerb
                 return
             default:
                 break
             }
         case .isVerb_concat_nounProp:
             if case .connective(let connective) = entityType, connective == .and {
-                ruleParserState.dfaState = .isVerbPrime
+                ruleParserState.automataState = .isVerbPrime
                 return
             }
         case .hasVerb:
             switch entityType {
             case .noun(let noun):
                 ruleParserState.hasObjects.append(noun)
-                ruleParserState.dfaState = .hasVerb_concat_noun
+                ruleParserState.automataState = .hasVerb_concat_noun
                 return
             default:
                 break
@@ -126,10 +116,10 @@ class RuleParser {
             switch entityType {
             case .noun(let noun):
                 ruleParserState.hasObjects.append(noun)
-                ruleParserState.dfaState = .hasVerb_concat_noun
+                ruleParserState.automataState = .hasVerb_concat_noun
                 return
             case .verb(let verb) where verb == .vIs:
-                ruleParserState.dfaState = .isVerb
+                ruleParserState.automataState = .isVerb
                 return
             default:
                 break
@@ -137,7 +127,7 @@ class RuleParser {
         case .hasVerb_concat_noun:
             switch entityType {
             case .connective(let connective) where connective == .and:
-                ruleParserState.dfaState = .hasVerbPrime
+                ruleParserState.automataState = .hasVerbPrime
                 return
             default:
                 break
@@ -145,7 +135,7 @@ class RuleParser {
         case .reject:
             break
         }
-        ruleParserState.dfaState = .reject
+        ruleParserState.automataState = .reject
     }
     
     func parse(sentence: [EntityType]) -> [Rule] {
@@ -187,9 +177,10 @@ class RuleParser {
 }
 
 class RuleValidator {
-    
+    func validate(rules: [Rule]) {
+        // is there even anything to validate
+    }
 }
-
 
 class RuleEngine {
     var wellFormedRules: [Rule] = []
@@ -197,12 +188,11 @@ class RuleEngine {
     private var ruleValidator: RuleValidator = RuleValidator()
 }
 
-enum RulePerformer: Hashable {
-    case noun(Noun)
-    case property(Property)
-}
-
 class Rule {
+    enum RulePerformer: Hashable {
+        case noun(Noun)
+        case property(Property)
+    }
     var receiver: Noun
     var verb: Verb
     var perfomer: RulePerformer

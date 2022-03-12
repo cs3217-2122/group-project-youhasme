@@ -1,10 +1,3 @@
-//
-//  Entity.swift
-//  YouHasMe
-//
-//  Created by Jia Cheng Sun on 12/3/22.
-//
-
 import Foundation
 enum EntityType: Hashable {
     case noun(Noun)
@@ -16,7 +9,7 @@ enum EntityType: Hashable {
 
 extension EntityType {
     var isMetaData: Bool {
-        if case .nounInstance(_) = self else {
+        if case .nounInstance(_) = self {
             return false
         }
         return true

@@ -1,30 +1,27 @@
-//
-//  BidirectionalArray.swift
-//  YouHasMe
-//
-//  Created by Jia Cheng Sun on 12/3/22.
-//
-
 import Foundation
-struct BidirectionalArray<T> {
+class BidirectionalArray<T> {
+    private var lowerBound: Int = 0
+    private var upperBound: Int = 0
     private var backingArray: [T] = []
     private func getActualIndex(_ index: Int) -> Int {
-        index >= 0 ? backingArray[2 * index] : backingArray[2 * -index - 1]
+        index >= 0 ? 2 * index : 2 * -index - 1
     }
     
     func getAtIndex(_ index: Int) -> T {
         backingArray[getActualIndex(index)]
     }
     
-    func setAtIndex(_: Int, value: T) {
+    func setAtIndex(_ index: Int, value: T) {
         backingArray[getActualIndex(index)] = value
     }
     
     func append(_ item: T) {
-        
+        upperBound += 1
+        setAtIndex(upperBound, value: item)
     }
     
     func prepend(_ item: T) {
-        
+        lowerBound -= 1
+        setAtIndex(lowerBound, value: item)
     }
 }
