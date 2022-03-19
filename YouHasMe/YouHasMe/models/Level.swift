@@ -1,6 +1,6 @@
 import Foundation
 
-class Rectangle {
+struct Rectangle {
     var width: Int
     var height: Int
     init(width: Int, height: Int) {
@@ -13,7 +13,7 @@ class Rectangle {
     }
 }
 
-class Level {
+struct Level {
     var layers: BidirectionalArray<LevelLayer>
     init() {
         layers = BidirectionalArray()

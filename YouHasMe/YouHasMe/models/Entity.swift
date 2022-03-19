@@ -1,6 +1,6 @@
 import Foundation
 
-class Entity {
+struct Entity {
     var entityType: EntityType
     init(entityType: EntityType) {
         self.entityType = entityType

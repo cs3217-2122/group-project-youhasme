@@ -36,7 +36,7 @@ extension ConditionRelation {
     }
 }
 
-class Condition {
+struct Condition {
     var subject: ConditionSubject
     var relation: ConditionRelation
     var value: Double

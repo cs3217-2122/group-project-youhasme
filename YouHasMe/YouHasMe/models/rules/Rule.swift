@@ -192,7 +192,7 @@ class RuleEngine {
     private var ruleValidator: RuleValidator = RuleValidator()
 }
 
-class Rule {
+struct Rule {
     enum RulePerformer: Hashable {
         case noun(Noun)
         case property(Property)

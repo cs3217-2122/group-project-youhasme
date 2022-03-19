@@ -65,7 +65,7 @@ extension Property: CustomDebugStringConvertible {
     }
 }
 
-class EntityType: Hashable {
+struct EntityType: Hashable {
     var classification: Classification
     
     /// A set of rules potentially applicable to this entity type, that may or may not be active.
