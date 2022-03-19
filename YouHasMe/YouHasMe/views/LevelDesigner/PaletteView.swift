@@ -23,8 +23,8 @@ struct PaletteView: View {
     }
 }
 
-//struct PaletteView_Previews: PreviewProvider {
+// struct PaletteView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        Pal	etteView()
 //    }
-//}
+// }

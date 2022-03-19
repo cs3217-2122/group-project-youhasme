@@ -14,7 +14,7 @@ protocol AbstractLevelLayer {
 
 extension AbstractLevelLayer {
     func getTileAt(x: Int, y: Int) -> Tile {
-        return tiles[x + y * dimensions.width]
+        tiles[x + y * dimensions.width]
     }
 
     mutating func setTileAt(x: Int, y: Int, tile: Tile) {

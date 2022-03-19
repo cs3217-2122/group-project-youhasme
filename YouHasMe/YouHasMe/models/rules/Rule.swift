@@ -7,7 +7,7 @@ struct Rule {
         case noun(Noun)
         case property(Property)
     }
-    
+
     var receiver: Noun
     var verb: Verb
     var performer: RulePerformer
@@ -17,7 +17,7 @@ struct Rule {
         self.verb = verb
         self.performer = performer
     }
-    
+
     func activateToBehaviour() -> Behaviour {
         switch performer {
         case .noun(let noun):
@@ -35,9 +35,9 @@ struct Rule {
 
 extension Rule: Hashable {
     static func == (lhs: Rule, rhs: Rule) -> Bool {
-        return lhs.receiver == rhs.receiver && lhs.verb == rhs.verb && lhs.performer == rhs.performer
+        lhs.receiver == rhs.receiver && lhs.verb == rhs.verb && lhs.performer == rhs.performer
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(receiver)
         hasher.combine(verb)

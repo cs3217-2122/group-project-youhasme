@@ -16,11 +16,11 @@ class Outlet {
     // outlet lies on the boundaries
     var edge: RectangleEdge
     var position: ClosedRange<Int>
-    
+
     var isOpen: Bool {
         condition?.isConditionMet() ?? true
     }
-    
+
     init(edge: RectangleEdge, position: ClosedRange<Int>) {
         self.edge = edge
         self.position = position
