@@ -13,15 +13,16 @@ struct BidirectionalArray<T> {
     
     mutating func setAtIndex(_ index: Int, value: T) {
         let index = getActualIndex(index)
-        while index <= backingArray.count {
+        while index >= backingArray.count {
             backingArray.append(nil)
         }
+
         backingArray[index] = value
     }
     
     mutating func append(_ item: T) {
-        upperBound += 1
         setAtIndex(upperBound, value: item)
+        upperBound += 1
     }
     
     mutating func prepend(_ item: T) {

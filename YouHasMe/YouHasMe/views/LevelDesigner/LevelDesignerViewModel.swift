@@ -13,7 +13,7 @@ class LevelDesignerViewModel: ObservableObject {
 
     init(currLevel: Level) {
         self.currLevel = Level()
-        self.currLevelLayer = LevelLayer(dimensions: Rectangle(width: 30, height: 30))
+        self.currLevelLayer = currLevel.baseLevel
     }
 
     func getWidth() -> Int  {
@@ -57,5 +57,9 @@ class LevelDesignerViewModel: ObservableObject {
 
         tile.entities.append(newEntity)
         currLevelLayer.setTileAt(x: x, y: y, tile: tile)
+    }
+
+    func reset() {
+        self.currLevelLayer = LevelLayer(dimensions: currLevelLayer.dimensions)
     }
 }

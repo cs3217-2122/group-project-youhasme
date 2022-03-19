@@ -14,14 +14,22 @@ struct Rectangle {
 }
 
 struct Level {
+    var name: String
     var layers: BidirectionalArray<LevelLayer>
-    init() {
+
+    init(name: String = "") {
+        self.name = name
         layers = BidirectionalArray()
+        layers.append(LevelLayer(dimensions: Rectangle(width: 30, height: 30)))
     }
     
     /// Level zero.
     var baseLevel: LevelLayer {
-        layers.getAtIndex(0)
+        guard let baseLayer = layers.getAtIndex(0) else {
+            assert(false, "Level does not have a base layer")
+        }
+
+        return baseLayer
     }
 }
 
