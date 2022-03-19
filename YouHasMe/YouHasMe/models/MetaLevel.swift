@@ -17,6 +17,10 @@ extension AbstractLevelLayer {
         tiles[x + y * dimensions.width]
     }
 
+    mutating func add(entity: Entity, x: Int, y: Int) {
+        tiles[x + y * dimensions.width].entities.append(entity)
+    }
+
     mutating func setTileAt(x: Int, y: Int, tile: Tile) {
         tiles[x + y * dimensions.width] = tile
     }
