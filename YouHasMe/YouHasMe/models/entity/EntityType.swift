@@ -74,3 +74,6 @@ struct EntityTypes {
         return entityTypes
     }
 }
+
+extension EntityType: Codable {
+}

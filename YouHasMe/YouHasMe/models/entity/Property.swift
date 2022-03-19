@@ -14,3 +14,6 @@ extension Property: CustomDebugStringConvertible {
         rawValue
     }
 }
+
+extension Property: Codable {
+}

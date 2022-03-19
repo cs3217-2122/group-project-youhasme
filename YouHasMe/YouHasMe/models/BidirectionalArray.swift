@@ -1,5 +1,5 @@
 import Foundation
-struct BidirectionalArray<T> {
+struct BidirectionalArray<T: Codable> {
     private var lowerBound: Int = 0
     private var upperBound: Int = 0
     private var backingArray: [T?] = []
@@ -13,19 +13,23 @@ struct BidirectionalArray<T> {
 
     mutating func setAtIndex(_ index: Int, value: T) {
         let index = getActualIndex(index)
-        while index <= backingArray.count {
+        while index >= backingArray.count {
             backingArray.append(nil)
         }
+
         backingArray[index] = value
     }
 
     mutating func append(_ item: T) {
-        upperBound += 1
         setAtIndex(upperBound, value: item)
+        upperBound += 1
     }
 
     mutating func prepend(_ item: T) {
         lowerBound -= 1
         setAtIndex(lowerBound, value: item)
     }
+}
+
+extension BidirectionalArray: Codable {
 }
