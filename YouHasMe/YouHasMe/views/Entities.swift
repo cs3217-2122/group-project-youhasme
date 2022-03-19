@@ -6,20 +6,7 @@
 import Foundation
 import SwiftUI
  
-let allAvailableEntityTypes: [EntityType] = [
-    EntityTypes.Nouns.baba,
-    EntityTypes.Nouns.wall,
-    EntityTypes.Nouns.skull,
-    EntityTypes.Nouns.flag,
-    EntityTypes.Connectives.and,
-    EntityTypes.Verbs.vIs,
-    EntityTypes.Verbs.vHas,
-    EntityTypes.Properties.you,
-    EntityTypes.Properties.win,
-    EntityTypes.Properties.defeat,
-    EntityTypes.Properties.block
-]
-
+let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
 
 func entityTypeToImageString(type: EntityType) -> Color {
     switch type {
@@ -43,7 +30,11 @@ func entityTypeToImageString(type: EntityType) -> Color {
         return .cyan
     case EntityTypes.Properties.defeat:
         return .pink
+    case EntityTypes.Properties.block:
+        return .gray
     default:
+        /// can change this if we have entity types in the future that cannot be added to the level designer
+        assert(false, "Entity Type does not have image")
         return .gray
     }
 }
