@@ -5,7 +5,7 @@
 
 import Foundation
 import SwiftUI
- 
+
 let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
 
 func entityTypeToImageString(type: EntityType) -> Color {
@@ -34,7 +34,8 @@ func entityTypeToImageString(type: EntityType) -> Color {
         return .gray
     default:
         /// can change this if we have entity types in the future that cannot be added to the level designer
-        assert(false, "Entity Type does not have image")
+        // assert(false, "Entity Type does not have image")
+        // TODO: Fix this
         return .gray
     }
 }

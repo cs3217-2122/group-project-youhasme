@@ -15,7 +15,6 @@ extension String {
   }
 }
 
-
 extension String {
   subscript(value: CountableClosedRange<Int>) -> Substring {
     self[index(at: value.lowerBound)...index(at: value.upperBound)]
@@ -43,5 +42,3 @@ private extension String {
     index(startIndex, offsetBy: offset)
   }
 }
-
-

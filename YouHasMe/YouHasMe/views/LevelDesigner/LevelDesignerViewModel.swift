@@ -8,7 +8,7 @@ import Foundation
 class LevelDesignerViewModel: ObservableObject {
     var currLevel: Level
     @Published var currLevelLayer: LevelLayer
-    @Published var selectedEntityType: EntityType? = nil
+    @Published var selectedEntityType: EntityType?
     @Published var availableEntityTypes: [EntityType] = allAvailableEntityTypes
 
     init(currLevel: Level) {
@@ -16,12 +16,12 @@ class LevelDesignerViewModel: ObservableObject {
         self.currLevelLayer = LevelLayer(dimensions: Rectangle(width: 30, height: 30))
     }
 
-    func getWidth() -> Int  {
-        return currLevelLayer.dimensions.width
+    func getWidth() -> Int {
+        currLevelLayer.dimensions.width
     }
 
-    func getHeight() -> Int  {
-        return currLevelLayer.dimensions.height
+    func getHeight() -> Int {
+        currLevelLayer.dimensions.height
     }
 
     func selectEntityType(type: EntityType) {

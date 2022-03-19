@@ -45,7 +45,7 @@ struct Condition {
         self.relation = relation
         self.value = value
     }
-    
+
     func isConditionMet() -> Bool {
         relation.evaluate(lhs: subject.value, rhs: value)
     }
