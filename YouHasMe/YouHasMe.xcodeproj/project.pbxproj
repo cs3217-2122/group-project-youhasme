@@ -15,8 +15,8 @@
 		1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */; };
 		B0A318BD27E62B3100D3B295 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318BC27E62B3100D3B295 /* GameEngine.swift */; };
 		B0A318C027E6338700D3B295 /* EntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318BF27E6338700D3B295 /* EntityAction.swift */; };
-		B0A318C227E634C700D3B295 /* BehaviourSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C127E634C700D3B295 /* BehaviourSystem.swift */; };
-		B0A318C427E634DE00D3B295 /* MoveSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C327E634DE00D3B295 /* MoveSystem.swift */; };
+		B0A318C227E634C700D3B295 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C127E634C700D3B295 /* GameMechanic.swift */; };
+		B0A318C427E634DE00D3B295 /* MoveMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C327E634DE00D3B295 /* MoveMechanic.swift */; };
 		B0A318C627E6357000D3B295 /* UpdateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C527E6357000D3B295 /* UpdateAction.swift */; };
 		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
@@ -71,8 +71,8 @@
 		1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		B0A318BC27E62B3100D3B295 /* GameEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
 		B0A318BF27E6338700D3B295 /* EntityAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityAction.swift; sourceTree = "<group>"; };
-		B0A318C127E634C700D3B295 /* BehaviourSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviourSystem.swift; sourceTree = "<group>"; };
-		B0A318C327E634DE00D3B295 /* MoveSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSystem.swift; sourceTree = "<group>"; };
+		B0A318C127E634C700D3B295 /* GameMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
+		B0A318C327E634DE00D3B295 /* MoveMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMechanic.swift; sourceTree = "<group>"; };
 		B0A318C527E6357000D3B295 /* UpdateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAction.swift; sourceTree = "<group>"; };
 		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
@@ -155,11 +155,12 @@
 			children = (
 				B0A318BC27E62B3100D3B295 /* GameEngine.swift */,
 				B0A318BF27E6338700D3B295 /* EntityAction.swift */,
-				B0A318C127E634C700D3B295 /* BehaviourSystem.swift */,
-				B0A318C327E634DE00D3B295 /* MoveSystem.swift */,
+				B0A318C127E634C700D3B295 /* GameMechanic.swift */,
+				B0A318C327E634DE00D3B295 /* MoveMechanic.swift */,
 				B0A318C527E6357000D3B295 /* UpdateAction.swift */,
 			);
 			path = GameEngine;
+		};
 		40AD869127E606F300F42C42 /* storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,11 +422,11 @@
 				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
-				B0A318C227E634C700D3B295 /* BehaviourSystem.swift in Sources */,
+				B0A318C227E634C700D3B295 /* GameMechanic.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
-				B0A318C427E634DE00D3B295 /* MoveSystem.swift in Sources */,
+				B0A318C427E634DE00D3B295 /* MoveMechanic.swift in Sources */,
 				B0A318BD27E62B3100D3B295 /* GameEngine.swift in Sources */,
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
