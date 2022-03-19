@@ -21,7 +21,9 @@ struct MoveMechanic: GameMechanic {
             for c in 0..<levelLayer.dimensions.width {
                 let entities = levelLayer.getTileAt(x: c, y: r).entities
                 for i in 0..<entities.count where entities[i].activeBehaviours.contains(.property(.you)) {
-                    dict[[r, c, i]] = [.move(dx, dy)]
+                    if levelLayer.isWithinBounds(x: c + dx, y: r + dy) {
+                        dict[[r, c, i]] = [.move(dx, dy)]
+                    }
                 }
             }
         }
