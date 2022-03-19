@@ -16,3 +16,6 @@ extension Classification {
         return true
     }
 }
+
+extension Classification: Codable {
+}

@@ -6,14 +6,17 @@
 import Foundation
 
 class LevelDesignerViewModel: ObservableObject {
-    var currLevel: Level
-    @Published var currLevelLayer: LevelLayer
-    @Published var selectedEntityType: EntityType? = nil
-    @Published var availableEntityTypes: [EntityType] = allAvailableEntityTypes
+    private var savedLevels: [Level]
+
+    private(set) var currLevel: Level
+    @Published private(set) var currLevelLayer: LevelLayer
+    @Published private(set) var selectedEntityType: EntityType? = nil
+    @Published private(set) var availableEntityTypes: [EntityType] = allAvailableEntityTypes
 
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel
+        self.savedLevels = StorageUtil.loadSavedLevels()
     }
 
     func getWidth() -> Int  {
@@ -61,5 +64,31 @@ class LevelDesignerViewModel: ObservableObject {
 
     func reset() {
         self.currLevelLayer = LevelLayer(dimensions: currLevelLayer.dimensions)
+    }
+
+    func loadLevel(levelName: String) -> Bool {
+        for level in savedLevels where level.name == levelName {
+            currLevel = level
+            currLevelLayer = level.baseLevel
+            return true
+        }
+
+        return false
+    }
+
+    func saveLevel(levelName: String) -> String {
+        if levelName.isEmpty {
+            return "Please input a non-empty level name."
+        }
+
+        do {
+            // TODO: updateSavedLevels, updateJsonFileSavedLevels
+//            updateSavedLevels(levelName: levelName)
+//            try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
+//                                                      savedLevels: savedLevels)
+            return "Successfully saved level: \(levelName)"
+        } catch {
+            return "error saving level: \(error)"
+        }
     }
 }

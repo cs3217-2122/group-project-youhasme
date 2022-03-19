@@ -5,3 +5,6 @@ enum Behaviour {
     case bIs(Noun)
     case bHas(Noun)
 }
+
+extension Behaviour: Codable {
+}

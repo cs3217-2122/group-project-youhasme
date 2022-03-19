@@ -7,3 +7,6 @@ struct Entity {
         self.entityType = entityType
     }
 }
+
+extension Entity: Codable {
+}

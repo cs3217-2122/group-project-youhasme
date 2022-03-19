@@ -62,3 +62,15 @@ struct LevelLayer: AbstractLevelLayer {
 struct Tile {
     var entities: [Entity] = []
 }
+
+extension Rectangle: Codable {
+}
+
+extension Level: Codable {
+}
+
+extension LevelLayer: Codable {
+}
+
+extension Tile: Codable {
+}

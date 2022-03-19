@@ -41,13 +41,10 @@ struct LevelEditRowView: View {
                 .padding([.trailing, .leading], 5.0)
                 .disableAutocorrection(true)
 
-
 //            NavigationLink(destination:
 //                            LazyNavigationView(
-//                                ChoosePowerUpView(level: Level(
-//                                    name: levelName, pegs: viewModel.pegs, blocks: viewModel.blocks,
-//                                    storedBounds: viewModel.bounds ?? CGRect(x: 0, y: 0, width: 800, height: 900))))
-//            ) {
+//                                GameView(level: viewModel.currLevel)
+//            )) {
 //                Text("Start")
 //            }
 
@@ -56,7 +53,7 @@ struct LevelEditRowView: View {
     }
 
     private func load() {
-//        loadSuccess = viewModel.loadLevel(levelName: levelName)
+        loadSuccess = viewModel.loadLevel(levelName: levelName)
         if loadSuccess {
             levelName = viewModel.currLevel.name
         }
@@ -65,7 +62,7 @@ struct LevelEditRowView: View {
 
     private func save() {
         showSaveLevelAlert = true
-//        saveMessage = viewModel.saveLevel(levelName: levelName)
+        saveMessage = viewModel.saveLevel(levelName: levelName)
     }
 
     private func getLoadLevelAlert(loadSuccess: Bool, levelName: String) -> String {

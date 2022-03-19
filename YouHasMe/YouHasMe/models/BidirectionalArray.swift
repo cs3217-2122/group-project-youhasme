@@ -1,5 +1,5 @@
 import Foundation
-struct BidirectionalArray<T> {
+struct BidirectionalArray<T: Codable> {
     private var lowerBound: Int = 0
     private var upperBound: Int = 0
     private var backingArray: [T?] = []
@@ -29,4 +29,7 @@ struct BidirectionalArray<T> {
         lowerBound -= 1
         setAtIndex(lowerBound, value: item)
     }
+}
+
+extension BidirectionalArray: Codable {
 }

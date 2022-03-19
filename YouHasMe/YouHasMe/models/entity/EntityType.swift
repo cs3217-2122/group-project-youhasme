@@ -75,4 +75,5 @@ struct EntityTypes {
     }
 }
 
-
+extension EntityType: Codable {
+}
