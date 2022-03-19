@@ -1,10 +1,7 @@
 import Foundation
 
-struct Behaviour {
-    enum BehaviourTarget: Hashable {
-        case noun(Noun)
-        case property(Property)
-    }
-    var verb: Verb
-    var target: BehaviourTarget
+enum Behaviour {
+    case property(Property)
+    case bIs(Noun)
+    case bHas(Noun)
 }

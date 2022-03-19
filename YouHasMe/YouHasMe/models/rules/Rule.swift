@@ -21,9 +21,14 @@ struct Rule {
     func activateToBehaviour() -> Behaviour {
         switch performer {
         case .noun(let noun):
-            return Behaviour(verb: verb, target: .noun(noun))
+            switch verb {
+            case .vIs:
+                return .bIs(noun)
+            case .vHas:
+                return .bHas(noun)
+            }
         case .property(let property):
-            return Behaviour(verb: verb, target: .property(property))
+            return .property(property)
         }
     }
 }
