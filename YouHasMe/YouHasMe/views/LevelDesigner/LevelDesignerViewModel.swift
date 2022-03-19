@@ -33,7 +33,7 @@ class LevelDesignerViewModel: ObservableObject {
         if tile.entities.isEmpty {
             return nil
         } else {
-            return tile.entities[0].classification
+            return tile.entities[0].entityType
         }
     }
     
@@ -48,7 +48,7 @@ class LevelDesignerViewModel: ObservableObject {
             return
         }
         
-        let newEntity = Entity(classification: entityType)
+        let newEntity = Entity(entityType: entityType)
         var tile = currLevelLayer.getTileAt(x: x, y: y)
         
         guard tile.entities.isEmpty else {

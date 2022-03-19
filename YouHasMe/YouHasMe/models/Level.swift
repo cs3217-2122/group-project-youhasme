@@ -7,7 +7,7 @@ class Rectangle {
         self.width = width
         self.height = height
     }
-    
+
     var numCells: Int {
         width * height
     }
@@ -33,7 +33,7 @@ struct LevelLayer: AbstractLevelLayer {
         self.dimensions = dimensions
         self.tiles = Array(repeating: Tile(), count: dimensions.width*dimensions.height)
     }
-    
+
     func getAbstractRepresentation() -> EntityBlock {
         var grid: EntityBlock = Array(
             repeating: Array(repeating: nil, count: dimensions.width),
@@ -44,7 +44,7 @@ struct LevelLayer: AbstractLevelLayer {
             guard !tile.entities.isEmpty else {
                 continue
             }
-            grid[index / delegate.dimensions.width][index % delegate.dimensions.width] =
+            grid[index / dimensions.width][index % dimensions.width] =
             Set(tile.entities.map {$0.entityType.classification})
         }
         return grid

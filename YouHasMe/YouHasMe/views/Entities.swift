@@ -7,41 +7,41 @@ import Foundation
 import SwiftUI
  
 let allAvailableEntityTypes: [EntityType] = [
-    .noun(.baba),
-    .noun(.wall),
-    .noun(.skull),
-    .noun(.flag),
-    .connective(.and),
-    .verb(.vIs),
-    .verb(.vHas),
-    .property(.you),
-    .property(.win),
-    .property(.defeat),
-    .property(.block)
+    EntityTypes.Nouns.baba,
+    EntityTypes.Nouns.wall,
+    EntityTypes.Nouns.skull,
+    EntityTypes.Nouns.flag,
+    EntityTypes.Connectives.and,
+    EntityTypes.Verbs.vIs,
+    EntityTypes.Verbs.vHas,
+    EntityTypes.Properties.you,
+    EntityTypes.Properties.win,
+    EntityTypes.Properties.defeat,
+    EntityTypes.Properties.block
 ]
 
 
 func entityTypeToImageString(type: EntityType) -> Color {
     switch type {
-    case EntityType.noun(.baba):
+    case EntityTypes.Nouns.baba:
         return .red
-    case EntityType.noun(.wall):
+    case EntityTypes.Nouns.wall:
         return .yellow
-    case EntityType.noun(.skull):
+    case EntityTypes.Nouns.skull:
         return .blue
-    case EntityType.noun(.flag):
+    case EntityTypes.Nouns.flag:
         return .purple
-    case EntityType.connective(.and):
+    case EntityTypes.Connectives.and:
         return .green
-    case EntityType.verb(.vIs):
+    case EntityTypes.Verbs.vIs:
         return .mint
-    case EntityType.verb(.vHas):
+    case EntityTypes.Verbs.vHas:
         return .orange
-    case EntityType.property(.you):
+    case EntityTypes.Properties.you:
         return .brown
-    case EntityType.property(.win):
+    case EntityTypes.Properties.win:
         return .cyan
-    case EntityType.property(.defeat):
+    case EntityTypes.Properties.defeat:
         return .pink
     default:
         return .gray
