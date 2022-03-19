@@ -4,7 +4,9 @@ enum Property: String, Hashable {
     case you
     case win
     case defeat
-    case block
+    case stop
+    case push
+    case pull
 }
 
 extension Property: CustomDebugStringConvertible {
