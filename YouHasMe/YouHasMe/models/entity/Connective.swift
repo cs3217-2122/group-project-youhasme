@@ -9,3 +9,6 @@ extension Connective: CustomDebugStringConvertible {
         rawValue
     }
 }
+
+extension Connective: Codable {
+}

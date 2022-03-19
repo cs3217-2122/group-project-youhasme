@@ -8,7 +8,7 @@ import SwiftUI
 
 let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
 
-func entityTypeToImageString(type: EntityType) -> Color {
+func entityTypeToImageColor(type: EntityType) -> Color {
     switch type {
     case EntityTypes.Nouns.baba:
         return .red
@@ -18,6 +18,8 @@ func entityTypeToImageString(type: EntityType) -> Color {
         return .blue
     case EntityTypes.Nouns.flag:
         return .purple
+    case EntityTypes.Nouns.word:
+        return .indigo
     case EntityTypes.Connectives.and:
         return .green
     case EntityTypes.Verbs.vIs:
@@ -34,8 +36,8 @@ func entityTypeToImageString(type: EntityType) -> Color {
         return .gray
     default:
         /// can change this if we have entity types in the future that cannot be added to the level designer
-        // assert(false, "Entity Type does not have image")
-        // TODO: Fix this
+        print("Entity Type \(type.classification) does not have image")
+//        assert(false, "Entity Type \(type.classification) does not have image")
         return .gray
     }
 }

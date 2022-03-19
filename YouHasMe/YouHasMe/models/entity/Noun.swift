@@ -13,3 +13,6 @@ extension Noun: CustomDebugStringConvertible {
         rawValue
     }
 }
+
+extension Noun: Codable {
+}

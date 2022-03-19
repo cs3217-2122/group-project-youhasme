@@ -12,3 +12,6 @@ extension Verb: CustomDebugStringConvertible {
         return "\(s[index...])"
     }
 }
+
+extension Verb: Codable {
+}

@@ -14,14 +14,43 @@ struct Rectangle {
 }
 
 struct Level {
-    var layers: BidirectionalArray<LevelLayer>
-    init() {
+    private(set) var name: String
+    private(set) var layers: BidirectionalArray<LevelLayer>
+
+    init(name: String = "") {
+        self.name = name
         layers = BidirectionalArray()
+        layers.append(LevelLayer(dimensions: Rectangle(width: 30, height: 30)))
     }
 
     /// Level zero.
     var baseLevel: LevelLayer {
-        layers.getAtIndex(0)!  // TODO: Fix this
+        getLayerAtIndex(0)
+    }
+
+    mutating func resetLayerAtIndex(_ index: Int) {
+        guard let originalLayer = layers.getAtIndex(index) else {
+            assert(false, "Level does not have layer at index \(index)")
+        }
+
+        let emptyLayer = LevelLayer(dimensions: originalLayer.dimensions)
+        layers.setAtIndex(index, value: emptyLayer)
+    }
+
+    mutating func setName(_ name: String) {
+        self.name = name
+    }
+
+    mutating func setLevelLayerAtIndex(_ index: Int, value: LevelLayer) {
+        layers.setAtIndex(index, value: value)
+    }
+
+    func getLayerAtIndex(_ index: Int) -> LevelLayer {
+        guard let layer = layers.getAtIndex(index) else {
+            assert(false, "Level does not have layer at index \(index)")
+        }
+
+        return layer
     }
 }
 
@@ -67,4 +96,16 @@ extension LevelLayer: CustomDebugStringConvertible {
 
 struct Tile {
     var entities: [Entity] = []
+}
+
+extension Rectangle: Codable {
+}
+
+extension Level: Codable {
+}
+
+extension LevelLayer: Codable {
+}
+
+extension Tile: Codable {
 }

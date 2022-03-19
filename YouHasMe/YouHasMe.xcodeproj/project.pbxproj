@@ -18,6 +18,9 @@
 		B0A318C227E634C700D3B295 /* BehaviourSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C127E634C700D3B295 /* BehaviourSystem.swift */; };
 		B0A318C427E634DE00D3B295 /* MoveSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C327E634DE00D3B295 /* MoveSystem.swift */; };
 		B0A318C627E6357000D3B295 /* UpdateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0A318C527E6357000D3B295 /* UpdateAction.swift */; };
+		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
+		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
+		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -71,6 +74,9 @@
 		B0A318C127E634C700D3B295 /* BehaviourSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BehaviourSystem.swift; sourceTree = "<group>"; };
 		B0A318C327E634DE00D3B295 /* MoveSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveSystem.swift; sourceTree = "<group>"; };
 		B0A318C527E6357000D3B295 /* UpdateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAction.swift; sourceTree = "<group>"; };
+		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
+		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
+		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +145,7 @@
 				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
 				1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */,
+				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
 			);
 			path = LevelDesigner;
 			sourceTree = "<group>";
@@ -153,6 +160,13 @@
 				B0A318C527E6357000D3B295 /* UpdateAction.swift */,
 			);
 			path = GameEngine;
+		40AD869127E606F300F42C42 /* storage */ = {
+			isa = PBXGroup;
+			children = (
+				40AD869427E60AC400F42C42 /* StorageUtil.swift */,
+				40AD869827E617B300F42C42 /* GameStorage.swift */,
+			);
+			path = storage;
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -176,6 +190,7 @@
 		E57ACB2527DC582300F73B27 /* YouHasMe */ = {
 			isa = PBXGroup;
 			children = (
+				40AD869127E606F300F42C42 /* storage */,
 				1E6B90C127E5B2A300161E63 /* views */,
 				E57ACB3427DC588100F73B27 /* models */,
 				E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */,
@@ -381,12 +396,14 @@
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
+				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				B0A318C627E6357000D3B295 /* UpdateAction.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
@@ -410,6 +427,7 @@
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				B0A318C427E634DE00D3B295 /* MoveSystem.swift in Sources */,
 				B0A318BD27E62B3100D3B295 /* GameEngine.swift in Sources */,
+				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
