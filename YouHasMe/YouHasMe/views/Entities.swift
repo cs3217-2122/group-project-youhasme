@@ -5,7 +5,7 @@
 
 import Foundation
 import SwiftUI
- 
+
 let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
 
 func entityTypeToImageColor(type: EntityType) -> Color {

@@ -10,7 +10,7 @@ enum Classification: Hashable {
 
 extension Classification {
     var isMetaData: Bool {
-        if case .nounInstance(_) = self {
+        if case .nounInstance = self {
             return false
         }
         return true

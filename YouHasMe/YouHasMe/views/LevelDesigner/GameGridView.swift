@@ -41,8 +41,8 @@ struct GameGridView: View {
     }
 }
 
-//struct GameGridView_Previews: PreviewProvider {
+// struct GameGridView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        GameGridView()
 //    }
-//}
+// }

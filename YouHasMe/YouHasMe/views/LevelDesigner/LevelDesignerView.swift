@@ -18,7 +18,7 @@ struct LevelDesignerView: View {
 
     var body: some View {
         VStack {
-            PalletteView(levelDesignerViewModel: levelDesignerViewModel)
+            PaletteView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()
             GameGridView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()

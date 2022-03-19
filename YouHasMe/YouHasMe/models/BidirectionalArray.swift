@@ -6,11 +6,11 @@ struct BidirectionalArray<T: Codable> {
     private func getActualIndex(_ index: Int) -> Int {
         index >= 0 ? 2 * index : 2 * -index - 1
     }
-    
+
     func getAtIndex(_ index: Int) -> T? {
         backingArray[getActualIndex(index)]
     }
-    
+
     mutating func setAtIndex(_ index: Int, value: T) {
         let index = getActualIndex(index)
         while index >= backingArray.count {
@@ -19,12 +19,12 @@ struct BidirectionalArray<T: Codable> {
 
         backingArray[index] = value
     }
-    
+
     mutating func append(_ item: T) {
         setAtIndex(upperBound, value: item)
         upperBound += 1
     }
-    
+
     mutating func prepend(_ item: T) {
         lowerBound -= 1
         setAtIndex(lowerBound, value: item)

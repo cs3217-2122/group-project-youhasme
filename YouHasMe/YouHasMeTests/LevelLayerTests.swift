@@ -1,7 +1,7 @@
 import XCTest
 @testable import YouHasMe
 
-fileprivate class SimpleLevelLayerDelegate: LevelLayerDelegate {
+private class SimpleLevelLayerDelegate: LevelLayerDelegate {
     var dimensions: Rectangle
     init(dimensions: Rectangle) {
         self.dimensions = dimensions
@@ -10,10 +10,10 @@ fileprivate class SimpleLevelLayerDelegate: LevelLayerDelegate {
 
 class LevelLayerTests: XCTestCase {
     var dimensions: Rectangle!
-    fileprivate var levelLayerDelegate: SimpleLevelLayerDelegate!
+    fileprivate weak var levelLayerDelegate: SimpleLevelLayerDelegate!
     var levelLayer: LevelLayer!
     var ruleParser = RuleParser()
-    
+
     override func setUpWithError() throws {
         dimensions = Rectangle(width: 6, height: 6)
         levelLayer = LevelLayer()
