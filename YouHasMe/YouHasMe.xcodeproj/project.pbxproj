@@ -32,6 +32,16 @@
 		E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDF27E5A64B00E3952D /* Entity.swift */; };
 		E5BECBE227E5B6EF00E3952D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE127E5B6EF00E3952D /* String.swift */; };
 		E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */; };
+		E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE627E5E68200E3952D /* Behaviour.swift */; };
+		E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE827E5E7C700E3952D /* RuleParser.swift */; };
+		E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */; };
+		E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */; };
+		E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEE27E5E84200E3952D /* DefaultRules.swift */; };
+		E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF127E5E8B900E3952D /* Noun.swift */; };
+		E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF327E5E8BF00E3952D /* Verb.swift */; };
+		E5BECBF627E5E8C600E3952D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF527E5E8C600E3952D /* Property.swift */; };
+		E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF727E5E8FF00E3952D /* Classification.swift */; };
+		E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF927E5E91200E3952D /* Connective.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +82,16 @@
 		E5BECBDF27E5A64B00E3952D /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E5BECBE127E5B6EF00E3952D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBuilder.swift; sourceTree = "<group>"; };
+		E5BECBE627E5E68200E3952D /* Behaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
+		E5BECBE827E5E7C700E3952D /* RuleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleParser.swift; sourceTree = "<group>"; };
+		E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidator.swift; sourceTree = "<group>"; };
+		E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleEngine.swift; sourceTree = "<group>"; };
+		E5BECBEE27E5E84200E3952D /* DefaultRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRules.swift; sourceTree = "<group>"; };
+		E5BECBF127E5E8B900E3952D /* Noun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noun.swift; sourceTree = "<group>"; };
+		E5BECBF327E5E8BF00E3952D /* Verb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verb.swift; sourceTree = "<group>"; };
+		E5BECBF527E5E8C600E3952D /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
+		E5BECBF727E5E8FF00E3952D /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
+		E5BECBF927E5E91200E3952D /* Connective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connective.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +175,7 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E5BECBF027E5E87A00E3952D /* entity */,
 				E5BECBE327E5BE0200E3952D /* rules */,
 				E5BECBDC27E59E0300E3952D /* extensions */,
 				E57ACB3527DC58A000F73B27 /* Campaign.swift */,
@@ -162,10 +183,9 @@
 				E57ACB3727DC58B000F73B27 /* MetaLevel.swift */,
 				E57ACB3927DC58B800F73B27 /* Connector.swift */,
 				E57ACB3B27DC58C700F73B27 /* Level.swift */,
-				E57ACB3F27DC675E00F73B27 /* EntityType.swift */,
 				E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */,
 				E57ACB4527DC948400F73B27 /* Outlet.swift */,
-				E5BECBDF27E5A64B00E3952D /* Entity.swift */,
+				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -193,8 +213,26 @@
 			children = (
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
 				E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */,
+				E5BECBE827E5E7C700E3952D /* RuleParser.swift */,
+				E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */,
+				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
+				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
 			);
 			path = rules;
+			sourceTree = "<group>";
+		};
+		E5BECBF027E5E87A00E3952D /* entity */ = {
+			isa = PBXGroup;
+			children = (
+				E5BECBDF27E5A64B00E3952D /* Entity.swift */,
+				E57ACB3F27DC675E00F73B27 /* EntityType.swift */,
+				E5BECBF127E5E8B900E3952D /* Noun.swift */,
+				E5BECBF327E5E8BF00E3952D /* Verb.swift */,
+				E5BECBF527E5E8C600E3952D /* Property.swift */,
+				E5BECBF727E5E8FF00E3952D /* Classification.swift */,
+				E5BECBF927E5E91200E3952D /* Connective.swift */,
+			);
+			path = entity;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,27 +335,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
+				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
+				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
+				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
+				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
 				1E6B90CA27E5B55100161E63 /* PalletteView.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
+				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
+				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
+				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

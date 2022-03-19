@@ -1,76 +1,7 @@
 import Foundation
 
-enum Classification: Hashable {
-    case noun(Noun)
-    case verb(Verb)
-    case connective(Connective)
-    case property(Property)
-    case nounInstance(Noun)
-}
-
-extension Classification {
-    var isMetaData: Bool {
-        if case .nounInstance(_) = self {
-            return false
-        }
-        return true
-    }
-}
-
-enum Connective: String, Hashable {
-    case and
-}
-
-extension Connective: CustomDebugStringConvertible {
-    var debugDescription: String {
-        rawValue
-    }
-}
-
-enum Verb: String, Hashable {
-    case vIs
-    case vHas
-}
-
-extension Verb: CustomDebugStringConvertible {
-    var debugDescription: String {
-        let s: String = self.rawValue
-        let index: String.Index = s.index(s.startIndex, offsetBy: 1)
-        return "\(s[index...])"
-    }
-}
-
-enum Noun: String, Hashable {
-    case baba
-    case wall
-    case flag
-    case skull
-}
-
-extension Noun: CustomDebugStringConvertible {
-    var debugDescription: String {
-        rawValue
-    }
-}
-
-enum Property: String, Hashable {
-    case you
-    case win
-    case defeat
-    case block
-}
-
-extension Property: CustomDebugStringConvertible {
-    var debugDescription: String {
-        rawValue
-    }
-}
-
 struct EntityType: Hashable {
     var classification: Classification
-    
-    /// A set of rules potentially applicable to this entity type, that may or may not be active.
-    var rules: [Rule] = []
     
     fileprivate init(classification: Classification) {
         self.classification = classification
@@ -91,9 +22,10 @@ struct EntityTypes {
         static var flag = EntityType(classification: .noun(.flag))
         static var wall = EntityType(classification: .noun(.wall))
         static var skull = EntityType(classification: .noun(.skull))
+        static var word = EntityType(classification: .noun(.word))
     
         static func getAllNouns() -> [EntityType] {
-            return [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull]
+            return [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull, Nouns.word]
         }
     }
     
@@ -110,10 +42,19 @@ struct EntityTypes {
         static var you = EntityType(classification: .property(.you))
         static var win = EntityType(classification: .property(.win))
         static var defeat = EntityType(classification: .property(.defeat))
-        static var block = EntityType(classification: .property(.block))
+        static var stop = EntityType(classification: .property(.stop))
+        static var push = EntityType(classification: .property(.push))
+        static var pull = EntityType(classification: .property(.pull))
 
         static func getAllProperties() -> [EntityType] {
-            return [Properties.you, Properties.win, Properties.defeat, Properties.block]
+            return [
+                Properties.you,
+                Properties.win,
+                Properties.defeat,
+                Properties.stop,
+                Properties.push,
+                Properties.pull
+            ]
         }
     }
     
