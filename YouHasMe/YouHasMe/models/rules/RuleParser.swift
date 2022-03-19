@@ -19,7 +19,7 @@ class RuleParser {
         var properties: [Property] = []
         var isObjects: [Noun] = []
         var hasObjects: [Noun] = []
-        
+
         func getRules() -> [Rule] {
             var rules: [Rule] = []
             for noun in receivers {
@@ -36,7 +36,7 @@ class RuleParser {
             return rules
         }
     }
-    
+
     func transition(ruleParserState: RuleParserState, entityType: Classification) {
         switch ruleParserState.automataState {
         case .epsilon:
@@ -139,7 +139,7 @@ class RuleParser {
         }
         ruleParserState.automataState = .reject
     }
-    
+
     func parse(sentence: [Classification]) -> [Rule] {
         let ruleParserState = RuleParserState()
         for entityType in sentence {
@@ -147,19 +147,19 @@ class RuleParser {
         }
         return ruleParserState.getRules()
     }
-    
+
     func parse(block: EntityBlock) -> [Rule] {
         var rules: [Rule] = []
         for i in 0..<block.count {
             for j in 0..<block[0].count {
-                
+
                 var verticalCandidateSentence: [Classification] = []
                 for k in i..<block.count {
                     guard let entityTypes = block[k][j],
                           let metaData = entityTypes.first(where: { $0.isMetaData }) else {
                         break
                     }
-                    
+
                     verticalCandidateSentence.append(metaData)
                 }
                 rules.append(contentsOf: parse(sentence: verticalCandidateSentence))

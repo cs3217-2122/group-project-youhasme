@@ -10,7 +10,7 @@
 		1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* EntityView.swift */; };
 		1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C527E5B43F00161E63 /* Entities.swift */; };
 		1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */; };
-		1E6B90CA27E5B55100161E63 /* PalletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C927E5B55100161E63 /* PalletteView.swift */; };
+		1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C927E5B55100161E63 /* PaletteView.swift */; };
 		1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */; };
 		1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */; };
 		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
@@ -61,7 +61,7 @@
 		1E6B90C327E5B2BF00161E63 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
 		1E6B90C527E5B43F00161E63 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
-		1E6B90C927E5B55100161E63 /* PalletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalletteView.swift; sourceTree = "<group>"; };
+		1E6B90C927E5B55100161E63 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameGridView.swift; sourceTree = "<group>"; };
 		1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 			children = (
 				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
 				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
-				1E6B90C927E5B55100161E63 /* PalletteView.swift */,
+				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
 				1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */,
 				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
@@ -262,6 +262,7 @@
 				E57ACB1F27DC582300F73B27 /* Sources */,
 				E57ACB2027DC582300F73B27 /* Frameworks */,
 				E57ACB2127DC582300F73B27 /* Resources */,
+				B0F9DEC927E624E5002C0977 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -347,6 +348,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B0F9DEC927E624E5002C0977 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E57ACB1F27DC582300F73B27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -375,7 +396,7 @@
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
-				1E6B90CA27E5B55100161E63 /* PalletteView.swift in Sources */,
+				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
@@ -533,6 +554,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YouHasMe/Preview Content\"";
+				DEVELOPMENT_TEAM = 3L5QJ3M5M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -545,7 +567,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sunjc826.YouHasMe;
+				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -561,6 +583,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YouHasMe/Preview Content\"";
+				DEVELOPMENT_TEAM = 3L5QJ3M5M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -573,7 +596,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = sunjc826.YouHasMe;
+				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

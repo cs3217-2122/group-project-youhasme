@@ -9,7 +9,7 @@ struct LevelDesignerView: View {
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel(currLevel: Level())
     var body: some View {
         VStack {
-            PalletteView(levelDesignerViewModel: levelDesignerViewModel)
+            PaletteView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()
             GameGridView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()

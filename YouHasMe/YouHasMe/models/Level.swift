@@ -57,10 +57,10 @@ struct Level {
 struct LevelLayer: AbstractLevelLayer {
     var dimensions: Rectangle
     var tiles: [Tile]
-    
+
     init(dimensions: Rectangle) {
         self.dimensions = dimensions
-        self.tiles = Array(repeating: Tile(), count: dimensions.width*dimensions.height)
+        self.tiles = Array(repeating: Tile(), count: dimensions.width * dimensions.height)
     }
 
     func getAbstractRepresentation() -> EntityBlock {
@@ -68,13 +68,13 @@ struct LevelLayer: AbstractLevelLayer {
             repeating: Array(repeating: nil, count: dimensions.width),
             count: dimensions.height
         )
-        
+
         for (index, tile) in tiles.enumerated() {
             guard !tile.entities.isEmpty else {
                 continue
             }
             grid[index / dimensions.width][index % dimensions.width] =
-            Set(tile.entities.map {$0.entityType.classification})
+            Set(tile.entities.map { $0.entityType.classification })
         }
         return grid
     }

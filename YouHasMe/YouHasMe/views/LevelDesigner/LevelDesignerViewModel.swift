@@ -11,7 +11,7 @@ class LevelDesignerViewModel: ObservableObject {
     private(set) var currLevel: Level
     private(set) var currLevelLayerIndex: Int
     @Published private(set) var currLevelLayer: LevelLayer
-    @Published private(set) var selectedEntityType: EntityType? = nil
+    @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = allAvailableEntityTypes
 
     init(currLevel: Level) {
@@ -21,12 +21,12 @@ class LevelDesignerViewModel: ObservableObject {
         self.savedLevels = StorageUtil.loadSavedLevels()
     }
 
-    func getWidth() -> Int  {
-        return currLevelLayer.dimensions.width
+    func getWidth() -> Int {
+        currLevelLayer.dimensions.width
     }
 
-    func getHeight() -> Int  {
-        return currLevelLayer.dimensions.height
+    func getHeight() -> Int {
+        currLevelLayer.dimensions.height
     }
 
     func selectEntityType(type: EntityType) {

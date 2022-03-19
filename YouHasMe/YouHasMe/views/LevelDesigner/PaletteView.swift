@@ -1,11 +1,11 @@
 //
-//  PalletteView.swift
+//  PaletteView.swift
 //  YouHasMe
 //
 
 import SwiftUI
 
-struct PalletteView: View {
+struct PaletteView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     var body: some View {
         ScrollView(.horizontal) {
@@ -23,8 +23,8 @@ struct PalletteView: View {
     }
 }
 
-//struct PalletteView_Previews: PreviewProvider {
+// struct PaletteView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        PalletteView()
+//        Pal	etteView()
 //    }
-//}
+// }

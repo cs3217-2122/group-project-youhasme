@@ -18,8 +18,8 @@ struct EntityView: View {
     }
 }
 
-//struct EntityView_Previews: PreviewProvider {
+// struct EntityView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        EntityView()
 //    }
-//}
+// }
