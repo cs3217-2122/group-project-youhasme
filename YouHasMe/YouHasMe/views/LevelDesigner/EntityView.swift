@@ -10,7 +10,7 @@ struct EntityView: View {
     var body: some View {
         if let entityType = entityType {
             SwiftUI.Rectangle()
-                .fill(entityTypeToImageString(type: entityType))
+                .fill(entityTypeToImageColor(type: entityType))
         } else {
             SwiftUI.Rectangle()
                 .fill(.gray)
