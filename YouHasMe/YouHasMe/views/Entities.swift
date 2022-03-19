@@ -30,7 +30,7 @@ func entityTypeToImageString(type: EntityType) -> Color {
         return .cyan
     case EntityTypes.Properties.defeat:
         return .pink
-    case EntityTypes.Properties.block:
+    case EntityTypes.Properties.stop:
         return .gray
     default:
         /// can change this if we have entity types in the future that cannot be added to the level designer

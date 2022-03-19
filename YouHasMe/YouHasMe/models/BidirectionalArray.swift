@@ -2,17 +2,21 @@ import Foundation
 struct BidirectionalArray<T> {
     private var lowerBound: Int = 0
     private var upperBound: Int = 0
-    private var backingArray: [T] = []
+    private var backingArray: [T?] = []
     private func getActualIndex(_ index: Int) -> Int {
         index >= 0 ? 2 * index : 2 * -index - 1
     }
     
-    func getAtIndex(_ index: Int) -> T {
+    func getAtIndex(_ index: Int) -> T? {
         backingArray[getActualIndex(index)]
     }
     
     mutating func setAtIndex(_ index: Int, value: T) {
-        backingArray[getActualIndex(index)] = value
+        let index = getActualIndex(index)
+        while index <= backingArray.count {
+            backingArray.append(nil)
+        }
+        backingArray[index] = value
     }
     
     mutating func append(_ item: T) {

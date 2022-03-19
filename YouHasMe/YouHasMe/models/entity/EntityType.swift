@@ -3,9 +3,6 @@ import Foundation
 struct EntityType: Hashable {
     var classification: Classification
     
-    /// A set of rules potentially applicable to this entity type, that may or may not be active.
-    var rules: [Rule] = []
-    
     fileprivate init(classification: Classification) {
         self.classification = classification
     }
@@ -25,9 +22,10 @@ struct EntityTypes {
         static var flag = EntityType(classification: .noun(.flag))
         static var wall = EntityType(classification: .noun(.wall))
         static var skull = EntityType(classification: .noun(.skull))
+        static var word = EntityType(classification: .noun(.word))
     
         static func getAllNouns() -> [EntityType] {
-            return [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull]
+            return [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull, Nouns.word]
         }
     }
     
@@ -44,10 +42,19 @@ struct EntityTypes {
         static var you = EntityType(classification: .property(.you))
         static var win = EntityType(classification: .property(.win))
         static var defeat = EntityType(classification: .property(.defeat))
-        static var block = EntityType(classification: .property(.block))
+        static var stop = EntityType(classification: .property(.stop))
+        static var push = EntityType(classification: .property(.push))
+        static var pull = EntityType(classification: .property(.pull))
 
         static func getAllProperties() -> [EntityType] {
-            return [Properties.you, Properties.win, Properties.defeat, Properties.block]
+            return [
+                Properties.you,
+                Properties.win,
+                Properties.defeat,
+                Properties.stop,
+                Properties.push,
+                Properties.pull
+            ]
         }
     }
     
