@@ -33,7 +33,8 @@ struct LevelEditRowView: View {
                 .padding([.trailing, .leading], 5.0)
                 .disableAutocorrection(true)
                 .onAppear {
-                    levelName = viewModel.currLevel.name
+                    levelName = viewModel.currLevel.name.isEmpty ? levelName
+                                                                 : viewModel.currLevel.name
                 }
 
             // TODO: implement game view

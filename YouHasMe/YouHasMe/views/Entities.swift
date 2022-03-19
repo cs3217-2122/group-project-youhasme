@@ -35,7 +35,7 @@ func entityTypeToImageColor(type: EntityType) -> Color {
     case EntityTypes.Properties.stop:
         return .gray
     default:
-        /// can change this if we have entity types in the future that cannot be added to the level designer
+        // can change this if we have entity types in the future that cannot be added to the level designer
         // TODO: implement images for entity types
         print("Entity Type \(type.classification) does not have image")
 //        assert(false, "Entity Type \(type.classification) does not have image")

@@ -35,7 +35,7 @@ struct StorageUtil {
     }
 
     static func getPreloadedLevels() -> [Level] {
-        return []
+        []
     }
 
     static func updateJsonFileSavedLevels(dataFileName: String, savedLevels: [Level]) throws {
@@ -74,6 +74,6 @@ struct StorageUtil {
 
     // TODO: implement
     private static func getUpdatedEntitiesLevels(levels: [Level]) -> [Level] {
-        return levels
+        levels
     }
 }
