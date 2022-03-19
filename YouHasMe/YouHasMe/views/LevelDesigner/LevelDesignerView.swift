@@ -6,7 +6,16 @@
 import SwiftUI
 
 struct LevelDesignerView: View {
-    @StateObject var levelDesignerViewModel = LevelDesignerViewModel(currLevel: Level())
+    @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+
+    init() {
+        levelDesignerViewModel = LevelDesignerViewModel()
+    }
+
+    init(level: Level) {
+        levelDesignerViewModel = LevelDesignerViewModel(currLevel: level)
+    }
+
     var body: some View {
         VStack {
             PalletteView(levelDesignerViewModel: levelDesignerViewModel)

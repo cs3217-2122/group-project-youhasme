@@ -13,19 +13,11 @@ struct LevelEditRowView: View {
     @State var levelName = ""
     @State var showSaveLevelAlert = false
     @State var saveMessage = ""
-    @State var showLoadLevelAlert = false
-    @State var loadSuccess = false
     @State var startGame = false
 
     var body: some View {
         HStack {
-            Button(action: load) {
-                Text("Load")
-            }.alert(isPresented: $showLoadLevelAlert) {
-                let alertText = getLoadLevelAlert(loadSuccess: loadSuccess, levelName: levelName)
-
-                return Alert(title: Text(alertText), dismissButton: .cancel(Text("close")))
-            }
+            NavigationLink("Load", destination: LazyNavigationView(LoadLevelDesignView()))
 
             Button(action: save) {
                 Text("Save")
@@ -40,7 +32,11 @@ struct LevelEditRowView: View {
             TextField("Level Name", text: $levelName)
                 .padding([.trailing, .leading], 5.0)
                 .disableAutocorrection(true)
+                .onAppear {
+                    levelName = viewModel.currLevel.name
+                }
 
+            // TODO: implement game view
 //            NavigationLink(destination:
 //                            LazyNavigationView(
 //                                GameView(level: viewModel.currLevel)
@@ -52,26 +48,8 @@ struct LevelEditRowView: View {
         .padding([.leading, .trailing], 10.0)
     }
 
-    private func load() {
-        loadSuccess = viewModel.loadLevel(levelName: levelName)
-        if loadSuccess {
-            levelName = viewModel.currLevel.name
-        }
-        showLoadLevelAlert = true
-    }
-
     private func save() {
         showSaveLevelAlert = true
         saveMessage = viewModel.saveLevel(levelName: levelName)
-    }
-
-    private func getLoadLevelAlert(loadSuccess: Bool, levelName: String) -> String {
-        if loadSuccess {
-            return "Successfully loaded level \(levelName)."
-        } else if levelName.isEmpty {
-            return "Please key in a non-empty level name."
-        } else {
-            return "No level called \(levelName) exists."
-        }
     }
 }

@@ -11,11 +11,18 @@ class LevelDesignerViewModel: ObservableObject {
     private(set) var currLevel: Level
     private(set) var currLevelLayerIndex: Int
     @Published private(set) var currLevelLayer: LevelLayer
-    @Published private(set) var selectedEntityType: EntityType? = nil
+    @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = allAvailableEntityTypes
 
-    init(currLevel: Level) {
+    init() {
         self.currLevel = Level()
+        self.currLevelLayer = currLevel.baseLevel
+        self.currLevelLayerIndex = 0
+        self.savedLevels = StorageUtil.loadSavedLevels()
+    }
+
+    init(currLevel: Level) {
+        self.currLevel = currLevel
         self.currLevelLayer = currLevel.baseLevel
         self.currLevelLayerIndex = 0
         self.savedLevels = StorageUtil.loadSavedLevels()
@@ -67,16 +74,6 @@ class LevelDesignerViewModel: ObservableObject {
     func reset() {
         self.currLevel.resetLayerAtIndex(currLevelLayerIndex)
         self.currLevelLayer = currLevel.getLayerAtIndex(currLevelLayerIndex)
-    }
-
-    func loadLevel(levelName: String) -> Bool {
-        for level in savedLevels where level.name == levelName {
-            currLevel = level
-            currLevelLayer = level.baseLevel
-            return true
-        }
-
-        return false
     }
 
     func saveLevel(levelName: String) -> String {

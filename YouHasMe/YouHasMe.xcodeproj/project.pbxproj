@@ -17,6 +17,8 @@
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
 		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
 		40AD869F27E626B200F42C42 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869E27E626B200F42C42 /* HomeScreenView.swift */; };
+		40AD86A227E62A3800F42C42 /* LoadLevelDesignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A127E62A3800F42C42 /* LoadLevelDesignView.swift */; };
+		40AD86A427E62CB000F42C42 /* LazyNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A327E62CB000F42C42 /* LazyNavigationView.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -69,6 +71,8 @@
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
 		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		40AD869E27E626B200F42C42 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		40AD86A127E62A3800F42C42 /* LoadLevelDesignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadLevelDesignView.swift; sourceTree = "<group>"; };
+		40AD86A327E62CB000F42C42 /* LazyNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LazyNavigationView.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
 				1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */,
 				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
+				40AD86A127E62A3800F42C42 /* LoadLevelDesignView.swift */,
 			);
 			path = LevelDesigner;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 				E57ACB2827DC582300F73B27 /* ContentView.swift */,
 				E57ACB2A27DC582500F73B27 /* Assets.xcassets */,
 				E57ACB2C27DC582500F73B27 /* Preview Content */,
+				40AD86A327E62CB000F42C42 /* LazyNavigationView.swift */,
 			);
 			path = YouHasMe;
 			sourceTree = "<group>";
@@ -265,6 +271,7 @@
 				E57ACB1F27DC582300F73B27 /* Sources */,
 				E57ACB2027DC582300F73B27 /* Frameworks */,
 				E57ACB2127DC582300F73B27 /* Resources */,
+				40AD86A027E6295000F42C42 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -350,6 +357,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		40AD86A027E6295000F42C42 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E57ACB1F27DC582300F73B27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -388,6 +416,8 @@
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
+				40AD86A227E62A3800F42C42 /* LoadLevelDesignView.swift in Sources */,
+				40AD86A427E62CB000F42C42 /* LazyNavigationView.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 			);

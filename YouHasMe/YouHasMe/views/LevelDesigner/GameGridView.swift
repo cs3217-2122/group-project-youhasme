@@ -7,13 +7,13 @@ import SwiftUI
 
 struct GameGridView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
-    
+
     func gridSize(proxy: GeometryProxy) -> CGFloat {
         let width = floor(proxy.size.width / CGFloat(levelDesignerViewModel.getWidth()))
         let height = floor(proxy.size.height / CGFloat(levelDesignerViewModel.getHeight()))
         return min(width, height)
     }
-    
+
     var body: some View {
         GeometryReader { proxy in
             HStack {

@@ -68,7 +68,7 @@ struct LevelLayer: AbstractLevelLayer {
             repeating: Array(repeating: nil, count: dimensions.width),
             count: dimensions.height
         )
-        
+
         for (index, tile) in tiles.enumerated() {
             guard !tile.entities.isEmpty else {
                 continue
