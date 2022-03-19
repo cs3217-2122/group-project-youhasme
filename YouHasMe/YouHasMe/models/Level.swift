@@ -7,6 +7,10 @@ class Rectangle {
         self.width = width
         self.height = height
     }
+    
+    var numCells: Int {
+        width * height
+    }
 }
 
 class Level {
@@ -15,6 +19,11 @@ class Level {
     init(dimensions: Rectangle) {
         layers = BidirectionalArray()
         self.dimensions = dimensions
+    }
+    
+    /// Level zero.
+    var baseLevel: LevelLayer {
+        layers.getAtIndex(0)
     }
 }
 
@@ -36,7 +45,7 @@ class LevelLayer: AbstractLevelLayer {
                 continue
             }
             grid[index / delegate.dimensions.width][index % delegate.dimensions.width] =
-                Set(tile.entities.map {$0.classification})
+            Set(tile.entities.map {$0.entityType.classification})
         }
         return grid
     }

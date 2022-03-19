@@ -1,6 +1,6 @@
 import Foundation
 
-typealias EntityBlock = [[Set<EntityType>?]]
+typealias EntityBlock = [[Set<Classification>?]]
 
 class RuleParser {
     enum AutomataState {
@@ -19,6 +19,7 @@ class RuleParser {
         var automataState: AutomataState = .epsilon
         var receivers: [Noun] = []
         var properties: [Property] = []
+        var isObjects: [Noun] = []
         var hasObjects: [Noun] = []
         
         func getRules() -> [Rule] {
@@ -26,6 +27,9 @@ class RuleParser {
             for noun in receivers {
                 for property in properties {
                     rules.append(Rule(receiver: noun, verb: .vIs, performer: .property(property)))
+                }
+                for otherNoun in isObjects {
+                    rules.append(Rule(receiver: noun, verb: .vIs, performer: .noun(otherNoun)))
                 }
                 for otherNoun in hasObjects {
                     rules.append(Rule(receiver: noun, verb: .vHas, performer: .noun(otherNoun)))
@@ -35,7 +39,7 @@ class RuleParser {
         }
     }
     
-    func transition(ruleParserState: RuleParserState, entityType: EntityType) {
+    func transition(ruleParserState: RuleParserState, entityType: Classification) {
         switch ruleParserState.automataState {
         case .epsilon:
             switch entityType {
@@ -72,7 +76,7 @@ class RuleParser {
         case .isVerb:
             switch entityType {
             case .noun(let noun):
-                ruleParserState.properties.append(.equalTo(noun))
+                ruleParserState.isObjects.append(noun)
                 ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             case .property(let property):
@@ -85,7 +89,7 @@ class RuleParser {
         case .isVerbPrime:
             switch entityType {
             case .noun(let noun):
-                ruleParserState.properties.append(.equalTo(noun))
+                ruleParserState.isObjects.append(noun)
                 ruleParserState.automataState = .isVerb_concat_nounProp
                 return
             case .property(let property):
@@ -138,7 +142,7 @@ class RuleParser {
         ruleParserState.automataState = .reject
     }
     
-    func parse(sentence: [EntityType]) -> [Rule] {
+    func parse(sentence: [Classification]) -> [Rule] {
         let ruleParserState = RuleParserState()
         for entityType in sentence {
             transition(ruleParserState: ruleParserState, entityType: entityType)
@@ -151,7 +155,7 @@ class RuleParser {
         for i in 0..<block.count {
             for j in 0..<block[0].count {
                 
-                var verticalCandidateSentence: [EntityType] = []
+                var verticalCandidateSentence: [Classification] = []
                 for k in i..<block.count {
                     guard let entityTypes = block[k][j],
                           let metaData = entityTypes.first(where: { $0.isMetaData }) else {
@@ -161,7 +165,7 @@ class RuleParser {
                     verticalCandidateSentence.append(metaData)
                 }
                 rules.append(contentsOf: parse(sentence: verticalCandidateSentence))
-                var horizontalCandidateSentence: [EntityType] = []
+                var horizontalCandidateSentence: [Classification] = []
                 for k in j..<block[0].count {
                     guard let entityTypes = block[i][k],
                           let metaData = entityTypes.first(where: { $0.isMetaData }) else {
@@ -193,25 +197,46 @@ class Rule {
         case noun(Noun)
         case property(Property)
     }
+    
     var receiver: Noun
     var verb: Verb
-    var perfomer: RulePerformer
-    var relevantEntities: [Entity] = []
+    var performer: RulePerformer
+    var relevantEntities: [EntityType] = []
     init(receiver: Noun, verb: Verb, performer: RulePerformer) {
         self.receiver = receiver
         self.verb = verb
-        self.perfomer = performer
+        self.performer = performer
     }
 }
 
 extension Rule: Hashable {
     static func == (lhs: Rule, rhs: Rule) -> Bool {
-        return lhs.receiver == rhs.receiver && lhs.verb == rhs.verb && lhs.perfomer == rhs.perfomer
+        return lhs.receiver == rhs.receiver && lhs.verb == rhs.verb && lhs.performer == rhs.performer
     }
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(receiver)
         hasher.combine(verb)
-        hasher.combine(perfomer)
+        hasher.combine(performer)
+    }
+}
+
+extension Rule.RulePerformer: CustomDebugStringConvertible {
+    var debugDescription: String {
+        switch self {
+        case .noun(let item as CustomDebugStringConvertible), .property(let item as CustomDebugStringConvertible):
+            return item.debugDescription
+        default:
+            return ""
+        }
+        
+    }
+}
+
+extension Rule: CustomDebugStringConvertible {
+    var debugDescription: String {
+        """
+        \(receiver.debugDescription) \(verb.debugDescription) \(performer.debugDescription)
+        """
     }
 }
