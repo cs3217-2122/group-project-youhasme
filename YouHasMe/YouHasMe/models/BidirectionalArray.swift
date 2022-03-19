@@ -1,5 +1,5 @@
 import Foundation
-class BidirectionalArray<T> {
+struct BidirectionalArray<T> {
     private var lowerBound: Int = 0
     private var upperBound: Int = 0
     private var backingArray: [T] = []
@@ -11,16 +11,16 @@ class BidirectionalArray<T> {
         backingArray[getActualIndex(index)]
     }
     
-    func setAtIndex(_ index: Int, value: T) {
+    mutating func setAtIndex(_ index: Int, value: T) {
         backingArray[getActualIndex(index)] = value
     }
     
-    func append(_ item: T) {
+    mutating func append(_ item: T) {
         upperBound += 1
         setAtIndex(upperBound, value: item)
     }
     
-    func prepend(_ item: T) {
+    mutating func prepend(_ item: T) {
         lowerBound -= 1
         setAtIndex(lowerBound, value: item)
     }

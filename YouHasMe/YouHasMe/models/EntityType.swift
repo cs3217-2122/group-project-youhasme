@@ -1,4 +1,5 @@
 import Foundation
+
 enum Classification: Hashable {
     case noun(Noun)
     case verb(Verb)
@@ -65,7 +66,7 @@ extension Property: CustomDebugStringConvertible {
     }
 }
 
-class EntityType: Hashable {
+struct EntityType: Hashable {
     var classification: Classification
     
     /// A set of rules potentially applicable to this entity type, that may or may not be active.
@@ -90,11 +91,19 @@ struct EntityTypes {
         static var flag = EntityType(classification: .noun(.flag))
         static var wall = EntityType(classification: .noun(.wall))
         static var skull = EntityType(classification: .noun(.skull))
+    
+        static func getAllNouns() -> [EntityType] {
+            return [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull]
+        }
     }
     
     struct Verbs {
         static var vIs = EntityType(classification: .verb(.vIs))
         static var vHas = EntityType(classification: .verb(.vHas))
+        
+        static func getAllVerbs() -> [EntityType] {
+            return [Verbs.vIs, Verbs.vHas]
+        }
     }
     
     struct Properties {
@@ -102,10 +111,26 @@ struct EntityTypes {
         static var win = EntityType(classification: .property(.win))
         static var defeat = EntityType(classification: .property(.defeat))
         static var block = EntityType(classification: .property(.block))
+
+        static func getAllProperties() -> [EntityType] {
+            return [Properties.you, Properties.win, Properties.defeat, Properties.block]
+        }
     }
     
     struct Connectives {
         static var and = EntityType(classification: .connective(.and))
+
+        static func getAllConnectives() -> [EntityType] {
+            return [Connectives.and]
+        }
+    }
+
+    static func getAllEntityTypes() -> [EntityType] {
+        var entityTypes = Nouns.getAllNouns()
+        entityTypes.append(contentsOf: Verbs.getAllVerbs())
+        entityTypes.append(contentsOf: Properties.getAllProperties())
+        entityTypes.append(contentsOf: Connectives.getAllConnectives())
+        return entityTypes
     }
 }
 
