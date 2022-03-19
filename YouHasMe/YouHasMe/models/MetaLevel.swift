@@ -7,23 +7,23 @@ class MetaLevel {
     }
 }
 
-protocol LevelLayerDelegate: AnyObject {
-    var dimensions: Rectangle { get }
+protocol AbstractLevelLayer {
+    var dimensions: Rectangle { get set }
+    var tiles: [Tile] { get set }
 }
 
-class AbstractLevelLayer {
-    weak var delegate: LevelLayerDelegate?
-    
-    var tiles: [Tile] = []
+extension AbstractLevelLayer {
     func getTileAt(x: Int, y: Int) -> Tile {
-        guard let delegate = delegate else {
-            fatalError("should not be nil")
-        }
-
-        return tiles[x + y * delegate.dimensions.width]
+        return tiles[x + y * dimensions.width]
+    }
+    
+    mutating func setTileAt(x: Int, y: Int, tile: Tile) {
+        tiles[x + y * dimensions.width] = tile
     }
 }
 
-class MetaLevelLayer: AbstractLevelLayer {
+struct MetaLevelLayer: AbstractLevelLayer {
+    var tiles: [Tile] = []
     var outlets: [Outlet] = []
+    var dimensions: Rectangle
 }

@@ -45,7 +45,7 @@ class Entity {
     var classification: EntityType
     var rules: [Rule] = []
     
-    fileprivate init(classification: EntityType) {
+    init(classification: EntityType) {
         self.classification = classification
     }
 }
