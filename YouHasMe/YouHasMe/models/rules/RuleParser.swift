@@ -149,7 +149,7 @@ class RuleParser {
     }
 
     func parse(block: EntityBlock) -> [Rule] {
-        var rules: [Rule] = []
+        var rules: [Rule] = DefaultRules.rules
         for i in 0..<block.count {
             for j in 0..<block[0].count {
 
