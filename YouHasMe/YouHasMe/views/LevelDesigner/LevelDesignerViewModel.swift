@@ -9,6 +9,7 @@ class LevelDesignerViewModel: ObservableObject {
     private var savedLevels: [Level]
 
     private(set) var currLevel: Level
+    private(set) var currLevelLayerIndex: Int
     @Published private(set) var currLevelLayer: LevelLayer
     @Published private(set) var selectedEntityType: EntityType? = nil
     @Published private(set) var availableEntityTypes: [EntityType] = allAvailableEntityTypes
@@ -16,6 +17,7 @@ class LevelDesignerViewModel: ObservableObject {
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel
+        self.currLevelLayerIndex = 0
         self.savedLevels = StorageUtil.loadSavedLevels()
     }
 
@@ -63,7 +65,8 @@ class LevelDesignerViewModel: ObservableObject {
     }
 
     func reset() {
-        self.currLevelLayer = LevelLayer(dimensions: currLevelLayer.dimensions)
+        self.currLevel.resetLayerAtIndex(currLevelLayerIndex)
+        self.currLevelLayer = currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
 
     func loadLevel(levelName: String) -> Bool {
@@ -82,7 +85,6 @@ class LevelDesignerViewModel: ObservableObject {
         }
 
         do {
-            // TODO: updateSavedLevels, updateJsonFileSavedLevels
             savedLevels = getUpdatedSavedLevels(levelName: levelName)
             try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
                                                       savedLevels: savedLevels)
@@ -95,6 +97,7 @@ class LevelDesignerViewModel: ObservableObject {
     func getUpdatedSavedLevels(levelName: String) -> [Level] {
         // remove level with outdated data if it exists
         var updatedLevels = savedLevels.filter { $0.name != levelName }
+        currLevel.setName(levelName)
         updatedLevels.append(currLevel)
         return updatedLevels
     }
