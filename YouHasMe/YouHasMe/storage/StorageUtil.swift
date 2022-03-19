@@ -24,7 +24,7 @@ struct StorageUtil {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let storage = try decoder.decode(GameStorage.self, from: data)
-            var updatedLevels = getUpdatedEntitiesLevels(levels: storage.levels)
+            var updatedLevels = storage.levels
             updatedLevels.append(contentsOf: preloadedLevels)
             return updatedLevels
         } catch {
@@ -70,10 +70,5 @@ struct StorageUtil {
     private static func saveFileExists(at url: URL) -> Bool {
         let fileManager = FileManager.default
         return fileManager.fileExists(atPath: url.path)
-    }
-
-    // TODO: implement
-    private static func getUpdatedEntitiesLevels(levels: [Level]) -> [Level] {
-        return levels
     }
 }

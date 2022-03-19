@@ -40,14 +40,6 @@ struct LevelEditRowView: View {
             TextField("Level Name", text: $levelName)
                 .padding([.trailing, .leading], 5.0)
                 .disableAutocorrection(true)
-
-//            NavigationLink(destination:
-//                            LazyNavigationView(
-//                                GameView(level: viewModel.currLevel)
-//            )) {
-//                Text("Start")
-//            }
-
         }
         .padding([.leading, .trailing], 10.0)
     }
