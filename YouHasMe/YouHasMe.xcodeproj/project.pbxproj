@@ -22,11 +22,27 @@
 		E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3927DC58B800F73B27 /* Connector.swift */; };
 		E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3B27DC58C700F73B27 /* Level.swift */; };
 		E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3D27DC58DD00F73B27 /* Condition.swift */; };
-		E57ACB4027DC675E00F73B27 /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3F27DC675E00F73B27 /* Entity.swift */; };
+		E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3F27DC675E00F73B27 /* EntityType.swift */; };
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
 		E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */; };
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
+		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
+		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
+		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
+		E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDF27E5A64B00E3952D /* Entity.swift */; };
+		E5BECBE227E5B6EF00E3952D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE127E5B6EF00E3952D /* String.swift */; };
+		E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E5BECBD527E599F100E3952D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E57ACB1B27DC582300F73B27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E57ACB2227DC582300F73B27;
+			remoteInfo = YouHasMe;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1E6B90C327E5B2BF00161E63 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
@@ -45,14 +61,28 @@
 		E57ACB3927DC58B800F73B27 /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		E57ACB3B27DC58C700F73B27 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		E57ACB3D27DC58DD00F73B27 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
-		E57ACB3F27DC675E00F73B27 /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		E57ACB3F27DC675E00F73B27 /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalArray.swift; sourceTree = "<group>"; };
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
+		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
+		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
+		E5BECBDD27E59E1000E3952D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		E5BECBDF27E5A64B00E3952D /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
+		E5BECBE127E5B6EF00E3952D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		E57ACB2027DC582300F73B27 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E5BECBCE27E599F100E3952D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -87,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				E57ACB2527DC582300F73B27 /* YouHasMe */,
+				E5BECBD227E599F100E3952D /* YouHasMeTests */,
 				E57ACB2427DC582300F73B27 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				E57ACB2327DC582300F73B27 /* YouHasMe.app */,
+				E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,17 +155,46 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E5BECBE327E5BE0200E3952D /* rules */,
+				E5BECBDC27E59E0300E3952D /* extensions */,
 				E57ACB3527DC58A000F73B27 /* Campaign.swift */,
 				E57ACB3D27DC58DD00F73B27 /* Condition.swift */,
 				E57ACB3727DC58B000F73B27 /* MetaLevel.swift */,
 				E57ACB3927DC58B800F73B27 /* Connector.swift */,
 				E57ACB3B27DC58C700F73B27 /* Level.swift */,
-				E57ACB3F27DC675E00F73B27 /* Entity.swift */,
-				E57ACB4127DC677A00F73B27 /* Rule.swift */,
+				E57ACB3F27DC675E00F73B27 /* EntityType.swift */,
 				E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */,
 				E57ACB4527DC948400F73B27 /* Outlet.swift */,
+				E5BECBDF27E5A64B00E3952D /* Entity.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E5BECBD227E599F100E3952D /* YouHasMeTests */ = {
+			isa = PBXGroup;
+			children = (
+				E5BECBD327E599F100E3952D /* YouHasMeTests.swift */,
+				E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */,
+			);
+			path = YouHasMeTests;
+			sourceTree = "<group>";
+		};
+		E5BECBDC27E59E0300E3952D /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5BECBDD27E59E1000E3952D /* Array.swift */,
+				E5BECBE127E5B6EF00E3952D /* String.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		E5BECBE327E5BE0200E3952D /* rules */ = {
+			isa = PBXGroup;
+			children = (
+				E57ACB4127DC677A00F73B27 /* Rule.swift */,
+				E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */,
+			);
+			path = rules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -156,6 +217,24 @@
 			productReference = E57ACB2327DC582300F73B27 /* YouHasMe.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E5BECBD027E599F100E3952D /* YouHasMeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E5BECBD927E599F100E3952D /* Build configuration list for PBXNativeTarget "YouHasMeTests" */;
+			buildPhases = (
+				E5BECBCD27E599F100E3952D /* Sources */,
+				E5BECBCE27E599F100E3952D /* Frameworks */,
+				E5BECBCF27E599F100E3952D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E5BECBD627E599F100E3952D /* PBXTargetDependency */,
+			);
+			name = YouHasMeTests;
+			productName = YouHasMeTests;
+			productReference = E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -168,6 +247,10 @@
 				TargetAttributes = {
 					E57ACB2227DC582300F73B27 = {
 						CreatedOnToolsVersion = 13.2.1;
+					};
+					E5BECBD027E599F100E3952D = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = E57ACB2227DC582300F73B27;
 					};
 				};
 			};
@@ -185,6 +268,7 @@
 			projectRoot = "";
 			targets = (
 				E57ACB2227DC582300F73B27 /* YouHasMe */,
+				E5BECBD027E599F100E3952D /* YouHasMeTests */,
 			);
 		};
 /* End PBXProject section */
@@ -199,6 +283,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5BECBCF27E599F100E3952D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -209,7 +300,9 @@
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
+				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
@@ -219,14 +312,33 @@
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
 				1E6B90CA27E5B55100161E63 /* PalletteView.swift in Sources */,
-				E57ACB4027DC675E00F73B27 /* Entity.swift in Sources */,
+				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
+				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
+				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5BECBCD27E599F100E3952D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
+				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E5BECBD627E599F100E3952D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E57ACB2227DC582300F73B27 /* YouHasMe */;
+			targetProxy = E5BECBD527E599F100E3952D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E57ACB2F27DC582500F73B27 /* Debug */ = {
@@ -401,6 +513,40 @@
 			};
 			name = Release;
 		};
+		E5BECBD727E599F100E3952D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sunjc826.YouHasMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouHasMe.app/YouHasMe";
+			};
+			name = Debug;
+		};
+		E5BECBD827E599F100E3952D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = sunjc826.YouHasMeTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/YouHasMe.app/YouHasMe";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -418,6 +564,15 @@
 			buildConfigurations = (
 				E57ACB3227DC582500F73B27 /* Debug */,
 				E57ACB3327DC582500F73B27 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E5BECBD927E599F100E3952D /* Build configuration list for PBXNativeTarget "YouHasMeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E5BECBD727E599F100E3952D /* Debug */,
+				E5BECBD827E599F100E3952D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
