@@ -41,6 +41,10 @@ struct Level {
         self.name = name
     }
 
+    mutating func setLevelLayerAtIndex(_ index: Int, value: LevelLayer) {
+        layers.setAtIndex(index, value: value)
+    }
+
     func getLayerAtIndex(_ index: Int) -> LevelLayer {
         guard let layer = layers.getAtIndex(index) else {
             assert(false, "Level does not have layer at index \(index)")

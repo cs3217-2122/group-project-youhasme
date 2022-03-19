@@ -98,6 +98,7 @@ class LevelDesignerViewModel: ObservableObject {
         // remove level with outdated data if it exists
         var updatedLevels = savedLevels.filter { $0.name != levelName }
         currLevel.setName(levelName)
+        currLevel.setLevelLayerAtIndex(currLevelLayerIndex, value: currLevelLayer)
         updatedLevels.append(currLevel)
         return updatedLevels
     }
