@@ -18,10 +18,10 @@ struct Level {
     init() {
         layers = BidirectionalArray()
     }
-    
+    	
     /// Level zero.
     var baseLevel: LevelLayer {
-        layers.getAtIndex(0)
+        layers.getAtIndex(0)! // TODO: Fix this
     }
 }
 
