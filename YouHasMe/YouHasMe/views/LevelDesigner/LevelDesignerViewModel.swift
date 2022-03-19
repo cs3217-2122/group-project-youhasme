@@ -83,12 +83,19 @@ class LevelDesignerViewModel: ObservableObject {
 
         do {
             // TODO: updateSavedLevels, updateJsonFileSavedLevels
-//            updateSavedLevels(levelName: levelName)
-//            try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
-//                                                      savedLevels: savedLevels)
+            savedLevels = getUpdatedSavedLevels(levelName: levelName)
+            try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
+                                                      savedLevels: savedLevels)
             return "Successfully saved level: \(levelName)"
         } catch {
             return "error saving level: \(error)"
         }
+    }
+
+    func getUpdatedSavedLevels(levelName: String) -> [Level] {
+        // remove level with outdated data if it exists
+        var updatedLevels = savedLevels.filter { $0.name != levelName }
+        updatedLevels.append(currLevel)
+        return updatedLevels
     }
 }
