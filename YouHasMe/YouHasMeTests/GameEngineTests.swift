@@ -18,8 +18,9 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         print(levelLayer)
-        var ge = GameEngine(levelLayer: levelLayer)
-        ge.update(action: .moveDown)
-        print(ge.levelLayer)
+        var gameEngine = GameEngine(levelLayer: levelLayer)
+        gameEngine.update(action: .moveDown)
+        print(gameEngine.levelLayer)
+        XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
 }
