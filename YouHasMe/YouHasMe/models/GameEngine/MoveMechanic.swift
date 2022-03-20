@@ -20,13 +20,13 @@ struct MoveMechanic: GameMechanic {
             return [:]
         }
 
-        let youLocations = getLocationsOfYou(levelLayer: levelLayer)  // Coordinates of YOU blocks
+        let youLocations = levelLayer.getLocationsOf(behaviour: .property(.you))  // Coordinates of YOU blocks
 
         // Get coordinates of blocks that are moved
         var locationsMoved: Set<Location> = []
         for location in youLocations {  // For each you block
-            let newLocation = getMovedByYou(levelLayer: levelLayer, youLocation: location, dy: dy, dx: dx)
-            locationsMoved = locationsMoved.union(newLocation)
+            let newLocations = getMovedByYou(levelLayer: levelLayer, youLocation: location, dy: dy, dx: dx)
+            locationsMoved = locationsMoved.union(newLocations)
         }
 
         // Return map of coordinates to move action
@@ -35,20 +35,6 @@ struct MoveMechanic: GameMechanic {
             actions[location] = [.move(dx: dx, dy: dy)]
         }
         return actions
-    }
-
-    // Get coordinates of YOU blocks
-    private func getLocationsOfYou(levelLayer: LevelLayer) -> Set<Location> {
-        var coordsOfYou: Set<Location> = []
-        for r in 0..<levelLayer.dimensions.height {
-            for c in 0..<levelLayer.dimensions.width {
-                let entities = levelLayer.getTileAt(x: c, y: r).entities
-                for i in 0..<entities.count where entities[i].activeBehaviours.contains(.property(.you)) {
-                    coordsOfYou.insert(Location(x: c, y: r, z: i))
-                }
-            }
-        }
-        return coordsOfYou
     }
 
     // Get coordinates of line of blocks moved by a YOU block
