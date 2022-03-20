@@ -121,4 +121,3 @@ extension LevelLayer: Equatable {
 
 extension Tile: Equatable {
 }
-

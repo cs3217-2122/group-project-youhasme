@@ -17,6 +17,7 @@
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
 		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
+		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62727E658F200918E71 /* MoveMechanic.swift */; };
 		B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62827E658F200918E71 /* EntityAction.swift */; };
 		B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62927E658F200918E71 /* GameEngine.swift */; };
@@ -75,6 +76,7 @@
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
 		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
+		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		B07AA62727E658F200918E71 /* MoveMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveMechanic.swift; sourceTree = "<group>"; };
 		B07AA62827E658F200918E71 /* EntityAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAction.swift; sourceTree = "<group>"; };
 		B07AA62927E658F200918E71 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				E5BECBD327E599F100E3952D /* YouHasMeTests.swift */,
 				E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */,
 				B07AA63127E65FC500918E71 /* GameEngineTests.swift */,
+				40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */,
 			);
 			path = YouHasMeTests;
 			sourceTree = "<group>";
@@ -452,6 +455,7 @@
 				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */,
+				40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
