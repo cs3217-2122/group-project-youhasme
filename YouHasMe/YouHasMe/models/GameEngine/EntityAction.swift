@@ -7,7 +7,7 @@
 
 // Represents what happens to entity after updating game state
 enum EntityAction {
-    case move(Int, Int)  // Move by (dx, dy)
+    case move(dx: Int, dy: Int)  // Move by (dx, dy)
     case destroy  // Remove from level
     case win
     case defeat

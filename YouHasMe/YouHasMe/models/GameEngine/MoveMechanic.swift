@@ -28,7 +28,7 @@ struct MoveMechanic: GameMechanic {
         // Return map of coordinates to move action
         var actions: [[Int]: [EntityAction]] = [:]
         for coords in coordsMoved {
-            actions[coords] = [.move(dx, dy)]
+            actions[coords] = [.move(dx: dx, dy: dy)]
         }
         return actions
     }
