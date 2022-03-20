@@ -9,8 +9,11 @@ struct EntityView: View {
     let entityType: EntityType?
     var body: some View {
         if let entityType = entityType {
-            SwiftUI.Rectangle()
-                .fill(entityTypeToImageColor(type: entityType))
+            Text(entityTypeToString(type: entityType))
+                .font(.caption)
+                .scaledToFit()
+//            SwiftUI.Rectangle()
+//                .fill(entityTypeToImageColor(type: entityType))
         } else {
             SwiftUI.Rectangle()
                 .fill(.gray)

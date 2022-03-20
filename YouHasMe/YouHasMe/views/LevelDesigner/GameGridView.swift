@@ -6,13 +6,43 @@
 import SwiftUI
 
 struct GameGridView: View {
+    @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+    var gameEngine = GameEngine()
 
     func gridSize(proxy: GeometryProxy) -> CGFloat {
         let width = floor(proxy.size.width / CGFloat(levelDesignerViewModel.getWidth()))
         let height = floor(proxy.size.height / CGFloat(levelDesignerViewModel.getHeight()))
         return min(width, height)
     }
+    
+    var dragGesture : some Gesture {
+        DragGesture()
+            .onEnded { value in
+                guard gameState.state == .playing else {
+                    return
+                }
+                var updateAction: UpdateAction = .tick
+                let horizontalAmount = value.translation.width
+                let verticalAmount = value.translation.height
+                if abs(horizontalAmount) > abs(verticalAmount) {
+                    if horizontalAmount < 0 {
+                        updateAction = .moveLeft
+                    } else {
+                        updateAction = .moveRight
+                    }
+                            
+                } else {
+                    if verticalAmount < 0 {
+                        updateAction = .moveUp
+                    } else {
+                        updateAction = .moveDown
+                    }
+                }
+                levelDesignerViewModel.currLevelLayer = gameEngine.update(levelLayer: levelDesignerViewModel.currLevelLayer, action: updateAction)
+            }
+    }
+    
 
     var body: some View {
         GeometryReader { proxy in
@@ -26,11 +56,15 @@ struct GameGridView: View {
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
                                     .border(.pink)
                                     .onTapGesture {
-                                        levelDesignerViewModel.addEntityToPos(x: col, y: row)
+                                        if gameState.state == .designing {
+                                            levelDesignerViewModel.addEntityToPos(x: col, y: row)
+                                        }
                                     }
                                     .onLongPressGesture {
-                                        levelDesignerViewModel.removeEntityFromPos(x: col, y: row)
-                                    }
+                                        if gameState.state == .designing {
+                                            levelDesignerViewModel.removeEntityFromPos(x: col, y: row)
+                                        }
+                                    }.gesture(dragGesture)
                             }
                         }
                     }

@@ -8,10 +8,8 @@
 struct GameEngine {
     let gameMechanics = [MoveMechanic()]
 
-    var levelLayer: LevelLayer
-
     // Updates game state given action
-    mutating func update(action: UpdateAction) {
+     func update(levelLayer: LevelLayer, action: UpdateAction) -> LevelLayer {
         var updates: [[Int]: [EntityAction]] = [:]  // Map of coordinates of entity to actions
 
         // Get updates of all mechanics
@@ -46,6 +44,6 @@ struct GameEngine {
             }
         }
 
-        levelLayer = RuleEngine().applyRules(to: newLayer)
+        return RuleEngine().applyRules(to: newLayer)
     }
 }
