@@ -109,3 +109,16 @@ extension LevelLayer: Codable {
 
 extension Tile: Codable {
 }
+
+extension Rectangle: Equatable {
+}
+
+extension LevelLayer: Equatable {
+    static func == (lhs: LevelLayer, rhs: LevelLayer) -> Bool {
+        lhs.dimensions == rhs.dimensions && lhs.tiles == rhs.tiles
+    }
+}
+
+extension Tile: Equatable {
+}
+
