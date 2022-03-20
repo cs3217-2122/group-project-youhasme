@@ -10,7 +10,7 @@ struct GameEngine {
 
     // Updates game state given action
      func update(levelLayer: LevelLayer, action: UpdateAction) -> LevelLayer {
-        var updates: [[Int]: [EntityAction]] = [:]  // Map of coordinates of entity to actions
+        var updates: [[Location]: [EntityAction]] = [:]  // Map of coordinates of entity to actions
 
         // Get updates of all mechanics
         for mechanic in gameMechanics {
@@ -25,21 +25,18 @@ struct GameEngine {
             for c in 0..<levelLayer.dimensions.width {
                 let entities = levelLayer.getTileAt(x: c, y: r).entities
                 var newTile = Tile()
-                for i in 0..<entities.count where updates[[r, c, i]] == nil {
+                for i in 0..<entities.count where updates[Location(x: c, y: r, z: i)] == nil {
                     newTile.entities.append(entities[i])
                 }
                 newLayer.setTileAt(x: c, y: r, tile: newTile)
             }
         }
         // Add changed entities
-        for (coords, actions) in updates {
-            let y = coords[0]
-            let x = coords[1]
-            let i = coords[2]
-            let entity = levelLayer.getTileAt(x: x, y: y).entities[i]
+        for (location, actions) in updates {
+            let entity = levelLayer.getTileAt(x: location.x, y: location.y).entities[location.z]
             for action in actions {
-                if case let .move(dx, dy) = action { // If we are moving entity
-                    newLayer.add(entity: entity, x: x + dx, y: y + dy)
+                if case let .move(dx, dy) = action {  // If we are moving entity
+                    newLayer.add(entity: entity, x: location.x + dx, y: location.y + dy)
                 }
             }
         }

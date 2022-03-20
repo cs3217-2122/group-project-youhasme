@@ -13,56 +13,46 @@ struct MoveMechanic: GameMechanic {
     // Parameters:
     //  - update: What triggered the update (e.g. user moves right)
     //  - levelLayer: Current game state
-    // Returns a map of coordinates (y, x, position in tile) of entities to their actions
-    func apply(update: UpdateAction, levelLayer: LevelLayer) -> [[Int]: [EntityAction]] {
-        let coordsOfYou = getCoordsOfYou(levelLayer: levelLayer)  // Coordinates of YOU blocks
+    // Returns a map of location (x, y , position in tile) of entities to their actions
+    func apply(update: UpdateAction, levelLayer: LevelLayer) -> [Location: [EntityAction]] {
+        let (dx, dy) = update.getMovement()
+        guard dx != 0 || dy != 0 else {
+            return [:]
+        }
+
+        let youLocations = levelLayer.getLocationsOf(behaviour: .property(.you))  // Coordinates of YOU blocks
 
         // Get coordinates of blocks that are moved
-        var coordsMoved: Set<[Int]> = []
-        let (dx, dy) = update.getMovement()
-        for coords in coordsOfYou {  // For each you block
-            let newCoords = getMovedByYou(levelLayer: levelLayer, youCoords: coords, dy: dy, dx: dx)
-            coordsMoved = coordsMoved.union(newCoords)
+        var locationsMoved: Set<Location> = []
+        for location in youLocations {  // For each you block
+            let newLocations = getMovedByYou(levelLayer: levelLayer, youLocation: location, dy: dy, dx: dx)
+            locationsMoved = locationsMoved.union(newLocations)
         }
 
         // Return map of coordinates to move action
-        var actions: [[Int]: [EntityAction]] = [:]
-        for coords in coordsMoved {
-            actions[coords] = [.move(dx: dx, dy: dy)]
+        var actions: [Location: [EntityAction]] = [:]
+        for location in locationsMoved {
+            actions[location] = [.move(dx: dx, dy: dy)]
         }
         return actions
     }
 
-    // Get coordinates of YOU blocks
-    private func getCoordsOfYou(levelLayer: LevelLayer) -> Set<[Int]> {
-        var coordsOfYou: Set<[Int]> = []
-        for r in 0..<levelLayer.dimensions.height {
-            for c in 0..<levelLayer.dimensions.width {
-                let entities = levelLayer.getTileAt(x: c, y: r).entities
-                for i in 0..<entities.count where entities[i].activeBehaviours.contains(.property(.you)) {
-                    coordsOfYou.insert([r, c, i])
-                }
-            }
-        }
-        return coordsOfYou
-    }
-
     // Get coordinates of line of blocks moved by a YOU block
-    private func getMovedByYou(levelLayer: LevelLayer, youCoords: [Int], dy: Int, dx: Int) -> Set<[Int]> {
-        var coordsMightMove: Set<[Int]> = [youCoords]  // Coordinates of YOU block and line of blocks that are pushed
-        var curY = youCoords[0] + dy
-        var curX = youCoords[1] + dx
+    private func getMovedByYou(levelLayer: LevelLayer, youLocation: Location, dy: Int, dx: Int) -> Set<Location> {
+        var locationsMightMove: Set<Location> = [youLocation]  // Locations of YOU and pushed line of blocks
+        var curY = youLocation.y + dy
+        var curX = youLocation.x + dx
         while levelLayer.isWithinBounds(x: curX, y: curY) {  // While we have space to move
             let entities = levelLayer.getTileAt(x: curX, y: curY).entities
             var foundPushable = false
             // Add pushable entities in current tile
             for i in 0..<entities.count where entities[i].activeBehaviours.contains(.property(.push)) {
-                coordsMightMove.insert([curY, curX, i])
+                locationsMightMove.insert(Location(x: curX, y: curY, z: i))
                 foundPushable = true
             }
 
             if !foundPushable {  // Empty space found, return line of blocks moved
-                return coordsMightMove
+                return locationsMightMove
             }
             curY += dy
             curX += dx
