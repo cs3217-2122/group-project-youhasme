@@ -10,7 +10,7 @@ struct GameEngine {
 
     // Updates game state given action
      func update(levelLayer: LevelLayer, action: UpdateAction) -> LevelLayer {
-        var updates: [[Location]: [EntityAction]] = [:]  // Map of coordinates of entity to actions
+        var updates: [Location: [EntityAction]] = [:]  // Map of coordinates of entity to actions
 
         // Get updates of all mechanics
         for mechanic in gameMechanics {
