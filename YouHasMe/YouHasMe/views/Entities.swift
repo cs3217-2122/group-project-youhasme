@@ -7,6 +7,7 @@ import Foundation
 import SwiftUI
 
 let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
+
 let demoTypes: [EntityType] = [
     EntityTypes.Nouns.baba,
     EntityTypes.Nouns.wall,
@@ -16,24 +17,25 @@ let demoTypes: [EntityType] = [
     EntityTypes.NounInstances.baba,
     EntityTypes.NounInstances.wall
 ]
-func entityTypeToString(type: EntityType) -> String {
+
+func entityTypeToImageString(type: EntityType) -> String {
     switch type {
     case EntityTypes.Nouns.baba:
-        return "BABA(TEXT)"
+        return "baba_text"
     case EntityTypes.Nouns.wall:
-        return "WALL(TEXT)"
+        return "wall_text"
     case EntityTypes.Verbs.vIs:
-        return "IS(TEXT)"
+        return "is"
     case EntityTypes.Properties.you:
-        return "YOU(TEXT)"
+        return "you"
     case EntityTypes.Properties.push:
-        return "PUSH(TEXT)"
+        return "push"
     case EntityTypes.NounInstances.baba:
-        return "BABA"
+        return "baba"
     case EntityTypes.NounInstances.wall:
-        return "WALL"
+        return "wall"
     default:
-        return "UNSUPPORTED"
+        return "question"
     }
 }
 
