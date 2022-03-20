@@ -35,7 +35,7 @@ struct StorageUtil {
     }
 
     static func getPreloadedLevels() -> [Level] {
-        return []
+        []
     }
 
     static func updateJsonFileSavedLevels(dataFileName: String, savedLevels: [Level]) throws {
