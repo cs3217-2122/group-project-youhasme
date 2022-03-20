@@ -28,6 +28,20 @@ extension AbstractLevelLayer {
     func isWithinBounds(x: Int, y: Int) -> Bool {
         x >= 0 && y >= 0 && x < dimensions.width && y < dimensions.height
     }
+
+    // Returns locations of entities with specified behaviour
+    func getLocationsOf(behaviour: Behaviour) -> Set<Location> {
+        var locations: Set<Location> = []
+        for y in 0..<dimensions.height {
+            for x in 0..<dimensions.width {
+                let entities = getTileAt(x: x, y: y).entities
+                for i in 0..<entities.count where entities[i].activeBehaviours.contains(behaviour) {
+                    locations.insert(Location(x: x, y: y, z: i))
+                }
+            }
+        }
+        return locations
+    }
 }
 
 struct MetaLevelLayer: AbstractLevelLayer {
