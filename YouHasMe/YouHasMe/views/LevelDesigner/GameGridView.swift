@@ -8,7 +8,12 @@ import SwiftUI
 struct GameGridView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
-    var gameEngine = GameEngine()
+    @State var gameEngine : GameEngine
+    
+    init(levelDesignerViewModel: LevelDesignerViewModel) {
+        self.levelDesignerViewModel = levelDesignerViewModel
+        self.gameEngine = GameEngine(levelLayer: levelDesignerViewModel.currLevelLayer)
+    }
 
     func gridSize(proxy: GeometryProxy) -> CGFloat {
         let width = floor(proxy.size.width / CGFloat(levelDesignerViewModel.getWidth()))
@@ -39,7 +44,8 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                levelDesignerViewModel.currLevelLayer = gameEngine.update(levelLayer: levelDesignerViewModel.currLevelLayer, action: updateAction)
+                gameEngine.update(action: updateAction)
+                levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
             }
     }
     

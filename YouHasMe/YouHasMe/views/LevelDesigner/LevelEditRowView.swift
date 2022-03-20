@@ -53,6 +53,7 @@ struct LevelEditRowView: View {
                 .disableAutocorrection(true)
             Spacer()
             Button(action: {
+                viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
                 gameState.state = .playing
             }) {
                 Text("Play")
