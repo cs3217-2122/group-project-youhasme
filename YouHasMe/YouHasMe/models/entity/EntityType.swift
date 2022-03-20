@@ -17,6 +17,17 @@ struct EntityType: Hashable {
 }
 
 struct EntityTypes {
+    struct NounInstances {
+        static var baba = EntityType(classification: .nounInstance(.baba))
+        static var flag = EntityType(classification: .nounInstance(.flag))
+        static var wall = EntityType(classification: .nounInstance(.wall))
+        static var skull = EntityType(classification: .nounInstance(.skull))
+
+        static func getAllNounInstances() -> [EntityType] {
+            [NounInstances.baba, NounInstances.flag, NounInstances.wall, NounInstances.skull]
+        }
+    }
+
     struct Nouns {
         static var baba = EntityType(classification: .noun(.baba))
         static var flag = EntityType(classification: .noun(.flag))
@@ -67,7 +78,8 @@ struct EntityTypes {
     }
 
     static func getAllEntityTypes() -> [EntityType] {
-        var entityTypes = Nouns.getAllNouns()
+        var entityTypes = NounInstances.getAllNounInstances()
+        entityTypes.append(contentsOf: Nouns.getAllNouns())
         entityTypes.append(contentsOf: Verbs.getAllVerbs())
         entityTypes.append(contentsOf: Properties.getAllProperties())
         entityTypes.append(contentsOf: Connectives.getAllConnectives())

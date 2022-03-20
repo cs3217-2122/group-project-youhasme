@@ -74,9 +74,23 @@ struct LevelLayer: AbstractLevelLayer {
                 continue
             }
             grid[index / dimensions.width][index % dimensions.width] =
-            Set(tile.entities.map { $0.entityType.classification })
+                Set(tile.entities.map { $0.entityType.classification })
         }
         return grid
+    }
+}
+
+extension LevelLayer: CustomDebugStringConvertible {
+    var debugDescription: String {
+        var s = ""
+        let grid = getAbstractRepresentation()
+        for r in 0..<dimensions.height {
+            for c in 0..<dimensions.width {
+                s += Array(grid[r][c] ?? Set()).description
+            }
+            s += "\n"
+        }
+        return s.replacingOccurrences(of: "YouHasMe.Classification.", with: "")
     }
 }
 
