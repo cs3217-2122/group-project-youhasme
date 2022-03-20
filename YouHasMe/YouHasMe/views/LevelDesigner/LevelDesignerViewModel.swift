@@ -69,6 +69,10 @@ class LevelDesignerViewModel: ObservableObject {
         self.currLevelLayer = currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
     
+    var unsavedChanges: Bool {
+        currLevelLayer != currLevel.getLayerAtIndex(currLevelLayerIndex)
+    }
+    
     func selectLevel(level: Level) {
         self.currLevel = level
         self.currLevelLayer = level.baseLevel

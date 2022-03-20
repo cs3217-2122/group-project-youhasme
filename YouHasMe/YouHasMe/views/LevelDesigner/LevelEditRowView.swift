@@ -14,22 +14,29 @@ struct LevelEditRowView: View {
 //    @State var levelName = ""
     @State var showSaveLevelAlert = false
     @State var saveMessage = ""
-    @State var showLoadLevelAlert = false
+    @State var showUnsavedChangesPrompt = false
     @State var loadSuccess = false
     @State var startGame = false
 
     var body: some View {
         HStack {
             Button(action: {
+                guard !viewModel.unsavedChanges else {
+                    showUnsavedChangesPrompt = true
+                    return
+                }
                 gameState.state = .selecting
             }) {
                 Text("Load")
+            }.confirmationDialog("You have unsaved changes that will be lost.",
+                                 isPresented: $showUnsavedChangesPrompt,
+                                 titleVisibility: .visible) {
+                Button("Continue") {
+                    gameState.state = .selecting
+                }
+                Button("Cancel") {
+                }
             }
-//            }.alert(isPresented: $showLoadLevelAlert) {
-//                let alertText = getLoadLevelAlert(loadSuccess: loadSuccess, levelName: levelName)
-//
-//                return Alert(title: Text(alertText), dismissButton: .cancel(Text("close")))
-//            }
 
             Button(action: save) {
                 Text("Save")
@@ -49,7 +56,7 @@ struct LevelEditRowView: View {
                 gameState.state = .playing
             }) {
                 Text("Play")
-            }
+            }.disabled(viewModel.unsavedChanges)
         }
         .padding([.leading, .trailing], 10.0)
     }

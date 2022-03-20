@@ -100,11 +100,15 @@ extension LevelLayer: CustomDebugStringConvertible {
     }
 }
 
+extension LevelLayer: Equatable {
+    
+}
+
 struct Tile {
     var entities: [Entity] = []
 }
 
-extension Rectangle: Codable {
+extension Rectangle: Codable, Equatable {
 }
 
 extension Level: Codable {
@@ -113,5 +117,6 @@ extension Level: Codable {
 extension LevelLayer: Codable {
 }
 
-extension Tile: Codable {
+extension Tile: Codable, Equatable {
 }
+
