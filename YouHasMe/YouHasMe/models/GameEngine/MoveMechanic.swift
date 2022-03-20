@@ -15,11 +15,15 @@ struct MoveMechanic: GameMechanic {
     //  - levelLayer: Current game state
     // Returns a map of coordinates (y, x, position in tile) of entities to their actions
     func apply(update: UpdateAction, levelLayer: LevelLayer) -> [[Int]: [EntityAction]] {
+        let (dx, dy) = update.getMovement()
+        guard dx != 0 || dy != 0 else {
+            return [:]
+        }
+
         let coordsOfYou = getCoordsOfYou(levelLayer: levelLayer)  // Coordinates of YOU blocks
 
         // Get coordinates of blocks that are moved
         var coordsMoved: Set<[Int]> = []
-        let (dx, dy) = update.getMovement()
         for coords in coordsOfYou {  // For each you block
             let newCoords = getMovedByYou(levelLayer: levelLayer, youCoords: coords, dy: dy, dx: dx)
             coordsMoved = coordsMoved.union(newCoords)
