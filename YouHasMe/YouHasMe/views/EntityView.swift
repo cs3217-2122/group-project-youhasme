@@ -37,7 +37,7 @@ class CellViewModel {
     var image: Image? {
         imageSource?.toImage()
     }
-    
+
     init(imageSource: Imageable? = nil) {
         self.imageSource = imageSource
     }
@@ -63,7 +63,7 @@ class EntityViewModel: CellViewModel {
 
 struct MetaEntityView: View {
     var viewModel: MetaEntityViewModel
-    
+
     var body: some View {
         CellView(viewModel: viewModel)
     }
@@ -75,7 +75,7 @@ class MetaEntityViewModel: CellViewModel {
             super.init()
             return
         }
-        
+
         super.init(imageSource: metaEntityTypeToImageable(type: metaEntityType))
     }
 }

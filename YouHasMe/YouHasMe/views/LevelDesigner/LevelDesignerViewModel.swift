@@ -41,7 +41,7 @@ class LevelDesignerViewModel: ObservableObject {
             return tile.entities[0].entityType
         }
     }
-    
+
     func getEntityTypeAtPos(point: Point) -> EntityType? {
         getEntityTypeAtPos(x: point.x, y: point.y)
     }
@@ -141,7 +141,7 @@ extension LevelDesignerViewModel {
     func getTileViewModel(for entityType: EntityType) -> EntityViewModel {
         EntityViewModel(entityType: entityType)
     }
-    
+
     func getTileViewModel(at point: Point) -> EntityViewModel {
         EntityViewModel(entityType: getEntityTypeAtPos(point: point))
     }

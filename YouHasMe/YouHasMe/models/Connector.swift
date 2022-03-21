@@ -4,6 +4,8 @@ class DesignerConnector {
     var otherMetaLevel: MetaLevel?
 }
 
+extension DesignerConnector: Codable {}
+
 class Connector {
     var metaLevel: MetaLevel
     var otherMetaLevel: MetaLevel
@@ -12,3 +14,5 @@ class Connector {
         self.otherMetaLevel = otherMetaLevel
     }
 }
+
+extension Connector: Codable {}

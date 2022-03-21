@@ -50,3 +50,5 @@ struct Condition {
         relation.evaluate(lhs: subject.value, rhs: value)
     }
 }
+
+extension Condition: Codable {}

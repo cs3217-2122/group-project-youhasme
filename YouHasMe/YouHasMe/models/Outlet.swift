@@ -10,7 +10,9 @@ enum RectangleEdge {
     case rightEdge
 }
 
-class Outlet {
+extension RectangleEdge: Codable {}
+
+final class Outlet {
     var condition: Condition?
     var connector: Connector?
     // outlet lies on the boundaries
@@ -26,3 +28,5 @@ class Outlet {
         self.position = position
     }
 }
+
+extension Outlet: Codable {}

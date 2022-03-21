@@ -1,6 +1,6 @@
 import Foundation
 
-class MetaLevel {
+struct MetaLevel {
     var origin: Point
     var layer: MetaLevelLayer
     init(origin: Point, layer: MetaLevelLayer) {
@@ -9,7 +9,7 @@ class MetaLevel {
     }
 }
 
-protocol AbstractLevelLayer {
+protocol AbstractLevelLayer: Codable {
     associatedtype TileType
     var dimensions: Rectangle { get set }
     var tiles: [TileType] { get set }
@@ -19,11 +19,16 @@ extension AbstractLevelLayer {
     func getTileAt(point: Point) -> TileType {
         getTileAt(x: point.x, y: point.y)
     }
-    
+
     func getTileAt(x: Int, y: Int) -> TileType {
         tiles[x + y * dimensions.width]
     }
 
+    mutating func setTile(_ tile: TileType, at point: Point) {
+        setTileAt(x: point.x, y: point.y, tile: tile)
+    }
+
+    // TODO: refactor to `setTile` style
     mutating func setTileAt(x: Int, y: Int, tile: TileType) {
         tiles[x + y * dimensions.width] = tile
     }
@@ -40,7 +45,6 @@ struct MetaLevelLayer: AbstractLevelLayer {
     var dimensions: Rectangle
 }
 
-
 enum MetaEntityType {
     case blocking
     case nonBlocking
@@ -48,7 +52,11 @@ enum MetaEntityType {
     case level
 }
 
+extension MetaEntityType: Codable {}
+
 struct MetaTile {
     var metaEntity: MetaEntityType
     var hasPlayer: Bool
 }
+
+extension MetaTile: Codable {}

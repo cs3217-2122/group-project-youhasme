@@ -1,6 +1,5 @@
 import SwiftUI
 
-
 struct GridViewData {
     var displayWidth: Double
     var displayHeight: Double
@@ -20,7 +19,7 @@ struct GridViewData {
         self.widthInCells = Int(floor(displayWidth / cellDimensions))
         self.heightInCells = Int(floor(displayHeight / cellDimensions))
     }
-    
+
     init(proxy: GeometryProxy) {
         self.init(displayWidth: proxy.size.width, displayHeight: proxy.size.height)
     }
@@ -44,7 +43,7 @@ struct MetaLevelGridView: View {
                                 .frame(width: gridViewData.cellWidth, height: gridViewData.cellHeight)
                                 .border(.pink)
                                 .onTapGesture {
-                                    
+
                                 }
                                 .onLongPressGesture {
 
@@ -59,8 +58,8 @@ struct MetaLevelGridView: View {
     }
 }
 
-//struct MetaLevelGridView_Previews: PreviewProvider {
+// struct MetaLevelGridView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        MetaLevelGridView()
 //    }
-//}
+// }
