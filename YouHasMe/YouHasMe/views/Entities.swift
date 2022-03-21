@@ -80,3 +80,16 @@ func entityTypeToImageColor(type: EntityType) -> Color {
         return .gray
     }
 }
+
+func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
+    switch type {
+    case .blocking:
+        return .string("wall")
+    case .nonBlocking:
+        return .string("grass")
+    case .space:
+        return nil
+    case .level:
+        return nil
+    }
+}

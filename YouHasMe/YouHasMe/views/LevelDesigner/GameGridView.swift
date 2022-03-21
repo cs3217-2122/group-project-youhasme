@@ -58,7 +58,8 @@ struct GameGridView: View {
                     ForEach((0..<levelDesignerViewModel.getHeight()), id: \.self) { row in
                         HStack(spacing: 0) {
                             ForEach((0..<levelDesignerViewModel.getWidth()), id: \.self) { col in
-                                EntityView(entityType: levelDesignerViewModel.getEntityTypeAtPos(x: col, y: row))
+                                let tileViewModel = levelDesignerViewModel.getTileViewModel(at: Point(x: col, y: row))
+                                EntityView(viewModel: tileViewModel)
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
                                     .border(.pink)
                                     .onTapGesture {

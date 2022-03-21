@@ -28,6 +28,11 @@
 		B07AA62F27E658F200918E71 /* UpdateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62A27E658F200918E71 /* UpdateAction.swift */; };
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
+		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
+		E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */; };
+		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
+		E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3827E8B213007D2E86 /* ViewConstants.swift */; };
+		E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3B27E8B55E007D2E86 /* Point.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -91,6 +96,11 @@
 		B07AA62A27E658F200918E71 /* UpdateAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateAction.swift; sourceTree = "<group>"; };
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
+		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
+		E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelGridView.swift; sourceTree = "<group>"; };
+		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
+		E5563C3827E8B213007D2E86 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
+		E5563C3B27E8B55E007D2E86 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -145,6 +155,8 @@
 		1E6B90C127E5B2A300161E63 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
+				E5563C3127E8ADAC007D2E86 /* MetaLevelDesigner */,
 				1E6B90C227E5B2AD00161E63 /* LevelDesigner */,
 				1E6B90C527E5B43F00161E63 /* Entities.swift */,
 				1E96EB8C27E7254000321BEB /* MainMenuView.swift */,
@@ -152,6 +164,7 @@
 				1E96EB9027E725DF00321BEB /* GameView.swift */,
 				1E96EB9227E7264100321BEB /* LevelSelectionView.swift */,
 				1E96EB9427E726CC00321BEB /* LevelPlayView.swift */,
+				E5563C3827E8B213007D2E86 /* ViewConstants.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -159,7 +172,6 @@
 		1E6B90C227E5B2AD00161E63 /* LevelDesigner */ = {
 			isa = PBXGroup;
 			children = (
-				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
 				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
 				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
@@ -188,6 +200,24 @@
 				B07AA62B27E658F200918E71 /* GameMechanic.swift */,
 			);
 			path = GameEngine;
+			sourceTree = "<group>";
+		};
+		E5563C3127E8ADAC007D2E86 /* MetaLevelDesigner */ = {
+			isa = PBXGroup;
+			children = (
+				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
+				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
+				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
+			);
+			path = MetaLevelDesigner;
+			sourceTree = "<group>";
+		};
+		E5563C3A27E8B551007D2E86 /* helper */ = {
+			isa = PBXGroup;
+			children = (
+				E5563C3B27E8B55E007D2E86 /* Point.swift */,
+			);
+			path = helper;
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -233,6 +263,7 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E5563C3A27E8B551007D2E86 /* helper */,
 				B07AA62627E658F200918E71 /* GameEngine */,
 				E5BECBF027E5E87A00E3952D /* entity */,
 				E5BECBE327E5BE0200E3952D /* rules */,
@@ -429,8 +460,10 @@
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
+				E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
@@ -443,6 +476,7 @@
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
+				E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
 				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
@@ -456,9 +490,11 @@
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
+				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
+				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
