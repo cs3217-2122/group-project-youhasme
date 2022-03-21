@@ -1,12 +1,12 @@
 import Foundation
-class DesignerConnector {
+final class DesignerConnector {
     var metaLevel: MetaLevel?
     var otherMetaLevel: MetaLevel?
 }
 
 extension DesignerConnector: Codable {}
 
-class Connector {
+final class Connector {
     var metaLevel: MetaLevel
     var otherMetaLevel: MetaLevel
     init(metaLevel: MetaLevel, otherMetaLevel: MetaLevel) {

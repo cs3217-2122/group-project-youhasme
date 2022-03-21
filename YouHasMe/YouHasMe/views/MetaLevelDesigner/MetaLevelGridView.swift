@@ -28,33 +28,51 @@ struct GridViewData {
 struct MetaLevelGridView: View {
     @ObservedObject var viewModel: MetaLevelDesignerViewModel
 
+    @State var lastDragLocation: CGPoint?
+
     var body: some View {
-        GeometryReader { proxy in
-            HStack {
-                Spacer()
-                VStack(spacing: 0) {
-                    let gridViewData = GridViewData(proxy: proxy)
-                    ForEach(0..<gridViewData.heightInCells, id: \.self) { y in
-                        HStack(spacing: 0) {
-                            ForEach(0..<gridViewData.widthInCells, id: \.self) { x in
-                                MetaEntityView(
-                                    viewModel: viewModel.getTileViewModel(at: Vector(dx: x, dy: y))
-                                )
-                                .frame(width: gridViewData.cellWidth, height: gridViewData.cellHeight)
-                                .border(.pink)
-                                .onTapGesture {
+        Group {
+            GeometryReader { proxy in
+                HStack {
+                    Spacer()
+                    VStack(spacing: 0) {
+                        let gridViewData = GridViewData(proxy: proxy)
+                        ForEach(0..<gridViewData.heightInCells, id: \.self) { y in
+                            HStack(spacing: 0) {
+                                ForEach(0..<gridViewData.widthInCells, id: \.self) { x in
+                                    MetaEntityView(
+                                        viewModel: viewModel.getTileViewModel(at: Vector(dx: x, dy: y))
+                                    )
+                                    .frame(width: gridViewData.cellWidth, height: gridViewData.cellHeight)
+                                    .border(.pink)
+                                    .onTapGesture {
 
-                                }
-                                .onLongPressGesture {
+                                    }
+                                    .onLongPressGesture {
 
+                                    }
                                 }
                             }
                         }
                     }
+                    Spacer()
                 }
-                Spacer()
             }
         }
+        .gesture(
+            DragGesture()
+                .onChanged { value in
+
+                    let currentDragLocation = value.location
+
+                    if let lastDragLocation = lastDragLocation {
+                        let translation = CGVector(from: lastDragLocation, to: currentDragLocation)
+                        viewModel.translateView(by: translation)
+                    }
+                    lastDragLocation = value.location
+                }
+        )
+
     }
 }
 

@@ -9,6 +9,8 @@ struct MetaLevel {
     }
 }
 
+extension MetaLevel: Codable {}
+
 protocol AbstractLevelLayer: Codable {
     associatedtype TileType
     var dimensions: Rectangle { get set }

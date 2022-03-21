@@ -4,9 +4,10 @@ struct MetaLevelDesignerView: View {
     @ObservedObject var viewModel: MetaLevelDesignerViewModel
     var body: some View {
         VStack {
+            MetaLevelDesignerToolbarView(viewModel: viewModel.getToolbarViewModel())
+                .padding()
             MetaLevelGridView(viewModel: viewModel)
                 .padding()
-
         }
     }
 }

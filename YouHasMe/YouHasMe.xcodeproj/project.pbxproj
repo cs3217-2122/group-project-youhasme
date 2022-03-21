@@ -33,6 +33,12 @@
 		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
 		E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3827E8B213007D2E86 /* ViewConstants.swift */; };
 		E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3B27E8B55E007D2E86 /* Point.swift */; };
+		E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */; };
+		E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */; };
+		E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4127E8DF6A007D2E86 /* CGVector.swift */; };
+		E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4327E8DF87007D2E86 /* CGPoint.swift */; };
+		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
+		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -101,6 +107,12 @@
 		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		E5563C3827E8B213007D2E86 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		E5563C3B27E8B55E007D2E86 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerToolbarView.swift; sourceTree = "<group>"; };
+		E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerToolbarViewModel.swift; sourceTree = "<group>"; };
+		E5563C4127E8DF6A007D2E86 /* CGVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
+		E5563C4327E8DF87007D2E86 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
+		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -208,6 +220,8 @@
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
 				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
 				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
+				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
+				E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */,
 			);
 			path = MetaLevelDesigner;
 			sourceTree = "<group>";
@@ -216,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
+				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -296,6 +311,9 @@
 			children = (
 				E5BECBDD27E59E1000E3952D /* Array.swift */,
 				E5BECBE127E5B6EF00E3952D /* String.swift */,
+				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
+				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
+				E5563C4527E8E31B007D2E86 /* Double.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -452,10 +470,12 @@
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateAction.swift in Sources */,
 				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
+				E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				1E96EB9327E7264100321BEB /* LevelSelectionView.swift in Sources */,
+				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
@@ -489,6 +509,10 @@
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */,
+				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
+				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
+				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
+				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,

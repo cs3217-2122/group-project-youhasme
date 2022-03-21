@@ -7,8 +7,12 @@
 
 import Foundation
 
-protocol ConditionSubject {
+protocol AbstractConditionSubject: Codable {
     var value: Double { get }
+}
+
+struct ConditionSubject: AbstractConditionSubject {
+    var value: Double
 }
 
 enum ConditionRelation {
@@ -18,6 +22,8 @@ enum ConditionRelation {
     case lt
     case gt
 }
+
+extension ConditionRelation: Codable {}
 
 extension ConditionRelation {
     func evaluate(lhs: Double, rhs: Double) -> Bool {
@@ -40,7 +46,7 @@ struct Condition {
     var subject: ConditionSubject
     var relation: ConditionRelation
     var value: Double
-    init<T: ConditionSubject>(subject: T, relation: ConditionRelation, value: Double) {
+    init(subject: ConditionSubject, relation: ConditionRelation, value: Double) {
         self.subject = subject
         self.relation = relation
         self.value = value
