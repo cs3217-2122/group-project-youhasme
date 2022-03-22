@@ -8,7 +8,7 @@ struct Entity {
     }
 }
 
-extension Entity: Codable {
+extension Entity: Codable, Equatable {
 }
 
 extension Entity: Equatable {

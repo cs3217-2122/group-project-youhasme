@@ -14,13 +14,13 @@ struct Rectangle {
 }
 
 struct Level {
-    private(set) var name: String
+    var name: String
     private(set) var layers: BidirectionalArray<LevelLayer>
 
     init(name: String = "") {
         self.name = name
         layers = BidirectionalArray()
-        layers.append(LevelLayer(dimensions: Rectangle(width: 30, height: 30)))
+        layers.append(LevelLayer(dimensions: Rectangle(width: 10, height: 10)))
     }
 
     /// Level zero.
@@ -51,6 +51,12 @@ struct Level {
         }
 
         return layer
+    }
+}
+
+extension Level: Identifiable {
+    var id: String {
+        name
     }
 }
 
@@ -94,11 +100,15 @@ extension LevelLayer: CustomDebugStringConvertible {
     }
 }
 
+extension LevelLayer: Equatable {
+    
+}
+
 struct Tile {
     var entities: [Entity] = []
 }
 
-extension Rectangle: Codable {
+extension Rectangle: Codable, Equatable {
 }
 
 extension Level: Codable {
@@ -107,17 +117,5 @@ extension Level: Codable {
 extension LevelLayer: Codable {
 }
 
-extension Tile: Codable {
-}
-
-extension Rectangle: Equatable {
-}
-
-extension LevelLayer: Equatable {
-    static func == (lhs: LevelLayer, rhs: LevelLayer) -> Bool {
-        lhs.dimensions == rhs.dimensions && lhs.tiles == rhs.tiles
-    }
-}
-
-extension Tile: Equatable {
+extension Tile: Codable, Equatable {
 }
