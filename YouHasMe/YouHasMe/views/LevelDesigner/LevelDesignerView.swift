@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct LevelDesignerView: View {
-    @StateObject var levelDesignerViewModel = LevelDesignerViewModel(currLevel: Level())
+    @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     var body: some View {
         VStack {
             PaletteView(levelDesignerViewModel: levelDesignerViewModel)
@@ -19,8 +19,8 @@ struct LevelDesignerView: View {
     }
 }
 
-struct LevelDesignerView_Previews: PreviewProvider {
-    static var previews: some View {
-        LevelDesignerView()
-    }
-}
+//struct LevelDesignerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LevelDesignerView()
+//    }
+//}
