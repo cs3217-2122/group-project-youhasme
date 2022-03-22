@@ -6,12 +6,6 @@ protocol AbstractChunkNode {
     var identifier: ChunkIdentifier { get set }
 }
 
-extension AbstractChunkNode {
-    func loadWithIdentifier() -> Data {
-        
-    }
-}
-
 struct ExtremityData<ChunkIdentifier> {
     var topExtreme: ChunkIdentifier
     var leftExtreme: ChunkIdentifier
@@ -172,16 +166,49 @@ struct ChunkNode: AbstractChunkNode {
 
     static var chunkDimensions = 128
     var identifier: Point
-    var chunkTiles: [[MetaTile]] = Array(
-        repeatingFactory:
-            Array(repeatingFactory: MetaTile(metaEntity: .space), count: chunkDimensions),
-        count: chunkDimensions
-    )
+    var chunkTiles: [[MetaTile]]
     var neighborFinder: AnyChunkNeighborFinder<Point>
-    init<Finder: AbstractChunkNeighborFinder>(identifier: Point, neighborFinder: Finder)
+    init<Finder: AbstractChunkNeighborFinder>(identifier: Point, neighborFinder: Finder
+    )
     where Finder.ChunkIdentifier == Point {
         self.identifier = identifier
         self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
-        
+        chunkTiles = Array(
+            repeatingFactory:
+                Array(repeatingFactory: MetaTile(metaEntity: .space), count: ChunkNode.chunkDimensions),
+            count: ChunkNode.chunkDimensions
+        )
+    }
+    
+    init(identifier: Point) {
+        self.init(identifier: identifier, neighborFinder: ImmediateNeighborhoodChunkNeighborFinder())
+    }
+    
+    init(identifier: Point, chunkTiles: [[MetaTile]]) {
+        self.identifier = identifier
+        self.chunkTiles = chunkTiles
+        self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: ImmediateNeighborhoodChunkNeighborFinder()
+        )
+    }
+}
+
+// MARK: Persistence
+extension ChunkNode {
+    func toPersistable() -> PersistableChunkNode {
+        PersistableChunkNode(
+            identifier: identifier,
+            chunkTiles: chunkTiles.map { $0.map { $0.toPersistable() } }
+        )
+    }
+    
+    static func fromPersistable(_ persistableChunkNode: PersistableChunkNode) -> ChunkNode {
+        ChunkNode(
+            identifier: persistableChunkNode.identifier,
+            chunkTiles: persistableChunkNode.chunkTiles.map {
+                $0.map {
+                    MetaTile.fromPersistable($0)
+                }
+            }
+        )
     }
 }

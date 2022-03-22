@@ -39,6 +39,9 @@ struct PositionedRectangle {
     }
 }
 
+extension PositionedRectangle: Codable {}
+
+
 extension PositionedRectangle {
     var topSide: Int {
         topLeft.y

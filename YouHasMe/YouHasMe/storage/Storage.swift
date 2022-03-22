@@ -23,6 +23,20 @@ class Storage {
     init(fileExtension: String) {
         self.fileExtension = fileExtension
     }
+    
+    func getDefaultDirectory() throws -> URL {
+        let url = try FileManager.default.url(
+            for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            .appendingPathComponent(Storage.defaultDirectoryName, isDirectory: true)
+        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        return url
+    }
+    
+    func getURL(filename: String) throws -> URL {
+        try getDefaultDirectory()
+            .appendingPathComponent(filename)
+            .appendingPathExtension(fileExtension)
+    }
 
     func save(data: Data, to file: URL) throws {
         try data.write(to: file)
@@ -51,20 +65,6 @@ class Storage {
 }
 
 extension Storage {
-    func getDefaultDirectory() throws -> URL {
-        let url = try FileManager.default.url(
-            for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            .appendingPathComponent(Storage.defaultDirectoryName, isDirectory: true)
-        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        return url
-    }
-
-    func getURL(filename: String) throws -> URL {
-        try getDefaultDirectory()
-            .appendingPathComponent(filename)
-            .appendingPathExtension(fileExtension)
-    }
-
     func save(data: Data, filename: String) throws {
         try save(data: data, to: getURL(filename: filename))
     }
@@ -126,6 +126,67 @@ extension JSONStorage {
     }
 }
 
-class ChunkStorage: JSONStorage {
+class LevelStorage: JSONStorage {
+    static let levelDirectoryName: String = "Levels"
+    static let defaultFileStorageName = "TestDataFile1"
+    static let preloadedLevelNames: [String] = []
     
+    override func getDefaultDirectory() throws -> URL {
+        try super.getDefaultDirectory().appendingPathComponent(LevelStorage.levelDirectoryName)
+    }
+    
+    func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {
+        let preloadedLevels = getPreloadedLevels()
+        guard let gameStorage: GameStorage = try? loadAndDecode(filename: fileName) else {
+            globalLogger.info("Cannot find saved levels")
+            return getPreloadedLevels()
+        }
+        var levels = gameStorage.levels
+        levels.append(contentsOf: preloadedLevels)
+        return levels
+    }
+    
+    func getPreloadedLevels() -> [Level] {
+        []
+    }
+    
+    func updateJsonFileSavedLevels(dataFileName: String, savedLevels: [Level]) throws {
+        let levelsWithoutPreLoaded = savedLevels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
+        try encodeAndSave(
+            object: GameStorage(levels: levelsWithoutPreLoaded), filename: dataFileName
+        )
+    }
+}
+
+class MetaLevelStorage: JSONStorage {
+    static let metaLevelDirectoryName: String = "MetaLevels"
+    
+    override func getDefaultDirectory() throws -> URL {
+        try super.getDefaultDirectory().appendingPathComponent(MetaLevelStorage.metaLevelDirectoryName)
+    }
+    
+    func loadMetaLevel(name: String) throws -> PersistableMetaLevel {
+        try loadAndDecode(filename: name)
+    }
+    
+    func getChunkStorage(for metaLevelName: String) throws -> ChunkStorage {
+        try ChunkStorage(metaLevelDirectory: getDefaultDirectory().appendingPathComponent(metaLevelName))
+    }
+}
+
+class ChunkStorage: JSONStorage {
+    static let chunkStorageDirectoryName: String = "Chunks"
+    var metaLevelDirectory: URL
+    
+    init(metaLevelDirectory: URL) {
+        self.metaLevelDirectory = metaLevelDirectory
+    }
+    
+    override func getDefaultDirectory() throws -> URL {
+        metaLevelDirectory.appendingPathComponent(ChunkStorage.chunkStorageDirectoryName)
+    }
+    
+    func loadChunk(identifier: String) throws -> PersistableChunkNode {
+        try loadAndDecode(filename: identifier)
+    }
 }
