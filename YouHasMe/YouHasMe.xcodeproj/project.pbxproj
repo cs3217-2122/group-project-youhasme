@@ -41,6 +41,8 @@
 		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
+		E573E95C27EA2797000D10E4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95B27EA2797000D10E4 /* Storage.swift */; };
+		E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95E27EA27CC000D10E4 /* LoggerWrapper.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
@@ -118,6 +120,8 @@
 		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
+		E573E95B27EA2797000D10E4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
+		E573E95E27EA27CC000D10E4 /* LoggerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerWrapper.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 			children = (
 				40AD869427E60AC400F42C42 /* StorageUtil.swift */,
 				40AD869827E617B300F42C42 /* GameStorage.swift */,
+				E573E95B27EA2797000D10E4 /* Storage.swift */,
 			);
 			path = storage;
 			sourceTree = "<group>";
@@ -244,6 +249,14 @@
 			path = helper;
 			sourceTree = "<group>";
 		};
+		E573E95D27EA27BE000D10E4 /* logs */ = {
+			isa = PBXGroup;
+			children = (
+				E573E95E27EA27CC000D10E4 /* LoggerWrapper.swift */,
+			);
+			path = logs;
+			sourceTree = "<group>";
+		};
 		E57ACB1A27DC582300F73B27 = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +278,7 @@
 		E57ACB2527DC582300F73B27 /* YouHasMe */ = {
 			isa = PBXGroup;
 			children = (
+				E573E95D27EA27BE000D10E4 /* logs */,
 				40AD869127E606F300F42C42 /* storage */,
 				1E6B90C127E5B2A300161E63 /* views */,
 				E57ACB3427DC588100F73B27 /* models */,
@@ -486,6 +500,7 @@
 				1E96EB9327E7264100321BEB /* LevelSelectionView.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
+				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
@@ -504,6 +519,7 @@
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
+				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */,

@@ -6,6 +6,12 @@ protocol AbstractChunkNode {
     var identifier: ChunkIdentifier { get set }
 }
 
+extension AbstractChunkNode {
+    func loadWithIdentifier() -> Data {
+        
+    }
+}
+
 struct ExtremityData<ChunkIdentifier> {
     var topExtreme: ChunkIdentifier
     var leftExtreme: ChunkIdentifier
@@ -176,5 +182,6 @@ struct ChunkNode: AbstractChunkNode {
     where Finder.ChunkIdentifier == Point {
         self.identifier = identifier
         self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
+        
     }
 }
