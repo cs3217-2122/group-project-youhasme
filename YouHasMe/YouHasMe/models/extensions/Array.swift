@@ -6,7 +6,7 @@ extension Array {
     /// - Parameters:
     ///   - repeatingFactory: A function producing a certain object of type `Element`.
     ///   - count: The number of times to invoke `repeatingFactory`, so that the array is of size `count`.
-    init(repeatingFactory: () -> Element, count: Int) {
+    init(repeatingFactory: @autoclosure () -> Element, count: Int) {
         self = []
         for _ in 0..<count {
             self.append(repeatingFactory())

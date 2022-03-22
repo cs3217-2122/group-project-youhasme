@@ -15,6 +15,8 @@ protocol AbstractLevelLayer: Codable {
     associatedtype TileType
     var dimensions: Rectangle { get set }
     var tiles: [TileType] { get set }
+    func getTileAt(point: Point) -> TileType
+    mutating func setTile(_ tile: TileType, at point: Point)
 }
 
 extension AbstractLevelLayer {
@@ -42,6 +44,7 @@ extension AbstractLevelLayer {
 
 struct MetaLevelLayer: AbstractLevelLayer {
     typealias TileType = MetaTile
+    var loadedChunks: [ChunkNode] = []
     var tiles: [MetaTile] = []
     var outlets: [Outlet] = []
     var dimensions: Rectangle
@@ -58,7 +61,6 @@ extension MetaEntityType: Codable {}
 
 struct MetaTile {
     var metaEntity: MetaEntityType
-    var hasPlayer: Bool
 }
 
 extension MetaTile: Codable {}

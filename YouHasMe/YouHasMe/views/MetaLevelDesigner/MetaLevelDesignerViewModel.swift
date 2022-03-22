@@ -3,6 +3,7 @@ import CoreGraphics
 
 class MetaLevelDesignerViewModel: ObservableObject {
     var currMetaLevel: MetaLevel
+    /// The view position relative to the coordinate system of the current meta level.
     var viewPosition: Point
     private var cumulativeTranslation: CGVector = .zero {
         didSet {

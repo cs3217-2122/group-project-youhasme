@@ -39,6 +39,7 @@
 		E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4327E8DF87007D2E86 /* CGPoint.swift */; };
 		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
 		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
+		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -113,6 +114,7 @@
 		E5563C4327E8DF87007D2E86 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 			children = (
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
 				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
+				E575264B27E965410045D3D6 /* ChunkNode.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -493,6 +496,7 @@
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
