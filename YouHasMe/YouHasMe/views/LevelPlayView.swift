@@ -25,11 +25,10 @@ struct LevelPlayView: View {
             }.padding()
         }
     }
-        
 }
 
-//struct LevelPlayView_Previews: PreviewProvider {
+// struct LevelPlayView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        LevelPlayView()
 //    }
-//}
+// }

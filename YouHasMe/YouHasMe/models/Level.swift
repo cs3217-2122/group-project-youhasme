@@ -101,7 +101,7 @@ extension LevelLayer: CustomDebugStringConvertible {
 }
 
 extension LevelLayer: Equatable {
-    
+
 }
 
 struct Tile {

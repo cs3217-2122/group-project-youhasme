@@ -10,6 +10,3 @@ struct Entity {
 
 extension Entity: Codable, Equatable {
 }
-
-extension Entity: Equatable {
-}

@@ -68,11 +68,11 @@ class LevelDesignerViewModel: ObservableObject {
         self.currLevel.resetLayerAtIndex(currLevelLayerIndex)
         self.currLevelLayer = currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
-    
+
     var unsavedChanges: Bool {
         currLevelLayer != currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
-    
+
     func selectLevel(level: Level) {
         self.currLevel = level
         self.currLevelLayer = level.baseLevel
@@ -80,14 +80,14 @@ class LevelDesignerViewModel: ObservableObject {
 //        currentlySelectedLevel.dirty = false
 //        state = .designing
     }
-    
+
     func createLevel() {
         self.currLevel = Level()
         self.currLevelLayerIndex = 0
         self.currLevelLayer = self.currLevel.baseLevel
 
     }
-    
+
     func resetFromPlay() {
         self.currLevelLayer = self.currLevel.baseLevel
     }
@@ -117,7 +117,11 @@ class LevelDesignerViewModel: ObservableObject {
             return "error saving level: \(error)"
         }
     }
-    
+
+//    func undo() {
+//
+//    }
+
 //    func playLevel() {
 //        
 //    }
