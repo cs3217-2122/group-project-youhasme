@@ -8,9 +8,7 @@ struct Point {
 
 extension Point: Codable {}
 
-extension Point: Hashable {
-
-}
+extension Point: Hashable {}
 
 extension Point {
     static var zero = Point(x: 0, y: 0)
@@ -33,5 +31,11 @@ extension Point {
 
     func translateY(dy: Int) -> Point {
         Point(x: x, y: y + dy)
+    }
+}
+
+extension Point: DataStringConvertible {
+    var dataString: String {
+        "\(x)_\(y)"
     }
 }

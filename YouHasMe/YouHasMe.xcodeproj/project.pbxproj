@@ -39,6 +39,8 @@
 		E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4327E8DF87007D2E86 /* CGPoint.swift */; };
 		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
 		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
+		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
+		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
@@ -114,6 +116,8 @@
 		E5563C4327E8DF87007D2E86 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
+		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
 				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
 				E575264B27E965410045D3D6 /* ChunkNode.swift */,
+				E573E95727EA1A34000D10E4 /* Rectangle.swift */,
+				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -506,6 +512,7 @@
 				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
+				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
@@ -524,6 +531,7 @@
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
+				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 			);

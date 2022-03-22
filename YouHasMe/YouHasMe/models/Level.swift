@@ -1,18 +1,5 @@
 import Foundation
 
-struct Rectangle {
-    var width: Int
-    var height: Int
-    init(width: Int, height: Int) {
-        self.width = width
-        self.height = height
-    }
-
-    var numCells: Int {
-        width * height
-    }
-}
-
 struct Level {
     var name: String
     private(set) var layers: BidirectionalArray<LevelLayer>
@@ -119,23 +106,15 @@ extension LevelLayer: CustomDebugStringConvertible {
     }
 }
 
-extension LevelLayer: Equatable {
-    
-}
+extension LevelLayer: Equatable {}
 
 struct Tile {
     var entities: [Entity] = []
 }
 
-extension Rectangle: Codable, Equatable {
-}
+extension Level: Codable {}
 
-extension Level: Codable {
-}
+extension LevelLayer: Codable {}
 
-extension LevelLayer: Codable {
-}
-
-extension Tile: Codable, Equatable {
-}
+extension Tile: Codable, Equatable {}
 

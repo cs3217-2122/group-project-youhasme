@@ -25,3 +25,12 @@ extension Array where Element: AnyObject {
         removeAll(where: { $0 === item })
     }
 }
+
+// Random
+extension Array {
+    static func getRandomPermutation(in range: Range<Int>) -> [Int] {
+        var arr = [Int](range)
+        arr.shuffle()
+        return arr
+    }
+}
