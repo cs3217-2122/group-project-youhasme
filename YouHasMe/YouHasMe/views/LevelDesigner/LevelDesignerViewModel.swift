@@ -14,6 +14,10 @@ class LevelDesignerViewModel: ObservableObject {
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
 
+    convenience init() {
+        self.init(currLevel: Level())
+    }
+    
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel

@@ -238,11 +238,8 @@
 		E5563C3127E8ADAC007D2E86 /* MetaLevelDesigner */ = {
 			isa = PBXGroup;
 			children = (
-				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
-				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
-				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
-				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
-				E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */,
+				E581F52827ECCC6000CAC137 /* View Models */,
+				E581F52727ECCC5600CAC137 /* Views */,
 			);
 			path = MetaLevelDesigner;
 			sourceTree = "<group>";
@@ -339,6 +336,25 @@
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E581F52727ECCC5600CAC137 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
+				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
+				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E581F52827ECCC6000CAC137 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */,
+				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		E5BECBD227E599F100E3952D /* YouHasMeTests */ = {

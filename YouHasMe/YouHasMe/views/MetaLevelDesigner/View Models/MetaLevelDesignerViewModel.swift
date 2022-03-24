@@ -17,6 +17,10 @@ class MetaLevelDesignerViewModel: ObservableObject {
     }
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
 
+    convenience init() {
+        self.init(currMetaLevel: MetaLevel())
+    }
+    
     init(currMetaLevel: MetaLevel) {
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition
@@ -25,8 +29,6 @@ class MetaLevelDesignerViewModel: ObservableObject {
     func translateView(by offset: CGVector) {
         cumulativeTranslation = cumulativeTranslation.add(with: offset)
     }
-    
-    
 
     func getItem(at viewOffset: Vector) -> MetaTile? {
         currMetaLevel.getTile(at: viewPosition.translate(by: viewOffset))

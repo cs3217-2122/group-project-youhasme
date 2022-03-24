@@ -62,7 +62,6 @@ struct MetaLevelGridView: View {
         .gesture(
             DragGesture()
                 .onChanged { value in
-
                     let currentDragLocation = value.location
 
                     if let lastDragLocation = lastDragLocation {

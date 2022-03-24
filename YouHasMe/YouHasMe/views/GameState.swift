@@ -10,6 +10,7 @@ enum ScreenState {
     case selecting
     case playing
     case designing
+    case designingMeta
     case mainmenu
 }
 

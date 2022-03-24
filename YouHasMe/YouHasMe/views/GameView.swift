@@ -7,17 +7,20 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
-    @StateObject var levelDesignerViewModel = LevelDesignerViewModel(currLevel: Level())
+    @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
+    @StateObject var metaLevelDesignerViewModel = MetaLevelDesignerViewModel()
     var body: some View {
         switch gameState.state {
-        case ScreenState.mainmenu:
-             MainMenuView()
-        case ScreenState.selecting:
-             LevelSelectionView(levelDesignerViewModel: levelDesignerViewModel)
-        case ScreenState.designing:
-             LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel)
-        case ScreenState.playing:
-             LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
+        case .mainmenu:
+            MainMenuView()
+        case .selecting:
+            LevelSelectionView(levelDesignerViewModel: levelDesignerViewModel)
+        case .designing:
+            LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel)
+        case .designingMeta:
+            MetaLevelDesignerView(viewModel: metaLevelDesignerViewModel)
+        case .playing:
+            LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
         }
     }
 }

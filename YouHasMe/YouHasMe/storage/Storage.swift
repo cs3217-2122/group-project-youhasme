@@ -150,10 +150,10 @@ class LevelStorage: JSONStorage {
         []
     }
     
-    func updateJsonFileSavedLevels(dataFileName: String, savedLevels: [Level]) throws {
-        let levelsWithoutPreLoaded = savedLevels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
+    func saveAllUserCreatedLevels(filename: String, levels: [Level]) throws {
+        let levelsWithoutPreLoaded = levels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
         try encodeAndSave(
-            object: GameStorage(levels: levelsWithoutPreLoaded), filename: dataFileName
+            object: GameStorage(levels: levelsWithoutPreLoaded), filename: filename
         )
     }
 }
@@ -167,6 +167,10 @@ class MetaLevelStorage: JSONStorage {
     
     func loadMetaLevel(name: String) throws -> PersistableMetaLevel {
         try loadAndDecode(filename: name)
+    }
+    
+    func saveMetaLevel(_ metaLevel: MetaLevel) throws {
+        try encodeAndSave(object: metaLevel.toPersistable(), filename: metaLevel.name)
     }
     
     func getChunkStorage(for metaLevelName: String) throws -> ChunkStorage {
@@ -195,5 +199,9 @@ class ChunkStorage: JSONStorage {
             return nil
         }
         return ChunkNode.fromPersistable(persistableChunk)
+    }
+    
+    func saveChunk(_ chunk: ChunkNode) throws {
+        try encodeAndSave(object: chunk.toPersistable(), filename: chunk.identifier.dataString)
     }
 }

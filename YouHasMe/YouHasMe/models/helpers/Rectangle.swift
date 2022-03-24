@@ -19,7 +19,7 @@ extension Rectangle {
 }
 
 struct PositionedRectangle {
-    private var rectangle: Rectangle
+    var rectangle: Rectangle
     var topLeft: Point
     var width: Int {
         get {

@@ -8,24 +8,32 @@
 import SwiftUI
 
 struct MainMenuView: View {
+    private let titleFont: Font = .largeTitle
+    private let transitionButtonFont: Font = .title2
     @EnvironmentObject var gameState: GameState
+    
     var body: some View {
         VStack {
             Text("You Has Me")
-                .font(.largeTitle)
+                .font(titleFont)
                 .padding()
-            Button(action: {
-                gameState.state = .selecting
-            }) {
-                Text("Select A Level")
-                    .font(.title2)
-            }.padding()
-            Button(action: {
-                gameState.state = .designing
-            }) {
-                Text("Design A Level")
-                    .font(.title2)
-            }.padding()
+            Group {
+                Button(action: {
+                    gameState.state = .selecting
+                }) {
+                    Text("Select A Level")
+                }.padding()
+                Button(action: {
+                    gameState.state = .designingMeta
+                }) {
+                    Text("Design A MetaLevel")
+                }
+                Button(action: {
+                    gameState.state = .designing
+                }) {
+                    Text("Design A Level")
+                }.padding()
+            }.font(transitionButtonFont)
         }.padding()
     }
 }

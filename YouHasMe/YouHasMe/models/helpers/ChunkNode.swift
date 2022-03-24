@@ -263,7 +263,7 @@ class ChunkNode: AbstractChunkNode {
         self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
         self.chunkTiles = Array(
             repeatingFactory:
-                Array(repeatingFactory: MetaTile(metaEntity: .space), count: ChunkNode.chunkDimensions),
+                Array(repeatingFactory: MetaTile(), count: ChunkNode.chunkDimensions),
             count: ChunkNode.chunkDimensions
         )
     }

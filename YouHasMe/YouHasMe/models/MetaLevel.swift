@@ -1,6 +1,7 @@
 import Foundation
 
 class MetaLevel {
+    static let defaultName: String = "MetaLevel1"
     var chunkDimensions: Int {
         ChunkNode.chunkDimensions
     }
@@ -19,10 +20,23 @@ class MetaLevel {
     // TODO
     // var outlets: [Outlet] = []
     var dimensions: PositionedRectangle
+    
+    init() {
+        self.name = MetaLevel.defaultName
+        self.dimensions = PositionedRectangle(
+            rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
+            topLeft: .zero
+        )
+    }
+    
     init(name: String, entryChunkPosition: Point, dimensions: PositionedRectangle) {
         self.name = name
         self.entryChunkPosition = entryChunkPosition
         self.dimensions = dimensions
+    }
+    
+    func hydrate(with persistableMetaLevel: PersistableMetaLevel) {
+        
     }
 }
 
@@ -92,7 +106,7 @@ extension MetaLevel {
 }
 
 struct MetaTile {
-    var metaEntities: [MetaEntityType]
+    var metaEntities: [MetaEntityType] = []
 }
 
 extension MetaTile {
