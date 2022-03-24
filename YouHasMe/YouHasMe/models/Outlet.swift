@@ -28,5 +28,3 @@ final class Outlet {
         self.position = position
     }
 }
-
-extension Outlet: Codable {}

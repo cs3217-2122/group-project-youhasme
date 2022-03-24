@@ -19,7 +19,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
 
     init(currMetaLevel: MetaLevel) {
         self.currMetaLevel = currMetaLevel
-        viewPosition = currMetaLevel.origin
+        viewPosition = currMetaLevel.entryWorldPosition
     }
 
     func translateView(by offset: CGVector) {

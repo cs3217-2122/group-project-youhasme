@@ -186,7 +186,14 @@ class ChunkStorage: JSONStorage {
         metaLevelDirectory.appendingPathComponent(ChunkStorage.chunkStorageDirectoryName)
     }
     
-    func loadChunk(identifier: String) throws -> PersistableChunkNode {
-        try loadAndDecode(filename: identifier)
+    func loadChunk(identifier: String) -> PersistableChunkNode? {
+        try? loadAndDecode(filename: identifier)
+    }
+    
+    func loadChunk(identifier: String) -> ChunkNode? {
+        guard let persistableChunk: PersistableChunkNode = loadChunk(identifier: identifier) else {
+            return nil
+        }
+        return ChunkNode.fromPersistable(persistableChunk)
     }
 }

@@ -61,6 +61,7 @@
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
 		E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */; };
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
+		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -145,6 +146,7 @@
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalArray.swift; sourceTree = "<group>"; };
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
+		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -245,7 +247,7 @@
 			path = MetaLevelDesigner;
 			sourceTree = "<group>";
 		};
-		E5563C3A27E8B551007D2E86 /* helper */ = {
+		E5563C3A27E8B551007D2E86 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
@@ -254,7 +256,7 @@
 				E573E95727EA1A34000D10E4 /* Rectangle.swift */,
 				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
 			);
-			path = helper;
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		E573E95D27EA27BE000D10E4 /* logs */ = {
@@ -320,7 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				E573E96027EA32DC000D10E4 /* persistable */,
-				E5563C3A27E8B551007D2E86 /* helper */,
+				E5563C3A27E8B551007D2E86 /* helpers */,
 				B07AA62627E658F200918E71 /* GameEngine */,
 				E5BECBF027E5E87A00E3952D /* entity */,
 				E5BECBE327E5BE0200E3952D /* rules */,
@@ -357,6 +359,7 @@
 				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
 				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
 				E5563C4527E8E31B007D2E86 /* Double.swift */,
+				E581F52527ECBCD900CAC137 /* Int.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */,
+				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,

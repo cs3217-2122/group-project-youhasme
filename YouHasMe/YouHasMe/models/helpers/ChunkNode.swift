@@ -6,6 +6,62 @@ protocol AbstractChunkNode {
     var identifier: ChunkIdentifier { get set }
 }
 
+enum Directions: CaseIterable {
+    case top
+    case bottom
+    case left
+    case right
+}
+
+extension Directions {
+    var vectorialOffset: Vector {
+        switch self {
+        case .top:
+            return Vector(dx: 0, dy: -1)
+        case .bottom:
+            return Vector(dx: 0, dy: 1)
+        case .left:
+            return Vector(dx: -1, dy: 0)
+        case .right:
+            return Vector(dx: 1, dy: 0)
+        }
+    }
+    
+    var neighborDataKeyPath: WritableKeyPath<NeighborData<Point>, Point> {
+        switch self {
+        case .top:
+            return \.topNeighbor
+        case .bottom:
+            return \.bottomNeighbor
+        case .left:
+            return \.leftNeighbor
+        case .right:
+            return \.rightNeighbor
+        }
+    }
+    
+    static var neighborDataKeyPaths: [WritableKeyPath<NeighborData<Point>, Point>] {
+        allCases.map { $0.neighborDataKeyPath }
+    }
+    
+    var neighborhoodKeyPath: WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?> {
+        switch self {
+        case .top:
+            return \.topNeighbor
+        case .bottom:
+            return \.bottomNeighbor
+        case .left:
+            return \.leftNeighbor
+        case .right:
+            return \.rightNeighbor
+        }
+    }
+    
+    static var neighborhoodKeyPaths: [WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?>] {
+        allCases.map { $0.neighborhoodKeyPath }
+    }
+}
+
 struct ExtremityData<ChunkIdentifier> {
     var topExtreme: ChunkIdentifier
     var leftExtreme: ChunkIdentifier
@@ -30,6 +86,9 @@ protocol AbstractChunkNeighborFinder {
     associatedtype ChunkIdentifier where ChunkIdentifier: DataStringConvertible
     func getNeighborId<T: AbstractChunkNode>(of chunk: T) -> NeighborData<ChunkIdentifier> where T.ChunkIdentifier == ChunkIdentifier
 }
+
+// TODO
+protocol AbstrackChunkGenerator {}
 
 struct AnyChunkNode<T>: AbstractChunkNode where T: DataStringConvertible {
     typealias ChunkIdentifier = T
@@ -141,12 +200,34 @@ struct ChunkNeighborFinderRandomizerDecorator: AbstractChunkNeighborFinder {
     }
 }
 
-
 protocol ChunkNodeDelegate: AnyObject {
     var chunkExtremities: PositionedRectangle { get }
 }
 
-struct ChunkNode: AbstractChunkNode {
+class ChunkNode: AbstractChunkNode {
+    struct Neighborhood {
+        weak var topNeighbor: ChunkNode? = nil
+        weak var leftNeighbor: ChunkNode? = nil
+        weak var rightNeighbor: ChunkNode? = nil
+        weak var bottomNeighbor: ChunkNode? = nil
+        
+        var topLeftNeighbor: ChunkNode? {
+            topNeighbor?.neighbors.leftNeighbor
+        }
+        
+        var topRightNeighbor: ChunkNode? {
+            topNeighbor?.neighbors.rightNeighbor
+        }
+        
+        var bottomLeftNeighbor: ChunkNode? {
+            bottomNeighbor?.neighbors.leftNeighbor
+        }
+        
+        var bottomRightNeighbor: ChunkNode? {
+            bottomNeighbor?.neighbors.rightNeighbor
+        }
+    }
+    
     typealias ChunkIdentifier = Point
     
     weak var delegate: ChunkNodeDelegate?
@@ -164,31 +245,81 @@ struct ChunkNode: AbstractChunkNode {
         )
     }
 
-    static var chunkDimensions = 128
+    static var chunkDimensions = 256
+    var chunkStorage: ChunkStorage?
     var identifier: Point
+    var chunkDimensions: Int {
+        ChunkNode.chunkDimensions
+    }
     var chunkTiles: [[MetaTile]]
+    var neighbors: Neighborhood = Neighborhood()
     var neighborFinder: AnyChunkNeighborFinder<Point>
-    init<Finder: AbstractChunkNeighborFinder>(identifier: Point, neighborFinder: Finder
+    init<Finder: AbstractChunkNeighborFinder>(
+        identifier: Point,
+        neighborFinder: Finder
     )
     where Finder.ChunkIdentifier == Point {
         self.identifier = identifier
         self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
         chunkTiles = Array(
             repeatingFactory:
-                Array(repeatingFactory: MetaTile(metaEntity: .space), count: ChunkNode.chunkDimensions),
-            count: ChunkNode.chunkDimensions
+                Array(repeatingFactory: MetaTile(metaEntity: .space), count: chunkDimensions),
+            count: chunkDimensions
         )
     }
     
-    init(identifier: Point) {
+    convenience init(identifier: Point) {
         self.init(identifier: identifier, neighborFinder: ImmediateNeighborhoodChunkNeighborFinder())
     }
     
     init(identifier: Point, chunkTiles: [[MetaTile]]) {
         self.identifier = identifier
         self.chunkTiles = chunkTiles
-        self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: ImmediateNeighborhoodChunkNeighborFinder()
+        self.neighborFinder = AnyChunkNeighborFinder(
+            neighborFinder: ImmediateNeighborhoodChunkNeighborFinder()
         )
+    }
+}
+
+// MARK: Positional data helpers
+extension ChunkNode {
+    func isInTopFraction(fraction: Double, positionInChunk: Point) -> Bool {
+        positionInChunk.y <= Int(Double(chunkDimensions) * fraction)
+    }
+    
+    func isInBottomFraction(fraction: Double, positionInChunk: Point) -> Bool {
+        positionInChunk.y > Int(Double(chunkDimensions) * (1 - fraction))
+    }
+    
+    func isInLeftFraction(fraction: Double, positionInChunk: Point) -> Bool {
+        positionInChunk.x <= Int(Double(chunkDimensions) * fraction)
+    }
+    
+    func isInRightFraction(fraction: Double, positionInChunk: Point) -> Bool {
+        positionInChunk.x > Int(Double(chunkDimensions) * (1 - fraction))
+    }
+}
+
+// MARK: Dynamic loading / unloading
+extension ChunkNode {
+    func loadNeighbors(at position: Point) -> [Point:ChunkNode] {
+        guard let chunkStorage = chunkStorage else {
+            return [:]
+        }
+        var newlyLoadedChunks: [Point:ChunkNode] = [:]
+        let neighborIdentifiers = neighborFinder.getNeighborId(of: self)
+        for direction in Directions.allCases {
+            let offset = direction.vectorialOffset
+            let neighborPosition = position.translate(by: offset)
+            let neighborhoodKeyPath = direction.neighborhoodKeyPath
+            let neighborDataKeyPath = direction.neighborDataKeyPath
+            if neighbors[keyPath: neighborhoodKeyPath] == nil,
+               let neighbor: ChunkNode = chunkStorage.loadChunk(identifier: neighborIdentifiers[keyPath: neighborDataKeyPath].dataString) {
+                neighbors[keyPath: neighborhoodKeyPath] = neighbor
+                newlyLoadedChunks[neighborPosition] = neighbor
+            }
+        }
+        return newlyLoadedChunks
     }
 }
 
