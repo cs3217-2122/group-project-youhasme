@@ -4,7 +4,6 @@ final class DesignerConnector {
     var otherMetaLevel: MetaLevel?
 }
 
-
 final class Connector {
     var metaLevel: MetaLevel
     var otherMetaLevel: MetaLevel
@@ -13,4 +12,3 @@ final class Connector {
         self.otherMetaLevel = otherMetaLevel
     }
 }
-

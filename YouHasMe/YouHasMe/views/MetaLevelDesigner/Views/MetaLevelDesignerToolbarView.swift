@@ -12,7 +12,6 @@ struct MetaLevelDesignerToolbarView: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
             }
-            Spacer()
         }
     }
 }

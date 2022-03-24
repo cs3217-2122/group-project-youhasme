@@ -35,7 +35,7 @@ struct StorageUtil {
         )
     }
 
-    static func getFileURL(from filename: String, with pathExtension: String) throws -> URL  {
+    static func getFileURL(from filename: String, with pathExtension: String) throws -> URL {
         let storage = Storage(fileExtension: pathExtension)
         return try storage.getURL(filename: filename)
     }

@@ -3,7 +3,6 @@
 //  YouHasMe
 //
 
-
 import Foundation
 
 enum ScreenState {
@@ -16,7 +15,7 @@ enum ScreenState {
 
 class GameState: ObservableObject {
     @Published var state: ScreenState
-    
+
     init() {
         state = .mainmenu
     }

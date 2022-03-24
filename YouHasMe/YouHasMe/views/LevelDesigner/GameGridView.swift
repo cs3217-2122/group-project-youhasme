@@ -8,8 +8,8 @@ import SwiftUI
 struct GameGridView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
-    @State var gameEngine : GameEngine
-    
+    @State var gameEngine: GameEngine
+
     init(levelDesignerViewModel: LevelDesignerViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
         self.gameEngine = GameEngine(levelLayer: levelDesignerViewModel.currLevelLayer)
@@ -20,7 +20,7 @@ struct GameGridView: View {
         let height = floor(proxy.size.height / CGFloat(levelDesignerViewModel.getHeight()))
         return min(width, height)
     }
-    
+
     var dragGesture : some Gesture {
         DragGesture()
             .onEnded { value in
@@ -36,7 +36,7 @@ struct GameGridView: View {
                     } else {
                         updateAction = .moveRight
                     }
-                            
+
                 } else {
                     if verticalAmount < 0 {
                         updateAction = .moveUp
@@ -48,7 +48,6 @@ struct GameGridView: View {
                 levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
             }
     }
-    
 
     var body: some View {
         GeometryReader { proxy in

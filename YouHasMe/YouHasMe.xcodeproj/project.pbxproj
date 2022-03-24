@@ -62,6 +62,8 @@
 		E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */; };
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
+		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
+		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -147,6 +149,8 @@
 		E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalArray.swift; sourceTree = "<group>"; };
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
+		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 		1E6B90C127E5B2A300161E63 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				E581F52D27ECD27E00CAC137 /* shared */,
 				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
 				E5563C3127E8ADAC007D2E86 /* MetaLevelDesigner */,
 				1E6B90C227E5B2AD00161E63 /* LevelDesigner */,
@@ -355,6 +360,15 @@
 				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E581F52D27ECD27E00CAC137 /* shared */ = {
+			isa = PBXGroup;
+			children = (
+				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
+				E581F52E27ECD29800CAC137 /* ContainerView.swift */,
+			);
+			path = shared;
 			sourceTree = "<group>";
 		};
 		E5BECBD227E599F100E3952D /* YouHasMeTests */ = {
@@ -578,6 +592,7 @@
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
+				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
 				B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */,
 				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
@@ -587,6 +602,7 @@
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,

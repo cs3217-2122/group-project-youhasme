@@ -26,7 +26,7 @@ extension Directions {
             return Vector(dx: 1, dy: 0)
         }
     }
-    
+
     var neighborDataKeyPath: WritableKeyPath<NeighborData<Point>, Point> {
         switch self {
         case .top:
@@ -39,11 +39,11 @@ extension Directions {
             return \.rightNeighbor
         }
     }
-    
+
     static var neighborDataKeyPaths: [WritableKeyPath<NeighborData<Point>, Point>] {
         allCases.map { $0.neighborDataKeyPath }
     }
-    
+
     var neighborhoodKeyPath: WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?> {
         switch self {
         case .top:
@@ -56,7 +56,7 @@ extension Directions {
             return \.rightNeighbor
         }
     }
-    
+
     static var neighborhoodKeyPaths: [WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?>] {
         allCases.map { $0.neighborhoodKeyPath }
     }
@@ -106,12 +106,12 @@ struct AnyChunkNode<T>: AbstractChunkNode where T: DataStringConvertible {
 struct AnyChunkNeighborFinder<T>: AbstractChunkNeighborFinder where T: DataStringConvertible {
     typealias ChunkIdentifier = T
     private var _getNeighborId: (AnyChunkNode<T>) -> NeighborData<ChunkIdentifier>
-    
+
     init<Finder: AbstractChunkNeighborFinder>(neighborFinder: Finder)
     where Finder.ChunkIdentifier == T {
         _getNeighborId = neighborFinder.getNeighborId(of:)
     }
-    
+
     func getNeighborId<Node: AbstractChunkNode>(of chunk: Node) -> NeighborData<T> where Node.ChunkIdentifier == T {
         _getNeighborId(AnyChunkNode(chunk: chunk))
     }
@@ -120,7 +120,7 @@ struct AnyChunkNeighborFinder<T>: AbstractChunkNeighborFinder where T: DataStrin
 struct ImmediateNeighborhoodChunkNeighborFinder: AbstractChunkNeighborFinder {
     typealias ChunkIdentifier = Point
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T : AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
         let currentChunkIdentifier = chunk.identifier
         return NeighborData(
             topNeighbor: currentChunkIdentifier.translateY(dy: -1),
@@ -134,14 +134,14 @@ struct ImmediateNeighborhoodChunkNeighborFinder: AbstractChunkNeighborFinder {
 struct ChunkNeighborFinderReversedDecorator: AbstractChunkNeighborFinder {
     typealias ChunkIdentifier = Point
     var backingFinder: AnyChunkNeighborFinder<Point>
-    
+
     init<Finder: AbstractChunkNeighborFinder>(neighborFinder: Finder)
     where Finder.ChunkIdentifier == Point {
         backingFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
     }
-    
+
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T : AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
         let neighborData = backingFinder.getNeighborId(of: chunk)
         return NeighborData(
             topNeighbor: neighborData.bottomNeighbor,
@@ -155,14 +155,14 @@ struct ChunkNeighborFinderReversedDecorator: AbstractChunkNeighborFinder {
 struct ChunkNeighborFinderWrapAroundDecorator: AbstractChunkNeighborFinder {
     typealias ChunkIdentifier = Point
     var backingFinder: AnyChunkNeighborFinder<Point>
-    
+
     init<Finder: AbstractChunkNeighborFinder>(neighborFinder: Finder)
     where Finder.ChunkIdentifier == Point {
         backingFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
     }
-    
+
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T : AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
         let extremities = chunk.extremities
         let neighborData = backingFinder.getNeighborId(of: chunk)
         return NeighborData(
@@ -181,14 +181,14 @@ struct ChunkNeighborFinderWrapAroundDecorator: AbstractChunkNeighborFinder {
 struct ChunkNeighborFinderRandomizerDecorator: AbstractChunkNeighborFinder {
     typealias ChunkIdentifier = Point
     var backingFinder: AnyChunkNeighborFinder<Point>
-    
+
     init<Finder: AbstractChunkNeighborFinder>(neighborFinder: Finder)
     where Finder.ChunkIdentifier == Point {
         backingFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
     }
-    
+
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T : AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
         let neighborData = backingFinder.getNeighborId(of: chunk)
         let permutation = neighborData.toArray().shuffled()
         return NeighborData(
@@ -206,30 +206,30 @@ protocol ChunkNodeDelegate: AnyObject {
 
 class ChunkNode: AbstractChunkNode {
     struct Neighborhood {
-        weak var topNeighbor: ChunkNode? = nil
-        weak var leftNeighbor: ChunkNode? = nil
-        weak var rightNeighbor: ChunkNode? = nil
-        weak var bottomNeighbor: ChunkNode? = nil
-        
+        weak var topNeighbor: ChunkNode?
+        weak var leftNeighbor: ChunkNode?
+        weak var rightNeighbor: ChunkNode?
+        weak var bottomNeighbor: ChunkNode?
+
         var topLeftNeighbor: ChunkNode? {
             topNeighbor?.neighbors.leftNeighbor
         }
-        
+
         var topRightNeighbor: ChunkNode? {
             topNeighbor?.neighbors.rightNeighbor
         }
-        
+
         var bottomLeftNeighbor: ChunkNode? {
             bottomNeighbor?.neighbors.leftNeighbor
         }
-        
+
         var bottomRightNeighbor: ChunkNode? {
             bottomNeighbor?.neighbors.rightNeighbor
         }
     }
-    
+
     typealias ChunkIdentifier = Point
-    
+
     weak var delegate: ChunkNodeDelegate?
     var extremities: ExtremityData<Point> {
         guard let delegate = delegate else {
@@ -252,7 +252,7 @@ class ChunkNode: AbstractChunkNode {
         ChunkNode.chunkDimensions
     }
     var chunkTiles: [[MetaTile]]
-    var neighbors: Neighborhood = Neighborhood()
+    var neighbors = Neighborhood()
     var neighborFinder: AnyChunkNeighborFinder<Point>
     init<Finder: AbstractChunkNeighborFinder>(
         identifier: Point,
@@ -267,11 +267,11 @@ class ChunkNode: AbstractChunkNode {
             count: ChunkNode.chunkDimensions
         )
     }
-    
+
     convenience init(identifier: Point) {
         self.init(identifier: identifier, neighborFinder: ImmediateNeighborhoodChunkNeighborFinder())
     }
-    
+
     init(identifier: Point, chunkTiles: [[MetaTile]]) {
         self.identifier = identifier
         self.chunkTiles = chunkTiles
@@ -286,15 +286,15 @@ extension ChunkNode {
     func isInTopFraction(fraction: Double, positionInChunk: Point) -> Bool {
         positionInChunk.y <= Int(Double(chunkDimensions) * fraction)
     }
-    
+
     func isInBottomFraction(fraction: Double, positionInChunk: Point) -> Bool {
         positionInChunk.y > Int(Double(chunkDimensions) * (1 - fraction))
     }
-    
+
     func isInLeftFraction(fraction: Double, positionInChunk: Point) -> Bool {
         positionInChunk.x <= Int(Double(chunkDimensions) * fraction)
     }
-    
+
     func isInRightFraction(fraction: Double, positionInChunk: Point) -> Bool {
         positionInChunk.x > Int(Double(chunkDimensions) * (1 - fraction))
     }
@@ -322,14 +322,13 @@ extension ChunkNode {
     }
 }
 
-
 // MARK: Dynamic loading / unloading
 extension ChunkNode {
-    func loadNeighbors(at position: Point) -> [Point:ChunkNode] {
+    func loadNeighbors(at position: Point) -> [Point: ChunkNode] {
         guard let chunkStorage = chunkStorage else {
             return [:]
         }
-        var newlyLoadedChunks: [Point:ChunkNode] = [:]
+        var newlyLoadedChunks: [Point: ChunkNode] = [:]
         let neighborIdentifiers = neighborFinder.getNeighborId(of: self)
         for direction in Directions.allCases {
             let offset = direction.vectorialOffset
@@ -354,7 +353,7 @@ extension ChunkNode {
             chunkTiles: chunkTiles.map { $0.map { $0.toPersistable() } }
         )
     }
-    
+
     static func fromPersistable(_ persistableChunkNode: PersistableChunkNode) -> ChunkNode {
         ChunkNode(
             identifier: persistableChunkNode.identifier,

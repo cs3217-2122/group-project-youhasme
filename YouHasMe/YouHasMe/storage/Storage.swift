@@ -23,7 +23,7 @@ class Storage {
     init(fileExtension: String) {
         self.fileExtension = fileExtension
     }
-    
+
     func getDefaultDirectory() throws -> URL {
         let url = try FileManager.default.url(
             for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -31,7 +31,7 @@ class Storage {
         try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         return url
     }
-    
+
     func getURL(filename: String) throws -> URL {
         try getDefaultDirectory()
             .appendingPathComponent(filename)
@@ -130,11 +130,11 @@ class LevelStorage: JSONStorage {
     static let levelDirectoryName: String = "Levels"
     static let defaultFileStorageName = "TestDataFile1"
     static let preloadedLevelNames: [String] = []
-    
+
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(LevelStorage.levelDirectoryName)
     }
-    
+
     func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {
         let preloadedLevels = getPreloadedLevels()
         guard let gameStorage: GameStorage = try? loadAndDecode(filename: fileName) else {
@@ -145,11 +145,11 @@ class LevelStorage: JSONStorage {
         levels.append(contentsOf: preloadedLevels)
         return levels
     }
-    
+
     func getPreloadedLevels() -> [Level] {
         []
     }
-    
+
     func saveAllUserCreatedLevels(filename: String, levels: [Level]) throws {
         let levelsWithoutPreLoaded = levels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
         try encodeAndSave(
@@ -160,19 +160,19 @@ class LevelStorage: JSONStorage {
 
 class MetaLevelStorage: JSONStorage {
     static let metaLevelDirectoryName: String = "MetaLevels"
-    
+
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(MetaLevelStorage.metaLevelDirectoryName)
     }
-    
+
     func loadMetaLevel(name: String) throws -> PersistableMetaLevel {
         try loadAndDecode(filename: name)
     }
-    
+
     func saveMetaLevel(_ metaLevel: MetaLevel) throws {
         try encodeAndSave(object: metaLevel.toPersistable(), filename: metaLevel.name)
     }
-    
+
     func getChunkStorage(for metaLevelName: String) throws -> ChunkStorage {
         try ChunkStorage(metaLevelDirectory: getDefaultDirectory().appendingPathComponent(metaLevelName))
     }
@@ -181,26 +181,26 @@ class MetaLevelStorage: JSONStorage {
 class ChunkStorage: JSONStorage {
     static let chunkStorageDirectoryName: String = "Chunks"
     var metaLevelDirectory: URL
-    
+
     init(metaLevelDirectory: URL) {
         self.metaLevelDirectory = metaLevelDirectory
     }
-    
+
     override func getDefaultDirectory() throws -> URL {
         metaLevelDirectory.appendingPathComponent(ChunkStorage.chunkStorageDirectoryName)
     }
-    
+
     func loadChunk(identifier: String) -> PersistableChunkNode? {
         try? loadAndDecode(filename: identifier)
     }
-    
+
     func loadChunk(identifier: String) -> ChunkNode? {
         guard let persistableChunk: PersistableChunkNode = loadChunk(identifier: identifier) else {
             return nil
         }
         return ChunkNode.fromPersistable(persistableChunk)
     }
-    
+
     func saveChunk(_ chunk: ChunkNode) throws {
         try encodeAndSave(object: chunk.toPersistable(), filename: chunk.identifier.dataString)
     }

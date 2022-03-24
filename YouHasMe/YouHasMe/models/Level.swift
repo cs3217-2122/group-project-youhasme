@@ -49,11 +49,9 @@ extension Level: Identifiable {
 
 extension Level: Codable {}
 
-
 struct Tile {
     var entities: [Entity] = []
 }
 
 extension Tile: Codable {}
 extension Tile: Equatable {}
-

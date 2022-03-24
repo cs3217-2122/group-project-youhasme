@@ -1,7 +1,9 @@
 import SwiftUI
 
 struct CellView: View {
-    var backupDisplay: SwiftUI.Rectangle = SwiftUI.Rectangle().fill(.gray) as! SwiftUI.Rectangle
+    var backupDisplay: some View {
+        SwiftUI.Rectangle().fill(.gray)
+    }
     var viewModel: CellViewModel
     var body: some View {
         if let image = viewModel.image {

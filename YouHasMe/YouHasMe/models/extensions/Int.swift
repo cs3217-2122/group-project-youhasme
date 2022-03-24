@@ -10,7 +10,7 @@ extension Int {
     func flooredDiv(_ other: Int) -> Int {
         Int(floor(Double(self) / Double(other)))
     }
-    
+
     func modulo(_ residualClass: Int) -> Int {
         assert(residualClass > 0)
         let remainder = self % residualClass

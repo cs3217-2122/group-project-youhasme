@@ -41,35 +41,32 @@ struct PositionedRectangle {
 
 extension PositionedRectangle: Codable {}
 
-
 extension PositionedRectangle {
     var topSide: Int {
         topLeft.y
     }
-    
+
     var bottomSide: Int {
         topLeft.y + height
     }
-    
+
     var leftSide: Int {
         topLeft.x
     }
-    
+
     var rightSide: Int {
         topLeft.x + width
     }
-    
+
     var topRight: Point {
         Point(x: rightSide, y: topSide)
     }
-    
+
     var bottomLeft: Point {
         Point(x: leftSide, y: bottomSide)
     }
-    
+
     var bottomRight: Point {
         Point(x: rightSide, y: bottomSide)
     }
 }
-
-

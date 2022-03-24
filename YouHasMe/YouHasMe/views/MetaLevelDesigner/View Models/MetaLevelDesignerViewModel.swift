@@ -20,7 +20,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
     convenience init() {
         self.init(currMetaLevel: MetaLevel())
     }
-    
+
     init(currMetaLevel: MetaLevel) {
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition

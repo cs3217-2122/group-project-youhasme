@@ -11,7 +11,7 @@ struct MainMenuView: View {
     private let titleFont: Font = .largeTitle
     private let transitionButtonFont: Font = .title2
     @EnvironmentObject var gameState: GameState
-    
+
     var body: some View {
         VStack {
             Text("You Has Me")
