@@ -261,10 +261,10 @@ class ChunkNode: AbstractChunkNode {
     where Finder.ChunkIdentifier == Point {
         self.identifier = identifier
         self.neighborFinder = AnyChunkNeighborFinder(neighborFinder: neighborFinder)
-        chunkTiles = Array(
+        self.chunkTiles = Array(
             repeatingFactory:
-                Array(repeatingFactory: MetaTile(metaEntity: .space), count: chunkDimensions),
-            count: chunkDimensions
+                Array(repeatingFactory: MetaTile(metaEntity: .space), count: ChunkNode.chunkDimensions),
+            count: ChunkNode.chunkDimensions
         )
     }
     
@@ -299,6 +299,29 @@ extension ChunkNode {
         positionInChunk.x > Int(Double(chunkDimensions) * (1 - fraction))
     }
 }
+
+extension Array where Element == [MetaTile] {
+    subscript(point: Point) -> MetaTile {
+        get {
+            self[point.y][point.x]
+        }
+        set {
+            self[point.y][point.x] = newValue
+        }
+    }
+}
+
+// MARK: Getters / Setters
+extension ChunkNode {
+    func getTile(at point: Point) -> MetaTile {
+        chunkTiles[point]
+    }
+
+    func setTile(_ tile: MetaTile, at point: Point) {
+        chunkTiles[point] = tile
+    }
+}
+
 
 // MARK: Dynamic loading / unloading
 extension ChunkNode {

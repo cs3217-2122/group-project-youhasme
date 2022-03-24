@@ -31,7 +31,11 @@ extension MetaLevel {
         Point(x: worldPosition.x.flooredDiv(chunkDimensions), y: worldPosition.y.flooredDiv(chunkDimensions))
     }
     
-    func getChunk(for worldPosition: Point) -> ChunkNode? {
+    func worldToPositionWithinChunk(_ worldPosition: Point) -> Point {
+        Point(x: worldPosition.x.modulo(chunkDimensions), y: worldPosition.y.modulo(chunkDimensions))
+    }
+    
+    func getChunk(at worldPosition: Point) -> ChunkNode? {
         // The most basic behavior of getChunk is that it
         // 1. searches `loadedChunks` for the chunk at the given position and returns it
         // 2. tries to load a chunk with the same identifier as the given position
@@ -47,6 +51,22 @@ extension MetaLevel {
         let loadedChunk: ChunkNode? = chunkStorage.loadChunk(identifier: chunkPosition.dataString)
         loadedChunks[chunkPosition] = loadedChunk
         return loadedChunk
+    }
+    
+    func getTile(at worldPosition: Point) -> MetaTile? {
+        guard let chunk = getChunk(at: worldPosition) else {
+            return nil
+        }
+        let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
+        return chunk.getTile(at: positionWithinChunk)
+    }
+
+    func setTile(_ tile: MetaTile, at worldPosition: Point) {
+        guard let chunk = getChunk(at: worldPosition) else {
+            return
+        }
+        let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
+        chunk.setTile(tile, at: positionWithinChunk)
     }
 }
 
@@ -66,24 +86,22 @@ extension MetaLevel {
             entryChunkPosition: persistableMetaLevel.entryChunkPosition,
             dimensions: persistableMetaLevel.dimensions
         )
-        metaLevel.currentChunk = metaLevel.getChunk(for: metaLevel.entryChunkPosition)
+        metaLevel.currentChunk = metaLevel.getChunk(at: metaLevel.entryChunkPosition)
         return metaLevel
     }
 }
 
-
-
 struct MetaTile {
-    var metaEntity: MetaEntityType
+    var metaEntities: [MetaEntityType]
 }
 
 extension MetaTile {
     func toPersistable() -> PersistableMetaTile {
-        PersistableMetaTile(metaEntity: metaEntity)
+        PersistableMetaTile(metaEntities: metaEntities)
     }
     
     static func fromPersistable(_ persistableMetaTile: PersistableMetaTile) -> MetaTile {
-        MetaTile(metaEntity: persistableMetaTile.metaEntity)
+        MetaTile(metaEntities: persistableMetaTile.metaEntities)
     }
 }
 

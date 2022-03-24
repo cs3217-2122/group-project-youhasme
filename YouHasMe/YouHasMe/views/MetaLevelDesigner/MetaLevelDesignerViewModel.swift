@@ -25,13 +25,15 @@ class MetaLevelDesignerViewModel: ObservableObject {
     func translateView(by offset: CGVector) {
         cumulativeTranslation = cumulativeTranslation.add(with: offset)
     }
+    
+    
 
-    func getItem(at viewOffset: Vector) -> MetaTile {
-        currMetaLevel.layer.getTileAt(point: viewPosition.translate(by: viewOffset))
+    func getItem(at viewOffset: Vector) -> MetaTile? {
+        currMetaLevel.getTile(at: viewPosition.translate(by: viewOffset))
     }
 
     func setTile(_ tile: MetaTile, at viewOffset: Vector) {
-        currMetaLevel.layer.setTile(tile, at: viewPosition.translate(by: viewOffset))
+        currMetaLevel.setTile(tile, at: viewPosition.translate(by: viewOffset))
     }
 }
 
@@ -54,6 +56,6 @@ extension MetaLevelDesignerViewModel {
     }
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
-        MetaEntityViewModel(metaEntityType: getItem(at: viewOffset).metaEntity)
+        MetaEntityViewModel(metaEntities: getItem(at: viewOffset)?.metaEntities ?? [])
     }
 }

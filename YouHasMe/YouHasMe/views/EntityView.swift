@@ -70,13 +70,13 @@ struct MetaEntityView: View {
 }
 
 class MetaEntityViewModel: CellViewModel {
-    init(metaEntityType: MetaEntityType?) {
-        guard let metaEntityType = metaEntityType else {
+    init(metaEntities: [MetaEntityType]) {
+        guard !metaEntities.isEmpty else {
             super.init()
             return
         }
 
-        super.init(imageSource: metaEntityTypeToImageable(type: metaEntityType))
+        super.init(imageSource: metaEntityTypeToImageable(type: metaEntities[0]))
     }
 }
 
