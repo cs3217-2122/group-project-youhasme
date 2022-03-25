@@ -6,11 +6,15 @@ struct Vector {
     var dy: Int
 }
 
+extension Vector: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "(\(dx), \(dy))"
+    }
+}
+
 extension Vector: Codable {}
 
-extension Vector: Hashable {
-
-}
+extension Vector: Hashable {}
 
 extension Vector {
     static var zero = Vector(dx: 0, dy: 0)

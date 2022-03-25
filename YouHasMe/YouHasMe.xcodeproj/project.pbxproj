@@ -62,6 +62,7 @@
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
 		E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */; };
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
+		E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
 		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
 		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
@@ -150,6 +151,7 @@
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalArray.swift; sourceTree = "<group>"; };
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
+		E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerPaletteView.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
 		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
 				E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */,
+				E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -536,7 +539,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -614,6 +617,7 @@
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
+				E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

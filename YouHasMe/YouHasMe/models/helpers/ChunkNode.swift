@@ -26,7 +26,7 @@ extension Directions {
             return .left
         }
     }
-    
+
     var vectorialOffset: Vector {
         switch self {
         case .top:

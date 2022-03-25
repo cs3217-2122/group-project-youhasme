@@ -70,3 +70,17 @@ extension PositionedRectangle {
         Point(x: rightSide, y: bottomSide)
     }
 }
+
+extension PositionedRectangle {
+    func contains(point: Point) -> Bool {
+        (leftSide...rightSide).contains(point.x) && (topSide...bottomSide).contains(point.y)
+    }
+
+    func expandInAllDirections(by amount: Int) -> PositionedRectangle {
+        assert(amount > 0)
+        return PositionedRectangle(
+            rectangle: Rectangle(width: width + amount * 2, height: height + amount * 2),
+            topLeft: topLeft.translateX(dx: -amount).translateY(dy: -amount)
+        )
+    }
+}

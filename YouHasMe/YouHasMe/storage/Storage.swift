@@ -25,32 +25,31 @@ class Storage {
     }
 
     func getDefaultDirectory() throws -> URL {
-        let url = try FileManager.default.url(
+        try FileManager.default.url(
             for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appendingPathComponent(Storage.defaultDirectoryName, isDirectory: true)
-        try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
-        return url
     }
 
-    func getURL(filename: String) throws -> URL {
-        try getDefaultDirectory()
-            .appendingPathComponent(filename)
+    final func getURL(filename: String) throws -> URL {
+        let directoryUrl = try getDefaultDirectory()
+        try FileManager.default.createDirectory(at: directoryUrl, withIntermediateDirectories: true, attributes: nil)
+        return directoryUrl.appendingPathComponent(filename)
             .appendingPathExtension(fileExtension)
     }
 
-    func save(data: Data, to file: URL) throws {
+    final func save(data: Data, to file: URL) throws {
         try data.write(to: file)
     }
 
-    func load(from file: URL) throws -> Data {
+    final func load(from file: URL) throws -> Data {
         try Data(contentsOf: file)
     }
 
-    func delete(file: URL) throws {
+    final func delete(file: URL) throws {
         try FileManager.default.removeItem(at: file)
     }
 
-    func getAllFiles(in directory: URL) -> (urls: [URL], filenames: [String]) {
+    final func getAllFiles(in directory: URL) -> (urls: [URL], filenames: [String]) {
         do {
             let urls = try FileManager.default.contentsOfDirectory(
                 at: directory, includingPropertiesForKeys: nil, options: [])

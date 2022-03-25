@@ -18,12 +18,13 @@ struct GridViewData {
         self.cellDimensions = cellDimensions
         self.widthInCells = Int(floor(displayWidth / cellDimensions))
         self.heightInCells = Int(floor(displayHeight / cellDimensions))
+        print("\(heightInCells) \(widthInCells)")
     }
 
     init(proxy: GeometryProxy) {
         self.init(displayWidth: proxy.size.width, displayHeight: proxy.size.height)
     }
-    
+
     func getViewableDimensions() -> Rectangle {
         Rectangle(width: widthInCells, height: heightInCells)
     }

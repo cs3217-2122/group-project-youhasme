@@ -18,6 +18,7 @@ let demoTypes: [EntityType] = [
     EntityTypes.NounInstances.wall
 ]
 
+
 func entityTypeToImageString(type: EntityType) -> String {
     switch type {
     case EntityTypes.Nouns.baba:
@@ -86,7 +87,7 @@ func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
     case .blocking:
         return .string("wall")
     case .nonBlocking:
-        return .string("grass")
+        return .string("flag")
     case .space:
         return nil
     case .level:

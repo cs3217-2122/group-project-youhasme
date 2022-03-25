@@ -5,10 +5,14 @@ protocol MetaLevelViewableDelegate: AnyObject {
 }
 
 class MetaLevel {
+    static let loadableChunkRadius: Int = 1
     static let defaultName: String = "MetaLevel1"
     weak var viewableDelegate: MetaLevelViewableDelegate?
     var chunkDimensions: Int {
         ChunkNode.chunkDimensions
+    }
+    var loadableChunkRadius: Int {
+        MetaLevel.loadableChunkRadius
     }
     var chunkStorage: ChunkStorage {
         guard let storage = try? MetaLevelStorage().getChunkStorage(for: name) else {
@@ -41,7 +45,7 @@ class MetaLevel {
     }
 
     func hydrate(with persistableMetaLevel: PersistableMetaLevel) {
-
+        // TODO: This function may not be necessary
     }
 }
 
@@ -53,9 +57,17 @@ extension MetaLevel {
     func worldToPositionWithinChunk(_ worldPosition: Point) -> Point {
         Point(x: worldPosition.x.modulo(chunkDimensions), y: worldPosition.y.modulo(chunkDimensions))
     }
-    
+
     func worldRegionToChunkRegion(_ worldRegion: PositionedRectangle) -> PositionedRectangle {
-        
+        let chunkTopLeft = worldToChunkPosition(worldRegion.topLeft)
+        let chunkBottomRight = worldToChunkPosition(worldRegion.bottomRight)
+        return PositionedRectangle(
+            rectangle: Rectangle(
+                width: chunkBottomRight.x - chunkTopLeft.x,
+                height: chunkBottomRight.y - chunkTopLeft.y
+            ),
+            topLeft: chunkTopLeft
+        )
     }
 
     func getChunk(at worldPosition: Point, createIfNotExists: Bool = false) -> ChunkNode? {
@@ -66,6 +78,7 @@ extension MetaLevel {
         // This behavior can be abstracted into a Position to Chunk handler.
 
         let chunkPosition = worldToChunkPosition(worldPosition)
+        print("chunk pos: \(chunkPosition)")
 
         if let foundChunk = loadedChunks[chunkPosition] {
             return foundChunk
@@ -75,19 +88,20 @@ extension MetaLevel {
             loadedChunks[chunkPosition] = loadedChunk
             return loadedChunk
         }
-        
+
         guard createIfNotExists else {
             return nil
         }
-        
+
         let chunkNode = ChunkNode(identifier: chunkPosition)
         
         do {
             try chunkStorage.saveChunk(chunkNode)
         } catch {
-            return nil
+            fatalError("unexpected save failure")
         }
         
+        loadedChunks[chunkPosition] = chunkNode
         return chunkNode
     }
     
@@ -95,12 +109,23 @@ extension MetaLevel {
         guard let delegate = viewableDelegate else {
             return
         }
-        let viewableRegion = delegate.getViewableRegion()
-        
+        let viewableWorldRegion = delegate.getViewableRegion()
+        let viewableChunkRegion = worldRegionToChunkRegion(viewableWorldRegion)
+        let loadableChunkRegion = viewableChunkRegion.expandInAllDirections(by: loadableChunkRadius)
         // Unload all chunks that are very far away from the viewable region
-        
+        // In future, there may be multiple viewableChunkRegions due to multiplayer,
+        // so we need to account for all of those.
         for (position, loadedChunk) in loadedChunks {
-            
+            guard !loadableChunkRegion.contains(point: position) else {
+                continue
+            }
+
+            do {
+                try chunkStorage.saveChunk(loadedChunk)
+            } catch {
+                fatalError("unexpected failure")
+            }
+            loadedChunks[position] = nil
         }
     }
 
@@ -156,7 +181,7 @@ extension MetaTile {
     }
 }
 
-enum MetaEntityType {
+enum MetaEntityType: CaseIterable {
     case blocking
     case nonBlocking
     case space

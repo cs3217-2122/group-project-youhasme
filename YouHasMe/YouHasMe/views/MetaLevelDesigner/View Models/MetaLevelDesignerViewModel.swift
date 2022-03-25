@@ -2,13 +2,17 @@ import Foundation
 import CoreGraphics
 
 class MetaLevelDesignerViewModel: ObservableObject {
+    // MARK: Palette
+    var selectedPaletteMetaEntity: MetaEntityType?
+    
+    
     private var metaLevelStorage = MetaLevelStorage()
-    var viewableDimensions: Rectangle = Rectangle(
+    var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
         height: ChunkNode.chunkDimensions
     )
     @Published var currMetaLevel: MetaLevel
-    var hasUnsavedChanges: Bool = false
+    var hasUnsavedChanges = false
     /// The view position relative to the coordinate system of the current meta level.
     var viewPosition: Point
     private var cumulativeTranslation: CGVector = .zero {
@@ -21,7 +25,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
             cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
         }
     }
-    
+
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
 
     convenience init() {
@@ -37,8 +41,9 @@ class MetaLevelDesignerViewModel: ObservableObject {
         cumulativeTranslation = cumulativeTranslation.add(with: offset)
     }
 
-    func getItem(at viewOffset: Vector) -> MetaTile? {
-        currMetaLevel.getTile(
+    func getTile(at viewOffset: Vector) -> MetaTile? {
+        print(viewOffset)
+        return currMetaLevel.getTile(
             at: viewPosition.translate(by: viewOffset),
             createChunkIfNotExists: true
         )
@@ -46,6 +51,13 @@ class MetaLevelDesignerViewModel: ObservableObject {
 
     func setTile(_ tile: MetaTile, at viewOffset: Vector) {
         currMetaLevel.setTile(tile, at: viewPosition.translate(by: viewOffset))
+    }
+}
+
+// MARK: Palette
+extension MetaLevelDesignerViewModel {
+    func selectMetaEntity(_ metaEntity: MetaEntityType) {
+        
     }
 }
 
@@ -64,6 +76,17 @@ extension MetaLevelDesignerViewModel {
 
 extension MetaLevelDesignerViewModel: MetaLevelDesignerToolbarViewModelDelegate {}
 
+extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
+    func selectPaletteMetaEntity(_ metaEntity: MetaEntityType) {
+        selectedPaletteMetaEntity = metaEntity
+    }
+    
+    func getSelectedPaletteMetaEntity() -> MetaEntityType? {
+        selectedPaletteMetaEntity
+    }
+}
+
+
 // MARK: Child view models
 extension MetaLevelDesignerViewModel {
     func getToolbarViewModel() -> MetaLevelDesignerToolbarViewModel {
@@ -79,8 +102,16 @@ extension MetaLevelDesignerViewModel {
 
         return toolbarViewModel
     }
+    
+    func getPaletteMetaEntityViewModels() -> [PaletteMetaEntityViewModel] {
+        MetaEntityType.allCases.map {
+            let viewModel = PaletteMetaEntityViewModel(metaEntity: $0)
+            viewModel.delegate = self
+            return viewModel
+        }
+    }
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
-        MetaEntityViewModel(metaEntities: getItem(at: viewOffset)?.metaEntities ?? [])
+        MetaEntityViewModel(metaEntities: getTile(at: viewOffset)?.metaEntities ?? [])
     }
 }

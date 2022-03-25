@@ -82,6 +82,59 @@ class MetaEntityViewModel: CellViewModel {
     }
 }
 
+protocol PaletteMetaEntityViewModelDelegate: AnyObject {
+    func selectPaletteMetaEntity(_ metaEntity: MetaEntityType)
+    func getSelectedPaletteMetaEntity() -> MetaEntityType?
+}
+
+
+struct PaletteMetaEntityView: View {
+    var viewModel: PaletteMetaEntityViewModel
+
+    var body: some View {
+        CellView(viewModel: viewModel)
+            .onTapGesture {
+                viewModel.select()
+            }
+            .border(viewModel.shouldHighlight() ? .red : .black)
+    }
+}
+
+class PaletteMetaEntityViewModel: CellViewModel {
+    weak var delegate: PaletteMetaEntityViewModelDelegate?
+    private var metaEntity: MetaEntityType
+    init(metaEntity: MetaEntityType) {
+        self.metaEntity = metaEntity
+        super.init(imageSource: metaEntityTypeToImageable(type: metaEntity))
+    }
+    
+    func select() {
+        guard let delegate = delegate else {
+            return
+        }
+        
+        delegate.selectPaletteMetaEntity(metaEntity)
+    }
+    
+    func shouldHighlight() -> Bool {
+        guard let delegate = delegate else {
+            return false
+        }
+        
+        return delegate.getSelectedPaletteMetaEntity() == metaEntity
+    }
+}
+
+extension PaletteMetaEntityViewModel: Hashable {
+    static func == (lhs: PaletteMetaEntityViewModel, rhs: PaletteMetaEntityViewModel) -> Bool {
+        lhs.metaEntity == rhs.metaEntity
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(metaEntity)
+    }
+}
+
 // struct EntityView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        EntityView()

@@ -6,6 +6,8 @@ struct MetaLevelDesignerView: View {
         VStack {
             MetaLevelDesignerToolbarView(viewModel: viewModel.getToolbarViewModel())
                 .padding()
+            MetaLevelDesignerPaletteView(viewModel: viewModel)
+                .padding()
             MetaLevelGridView(viewModel: viewModel)
                 .padding()
         }
