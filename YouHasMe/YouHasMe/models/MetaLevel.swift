@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 protocol MetaLevelViewableDelegate: AnyObject {
     func getViewableRegion() -> PositionedRectangle
@@ -78,7 +79,6 @@ extension MetaLevel {
         // This behavior can be abstracted into a Position to Chunk handler.
 
         let chunkPosition = worldToChunkPosition(worldPosition)
-        print("chunk pos: \(chunkPosition)")
 
         if let foundChunk = loadedChunks[chunkPosition] {
             return foundChunk
@@ -167,8 +167,13 @@ extension MetaLevel {
     }
 }
 
-struct MetaTile {
-    var metaEntities: [MetaEntityType] = []
+class MetaTile {
+    @Published var metaEntities: [MetaEntityType] = []
+    init() {}
+    
+    init(metaEntities: [MetaEntityType]) {
+        self.metaEntities = metaEntities
+    }
 }
 
 extension MetaTile {

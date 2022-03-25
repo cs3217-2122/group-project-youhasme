@@ -13,7 +13,6 @@ struct MetaLevelDesignerPaletteView: View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(viewModel.getPaletteMetaEntityViewModels(), id: \.self) { paletteMetaEntityViewModel in
-                    
                     PaletteMetaEntityView(viewModel: paletteMetaEntityViewModel)
                         .frame(width: 50, height: 50)
                 }

@@ -18,7 +18,6 @@ struct GridViewData {
         self.cellDimensions = cellDimensions
         self.widthInCells = Int(floor(displayWidth / cellDimensions))
         self.heightInCells = Int(floor(displayHeight / cellDimensions))
-        print("\(heightInCells) \(widthInCells)")
     }
 
     init(proxy: GeometryProxy) {
@@ -50,13 +49,6 @@ struct MetaLevelGridView: View {
                                         viewModel: viewModel.getTileViewModel(at: Vector(dx: x, dy: y))
                                     )
                                     .frame(width: gridViewData.cellWidth, height: gridViewData.cellHeight)
-                                    .border(.pink)
-                                    .onTapGesture {
-
-                                    }
-                                    .onLongPressGesture {
-
-                                    }
                                 }
                             }
                         }

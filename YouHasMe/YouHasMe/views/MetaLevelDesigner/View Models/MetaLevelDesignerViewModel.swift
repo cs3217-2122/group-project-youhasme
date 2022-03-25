@@ -1,10 +1,10 @@
 import Foundation
 import CoreGraphics
+import Combine
 
 class MetaLevelDesignerViewModel: ObservableObject {
     // MARK: Palette
-    var selectedPaletteMetaEntity: MetaEntityType?
-    
+    @Published var selectedPaletteMetaEntity: MetaEntityType?
     
     private var metaLevelStorage = MetaLevelStorage()
     var viewableDimensions = Rectangle(
@@ -40,24 +40,9 @@ class MetaLevelDesignerViewModel: ObservableObject {
     func translateView(by offset: CGVector) {
         cumulativeTranslation = cumulativeTranslation.add(with: offset)
     }
-
-    func getTile(at viewOffset: Vector) -> MetaTile? {
-        print(viewOffset)
-        return currMetaLevel.getTile(
-            at: viewPosition.translate(by: viewOffset),
-            createChunkIfNotExists: true
-        )
-    }
-
-    func setTile(_ tile: MetaTile, at viewOffset: Vector) {
-        currMetaLevel.setTile(tile, at: viewPosition.translate(by: viewOffset))
-    }
-}
-
-// MARK: Palette
-extension MetaLevelDesignerViewModel {
-    func selectMetaEntity(_ metaEntity: MetaEntityType) {
-        
+    
+    func getWorldPosition(at viewOffset: Vector) -> Point {
+        viewPosition.translate(by: viewOffset)
     }
 }
 
@@ -74,6 +59,20 @@ extension MetaLevelDesignerViewModel {
     }
 }
 
+// MARK: CRUD
+extension MetaLevelDesignerViewModel {
+    func getTile(at viewOffset: Vector) -> MetaTile? {
+        return currMetaLevel.getTile(
+            at: viewPosition.translate(by: viewOffset),
+            createChunkIfNotExists: true
+        )
+    }
+
+    func setTile(_ tile: MetaTile, at viewOffset: Vector) {
+        currMetaLevel.setTile(tile, at: getWorldPosition(at: viewOffset))
+    }
+}
+
 extension MetaLevelDesignerViewModel: MetaLevelDesignerToolbarViewModelDelegate {}
 
 extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
@@ -81,11 +80,24 @@ extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
         selectedPaletteMetaEntity = metaEntity
     }
     
-    func getSelectedPaletteMetaEntity() -> MetaEntityType? {
-        selectedPaletteMetaEntity
+    var selectedPaletteMetaEntityPublisher: AnyPublisher<MetaEntityType?, Never> {
+        $selectedPaletteMetaEntity.eraseToAnyPublisher()
     }
 }
 
+extension MetaLevelDesignerViewModel: MetaEntityViewModelDelegate {
+    func addSelectedEntity(to tile: MetaTile) {
+        guard let selectedPaletteMetaEntity = selectedPaletteMetaEntity else {
+            return
+        }
+        
+        tile.metaEntities.append(selectedPaletteMetaEntity)
+    }
+    
+    func removeEntity(from tile: MetaTile) {
+        tile.metaEntities.removeAll()
+    }
+}
 
 // MARK: Child view models
 extension MetaLevelDesignerViewModel {
@@ -112,6 +124,11 @@ extension MetaLevelDesignerViewModel {
     }
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
-        MetaEntityViewModel(metaEntities: getTile(at: viewOffset)?.metaEntities ?? [])
+        let metaEntityViewModel = MetaEntityViewModel(
+            tile: getTile(at: viewOffset),
+            worldPosition: getWorldPosition(at: viewOffset)
+        )
+        metaEntityViewModel.delegate = self
+        return metaEntityViewModel
     }
 }

@@ -1,5 +1,5 @@
 import Foundation
 
 struct ViewConstants {
-    static var gridCellDimensions: Double = 10.0
+    static var gridCellDimensions: Double = 20.0
 }

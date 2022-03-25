@@ -1,10 +1,11 @@
 import SwiftUI
+import Combine
 
 struct CellView: View {
     var backupDisplay: some View {
         SwiftUI.Rectangle().fill(.gray)
     }
-    var viewModel: CellViewModel
+    @ObservedObject var viewModel: CellViewModel
     var body: some View {
         if let image = viewModel.image {
             image.resizable()
@@ -34,8 +35,8 @@ extension Imageable {
     }
 }
 
-class CellViewModel {
-    var imageSource: Imageable?
+class CellViewModel: ObservableObject {
+    @Published var imageSource: Imageable?
     var image: Image? {
         imageSource?.toImage()
     }
@@ -68,41 +69,109 @@ struct MetaEntityView: View {
 
     var body: some View {
         CellView(viewModel: viewModel)
+            .border(.pink)
+            .onTapGesture {
+                viewModel.addEntity()
+            }
+            .onLongPressGesture {
+                viewModel.removeEntity()
+            }
     }
 }
 
+protocol MetaEntityViewModelDelegate: AnyObject {
+    func addSelectedEntity(to tile: MetaTile)
+    func removeEntity(from tile: MetaTile)
+}
+
 class MetaEntityViewModel: CellViewModel {
-    init(metaEntities: [MetaEntityType]) {
-        guard !metaEntities.isEmpty else {
+    weak var delegate: MetaEntityViewModelDelegate?
+    var tile: MetaTile?
+    var worldPosition: Point
+    
+    private var subscriptions: Set<AnyCancellable> = []
+    
+    init(tile: MetaTile?, worldPosition: Point) {
+        self.tile = tile
+        self.worldPosition = worldPosition
+        
+        guard let tile = tile, !(tile.metaEntities.isEmpty) else {
             super.init()
             return
         }
+        
+        // TODO: Allow stacking of multiple images
+        super.init(imageSource: metaEntityTypeToImageable(type: tile.metaEntities[0]))
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        guard let tile = tile else {
+            return
+        }
 
-        super.init(imageSource: metaEntityTypeToImageable(type: metaEntities[0]))
+        tile.$metaEntities.sink { [weak self] metaEntities in
+            self?.imageSource = metaEntityTypeToImageable(type: metaEntities[0])
+        }
+        .store(in: &subscriptions)
+    }
+    
+    func addEntity() {
+        guard let delegate = delegate, let tile = tile else {
+            return
+        }
+        
+        delegate.addSelectedEntity(to: tile)
+    }
+    
+    func removeEntity() {
+        guard let delegate = delegate, let tile = tile else {
+            return
+        }
+        
+        delegate.removeEntity(from: tile)
     }
 }
 
 protocol PaletteMetaEntityViewModelDelegate: AnyObject {
     func selectPaletteMetaEntity(_ metaEntity: MetaEntityType)
-    func getSelectedPaletteMetaEntity() -> MetaEntityType?
+    var selectedPaletteMetaEntityPublisher: AnyPublisher<MetaEntityType?, Never> { get }
 }
 
 
 struct PaletteMetaEntityView: View {
     var viewModel: PaletteMetaEntityViewModel
-
+    @State var borderColor: Color = .black
     var body: some View {
+        
         CellView(viewModel: viewModel)
             .onTapGesture {
+                let _ = print("tapped")
                 viewModel.select()
             }
-            .border(viewModel.shouldHighlight() ? .red : .black)
+            .onReceive(viewModel.shouldHighlightPublisher, perform: { shouldHighlight in
+                borderColor = shouldHighlight ? .red : .black
+            })
+            .border(borderColor)
     }
 }
 
 class PaletteMetaEntityViewModel: CellViewModel {
-    weak var delegate: PaletteMetaEntityViewModelDelegate?
+    weak var delegate: PaletteMetaEntityViewModelDelegate? {
+        didSet {
+            guard delegate != nil else {
+                return
+            }
+            setupBindingsWithDelegate()
+        }
+    }
     private var metaEntity: MetaEntityType
+    var shouldHighlightPublisher: AnyPublisher<Bool, Never> {
+        shouldHighlight.eraseToAnyPublisher()
+    }
+    private var shouldHighlight: PassthroughSubject<Bool, Never> = PassthroughSubject()
+    private var subscriptions: Set<AnyCancellable> = []
+    
     init(metaEntity: MetaEntityType) {
         self.metaEntity = metaEntity
         super.init(imageSource: metaEntityTypeToImageable(type: metaEntity))
@@ -112,16 +181,24 @@ class PaletteMetaEntityViewModel: CellViewModel {
         guard let delegate = delegate else {
             return
         }
-        
+        print("selecting")
         delegate.selectPaletteMetaEntity(metaEntity)
     }
     
-    func shouldHighlight() -> Bool {
+    func setupBindingsWithDelegate() {
         guard let delegate = delegate else {
-            return false
+            fatalError("should not be nil")
         }
         
-        return delegate.getSelectedPaletteMetaEntity() == metaEntity
+        delegate.selectedPaletteMetaEntityPublisher
+            .sink { [weak self] selectedPaletteMetaEntity in
+                guard let self = self else {
+                    return
+                }
+                
+                self.shouldHighlight.send(selectedPaletteMetaEntity == self.metaEntity)
+            }
+            .store(in: &subscriptions)
     }
 }
 
