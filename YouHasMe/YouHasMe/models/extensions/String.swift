@@ -42,3 +42,9 @@ extension String {
     index(startIndex, offsetBy: offset)
   }
 }
+
+extension String {
+    var isBlank: Bool {
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
+}

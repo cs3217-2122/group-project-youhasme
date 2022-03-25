@@ -14,6 +14,19 @@ enum Directions: CaseIterable {
 }
 
 extension Directions {
+    var opposite: Directions {
+        switch self {
+        case .top:
+            return .bottom
+        case .bottom:
+            return .top
+        case .left:
+            return .right
+        case .right:
+            return .left
+        }
+    }
+    
     var vectorialOffset: Vector {
         switch self {
         case .top:
@@ -84,7 +97,8 @@ extension NeighborData {
 
 protocol AbstractChunkNeighborFinder {
     associatedtype ChunkIdentifier where ChunkIdentifier: DataStringConvertible
-    func getNeighborId<T: AbstractChunkNode>(of chunk: T) -> NeighborData<ChunkIdentifier> where T.ChunkIdentifier == ChunkIdentifier
+    func getNeighborId<T: AbstractChunkNode>(of chunk: T) -> NeighborData<ChunkIdentifier>
+    where T.ChunkIdentifier == ChunkIdentifier
 }
 
 // TODO
@@ -334,10 +348,14 @@ extension ChunkNode {
             let offset = direction.vectorialOffset
             let neighborPosition = position.translate(by: offset)
             let neighborhoodKeyPath = direction.neighborhoodKeyPath
+            let oppositeNeighborhoodKeyPath = direction.opposite.neighborhoodKeyPath
             let neighborDataKeyPath = direction.neighborDataKeyPath
             if neighbors[keyPath: neighborhoodKeyPath] == nil,
-               let neighbor: ChunkNode = chunkStorage.loadChunk(identifier: neighborIdentifiers[keyPath: neighborDataKeyPath].dataString) {
+               let neighbor: ChunkNode = chunkStorage.loadChunk(
+                identifier: neighborIdentifiers[keyPath: neighborDataKeyPath].dataString
+               ) {
                 neighbors[keyPath: neighborhoodKeyPath] = neighbor
+                neighbor.neighbors[keyPath: oppositeNeighborhoodKeyPath] = self
                 newlyLoadedChunks[neighborPosition] = neighbor
             }
         }

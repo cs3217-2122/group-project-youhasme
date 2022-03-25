@@ -39,6 +39,7 @@
 		E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4327E8DF87007D2E86 /* CGPoint.swift */; };
 		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
 		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
+		E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
 		E573E95C27EA2797000D10E4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95B27EA2797000D10E4 /* Storage.swift */; };
@@ -125,6 +126,7 @@
 		E5563C4327E8DF87007D2E86 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
+		E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerPersistenceView.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
 		E573E95B27EA2797000D10E4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
 				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
+				E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,

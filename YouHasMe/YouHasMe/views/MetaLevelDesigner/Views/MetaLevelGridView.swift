@@ -23,6 +23,10 @@ struct GridViewData {
     init(proxy: GeometryProxy) {
         self.init(displayWidth: proxy.size.width, displayHeight: proxy.size.height)
     }
+    
+    func getViewableDimensions() -> Rectangle {
+        Rectangle(width: widthInCells, height: heightInCells)
+    }
 }
 
 struct MetaLevelGridView: View {
@@ -37,6 +41,7 @@ struct MetaLevelGridView: View {
                     Spacer()
                     VStack(spacing: 0) {
                         let gridViewData = GridViewData(proxy: proxy)
+                        let _ = (viewModel.viewableDimensions = gridViewData.getViewableDimensions())
                         ForEach(0..<gridViewData.heightInCells, id: \.self) { y in
                             HStack(spacing: 0) {
                                 ForEach(0..<gridViewData.widthInCells, id: \.self) { x in

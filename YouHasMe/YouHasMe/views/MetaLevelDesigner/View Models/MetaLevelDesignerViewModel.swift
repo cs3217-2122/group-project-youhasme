@@ -2,7 +2,13 @@ import Foundation
 import CoreGraphics
 
 class MetaLevelDesignerViewModel: ObservableObject {
-    var currMetaLevel: MetaLevel
+    private var metaLevelStorage = MetaLevelStorage()
+    var viewableDimensions: Rectangle = Rectangle(
+        width: ChunkNode.chunkDimensions,
+        height: ChunkNode.chunkDimensions
+    )
+    @Published var currMetaLevel: MetaLevel
+    var hasUnsavedChanges: Bool = false
     /// The view position relative to the coordinate system of the current meta level.
     var viewPosition: Point
     private var cumulativeTranslation: CGVector = .zero {
@@ -15,6 +21,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
             cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
         }
     }
+    
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
 
     convenience init() {
@@ -31,11 +38,27 @@ class MetaLevelDesignerViewModel: ObservableObject {
     }
 
     func getItem(at viewOffset: Vector) -> MetaTile? {
-        currMetaLevel.getTile(at: viewPosition.translate(by: viewOffset))
+        currMetaLevel.getTile(
+            at: viewPosition.translate(by: viewOffset),
+            createChunkIfNotExists: true
+        )
     }
 
     func setTile(_ tile: MetaTile, at viewOffset: Vector) {
         currMetaLevel.setTile(tile, at: viewPosition.translate(by: viewOffset))
+    }
+}
+
+extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {
+    func getViewableRegion() -> PositionedRectangle {
+        PositionedRectangle(rectangle: viewableDimensions, topLeft: viewPosition)
+    }
+}
+
+// MARK: Persistence
+extension MetaLevelDesignerViewModel {
+    func save() throws {
+        try metaLevelStorage.saveMetaLevel(currMetaLevel)
     }
 }
 

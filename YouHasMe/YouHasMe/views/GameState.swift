@@ -7,6 +7,7 @@ import Foundation
 
 enum ScreenState {
     case selecting
+    case selectingMeta
     case playing
     case designing
     case designingMeta

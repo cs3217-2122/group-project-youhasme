@@ -1,7 +1,12 @@
 import Foundation
 
+protocol MetaLevelViewableDelegate: AnyObject {
+    func getViewableRegion() -> PositionedRectangle
+}
+
 class MetaLevel {
     static let defaultName: String = "MetaLevel1"
+    weak var viewableDelegate: MetaLevelViewableDelegate?
     var chunkDimensions: Int {
         ChunkNode.chunkDimensions
     }
@@ -48,8 +53,12 @@ extension MetaLevel {
     func worldToPositionWithinChunk(_ worldPosition: Point) -> Point {
         Point(x: worldPosition.x.modulo(chunkDimensions), y: worldPosition.y.modulo(chunkDimensions))
     }
+    
+    func worldRegionToChunkRegion(_ worldRegion: PositionedRectangle) -> PositionedRectangle {
+        
+    }
 
-    func getChunk(at worldPosition: Point) -> ChunkNode? {
+    func getChunk(at worldPosition: Point, createIfNotExists: Bool = false) -> ChunkNode? {
         // The most basic behavior of getChunk is that it
         // 1. searches `loadedChunks` for the chunk at the given position and returns it
         // 2. tries to load a chunk with the same identifier as the given position
@@ -62,13 +71,41 @@ extension MetaLevel {
             return foundChunk
         }
 
-        let loadedChunk: ChunkNode? = chunkStorage.loadChunk(identifier: chunkPosition.dataString)
-        loadedChunks[chunkPosition] = loadedChunk
-        return loadedChunk
+        if let loadedChunk: ChunkNode = chunkStorage.loadChunk(identifier: chunkPosition.dataString) {
+            loadedChunks[chunkPosition] = loadedChunk
+            return loadedChunk
+        }
+        
+        guard createIfNotExists else {
+            return nil
+        }
+        
+        let chunkNode = ChunkNode(identifier: chunkPosition)
+        
+        do {
+            try chunkStorage.saveChunk(chunkNode)
+        } catch {
+            return nil
+        }
+        
+        return chunkNode
+    }
+    
+    func unloadChunkNodes() {
+        guard let delegate = viewableDelegate else {
+            return
+        }
+        let viewableRegion = delegate.getViewableRegion()
+        
+        // Unload all chunks that are very far away from the viewable region
+        
+        for (position, loadedChunk) in loadedChunks {
+            
+        }
     }
 
-    func getTile(at worldPosition: Point) -> MetaTile? {
-        guard let chunk = getChunk(at: worldPosition) else {
+    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool = false) -> MetaTile? {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists) else {
             return nil
         }
         let positionWithinChunk = worldToPositionWithinChunk(worldPosition)

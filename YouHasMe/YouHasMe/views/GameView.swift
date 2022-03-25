@@ -15,7 +15,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .designing, .designingMeta, .playing:
+            case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
                 gameState.state = .mainmenu
             }
         }) {
@@ -30,6 +30,9 @@ struct GameView: View {
                 MetaLevelDesignerView(viewModel: metaLevelDesignerViewModel)
             case .playing:
                 LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
+            case .selectingMeta:
+                // TODO
+                LevelSelectionView(levelDesignerViewModel: levelDesignerViewModel)
             }
         }
     }
