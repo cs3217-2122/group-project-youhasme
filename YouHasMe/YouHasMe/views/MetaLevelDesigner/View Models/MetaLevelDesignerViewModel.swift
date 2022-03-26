@@ -22,7 +22,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
                 return
             }
             viewPosition = viewPosition.translate(by: floor)
-            print("floor \(floor) viewPos \(viewPosition)")
+//            print("floor \(floor) viewPos \(viewPosition)")
             cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
         }
     }
@@ -31,6 +31,15 @@ class MetaLevelDesignerViewModel: ObservableObject {
 
     convenience init() {
         self.init(currMetaLevel: MetaLevel())
+    }
+
+    convenience init(metaLevelURLData: URLListObject) {
+        let metaLevelStorage = MetaLevelStorage()
+        guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelURLData.name) else {
+            fatalError("should not be nil")
+        }
+
+        self.init(currMetaLevel: currMetaLevel)
     }
 
     init(currMetaLevel: MetaLevel) {
@@ -60,6 +69,7 @@ extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {
 // MARK: Persistence
 extension MetaLevelDesignerViewModel {
     func save() throws {
+        try currMetaLevel.saveLoadedChunks()
         try metaLevelStorage.saveMetaLevel(currMetaLevel)
     }
 }

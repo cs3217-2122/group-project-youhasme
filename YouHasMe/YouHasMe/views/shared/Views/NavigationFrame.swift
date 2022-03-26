@@ -10,19 +10,19 @@ import SwiftUI
 enum VerticalAlignment {
     case top
     case bottom
-    case middle
+    case center
 }
 
 enum HorizontalAlignment {
-    case leftSide
-    case rightSide
-    case middle
+    case leading
+    case trailing
+    case center
 }
 
 typealias Runnable = () -> Void
 struct NavigationFrame<Content: View>: ContainerView {
-    var verticalAlignment: VerticalAlignment = .middle
-    var horizontalAlignment: HorizontalAlignment = .middle
+    var verticalAlignment: VerticalAlignment = .center
+    var horizontalAlignment: HorizontalAlignment = .center
 
     init(content: @escaping () -> Content) {
         self.content = content
@@ -54,11 +54,11 @@ struct NavigationFrame<Content: View>: ContainerView {
                 Spacer()
             }
             HStack {
-                if horizontalAlignment != .leftSide {
+                if horizontalAlignment != .leading {
                     Spacer()
                 }
                 content()
-                if horizontalAlignment != .rightSide {
+                if horizontalAlignment != .trailing {
                     Spacer()
                 }
             }
@@ -71,7 +71,7 @@ struct NavigationFrame<Content: View>: ContainerView {
 
 struct NavigationFrame_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationFrame(verticalAlignment: .top, horizontalAlignment: .middle) {
+        NavigationFrame(verticalAlignment: .top, horizontalAlignment: .center) {
             Text("Inner text")
         }
     }

@@ -29,7 +29,7 @@ struct GridViewData {
     }
 }
 
-struct MetaLevelGridView: View {
+struct MetaLevelDesignerGridView: View {
     let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
 
     @ObservedObject var viewModel: MetaLevelDesignerViewModel

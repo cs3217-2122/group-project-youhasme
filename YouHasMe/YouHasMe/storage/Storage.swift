@@ -53,9 +53,9 @@ class Storage {
         do {
             let urls = try FileManager.default.contentsOfDirectory(
                 at: directory, includingPropertiesForKeys: nil, options: [])
-            let jsonUrls = urls.filter({ $0.pathExtension == fileExtension })
-            let filenames = jsonUrls.map { $0.deletingPathExtension().lastPathComponent }
-            return (jsonUrls, filenames)
+            let urlsWithSelectedFileExtension = urls.filter({ $0.pathExtension == fileExtension })
+            let filenames = urlsWithSelectedFileExtension.map { $0.deletingPathExtension().lastPathComponent }
+            return (urlsWithSelectedFileExtension, filenames)
         } catch {
             globalLogger.error(error.localizedDescription)
         }
@@ -168,6 +168,14 @@ class MetaLevelStorage: JSONStorage {
         try loadAndDecode(filename: name)
     }
 
+    func loadMetaLevel(name: String) -> MetaLevel? {
+        guard let persistableMetaLevel: PersistableMetaLevel = try? loadAndDecode(filename: name) else {
+            return nil
+        }
+
+        return MetaLevel.fromPersistable(persistableMetaLevel)
+    }
+
     func saveMetaLevel(_ metaLevel: MetaLevel) throws {
         try encodeAndSave(object: metaLevel.toPersistable(), filename: metaLevel.name)
     }
@@ -175,6 +183,7 @@ class MetaLevelStorage: JSONStorage {
     func getChunkStorage(for metaLevelName: String) throws -> ChunkStorage {
         try ChunkStorage(metaLevelDirectory: getDefaultDirectory().appendingPathComponent(metaLevelName))
     }
+
 }
 
 class ChunkStorage: JSONStorage {
@@ -197,6 +206,7 @@ class ChunkStorage: JSONStorage {
         guard let persistableChunk: PersistableChunkNode = loadChunk(identifier: identifier) else {
             return nil
         }
+
         return ChunkNode.fromPersistable(persistableChunk)
     }
 

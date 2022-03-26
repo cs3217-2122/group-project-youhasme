@@ -19,15 +19,20 @@ struct MainMenuView: View {
                 .padding()
             Group {
                 Button(action: {
+                    gameState.state = .selectingMeta
+                }) {
+                    Text("Select A Meta Level")
+                }.padding()
+                Button(action: {
                     gameState.state = .selecting
                 }) {
                     Text("Select A Level")
                 }.padding()
                 Button(action: {
-                    gameState.state = .designingMeta
+                    gameState.state = .designingMeta()
                 }) {
-                    Text("Design A MetaLevel")
-                }
+                    Text("Design A Meta Level")
+                }.padding()
                 Button(action: {
                     gameState.state = .designing
                 }) {

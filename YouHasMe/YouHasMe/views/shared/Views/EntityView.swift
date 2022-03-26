@@ -150,7 +150,6 @@ struct PaletteMetaEntityView: View {
         
         CellView(viewModel: viewModel)
             .onTapGesture {
-                let _ = print("tapped")
                 viewModel.select()
             }
             .onReceive(viewModel.shouldHighlightPublisher, perform: { shouldHighlight in

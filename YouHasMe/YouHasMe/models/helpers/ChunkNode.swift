@@ -259,7 +259,7 @@ class ChunkNode: AbstractChunkNode {
         )
     }
 
-    static var chunkDimensions = 256
+    static var chunkDimensions = 128
     var chunkStorage: ChunkStorage?
     var identifier: Point
     var chunkDimensions: Int {

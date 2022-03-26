@@ -39,3 +39,9 @@ extension Point: DataStringConvertible {
         "\(x)_\(y)"
     }
 }
+
+extension Point: CustomDebugStringConvertible {
+    var debugDescription: String {
+        "P(\(x), \(y))"
+    }
+}

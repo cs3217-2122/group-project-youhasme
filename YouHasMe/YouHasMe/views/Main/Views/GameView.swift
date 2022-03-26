@@ -8,10 +8,9 @@ import SwiftUI
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
-    @StateObject var metaLevelDesignerViewModel = MetaLevelDesignerViewModel()
 
     var body: some View {
-        NavigationFrame(verticalAlignment: .middle, horizontalAlignment: .middle, backHandler: {
+        NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: {
             switch gameState.state {
             case .mainmenu:
                 break
@@ -23,16 +22,15 @@ struct GameView: View {
             case .mainmenu:
                 MainMenuView()
             case .selecting:
-                LevelSelectionView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelSelectView(levelDesignerViewModel: levelDesignerViewModel)
             case .designing:
                 LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel)
             case .designingMeta:
-                MetaLevelDesignerView(viewModel: metaLevelDesignerViewModel)
+                MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
                 LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
             case .selectingMeta:
-                // TODO
-                LevelSelectionView(levelDesignerViewModel: levelDesignerViewModel)
+                MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
             }
         }
     }

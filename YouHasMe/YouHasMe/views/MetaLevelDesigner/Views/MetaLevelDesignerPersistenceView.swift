@@ -16,7 +16,6 @@ struct MetaLevelDesignerPersistenceView: View {
     @State var showSaveErrorAlert = false
     @State var showUnsavedChangesPrompt = false
     @State var loadSuccess = false
-    @State var startGame = false
 
     var body: some View {
         HStack {

@@ -8,7 +8,7 @@ struct Vector {
 
 extension Vector: CustomDebugStringConvertible {
     var debugDescription: String {
-        "(\(dx), \(dy))"
+        "V(\(dx), \(dy))"
     }
 }
 
