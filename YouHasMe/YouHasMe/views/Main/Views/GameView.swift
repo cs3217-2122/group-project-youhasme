@@ -10,14 +10,14 @@ struct GameView: View {
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
     var body: some View {
-        NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: {
+        NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: gameState.state == .mainmenu ? nil : ({
             switch gameState.state {
             case .mainmenu:
                 break
             case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
                 gameState.state = .mainmenu
             }
-        }) {
+        })) {
             switch gameState.state {
             case .mainmenu:
                 MainMenuView()

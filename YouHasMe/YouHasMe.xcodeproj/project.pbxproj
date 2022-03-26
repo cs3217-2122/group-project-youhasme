@@ -359,6 +359,15 @@
 			path = "View Models";
 			sourceTree = "<group>";
 		};
+		E56FE99627EEF21100EBE865 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
+				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		E573E95D27EA27BE000D10E4 /* logs */ = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +474,7 @@
 		E581F52D27ECD27E00CAC137 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				E56FE99627EEF21100EBE865 /* extensions */,
 				E56752FD27EEA86F0001305D /* Protocols */,
 				E56752FC27EEA8650001305D /* Views */,
 			);
@@ -486,8 +496,6 @@
 			children = (
 				E5BECBDD27E59E1000E3952D /* Array.swift */,
 				E5BECBE127E5B6EF00E3952D /* String.swift */,
-				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
-				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
 				E5563C4527E8E31B007D2E86 /* Double.swift */,
 				E581F52527ECBCD900CAC137 /* Int.swift */,
 			);
