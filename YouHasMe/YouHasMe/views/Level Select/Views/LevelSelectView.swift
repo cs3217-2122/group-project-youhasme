@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LevelSelectionView: View {
+struct LevelSelectView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     @EnvironmentObject var gameState: GameState
     var body: some View {
@@ -35,8 +35,8 @@ struct LevelSelectionView: View {
     }
 }
 
-//struct LevelSelectionView_Previews: PreviewProvider {
+// struct LevelSelectionView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        LevelSelectionView()
 //    }
-//}
+// }

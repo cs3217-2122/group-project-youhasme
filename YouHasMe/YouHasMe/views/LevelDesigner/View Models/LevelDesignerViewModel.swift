@@ -14,6 +14,10 @@ class LevelDesignerViewModel: ObservableObject {
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
 
+    convenience init() {
+        self.init(currLevel: Level())
+    }
+
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel
@@ -42,6 +46,10 @@ class LevelDesignerViewModel: ObservableObject {
         }
     }
 
+    func getEntityTypeAtPos(point: Point) -> EntityType? {
+        getEntityTypeAtPos(x: point.x, y: point.y)
+    }
+
     func removeEntityFromPos(x: Int, y: Int) {
         var tile = currLevelLayer.getTileAt(x: x, y: y)
         tile.entities = []
@@ -68,11 +76,11 @@ class LevelDesignerViewModel: ObservableObject {
         self.currLevel.resetLayerAtIndex(currLevelLayerIndex)
         self.currLevelLayer = currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
-    
+
     var unsavedChanges: Bool {
         currLevelLayer != currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
-    
+
     func selectLevel(level: Level) {
         self.currLevel = level
         self.currLevelLayer = level.baseLevel
@@ -80,14 +88,14 @@ class LevelDesignerViewModel: ObservableObject {
 //        currentlySelectedLevel.dirty = false
 //        state = .designing
     }
-    
+
     func createLevel() {
         self.currLevel = Level()
         self.currLevelLayerIndex = 0
         self.currLevelLayer = self.currLevel.baseLevel
 
     }
-    
+
     func resetFromPlay() {
         self.currLevelLayer = self.currLevel.baseLevel
     }
@@ -117,7 +125,7 @@ class LevelDesignerViewModel: ObservableObject {
             return "error saving level: \(error)"
         }
     }
-    
+
 //    func playLevel() {
 //        
 //    }
@@ -129,5 +137,16 @@ class LevelDesignerViewModel: ObservableObject {
         currLevel.setLevelLayerAtIndex(currLevelLayerIndex, value: currLevelLayer)
         updatedLevels.append(currLevel)
         return updatedLevels
+    }
+}
+
+// MARK: Child view models
+extension LevelDesignerViewModel {
+    func getTileViewModel(for entityType: EntityType) -> EntityViewModel {
+        EntityViewModel(entityType: entityType)
+    }
+
+    func getTileViewModel(at point: Point) -> EntityViewModel {
+        EntityViewModel(entityType: getEntityTypeAtPos(point: point))
     }
 }

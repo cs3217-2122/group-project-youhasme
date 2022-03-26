@@ -6,7 +6,7 @@ extension Array {
     /// - Parameters:
     ///   - repeatingFactory: A function producing a certain object of type `Element`.
     ///   - count: The number of times to invoke `repeatingFactory`, so that the array is of size `count`.
-    init(repeatingFactory: () -> Element, count: Int) {
+    init(repeatingFactory: @autoclosure () -> Element, count: Int) {
         self = []
         for _ in 0..<count {
             self.append(repeatingFactory())
@@ -23,5 +23,14 @@ extension Array where Element: Equatable {
 extension Array where Element: AnyObject {
     mutating func removeByIdentity(_ item: Element) {
         removeAll(where: { $0 === item })
+    }
+}
+
+// Random
+extension Array {
+    static func getRandomPermutation(in range: Range<Int>) -> [Int] {
+        var arr = [Int](range)
+        arr.shuffle()
+        return arr
     }
 }
