@@ -95,13 +95,17 @@ class MetaEntityViewModel: CellViewModel {
         self.tile = tile
         self.worldPosition = worldPosition
         
-        guard let tile = tile, !(tile.metaEntities.isEmpty) else {
+        guard let tile = tile else {
             super.init()
             return
         }
-        
-        // TODO: Allow stacking of multiple images
-        super.init(imageSource: metaEntityTypeToImageable(type: tile.metaEntities[0]))
+
+        if tile.metaEntities.isEmpty {
+            super.init()
+        } else {
+            // TODO: Allow stacking of multiple images
+            super.init(imageSource: metaEntityTypeToImageable(type: tile.metaEntities[0]))
+        }
         setupBindings()
     }
     
@@ -111,6 +115,10 @@ class MetaEntityViewModel: CellViewModel {
         }
 
         tile.$metaEntities.sink { [weak self] metaEntities in
+            guard !metaEntities.isEmpty else {
+                self?.imageSource = nil
+                return
+            }
             self?.imageSource = metaEntityTypeToImageable(type: metaEntities[0])
         }
         .store(in: &subscriptions)
@@ -120,7 +128,7 @@ class MetaEntityViewModel: CellViewModel {
         guard let delegate = delegate, let tile = tile else {
             return
         }
-        
+
         delegate.addSelectedEntity(to: tile)
     }
     
@@ -132,12 +140,6 @@ class MetaEntityViewModel: CellViewModel {
         delegate.removeEntity(from: tile)
     }
 }
-
-protocol PaletteMetaEntityViewModelDelegate: AnyObject {
-    func selectPaletteMetaEntity(_ metaEntity: MetaEntityType)
-    var selectedPaletteMetaEntityPublisher: AnyPublisher<MetaEntityType?, Never> { get }
-}
-
 
 struct PaletteMetaEntityView: View {
     var viewModel: PaletteMetaEntityViewModel
@@ -154,6 +156,11 @@ struct PaletteMetaEntityView: View {
             })
             .border(borderColor)
     }
+}
+
+protocol PaletteMetaEntityViewModelDelegate: AnyObject {
+    func selectPaletteMetaEntity(_ metaEntity: MetaEntityType)
+    var selectedPaletteMetaEntityPublisher: AnyPublisher<MetaEntityType?, Never> { get }
 }
 
 class PaletteMetaEntityViewModel: CellViewModel {
@@ -181,7 +188,6 @@ class PaletteMetaEntityViewModel: CellViewModel {
         guard let delegate = delegate else {
             return
         }
-        print("selecting")
         delegate.selectPaletteMetaEntity(metaEntity)
     }
     

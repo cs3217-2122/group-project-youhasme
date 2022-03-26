@@ -5,7 +5,7 @@ import Combine
 class MetaLevelDesignerViewModel: ObservableObject {
     // MARK: Palette
     @Published var selectedPaletteMetaEntity: MetaEntityType?
-    
+
     private var metaLevelStorage = MetaLevelStorage()
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
@@ -40,7 +40,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
     func translateView(by offset: CGVector) {
         cumulativeTranslation = cumulativeTranslation.add(with: offset)
     }
-    
+
     func getWorldPosition(at viewOffset: Vector) -> Point {
         viewPosition.translate(by: viewOffset)
     }
@@ -62,7 +62,7 @@ extension MetaLevelDesignerViewModel {
 // MARK: CRUD
 extension MetaLevelDesignerViewModel {
     func getTile(at viewOffset: Vector) -> MetaTile? {
-        return currMetaLevel.getTile(
+        currMetaLevel.getTile(
             at: viewPosition.translate(by: viewOffset),
             createChunkIfNotExists: true
         )
@@ -79,7 +79,7 @@ extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
     func selectPaletteMetaEntity(_ metaEntity: MetaEntityType) {
         selectedPaletteMetaEntity = metaEntity
     }
-    
+
     var selectedPaletteMetaEntityPublisher: AnyPublisher<MetaEntityType?, Never> {
         $selectedPaletteMetaEntity.eraseToAnyPublisher()
     }
@@ -90,10 +90,10 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelDelegate {
         guard let selectedPaletteMetaEntity = selectedPaletteMetaEntity else {
             return
         }
-        
+
         tile.metaEntities.append(selectedPaletteMetaEntity)
     }
-    
+
     func removeEntity(from tile: MetaTile) {
         tile.metaEntities.removeAll()
     }
@@ -114,7 +114,7 @@ extension MetaLevelDesignerViewModel {
 
         return toolbarViewModel
     }
-    
+
     func getPaletteMetaEntityViewModels() -> [PaletteMetaEntityViewModel] {
         MetaEntityType.allCases.map {
             let viewModel = PaletteMetaEntityViewModel(metaEntity: $0)

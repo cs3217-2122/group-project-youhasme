@@ -195,16 +195,14 @@
 		1E6B90C127E5B2A300161E63 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				E56752FA27EEA82B0001305D /* Game */,
+				E56752F827EEA8110001305D /* Level Select */,
+				E56752F627EEA7F60001305D /* Main */,
 				E581F52D27ECD27E00CAC137 /* shared */,
-				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
 				E5563C3127E8ADAC007D2E86 /* MetaLevelDesigner */,
 				1E6B90C227E5B2AD00161E63 /* LevelDesigner */,
 				1E6B90C527E5B43F00161E63 /* Entities.swift */,
-				1E96EB8C27E7254000321BEB /* MainMenuView.swift */,
 				1E96EB8E27E7255200321BEB /* GameState.swift */,
-				1E96EB9027E725DF00321BEB /* GameView.swift */,
-				1E96EB9227E7264100321BEB /* LevelSelectionView.swift */,
-				1E96EB9427E726CC00321BEB /* LevelPlayView.swift */,
 				E5563C3827E8B213007D2E86 /* ViewConstants.swift */,
 			);
 			path = views;
@@ -213,11 +211,8 @@
 		1E6B90C227E5B2AD00161E63 /* LevelDesigner */ = {
 			isa = PBXGroup;
 			children = (
-				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
-				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
-				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
-				1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */,
-				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
+				E56752F527EEA7E70001305D /* View Models */,
+				E56752F427EEA7D90001305D /* Views */,
 			);
 			path = LevelDesigner;
 			sourceTree = "<group>";
@@ -263,6 +258,91 @@
 				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
 			);
 			path = helpers;
+			sourceTree = "<group>";
+		};
+		E56752F427EEA7D90001305D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
+				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
+				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
+				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E56752F527EEA7E70001305D /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				1E6B90CD27E5B8AF00161E63 /* LevelDesignerViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E56752F627EEA7F60001305D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E56752F727EEA8000001305D /* Views */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		E56752F727EEA8000001305D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E96EB8C27E7254000321BEB /* MainMenuView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E56752F827EEA8110001305D /* Level Select */ = {
+			isa = PBXGroup;
+			children = (
+				E56752F927EEA81D0001305D /* Views */,
+			);
+			path = "Level Select";
+			sourceTree = "<group>";
+		};
+		E56752F927EEA81D0001305D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E96EB9227E7264100321BEB /* LevelSelectionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E56752FA27EEA82B0001305D /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				E56752FB27EEA8330001305D /* Views */,
+			);
+			path = Game;
+			sourceTree = "<group>";
+		};
+		E56752FB27EEA8330001305D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1E96EB9427E726CC00321BEB /* LevelPlayView.swift */,
+				1E96EB9027E725DF00321BEB /* GameView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E56752FC27EEA8650001305D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
+				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E56752FD27EEA86F0001305D /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				E581F52E27ECD29800CAC137 /* ContainerView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		E573E95D27EA27BE000D10E4 /* logs */ = {
@@ -371,8 +451,8 @@
 		E581F52D27ECD27E00CAC137 /* shared */ = {
 			isa = PBXGroup;
 			children = (
-				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
-				E581F52E27ECD29800CAC137 /* ContainerView.swift */,
+				E56752FD27EEA86F0001305D /* Protocols */,
+				E56752FC27EEA8650001305D /* Views */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -539,7 +619,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

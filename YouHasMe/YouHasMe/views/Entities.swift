@@ -18,7 +18,6 @@ let demoTypes: [EntityType] = [
     EntityTypes.NounInstances.wall
 ]
 
-
 func entityTypeToImageString(type: EntityType) -> String {
     switch type {
     case EntityTypes.Nouns.baba:

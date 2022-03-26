@@ -94,17 +94,17 @@ extension MetaLevel {
         }
 
         let chunkNode = ChunkNode(identifier: chunkPosition)
-        
+
         do {
             try chunkStorage.saveChunk(chunkNode)
         } catch {
             fatalError("unexpected save failure")
         }
-        
+
         loadedChunks[chunkPosition] = chunkNode
         return chunkNode
     }
-    
+
     func unloadChunkNodes() {
         guard let delegate = viewableDelegate else {
             return
@@ -170,7 +170,7 @@ extension MetaLevel {
 class MetaTile {
     @Published var metaEntities: [MetaEntityType] = []
     init() {}
-    
+
     init(metaEntities: [MetaEntityType]) {
         self.metaEntities = metaEntities
     }
