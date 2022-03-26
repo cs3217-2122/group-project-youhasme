@@ -43,4 +43,12 @@ extension Double {
     func absoluteFloor() -> Int {
         signum() * Int(floor(Double(signum()) * self))
     }
+
+    func additiveInverse() -> Double {
+        -self
+    }
+
+    func multiplicativeInverse() -> Double {
+        1 / self
+    }
 }

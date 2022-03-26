@@ -37,6 +37,8 @@ extension Imageable {
 
 class CellViewModel: ObservableObject {
     @Published var imageSource: Imageable?
+    // Remark: Not quite sure how swiftui magic works, as publishers act like a willSet instead
+    // of a didSet, it is unknown how image updates correctly when imageSource updates
     var image: Image? {
         imageSource?.toImage()
     }

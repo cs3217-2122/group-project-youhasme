@@ -14,7 +14,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
     @Published var currMetaLevel: MetaLevel
     var hasUnsavedChanges = false
     /// The view position relative to the coordinate system of the current meta level.
-    var viewPosition: Point
+    @Published var viewPosition: Point
     private var cumulativeTranslation: CGVector = .zero {
         didSet {
             let floor = cumulativeTranslation.absoluteFloor()
@@ -22,6 +22,7 @@ class MetaLevelDesignerViewModel: ObservableObject {
                 return
             }
             viewPosition = viewPosition.translate(by: floor)
+            print("floor \(floor) viewPos \(viewPosition)")
             cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
         }
     }
@@ -35,6 +36,10 @@ class MetaLevelDesignerViewModel: ObservableObject {
     init(currMetaLevel: MetaLevel) {
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition
+    }
+
+    func endTranslateView() {
+        cumulativeTranslation = .zero
     }
 
     func translateView(by offset: CGVector) {

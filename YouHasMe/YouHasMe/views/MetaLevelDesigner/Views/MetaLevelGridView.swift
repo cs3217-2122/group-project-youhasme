@@ -30,8 +30,9 @@ struct GridViewData {
 }
 
 struct MetaLevelGridView: View {
-    @ObservedObject var viewModel: MetaLevelDesignerViewModel
+    let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
 
+    @ObservedObject var viewModel: MetaLevelDesignerViewModel
     @State var lastDragLocation: CGPoint?
 
     var body: some View {
@@ -63,10 +64,16 @@ struct MetaLevelGridView: View {
                     let currentDragLocation = value.location
 
                     if let lastDragLocation = lastDragLocation {
-                        let translation = CGVector(from: lastDragLocation, to: currentDragLocation)
+                        let translation =
+                            CGVector(from: currentDragLocation, to: lastDragLocation)
+                            .scaleBy(factor: inverseDragThreshold)
                         viewModel.translateView(by: translation)
                     }
                     lastDragLocation = value.location
+                }
+                .onEnded { _ in
+                    lastDragLocation = nil
+                    viewModel.endTranslateView()
                 }
         )
 
