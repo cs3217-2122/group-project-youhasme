@@ -19,10 +19,12 @@ protocol GameMechanic {
 
 // Represents the state of a level layer while it is being updated by the game engine
 struct LevelLayerState {
+    var dimensions: Rectangle
     var entityStates: [EntityState] = []
     // var gameState: GameState
 
     init(levelLayer: LevelLayer) {
+        dimensions = levelLayer.dimensions
         for y in 0..<levelLayer.dimensions.height {
             for x in 0..<levelLayer.dimensions.width {
                 let entities = levelLayer.getTileAt(x: x, y: y).entities
@@ -55,12 +57,28 @@ struct EntityState: Hashable {
 
     // Returns next action to be performed or nil if there is no such action
     mutating func popAction() -> EntityAction? {
-        let nextIntent = intents.first { !$0.isRejected } // First unrejected intent
+        let nextIntent = intents.first { !$0.isRejected }  // First unrejected intent
         guard let intent = nextIntent else {
-            return nil // No unrejected actions
+            return nil  // No unrejected actions
         }
         intents.remove(intent)
         return intent.action
+    }
+
+    func getActions() -> [EntityAction] {
+        intents.map { $0.action }
+    }
+
+    // Rejects action if present in intents, does nothing otherwise
+    mutating func reject(action: EntityAction) {
+        let newIntents: [EntityIntent] = intents.map {
+            var intent = $0
+            if intent.action == action {
+                intent.isRejected = true
+            }
+            return intent
+        }
+        intents = Set(newIntents)
     }
 }
 

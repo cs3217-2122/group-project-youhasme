@@ -6,7 +6,7 @@
 //
 
 struct GameEngine {
-    let gameMechanics = [PlayerMoveMechanic()]
+    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic()]
     let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer

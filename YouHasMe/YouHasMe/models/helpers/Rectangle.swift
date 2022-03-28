@@ -16,6 +16,10 @@ extension Rectangle {
     var numCells: Int {
         width * height
     }
+
+    func isWithinBounds(x: Int, y: Int) -> Bool {
+        x >= 0 && y >= 0 && x < width && y < height
+    }
 }
 
 struct PositionedRectangle {

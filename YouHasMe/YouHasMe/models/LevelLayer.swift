@@ -31,10 +31,6 @@ extension AbstractLevelLayer {
     mutating func setTileAt(x: Int, y: Int, tile: TileType) {
         tiles[x + y * dimensions.width] = tile
     }
-
-    func isWithinBounds(x: Int, y: Int) -> Bool {
-        x >= 0 && y >= 0 && x < dimensions.width && y < dimensions.height
-    }
 }
 
 struct LevelLayer: AbstractLevelLayer {
