@@ -14,6 +14,6 @@ protocol GameMechanic {
     //  - update: What triggered the update (e.g. user moves right)
     //  - levelLayer: Current game state
     // Returns a map of location (x, y , position in tile) of entities to their actions
-    func apply(update: UpdateAction, levelLayer: LevelLayer) -> [Location: [EntityAction]]
+    func apply(update: UpdateType, levelLayer: LevelLayer) -> [Location: [EntityAction]]
 
 }

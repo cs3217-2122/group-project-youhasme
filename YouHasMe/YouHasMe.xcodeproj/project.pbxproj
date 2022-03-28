@@ -25,7 +25,7 @@
 		B07AA62C27E658F200918E71 /* MoveMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62727E658F200918E71 /* MoveMechanic.swift */; };
 		B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62827E658F200918E71 /* EntityAction.swift */; };
 		B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62927E658F200918E71 /* GameEngine.swift */; };
-		B07AA62F27E658F200918E71 /* UpdateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62A27E658F200918E71 /* UpdateAction.swift */; };
+		B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62A27E658F200918E71 /* UpdateType.swift */; };
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
@@ -115,7 +115,7 @@
 		B07AA62727E658F200918E71 /* MoveMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveMechanic.swift; sourceTree = "<group>"; };
 		B07AA62827E658F200918E71 /* EntityAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAction.swift; sourceTree = "<group>"; };
 		B07AA62927E658F200918E71 /* GameEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameEngine.swift; sourceTree = "<group>"; };
-		B07AA62A27E658F200918E71 /* UpdateAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateAction.swift; sourceTree = "<group>"; };
+		B07AA62A27E658F200918E71 /* UpdateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateType.swift; sourceTree = "<group>"; };
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
@@ -237,7 +237,7 @@
 				B07AA62727E658F200918E71 /* MoveMechanic.swift */,
 				B07AA62827E658F200918E71 /* EntityAction.swift */,
 				B07AA62927E658F200918E71 /* GameEngine.swift */,
-				B07AA62A27E658F200918E71 /* UpdateAction.swift */,
+				B07AA62A27E658F200918E71 /* UpdateType.swift */,
 				B07AA62B27E658F200918E71 /* GameMechanic.swift */,
 			);
 			path = GameEngine;
@@ -653,7 +653,7 @@
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
-				B07AA62F27E658F200918E71 /* UpdateAction.swift in Sources */,
+				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
@@ -883,7 +883,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe;
+				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -912,7 +912,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe;
+				PRODUCT_BUNDLE_IDENTIFIER = YouHasMe2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

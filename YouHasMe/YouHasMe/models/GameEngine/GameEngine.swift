@@ -15,9 +15,8 @@ struct GameEngine {
     }
 
     // Updates game state given action
-     mutating func update(action: UpdateAction) {
+     mutating func update(action: UpdateType) {
         var updates: [Location: [EntityAction]] = [:]  // Map of coordinates of entity to actions
-         print(action)
         // Get updates of all mechanics
         for mechanic in gameMechanics {
             let newUpdates = mechanic.apply(update: action, levelLayer: levelLayer)
