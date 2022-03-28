@@ -234,6 +234,7 @@
 		B07AA62627E658F200918E71 /* GameEngine */ = {
 			isa = PBXGroup;
 			children = (
+				B06FEA0227E73D58005A3D1B /* Location.swift */,
 				B07AA62727E658F200918E71 /* MoveMechanic.swift */,
 				B07AA62827E658F200918E71 /* EntityAction.swift */,
 				B07AA62927E658F200918E71 /* GameEngine.swift */,
@@ -444,7 +445,6 @@
 				E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */,
 				E57ACB4527DC948400F73B27 /* Outlet.swift */,
 				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
-				B06FEA0227E73D58005A3D1B /* Location.swift */,
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 			);
 			path = models;

@@ -1,6 +1,6 @@
 import Foundation
 
-enum Behaviour: Equatable {
+enum Behaviour: Hashable {
     case property(Property)
     case bIs(Noun)
     case bHas(Noun)
