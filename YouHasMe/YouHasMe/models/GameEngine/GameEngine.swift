@@ -7,11 +7,12 @@
 
 struct GameEngine {
     let gameMechanics = [MoveMechanic()]
+    let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer
 
     init(levelLayer: LevelLayer) {
-        self.levelLayer = RuleEngine().applyRules(to: levelLayer)
+        self.levelLayer = ruleEngine.applyRules(to: levelLayer)
     }
 
     // Updates game state given action
@@ -46,6 +47,6 @@ struct GameEngine {
             }
         }
 
-        levelLayer = RuleEngine().applyRules(to: newLayer)
+        levelLayer = ruleEngine.applyRules(to: newLayer)
     }
 }
