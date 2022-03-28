@@ -51,20 +51,6 @@ struct LevelLayer: AbstractLevelLayer {
         tiles[x + y * dimensions.width].entities.append(entity)
     }
 
-    // Returns locations of entities with specified behaviour
-    func getLocationsOf(behaviour: Behaviour) -> Set<Location> {
-        var locations: Set<Location> = []
-        for y in 0..<dimensions.height {
-            for x in 0..<dimensions.width {
-                let entities = getTileAt(x: x, y: y).entities
-                for i in 0..<entities.count where entities[i].activeBehaviours.contains(behaviour) {
-                    locations.insert(Location(x: x, y: y, z: i))
-                }
-            }
-        }
-        return locations
-    }
-
     func getAbstractRepresentation() -> EntityBlock {
         var grid: EntityBlock = Array(
             repeating: Array(repeating: nil, count: dimensions.width),

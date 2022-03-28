@@ -1,40 +1,32 @@
 //
-//  MoveSystem.swift
+//  PlayerMoveMechanic.swift
 //  YouHasMe
 //
 //  Created by wayne on 19/3/22.
 //
 
 // Represents player controlled movement mechanic
-struct MoveMechanic: GameMechanic {
+struct PlayerMoveMechanic: GameMechanic {
 
-    // Applies player controlled movement mechanic to levelLayer
+    // Applies player controlled movement mechanic to current state
     //
     // Parameters:
     //  - update: What triggered the update (e.g. user moves right)
-    //  - levelLayer: Current game state
-    // Returns a map of location (x, y , position in tile) of entities to their actions
-    func apply(update: UpdateType, levelLayer: LevelLayer) -> [Location: [EntityAction]] {
+    //  - state: Current game state
+    // Returns new state containing updates triggered by mechanic
+    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState {
         let (dx, dy) = update.getMovement()
         guard dx != 0 || dy != 0 else {
-            return [:]
+            return state  // Return original state if no movement
         }
 
-        let youLocations = levelLayer.getLocationsOf(behaviour: .property(.you))  // Coordinates of YOU blocks
-
-        // Get coordinates of blocks that are moved
-        var locationsMoved: Set<Location> = []
-        for location in youLocations {  // For each you block
-            let newLocations = getMovedByYou(levelLayer: levelLayer, youLocation: location, dy: dy, dx: dx)
-            locationsMoved = locationsMoved.union(newLocations)
+        // Move all you blocks
+        var newState = state
+        for (i, entityState) in state.entityStates.enumerated() where entityState.has(behaviour: .property(.you)) {
+            newState.entityStates[i].add(action: .move(dx: dx, dy: dy))
         }
 
-        // Return map of coordinates to move action
-        var actions: [Location: [EntityAction]] = [:]
-        for location in locationsMoved {
-            actions[location] = [.move(dx: dx, dy: dy)]
-        }
-        return actions
+        return newState
     }
 
     // Get coordinates of line of blocks moved by a YOU block

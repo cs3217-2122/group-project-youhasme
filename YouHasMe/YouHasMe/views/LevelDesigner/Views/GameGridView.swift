@@ -44,7 +44,7 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.update(action: updateAction)
+                gameEngine.step(action: updateAction)
                 levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
             }
     }

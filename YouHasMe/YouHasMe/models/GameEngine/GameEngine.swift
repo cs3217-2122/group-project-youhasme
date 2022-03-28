@@ -6,7 +6,7 @@
 //
 
 struct GameEngine {
-    let gameMechanics = [MoveMechanic()]
+    let gameMechanics = [PlayerMoveMechanic()]
     let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer
@@ -16,34 +16,21 @@ struct GameEngine {
     }
 
     // Updates game state given action
-     mutating func update(action: UpdateType) {
-        var updates: [Location: [EntityAction]] = [:]  // Map of coordinates of entity to actions
-        // Get updates of all mechanics
+    mutating func step(action: UpdateType) {
+        var state = LevelLayerState(levelLayer: levelLayer)
         for mechanic in gameMechanics {
-            let newUpdates = mechanic.apply(update: action, levelLayer: levelLayer)
-            updates.merge(newUpdates, uniquingKeysWith: { $0 + $1 })
+            state = mechanic.apply(update: action, state: state)
         }
 
         // Apply updates
-        var newLayer = levelLayer
-        // Copy unchanged entities
-        for r in 0..<levelLayer.dimensions.height {
-            for c in 0..<levelLayer.dimensions.width {
-                let entities = levelLayer.getTileAt(x: c, y: r).entities
-                var newTile = Tile()
-                for i in 0..<entities.count where updates[Location(x: c, y: r, z: i)] == nil {
-                    newTile.entities.append(entities[i])
-                }
-                newLayer.setTileAt(x: c, y: r, tile: newTile)
-            }
-        }
-        // Add changed entities
-        for (location, actions) in updates {
-            let entity = levelLayer.getTileAt(x: location.x, y: location.y).entities[location.z]
-            for action in actions {
-                if case let .move(dx, dy) = action {  // If we are moving entity
-                    newLayer.add(entity: entity, x: location.x + dx, y: location.y + dy)
-                }
+        var newLayer = LevelLayer(dimensions: levelLayer.dimensions)
+        for entityState in state.entityStates {
+            var cur = entityState
+            let location = cur.location
+            if case let .move(dx, dy) = cur.popAction() {  // If we are moving entity
+                newLayer.add(entity: cur.entity, x: location.x + dx, y: location.y + dy)
+            } else {
+                newLayer.add(entity: cur.entity, x: location.x, y: location.y)
             }
         }
 
