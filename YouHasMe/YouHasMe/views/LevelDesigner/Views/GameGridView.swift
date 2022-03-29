@@ -27,7 +27,7 @@ struct GameGridView: View {
                 guard gameState.state == .playing else {
                     return
                 }
-                var updateAction: UpdateAction = .tick
+                var updateAction: UpdateType = .tick
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height
                 if abs(horizontalAmount) > abs(verticalAmount) {
@@ -44,7 +44,7 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.update(action: updateAction)
+                gameEngine.step(action: updateAction)
                 levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
             }
     }

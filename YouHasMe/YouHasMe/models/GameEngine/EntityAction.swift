@@ -6,7 +6,7 @@
 //
 
 // Represents what happens to entity after updating game state
-enum EntityAction {
+enum EntityAction: Hashable {
     case move(dx: Int, dy: Int)  // Move by (dx, dy)
     case destroy  // Remove from level
     case win
