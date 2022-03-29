@@ -17,10 +17,10 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 2, y: 0)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
         levelLayer = RuleEngine().applyRules(to: levelLayer)
-        //print(levelLayer)
+        // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.step(action: .moveDown)
-        //print(gameEngine.levelLayer)
+        // print(gameEngine.levelLayer)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
 
@@ -39,10 +39,10 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 4, y: 2)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
-        //print(levelLayer)
+        // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.step(action: .moveRight)
-        //print(gameEngine.levelLayer)
+        // print(gameEngine.levelLayer)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
     }
 
@@ -60,7 +60,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
-        //print(levelLayer)
+        // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.step(action: .tick)
         XCTAssertEqual(gameEngine.gameStatus, .win)
