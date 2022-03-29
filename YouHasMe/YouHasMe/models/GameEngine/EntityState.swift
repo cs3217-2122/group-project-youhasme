@@ -23,7 +23,7 @@ struct EntityState: Hashable {
         intents.insert(EntityIntent(action: action))
     }
 
-    // Returns next action to be performed or nil if there is no such action
+    // Returns next unrejected action to be performed or nil if there is no such action
     mutating func popAction() -> EntityAction? {
         let nextIntent = intents.first { !$0.isRejected }  // First unrejected intent
         guard let intent = nextIntent else {
