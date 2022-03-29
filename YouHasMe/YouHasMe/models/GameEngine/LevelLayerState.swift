@@ -8,8 +8,8 @@
 // Represents the state of a level layer while it is being updated by the game engine
 struct LevelLayerState: Equatable {
     var dimensions: Rectangle
+    var gameStatus: GameStatus = .inProgress
     var entityStates: [EntityState] = []
-    // var gameState: GameState
 
     init(levelLayer: LevelLayer) {
         dimensions = levelLayer.dimensions

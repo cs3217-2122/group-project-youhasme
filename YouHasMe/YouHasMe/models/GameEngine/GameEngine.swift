@@ -10,6 +10,7 @@ struct GameEngine {
     let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer
+    var gameStatus: GameStatus = .inProgress
 
     init(levelLayer: LevelLayer) {
         self.levelLayer = ruleEngine.applyRules(to: levelLayer)
