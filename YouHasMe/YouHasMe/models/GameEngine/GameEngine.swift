@@ -6,22 +6,69 @@
 //
 
 struct GameEngine {
-    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic()]
-    let ruleEngine = RuleEngine()
+    private let gameMechanics: [GameMechanic] = [
+        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(),
+    ]
+    private let ruleEngine = RuleEngine()
 
-    var levelLayer: LevelLayer
-    var gameStatus: GameStatus = .inProgress
+    private(set) var game: Game  // Current game state
+
+    private(set) var status: GameEngineStatus = .running
+    enum GameEngineStatus {
+        case running
+        case infiniteLoop  // Player has attempted to create infinite loop
+    }
 
     init(levelLayer: LevelLayer) {
-        self.levelLayer = ruleEngine.applyRules(to: levelLayer)
+        game = Game(levelLayer: ruleEngine.applyRules(to: levelLayer))
     }
 
     // Updates game state given action
-    mutating func step(action: UpdateType) {
-        let state = applyMechanics(action: action)
+    mutating func apply(action: UpdateType) {
+        status = .running
+        // Repeatedly run simulation step until no more updates or infinite loop detected
+        var previousStates = [game]
+        var nextAction = action
+        while true {
+            let newState = step(game: previousStates.last ?? game, action: nextAction)
+            if newState == previousStates.last {  // If reached steady state
+                game = newState
+                return
+            } else if previousStates.contains(newState) {  // If returning to earlier states
+                status = .infiniteLoop
+                return
+            }
+            previousStates.append(newState)
+            nextAction = .tick  // Apply .tick after first action
+        }
+    }
 
-        // Apply updates
-        var newLayer = LevelLayer(dimensions: levelLayer.dimensions)
+    // Runs single step of simulation and returns new game state
+    private func step(game: Game, action: UpdateType) -> Game {
+        var newGame = game
+        let state = applyMechanics(action: action, levelLayer: game.levelLayer)  // Get updates
+        newGame.levelLayer = resolveActions(in: state)  // Apply updates
+        newGame.gameStatus = state.gameStatus
+        return newGame
+    }
+
+    // Applies mechanics to level layer and returns resulting state with entities and their actions
+    private func applyMechanics(action: UpdateType, levelLayer: LevelLayer) -> LevelLayerState {
+        var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
+        var oldState = curState
+        // Apply all mechanics until there are no more changes to state (all mechanics agree on next set of actions)
+        repeat {
+            oldState = curState
+            for mechanic in gameMechanics {
+                curState = mechanic.apply(update: action, state: curState)
+            }
+        } while curState != oldState
+        return curState
+    }
+
+    // Applies actions and returns new level layer
+    private func resolveActions(in state: LevelLayerState) -> LevelLayer {
+        var newLayer = LevelLayer(dimensions: game.levelLayer.dimensions)
         for entityState in state.entityStates {
             var cur = entityState
             let location = cur.location
@@ -31,21 +78,6 @@ struct GameEngine {
                 newLayer.add(entity: cur.entity, x: location.x, y: location.y)
             }
         }
-        levelLayer = ruleEngine.applyRules(to: newLayer)
-        gameStatus = state.gameStatus
-    }
-
-    // Applies mechanics to level layer and returns resulting state with entities and their actions
-    private func applyMechanics(action: UpdateType) -> LevelLayerState {
-        var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
-        var oldState = curState
-        // Apply all mechanics until there are no more changes to state
-        repeat {
-            oldState = curState
-            for mechanic in gameMechanics {
-                curState = mechanic.apply(update: action, state: curState)
-            }
-        } while curState != oldState
-        return curState
+        return ruleEngine.applyRules(to: newLayer)
     }
 }

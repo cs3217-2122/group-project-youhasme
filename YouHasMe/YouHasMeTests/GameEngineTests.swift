@@ -19,9 +19,9 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.step(action: .moveDown)
+        gameEngine.apply(action: .moveDown)
         // print(gameEngine.levelLayer)
-        XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
+        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
 
     func testComplex() throws {
@@ -41,9 +41,9 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.step(action: .moveRight)
+        gameEngine.apply(action: .moveRight)
         // print(gameEngine.levelLayer)
-        XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
+        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
     }
 
     func testWin() throws {
@@ -56,13 +56,13 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 1)
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.win), x: 2, y: 1)
 
+        levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 1, y: 3)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.flag), x: 2, y: 3)
-        levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.step(action: .tick)
-        XCTAssertEqual(gameEngine.gameStatus, .win)
+        gameEngine.apply(action: .moveRight)
+        XCTAssertEqual(gameEngine.game.gameStatus, .win)
     }
 }

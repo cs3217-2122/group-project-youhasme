@@ -45,9 +45,9 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.step(action: updateAction)
-                showingWinAlert = gameEngine.gameStatus == .win
-                levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                gameEngine.apply(action: updateAction)
+                showingWinAlert = gameEngine.game.gameStatus == .win
+                levelDesignerViewModel.currLevelLayer = gameEngine.game.levelLayer
             }
     }
 
