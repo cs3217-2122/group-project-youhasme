@@ -12,13 +12,16 @@ let demoTypes: [EntityType] = [
     EntityTypes.Nouns.baba,
     EntityTypes.Nouns.wall,
     EntityTypes.Nouns.flag,
+    EntityTypes.Nouns.box,
     EntityTypes.Verbs.vIs,
     EntityTypes.Properties.you,
     EntityTypes.Properties.push,
+    EntityTypes.Properties.stop,
     EntityTypes.Properties.win,
     EntityTypes.NounInstances.baba,
     EntityTypes.NounInstances.wall,
-    EntityTypes.NounInstances.flag
+    EntityTypes.NounInstances.flag,
+    EntityTypes.NounInstances.box
 ]
 
 func entityTypeToImageString(type: EntityType) -> String {
@@ -29,12 +32,16 @@ func entityTypeToImageString(type: EntityType) -> String {
         return "wall_text"
     case EntityTypes.Nouns.flag:
         return "flag_text"
+    case EntityTypes.Nouns.box:
+        return "box_text"
     case EntityTypes.Verbs.vIs:
         return "is"
     case EntityTypes.Properties.you:
         return "you"
     case EntityTypes.Properties.push:
         return "push"
+    case EntityTypes.Properties.stop:
+        return "stop"
     case EntityTypes.Properties.win:
         return "win"
     case EntityTypes.NounInstances.baba:
@@ -43,6 +50,8 @@ func entityTypeToImageString(type: EntityType) -> String {
         return "wall"
     case EntityTypes.NounInstances.flag:
         return "flag"
+    case EntityTypes.NounInstances.box:
+        return "box"
     default:
         return "question"
     }

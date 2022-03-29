@@ -7,7 +7,7 @@
 
 struct GameEngine {
     private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(),
+        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic()
     ]
     private let ruleEngine = RuleEngine()
 

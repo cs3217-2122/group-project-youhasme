@@ -27,6 +27,7 @@
 		B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD227F2FFD300F10324 /* GameStatus.swift */; };
 		B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD427F303D900F10324 /* WinMechanic.swift */; };
 		B05687DF27F36CF00046C26C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05687DE27F36CF00046C26C /* Game.swift */; };
+		B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05687E027F377DC0046C26C /* StopMechanic.swift */; };
 		B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */; };
 		B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3927F219B1002EC0C3 /* PushMechanic.swift */; };
 		B06FEA0327E73D58005A3D1B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FEA0227E73D58005A3D1B /* Location.swift */; };
@@ -125,6 +126,7 @@
 		B0562DD227F2FFD300F10324 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
 		B0562DD427F303D900F10324 /* WinMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinMechanic.swift; sourceTree = "<group>"; };
 		B05687DE27F36CF00046C26C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		B05687E027F377DC0046C26C /* StopMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMechanic.swift; sourceTree = "<group>"; };
 		B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryMechanic.swift; sourceTree = "<group>"; };
 		B0592D3927F219B1002EC0C3 /* PushMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushMechanic.swift; sourceTree = "<group>"; };
 		B06FEA0227E73D58005A3D1B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 				B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */,
 				B0592D3927F219B1002EC0C3 /* PushMechanic.swift */,
 				B0562DD427F303D900F10324 /* WinMechanic.swift */,
+				B05687E027F377DC0046C26C /* StopMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
+				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,

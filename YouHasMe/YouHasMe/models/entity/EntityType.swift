@@ -22,9 +22,10 @@ struct EntityTypes {
         static var flag = EntityType(classification: .nounInstance(.flag))
         static var wall = EntityType(classification: .nounInstance(.wall))
         static var skull = EntityType(classification: .nounInstance(.skull))
+        static var box = EntityType(classification: .nounInstance(.box))
 
         static func getAllNounInstances() -> [EntityType] {
-            [NounInstances.baba, NounInstances.flag, NounInstances.wall, NounInstances.skull]
+            [NounInstances.baba, NounInstances.flag, NounInstances.wall, NounInstances.skull, NounInstances.box]
         }
     }
 
@@ -33,10 +34,11 @@ struct EntityTypes {
         static var flag = EntityType(classification: .noun(.flag))
         static var wall = EntityType(classification: .noun(.wall))
         static var skull = EntityType(classification: .noun(.skull))
+        static var box = EntityType(classification: .noun(.box))
         static var word = EntityType(classification: .noun(.word))
 
         static func getAllNouns() -> [EntityType] {
-            [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull, Nouns.word]
+            [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull, Nouns.box, Nouns.word]
         }
     }
 
