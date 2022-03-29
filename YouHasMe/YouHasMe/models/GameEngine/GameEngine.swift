@@ -6,7 +6,7 @@
 //
 
 struct GameEngine {
-    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
+    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic()]
     let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer
@@ -31,8 +31,8 @@ struct GameEngine {
                 newLayer.add(entity: cur.entity, x: location.x, y: location.y)
             }
         }
-
         levelLayer = ruleEngine.applyRules(to: newLayer)
+        gameStatus = state.gameStatus
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions

@@ -23,4 +23,11 @@ struct LevelLayerState: Equatable {
             }
         }
     }
+
+    // Returns entityStates of entities with specified behaviour
+    func entitiesWith(behaviour: Behaviour) -> [EntityState] {
+        entityStates.filter {
+            $0.has(behaviour: behaviour)
+        }
+    }
 }

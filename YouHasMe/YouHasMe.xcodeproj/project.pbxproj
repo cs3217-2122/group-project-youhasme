@@ -25,6 +25,7 @@
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
 		B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD227F2FFD300F10324 /* GameStatus.swift */; };
+		B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD427F303D900F10324 /* WinMechanic.swift */; };
 		B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */; };
 		B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3927F219B1002EC0C3 /* PushMechanic.swift */; };
 		B06FEA0327E73D58005A3D1B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FEA0227E73D58005A3D1B /* Location.swift */; };
@@ -121,6 +122,7 @@
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
 		B0562DD227F2FFD300F10324 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
+		B0562DD427F303D900F10324 /* WinMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinMechanic.swift; sourceTree = "<group>"; };
 		B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryMechanic.swift; sourceTree = "<group>"; };
 		B0592D3927F219B1002EC0C3 /* PushMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushMechanic.swift; sourceTree = "<group>"; };
 		B06FEA0227E73D58005A3D1B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				B07AA62727E658F200918E71 /* PlayerMoveMechanic.swift */,
 				B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */,
 				B0592D3927F219B1002EC0C3 /* PushMechanic.swift */,
+				B0562DD427F303D900F10324 /* WinMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -693,6 +696,7 @@
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
