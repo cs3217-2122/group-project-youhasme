@@ -17,14 +17,7 @@ struct GameEngine {
 
     // Updates game state given action
     mutating func step(action: UpdateType) {
-        var state = LevelLayerState(levelLayer: levelLayer)
-        var oldState = state
-        repeat {
-            oldState = state
-            for mechanic in gameMechanics {
-                state = mechanic.apply(update: action, state: state)
-            }
-        } while state != oldState
+        let state = applyMechanics(action: action)
 
         // Apply updates
         var newLayer = LevelLayer(dimensions: levelLayer.dimensions)
@@ -39,5 +32,19 @@ struct GameEngine {
         }
 
         levelLayer = ruleEngine.applyRules(to: newLayer)
+    }
+
+    // Applies mechanics to level layer and returns resulting state with entities and their actions
+    private func applyMechanics(action: UpdateType) -> LevelLayerState {
+        var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
+        var oldState = curState
+        // Apply all mechanics until there are no more changes to state
+        repeat {
+            oldState = curState
+            for mechanic in gameMechanics {
+                curState = mechanic.apply(update: action, state: curState)
+            }
+        } while curState != oldState
+        return curState
     }
 }

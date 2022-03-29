@@ -21,6 +21,9 @@
 		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
 		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
+		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
+		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
+		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
 		B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */; };
 		B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3927F219B1002EC0C3 /* PushMechanic.swift */; };
 		B06FEA0327E73D58005A3D1B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FEA0227E73D58005A3D1B /* Location.swift */; };
@@ -113,6 +116,9 @@
 		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
 		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
+		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
+		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
+		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
 		B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryMechanic.swift; sourceTree = "<group>"; };
 		B0592D3927F219B1002EC0C3 /* PushMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushMechanic.swift; sourceTree = "<group>"; };
 		B06FEA0227E73D58005A3D1B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -254,6 +260,9 @@
 				B07AA62927E658F200918E71 /* GameEngine.swift */,
 				B07AA62A27E658F200918E71 /* UpdateType.swift */,
 				B07AA62B27E658F200918E71 /* GameMechanic.swift */,
+				B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */,
+				B03EEE9A27F2CED90050D295 /* EntityState.swift */,
+				B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -694,6 +703,7 @@
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
+				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
@@ -719,10 +729,12 @@
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
+				B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */,
 				B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */,
 				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
+				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
