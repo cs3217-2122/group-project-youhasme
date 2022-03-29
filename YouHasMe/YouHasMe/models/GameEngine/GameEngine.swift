@@ -6,7 +6,7 @@
 //
 
 struct GameEngine {
-    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic()]
+    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
     let ruleEngine = RuleEngine()
 
     var levelLayer: LevelLayer
@@ -18,9 +18,13 @@ struct GameEngine {
     // Updates game state given action
     mutating func step(action: UpdateType) {
         var state = LevelLayerState(levelLayer: levelLayer)
-        for mechanic in gameMechanics {
-            state = mechanic.apply(update: action, state: state)
-        }
+        var oldState = state
+        repeat {
+            oldState = state
+            for mechanic in gameMechanics {
+                state = mechanic.apply(update: action, state: state)
+            }
+        } while state != oldState
 
         // Apply updates
         var newLayer = LevelLayer(dimensions: levelLayer.dimensions)

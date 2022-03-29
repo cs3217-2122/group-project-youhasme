@@ -18,7 +18,7 @@ protocol GameMechanic {
 }
 
 // Represents the state of a level layer while it is being updated by the game engine
-struct LevelLayerState {
+struct LevelLayerState: Equatable {
     var dimensions: Rectangle
     var entityStates: [EntityState] = []
     // var gameState: GameState
@@ -65,8 +65,13 @@ struct EntityState: Hashable {
         return intent.action
     }
 
+    // Returns unrejected actions
     func getActions() -> [EntityAction] {
-        intents.map { $0.action }
+        intents.filter {
+            !$0.isRejected
+        }.map {
+            $0.action
+        }
     }
 
     // Rejects action if present in intents, does nothing otherwise
@@ -79,6 +84,12 @@ struct EntityState: Hashable {
             return intent
         }
         intents = Set(newIntents)
+    }
+
+    func hasRejected(action: EntityAction) -> Bool {
+        intents.contains {
+            $0.action == action && $0.isRejected
+        }
     }
 }
 

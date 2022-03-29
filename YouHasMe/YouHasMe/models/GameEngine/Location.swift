@@ -9,4 +9,8 @@ struct Location: Hashable {
     var x: Int
     var y: Int
     var z: Int
+
+    func isAt(x: Int, y: Int) -> Bool {
+        self.x == x && self.y == y
+    }
 }
