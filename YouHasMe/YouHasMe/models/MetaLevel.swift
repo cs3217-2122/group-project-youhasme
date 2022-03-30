@@ -173,8 +173,21 @@ extension MetaLevel {
     }
 }
 
+extension MetaLevel: KeyPathExposable {
+    static var exposedNumericKeyPaths: [String : KeyPath<MetaLevel, Int>] {
+        [
+            "Name length": \.name.count
+        ]
+    }
+    
+    func evaluate(given keyPath: NamedKeyPath<MetaLevel, Int>) -> Int {
+        self[keyPath: keyPath.keyPath]
+    }
+}
+
 class MetaTile {
     @Published var metaEntities: [MetaEntityType] = []
+    
     init() {}
 
     init(metaEntities: [MetaEntityType]) {
@@ -183,10 +196,10 @@ class MetaTile {
 }
 
 extension MetaTile {
-    func getLevelURL() -> URL? {
+    func getLevelLoadable() -> Loadable? {
         for metaEntity in metaEntities {
-            if case .level(levelURL: let levelURL, unlockCondition: _) = metaEntity {
-                return levelURL
+            if case .level(levelLoadable: let levelLoadable, unlockCondition: _) = metaEntity {
+                return levelLoadable
             }
         }
 
@@ -213,8 +226,8 @@ enum MetaEntityType: CaseIterable {
     case blocking
     case nonBlocking
     case space
-    case level(levelURL: URL? = nil, unlockCondition: Condition? = nil)
-    case travel(metaLevelURL: URL? = nil, unlockCondition: Condition? = nil)
+    case level(levelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
+    case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
     // TODO: Perhaps the message can be associated with a user
     case message(text: String? = nil)
 

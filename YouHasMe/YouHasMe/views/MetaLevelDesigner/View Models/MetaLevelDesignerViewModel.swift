@@ -26,7 +26,7 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
         self.init(currMetaLevel: MetaLevel())
     }
 
-    convenience init(metaLevelURLData: URLListObject) {
+    convenience init(metaLevelURLData: Loadable) {
         let metaLevelStorage = MetaLevelStorage()
         guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelURLData.name) else {
             fatalError("should not be nil")

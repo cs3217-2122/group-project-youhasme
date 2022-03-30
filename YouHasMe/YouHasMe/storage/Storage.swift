@@ -133,6 +133,10 @@ class LevelStorage: JSONStorage {
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(LevelStorage.levelDirectoryName)
     }
+    
+    func loadLevel(name: String) -> Level? {
+        try? loadAndDecode(filename: name)
+    }
 
     func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {
         let preloadedLevels = getPreloadedLevels()

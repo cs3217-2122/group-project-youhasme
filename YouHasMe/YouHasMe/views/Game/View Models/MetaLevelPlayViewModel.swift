@@ -103,7 +103,7 @@ class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulab
         self.init(currMetaLevel: MetaLevel())
     }
 
-    convenience init(metaLevelURLData: URLListObject) {
+    convenience init(metaLevelURLData: Loadable) {
         let metaLevelStorage = MetaLevelStorage()
         guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelURLData.name) else {
             fatalError("should not be nil")
@@ -133,6 +133,21 @@ extension MetaLevelPlayViewModel: ContextualMenuDelegate {
 
     func showMessages() {
         overlayState = .messages
+    }
+}
+
+class LevelInfoViewModel: ObservableObject {
+    @Published var level: Level
+    
+    convenience init(levelLoadable: Loadable) {
+        guard let level = LevelStorage().loadLevel(name: levelLoadable.name) else {
+            fatalError("should not be nil")
+        }
+        self.init(level: level)
+    }
+    
+    init(level: Level) {
+        self.level = level
     }
 }
 

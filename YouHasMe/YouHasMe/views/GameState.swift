@@ -10,7 +10,7 @@ enum ScreenState {
     case selectingMeta
     case playing
     case designing
-    case designingMeta(metaLevelURLData: URLListObject? = nil)
+    case designingMeta(metaLevelURLData: Loadable? = nil)
     case mainmenu
 }
 
