@@ -27,8 +27,6 @@ class MetaLevel {
     var loadedChunks: [Point: ChunkNode] = [:]
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
     var currentChunk: ChunkNode?
-    // TODO
-    // var outlets: [Outlet] = []
     var dimensions: PositionedRectangle
 
     init() {
@@ -184,6 +182,18 @@ class MetaTile {
     }
 }
 
+extension MetaTile {
+    func getLevelURL() -> URL? {
+        for metaEntity in metaEntities {
+            if case .level(levelURL: let levelURL, unlockCondition: _) = metaEntity {
+                return levelURL
+            }
+        }
+
+        return nil
+    }
+}
+
 // MARK: Persistence
 extension MetaTile {
     func toPersistable() -> PersistableMetaTile {
@@ -196,10 +206,50 @@ extension MetaTile {
 }
 
 enum MetaEntityType: CaseIterable {
+    static var allCases: [MetaEntityType] {
+        [.blocking, .nonBlocking, .space, .level(), .travel(), .message()]
+    }
+
     case blocking
     case nonBlocking
     case space
-    case level
+    case level(levelURL: URL? = nil, unlockCondition: Condition? = nil)
+    case travel(metaLevelURL: URL? = nil, unlockCondition: Condition? = nil)
+    // TODO: Perhaps the message can be associated with a user
+    case message(text: String? = nil)
+
+    func getSelfWithDefaultValues() -> MetaEntityType {
+        switch self {
+        case .blocking, .nonBlocking, .space:
+            return self
+        case .level:
+            return .level()
+        case .travel:
+            return .travel()
+        case .message:
+            return .message()
+        }
+    }
 }
 
 extension MetaEntityType: Codable {}
+
+extension MetaEntityType: RawRepresentable {
+    typealias RawValue = Int
+    init?(rawValue: RawValue) {
+        guard rawValue < MetaEntityType.allCases.count else {
+            return nil
+        }
+        self = MetaEntityType.allCases[rawValue]
+    }
+
+    var rawValue: RawValue {
+        guard let firstIndex = MetaEntityType.allCases.firstIndex(of: self.getSelfWithDefaultValues()) else {
+            fatalError("should not be nil")
+        }
+
+        return firstIndex
+    }
+}
+
+extension MetaEntityType: Hashable {}

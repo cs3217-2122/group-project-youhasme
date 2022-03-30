@@ -91,5 +91,9 @@ func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
         return nil
     case .level:
         return nil
+    case .travel:
+        return nil
+    case .message:
+        return nil
     }
 }

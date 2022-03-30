@@ -67,27 +67,46 @@ class EntityViewModel: CellViewModel {
 }
 
 struct MetaEntityView: View {
+    @EnvironmentObject var gameState: GameState
     var viewModel: MetaEntityViewModel
 
     var body: some View {
         CellView(viewModel: viewModel)
             .border(.pink)
             .onTapGesture {
-                viewModel.addEntity()
+                switch gameState.state {
+                case .designingMeta(_):
+                    viewModel.addEntity()
+                case .playing:
+                    viewModel.enterLevelIfExists()
+                default:
+                    return
+                }
             }
             .onLongPressGesture {
-                viewModel.removeEntity()
+                switch gameState.state {
+                case .designingMeta(_):
+                    viewModel.removeEntity()
+                default:
+                    return
+                }
             }
     }
 }
 
-protocol MetaEntityViewModelDelegate: AnyObject {
+protocol MetaEntityViewModelPaletteDelegate: AnyObject {
     func addSelectedEntity(to tile: MetaTile)
     func removeEntity(from tile: MetaTile)
 }
 
+protocol MetaEntityViewModelLevelDelegate: AnyObject {
+    func getLevelInfo(_ levelURL: URL)
+    func enterLevel(_ levelURL: URL)
+}
+
 class MetaEntityViewModel: CellViewModel {
-    weak var delegate: MetaEntityViewModelDelegate?
+    weak var paletteDelegate: MetaEntityViewModelPaletteDelegate?
+    weak var levelDelegate: MetaEntityViewModelLevelDelegate?
     var tile: MetaTile?
     var worldPosition: Point
     
@@ -127,19 +146,31 @@ class MetaEntityViewModel: CellViewModel {
     }
     
     func addEntity() {
-        guard let delegate = delegate, let tile = tile else {
+        guard let paletteDelegate = paletteDelegate, let tile = tile else {
             return
         }
 
-        delegate.addSelectedEntity(to: tile)
+        paletteDelegate.addSelectedEntity(to: tile)
     }
     
     func removeEntity() {
-        guard let delegate = delegate, let tile = tile else {
+        guard let paletteDelegate = paletteDelegate, let tile = tile else {
             return
         }
         
-        delegate.removeEntity(from: tile)
+        paletteDelegate.removeEntity(from: tile)
+    }
+    
+    func enterLevelIfExists() {
+        guard
+            let levelDelegate = levelDelegate,
+            let tile = tile,
+            let levelURL = tile.getLevelURL()
+            else {
+            return
+        }
+
+        levelDelegate.enterLevel(levelURL)
     }
 }
 

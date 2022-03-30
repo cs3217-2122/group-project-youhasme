@@ -42,7 +42,7 @@ extension ConditionRelation {
     }
 }
 
-struct Condition {
+final class Condition {
     var subject: ConditionSubject
     var relation: ConditionRelation
     var value: Double
@@ -58,3 +58,9 @@ struct Condition {
 }
 
 extension Condition: Codable {}
+
+extension Condition: Equatable {
+    static func == (lhs: Condition, rhs: Condition) -> Bool {
+        lhs === rhs
+    }
+}

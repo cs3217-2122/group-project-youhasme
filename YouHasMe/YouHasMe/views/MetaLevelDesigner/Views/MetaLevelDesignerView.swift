@@ -8,7 +8,7 @@ struct MetaLevelDesignerView: View {
                 .padding()
             MetaLevelDesignerPaletteView(viewModel: viewModel)
                 .padding()
-            MetaLevelDesignerGridView(viewModel: viewModel)
+            MetaLevelGridView(viewModel: viewModel)
                 .padding()
             Spacer()
             MetaLevelDesignerPersistenceView(viewModel: viewModel)

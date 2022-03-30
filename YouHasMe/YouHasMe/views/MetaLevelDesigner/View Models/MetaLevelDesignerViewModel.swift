@@ -2,8 +2,7 @@ import Foundation
 import CoreGraphics
 import Combine
 
-class MetaLevelDesignerViewModel: ObservableObject {
-    // MARK: Palette
+class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
     @Published var selectedPaletteMetaEntity: MetaEntityType?
 
     private var metaLevelStorage = MetaLevelStorage()
@@ -15,15 +14,9 @@ class MetaLevelDesignerViewModel: ObservableObject {
     var hasUnsavedChanges = false
     /// The view position relative to the coordinate system of the current meta level.
     @Published var viewPosition: Point
-    private var cumulativeTranslation: CGVector = .zero {
+    var cumulativeTranslation: CGVector = .zero {
         didSet {
-            let floor = cumulativeTranslation.absoluteFloor()
-            guard floor != .zero else {
-                return
-            }
-            viewPosition = viewPosition.translate(by: floor)
-//            print("floor \(floor) viewPos \(viewPosition)")
-            cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
+            applyCumulativeTranslationToViewPosition()
         }
     }
 
@@ -46,25 +39,9 @@ class MetaLevelDesignerViewModel: ObservableObject {
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition
     }
-
-    func endTranslateView() {
-        cumulativeTranslation = .zero
-    }
-
-    func translateView(by offset: CGVector) {
-        cumulativeTranslation = cumulativeTranslation.add(with: offset)
-    }
-
-    func getWorldPosition(at viewOffset: Vector) -> Point {
-        viewPosition.translate(by: viewOffset)
-    }
 }
 
-extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {
-    func getViewableRegion() -> PositionedRectangle {
-        PositionedRectangle(rectangle: viewableDimensions, topLeft: viewPosition)
-    }
-}
+extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {}
 
 // MARK: Persistence
 extension MetaLevelDesignerViewModel {
@@ -100,7 +77,7 @@ extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
     }
 }
 
-extension MetaLevelDesignerViewModel: MetaEntityViewModelDelegate {
+extension MetaLevelDesignerViewModel: MetaEntityViewModelPaletteDelegate {
     func addSelectedEntity(to tile: MetaTile) {
         guard let selectedPaletteMetaEntity = selectedPaletteMetaEntity else {
             return
@@ -143,7 +120,7 @@ extension MetaLevelDesignerViewModel {
             tile: getTile(at: viewOffset),
             worldPosition: getWorldPosition(at: viewOffset)
         )
-        metaEntityViewModel.delegate = self
+        metaEntityViewModel.paletteDelegate = self
         return metaEntityViewModel
     }
 }

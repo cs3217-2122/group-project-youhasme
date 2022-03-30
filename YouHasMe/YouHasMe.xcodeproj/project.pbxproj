@@ -34,7 +34,7 @@
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
-		E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */; };
+		E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
 		E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3827E8B213007D2E86 /* ViewConstants.swift */; };
 		E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3B27E8B55E007D2E86 /* Point.swift */; };
@@ -56,6 +56,9 @@
 		E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */; };
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
+		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
+		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
+		E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594827F4180B009A79F9 /* MessagesViewModel.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -89,6 +92,8 @@
 		E5BECBF627E5E8C600E3952D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF527E5E8C600E3952D /* Property.swift */; };
 		E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF727E5E8FF00E3952D /* Classification.swift */; };
 		E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF927E5E91200E3952D /* Connective.swift */; };
+		E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */; };
+		E5EC5B5927F36ACE00BAE834 /* MetaLevelPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,7 +134,7 @@
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
-		E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerGridView.swift; sourceTree = "<group>"; };
+		E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelGridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		E5563C3827E8B213007D2E86 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		E5563C3B27E8B55E007D2E86 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -151,6 +156,9 @@
 		E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaTile.swift; sourceTree = "<group>"; };
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
+		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
+		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
+		E578594827F4180B009A79F9 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -186,6 +194,8 @@
 		E5BECBF527E5E8C600E3952D /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		E5BECBF727E5E8FF00E3952D /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
 		E5BECBF927E5E91200E3952D /* Connective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connective.swift; sourceTree = "<group>"; };
+		E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelPlayView.swift; sourceTree = "<group>"; };
+		E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelPlayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -345,6 +355,7 @@
 		E56752FA27EEA82B0001305D /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E5EC5B5727F36ABF00BAE834 /* View Models */,
 				E56752FB27EEA8330001305D /* Views */,
 			);
 			path = Game;
@@ -354,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				1E96EB9427E726CC00321BEB /* LevelPlayView.swift */,
+				E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -363,6 +375,7 @@
 			children = (
 				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
 				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
+				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -477,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
-				E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */,
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
 				E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */,
 				E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */,
@@ -500,6 +512,8 @@
 				E56FE99627EEF21100EBE865 /* extensions */,
 				E56752FD27EEA86F0001305D /* Protocols */,
 				E56752FC27EEA8650001305D /* Views */,
+				E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */,
+				E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -550,6 +564,15 @@
 				E5BECBF927E5E91200E3952D /* Connective.swift */,
 			);
 			path = entity;
+			sourceTree = "<group>";
+		};
+		E5EC5B5727F36ABF00BAE834 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */,
+				E578594827F4180B009A79F9 /* MessagesViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -679,6 +702,7 @@
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */,
+				E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
@@ -696,12 +720,14 @@
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
-				E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */,
+				E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
+				E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
@@ -736,10 +762,12 @@
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
+				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				E5EC5B5927F36ACE00BAE834 /* MetaLevelPlayViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
