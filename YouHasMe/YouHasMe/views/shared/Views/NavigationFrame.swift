@@ -29,12 +29,12 @@ struct NavigationFrame<Content: View>: ContainerView {
     }
 
     init(
-        verticalAlignment: VerticalAlignment,
-        horizontalAlignment: HorizontalAlignment,
+        verticalAlignment: VerticalAlignment = .center,
+        horizontalAlignment: HorizontalAlignment = .center,
         backHandler: Runnable? = nil,
         @ViewBuilder _ content: @escaping () -> Content
     ) {
-        self.init(content)
+        self.init(content: content)
         self.verticalAlignment = verticalAlignment
         self.horizontalAlignment = horizontalAlignment
         self.backHandler = backHandler

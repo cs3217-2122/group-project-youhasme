@@ -43,6 +43,10 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition
     }
+
+    func deselectTile() {
+        selectedTile = nil
+    }
 }
 
 extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {}

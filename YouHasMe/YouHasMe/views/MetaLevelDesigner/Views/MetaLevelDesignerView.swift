@@ -15,13 +15,15 @@ struct MetaLevelDesignerView: View {
                 MetaLevelDesignerPersistenceView(viewModel: viewModel)
             }
             
-//            if let selectedTile = viewModel.selectedTile {
-//                Group {
-//                    MetaLevelDesignerTileInfoView(
-//                        viewModel: viewModel.getTileInfoViewModel(tile: selectedTile)
-//                    )
-//                }
-//            }
+            if let selectedTile = viewModel.selectedTile {
+                NavigationFrame(backHandler: {
+                    viewModel.deselectTile()
+                }) {
+                    MetaLevelDesignerTileInfoView(
+                        viewModel: viewModel.getTileInfoViewModel(tile: selectedTile)
+                    )
+                }
+            }
         }
     }
 }
@@ -29,20 +31,30 @@ struct MetaLevelDesignerView: View {
 struct MetaLevelDesignerTileInfoView: View {
     @ObservedObject var viewModel: MetaLevelDesignerTileInfoViewModel
     var body: some View {
-        VStack {
-            ForEach(viewModel.metaEntities, id: \.self) { metaEntity in
-                HStack {
-                    VStack {
-                        Text(metaEntity.description)
-                        MetaEntityView(viewModel: viewModel.getMetaEntityViewModel())
-                    }
-                    
-                    if case .level(levelLoadable: _, unlockCondition: _) = metaEntity {
-                        ConditionCreatorView()
-                    }
+        ScrollView(.vertical) {
+            VStack {
+                ForEach(viewModel.metaEntities, id: \.self) { metaEntity in
+                    HStack {
+                        VStack {
+                            Text(metaEntity.description)
+                            MetaEntityView(viewModel: viewModel.getMetaEntityViewModel())
+                        }
+                        
+                        if case .level(levelLoadable: _, unlockCondition: _) = metaEntity {
+                            ConditionCreatorView()
+                        }
+                    }.frame(height: 100, alignment: .leading)
                 }
             }
-        }
+            
+        }.frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .center
+          )
+          .background(Color.black.opacity(0.3))
     }
 }
 
