@@ -100,8 +100,8 @@ protocol MetaEntityViewModelPaletteDelegate: AnyObject {
 }
 
 protocol MetaEntityViewModelLevelDelegate: AnyObject {
-    func getLevelInfo(_ levelURL: URL)
-    func enterLevel(_ levelURL: URL)
+    func getLevelInfo(_ loadable: Loadable)
+    func enterLevel(_ loadable: Loadable)
 }
 
 class MetaEntityViewModel: CellViewModel {
@@ -165,12 +165,12 @@ class MetaEntityViewModel: CellViewModel {
         guard
             let levelDelegate = levelDelegate,
             let tile = tile,
-            let levelURL = tile.getLevelURL()
+            let levelLoadable = tile.getLevelLoadable()
             else {
             return
         }
 
-        levelDelegate.enterLevel(levelURL)
+        levelDelegate.enterLevel(levelLoadable)
     }
 }
 

@@ -7,8 +7,6 @@
 
 import Foundation
 
-
-
 class MetaLevelSelectViewModel: ObservableObject {
     var metaLevelStorage = MetaLevelStorage()
 

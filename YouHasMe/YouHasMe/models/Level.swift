@@ -49,13 +49,13 @@ extension Level: Identifiable {
 
 extension Level: KeyPathExposable {
     typealias PathRoot = Level
-    
+
     static var exposedNumericKeyPaths: [String: KeyPath<Level, Int>] {
         [
             "Name length": \.name.count
         ]
     }
-    
+
     func evaluate(given keyPath: NamedKeyPath<Level, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
     }

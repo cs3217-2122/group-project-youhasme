@@ -15,7 +15,7 @@ struct AnyNamedKeyPath {
 struct NamedKeyPath<PathRoot, Value>: Identifiable {
     var id: String
     var keyPath: KeyPath<PathRoot, Value>
-    
+
     func eraseToAnyKeyPath() -> AnyNamedKeyPath {
         AnyNamedKeyPath(id: id, keyPath: keyPath)
     }
@@ -34,7 +34,7 @@ struct PersistableNamedKeyPath: Codable {
 protocol KeyPathExposable {
     typealias Identifier = String
     associatedtype PathRoot
-    static var exposedNumericKeyPaths: [Identifier:KeyPath<PathRoot, Int>] { get }
+    static var exposedNumericKeyPaths: [Identifier: KeyPath<PathRoot, Int>] { get }
     func evaluate(given keyPath: NamedKeyPath<PathRoot, Int>) -> Int
 }
 
@@ -42,12 +42,14 @@ extension KeyPathExposable {
     static var namedKeyPaths: [NamedKeyPath<PathRoot, Int>] {
         exposedNumericKeyPaths.map { NamedKeyPath(id: $0, keyPath: $1) }
     }
-    
+
     static var typeErasedNamedKeyPaths: [AnyNamedKeyPath] {
         namedKeyPaths.map { $0.eraseToAnyKeyPath() }
     }
-    
-    static func keyPathfromPersistable(_ persistableNamedKeyPath: PersistableNamedKeyPath) -> NamedKeyPath<PathRoot, Int>? {
+
+    static func keyPathfromPersistable(
+        _ persistableNamedKeyPath: PersistableNamedKeyPath
+    ) -> NamedKeyPath<PathRoot, Int>? {
         let id = persistableNamedKeyPath.id
         guard let keyPath = exposedNumericKeyPaths[id] else {
             return nil
@@ -63,8 +65,6 @@ enum ConditionEvaluable {
     case numericLiteral(Int)
 }
 
-
-
 extension ConditionEvaluable {
     func getKeyPaths() -> [AnyNamedKeyPath] {
         switch self {
@@ -78,7 +78,7 @@ extension ConditionEvaluable {
             return []
         }
     }
-    
+
     func getValue() -> Int? {
         switch self {
         case let .metaLevel(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
@@ -120,10 +120,10 @@ extension ConditionEvaluable {
             return .numericLiteral(literal)
         }
     }
-    
+
     static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluable) -> ConditionEvaluable {
         switch persistableConditionEvaluable {
-        case .metaLevel(let loadable, let evaluatingKeyPath):
+        case let .metaLevel(loadable, evaluatingKeyPath):
             guard let namedKeyPath = MetaLevel.keyPathfromPersistable(evaluatingKeyPath) else {
                 fatalError("missing key path")
             }
@@ -131,7 +131,7 @@ extension ConditionEvaluable {
                 loadable: loadable,
                 evaluatingKeyPath: namedKeyPath
             )
-        case .level(let loadable, let evaluatingKeyPath):
+        case let .level(loadable, evaluatingKeyPath):
             guard let namedKeyPath = Level.keyPathfromPersistable(evaluatingKeyPath) else {
                 fatalError("missing key path")
             }
@@ -195,7 +195,7 @@ final class Condition {
         guard let lhsValue = subject.getValue(), let rhsValue = object.getValue() else {
             return true
         }
-        
+
         return relation.evaluate(lhs: lhsValue, rhs: rhsValue)
     }
 }
@@ -215,7 +215,7 @@ extension Condition {
             object: object.toPersistable()
         )
     }
-    
+
     static func fromPersistable(_ persistableCondition: PersistableCondition) -> Condition {
         Condition(
             subject: ConditionEvaluable.fromPersistable(persistableCondition.subject),

@@ -20,7 +20,6 @@ class ContextualMenuData {
     let id: Int
     let description: String
     var action: () -> Void = {}
-    
 
     init?(metaEntity: MetaEntityType) {
         id = metaEntity.rawValue
@@ -122,7 +121,7 @@ extension MetaLevelPlayViewModel: ContextualMenuDelegate {
     func closeOverlay() {
         overlayState = .off
     }
-    
+
     func showLevel() {
         overlayState = .level
     }
@@ -138,14 +137,14 @@ extension MetaLevelPlayViewModel: ContextualMenuDelegate {
 
 class LevelInfoViewModel: ObservableObject {
     @Published var level: Level
-    
+
     convenience init(levelLoadable: Loadable) {
         guard let level = LevelStorage().loadLevel(name: levelLoadable.name) else {
             fatalError("should not be nil")
         }
         self.init(level: level)
     }
-    
+
     init(level: Level) {
         self.level = level
     }
@@ -159,14 +158,14 @@ extension MetaLevelPlayViewModel {
         )
         return metaEntityViewModel
     }
-    
+
     func getMessagesViewModel() -> MessagesViewModel {
         let playerPosition: Point = .zero // TODO
 
         guard let tile = currMetaLevel.getTile(at: playerPosition) else {
             fatalError("should not be nil")
         }
-        
+
         return MessagesViewModel(tile: tile)
     }
 }

@@ -174,12 +174,12 @@ extension MetaLevel {
 }
 
 extension MetaLevel: KeyPathExposable {
-    static var exposedNumericKeyPaths: [String : KeyPath<MetaLevel, Int>] {
+    static var exposedNumericKeyPaths: [String: KeyPath<MetaLevel, Int>] {
         [
             "Name length": \.name.count
         ]
     }
-    
+
     func evaluate(given keyPath: NamedKeyPath<MetaLevel, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
     }
@@ -187,7 +187,7 @@ extension MetaLevel: KeyPathExposable {
 
 class MetaTile {
     @Published var metaEntities: [MetaEntityType] = []
-    
+
     init() {}
 
     init(metaEntities: [MetaEntityType]) {
