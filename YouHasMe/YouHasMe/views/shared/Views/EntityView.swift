@@ -77,6 +77,7 @@ struct MetaEntityView: View {
                 switch gameState.state {
                 case .designingMeta(_):
                     viewModel.addEntity()
+                    viewModel.examine()
                 case .playing:
                     viewModel.enterLevelIfExists()
                 default:
@@ -94,9 +95,13 @@ struct MetaEntityView: View {
     }
 }
 
-protocol MetaEntityViewModelPaletteDelegate: AnyObject {
+protocol MetaEntityViewModelBasicCRUDDelegate: AnyObject {
     func addSelectedEntity(to tile: MetaTile)
     func removeEntity(from tile: MetaTile)
+}
+
+protocol MetaEntityViewModelDetailedUpdateDelegate: AnyObject {
+    func examineTile(_ tile: MetaTile)
 }
 
 protocol MetaEntityViewModelLevelDelegate: AnyObject {
@@ -105,14 +110,19 @@ protocol MetaEntityViewModelLevelDelegate: AnyObject {
 }
 
 class MetaEntityViewModel: CellViewModel {
-    weak var paletteDelegate: MetaEntityViewModelPaletteDelegate?
+    weak var basicCRUDDelegate: MetaEntityViewModelBasicCRUDDelegate?
+    weak var detailedUpdateDelegate: MetaEntityViewModelDetailedUpdateDelegate?
     weak var levelDelegate: MetaEntityViewModelLevelDelegate?
     var tile: MetaTile?
-    var worldPosition: Point
+    var worldPosition: Point?
     
     private var subscriptions: Set<AnyCancellable> = []
     
-    init(tile: MetaTile?, worldPosition: Point) {
+    convenience init(tile: MetaTile?) {
+        self.init(tile: tile, worldPosition: nil)
+    }
+    
+    init(tile: MetaTile?, worldPosition: Point?) {
         self.tile = tile
         self.worldPosition = worldPosition
         
@@ -146,19 +156,27 @@ class MetaEntityViewModel: CellViewModel {
     }
     
     func addEntity() {
-        guard let paletteDelegate = paletteDelegate, let tile = tile else {
+        guard let delegate = basicCRUDDelegate, let tile = tile else {
             return
         }
 
-        paletteDelegate.addSelectedEntity(to: tile)
+        delegate.addSelectedEntity(to: tile)
     }
     
     func removeEntity() {
-        guard let paletteDelegate = paletteDelegate, let tile = tile else {
+        guard let delegate = basicCRUDDelegate, let tile = tile else {
             return
         }
         
-        paletteDelegate.removeEntity(from: tile)
+        delegate.removeEntity(from: tile)
+    }
+    
+    func examine() {
+        guard let delegate = detailedUpdateDelegate, let tile = tile else {
+            return
+        }
+        
+        delegate.examineTile(tile)
     }
     
     func enterLevelIfExists() {

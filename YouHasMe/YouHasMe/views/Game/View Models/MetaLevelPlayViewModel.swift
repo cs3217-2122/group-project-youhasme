@@ -22,7 +22,10 @@ class ContextualMenuData {
     var action: () -> Void = {}
 
     init?(metaEntity: MetaEntityType) {
-        id = metaEntity.rawValue
+        guard let index = metaEntity.getSelfWithDefaultValues().index else {
+            return nil
+        }
+        id = index
         switch metaEntity {
         case .blocking, .nonBlocking, .space:
             return nil

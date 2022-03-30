@@ -4,6 +4,7 @@ import Combine
 
 class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
     @Published var selectedPaletteMetaEntity: MetaEntityType?
+    @Published var selectedTile: MetaTile?
 
     private var metaLevelStorage = MetaLevelStorage()
     var viewableDimensions = Rectangle(
@@ -21,6 +22,9 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
     }
 
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
+    var editorMode: EditorMode? {
+        toolbarViewModel?.editorMode
+    }
 
     convenience init() {
         self.init(currMetaLevel: MetaLevel())
@@ -77,8 +81,12 @@ extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
     }
 }
 
-extension MetaLevelDesignerViewModel: MetaEntityViewModelPaletteDelegate {
+extension MetaLevelDesignerViewModel: MetaEntityViewModelBasicCRUDDelegate {
     func addSelectedEntity(to tile: MetaTile) {
+        guard editorMode == .addAndRemove else {
+            return
+        }
+
         guard let selectedPaletteMetaEntity = selectedPaletteMetaEntity else {
             return
         }
@@ -87,7 +95,21 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelPaletteDelegate {
     }
 
     func removeEntity(from tile: MetaTile) {
+        guard editorMode == .addAndRemove else {
+            return
+        }
+
         tile.metaEntities.removeAll()
+    }
+}
+
+extension MetaLevelDesignerViewModel: MetaEntityViewModelDetailedUpdateDelegate {
+    func examineTile(_ tile: MetaTile) {
+        guard editorMode == .select else {
+            return
+        }
+
+        selectedTile = tile
     }
 }
 
@@ -120,7 +142,12 @@ extension MetaLevelDesignerViewModel {
             tile: getTile(at: viewOffset),
             worldPosition: getWorldPosition(at: viewOffset)
         )
-        metaEntityViewModel.paletteDelegate = self
+        metaEntityViewModel.basicCRUDDelegate = self
+        metaEntityViewModel.detailedUpdateDelegate = self
         return metaEntityViewModel
+    }
+
+    func getTileInfoViewModel(tile: MetaTile) -> MetaLevelDesignerTileInfoViewModel {
+        MetaLevelDesignerTileInfoViewModel(tile: tile)
     }
 }

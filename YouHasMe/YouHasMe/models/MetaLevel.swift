@@ -77,7 +77,7 @@ extension MetaLevel {
         // This behavior can be abstracted into a Position to Chunk handler.
 
         let chunkPosition = worldToChunkPosition(worldPosition)
-//        print("\(worldPosition) \(chunkPosition) \(loadedChunks.count)")
+        print("\(worldPosition) \(chunkPosition) \(loadedChunks.count)")
         if let foundChunk = loadedChunks[chunkPosition] {
             return foundChunk
         }
@@ -210,19 +210,16 @@ extension MetaTile {
 // MARK: Persistence
 extension MetaTile {
     func toPersistable() -> PersistableMetaTile {
-        PersistableMetaTile(metaEntities: metaEntities)
+        PersistableMetaTile(metaEntities: metaEntities.map { $0.toPersistable() })
     }
 
     static func fromPersistable(_ persistableMetaTile: PersistableMetaTile) -> MetaTile {
-        MetaTile(metaEntities: persistableMetaTile.metaEntities)
+        let metaEntities = persistableMetaTile.metaEntities.map(MetaEntityType.fromPersistable(_:))
+        return MetaTile(metaEntities: metaEntities)
     }
 }
 
-enum MetaEntityType: CaseIterable {
-    static var allCases: [MetaEntityType] {
-        [.blocking, .nonBlocking, .space, .level(), .travel(), .message()]
-    }
-
+enum MetaEntityType {
     case blocking
     case nonBlocking
     case space
@@ -233,8 +230,12 @@ enum MetaEntityType: CaseIterable {
 
     func getSelfWithDefaultValues() -> MetaEntityType {
         switch self {
-        case .blocking, .nonBlocking, .space:
-            return self
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .space:
+            return .space
         case .level:
             return .level()
         case .travel:
@@ -245,24 +246,86 @@ enum MetaEntityType: CaseIterable {
     }
 }
 
-extension MetaEntityType: Codable {}
+extension MetaEntityType: CaseIterable {
+    static var allCases: [MetaEntityType] {
+        [.blocking, .nonBlocking, .space, .level(), .travel(), .message()]
+    }
+}
 
-extension MetaEntityType: RawRepresentable {
-    typealias RawValue = Int
-    init?(rawValue: RawValue) {
-        guard rawValue < MetaEntityType.allCases.count else {
-            return nil
+extension MetaEntityType: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .blocking:
+            return "Blocking"
+        case .nonBlocking:
+            return "Nonblocking"
+        case .space:
+            return "Empty space"
+        case .level(let levelLoadable, let unlockCondition):
+            return "Level"
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            return "Travel point"
+        case .message(let text):
+            return "Message"
         }
-        self = MetaEntityType.allCases[rawValue]
+    }
+}
+
+extension MetaEntityType {
+    func toPersistable() -> PersistableMetaEntityType {
+        switch self {
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .space:
+            return .space
+        case .level(let levelLoadable, let unlockCondition):
+            return .level(
+                levelLoadable: levelLoadable,
+                unlockCondition: unlockCondition?.toPersistable()
+            )
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: unlockCondition?.toPersistable())
+        case .message(let text):
+            return .message(text: text)
+        }
     }
 
-    var rawValue: RawValue {
-        guard let firstIndex = MetaEntityType.allCases.firstIndex(of: self.getSelfWithDefaultValues()) else {
-            fatalError("should not be nil")
+    static func fromPersistable(_ persistableMetaEntity: PersistableMetaEntityType) -> MetaEntityType {
+        switch persistableMetaEntity {
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .space:
+            return .space
+        case .level(let levelLoadable, let unlockCondition):
+            guard let unlockCondition = unlockCondition else {
+                return .level(levelLoadable: levelLoadable, unlockCondition: nil)
+            }
+            return .level(levelLoadable: levelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            guard let unlockCondition = unlockCondition else {
+                return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: nil)
+            }
+            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
+        case .message(let text):
+            return .message(text: text)
         }
-
-        return firstIndex
     }
 }
 
 extension MetaEntityType: Hashable {}
+
+enum PersistableMetaEntityType {
+    case blocking
+    case nonBlocking
+    case space
+    case level(levelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
+    case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
+    // TODO: Perhaps the message can be associated with a user
+    case message(text: String? = nil)
+}
+
+extension PersistableMetaEntityType: Codable {}

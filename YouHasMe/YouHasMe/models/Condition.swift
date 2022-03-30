@@ -7,9 +7,15 @@
 
 import Foundation
 
-struct AnyNamedKeyPath {
+struct AnyNamedKeyPath: Identifiable {
     var id: String
     var keyPath: AnyKeyPath
+}
+
+extension AnyNamedKeyPath: CustomStringConvertible {
+    var description: String {
+        id
+    }
 }
 
 struct NamedKeyPath<PathRoot, Value>: Identifiable {
@@ -26,6 +32,14 @@ extension NamedKeyPath {
         PersistableNamedKeyPath(id: id)
     }
 }
+
+extension NamedKeyPath: CustomStringConvertible {
+    var description: String {
+        id
+    }
+}
+
+extension NamedKeyPath: Hashable {}
 
 struct PersistableNamedKeyPath: Codable {
     var id: String
@@ -65,20 +79,9 @@ enum ConditionEvaluable {
     case numericLiteral(Int)
 }
 
-extension ConditionEvaluable {
-    func getKeyPaths() -> [AnyNamedKeyPath] {
-        switch self {
-        case .metaLevel:
-            return MetaLevel.typeErasedNamedKeyPaths
-        case .level:
-            return Level.typeErasedNamedKeyPaths
-        case .player:
-            return []
-        case .numericLiteral:
-            return []
-        }
-    }
+extension ConditionEvaluable: Hashable {}
 
+extension ConditionEvaluable {
     func getValue() -> Int? {
         switch self {
         case let .metaLevel(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
@@ -164,6 +167,8 @@ enum ConditionRelation {
 
 extension ConditionRelation: Codable {}
 
+extension ConditionRelation: Hashable {}
+
 extension ConditionRelation {
     func evaluate(lhs: Int, rhs: Int) -> Bool {
         switch self {
@@ -181,7 +186,7 @@ extension ConditionRelation {
     }
 }
 
-final class Condition {
+struct Condition {
     var subject: ConditionEvaluable
     var relation: ConditionRelation
     var object: ConditionEvaluable
@@ -200,11 +205,13 @@ final class Condition {
     }
 }
 
-extension Condition: Equatable {
-    static func == (lhs: Condition, rhs: Condition) -> Bool {
-        lhs === rhs
-    }
-}
+extension Condition: Hashable {}
+
+// extension Condition: Hashable {
+//    static func == (lhs: Condition, rhs: Condition) -> Bool {
+//        lhs === rhs
+//    }
+// }
 
 // MARK: Persistable
 extension Condition {
@@ -230,3 +237,5 @@ struct PersistableCondition {
     var relation: ConditionRelation
     var object: PersistableConditionEvaluable
 }
+
+extension PersistableCondition: Codable {}
