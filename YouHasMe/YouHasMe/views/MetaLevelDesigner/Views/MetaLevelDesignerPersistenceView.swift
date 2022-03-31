@@ -44,13 +44,13 @@ struct MetaLevelDesignerPersistenceView: View {
                     showSaveErrorAlert = true
                 }
             }) {
-                Text("Save")
+                Text("Save Locally")
             }.alert(isPresented: $showSaveLevelAlert) {
                 Alert(title: Text(saveMessage), dismissButton: .cancel(Text("close")))
             }.alert(isPresented: $showSaveErrorAlert) {
                 Alert(title: Text(saveErrorMessage), dismissButton: .cancel(Text("close")))
             }
-
+            
             TextField("Meta Level Name", text: $viewModel.currMetaLevel.name)
                 .padding([.trailing, .leading], 5.0)
                 .disableAutocorrection(true)

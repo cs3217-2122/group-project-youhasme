@@ -373,13 +373,19 @@ extension ChunkNode {
     }
 
     static func fromPersistable(_ persistableChunkNode: PersistableChunkNode) -> ChunkNode {
-        ChunkNode(
+        var chunkTiles = Array(
+            repeatingFactory:
+                Array(repeatingFactory: MetaTile(), count: ChunkNode.chunkDimensions),
+            count: ChunkNode.chunkDimensions
+        )
+        
+        for (point, tile) in persistableChunkNode.map {
+            chunkTiles[point] = MetaTile.fromPersistable(tile)
+        }
+        
+        return ChunkNode(
             identifier: persistableChunkNode.identifier,
-            chunkTiles: persistableChunkNode.chunkTiles.map {
-                $0.map {
-                    MetaTile.fromPersistable($0)
-                }
-            }
+            chunkTiles: chunkTiles
         )
     }
 }

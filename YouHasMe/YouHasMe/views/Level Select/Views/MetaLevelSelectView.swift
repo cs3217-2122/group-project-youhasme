@@ -8,27 +8,18 @@
 import SwiftUI
 
 struct MetaLevelSelectView: View {
-    @EnvironmentObject var gameState: GameState
+//    @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: MetaLevelSelectViewModel
     var body: some View {
-        VStack {
-            Button(action: {
-                gameState.state = .designingMeta(metaLevelURLData: nil)
-            }) {
-                Text("Create New Meta Level")
-            }.padding()
-            Spacer()
-            List {
-                Section(header: Text("Select an existing Meta Level")) {
-                    ForEach(viewModel.getAllMetaLevels(), id: \.self) { urlListObject in
-                        Button(action: {
-                            gameState.state = .designingMeta(metaLevelURLData: urlListObject)
-                        }) {
-                            Text(urlListObject.name)
-                        }
-                    }
+        TabView {
+            LocalMetaLevelSelectView(viewModel: viewModel)
+                .tabItem {
+                    Text("Local Meta Levels")
                 }
-            }
+            OnlineMetaLevelSelectView(viewModel: viewModel)
+                .tabItem {
+                    Text("Online Meta Levels")
+                }
         }
     }
 }

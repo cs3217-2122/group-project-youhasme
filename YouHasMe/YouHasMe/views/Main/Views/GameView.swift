@@ -14,7 +14,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
+            case .selecting, .selectingMeta, .designing, .designingMeta, .playing, .rooms, .metaLevelMultiplayer:
                 gameState.state = .mainmenu
             }
         })) {
@@ -31,6 +31,10 @@ struct GameView: View {
                 LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
             case .selectingMeta:
                 MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+            case .rooms:
+                RoomListView(viewModel: gameState.getRoomListViewModel())
+            case .metaLevelMultiplayer:
+                MetaLevelMultiplayerView(viewModel: gameState.getMetaLevelMultiplayerViewModel())
             }
         }
     }

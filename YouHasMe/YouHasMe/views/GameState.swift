@@ -12,6 +12,8 @@ enum ScreenState {
     case designing
     case designingMeta(metaLevelURLData: URLListObject? = nil)
     case mainmenu
+    case rooms
+    case metaLevelMultiplayer
 }
 
 extension ScreenState: Equatable {}
@@ -41,5 +43,13 @@ extension GameState {
 
     func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
         MetaLevelSelectViewModel()
+    }
+    
+    func getRoomListViewModel() -> RoomListViewModel {
+        RoomListViewModel()
+    }
+    
+    func getMetaLevelMultiplayerViewModel() -> MetaLevelMultiplayerViewModel {
+        MetaLevelMultiplayerViewModel()
     }
 }
