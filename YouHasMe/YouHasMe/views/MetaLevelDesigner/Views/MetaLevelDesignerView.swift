@@ -34,16 +34,16 @@ struct MetaLevelDesignerTileInfoView: View {
         ScrollView(.vertical) {
             VStack {
                 ForEach(viewModel.metaEntities, id: \.self) { metaEntity in
-                    HStack {
-                        VStack {
-                            Text(metaEntity.description)
-                            MetaEntityView(viewModel: viewModel.getMetaEntityViewModel())
-                        }
-                        
+                    VStack {
+                        Text(metaEntity.description)
+                        MetaEntityView(viewModel: viewModel.getMetaEntityViewModel())
+                            .frame(height: 100, alignment: .leading)
                         if case .level(levelLoadable: _, unlockCondition: _) = metaEntity {
-                            ConditionCreatorView()
+                            ConditionCreatorView(
+                                viewModel: viewModel.getConditionCreatorViewModel()
+                            )
                         }
-                    }.frame(height: 100, alignment: .leading)
+                    }
                 }
             }
             
@@ -54,102 +54,150 @@ struct MetaLevelDesignerTileInfoView: View {
             maxHeight: .infinity,
             alignment: .center
           )
-          .background(Color.black.opacity(0.3))
+          .background(Color.black.opacity(0.7))
     }
 }
 
-enum ConditionType: String {
-    case metaLevel = "Meta Level"
-    case level = "Level"
-    case player = "Player"
-    case numericLiteral = "Numeric"
-    
-    func getKeyPaths() -> [AnyNamedKeyPath] {
-        switch self {
-        case .metaLevel:
-            return MetaLevel.typeErasedNamedKeyPaths
-        case .level:
-            return Level.typeErasedNamedKeyPaths
-        case .player:
-            return []
-        case .numericLiteral:
-            return []
-        }
-    }
-}
-
-extension ConditionType: CaseIterable {}
-extension ConditionType: Identifiable {
-    var id: String {
-        rawValue
-    }
-    
-    static func getEnum(by id: String) -> ConditionType? {
-        ConditionType.allCases.first { $0.id == id }
-    }
-}
-extension ConditionType: CustomStringConvertible {
-    var description: String {
-        rawValue
-    }
-}
-
-enum ComparatorType: String {
-    case eq = "="
-    case geq = ">="
-    case leq = "<="
-    case lt = "<"
-    case gt = ">"
-}
-extension ComparatorType: CaseIterable {}
-extension ComparatorType: Identifiable {
-    var id: String {
-        rawValue
-    }
-    
-    static func getEnum(by id: String) -> ComparatorType? {
-        ComparatorType.allCases.first { $0.id == id }
-    }
-}
-extension ComparatorType: CustomStringConvertible {
-    var description: String {
-        rawValue
-    }
-}
 
 struct ConditionCreatorView: View {
-    @State private var selectedSubjectConditionTypeId: String?
-    @State private var selectedComparatorTypeId: String?
-    @State private var selectedObjectConditionTypeId: String?
+    @ObservedObject var viewModel: ConditionCreatorViewModel
+    @State private var editingSubjectConditionType: Bool = false
+    @State private var editingComparatorType: Bool = false
+    @State private var editingObjectConditionType: Bool = false
+    
 
+    func getTextColor(selected: Bool) -> Color {
+        if (selected) {
+            return Color.blue.opacity(1)
+        } else {
+            return Color.gray.opacity(0.8)
+        }
+    }
+    
     var body: some View {
-        HStack {
-            VStack {
-                List(ConditionType.allCases, selection: $selectedSubjectConditionTypeId) {
-                    Text($0.description)
+        VStack {
+            Group {
+                Button("Subject Condition") {
+                    editingSubjectConditionType.toggle()
                 }
-                
-                if let selectedSubjectConditionTypeId = selectedSubjectConditionTypeId,
-                    let keyPaths = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getKeyPaths() {
-                    List(keyPaths) {
-                        Text($0.description)
+                if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
+                   let selectedSubjectField = viewModel.selectedSubjectField {
+                    Text("\(selectedSubjectConditionTypeId) -> \(selectedSubjectField)")
+                }
+            }
+            
+            Group {
+                Button("Comparator") {
+                    editingComparatorType.toggle()
+                }
+                if let selectedComparatorTypeId = viewModel.selectedComparatorTypeId {
+                    Text(selectedComparatorTypeId)
+                }
+            }
+            
+            Group {
+                Button("Object Condition") {
+                    editingObjectConditionType.toggle()
+                }
+                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
+                   let selectedObjectField = viewModel.selectedObjectField {
+                    Text("\(selectedObjectConditionTypeId) -> \(selectedObjectField)")
+                }
+            }
+            
+            Button("Save Condition") {
+                viewModel.saveCondition()
+            }
+        }
+        .popover(isPresented: $editingSubjectConditionType) {
+            NavigationView {
+                List(ConditionType.allCases, selection: $viewModel.selectedSubjectConditionTypeId) {
+                    Text($0.description)
+                        .foregroundColor(getTextColor(
+                            selected: $0.id == viewModel.selectedSubjectConditionTypeId)
+                        )
+                }
+                .navigationTitle("Condition Type")
+                .toolbar {
+                    EditButton()
+                }
+            }
+            if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
+                let keyPaths = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getKeyPaths() {
+                NavigationView{
+                    List(keyPaths, selection: $viewModel.selectedSubjectField) {
+                        Text($0.description).foregroundColor(getTextColor(
+                            selected: $0.id == viewModel.selectedSubjectField)
+                        )
+                    }.navigationTitle("Field")
+                    .toolbar {
+                        EditButton()
                     }
                 }
             }
             
-            List(ComparatorType.allCases, selection: $selectedComparatorTypeId) {
-                Text($0.description)
+            if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
+               let dependencies = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getStorageDependencies() {
+                NavigationView{
+                    List(dependencies, selection: $viewModel.selectedSubjectDependency) {
+                        Text($0.name).foregroundColor(getTextColor(
+                            selected: $0.id == viewModel.selectedSubjectDependency)
+                        )
+                    }.navigationTitle("Dependency")
+                    .toolbar {
+                        EditButton()
+                    }
+                }
             }
             
-            VStack {
-                List(ConditionType.allCases, selection: $selectedObjectConditionTypeId) {
-                    Text($0.description)
+        }.popover(isPresented: $editingComparatorType) {
+            NavigationView {
+                List(ComparatorType.allCases, selection: $viewModel.selectedComparatorTypeId) {
+                    Text($0.description).foregroundColor(getTextColor(
+                        selected: $0.id == viewModel.selectedComparatorTypeId)
+                    )
+                }.navigationTitle("Comparator")
+                .toolbar {
+                    EditButton()
+                }
+            }
+        }
+        .popover(isPresented: $editingObjectConditionType) {
+            NavigationView {
+                
+                List(ConditionType.allCases, selection: $viewModel.selectedObjectConditionTypeId) {
+                    Text($0.description).foregroundColor(getTextColor(
+                        selected: $0.id == viewModel.selectedObjectConditionTypeId)
+                    )
+                }.navigationTitle("Condition Type")
+                .toolbar {
+                    EditButton()
                 }
                 
-                if let selectedObjectConditionTypeId = selectedObjectConditionTypeId,
+                
+                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
                    let keyPaths = ConditionType.getEnum(by: selectedObjectConditionTypeId)?.getKeyPaths() {
-                    List(keyPaths) {
-                        Text($0.description)
+                    List(keyPaths, selection: $viewModel.selectedObjectField) {
+                        Text($0.description).foregroundColor(getTextColor(
+                            selected: $0.id == viewModel.selectedObjectField)
+                        )
+                    }.navigationTitle("Field")
+                        .toolbar {
+                            EditButton()
+                        }
+                }
+                
+                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
+                   let dependencies = ConditionType.getEnum(by: selectedObjectConditionTypeId)?.getStorageDependencies() {
+                    NavigationView{
+                        List(dependencies, selection: $viewModel.selectedObjectDependency) {
+                            Text($0.name).foregroundColor(getTextColor(
+                                selected: $0.id == viewModel.selectedObjectDependency)
+                            )
+                        }.navigationTitle("Dependency")
+                        .toolbar {
+                            EditButton()
+                        }
                     }
                 }
             }

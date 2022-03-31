@@ -57,6 +57,7 @@
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
 		E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */; };
 		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
+		E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
 		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
@@ -160,6 +161,7 @@
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
 		E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
 		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
+		E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorViewModel.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
 		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
@@ -509,6 +511,7 @@
 				E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */,
 				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
 				E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */,
+				E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
+				E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,

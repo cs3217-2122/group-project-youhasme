@@ -11,5 +11,11 @@ struct Loadable {
     var name: String
 }
 
+extension Loadable: Identifiable {
+    var id: String {
+        name
+    }
+}
+
 extension Loadable: Hashable {}
 extension Loadable: Codable {}

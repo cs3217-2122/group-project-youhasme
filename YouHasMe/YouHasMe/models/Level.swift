@@ -50,7 +50,7 @@ extension Level: Identifiable {
 extension Level: KeyPathExposable {
     typealias PathRoot = Level
 
-    static var exposedNumericKeyPaths: [String: KeyPath<Level, Int>] {
+    static var exposedNumericKeyPathsMap: [String: KeyPath<Level, Int>] {
         [
             "Name length": \.name.count
         ]

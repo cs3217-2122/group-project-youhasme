@@ -174,7 +174,7 @@ extension MetaLevel {
 }
 
 extension MetaLevel: KeyPathExposable {
-    static var exposedNumericKeyPaths: [String: KeyPath<MetaLevel, Int>] {
+    static var exposedNumericKeyPathsMap: [String: KeyPath<MetaLevel, Int>] {
         [
             "Name length": \.name.count
         ]

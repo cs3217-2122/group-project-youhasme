@@ -48,13 +48,20 @@ struct PersistableNamedKeyPath: Codable {
 protocol KeyPathExposable {
     typealias Identifier = String
     associatedtype PathRoot
-    static var exposedNumericKeyPaths: [Identifier: KeyPath<PathRoot, Int>] { get }
+    static var exposedNumericKeyPathsMap: [Identifier: KeyPath<PathRoot, Int>] { get }
     func evaluate(given keyPath: NamedKeyPath<PathRoot, Int>) -> Int
 }
 
 extension KeyPathExposable {
+    static func getNamedKeyPath(given id: Identifier) -> NamedKeyPath<PathRoot, Int>? {
+        guard let keyPath = exposedNumericKeyPathsMap[id] else {
+            return nil
+        }
+        return NamedKeyPath(id: id, keyPath: keyPath)
+    }
+
     static var namedKeyPaths: [NamedKeyPath<PathRoot, Int>] {
-        exposedNumericKeyPaths.map { NamedKeyPath(id: $0, keyPath: $1) }
+        exposedNumericKeyPathsMap.map { NamedKeyPath(id: $0, keyPath: $1) }
     }
 
     static var typeErasedNamedKeyPaths: [AnyNamedKeyPath] {
@@ -65,7 +72,7 @@ extension KeyPathExposable {
         _ persistableNamedKeyPath: PersistableNamedKeyPath
     ) -> NamedKeyPath<PathRoot, Int>? {
         let id = persistableNamedKeyPath.id
-        guard let keyPath = exposedNumericKeyPaths[id] else {
+        guard let keyPath = exposedNumericKeyPathsMap[id] else {
             return nil
         }
         return NamedKeyPath(id: id, keyPath: keyPath)

@@ -20,4 +20,8 @@ class MetaLevelDesignerTileInfoViewModel: ObservableObject {
     func getMetaEntityViewModel() -> MetaEntityViewModel {
         MetaEntityViewModel(tile: tile, worldPosition: .zero)
     }
+
+    func getConditionCreatorViewModel() -> ConditionCreatorViewModel {
+        ConditionCreatorViewModel()
+    }
 }

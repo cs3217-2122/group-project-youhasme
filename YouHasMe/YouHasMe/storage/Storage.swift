@@ -61,6 +61,24 @@ class Storage {
         }
         return ([], [])
     }
+
+    final func getAllLoadables(in directory: URL) -> [Loadable] {
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(
+                at: directory, includingPropertiesForKeys: nil, options: [])
+            let urlsWithSelectedFileExtension = urls.filter({ $0.pathExtension == fileExtension })
+            let loadables = urlsWithSelectedFileExtension.map {
+                Loadable(
+                    url: $0,
+                    name: $0.deletingPathExtension().lastPathComponent
+                )
+            }
+            return loadables
+        } catch {
+            globalLogger.error(error.localizedDescription)
+        }
+        return []
+    }
 }
 
 extension Storage {
@@ -83,6 +101,15 @@ extension Storage {
             globalLogger.error(error.localizedDescription)
         }
         return ([], [])
+    }
+
+    func getAllLoadables() -> [Loadable] {
+        do {
+            return try getAllLoadables(in: getDefaultDirectory())
+        } catch {
+            globalLogger.error(error.localizedDescription)
+        }
+        return []
     }
 }
 
