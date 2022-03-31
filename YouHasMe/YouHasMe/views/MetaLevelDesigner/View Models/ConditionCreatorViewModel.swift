@@ -13,29 +13,33 @@ class ConditionBuilder {
     var object: ConditionEvaluable?
 
     private func createConditionEvaluable(
-        type: ConditionType,
+        conditionTypeId: String,
         literal: Int? = nil,
         fieldId: String? = nil,
         loadableId: String? = nil
     ) -> ConditionEvaluable {
+        guard let type = ConditionType.getEnum(by: conditionTypeId) else {
+            fatalError("condition type not found")
+        }
         let loadable = type.getStorageDependencies()?.first { $0.id == loadableId }
-        let namedKeyPath = type.getKeyPaths().first { $0.id == fieldId }
         switch type {
         case .metaLevel:
             guard let loadable = loadable,
-                  let namedKeyPath = namedKeyPath  else {
+                  let fieldId = fieldId,
+                  let namedKeyPath = MetaLevel.getNamedKeyPath(given: fieldId)  else {
                 fatalError("should not be nil")
             }
             return .metaLevel(
                 loadable: loadable,
-                evaluatingKeyPath: NamedKeyPath(id: namedKeyPath.id, keyPath: namedKeyPath.keyPath as! KeyPath<MetaLevel, Int>)
+                evaluatingKeyPath: namedKeyPath
             )
         case .level:
             guard let loadable = loadable,
-                  let namedKeyPath = namedKeyPath  else {
+                  let fieldId = fieldId,
+                  let namedKeyPath = Level.getNamedKeyPath(given: fieldId) else {
                 fatalError("should not be nil")
             }
-            return .level(loadable: loadable, evaluatingKeyPath: NamedKeyPath(id: namedKeyPath.id, keyPath: namedKeyPath.keyPath as! KeyPath<Level, Int>))
+            return .level(loadable: loadable, evaluatingKeyPath: namedKeyPath)
         case .player:
             return .player
         case .numericLiteral:
@@ -44,13 +48,13 @@ class ConditionBuilder {
     }
 
     func buildSubject(
-        conditionSubjectType: ConditionType,
+        conditionSubjectTypeId: String,
         subjectLiteral: Int? = nil,
         subjectFieldId: String? = nil,
         subjectLoadableId: String? = nil
     ) {
         subject = createConditionEvaluable(
-            type: conditionSubjectType,
+            conditionTypeId: conditionSubjectTypeId,
             literal: subjectLiteral,
             fieldId: subjectFieldId,
             loadableId: subjectLoadableId
@@ -58,8 +62,12 @@ class ConditionBuilder {
     }
 
     func buildComparator(
-        comparator: ComparatorType
+        comparatorId: String
     ) {
+        guard let comparator = ComparatorType.getEnum(by: comparatorId) else {
+            fatalError("cannot find comparator")
+        }
+
         switch comparator {
         case .eq:
             relation = .eq
@@ -75,13 +83,13 @@ class ConditionBuilder {
     }
 
     func buildObject(
-        conditionObjectType: ConditionType,
+        conditionObjectTypeId: String,
         objectLiteral: Int? = nil,
         objectFieldId: String? = nil,
         objectLoadableId: String? = nil
     ) {
         object = createConditionEvaluable(
-            type: conditionObjectType,
+            conditionTypeId: conditionObjectTypeId,
             literal: objectLiteral,
             fieldId: objectFieldId,
             loadableId: objectLoadableId
@@ -97,7 +105,13 @@ class ConditionBuilder {
     }
 }
 
+protocol ConditionCreatorViewModelDelegate: AnyObject {
+    func saveCondition(_ condition: Condition, entityIndex: Int)
+}
+
 class ConditionCreatorViewModel: ObservableObject {
+    weak var delegate: ConditionCreatorViewModelDelegate?
+    var entityIndex: Int
     @Published var selectedSubjectConditionTypeId: String?
     @Published var selectedSubjectField: String?
     @Published var selectedSubjectDependency: String?
@@ -108,7 +122,8 @@ class ConditionCreatorViewModel: ObservableObject {
 
     private var subscriptions: Set<AnyCancellable> = []
 
-    init() {
+    init(entityIndex: Int) {
+        self.entityIndex = entityIndex
         setupBindings()
     }
 
@@ -131,26 +146,43 @@ class ConditionCreatorViewModel: ObservableObject {
         selectedObjectField = nil
         selectedObjectDependency = nil
     }
-    
+
     func saveCondition() {
         let builder = ConditionBuilder()
+        guard let selectedSubjectConditionTypeId = selectedSubjectConditionTypeId else {
+            return
+        }
+
+        guard let selectedObjectConditionTypeId = selectedObjectConditionTypeId else {
+            return
+        }
+
+        guard let selectedComparatorTypeId = selectedComparatorTypeId else {
+            return
+        }
+
         builder.buildSubject(
-            conditionSubjectType: <#T##ConditionType#>,
-            subjectLiteral: <#T##Int?#>,
-            subjectFieldId: <#T##String?#>,
-            subjectLoadableId: <#T##String?#>
+            conditionSubjectTypeId: selectedSubjectConditionTypeId,
+            subjectLiteral: nil,
+            subjectFieldId: selectedSubjectField,
+            subjectLoadableId: selectedSubjectDependency
         )
-        
-        builder.buildComparator(comparator: <#T##ComparatorType#>)
-        
+
+        builder.buildComparator(comparatorId: selectedComparatorTypeId)
+
         builder.buildObject(
-            conditionObjectType: <#T##ConditionType#>,
-            objectLiteral: <#T##Int?#>,
-            objectFieldId: <#T##String?#>,
-            objectLoadableId: <#T##String?#>
+            conditionObjectTypeId: selectedObjectConditionTypeId,
+            objectLiteral: nil,
+            objectFieldId: selectedSubjectField,
+            objectLoadableId: selectedObjectDependency
         )
-        
+
         let condition = builder.getResult()
+        guard let delegate = delegate else {
+            fatalError("should not be nil")
+        }
+
+        delegate.saveCondition(condition, entityIndex: entityIndex)
     }
 }
 

@@ -138,21 +138,6 @@ extension MetaLevelPlayViewModel: ContextualMenuDelegate {
     }
 }
 
-class LevelInfoViewModel: ObservableObject {
-    @Published var level: Level
-
-    convenience init(levelLoadable: Loadable) {
-        guard let level = LevelStorage().loadLevel(name: levelLoadable.name) else {
-            fatalError("should not be nil")
-        }
-        self.init(level: level)
-    }
-
-    init(level: Level) {
-        self.level = level
-    }
-}
-
 extension MetaLevelPlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
@@ -170,5 +155,15 @@ extension MetaLevelPlayViewModel {
         }
 
         return MessagesViewModel(tile: tile)
+    }
+
+    func getLevelInfoViewModel() -> LevelInfoViewModel {
+        let playerPosition: Point = .zero // TODO
+
+        guard let tile = currMetaLevel.getTile(at: playerPosition) else {
+            fatalError("should not be nil")
+        }
+
+        return LevelInfoViewModel(tile: tile)
     }
 }

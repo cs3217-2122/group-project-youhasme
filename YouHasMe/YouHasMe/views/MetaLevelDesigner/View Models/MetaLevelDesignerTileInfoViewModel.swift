@@ -21,7 +21,17 @@ class MetaLevelDesignerTileInfoViewModel: ObservableObject {
         MetaEntityViewModel(tile: tile, worldPosition: .zero)
     }
 
-    func getConditionCreatorViewModel() -> ConditionCreatorViewModel {
-        ConditionCreatorViewModel()
+    func getConditionCreatorViewModel(with entityIndex: Int) -> ConditionCreatorViewModel {
+        ConditionCreatorViewModel(entityIndex: entityIndex)
+    }
+}
+
+extension MetaLevelDesignerTileInfoViewModel: ConditionCreatorViewModelDelegate {
+    func saveCondition(_ condition: Condition, entityIndex: Int) {
+        guard case let .level(levelLoadable: levelLoadable, unlockCondition: _) = metaEntities[entityIndex] else {
+            return
+        }
+
+        tile.metaEntities[entityIndex] = .level(levelLoadable: levelLoadable, unlockCondition: condition)
     }
 }

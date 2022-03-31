@@ -33,14 +33,15 @@ struct MetaLevelDesignerTileInfoView: View {
     var body: some View {
         ScrollView(.vertical) {
             VStack {
-                ForEach(viewModel.metaEntities, id: \.self) { metaEntity in
+                ForEach(0..<viewModel.metaEntities.count, id: \.self) { index in
                     VStack {
+                        let metaEntity = viewModel.metaEntities[index]
                         Text(metaEntity.description)
                         MetaEntityView(viewModel: viewModel.getMetaEntityViewModel())
                             .frame(height: 100, alignment: .leading)
                         if case .level(levelLoadable: _, unlockCondition: _) = metaEntity {
                             ConditionCreatorView(
-                                viewModel: viewModel.getConditionCreatorViewModel()
+                                viewModel: viewModel.getConditionCreatorViewModel(with: index)
                             )
                         }
                     }
