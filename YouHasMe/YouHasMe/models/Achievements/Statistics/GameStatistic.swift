@@ -8,12 +8,10 @@
 import Foundation
 
 class GameStatistic: Codable, Hashable {
-    var id: Int
     var name: String
     var value: Int
 
-    init(id: Int, name: String, value: Int) {
-        self.id = id
+    init(name: String, value: Int) {
         self.name = name
         self.value = value
     }
@@ -28,10 +26,10 @@ class GameStatistic: Codable, Hashable {
     }
 
     static func == (lhs: GameStatistic, rhs: GameStatistic) -> Bool {
-        lhs.id == rhs.id
+        lhs.name == rhs.name
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        hasher.combine(name)
     }
 }

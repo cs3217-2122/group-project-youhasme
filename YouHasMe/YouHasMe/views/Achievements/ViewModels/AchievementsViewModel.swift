@@ -29,6 +29,10 @@ class AchievementsViewModel: ObservableObject {
         ]
     }
 
+    func resetLevelStats() {
+        statistics.resetLevelStats()
+    }
+
     func setSubscriptionsFor(_ engine: GameEngine) {
         engine.gameEventPublisher.sink { [weak self] gameEvent in
             guard let self = self else {

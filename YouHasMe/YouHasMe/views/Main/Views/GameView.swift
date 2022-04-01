@@ -23,7 +23,7 @@ struct GameView: View {
             case .mainmenu:
                 MainMenuView()
             case .selecting:
-                LevelSelectView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelSelectView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
             case .designing:
                 LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
             case .designingMeta:

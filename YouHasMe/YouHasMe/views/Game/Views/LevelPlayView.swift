@@ -19,6 +19,7 @@ struct LevelPlayView: View {
             HStack {
                 Button(action: {
                     levelDesignerViewModel.resetFromPlay()
+                    achievementsViewModel.resetLevelStats()
                     gameState.state = .designing
                 }) {
                     Text("Back to Designing")

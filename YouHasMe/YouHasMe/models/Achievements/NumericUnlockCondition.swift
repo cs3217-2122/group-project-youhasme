@@ -28,15 +28,15 @@ class NumericUnlockCondition: UnlockCondition {
 
     func isFulfilled() -> Bool {
         switch comparison {
-        case Comparison.MORE_THAN:
+        case .MORE_THAN:
             return statistic.value > unlockValue
-        case Comparison.LESS_THAN:
+        case .LESS_THAN:
             return statistic.value < unlockValue
-        case Comparison.EQUAL_TO:
+        case .EQUAL_TO:
             return statistic.value == unlockValue
-        case Comparison.MORE_THAN_OR_EQUAL_TO:
+        case .MORE_THAN_OR_EQUAL_TO:
             return statistic.value >= unlockValue
-        case Comparison.LESS_THAN_OR_EQUAL_TO:
+        case .LESS_THAN_OR_EQUAL_TO:
             return statistic.value <= unlockValue
         }
     }

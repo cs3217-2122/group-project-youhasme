@@ -8,8 +8,7 @@
 import Foundation
 
 class Statistics: Codable {
-    // jx todo: change to dictionary
-    var gameStatistics: [GameStatistic] = []
+    var gameStatistics: [String: GameStatistic] = [:]
 
     init() {
         loadStatistics()
@@ -36,18 +35,26 @@ class Statistics: Codable {
         getStatistic(name: "Level Moves").reset()
     }
 
+    // jx todo: change to load from storage
     func loadStatistics() {
-        let stat1 = GameStatistic(id: 1, name: "Level Moves", value: 0)
-        let stat2 = GameStatistic(id: 2, name: "Lifetime Moves", value: 0)
-        let stat3 = GameStatistic(id: 3, name: "Lifetime Wins", value: 0)
-        gameStatistics = [stat1, stat2, stat3]
+        let stat1 = GameStatistic(name: "Level Moves", value: 0)
+        let stat2 = GameStatistic(name: "Lifetime Moves", value: 0)
+        let stat3 = GameStatistic(name: "Lifetime Wins", value: 0)
+        let stats = [stat1, stat2, stat3]
+        for stat in stats {
+            gameStatistics[stat.name] = stat
+        }
     }
 
     func getStatistic(name: String) -> GameStatistic {
-        guard let stat = gameStatistics.first(where: { $0.name == name }) else {
+        guard let stat = gameStatistics[name] else {
             assert(false, "Game statistic \(name) does not exist")
         }
 
         return stat
+    }
+
+    func resetLevelStats() {
+        resetLevelMoves()
     }
 }

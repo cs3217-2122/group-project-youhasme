@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LevelSelectView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+    @ObservedObject var achievementsViewModel: AchievementsViewModel
+
     @EnvironmentObject var gameState: GameState
     var body: some View {
         VStack {
@@ -24,6 +26,7 @@ struct LevelSelectView: View {
                     ForEach(levelDesignerViewModel.savedLevels) { level in
                         Button(action: {
                             levelDesignerViewModel.selectLevel(level: level)
+                            achievementsViewModel.resetLevelStats()
                             gameState.state = .designing
                         }) {
                             Text(level.name)
