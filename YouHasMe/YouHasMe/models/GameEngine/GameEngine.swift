@@ -5,9 +5,16 @@
 //  Created by wayne on 19/3/22.
 //
 
+import Combine
+
 struct GameEngine {
     let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
     let ruleEngine = RuleEngine()
+    var gameEventPublisher: AnyPublisher<GameEvent, Never> {
+        gameEventSubject.eraseToAnyPublisher()
+    }
+
+    private let gameEventSubject = PassthroughSubject<GameEvent, Never>()
 
     var levelLayer: LevelLayer
 
@@ -38,6 +45,8 @@ struct GameEngine {
     private func applyMechanics(action: UpdateType) -> LevelLayerState {
         var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
         var oldState = curState
+        let originalState = curState
+
         // Apply all mechanics until there are no more changes to state
         repeat {
             oldState = curState
@@ -45,6 +54,11 @@ struct GameEngine {
                 curState = mechanic.apply(update: action, state: curState)
             }
         } while curState != oldState
+
+        if curState != originalState {
+            gameEventSubject.send(GameEvent(type: .MOVE))
+        }
+
         return curState
     }
 }

@@ -7,6 +7,7 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
+    @StateObject var achievementsViewModel = AchievementsViewModel()
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
     var body: some View {
@@ -14,7 +15,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
+            case .selecting, .selectingMeta, .designing, .designingMeta, .playing, .achievements:
                 gameState.state = .mainmenu
             }
         })) {
@@ -24,13 +25,15 @@ struct GameView: View {
             case .selecting:
                 LevelSelectView(levelDesignerViewModel: levelDesignerViewModel)
             case .designing:
-                LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
             case .designingMeta:
                 MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
-                LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelPlayView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
             case .selectingMeta:
                 MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+            case .achievements:
+                AchievementMainView(achievementsViewModel: achievementsViewModel)
             }
         }
     }

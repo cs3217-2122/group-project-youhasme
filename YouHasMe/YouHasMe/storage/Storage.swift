@@ -140,6 +140,7 @@ class LevelStorage: JSONStorage {
             globalLogger.info("Cannot find saved levels")
             return getPreloadedLevels()
         }
+
         var levels = gameStorage.levels
         levels.append(contentsOf: preloadedLevels)
         return levels
