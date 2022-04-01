@@ -11,8 +11,8 @@ import Combine
 class AchievementsViewModel: ObservableObject {
     var lockedAchievements: [Achievement]
     var unlockedAchievements: [Achievement] = []
-    var width: Float = 40
-    var height: Float = 40
+    var imageWidth: Float = 40
+    var imageHeight: Float = 40
     private var cancellables = [AnyCancellable]()
     private var statistics = Statistics()
 
@@ -21,16 +21,12 @@ class AchievementsViewModel: ObservableObject {
         // let achievements = loadAchievements()
         self.lockedAchievements = [
 //            Achievement(name: "Design your first level", unlockConditions: [EventUnlockCondition(eventType: )]),
+//            Achievement(name: "Win level Abc", unlockConditions: [EventUnlockCondition(eventType: .WIN, )])
             Achievement(name: "Move 10 steps in total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)])
         ]
-    }
-
-    func getAllAchievements() -> [Achievement] {
-        // jx todo: update
-        return lockedAchievements
     }
 
     func setSubscriptionsFor(_ engine: GameEngine) {

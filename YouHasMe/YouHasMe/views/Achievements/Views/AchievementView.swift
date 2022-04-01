@@ -13,13 +13,12 @@ struct AchievementView: View {
 
     var body: some View {
         HStack {
-            Image("baba")
+            Image(AchievementImages.getAchievementImageString(achievement: achievement))
                 .resizable()
                 .scaledToFit()
-                .frame(width: CGFloat(achievementsViewModel.width),
-                       height: CGFloat(achievementsViewModel.height))
+                .frame(width: CGFloat(achievementsViewModel.imageWidth),
+                       height: CGFloat(achievementsViewModel.imageHeight))
             Text(achievement.name)
-//                .opacity(achievement.isUnlocked ? 1.0 : 0.5)
         }
     }
 

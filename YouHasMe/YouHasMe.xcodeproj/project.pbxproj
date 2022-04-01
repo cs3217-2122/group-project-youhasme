@@ -31,6 +31,7 @@
 		40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517727F72645008CBCE0 /* AchiementMainView.swift */; };
 		40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */; };
 		40E2517C27F72963008CBCE0 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517B27F72963008CBCE0 /* AchievementView.swift */; };
+		40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517D27F786B7008CBCE0 /* AchievementImages.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -136,6 +137,7 @@
 		40E2517727F72645008CBCE0 /* AchiementMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchiementMainView.swift; sourceTree = "<group>"; };
 		40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewModel.swift; sourceTree = "<group>"; };
 		40E2517B27F72963008CBCE0 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
+		40E2517D27F786B7008CBCE0 /* AchievementImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementImages.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 			children = (
 				40E2517727F72645008CBCE0 /* AchiementMainView.swift */,
 				40E2517B27F72963008CBCE0 /* AchievementView.swift */,
+				40E2517D27F786B7008CBCE0 /* AchievementImages.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
+				40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
