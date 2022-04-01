@@ -12,6 +12,13 @@ class LevelInfoViewModel: ObservableObject {
     struct LevelInfoWithConditions {
         var level: Level
         var unlockCondition: Condition?
+        var isLevelUnlocked: Bool {
+            guard let unlockCondition = unlockCondition else {
+                return true
+            }
+
+            return unlockCondition.isConditionMet()
+        }
     }
 
     @Published var levelInfo: [LevelInfoWithConditions] = []
@@ -36,3 +43,5 @@ class LevelInfoViewModel: ObservableObject {
         }.store(in: &subscriptions)
     }
 }
+
+extension LevelInfoViewModel.LevelInfoWithConditions: Hashable {}

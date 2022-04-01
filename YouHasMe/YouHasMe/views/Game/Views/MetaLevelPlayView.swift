@@ -39,7 +39,7 @@ struct MetaLevelPlayView: View {
                         case .travel:
                             TravelInfoView()
                         case .level:
-                            LevelInfoView()
+                            LevelInfoView(viewModel: viewModel.getLevelInfoViewModel())
                         default:
                             Group {}
                         }
@@ -107,8 +107,39 @@ struct MessageView: View {
 }
 
 struct LevelInfoView: View {
+    @ObservedObject var viewModel: LevelInfoViewModel
+    
+    func getConditionStatusImage(_ condition: Condition) -> Image {
+        condition.isConditionMet() ? Image.checkmark : Image.cross
+    }
+    
     var body: some View {
-        Text("level")
+        ScrollView(.vertical) {
+            VStack {
+                ForEach(viewModel.levelInfo, id: \.self) { levelInfo in
+                    Text(levelInfo.level.name)
+                    
+                    if let unlockCondition = levelInfo.unlockCondition {
+                        getConditionStatusImage(unlockCondition)
+                        Text(unlockCondition.description)
+                    }
+                    
+                    if levelInfo.isLevelUnlocked {
+                        Button("Enter Level") {
+                            print("Entering Level")
+                            // TODO
+                        }
+                    }
+                }
+            }
+        }.frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .center
+          )
+          .background(Color.black.opacity(0.7))
     }
 }
 

@@ -88,6 +88,21 @@ enum ConditionEvaluable {
 
 extension ConditionEvaluable: Hashable {}
 
+extension ConditionEvaluable: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .metaLevel(let loadable, let evaluatingKeyPath):
+            return "MetaLevel: \(loadable.name) -> \(evaluatingKeyPath.description)"
+        case .level(let loadable, let evaluatingKeyPath):
+            return "Level: \(loadable.name) -> \(evaluatingKeyPath.description)"
+        case .player:
+            return "Player"
+        case .numericLiteral(let int):
+            return "Value: \(int)"
+        }
+    }
+}
+
 extension ConditionEvaluable {
     func getValue() -> Int? {
         switch self {
@@ -164,17 +179,23 @@ enum PersistableConditionEvaluable: Codable {
     case numericLiteral(Int)
 }
 
-enum ConditionRelation {
-    case eq
-    case geq
-    case leq
-    case lt
-    case gt
+enum ConditionRelation: String {
+    case eq = "="
+    case geq = ">="
+    case leq = "<="
+    case lt = "<"
+    case gt = ">"
 }
 
 extension ConditionRelation: Codable {}
 
 extension ConditionRelation: Hashable {}
+
+extension ConditionRelation: CustomStringConvertible {
+    var description: String {
+        rawValue
+    }
+}
 
 extension ConditionRelation {
     func evaluate(lhs: Int, rhs: Int) -> Bool {
@@ -214,11 +235,13 @@ struct Condition {
 
 extension Condition: Hashable {}
 
-// extension Condition: Hashable {
-//    static func == (lhs: Condition, rhs: Condition) -> Bool {
-//        lhs === rhs
-//    }
-// }
+extension Condition: CustomStringConvertible {
+    var description: String {
+        """
+        \(subject.description) \(relation.description) \(object.description)
+        """
+    }
+}
 
 // MARK: Persistable
 extension Condition {

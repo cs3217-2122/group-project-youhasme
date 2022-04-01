@@ -9,7 +9,8 @@ struct Rectangle {
     }
 }
 
-extension Rectangle: Codable, Equatable {}
+extension Rectangle: Codable {}
+extension Rectangle: Hashable {}
 
 // MARK: Grid specific functionality
 extension Rectangle {

@@ -61,6 +61,8 @@ extension Level: KeyPathExposable {
     }
 }
 
+extension Level: Hashable {}
+
 extension Level: Codable {}
 
 struct Tile {
@@ -68,4 +70,4 @@ struct Tile {
 }
 
 extension Tile: Codable {}
-extension Tile: Equatable {}
+extension Tile: Hashable {}

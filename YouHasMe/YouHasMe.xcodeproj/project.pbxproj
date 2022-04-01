@@ -78,6 +78,8 @@
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
 		E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */; };
 		E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */; };
+		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
+		E581F08B27F760EA00B1CFCB /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08A27F760EA00B1CFCB /* Audio.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
 		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
 		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
@@ -184,6 +186,8 @@
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
 		E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfoViewModel.swift; sourceTree = "<group>"; };
 		E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerPaletteView.swift; sourceTree = "<group>"; };
+		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E581F08A27F760EA00B1CFCB /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
 		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -411,6 +415,7 @@
 			children = (
 				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
 				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
+				E581F08727F75C3900B1CFCB /* Image.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 		E57ACB2527DC582300F73B27 /* YouHasMe */ = {
 			isa = PBXGroup;
 			children = (
+				E581F08927F760D600B1CFCB /* audio */,
 				E573E95D27EA27BE000D10E4 /* logs */,
 				40AD869127E606F300F42C42 /* storage */,
 				1E6B90C127E5B2A300161E63 /* views */,
@@ -494,6 +500,14 @@
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 			);
 			path = models;
+			sourceTree = "<group>";
+		};
+		E581F08927F760D600B1CFCB /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				E581F08A27F760EA00B1CFCB /* Audio.swift */,
+			);
+			path = audio;
 			sourceTree = "<group>";
 		};
 		E581F52727ECCC5600CAC137 /* Views */ = {
@@ -712,6 +726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
+				E581F08B27F760EA00B1CFCB /* Audio.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
@@ -720,6 +735,7 @@
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
 				E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
+				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */,
