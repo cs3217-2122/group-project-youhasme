@@ -12,26 +12,15 @@ struct StorageUtil {
     static let preloadedLevelNames: [String] = []
 
     static func loadSavedLevels(fileName: String = defaultFileStorageName) -> [Level] {
-
-        let url = getFileURL(from: fileName, with: "json")
+        let jsonStorage = JSONStorage()
         let preloadedLevels = getPreloadedLevels()
-
-        if !saveFileExists(at: url) {
-            return preloadedLevels
+        guard let gameStorage: GameStorage = try? jsonStorage.loadAndDecode(filename: fileName) else {
+            globalLogger.info("Cannot find saved levels")
+            return getPreloadedLevels()
         }
-
-        do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            let storage = try decoder.decode(GameStorage.self, from: data)
-            var updatedLevels = storage.levels
-            updatedLevels.append(contentsOf: preloadedLevels)
-            return updatedLevels
-        } catch {
-            print("error loading levels from json: \(error)")
-        }
-
-        return []
+        var levels = gameStorage.levels
+        levels.append(contentsOf: preloadedLevels)
+        return levels
     }
 
     static func getPreloadedLevels() -> [Level] {
@@ -39,18 +28,16 @@ struct StorageUtil {
     }
 
     static func updateJsonFileSavedLevels(dataFileName: String, savedLevels: [Level]) throws {
+        let jsonStorage = JSONStorage()
         let levelsWithoutPreLoaded = savedLevels.filter({ !preloadedLevelNames.contains($0.name) })
-        let levelsData = try getEncodedLevelData(levels: levelsWithoutPreLoaded)
-
-        let saveFileUrl = getFileURL(from: dataFileName, with: "json")
-        createFileIfNotExists(at: saveFileUrl)
-
-        try levelsData.write(to: saveFileUrl)
+        try jsonStorage.encodeAndSave(
+            object: GameStorage(levels: levelsWithoutPreLoaded), filename: dataFileName
+        )
     }
 
-    static func getFileURL(from name: String, with pathExtension: String) -> URL {
-        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        return directory.appendingPathComponent(name).appendingPathExtension(pathExtension)
+    static func getFileURL(from filename: String, with pathExtension: String) throws -> URL {
+        let storage = Storage(fileExtension: pathExtension)
+        return try storage.getURL(filename: filename)
     }
 
     private static func createFileIfNotExists(at saveFileUrl: URL) {

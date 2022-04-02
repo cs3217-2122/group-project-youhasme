@@ -28,7 +28,7 @@ import XCTest
 //     }
 
 //     func testParse() throws {
-//         levelLayer.tiles = Array(repeatingFactory: {Tile()}, count: dimensions.numCells)
+//         levelLayer.tiles = Array(repeatingFactory: Tile(), count: dimensions.numCells)
 //         levelLayer.tiles[0].entities.append(Entity(entityType: EntityTypes.Nouns.baba))
 //         levelLayer.tiles[1].entities.append(Entity(entityType: EntityTypes.Verbs.vIs))
 //         levelLayer.tiles[2].entities.append(Entity(entityType: EntityTypes.Properties.you))

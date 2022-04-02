@@ -8,12 +8,11 @@
 // Represents a game mechanic, such as the movement mechanic
 protocol GameMechanic {
 
-    // Applies mechanic to levelLayer
+    // Applies mechanic to current state
     //
     // Parameters:
     //  - update: What triggered the update (e.g. user moves right)
-    //  - levelLayer: Current game state
-    // Returns a map of location (x, y , position in tile) of entities to their actions
-    func apply(update: UpdateAction, levelLayer: LevelLayer) -> [Location: [EntityAction]]
-
+    //  - state: Current game state
+    // Returns new state containing updates triggered by mechanic
+    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState
 }

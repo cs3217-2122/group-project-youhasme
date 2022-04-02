@@ -38,8 +38,14 @@ extension String {
   }
 }
 
-private extension String {
+extension String {
   func index(at offset: Int) -> String.Index {
     index(startIndex, offsetBy: offset)
   }
+}
+
+extension String {
+    var isBlank: Bool {
+        self.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+    }
 }
