@@ -10,7 +10,7 @@ import Foundation
 struct AchievementImages {
     static func getAchievementImageString(achievement: Achievement) -> String {
         switch achievement.name {
-        case "Move 10 steps in total":
+        case "Baby Steps":
             return "baba"
         default:
             return "question"

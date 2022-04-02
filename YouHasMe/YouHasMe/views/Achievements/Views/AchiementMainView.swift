@@ -11,11 +11,10 @@ struct AchievementMainView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var achievementsViewModel: AchievementsViewModel
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text("Achievements")
-            
-            if !achievementsViewModel.lockedAchievements.isEmpty {
-                List {
+            List {
+                if !achievementsViewModel.lockedAchievements.isEmpty {
                     Section(header: Text("Locked Achievements")) {
                         ForEach(achievementsViewModel.lockedAchievements) { achievement in
                             AchievementView(achievementsViewModel: achievementsViewModel,
@@ -23,10 +22,8 @@ struct AchievementMainView: View {
                         }
                     }
                 }
-            }
-            
-            if !achievementsViewModel.unlockedAchievements.isEmpty {
-                List {
+                
+                if !achievementsViewModel.unlockedAchievements.isEmpty {
                     Section(header: Text("Unlocked Achievements")) {
                         ForEach(achievementsViewModel.unlockedAchievements) { achievement in
                             AchievementView(achievementsViewModel: achievementsViewModel,

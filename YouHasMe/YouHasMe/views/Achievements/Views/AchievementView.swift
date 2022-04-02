@@ -15,10 +15,12 @@ struct AchievementView: View {
         HStack {
             Image(AchievementImages.getAchievementImageString(achievement: achievement))
                 .resizable()
-                .scaledToFit()
                 .frame(width: CGFloat(achievementsViewModel.imageWidth),
                        height: CGFloat(achievementsViewModel.imageHeight))
-            Text(achievement.name)
+            VStack(alignment: .leading) {
+                Text(achievement.name)
+                Text(achievement.description).font(.caption)
+            }.padding(.leading)
         }
     }
 

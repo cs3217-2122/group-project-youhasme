@@ -7,14 +7,15 @@
 
 import Foundation
 
-class Achievement: Identifiable {
-    var id = UUID()
+class Achievement {
     var name: String
+    var description: String
     var unlockConditions: [UnlockCondition]
     var isUnlocked: Bool
 
-    init(name: String, unlockConditions: [UnlockCondition], isUnlocked: Bool = false) {
+    init(name: String, description: String, unlockConditions: [UnlockCondition], isUnlocked: Bool = false) {
         self.name = name
+        self.description = description
         self.unlockConditions = unlockConditions
         self.isUnlocked = isUnlocked
     }
@@ -36,5 +37,11 @@ class Achievement: Identifiable {
 
     func unlock() {
         isUnlocked = true
+    }
+}
+
+extension Achievement: Identifiable {
+    var id: String {
+        name
     }
 }

@@ -22,10 +22,14 @@ class AchievementsViewModel: ObservableObject {
         self.lockedAchievements = [
 //            Achievement(name: "Design your first level", unlockConditions: [EventUnlockCondition(eventType: )]),
 //            Achievement(name: "Win level Abc", unlockConditions: [EventUnlockCondition(eventType: .WIN, )])
-            Achievement(name: "Move 10 steps in total",
+            Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)])
+                                                                  comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)]),
+            Achievement(name: "Addicted", description: "Move 1,000,000 Steps in Total",
+                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
+                                                                  statisticName: "Lifetime Moves",
+                                                                  comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1_000_000)])
         ]
     }
 
