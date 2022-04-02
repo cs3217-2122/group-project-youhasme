@@ -28,7 +28,7 @@ struct EntityIntent: Hashable {
     }
 
     // Removes all conditions
-    mutating func removeAllConditions() {
+    mutating func makeUnconditional() {
         conditions = []
     }
 

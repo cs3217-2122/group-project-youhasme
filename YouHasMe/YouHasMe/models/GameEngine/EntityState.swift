@@ -9,7 +9,7 @@
 struct EntityState: Hashable {
     var entity: Entity
     var location: Location
-    var intents: Set<EntityIntent> = []
+    var intents: Set<EntityIntent> = []  // Actions that might be performed by this entity
 
     func has(behaviour: Behaviour) -> Bool {
         entity.has(behaviour: behaviour)
@@ -17,25 +17,18 @@ struct EntityState: Hashable {
 
     // Adds intent to perform action unconditionally
     mutating func add(action: EntityAction) {
-        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
-        if var intent = oldIntent {  // Action already present
-            intents.remove(intent)  // Remove old intent
-            intent.removeAllConditions()  // Remove conditions from entent
-            intents.insert(intent)  // Insert new intent
-        } else {  // No intent with action yet
-            intents.insert(EntityIntent(action: action))
-        }
+        var intent = popIntent(action: action) ?? EntityIntent(action: action)
+        intent.makeUnconditional()
+        intents.insert(intent)
     }
 
     // Adds intent to perform action given condition
     mutating func add(action: EntityAction, ifEntityAt condLocation: Location, performs condAction: EntityAction) {
         let condition = EntityActionCondition(location: condLocation, action: condAction)
-        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
-        if var intent = oldIntent {  // Action already present
-            intents.remove(intent)  // Remove old intent
+        if var intent = popIntent(action: action) { // Intent with action found
             intent.addCondition(condition)
-            intents.insert(intent)  // Insert new intent
-        } else {  // No intent with action yet
+            intents.insert(intent)
+        } else {
             intents.insert(EntityIntent(action: action, condition: condition))
         }
     }
@@ -61,11 +54,9 @@ struct EntityState: Hashable {
 
     // Rejects action if present in intents, does nothing otherwise
     mutating func reject(action: EntityAction) {
-        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
-        guard var intent = oldIntent else {
+        guard var intent = popIntent(action: action) else {
             return  // No matching intent
         }
-        intents.remove(intent)  // Remove old intent
         intent.reject()
         intents.insert(intent)  // Insert new intent
     }
@@ -74,5 +65,14 @@ struct EntityState: Hashable {
         intents.contains {
             $0.action == action && $0.isRejected
         }
+    }
+
+    // Pops intent to perform specified action from intents, returns nil if there is no such intent
+    private mutating func popIntent(action: EntityAction) -> EntityIntent? {
+        let intent = intents.first { $0.action == action }
+        if let intent = intent {
+            intents.remove(intent)
+        }
+        return intent
     }
 }
