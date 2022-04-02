@@ -159,9 +159,7 @@ extension MetaLevelPlayViewModel {
     }
 
     func getMessagesViewModel() -> MessagesViewModel {
-        let playerPosition: Point = .zero // TODO
-
-        guard let tile = currMetaLevel.getTile(at: playerPosition) else {
+        guard let tile = selectedTile else {
             fatalError("should not be nil")
         }
 

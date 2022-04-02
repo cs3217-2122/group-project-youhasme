@@ -1,10 +1,15 @@
 import Foundation
 
+
 class RuleEngine {
     var wellFormedRules: [Rule] = []
-    private var ruleParser = RuleParser()
+    private var ruleParser = RuleParser(
+        sentenceMatchingStrategy: MaximumLengthMatchingStrategy(),
+        sentenceParsingStrategy: DeterministicFiniteAutomaton()
+    )
+    
     private var ruleValidator = RuleValidator()
-
+    
     // Adds behaviours to entities of levelLayer based on rules
     func applyRules(to levelLayer: LevelLayer) -> LevelLayer {
         let rules = ruleParser.parse(block: levelLayer.getAbstractRepresentation())
