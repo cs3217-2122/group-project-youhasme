@@ -8,7 +8,6 @@
 import Foundation
 
 struct UploadedChunkNode {
-    var uploaderID: String
     var persistedChunkNode: PersistableChunkNode
 }
 

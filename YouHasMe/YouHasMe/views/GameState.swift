@@ -57,6 +57,8 @@ enum ScreenState {
     case designing(playableLevel: PlayableLevel? = nil)
     case designingMeta(metaLevelLoadable: Loadable? = nil)
     case mainmenu
+    case roomSelection
+    case onlineMetaLevelSelection
 }
 
 extension ScreenState: Equatable {}
@@ -79,6 +81,10 @@ class GameState: ObservableObject {
     @Published var stateStack: [ScreenState] = []
     init() {
         stateStack.append(.mainmenu)
+    }
+    
+    func append(state: ScreenState) {
+        stateStack.append(state)
     }
 }
 
@@ -124,5 +130,13 @@ extension GameState {
 
     func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
         MetaLevelSelectViewModel()
+    }
+    
+    func getRoomListViewModel() -> RoomListViewModel {
+        RoomListViewModel()
+    }
+    
+    func getUploadedMetaLevelViewModel() -> UploadedMetaLevelSelectionViewModel {
+        UploadedMetaLevelSelectionViewModel()
     }
 }

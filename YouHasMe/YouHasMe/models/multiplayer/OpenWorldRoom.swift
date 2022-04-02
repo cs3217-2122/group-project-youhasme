@@ -11,8 +11,11 @@ import FirebaseFirestoreSwift
 struct OpenWorldRoom {
     @DocumentID var id : String?
     var name: String
-    var joinCode: String
+    var joinCode: String = UUID().uuidString
     var playerIds: [String]
+    var entryMetaLevelDocumentId: String
+    // Mapping from Player Ids to MetaLevelRoom Ids
+    var lastKnownPlayerLocations: [String: String] = [:]
 }
 
 
