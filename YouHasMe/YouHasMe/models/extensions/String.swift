@@ -1,6 +1,7 @@
 import Foundation
 
-// reference: https://stackoverflow.com/questions/45562662/how-can-i-use-string-substring-in-swift-4-substringto-is-deprecated-pleas
+// reference: https://stackoverflow.com/questions/45562662/how-can-i-use-string-substring-in-swift-4-substringto
+//  -is-deprecated-pleas
 // Answer by user: dimpiax
 
 extension String {

@@ -6,11 +6,13 @@
 //
 
 struct GameEngine {
+
     private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
+        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic(),
     ]
     private let ruleEngine = RuleEngine()
 
+    var gameStateManager: GameStateManager
     private(set) var game: Game  // Current game state
 
     private(set) var status: GameEngineStatus = .running
@@ -26,6 +28,10 @@ struct GameEngine {
     // Updates game state given action
     mutating func apply(action: UpdateType) {
         status = .running
+        if action == .undo {
+            performUndo()
+            return
+        }
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [game]
         var nextAction = action
@@ -37,6 +43,7 @@ struct GameEngine {
             } else if previousStates.contains(newState) {  // If returning to earlier states
                 status = .infiniteLoop
                 return
+
             }
             previousStates.append(newState)
             nextAction = .tick  // Apply .tick after first action
@@ -50,6 +57,15 @@ struct GameEngine {
         newGame.levelLayer = resolveActions(in: state)  // Apply updates
         newGame.gameStatus = state.gameStatus
         return newGame
+    }
+
+    private mutating func performUndo() {
+        guard let previousLayer = gameStateManager.getPreviousLayer() else {
+            return
+        }
+
+        levelLayer = previousLayer
+        levelLayer = ruleEngine.applyRules(to: levelLayer)
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions

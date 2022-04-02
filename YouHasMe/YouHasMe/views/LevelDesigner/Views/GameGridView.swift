@@ -55,6 +55,8 @@ struct GameGridView: View {
 
     var body: some View {
         GeometryReader { proxy in
+            VStack {
+                Spacer()
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -82,6 +84,17 @@ struct GameGridView: View {
                     Button("yay!", role: .cancel) {}
                 }.alert("No infinite loops allowed!", isPresented: $showingLoopAlert) {
                     Button("ok!", role: .cancel) {}
+                }
+                Spacer()
+            }
+                HStack {
+                    Spacer()
+                   if gameState.state == .playing {
+                       Button("Undo") {
+                           gameEngine.step(action: .undo)
+                           levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                       }
+                   }
                 }
                 Spacer()
             }

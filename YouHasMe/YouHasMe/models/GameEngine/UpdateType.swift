@@ -11,6 +11,7 @@ enum UpdateType {
     case moveDown
     case moveLeft
     case moveRight
+    case undo  // No movement
     case tick  // No movement
 
     // Returns (dx, dy)
