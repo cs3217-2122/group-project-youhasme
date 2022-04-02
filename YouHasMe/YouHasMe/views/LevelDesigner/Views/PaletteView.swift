@@ -11,7 +11,7 @@ struct PaletteView: View {
         ScrollView(.horizontal) {
             HStack {
                 ForEach(levelDesignerViewModel.availableEntityTypes, id: \.self) { entityType in
-                    EntityView(entityType: entityType)
+                    EntityView(viewModel: levelDesignerViewModel.getTileViewModel(for: entityType))
                         .frame(width: 50, height: 50)
                         .onTapGesture {
                             levelDesignerViewModel.selectEntityType(type: entityType)
@@ -25,6 +25,6 @@ struct PaletteView: View {
 
 // struct PaletteView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        Pal	etteView()
+//        PaletteView()
 //    }
 // }

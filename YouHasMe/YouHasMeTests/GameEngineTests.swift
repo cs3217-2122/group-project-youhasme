@@ -19,7 +19,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.update(action: .moveDown)
+        gameEngine.step(action: .moveDown)
         print(gameEngine.levelLayer)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
@@ -41,7 +41,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.update(action: .moveRight)
+        gameEngine.step(action: .moveRight)
         print(gameEngine.levelLayer)
 
     }

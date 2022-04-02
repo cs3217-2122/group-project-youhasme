@@ -1,5 +1,6 @@
 excluded:
   - Pods
+  - YouHasMe/views/*/Views
 
 opt_in_rules:
   - anyobject_protocol

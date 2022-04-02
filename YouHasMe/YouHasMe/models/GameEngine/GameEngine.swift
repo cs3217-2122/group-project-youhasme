@@ -6,56 +6,38 @@
 //
 
 struct GameEngine {
-    let gameMechanics = [MoveMechanic()]
+    let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
+    let ruleEngine = RuleEngine()
 
-    private var gameStateManager: GameStateManager
     var levelLayer: LevelLayer
 
     init(levelLayer: LevelLayer) {
-        self.levelLayer = RuleEngine().applyRules(to: levelLayer)
+        self.levelLayer = ruleEngine.applyRules(to: levelLayer)
         self.gameStateManager = GameStateManager(levelLayer: levelLayer)
     }
 
     // Updates game state given action
-    mutating func update(action: UpdateAction) {
+    mutating func step(action: UpdateType) {
         if action == .undo {
             performUndo()
             return
         }
 
-        var updates: [Location: [EntityAction]] = [:]  // Map of coordinates of entity to actions
-         print(action)
-        // Get updates of all mechanics
-        for mechanic in gameMechanics {
-            let newUpdates = mechanic.apply(update: action, levelLayer: levelLayer)
-            updates.merge(newUpdates, uniquingKeysWith: { $0 + $1 })
-        }
+        let state = applyMechanics(action: action)
 
         // Apply updates
-        var newLayer = levelLayer
-        // Copy unchanged entities
-        for r in 0..<levelLayer.dimensions.height {
-            for c in 0..<levelLayer.dimensions.width {
-                let entities = levelLayer.getTileAt(x: c, y: r).entities
-                var newTile = Tile()
-                for i in 0..<entities.count where updates[Location(x: c, y: r, z: i)] == nil {
-                    newTile.entities.append(entities[i])
-                }
-                newLayer.setTileAt(x: c, y: r, tile: newTile)
-            }
-        }
-        // Add changed entities
-        for (location, actions) in updates {
-            let entity = levelLayer.getTileAt(x: location.x, y: location.y).entities[location.z]
-            for action in actions {
-                if case let .move(dx, dy) = action {  // If we are moving entity
-                    newLayer.add(entity: entity, x: location.x + dx, y: location.y + dy)
-                }
+        var newLayer = LevelLayer(dimensions: levelLayer.dimensions)
+        for entityState in state.entityStates {
+            var cur = entityState
+            let location = cur.location
+            if case let .move(dx, dy) = cur.popAction() {  // If we are moving entity
+                newLayer.add(entity: cur.entity, x: location.x + dx, y: location.y + dy)
+            } else {
+                newLayer.add(entity: cur.entity, x: location.x, y: location.y)
             }
         }
 
-        levelLayer = RuleEngine().applyRules(to: newLayer)
-        gameStateManager.addToLayerHistory(levelLayer)
+        levelLayer = ruleEngine.applyRules(to: newLayer)
     }
 
     private mutating func performUndo() {
@@ -64,5 +46,20 @@ struct GameEngine {
         }
 
         levelLayer = previousLayer
+        levelLayer = ruleEngine.applyRules(to: newLayer)
+    }
+
+    // Applies mechanics to level layer and returns resulting state with entities and their actions
+    private func applyMechanics(action: UpdateType) -> LevelLayerState {
+        var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
+        var oldState = curState
+        // Apply all mechanics until there are no more changes to state
+        repeat {
+            oldState = curState
+            for mechanic in gameMechanics {
+                curState = mechanic.apply(update: action, state: curState)
+            }
+        } while curState != oldState
+        return curState
     }
 }

@@ -27,7 +27,7 @@ struct GameGridView: View {
                 guard gameState.state == .playing else {
                     return
                 }
-                var updateAction: UpdateAction = .tick
+                var updateAction: UpdateType = .tick
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height
                 if abs(horizontalAmount) > abs(verticalAmount) {
@@ -44,7 +44,7 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.update(action: updateAction)
+                gameEngine.step(action: updateAction)
                 levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
             }
     }
@@ -59,7 +59,8 @@ struct GameGridView: View {
                     ForEach((0..<levelDesignerViewModel.getHeight()), id: \.self) { row in
                         HStack(spacing: 0) {
                             ForEach((0..<levelDesignerViewModel.getWidth()), id: \.self) { col in
-                                EntityView(entityType: levelDesignerViewModel.getEntityTypeAtPos(x: col, y: row))
+                                let tileViewModel = levelDesignerViewModel.getTileViewModel(at: Point(x: col, y: row))
+                                EntityView(viewModel: tileViewModel)
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
                                     .border(.pink)
                                     .onTapGesture {

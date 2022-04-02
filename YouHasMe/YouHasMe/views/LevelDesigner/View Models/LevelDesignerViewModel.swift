@@ -14,6 +14,10 @@ class LevelDesignerViewModel: ObservableObject {
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
 
+    convenience init() {
+        self.init(currLevel: Level())
+    }
+
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel
@@ -40,6 +44,10 @@ class LevelDesignerViewModel: ObservableObject {
         } else {
             return tile.entities[0].entityType
         }
+    }
+
+    func getEntityTypeAtPos(point: Point) -> EntityType? {
+        getEntityTypeAtPos(x: point.x, y: point.y)
     }
 
     func removeEntityFromPos(x: Int, y: Int) {
@@ -118,10 +126,6 @@ class LevelDesignerViewModel: ObservableObject {
         }
     }
 
-//    func undo() {
-//
-//    }
-
 //    func playLevel() {
 //        
 //    }
@@ -133,5 +137,16 @@ class LevelDesignerViewModel: ObservableObject {
         currLevel.setLevelLayerAtIndex(currLevelLayerIndex, value: currLevelLayer)
         updatedLevels.append(currLevel)
         return updatedLevels
+    }
+}
+
+// MARK: Child view models
+extension LevelDesignerViewModel {
+    func getTileViewModel(for entityType: EntityType) -> EntityViewModel {
+        EntityViewModel(entityType: entityType)
+    }
+
+    func getTileViewModel(at point: Point) -> EntityViewModel {
+        EntityViewModel(entityType: getEntityTypeAtPos(point: point))
     }
 }

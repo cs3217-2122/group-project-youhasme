@@ -1,12 +1,12 @@
 //
-//  UpdateAction.swift
+//  UpdateType.swift
 //  YouHasMe
 //
 //  Created by wayne on 19/3/22.
 //
 
 // Represents type of update to game state
-enum UpdateAction {
+enum UpdateType {
     case moveUp
     case moveDown
     case moveLeft
