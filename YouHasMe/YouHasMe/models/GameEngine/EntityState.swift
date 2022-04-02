@@ -15,12 +15,16 @@ struct EntityState: Hashable {
         entity.has(behaviour: behaviour)
     }
 
-    // Adds intent to perform action if not already present
+    // Adds intent to perform action unconditionally
     mutating func add(action: EntityAction) {
-        guard intents.allSatisfy({ $0.action != action }) else {
-            return  // Intent already added
+        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
+        if var intent = oldIntent {  // Action already present
+            intents.remove(intent)  // Remove old intent
+            intent.removeAllConditions()  // Remove conditions from entent
+            intents.insert(intent)  // Insert new intent
+        } else { // No intent with action yet
+            intents.insert(EntityIntent(action: action))
         }
-        intents.insert(EntityIntent(action: action))
     }
 
     // Returns next unrejected action to be performed or nil if there is no such action
@@ -44,14 +48,13 @@ struct EntityState: Hashable {
 
     // Rejects action if present in intents, does nothing otherwise
     mutating func reject(action: EntityAction) {
-        let newIntents: [EntityIntent] = intents.map {
-            var intent = $0
-            if intent.action == action {
-                intent.isRejected = true
-            }
-            return intent
+        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
+        guard var intent = oldIntent else {
+            return  // No matching intent
         }
-        intents = Set(newIntents)
+        intents.remove(intent)  // Remove old intent
+        intent.reject()
+        intents.insert(intent)  // Insert new intent
     }
 
     func hasRejected(action: EntityAction) -> Bool {
