@@ -127,11 +127,33 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
-        print(levelLayer)
+        //print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
-        print(gameEngine.game.levelLayer)
+        //print(gameEngine.game.levelLayer)
         let typeAt22 = gameEngine.game.levelLayer.getTileAt(x: 2, y: 2).entities[0].entityType
         XCTAssertEqual(typeAt22, EntityTypes.NounInstances.wall)
+    }
+
+    func testInfiniteLoop() throws {
+        var levelLayer = LevelLayer(dimensions: Rectangle(width: 5, height: 5))
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 0, y: 0)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 0)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 2, y: 0)
+
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 0, y: 1)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 1)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.wall), x: 2, y: 2)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 3, y: 1)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 4, y: 1)
+
+        levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
+
+        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        // print(levelLayer)
+        var gameEngine = GameEngine(levelLayer: levelLayer)
+        gameEngine.apply(action: .moveUp)
+        // print(gameEngine.game.levelLayer)
+        XCTAssertEqual(gameEngine.status, .infiniteLoop)
     }
 }
