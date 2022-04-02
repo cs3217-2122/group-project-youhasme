@@ -7,7 +7,7 @@
 
 import Combine
 
-struct GameEngine {
+struct GameEngine: GameEventPublisher {
     let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
     let ruleEngine = RuleEngine()
     var gameEventPublisher: AnyPublisher<GameEvent, Never> {

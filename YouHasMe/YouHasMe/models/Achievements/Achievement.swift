@@ -30,7 +30,7 @@ class Achievement {
 
     func unlockIfConditionsMet() {
         if shouldUnlock() {
-            print("Unlocked")
+            globalLogger.info("Achievement [\(name)] Unlocked")
             unlock()
         }
     }

@@ -10,6 +10,10 @@ struct GameView: View {
     @StateObject var achievementsViewModel = AchievementsViewModel()
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
+    init() {
+//        achievementsViewModel.setSubscriptionsFor(<#T##gameEventPublisher: AnyPublisher<GameEvent, Never>##AnyPublisher<GameEvent, Never>#>)
+    }
+
     var body: some View {
         NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: gameState.state == .mainmenu ? nil : ({
             switch gameState.state {

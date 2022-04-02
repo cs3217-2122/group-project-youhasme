@@ -10,6 +10,7 @@ import SwiftUI
 struct AchievementMainView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var achievementsViewModel: AchievementsViewModel
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Achievements")
@@ -22,7 +23,7 @@ struct AchievementMainView: View {
                         }
                     }
                 }
-                
+
                 if !achievementsViewModel.unlockedAchievements.isEmpty {
                     Section(header: Text("Unlocked Achievements")) {
                         ForEach(achievementsViewModel.unlockedAchievements) { achievement in

@@ -15,7 +15,7 @@ struct GameGridView: View {
         self.levelDesignerViewModel = levelDesignerViewModel
         self.achievementsViewModel = achievementsViewModel
         self.gameEngine = GameEngine(levelLayer: levelDesignerViewModel.currLevelLayer)
-        achievementsViewModel.setSubscriptionsFor(gameEngine)
+        achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
 
     func gridSize(proxy: GeometryProxy) -> CGFloat {

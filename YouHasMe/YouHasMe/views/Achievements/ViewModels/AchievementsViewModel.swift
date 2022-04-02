@@ -13,7 +13,7 @@ class AchievementsViewModel: ObservableObject {
     var unlockedAchievements: [Achievement] = []
     var imageWidth: Float = 40
     var imageHeight: Float = 40
-    private var cancellables = [AnyCancellable]()
+    private var subscriptions = [AnyCancellable]()
     private var statistics = Statistics()
 
     init() {
@@ -25,11 +25,13 @@ class AchievementsViewModel: ObservableObject {
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)]),
-            Achievement(name: "Addicted", description: "Move 1,000,000 Steps in Total",
+                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                  unlockValue: 10)]),
+            Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1_000_000)])
+                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                  unlockValue: 1_000_000)])
         ]
     }
 
@@ -37,8 +39,8 @@ class AchievementsViewModel: ObservableObject {
         statistics.resetLevelStats()
     }
 
-    func setSubscriptionsFor(_ engine: GameEngine) {
-        engine.gameEventPublisher.sink { [weak self] gameEvent in
+    func setSubscriptionsFor(_ gameEventPublisher: AnyPublisher<GameEvent, Never>) {
+        gameEventPublisher.sink { [weak self] gameEvent in
             guard let self = self else {
                 return
             }
@@ -57,6 +59,6 @@ class AchievementsViewModel: ObservableObject {
                     self.unlockedAchievements.append(achievement)
                 }
             }
-        }.store(in: &cancellables)
+        }.store(in: &subscriptions)
     }
 }
