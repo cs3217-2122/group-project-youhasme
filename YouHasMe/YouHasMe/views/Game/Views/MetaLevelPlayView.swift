@@ -151,4 +151,3 @@ struct TravelInfoView: View {
         Text("travel")
     }
 }
-
