@@ -126,7 +126,7 @@ class LevelDesignerViewModel: ObservableObject, GameEventPublisher {
             savedLevels = getUpdatedSavedLevels(levelName: levelName)
             try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
                                                       savedLevels: savedLevels)
-            gameEventPublisher.send(GameEvent(type: .designLevel))
+            gameEventSubject.send(GameEvent(type: .designLevel))
             return "Successfully saved level: \(levelName)"
         }
     }

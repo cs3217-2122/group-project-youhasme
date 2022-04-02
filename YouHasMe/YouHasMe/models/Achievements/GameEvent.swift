@@ -7,18 +7,14 @@
 
 import Foundation
 
-class GameEvent {
-    enum type: Int {
-        case move
-        case win
-        case designLevel
+class GameEvent: AbstractGameEvent {
+    var type: GameEventType
+
+    init(type: GameEventType) {
+        self.type = type
     }
 
-    var type: GameEvent.type
-    var entityType: EntityType?
-
-    init(type: GameEvent.type, entityType: EntityType? = nil) {
-        self.type = type
-        self.entityType = entityType
+    func hasEvent(eventType: GameEventType) -> Bool {
+        type == eventType
     }
 }

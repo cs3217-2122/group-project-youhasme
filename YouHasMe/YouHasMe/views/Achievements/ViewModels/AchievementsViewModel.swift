@@ -45,11 +45,9 @@ class AchievementsViewModel: ObservableObject {
                 return
             }
 
-            switch gameEvent.type {
-            case .move:
-                self.statistics.addMove()
-            case .win:
-                self.statistics.addWin()
+            // jx todo: refactor
+            for statistic in self.statistics.gameStatistics.values {
+                statistic.handleGameEvent(event: gameEvent)
             }
 
             for achievement in self.lockedAchievements {

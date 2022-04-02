@@ -16,11 +16,18 @@ class GameStatistic: Codable, Hashable {
     var name: String
     var value: Int
     var type: StatisticType
+    var entity: EntityType?
+    var gameEvent: GameEventType?
+    var levelId: String?
 
-    init(name: String, value: Int, statisticType: StatisticType) {
+    init(name: String, value: Int, statisticType: StatisticType, entity: EntityType? = nil,
+         gameEvent: GameEventType? = nil, levelId: String? = nil) {
         self.name = name
         self.value = value
         self.type = statisticType
+        self.entity = entity
+        self.gameEvent = gameEvent
+        self.levelId = levelId
     }
 
     func increase() {
@@ -38,5 +45,39 @@ class GameStatistic: Codable, Hashable {
 
     func hash(into hasher: inout Hasher) {
         hasher.combine(name)
+    }
+
+    func handleGameEvent(event: AbstractGameEvent) {
+        if !hasValidEntity(event: event) {
+            return
+        }
+        if !hasValidEvent(event: event) {
+            return
+        }
+        if !hasValidLevel(event: event) {
+            return
+        }
+        increase()
+    }
+
+    func hasValidEntity(event: AbstractGameEvent) -> Bool {
+        guard let entity = entity else {
+            return true
+        }
+        return event.hasEntity(entityType: entity)
+    }
+
+    func hasValidEvent(event: AbstractGameEvent) -> Bool {
+        guard let gameEvent = gameEvent else {
+            return true
+        }
+        return event.hasEvent(eventType: gameEvent)
+    }
+
+    func hasValidLevel(event: AbstractGameEvent) -> Bool {
+        guard let levelId = levelId else {
+            return true
+        }
+        return event.hasLevel(levelName: levelId)
     }
 }
