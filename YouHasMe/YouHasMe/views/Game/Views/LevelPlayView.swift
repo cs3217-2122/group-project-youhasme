@@ -28,7 +28,6 @@ struct LevelPlayView: View {
             }.padding()
         }
     }
-
 }
 
 // struct LevelPlayView_Previews: PreviewProvider {

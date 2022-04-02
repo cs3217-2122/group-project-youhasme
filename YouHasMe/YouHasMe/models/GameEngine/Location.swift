@@ -13,4 +13,8 @@ struct Location: Hashable {
     func isAt(x: Int, y: Int) -> Bool {
         self.x == x && self.y == y
     }
+
+    func isOverlapping(with other: Location) -> Bool {
+        isAt(x: other.x, y: other.y)
+    }
 }

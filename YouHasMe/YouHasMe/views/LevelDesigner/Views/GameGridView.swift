@@ -10,6 +10,8 @@ struct GameGridView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     @ObservedObject var achievementsViewModel: AchievementsViewModel
     @State var gameEngine: GameEngine
+    @State var showingWinAlert = false
+    @State var showingLoopAlert = false
 
     init(levelDesignerViewModel: LevelDesignerViewModel, achievementsViewModel: AchievementsViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
@@ -24,7 +26,7 @@ struct GameGridView: View {
         return min(width, height)
     }
 
-    var dragGesture : some Gesture {
+    var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
                 guard gameState.state == .playing else {
@@ -47,13 +49,17 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.step(action: updateAction)
-                levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                gameEngine.apply(action: updateAction)
+                showingWinAlert = gameEngine.currentGame.gameStatus == .win
+                showingLoopAlert = gameEngine.status == .infiniteLoop
+                levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
             }
     }
 
     var body: some View {
         GeometryReader { proxy in
+            VStack {
+                Spacer()
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -77,6 +83,21 @@ struct GameGridView: View {
                             }
                         }
                     }
+                }.alert("You Win!", isPresented: $showingWinAlert) {
+                    Button("yay!", role: .cancel) {}
+                }.alert("No infinite loops allowed!", isPresented: $showingLoopAlert) {
+                    Button("ok!", role: .cancel) {}
+                }
+                Spacer()
+            }
+                HStack {
+                    Spacer()
+                   if gameState.state == .playing {
+                       Button("Undo") {
+                           gameEngine.undo()
+                           levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
+                       }
+                   }
                 }
                 Spacer()
             }
