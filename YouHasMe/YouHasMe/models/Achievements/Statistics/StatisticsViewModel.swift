@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Statistics: Codable {
+class StatisticsViewModel: Codable {
     var gameStatistics: [String: GameStatistic] = [:]
 
     init() {
@@ -35,12 +35,17 @@ class Statistics: Codable {
         getStatistic(name: "Level Moves").reset()
     }
 
+    func addLevelsDesigned() {
+        getStatistic(name: "Levels Designed").increase()
+    }
+
     // jx todo: change to load from storage
     func loadStatistics() {
-        let stat1 = GameStatistic(name: "Level Moves", value: 0)
-        let stat2 = GameStatistic(name: "Lifetime Moves", value: 0)
-        let stat3 = GameStatistic(name: "Lifetime Wins", value: 0)
-        let stats = [stat1, stat2, stat3]
+        let stat1 = GameStatistic(name: "Level Moves", value: 0, statisticType: .level)
+        let stat2 = GameStatistic(name: "Lifetime Moves", value: 0, statisticType: .lifetime)
+        let stat3 = GameStatistic(name: "Lifetime Wins", value: 0, statisticType: .lifetime)
+        let stat4 = GameStatistic(name: "Levels Designed", value: 0, statisticType: .lifetime)
+        let stats = [stat1, stat2, stat3, stat4]
         for stat in stats {
             gameStatistics[stat.name] = stat
         }
@@ -55,6 +60,8 @@ class Statistics: Codable {
     }
 
     func resetLevelStats() {
-        resetLevelMoves()
+        for statistic in gameStatistics.values where statistic.type == .level {
+            statistic.reset()
+        }
     }
 }

@@ -20,7 +20,7 @@ class NumericUnlockCondition: UnlockCondition {
     var comparison: Comparison
     var unlockValue: Int
 
-    init(statistics: Statistics, statisticName: String, comparison: Comparison, unlockValue: Int) {
+    init(statistics: StatisticsViewModel, statisticName: String, comparison: Comparison, unlockValue: Int) {
         self.statistic = statistics.getStatistic(name: statisticName)
         self.comparison = comparison
         self.unlockValue = unlockValue

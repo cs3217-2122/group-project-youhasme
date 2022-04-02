@@ -8,17 +8,24 @@
 import Foundation
 
 class GameStatistic: Codable, Hashable {
+    enum StatisticType: Int, Codable {
+        case level
+        case lifetime
+    }
+
     var name: String
     var value: Int
+    var type: StatisticType
 
-    init(name: String, value: Int) {
+    init(name: String, value: Int, statisticType: StatisticType) {
         self.name = name
         self.value = value
+        self.type = statisticType
     }
 
     func increase() {
         value += 1
-        print("\(name) increased to \(value)")
+        globalLogger.info("\(name) increased to \(value)")
     }
 
     func reset() {

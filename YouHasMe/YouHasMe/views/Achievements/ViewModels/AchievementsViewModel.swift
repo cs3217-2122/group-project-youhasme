@@ -14,7 +14,7 @@ class AchievementsViewModel: ObservableObject {
     var imageWidth: Float = 40
     var imageHeight: Float = 40
     private var subscriptions = [AnyCancellable]()
-    private var statistics = Statistics()
+    private var statistics = StatisticsViewModel()
 
     init() {
         // jx todo: implement pre-loaded achievements
