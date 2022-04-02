@@ -31,14 +31,10 @@ class RuleParser {
                 )
             }
         }
-        
+
         for sentence in sentences {
             rules.append(contentsOf: sentenceParsingStrategy.parse(sentence: sentence))
         }
         return rules
     }
 }
-
-
-
-

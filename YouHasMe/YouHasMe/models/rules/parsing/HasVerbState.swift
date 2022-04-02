@@ -6,8 +6,15 @@
 //
 
 import Foundation
-class HasVerbState: DFAState {
+final class HasVerbState: DFAState {
     weak var delegate: DFATransitionDelegate?
+    var unconfirmedRulesData: RulesData
+    let isAccepting = false
+
+    init(unconfirmedRulesData: RulesData) {
+        self.unconfirmedRulesData = unconfirmedRulesData
+    }
+
     func read(entityType: Classification) {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -15,8 +22,8 @@ class HasVerbState: DFAState {
 
         switch entityType {
         case .noun(let noun):
-            delegate.rulesData.hasObjects.append(noun)
-            delegate.stateTransition(to: HasVerbConcatNounState())
+            unconfirmedRulesData.hasObjects.append(noun)
+            delegate.stateTransition(to: HasVerbConcatNounState(unconfirmedRulesData: unconfirmedRulesData))
         default:
             delegate.stateTransition(to: RejectingState())
         }

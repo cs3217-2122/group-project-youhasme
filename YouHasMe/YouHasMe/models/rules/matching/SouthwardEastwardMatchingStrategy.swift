@@ -6,26 +6,26 @@
 //
 
 import Foundation
-class MaximumLengthMatchingStrategy: SentenceMatchingStrategy {
+class SouthwardEastwardMatchingStrategy: SentenceMatchingStrategy {
     func match(block: EntityBlock, startingFrom index: (i: Int, j: Int)) -> [Sentence] {
         let (i, j) = index
-        var verticalCandidateSentence: Sentence = []
+        var southwardCandidateSentence: Sentence = []
         for k in i..<block.count {
             guard let entityTypes = block[k][j],
                   let metaData = entityTypes.first(where: { $0.isMetaData }) else {
                 break
             }
 
-            verticalCandidateSentence.append(metaData)
+            southwardCandidateSentence.append(metaData)
         }
-        var horizontalCandidateSentence: Sentence = []
+        var eastwardCandidateSentence: Sentence = []
         for k in j..<block[0].count {
             guard let entityTypes = block[i][k],
                   let metaData = entityTypes.first(where: { $0.isMetaData }) else {
                 break
             }
-            horizontalCandidateSentence.append(metaData)
+            eastwardCandidateSentence.append(metaData)
         }
-        return [verticalCandidateSentence, horizontalCandidateSentence]
+        return [southwardCandidateSentence, eastwardCandidateSentence]
     }
 }

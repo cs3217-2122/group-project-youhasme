@@ -99,7 +99,7 @@ class LevelDesignerViewModel: ObservableObject {
         }
 
         do {
-            print(currLevel.baseLevel)
+//            print(currLevel.baseLevel)
             try levelStorage.saveLevel(currLevel)
             return "Successfully saved level: \(levelName)"
         } catch {

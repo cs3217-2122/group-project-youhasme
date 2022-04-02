@@ -6,8 +6,15 @@
 //
 
 import Foundation
-class IsVerbConcatNounPropState: DFAState {
+final class IsVerbConcatNounPropState: DFAState {
     weak var delegate: DFATransitionDelegate?
+    var unconfirmedRulesData: RulesData
+    let isAccepting = true
+
+    init(unconfirmedRulesData: RulesData) {
+        self.unconfirmedRulesData = unconfirmedRulesData
+    }
+
     func read(entityType: Classification) {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -17,7 +24,7 @@ class IsVerbConcatNounPropState: DFAState {
             delegate.stateTransition(to: RejectingState())
             return
         }
-        
-        delegate.stateTransition(to: IsVerbPrimedState())
+
+        delegate.stateTransition(to: IsVerbPrimedState(unconfirmedRulesData: unconfirmedRulesData))
     }
 }

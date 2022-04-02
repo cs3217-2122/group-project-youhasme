@@ -6,8 +6,15 @@
 //
 
 import Foundation
-class IsVerbPrimedState: DFAState {
+final class IsVerbPrimedState: DFAState {
     weak var delegate: DFATransitionDelegate?
+    var unconfirmedRulesData: RulesData
+    let isAccepting = false
+
+    init(unconfirmedRulesData: RulesData) {
+        self.unconfirmedRulesData = unconfirmedRulesData
+    }
+
     func read(entityType: Classification) {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -15,13 +22,13 @@ class IsVerbPrimedState: DFAState {
 
         switch entityType {
         case .noun(let noun):
-            delegate.rulesData.isObjects.append(noun)
-            delegate.stateTransition(to: IsVerbConcatNounPropState())
+            unconfirmedRulesData.isObjects.append(noun)
+            delegate.stateTransition(to: IsVerbConcatNounPropState(unconfirmedRulesData: unconfirmedRulesData))
         case .property(let property):
-            delegate.rulesData.properties.append(property)
-            delegate.stateTransition(to: IsVerbConcatNounPropState())
+            unconfirmedRulesData.properties.append(property)
+            delegate.stateTransition(to: IsVerbConcatNounPropState(unconfirmedRulesData: unconfirmedRulesData))
         case .verb(let verbType) where verbType == .vHas:
-            delegate.stateTransition(to: HasVerbState())
+            delegate.stateTransition(to: HasVerbState(unconfirmedRulesData: unconfirmedRulesData))
         default:
             delegate.stateTransition(to: RejectingState())
         }

@@ -7,9 +7,10 @@
 
 import Foundation
 class RejectingState: DFAState {
-    weak var delegate: DFATransitionDelegate? = nil
+    weak var delegate: DFATransitionDelegate?
+    var unconfirmedRulesData = RulesData()
+    let isAccepting = false
+
     // Rejection state can only lead to itself.
-    func read(entityType: Classification) {
-        return
-    }
+    func read(entityType: Classification) {}
 }

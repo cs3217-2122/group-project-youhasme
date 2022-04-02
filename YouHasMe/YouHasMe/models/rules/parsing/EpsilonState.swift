@@ -6,9 +6,11 @@
 //
 
 import Foundation
-class EpsilonState: DFAState {
+final class EpsilonState: DFAState {
     weak var delegate: DFATransitionDelegate?
-    
+    var unconfirmedRulesData = RulesData()
+    let isAccepting = false
+
     func read(entityType: Classification) {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -16,8 +18,8 @@ class EpsilonState: DFAState {
 
         switch entityType {
         case .noun(let noun):
-            delegate.rulesData.receivers.append(noun)
-            delegate.stateTransition(to: NounState())
+            unconfirmedRulesData.receivers.append(noun)
+            delegate.stateTransition(to: NounState(unconfirmedRulesData: unconfirmedRulesData))
         default:
             delegate.stateTransition(to: RejectingState())
         }

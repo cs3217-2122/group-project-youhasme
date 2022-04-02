@@ -6,9 +6,15 @@
 //
 
 import Foundation
-class NounConcatAndState: DFAState {
+final class NounConcatAndState: DFAState {
     weak var delegate: DFATransitionDelegate?
-    
+    let isAccepting = false
+    var unconfirmedRulesData: RulesData
+
+    init(unconfirmedRulesData: RulesData) {
+        self.unconfirmedRulesData = unconfirmedRulesData
+    }
+
     func read(entityType: Classification) {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -18,8 +24,8 @@ class NounConcatAndState: DFAState {
             delegate.stateTransition(to: RejectingState())
             return
         }
-        
-        delegate.rulesData.receivers.append(noun)
-        delegate.stateTransition(to: NounState())
+
+        unconfirmedRulesData.receivers.append(noun)
+        delegate.stateTransition(to: NounState(unconfirmedRulesData: unconfirmedRulesData))
     }
 }
