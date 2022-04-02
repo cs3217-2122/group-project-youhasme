@@ -10,14 +10,14 @@ import SwiftUI
 struct LevelPlayView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+    
     var body: some View {
         VStack {
             GameGridView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()
             HStack {
                 Button(action: {
-                    levelDesignerViewModel.resetFromPlay()
-                    gameState.state = .designing()
+                    gameState.stateStack.removeLast()
                 }) {
                     Text("Back to Designing")
                 }

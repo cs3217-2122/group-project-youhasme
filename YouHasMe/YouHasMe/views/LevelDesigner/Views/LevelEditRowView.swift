@@ -11,7 +11,6 @@ import SwiftUI
 struct LevelEditRowView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: LevelDesignerViewModel
-//    @State var levelName = ""
     @State var showSaveLevelAlert = false
     @State var saveMessage = ""
     @State var showUnsavedChangesPrompt = false
@@ -53,8 +52,7 @@ struct LevelEditRowView: View {
                 .disableAutocorrection(true)
             Spacer()
             Button(action: {
-                viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
-                gameState.state = .playing(playableLevel: .level(viewModel.currLevel))
+                gameState.stateStack.append(.playing(playableLevel: .level(viewModel.currLevel)))
             }) {
                 Text("Play")
             }.disabled(viewModel.unsavedChanges)

@@ -2,7 +2,7 @@ import Foundation
 
 struct Level {
     var name: String
-    private(set) var layers: BidirectionalArray<LevelLayer>
+    var layers: BidirectionalArray<LevelLayer>
 
     init(name: String = "") {
         self.name = name

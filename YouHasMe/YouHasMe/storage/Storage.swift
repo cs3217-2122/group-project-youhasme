@@ -123,20 +123,20 @@ class JSONStorage: Storage {
         super.init(fileExtension: "json")
     }
 
-    func encode<T: Encodable>(object: T) throws -> Data {
+    final func encode<T: Encodable>(object: T) throws -> Data {
         let result = try encoder.encode(object)
         return result
     }
 
-    func encodeAndSave<T: Encodable>(object: T, to file: URL) throws {
+    final func encodeAndSave<T: Encodable>(object: T, to file: URL) throws {
         try save(data: encode(object: object), to: file)
     }
 
-    func decode<T: Decodable>(data: Data) throws -> T {
+    final func decode<T: Decodable>(data: Data) throws -> T {
         try decoder.decode(T.self, from: data)
     }
 
-    func loadAndDecode<T: Decodable>(from file: URL) throws -> T {
+    final func loadAndDecode<T: Decodable>(from file: URL) throws -> T {
         try decode(data: load(from: file))
     }
 
@@ -163,6 +163,10 @@ class LevelStorage: JSONStorage {
 
     func loadLevel(name: String) -> Level? {
         try? loadAndDecode(filename: name)
+    }
+
+    func saveLevel(_ level: Level) throws {
+        try encodeAndSave(object: level, filename: level.name)
     }
 
     func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {

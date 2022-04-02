@@ -61,12 +61,25 @@ class GameState: ObservableObject {
 
 // MARK: View model factories
 extension GameState {
+    func getLevelPlayViewModel() -> LevelDesignerViewModel {
+        guard case let .playing(playableLevel: playableLevel) = state,
+              let playableLevel = playableLevel else {
+                  return LevelDesignerViewModel()
+              }
+
+        let viewModel = LevelDesignerViewModel(playableLevel: playableLevel)
+        // TODO: Move this elsewhere; bad to place it here
+        // Even better: Make a specialized LevelPlayViewModel instead
+        viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
+        return viewModel
+    }
+
     func getLevelDesignerViewModel() -> LevelDesignerViewModel {
         guard case let .designing(playableLevel: playableLevel) = state,
               let playableLevel = playableLevel else {
                   return LevelDesignerViewModel()
               }
-        
+
         return LevelDesignerViewModel(playableLevel: playableLevel)
     }
 

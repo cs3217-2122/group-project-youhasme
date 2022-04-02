@@ -27,7 +27,7 @@ struct GameView: View {
             case .designingMeta:
                 MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
-                LevelPlayView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
+                LevelPlayView(levelDesignerViewModel: gameState.getLevelPlayViewModel())
             case .selectingMeta:
                 MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
             }

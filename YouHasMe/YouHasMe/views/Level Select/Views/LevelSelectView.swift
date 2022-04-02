@@ -13,7 +13,6 @@ struct LevelSelectView: View {
     var body: some View {
         VStack {
             Button(action: {
-                levelDesignerViewModel.createLevel()
                 gameState.state = .designing()
             }) {
                 Text("Create New Level")
@@ -21,12 +20,13 @@ struct LevelSelectView: View {
             Spacer()
             List {
                 Section(header: Text("Select an existing level")) {
-                    ForEach(levelDesignerViewModel.savedLevels) { level in
+                    ForEach(levelDesignerViewModel.levelLoadables) { levelLoadable in
                         Button(action: {
-                            levelDesignerViewModel.selectLevel(level: level)
-                            gameState.state = .designing()
+                            gameState.state = .designing(
+                                playableLevel: .levelLoadable(levelLoadable)
+                            )
                         }) {
-                            Text(level.name)
+                            Text(levelLoadable.name)
                         }
                     }
                 }
