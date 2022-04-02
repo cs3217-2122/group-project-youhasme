@@ -23,51 +23,51 @@ class GameStateManagerTests: XCTestCase {
     }
 
     func testSingleUndo() throws {
-        gameEngine.update(action: .moveDown)
+        gameEngine.step(action: .moveDown)
         print(gameEngine.levelLayer)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 0)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
     }
 
     func testMultipleUndo() throws {
         let state0 = levelLayer
-        gameEngine.update(action: .moveUp)
+        gameEngine.step(action: .moveUp)
         let state1 = gameEngine.levelLayer
-        gameEngine.update(action: .moveRight)
+        gameEngine.step(action: .moveRight)
         let state2 = gameEngine.levelLayer
-        gameEngine.update(action: .moveDown)
+        gameEngine.step(action: .moveDown)
 
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer, state2)
 
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer, state1)
 
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer, state0)
     }
 
     func testMultipleSameStateUndo() throws {
-        gameEngine.update(action: .moveDown)
+        gameEngine.step(action: .moveDown)
         // test that if user doesn't move for a few ticks, undo still returns previous state
         // with changes, not just the same state
-        gameEngine.update(action: .tick)
-        gameEngine.update(action: .tick)
-        gameEngine.update(action: .tick)
+        gameEngine.step(action: .tick)
+        gameEngine.step(action: .tick)
+        gameEngine.step(action: .tick)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 4).entities.count, 0)
         XCTAssertEqual(gameEngine.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
     }
 
     func testUndoAtOldestLayer() throws {
         let oldestLayer = levelLayer
-        gameEngine.update(action: .moveDown)
-        gameEngine.update(action: .undo)
-        gameEngine.update(action: .undo)
-        gameEngine.update(action: .undo)
+        gameEngine.step(action: .moveDown)
+        gameEngine.step(action: .undo)
+        gameEngine.step(action: .undo)
+        gameEngine.step(action: .undo)
         XCTAssertEqual(gameEngine.levelLayer, oldestLayer)
     }
 }

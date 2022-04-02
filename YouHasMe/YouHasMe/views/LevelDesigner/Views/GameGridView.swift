@@ -83,7 +83,7 @@ struct GameGridView: View {
                     Spacer()
                    if gameState.state == .playing {
                        Button("Undo") {
-                           gameEngine.update(action: .undo)
+                           gameEngine.step(action: .undo)
                            levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
                        }
                    }

@@ -8,6 +8,7 @@
 struct GameEngine {
     let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
     let ruleEngine = RuleEngine()
+    var gameStateManager: GameStateManager
 
     var levelLayer: LevelLayer
 
@@ -38,6 +39,7 @@ struct GameEngine {
         }
 
         levelLayer = ruleEngine.applyRules(to: newLayer)
+        gameStateManager.addToLayerHistory(levelLayer)
     }
 
     private mutating func performUndo() {
@@ -46,7 +48,7 @@ struct GameEngine {
         }
 
         levelLayer = previousLayer
-        levelLayer = ruleEngine.applyRules(to: newLayer)
+        levelLayer = ruleEngine.applyRules(to: levelLayer)
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions
