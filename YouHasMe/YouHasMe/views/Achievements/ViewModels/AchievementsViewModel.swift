@@ -22,7 +22,11 @@ class AchievementsViewModel: ObservableObject {
         // let achievements = loadAchievements()
         self.levelId = levelId
         self.lockedAchievements = [
-//            Achievement(name: "Design your first level", unlockConditions: [EventUnlockCondition(eventType: )]),
+            Achievement(name: "Creativity", description: "Create your first level",
+                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
+                                                                  statisticName: "Levels Designed",
+                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                  unlockValue: 1)]),
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
@@ -35,11 +39,11 @@ class AchievementsViewModel: ObservableObject {
                                                                   unlockValue: 1_000_000)]),
             Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
-                                                                  statisticName: "Level Moves for Level Abc",
+                                                                  statisticName: "Level Moves for Abc",
                                                                   comparison: .LESS_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 10),
                                            NumericUnlockCondition(statistics: statistics,
-                                                                  statisticName: "Level Win for Level Abc",
+                                                                  statisticName: "Level Win for Abc",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1)
                                            ])

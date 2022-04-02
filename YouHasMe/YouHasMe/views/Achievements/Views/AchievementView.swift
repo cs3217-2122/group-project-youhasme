@@ -17,6 +17,7 @@ struct AchievementView: View {
                 .resizable()
                 .frame(width: CGFloat(achievementsViewModel.imageWidth),
                        height: CGFloat(achievementsViewModel.imageHeight))
+                .opacity(achievement.isUnlocked ? 1.0 : 0.5)
             VStack(alignment: .leading) {
                 Text(achievement.name)
                 Text(achievement.description).font(.caption)

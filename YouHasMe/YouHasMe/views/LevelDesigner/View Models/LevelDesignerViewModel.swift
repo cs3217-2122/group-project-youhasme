@@ -123,10 +123,14 @@ class LevelDesignerViewModel: ObservableObject, GameEventPublisher {
         }
 
         do {
+            let updatedLevels = savedLevels.filter { $0.name != levelName }
+            let isExistingLevel = updatedLevels.count != savedLevels.count
             savedLevels = getUpdatedSavedLevels(levelName: levelName)
             try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
                                                       savedLevels: savedLevels)
-            gameEventSubject.send(GameEvent(type: .designLevel))
+            if !isExistingLevel {
+                gameEventSubject.send(GameEvent(type: .designLevel))
+            }
             return "Successfully saved level: \(levelName)"
         }
     }
