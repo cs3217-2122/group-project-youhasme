@@ -25,6 +25,18 @@
 		1ED20DBA27F84C51002E7683 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED20DB927F84C51002E7683 /* FirebaseFirestore */; };
 		1ED20DBC27F84C51002E7683 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED20DBB27F84C51002E7683 /* FirebaseFirestoreCombine-Community */; };
 		1ED20DBE27F84C51002E7683 /* FirebaseFirestoreSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED20DBD27F84C51002E7683 /* FirebaseFirestoreSwift-Beta */; };
+		1ED20DC127F84D2E002E7683 /* UploadedMetaLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC027F84D2E002E7683 /* UploadedMetaLevel.swift */; };
+		1ED20DC227F84D2E002E7683 /* UploadedMetaLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC027F84D2E002E7683 /* UploadedMetaLevel.swift */; };
+		1ED20DC427F84D37002E7683 /* UploadedLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC327F84D37002E7683 /* UploadedLevel.swift */; };
+		1ED20DC527F84D37002E7683 /* UploadedLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC327F84D37002E7683 /* UploadedLevel.swift */; };
+		1ED20DC727F84D40002E7683 /* UploadedChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC627F84D40002E7683 /* UploadedChunkNode.swift */; };
+		1ED20DC827F84D40002E7683 /* UploadedChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC627F84D40002E7683 /* UploadedChunkNode.swift */; };
+		1ED20DCA27F84D49002E7683 /* OpenWorldRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC927F84D49002E7683 /* OpenWorldRoom.swift */; };
+		1ED20DCB27F84D49002E7683 /* OpenWorldRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DC927F84D49002E7683 /* OpenWorldRoom.swift */; };
+		1ED20DCD27F84D52002E7683 /* MetaLevelRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DCC27F84D52002E7683 /* MetaLevelRoom.swift */; };
+		1ED20DCE27F84D52002E7683 /* MetaLevelRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DCC27F84D52002E7683 /* MetaLevelRoom.swift */; };
+		1ED20DD027F84D59002E7683 /* LevelRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DCF27F84D59002E7683 /* LevelRoom.swift */; };
+		1ED20DD127F84D59002E7683 /* LevelRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1ED20DCF27F84D59002E7683 /* LevelRoom.swift */; };
 		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
 		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
@@ -141,6 +153,12 @@
 		1E96EB9227E7264100321BEB /* LevelSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectView.swift; sourceTree = "<group>"; };
 		1E96EB9427E726CC00321BEB /* LevelPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPlayView.swift; sourceTree = "<group>"; };
 		1ED20DB127F84C10002E7683 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		1ED20DC027F84D2E002E7683 /* UploadedMetaLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedMetaLevel.swift; sourceTree = "<group>"; };
+		1ED20DC327F84D37002E7683 /* UploadedLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedLevel.swift; sourceTree = "<group>"; };
+		1ED20DC627F84D40002E7683 /* UploadedChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedChunkNode.swift; sourceTree = "<group>"; };
+		1ED20DC927F84D49002E7683 /* OpenWorldRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenWorldRoom.swift; sourceTree = "<group>"; };
+		1ED20DCC27F84D52002E7683 /* MetaLevelRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelRoom.swift; sourceTree = "<group>"; };
+		1ED20DCF27F84D59002E7683 /* LevelRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelRoom.swift; sourceTree = "<group>"; };
 		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
 		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
@@ -282,6 +300,19 @@
 				E56752F427EEA7D90001305D /* Views */,
 			);
 			path = LevelDesigner;
+			sourceTree = "<group>";
+		};
+		1ED20DBF27F84D0F002E7683 /* multiplayer */ = {
+			isa = PBXGroup;
+			children = (
+				1ED20DC027F84D2E002E7683 /* UploadedMetaLevel.swift */,
+				1ED20DC327F84D37002E7683 /* UploadedLevel.swift */,
+				1ED20DC627F84D40002E7683 /* UploadedChunkNode.swift */,
+				1ED20DC927F84D49002E7683 /* OpenWorldRoom.swift */,
+				1ED20DCC27F84D52002E7683 /* MetaLevelRoom.swift */,
+				1ED20DCF27F84D59002E7683 /* LevelRoom.swift */,
+			);
+			path = multiplayer;
 			sourceTree = "<group>";
 		};
 		40AD869127E606F300F42C42 /* storage */ = {
@@ -522,6 +553,7 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				1ED20DBF27F84D0F002E7683 /* multiplayer */,
 				E573E96027EA32DC000D10E4 /* persistable */,
 				E5563C3A27E8B551007D2E86 /* helpers */,
 				B07AA62627E658F200918E71 /* GameEngine */,
@@ -786,6 +818,7 @@
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
+				1ED20DCA27F84D49002E7683 /* OpenWorldRoom.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
@@ -794,6 +827,7 @@
 				E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
+				1ED20DC127F84D2E002E7683 /* UploadedMetaLevel.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */,
@@ -801,6 +835,7 @@
 				E573E96227EA32F7000D10E4 /* PersistableChunkNode.swift in Sources */,
 				1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */,
 				E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */,
+				1ED20DC727F84D40002E7683 /* UploadedChunkNode.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
@@ -808,6 +843,7 @@
 				E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				1ED20DCD27F84D52002E7683 /* MetaLevelRoom.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
@@ -825,6 +861,7 @@
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				1ED20DC427F84D37002E7683 /* UploadedLevel.swift in Sources */,
 				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */,
@@ -851,6 +888,7 @@
 				E578594B27F42C94009A79F9 /* Loadable.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
+				1ED20DD027F84D59002E7683 /* LevelRoom.swift in Sources */,
 				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
 				B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */,
 				B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */,
@@ -887,9 +925,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ED20DCB27F84D49002E7683 /* OpenWorldRoom.swift in Sources */,
 				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
+				1ED20DCE27F84D52002E7683 /* MetaLevelRoom.swift in Sources */,
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */,
+				1ED20DC827F84D40002E7683 /* UploadedChunkNode.swift in Sources */,
+				1ED20DC227F84D2E002E7683 /* UploadedMetaLevel.swift in Sources */,
+				1ED20DD127F84D59002E7683 /* LevelRoom.swift in Sources */,
+				1ED20DC527F84D37002E7683 /* UploadedLevel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

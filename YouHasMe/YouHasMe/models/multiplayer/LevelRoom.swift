@@ -6,3 +6,15 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
+
+struct LevelRoom {
+    @DocumentID var id: String?
+    var persistedLevel: Level
+    var players: [String]
+    var playerPositions: [String: Point] = [:]
+}
+
+extension LevelRoom: Codable {
+    
+}

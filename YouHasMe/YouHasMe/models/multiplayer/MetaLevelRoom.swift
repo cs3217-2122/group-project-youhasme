@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
+
+struct MetaLevelRoom {
+    @DocumentID var id: String?
+    var persistedMetaLevel: PersistableMetaLevel
+    var players: [String]
+    var playerPositions: [String: Point] = [:]
+}
+
+extension MetaLevelRoom: Codable {
+    
+}
+
+

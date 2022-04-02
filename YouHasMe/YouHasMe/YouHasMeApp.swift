@@ -14,6 +14,7 @@ struct YouHasMeApp: App {
     
     init() {
         FirebaseApp.configure()
+        Auth.auth().signInAnonymously()
     }
     var body: some Scene {
         WindowGroup {

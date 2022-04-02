@@ -6,3 +6,17 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
+
+struct OpenWorldRoom {
+    @DocumentID var id : String?
+    var name: String
+    var joinCode: String
+    var playerIds: [String]
+}
+
+
+
+extension OpenWorldRoom: Codable {
+    
+}

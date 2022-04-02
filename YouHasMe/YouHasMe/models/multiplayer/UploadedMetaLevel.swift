@@ -6,3 +6,14 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
+
+struct UploadedMetaLevel {
+    @DocumentID var id: String?
+    var uploaderId : String
+    var persistedMetaLevel: PersistableMetaLevel
+}
+
+extension UploadedMetaLevel: Codable {
+    
+}
