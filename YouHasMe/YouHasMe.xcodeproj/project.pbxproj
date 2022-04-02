@@ -38,6 +38,7 @@
 		B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62A27E658F200918E71 /* UpdateType.swift */; };
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
+		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
 		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
@@ -138,6 +139,7 @@
 		B07AA62A27E658F200918E71 /* UpdateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateType.swift; sourceTree = "<group>"; };
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
+		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerGridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				B0592D3927F219B1002EC0C3 /* PushMechanic.swift */,
 				B0562DD427F303D900F10324 /* WinMechanic.swift */,
 				B05687E027F377DC0046C26C /* StopMechanic.swift */,
+				B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
+				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,

@@ -8,12 +8,15 @@
 // Represents an Action an entity can take
 enum EntityAction: Hashable {
     case move(dx: Int, dy: Int)  // Move by (dx, dy)
+    case transform(target: Noun)  // Tranform entity type to target
 
     // Returns new state after applying action
     func apply(on state: EntityState) -> EntityState {
         switch self {
         case let .move(dx, dy):
             return applyMove(state: state, dx: dx, dy: dy)
+        case let .transform(target):
+            return applyTransform(state: state, target: target)
         }
     }
 
@@ -21,6 +24,12 @@ enum EntityAction: Hashable {
         var newState = state
         newState.location.x += dx
         newState.location.y += dy
+        return newState
+    }
+
+    private func applyTransform(state: EntityState, target: Noun) -> EntityState {
+        var newState = state
+        newState.entity.entityType = EntityType(classification: .nounInstance(target))
         return newState
     }
 }

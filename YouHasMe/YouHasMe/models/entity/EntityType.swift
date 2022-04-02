@@ -3,7 +3,7 @@ import Foundation
 struct EntityType: Hashable {
     var classification: Classification
 
-    fileprivate init(classification: Classification) {
+    init(classification: Classification) {
         self.classification = classification
     }
 
