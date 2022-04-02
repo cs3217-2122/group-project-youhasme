@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* EntityView.swift */; };
+		1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* CellView.swift */; };
 		1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C527E5B43F00161E63 /* Entities.swift */; };
 		1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */; };
 		1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C927E5B55100161E63 /* PaletteView.swift */; };
@@ -58,6 +58,14 @@
 		E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */; };
 		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
 		E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */; };
+		E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657B27F8032500F79A52 /* AudioRecorder.swift */; };
+		E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657D27F8056A00F79A52 /* MetaEntityView.swift */; };
+		E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658027F8059000F79A52 /* MetaEntityViewModel.swift */; };
+		E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */; };
+		E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */; };
+		E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658627F8096600F79A52 /* ConditionCreatorView.swift */; };
+		E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */; };
+		E574658B27F80B0300F79A52 /* LevelSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
 		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
@@ -79,7 +87,7 @@
 		E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */; };
 		E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */; };
 		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
-		E581F08B27F760EA00B1CFCB /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08A27F760EA00B1CFCB /* Audio.swift */; };
+		E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
 		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
 		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
@@ -114,7 +122,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E6B90C327E5B2BF00161E63 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
+		1E6B90C327E5B2BF00161E63 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		1E6B90C527E5B43F00161E63 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
 		1E6B90C927E5B55100161E63 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
@@ -165,6 +173,14 @@
 		E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
 		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
 		E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorViewModel.swift; sourceTree = "<group>"; };
+		E574657B27F8032500F79A52 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		E574657D27F8056A00F79A52 /* MetaEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaEntityView.swift; sourceTree = "<group>"; };
+		E574658027F8059000F79A52 /* MetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaEntityViewModel.swift; sourceTree = "<group>"; };
+		E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteMetaEntityView.swift; sourceTree = "<group>"; };
+		E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteMetaEntityViewModel.swift; sourceTree = "<group>"; };
+		E574658627F8096600F79A52 /* ConditionCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorView.swift; sourceTree = "<group>"; };
+		E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoView.swift; sourceTree = "<group>"; };
+		E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewModel.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
 		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
@@ -187,7 +203,7 @@
 		E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfoViewModel.swift; sourceTree = "<group>"; };
 		E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerPaletteView.swift; sourceTree = "<group>"; };
 		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
-		E581F08A27F760EA00B1CFCB /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
 		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
@@ -388,8 +404,9 @@
 			isa = PBXGroup;
 			children = (
 				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
-				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
+				1E6B90C327E5B2BF00161E63 /* CellView.swift */,
 				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
+				E574657D27F8056A00F79A52 /* MetaEntityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -436,6 +453,14 @@
 				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
 			);
 			path = persistable;
+			sourceTree = "<group>";
+		};
+		E574657F27F8058300F79A52 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E574658027F8059000F79A52 /* MetaEntityViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -505,7 +530,8 @@
 		E581F08927F760D600B1CFCB /* audio */ = {
 			isa = PBXGroup;
 			children = (
-				E581F08A27F760EA00B1CFCB /* Audio.swift */,
+				E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */,
+				E574657B27F8032500F79A52 /* AudioRecorder.swift */,
 			);
 			path = audio;
 			sourceTree = "<group>";
@@ -517,6 +543,9 @@
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
 				E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */,
 				E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */,
+				E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */,
+				E574658627F8096600F79A52 /* ConditionCreatorView.swift */,
+				E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -528,6 +557,8 @@
 				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
 				E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */,
 				E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */,
+				E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */,
+				E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -535,6 +566,7 @@
 		E581F52D27ECD27E00CAC137 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				E574657F27F8058300F79A52 /* View Models */,
 				E56FE99627EEF21100EBE865 /* extensions */,
 				E56752FD27EEA86F0001305D /* Protocols */,
 				E56752FC27EEA8650001305D /* Views */,
@@ -726,7 +758,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
-				E581F08B27F760EA00B1CFCB /* Audio.swift in Sources */,
+				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
@@ -742,10 +774,12 @@
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				E573E96227EA32F7000D10E4 /* PersistableChunkNode.swift in Sources */,
 				1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */,
+				E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
@@ -765,6 +799,7 @@
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
@@ -776,9 +811,10 @@
 				E573E96427EA3326000D10E4 /* PersistableMetaLevel.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
-				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
+				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
+				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
@@ -789,6 +825,7 @@
 				E578594B27F42C94009A79F9 /* Loadable.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
+				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
 				B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */,
 				B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */,
 				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
@@ -799,10 +836,12 @@
 				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
+				E574658B27F80B0300F79A52 /* LevelSelectorViewModel.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* MetaLevelPlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */,
+				E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
@@ -810,6 +849,7 @@
 				E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
+				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,

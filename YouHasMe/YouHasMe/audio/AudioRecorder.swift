@@ -1,5 +1,5 @@
 //
-//  Audio.swift
+//  AudioRecorder.swift
 //  YouHasMe
 //
 //  Created by Jia Cheng Sun on 2/4/22.
@@ -7,26 +7,7 @@
 
 import Foundation
 import AVFoundation
-
-// reference: https://github.com/jgorset/Recorder/blob/master/Sources/Recording.swift
-
-class AudioPlayer {
-    private var session: AVAudioSession = .sharedInstance()
-    private var player: AVAudioPlayer?
-    private var url: URL
-
-    init(url: URL) {
-        self.url = url
-    }
-
-    // MARK: - Playback
-    func play() throws {
-        try session.setCategory(.playback)
-
-        player = try AVAudioPlayer(contentsOf: url)
-        player?.play()
-    }
-}
+import Combine
 
 class AudioRecorder {
     private var session: AVAudioSession = .sharedInstance()
@@ -37,6 +18,11 @@ class AudioRecorder {
     private var link: CADisplayLink?
     private var recordingURL: URL
     var isMeteringEnabled = true
+    var meterPublisher: AnyPublisher<Float, Never> {
+        meter.eraseToAnyPublisher()
+    }
+    private var meter: PassthroughSubject<Float, Never> = PassthroughSubject()
+
     init(recordingURL: URL) {
         self.recordingURL = recordingURL
     }
@@ -74,12 +60,17 @@ class AudioRecorder {
             startMetering()
         }
     }
-    @objc func updateMeter() {
-        guard let recorder = recorder else { return }
+
+    @objc
+    func updateMeter() {
+        guard let recorder = recorder else {
+            return
+        }
 
         recorder.updateMeters()
 
         let dB = recorder.averagePower(forChannel: 0)
+        meter.send(dB)
     }
 
     private func startMetering() {

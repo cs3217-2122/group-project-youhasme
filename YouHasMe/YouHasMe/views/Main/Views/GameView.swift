@@ -13,7 +13,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
+            case .selecting, .selectingMeta, .designing, .designingMeta, .playing, .playingMeta:
                 gameState.stateStack.removeLast()
             }
         })) {
@@ -22,14 +22,17 @@ struct GameView: View {
                 MainMenuView()
             case .selecting:
                 LevelSelectView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
+            case .selectingMeta:
+                MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+            
             case .designing:
                 LevelDesignerView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
             case .designingMeta:
                 MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
                 LevelPlayView(levelDesignerViewModel: gameState.getLevelPlayViewModel())
-            case .selectingMeta:
-                MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+            case .playingMeta:
+                MetaLevelPlayView(viewModel: gameState.getMetaLevelPlayViewModel())
             }
         }
     }

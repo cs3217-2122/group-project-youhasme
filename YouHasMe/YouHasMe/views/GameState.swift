@@ -27,10 +27,33 @@ extension PlayableLevel {
 
 extension PlayableLevel: Equatable {}
 
+enum PlayableMetaLevel {
+    case metaLevel(MetaLevel)
+    case metaLevelLoadable(Loadable)
+}
+
+extension PlayableMetaLevel: Equatable {}
+
+extension PlayableMetaLevel {
+    func getMetaLevel() -> MetaLevel {
+        switch self {
+        case .metaLevel(let metaLevel):
+            return metaLevel
+        case .metaLevelLoadable(let loadable):
+            let metaLevelStorage = MetaLevelStorage()
+            guard let metaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: loadable.name) else {
+                fatalError("should not be nil")
+            }
+            return metaLevel
+        }
+    }
+}
+
 enum ScreenState {
     case selecting
     case selectingMeta
-    case playing(playableLevel: PlayableLevel? = nil)
+    case playing(playableLevel: PlayableLevel)
+    case playingMeta(playableMetaLevel: PlayableMetaLevel)
     case designing(playableLevel: PlayableLevel? = nil)
     case designingMeta(metaLevelLoadable: Loadable? = nil)
     case mainmenu
@@ -62,10 +85,9 @@ class GameState: ObservableObject {
 // MARK: View model factories
 extension GameState {
     func getLevelPlayViewModel() -> LevelDesignerViewModel {
-        guard case let .playing(playableLevel: playableLevel) = state,
-              let playableLevel = playableLevel else {
-                  return LevelDesignerViewModel()
-              }
+        guard case let .playing(playableLevel: playableLevel) = state else {
+            fatalError("Unexpected state")
+        }
 
         let viewModel = LevelDesignerViewModel(playableLevel: playableLevel)
         // TODO: Move this elsewhere; bad to place it here
@@ -90,6 +112,14 @@ extension GameState {
         }
 
         return MetaLevelDesignerViewModel(metaLevelLoadable: metaLevelLoadable)
+    }
+
+    func getMetaLevelPlayViewModel() -> MetaLevelPlayViewModel {
+        guard case let .playingMeta(playableMetaLevel: playableMetaLevel) = state else {
+            fatalError("Unexpected state")
+        }
+
+        return MetaLevelPlayViewModel(playableMetaLevel: playableMetaLevel)
     }
 
     func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {

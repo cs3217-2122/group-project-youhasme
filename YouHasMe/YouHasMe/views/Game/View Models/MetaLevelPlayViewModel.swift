@@ -101,17 +101,8 @@ class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulab
         }
     }
 
-    convenience init() {
-        self.init(currMetaLevel: MetaLevel())
-    }
-
-    convenience init(metaLevelURLData: Loadable) {
-        let metaLevelStorage = MetaLevelStorage()
-        guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelURLData.name) else {
-            fatalError("should not be nil")
-        }
-
-        self.init(currMetaLevel: currMetaLevel)
+    convenience init(playableMetaLevel: PlayableMetaLevel) {
+        self.init(currMetaLevel: playableMetaLevel.getMetaLevel())
     }
 
     init(currMetaLevel: MetaLevel) {

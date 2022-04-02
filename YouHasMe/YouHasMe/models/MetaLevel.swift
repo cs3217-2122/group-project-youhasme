@@ -146,6 +146,12 @@ extension MetaLevel {
     }
 }
 
+extension MetaLevel: Equatable {
+    static func == (lhs: MetaLevel, rhs: MetaLevel) -> Bool {
+        lhs === rhs
+    }
+}
+
 // MARK: Persistence
 extension MetaLevel {
     func saveLoadedChunks() throws {

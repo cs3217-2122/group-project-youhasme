@@ -2,10 +2,16 @@ import Foundation
 import CoreGraphics
 import Combine
 
+enum MetaLevelDesignerState {
+    case normal
+    case choosingLevel(tile: MetaTile)
+    case choosingMetaLevel
+}
+
 class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
     @Published var selectedPaletteMetaEntity: MetaEntityType?
     @Published var selectedTile: MetaTile?
-
+    private var levelStorage = LevelStorage()
     private var metaLevelStorage = MetaLevelStorage()
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
@@ -22,6 +28,9 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
     }
 
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
+
+    @Published var state: MetaLevelDesignerState = .normal
+
     var editorMode: EditorMode? {
         toolbarViewModel?.editorMode
     }
@@ -46,6 +55,10 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
 
     func deselectTile() {
         selectedTile = nil
+    }
+
+    func getAllLoadableMetaLevels() -> [Loadable] {
+        metaLevelStorage.getAllLoadables()
     }
 }
 
@@ -95,6 +108,11 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelBasicCRUDDelegate {
             return
         }
 
+        if case .level = selectedPaletteMetaEntity {
+            state = .choosingLevel(tile: tile)
+            return
+        }
+
         tile.metaEntities.append(selectedPaletteMetaEntity)
     }
 
@@ -114,6 +132,16 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelDetailedUpdateDelegate 
         }
 
         selectedTile = tile
+    }
+}
+
+extension MetaLevelDesignerViewModel: LevelSelectorViewModelDelegate {
+    func selectLevel(_ loadable: Loadable) {
+        guard case .choosingLevel(tile: let tile) = state else {
+            return
+        }
+        tile.metaEntities.append(.level(levelLoadable: loadable))
+        state = .normal
     }
 }
 
@@ -153,5 +181,11 @@ extension MetaLevelDesignerViewModel {
 
     func getTileInfoViewModel(tile: MetaTile) -> MetaLevelDesignerTileInfoViewModel {
         MetaLevelDesignerTileInfoViewModel(tile: tile)
+    }
+
+    func getLevelSelectorViewModel() -> LevelSelectorViewModel {
+        let levelSelectorViewModel = LevelSelectorViewModel()
+        levelSelectorViewModel.delegate = self
+        return levelSelectorViewModel
     }
 }
