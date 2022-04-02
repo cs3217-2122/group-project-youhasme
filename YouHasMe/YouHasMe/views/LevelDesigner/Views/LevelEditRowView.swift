@@ -72,7 +72,11 @@ struct LevelEditRowView: View {
 
     private func save() {
         showSaveLevelAlert = true
-        saveMessage = viewModel.saveLevel()
+        do {
+            try saveMessage = viewModel.saveLevel()
+        } catch {
+            saveMessage = "failed to save level"
+        }
     }
 
     private func getLoadLevelAlert(loadSuccess: Bool, levelName: String) -> String {

@@ -46,9 +46,9 @@ class AchievementsViewModel: ObservableObject {
             }
 
             switch gameEvent.type {
-            case .MOVE:
+            case .move:
                 self.statistics.addMove()
-            case .WIN:
+            case .win:
                 self.statistics.addWin()
             }
 

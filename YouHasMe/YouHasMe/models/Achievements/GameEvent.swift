@@ -9,8 +9,9 @@ import Foundation
 
 class GameEvent {
     enum type: Int {
-        case MOVE = 0
-        case WIN = 1
+        case move
+        case win
+        case designLevel
     }
 
     var type: GameEvent.type

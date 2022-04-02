@@ -11,7 +11,7 @@ struct GameView: View {
     @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
     init() {
-//        achievementsViewModel.setSubscriptionsFor(<#T##gameEventPublisher: AnyPublisher<GameEvent, Never>##AnyPublisher<GameEvent, Never>#>)
+        achievementsViewModel.setSubscriptionsFor(levelDesignerViewModel.gameEventPublisher)
     }
 
     var body: some View {

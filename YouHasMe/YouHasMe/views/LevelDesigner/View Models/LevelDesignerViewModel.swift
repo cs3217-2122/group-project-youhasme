@@ -3,9 +3,10 @@
 //  YouHasMe
 //
 
+import Combine
 import Foundation
 
-class LevelDesignerViewModel: ObservableObject {
+class LevelDesignerViewModel: ObservableObject, GameEventPublisher {
     private(set) var savedLevels: [Level]
 
     var currLevel: Level
@@ -13,6 +14,11 @@ class LevelDesignerViewModel: ObservableObject {
     @Published var currLevelLayer: LevelLayer
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
+    var gameEventPublisher: AnyPublisher<GameEvent, Never> {
+        gameEventSubject.eraseToAnyPublisher()
+    }
+
+    private let gameEventSubject = PassthroughSubject<GameEvent, Never>()
 
     convenience init() {
         self.init(currLevel: Level())
@@ -110,7 +116,7 @@ class LevelDesignerViewModel: ObservableObject {
         return false
     }
 
-    func saveLevel() -> String {
+    func saveLevel() throws -> String {
         let levelName = currLevel.name
         if levelName.isEmpty {
             return "Please input a non-empty level name."
@@ -120,9 +126,8 @@ class LevelDesignerViewModel: ObservableObject {
             savedLevels = getUpdatedSavedLevels(levelName: levelName)
             try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
                                                       savedLevels: savedLevels)
+            gameEventPublisher.send(GameEvent(type: .designLevel))
             return "Successfully saved level: \(levelName)"
-        } catch {
-            return "error saving level: \(error)"
         }
     }
 

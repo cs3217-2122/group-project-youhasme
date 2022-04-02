@@ -56,7 +56,7 @@ struct GameEngine: GameEventPublisher {
         } while curState != oldState
 
         if curState != originalState {
-            gameEventSubject.send(GameEvent(type: .MOVE))
+            gameEventSubject.send(GameEvent(type: .move))
         }
 
         return curState
