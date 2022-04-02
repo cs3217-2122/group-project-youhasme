@@ -127,10 +127,10 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
-        //print(levelLayer)
+        // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
-        //print(gameEngine.game.levelLayer)
+        // print(gameEngine.game.levelLayer)
         let typeAt22 = gameEngine.game.levelLayer.getTileAt(x: 2, y: 2).entities[0].entityType
         XCTAssertEqual(typeAt22, EntityTypes.NounInstances.wall)
     }

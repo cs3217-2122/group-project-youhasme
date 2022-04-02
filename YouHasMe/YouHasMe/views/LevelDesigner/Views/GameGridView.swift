@@ -10,6 +10,7 @@ struct GameGridView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     @State var gameEngine: GameEngine
     @State var showingWinAlert = false
+    @State var showingLoopAlert = false
 
     init(levelDesignerViewModel: LevelDesignerViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
@@ -47,6 +48,7 @@ struct GameGridView: View {
                 }
                 gameEngine.apply(action: updateAction)
                 showingWinAlert = gameEngine.game.gameStatus == .win
+                showingLoopAlert = gameEngine.status == .infiniteLoop
                 levelDesignerViewModel.currLevelLayer = gameEngine.game.levelLayer
             }
     }
@@ -78,6 +80,8 @@ struct GameGridView: View {
                     }
                 }.alert("You Win!", isPresented: $showingWinAlert) {
                     Button("yay!", role: .cancel) {}
+                }.alert("No infinite loops allowed!", isPresented: $showingLoopAlert) {
+                    Button("ok!", role: .cancel) {}
                 }
                 Spacer()
             }
