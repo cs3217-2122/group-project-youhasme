@@ -15,36 +15,48 @@ class MetaLevel {
     var loadableChunkRadius: Int {
         MetaLevel.loadableChunkRadius
     }
+    var metaLevelStorage = MetaLevelStorage()
     var chunkStorage: ChunkStorage {
-        guard let storage = try? MetaLevelStorage().getChunkStorage(for: name) else {
+        guard let storage = try? metaLevelStorage.getChunkStorage(for: name) else {
             fatalError("unexpected failure")
         }
         return storage
     }
-    var name: String
+    @Published private(set) var name: String
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
     var loadedChunks: [Point: ChunkNode] = [:]
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
     var currentChunk: ChunkNode?
     var dimensions: PositionedRectangle
+    private var subscriptions: Set<AnyCancellable> = []
 
-    init() {
-        self.name = MetaLevel.defaultName
-        self.dimensions = PositionedRectangle(
-            rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
-            topLeft: .zero
+    convenience init() {
+        self.init(
+            name: MetaLevel.defaultName,
+            dimensions: PositionedRectangle(
+                rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
+                topLeft: .zero),
+            entryChunkPosition: .zero
         )
     }
 
-    init(name: String, entryChunkPosition: Point, dimensions: PositionedRectangle) {
+    init(name: String, dimensions: PositionedRectangle, entryChunkPosition: Point) {
         self.name = name
-        self.entryChunkPosition = entryChunkPosition
         self.dimensions = dimensions
+        self.entryChunkPosition = entryChunkPosition
     }
 
-    func hydrate(with persistableMetaLevel: PersistableMetaLevel) {
-        // TODO: This function may not be necessary
+    func renameLevel(to newName: String) {
+        let oldName = name
+        do {
+            globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
+            try metaLevelStorage.renameMetaLevel(from: oldName, to: newName)
+            name = newName
+            try metaLevelStorage.saveMetaLevel(self)
+        } catch {
+            globalLogger.error("\(error)")
+        }
     }
 }
 
@@ -171,8 +183,8 @@ extension MetaLevel {
     static func fromPersistable(_ persistableMetaLevel: PersistableMetaLevel) -> MetaLevel {
         let metaLevel = MetaLevel(
             name: persistableMetaLevel.name,
-            entryChunkPosition: persistableMetaLevel.entryChunkPosition,
-            dimensions: persistableMetaLevel.dimensions
+            dimensions: persistableMetaLevel.dimensions,
+            entryChunkPosition: persistableMetaLevel.entryChunkPosition
         )
         metaLevel.currentChunk = metaLevel.getChunk(at: metaLevel.entryChunkPosition)
         return metaLevel
@@ -198,18 +210,6 @@ class MetaTile {
 
     init(metaEntities: [MetaEntityType]) {
         self.metaEntities = metaEntities
-    }
-}
-
-extension MetaTile {
-    func getLevelLoadable() -> Loadable? {
-        for metaEntity in metaEntities {
-            if case .level(levelLoadable: let levelLoadable, unlockCondition: _) = metaEntity {
-                return levelLoadable
-            }
-        }
-
-        return nil
     }
 }
 
@@ -323,15 +323,3 @@ extension MetaEntityType {
 }
 
 extension MetaEntityType: Hashable {}
-
-enum PersistableMetaEntityType {
-    case blocking
-    case nonBlocking
-    case space
-    case level(levelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
-    case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
-    // TODO: Perhaps the message can be associated with a user
-    case message(text: String? = nil)
-}
-
-extension PersistableMetaEntityType: Codable {}

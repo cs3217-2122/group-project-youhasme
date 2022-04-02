@@ -30,17 +30,17 @@ class ContextualMenuData {
         case .blocking, .nonBlocking, .space:
             return nil
         case .level:
-            description = "Play Level"
+            description = "Levels"
             action = { [weak self] in
                 self?.delegate?.showLevel()
             }
         case .travel:
-            description = "Travel somewhere"
+            description = "Travel points"
             action = { [weak self] in
                 self?.delegate?.showTravel()
             }
         case .message:
-            description = "Show Messages"
+            description = "Messages"
             action = { [weak self] in
                 self?.delegate?.showMessages()
             }
@@ -66,26 +66,25 @@ extension ContextualMenuData: Comparable {
     }
 }
 
-enum OverlayState {
-    case off
+enum MetaLevelPlayViewState {
+    case normal
     case messages
     case level
     case travel
 }
 
 class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
+    private var subscriptions: Set<AnyCancellable> = []
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
         height: ChunkNode.chunkDimensions
     )
 
     var currMetaLevel: MetaLevel
-    @Published var overlayState: OverlayState = .off
+    @Published var state: MetaLevelPlayViewState = .normal
 
     var contextualData: [ContextualMenuData] {
-        let playerPosition: Point = .zero // TODO
-
-        guard let metaEntities = currMetaLevel.getTile(at: playerPosition)?.metaEntities else {
+        guard let metaEntities = selectedTile?.metaEntities else {
             return []
         }
 
@@ -101,6 +100,8 @@ class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulab
         }
     }
 
+    @Published var selectedTile: MetaTile?
+
     convenience init(playableMetaLevel: PlayableMetaLevel) {
         self.init(currMetaLevel: playableMetaLevel.getMetaLevel())
     }
@@ -108,24 +109,42 @@ class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulab
     init(currMetaLevel: MetaLevel) {
         self.currMetaLevel = currMetaLevel
         viewPosition = currMetaLevel.entryWorldPosition
+        setupBindings()
+    }
+
+    func setupBindings() {
+        $selectedTile.sink { [weak self] selectedTile in
+            guard let self = self else {
+                return
+            }
+            if selectedTile == nil {
+                self.state = .normal
+            }
+        }.store(in: &subscriptions)
     }
 }
 
 extension MetaLevelPlayViewModel: ContextualMenuDelegate {
     func closeOverlay() {
-        overlayState = .off
+        state = .normal
     }
 
     func showLevel() {
-        overlayState = .level
+        state = .level
     }
 
     func showTravel() {
-        overlayState = .travel
+        state = .travel
     }
 
     func showMessages() {
-        overlayState = .messages
+        state = .messages
+    }
+}
+
+extension MetaLevelPlayViewModel: MetaEntityViewModelExaminableDelegate {
+    func examineTile(_ tile: MetaTile) {
+        selectedTile = tile
     }
 }
 
@@ -135,6 +154,7 @@ extension MetaLevelPlayViewModel {
             tile: getTile(at: viewOffset),
             worldPosition: getWorldPosition(at: viewOffset)
         )
+        metaEntityViewModel.examinableDelegate = self
         return metaEntityViewModel
     }
 
@@ -149,9 +169,7 @@ extension MetaLevelPlayViewModel {
     }
 
     func getLevelInfoViewModel() -> LevelInfoViewModel {
-        let playerPosition: Point = .zero // TODO
-
-        guard let tile = currMetaLevel.getTile(at: playerPosition) else {
+        guard let tile = selectedTile else {
             fatalError("should not be nil")
         }
 

@@ -18,7 +18,7 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
         height: ChunkNode.chunkDimensions
     )
     @Published var currMetaLevel: MetaLevel
-    var hasUnsavedChanges = false
+
     /// The view position relative to the coordinate system of the current meta level.
     @Published var viewPosition: Point
     var cumulativeTranslation: CGVector = .zero {
@@ -55,6 +55,13 @@ class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManip
 
     func deselectTile() {
         selectedTile = nil
+    }
+
+    func getPlayableMetaLevel() -> PlayableMetaLevel {
+        guard let metaLevel = metaLevelStorage.loadMetaLevel(name: currMetaLevel.name) else {
+            fatalError("Failed to load current meta level")
+        }
+        return .metaLevel(metaLevel)
     }
 
     func getAllLoadableMetaLevels() -> [Loadable] {
@@ -125,7 +132,7 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelBasicCRUDDelegate {
     }
 }
 
-extension MetaLevelDesignerViewModel: MetaEntityViewModelDetailedUpdateDelegate {
+extension MetaLevelDesignerViewModel: MetaEntityViewModelExaminableDelegate {
     func examineTile(_ tile: MetaTile) {
         guard editorMode == .select else {
             return
@@ -175,7 +182,7 @@ extension MetaLevelDesignerViewModel {
             worldPosition: getWorldPosition(at: viewOffset)
         )
         metaEntityViewModel.basicCRUDDelegate = self
-        metaEntityViewModel.detailedUpdateDelegate = self
+        metaEntityViewModel.examinableDelegate = self
         return metaEntityViewModel
     }
 
@@ -187,5 +194,9 @@ extension MetaLevelDesignerViewModel {
         let levelSelectorViewModel = LevelSelectorViewModel()
         levelSelectorViewModel.delegate = self
         return levelSelectorViewModel
+    }
+
+    func getNameButtonViewModel() -> MetaLevelNameButtonViewModel {
+        MetaLevelNameButtonViewModel(namePublisher: currMetaLevel.$name.eraseToAnyPublisher())
     }
 }

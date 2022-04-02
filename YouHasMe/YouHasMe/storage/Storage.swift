@@ -30,11 +30,27 @@ class Storage {
             .appendingPathComponent(Storage.defaultDirectoryName, isDirectory: true)
     }
 
+    final func rename(source: URL, to destination: URL) throws {
+        try FileManager.default.moveItem(at: source, to: destination)
+    }
+
     final func getURL(filename: String) throws -> URL {
         let directoryUrl = try getDefaultDirectory()
         try FileManager.default.createDirectory(at: directoryUrl, withIntermediateDirectories: true, attributes: nil)
         return directoryUrl.appendingPathComponent(filename)
             .appendingPathExtension(fileExtension)
+    }
+
+    final func getURL(directoryName: String, createIfNotExists: Bool) throws -> URL {
+        let directoryUrl = try getDefaultDirectory().appendingPathComponent(directoryName)
+        if createIfNotExists {
+            try FileManager.default.createDirectory(
+                at: directoryUrl,
+                withIntermediateDirectories: true,
+                attributes: nil
+            )
+        }
+        return directoryUrl
     }
 
     final func save(data: Data, to file: URL) throws {
@@ -209,6 +225,21 @@ class MetaLevelStorage: JSONStorage {
         }
 
         return MetaLevel.fromPersistable(persistableMetaLevel)
+    }
+
+    func renameMetaLevel(from oldName: String, to newName: String) throws {
+        let oldMetaLevelURL = try getURL(filename: oldName)
+        let newMetaLevelURL = try getURL(filename: newName)
+        let oldChunkDirectory = try getURL(
+            directoryName: oldName,
+            createIfNotExists: false
+        )
+        let newChunkDirectory = try getURL(
+            directoryName: newName,
+            createIfNotExists: false
+        )
+        try rename(source: oldMetaLevelURL, to: newMetaLevelURL)
+        try rename(source: oldChunkDirectory, to: newChunkDirectory)
     }
 
     func saveMetaLevel(_ metaLevel: MetaLevel) throws {

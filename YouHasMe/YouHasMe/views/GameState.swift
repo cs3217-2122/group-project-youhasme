@@ -110,7 +110,7 @@ extension GameState {
             let metaLevelLoadable = metaLevelLoadable else {
             return MetaLevelDesignerViewModel()
         }
-
+        print("metalevelloadable: \(metaLevelLoadable.name) \(metaLevelLoadable.url)")
         return MetaLevelDesignerViewModel(metaLevelLoadable: metaLevelLoadable)
     }
 
