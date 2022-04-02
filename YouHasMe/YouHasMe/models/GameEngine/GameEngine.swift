@@ -33,7 +33,7 @@ struct GameEngine {
             }
         }
 
-        levelLayer = RuleEngine().applyRules(to: newLayer)
+        levelLayer = ruleEngine.applyRules(to: newLayer)
         gameStateManager.addToLayerHistory(levelLayer)
     }
 
@@ -43,7 +43,6 @@ struct GameEngine {
         }
 
         levelLayer = previousLayer
-        levelLayer = ruleEngine.applyRules(to: newLayer)
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions
