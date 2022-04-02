@@ -51,6 +51,8 @@ struct GameGridView: View {
 
     var body: some View {
         GeometryReader { proxy in
+            VStack {
+                Spacer()
             HStack {
                 Spacer()
                 VStack(spacing: 0) {
@@ -74,6 +76,17 @@ struct GameGridView: View {
                             }
                         }
                     }
+                }
+                Spacer()
+            }
+                HStack {
+                    Spacer()
+                   if gameState.state == .playing {
+                       Button("Undo") {
+                           gameEngine.step(action: .undo)
+                           levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                       }
+                   }
                 }
                 Spacer()
             }
