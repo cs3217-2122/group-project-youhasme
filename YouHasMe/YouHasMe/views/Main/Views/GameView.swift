@@ -7,28 +7,27 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
-    @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
     var body: some View {
-        NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: gameState.state == .mainmenu ? nil : ({
+        NavigationFrame(backHandler: gameState.state == .mainmenu ? nil : ({
             switch gameState.state {
             case .mainmenu:
                 break
             case .selecting, .selectingMeta, .designing, .designingMeta, .playing:
-                gameState.state = .mainmenu
+                gameState.stateStack.removeLast()
             }
         })) {
             switch gameState.state {
             case .mainmenu:
                 MainMenuView()
             case .selecting:
-                LevelSelectView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelSelectView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
             case .designing:
-                LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelDesignerView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
             case .designingMeta:
                 MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
-                LevelPlayView(levelDesignerViewModel: levelDesignerViewModel)
+                LevelPlayView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
             case .selectingMeta:
                 MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
             }

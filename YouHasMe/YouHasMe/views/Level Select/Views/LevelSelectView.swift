@@ -14,7 +14,7 @@ struct LevelSelectView: View {
         VStack {
             Button(action: {
                 levelDesignerViewModel.createLevel()
-                gameState.state = .designing
+                gameState.state = .designing()
             }) {
                 Text("Create New Level")
             }.padding()
@@ -24,7 +24,7 @@ struct LevelSelectView: View {
                     ForEach(levelDesignerViewModel.savedLevels) { level in
                         Button(action: {
                             levelDesignerViewModel.selectLevel(level: level)
-                            gameState.state = .designing
+                            gameState.state = .designing()
                         }) {
                             Text(level.name)
                         }

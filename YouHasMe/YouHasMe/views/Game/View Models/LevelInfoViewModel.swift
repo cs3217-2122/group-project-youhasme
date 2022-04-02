@@ -10,6 +10,7 @@ import Combine
 
 class LevelInfoViewModel: ObservableObject {
     struct LevelInfoWithConditions {
+        var loadable: Loadable
         var level: Level
         var unlockCondition: Condition?
         var isLevelUnlocked: Bool {
@@ -38,7 +39,7 @@ class LevelInfoViewModel: ObservableObject {
                 else {
                     return nil
                 }
-                return LevelInfoWithConditions(level: level, unlockCondition: unlockCondition)
+                return LevelInfoWithConditions(loadable: levelLoadable, level: level, unlockCondition: unlockCondition)
             }
         }.store(in: &subscriptions)
     }

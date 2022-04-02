@@ -54,7 +54,7 @@ struct LevelEditRowView: View {
             Spacer()
             Button(action: {
                 viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
-                gameState.state = .playing
+                gameState.state = .playing(playableLevel: .level(viewModel.currLevel))
             }) {
                 Text("Play")
             }.disabled(viewModel.unsavedChanges)

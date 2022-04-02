@@ -107,6 +107,7 @@ struct MessageView: View {
 }
 
 struct LevelInfoView: View {
+    @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: LevelInfoViewModel
     
     func getConditionStatusImage(_ condition: Condition) -> Image {
@@ -126,8 +127,10 @@ struct LevelInfoView: View {
                     
                     if levelInfo.isLevelUnlocked {
                         Button("Enter Level") {
-                            print("Entering Level")
-                            // TODO
+                            let _ = globalLogger.info("Entering level")
+                            gameState.stateStack.append(
+                                .playing(playableLevel: .levelLoadable(levelInfo.loadable))
+                            )
                         }
                     }
                 }

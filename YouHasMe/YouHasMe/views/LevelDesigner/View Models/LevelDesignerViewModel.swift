@@ -18,6 +18,10 @@ class LevelDesignerViewModel: ObservableObject {
         self.init(currLevel: Level())
     }
 
+    convenience init(playableLevel: PlayableLevel) {
+        self.init(currLevel: playableLevel.getLevel())
+    }
+    
     init(currLevel: Level) {
         self.currLevel = Level()
         self.currLevelLayer = currLevel.baseLevel
