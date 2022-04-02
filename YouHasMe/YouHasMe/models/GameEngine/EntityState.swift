@@ -22,8 +22,21 @@ struct EntityState: Hashable {
             intents.remove(intent)  // Remove old intent
             intent.removeAllConditions()  // Remove conditions from entent
             intents.insert(intent)  // Insert new intent
-        } else { // No intent with action yet
+        } else {  // No intent with action yet
             intents.insert(EntityIntent(action: action))
+        }
+    }
+
+    // Adds intent to perform action given condition
+    mutating func add(action: EntityAction, ifEntityAt condLocation: Location, performs condAction: EntityAction) {
+        let condition = EntityActionCondition(location: condLocation, action: condAction)
+        let oldIntent = intents.first { $0.action == action }  // Search for intent with matching action
+        if var intent = oldIntent {  // Action already present
+            intents.remove(intent)  // Remove old intent
+            intent.addCondition(condition)
+            intents.insert(intent)  // Insert new intent
+        } else {  // No intent with action yet
+            intents.insert(EntityIntent(action: action, condition: condition))
         }
     }
 

@@ -9,4 +9,12 @@
 struct EntityActionCondition: Hashable {
     var location: Location
     var action: EntityAction
+
+    func isFulfilled(by state: LevelLayerState) -> Bool {
+        state.entityStates.filter {
+            $0.location == location
+        }.allSatisfy {
+            $0.getActions().contains(action)
+        }
+    }
 }

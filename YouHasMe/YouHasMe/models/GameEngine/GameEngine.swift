@@ -7,7 +7,7 @@
 
 struct GameEngine {
     private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic()
+        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(),
     ]
     private let ruleEngine = RuleEngine()
 
@@ -63,7 +63,19 @@ struct GameEngine {
                 curState = mechanic.apply(update: action, state: curState)
             }
         } while curState != oldState
-        return curState
+        return applyConditions(state: curState)
+    }
+
+    // Remove intents with unmet conditions
+    private func applyConditions(state: LevelLayerState) -> LevelLayerState {
+        var newState = state
+        for (i, entityState) in state.entityStates.enumerated() {  // For each entity
+            let newIntents = entityState.intents.filter {  // Remove intents with rejected conditions
+                $0.conditionsMet(by: state)
+            }
+            newState.entityStates[i].intents = newIntents
+        }
+        return newState
     }
 
     // Applies actions and returns new level layer

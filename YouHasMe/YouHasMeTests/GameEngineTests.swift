@@ -84,12 +84,33 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.wall), x: 2, y: 3)
 
         levelLayer = RuleEngine().applyRules(to: levelLayer)
+        // print(levelLayer)
+        var gameEngine = GameEngine(levelLayer: levelLayer)
+        gameEngine.apply(action: .moveRight)
+        // print(gameEngine.game.levelLayer)
+        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
+        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
+    }
+
+    func testStopPush() throws {
+        var levelLayer = LevelLayer(dimensions: Rectangle(width: 5, height: 5))
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 0, y: 0)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 0)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 2, y: 0)
+
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 0, y: 1)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 1)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.stop), x: 2, y: 1)
+
+        levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 1, y: 3)
+        levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 2, y: 3)
+
+        levelLayer = RuleEngine().applyRules(to: levelLayer)
         print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
         print(gameEngine.game.levelLayer)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
         XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
-
+        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
     }
 }
