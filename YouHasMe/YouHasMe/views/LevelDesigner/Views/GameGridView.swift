@@ -9,6 +9,8 @@ struct GameGridView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     @State var gameEngine: GameEngine
+    @State var showingWinAlert = false
+    @State var showingLoopAlert = false
 
     init(levelDesignerViewModel: LevelDesignerViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
@@ -21,7 +23,7 @@ struct GameGridView: View {
         return min(width, height)
     }
 
-    var dragGesture : some Gesture {
+    var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
                 guard gameState.state == .playing else {
@@ -44,8 +46,10 @@ struct GameGridView: View {
                         updateAction = .moveDown
                     }
                 }
-                gameEngine.step(action: updateAction)
-                levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                gameEngine.apply(action: updateAction)
+                showingWinAlert = gameEngine.currentGame.gameStatus == .win
+                showingLoopAlert = gameEngine.status == .infiniteLoop
+                levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
             }
     }
 
@@ -76,6 +80,10 @@ struct GameGridView: View {
                             }
                         }
                     }
+                }.alert("You Win!", isPresented: $showingWinAlert) {
+                    Button("yay!", role: .cancel) {}
+                }.alert("No infinite loops allowed!", isPresented: $showingLoopAlert) {
+                    Button("ok!", role: .cancel) {}
                 }
                 Spacer()
             }
@@ -83,8 +91,8 @@ struct GameGridView: View {
                     Spacer()
                    if gameState.state == .playing {
                        Button("Undo") {
-                           gameEngine.step(action: .undo)
-                           levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                           gameEngine.undo()
+                           levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
                        }
                    }
                 }

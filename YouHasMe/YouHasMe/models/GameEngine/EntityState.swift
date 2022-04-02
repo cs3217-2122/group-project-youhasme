@@ -9,18 +9,28 @@
 struct EntityState: Hashable {
     var entity: Entity
     var location: Location
-    var intents: Set<EntityIntent> = []
+    var intents: Set<EntityIntent> = []  // Actions that might be performed by this entity
 
     func has(behaviour: Behaviour) -> Bool {
         entity.has(behaviour: behaviour)
     }
 
-    // Adds intent to perform action if not already present
+    // Adds intent to perform action unconditionally
     mutating func add(action: EntityAction) {
-        guard intents.allSatisfy({ $0.action != action }) else {
-            return  // Intent already added
+        var intent = popIntent(action: action) ?? EntityIntent(action: action)
+        intent.makeUnconditional()
+        intents.insert(intent)
+    }
+
+    // Adds intent to perform action given condition
+    mutating func add(action: EntityAction, ifEntityAt condLocation: Location, performs condAction: EntityAction) {
+        let condition = EntityActionCondition(location: condLocation, action: condAction)
+        if var intent = popIntent(action: action) { // Intent with action found
+            intent.addCondition(condition)
+            intents.insert(intent)
+        } else {
+            intents.insert(EntityIntent(action: action, condition: condition))
         }
-        intents.insert(EntityIntent(action: action))
     }
 
     // Returns next unrejected action to be performed or nil if there is no such action
@@ -44,19 +54,25 @@ struct EntityState: Hashable {
 
     // Rejects action if present in intents, does nothing otherwise
     mutating func reject(action: EntityAction) {
-        let newIntents: [EntityIntent] = intents.map {
-            var intent = $0
-            if intent.action == action {
-                intent.isRejected = true
-            }
-            return intent
+        guard var intent = popIntent(action: action) else {
+            return  // No matching intent
         }
-        intents = Set(newIntents)
+        intent.reject()
+        intents.insert(intent)  // Insert new intent
     }
 
     func hasRejected(action: EntityAction) -> Bool {
         intents.contains {
             $0.action == action && $0.isRejected
         }
+    }
+
+    // Pops intent to perform specified action from intents, returns nil if there is no such intent
+    private mutating func popIntent(action: EntityAction) -> EntityIntent? {
+        let intent = intents.first { $0.action == action }
+        if let intent = intent {
+            intents.remove(intent)
+        }
+        return intent
     }
 }

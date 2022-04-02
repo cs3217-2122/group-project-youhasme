@@ -26,8 +26,13 @@
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
+		B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD227F2FFD300F10324 /* GameStatus.swift */; };
+		B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0562DD427F303D900F10324 /* WinMechanic.swift */; };
+		B05687DF27F36CF00046C26C /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05687DE27F36CF00046C26C /* Game.swift */; };
+		B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05687E027F377DC0046C26C /* StopMechanic.swift */; };
 		B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */; };
 		B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0592D3927F219B1002EC0C3 /* PushMechanic.swift */; };
+		B05A807227F8451300F92D2C /* EntityActionCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05A807127F8451300F92D2C /* EntityActionCondition.swift */; };
 		B06FEA0327E73D58005A3D1B /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06FEA0227E73D58005A3D1B /* Location.swift */; };
 		B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62727E658F200918E71 /* PlayerMoveMechanic.swift */; };
 		B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62827E658F200918E71 /* EntityAction.swift */; };
@@ -35,6 +40,7 @@
 		B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62A27E658F200918E71 /* UpdateType.swift */; };
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
+		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
 		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
@@ -123,8 +129,13 @@
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
+		B0562DD227F2FFD300F10324 /* GameStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatus.swift; sourceTree = "<group>"; };
+		B0562DD427F303D900F10324 /* WinMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinMechanic.swift; sourceTree = "<group>"; };
+		B05687DE27F36CF00046C26C /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		B05687E027F377DC0046C26C /* StopMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopMechanic.swift; sourceTree = "<group>"; };
 		B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundaryMechanic.swift; sourceTree = "<group>"; };
 		B0592D3927F219B1002EC0C3 /* PushMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushMechanic.swift; sourceTree = "<group>"; };
+		B05A807127F8451300F92D2C /* EntityActionCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityActionCondition.swift; sourceTree = "<group>"; };
 		B06FEA0227E73D58005A3D1B /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		B07AA62727E658F200918E71 /* PlayerMoveMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerMoveMechanic.swift; sourceTree = "<group>"; };
 		B07AA62827E658F200918E71 /* EntityAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityAction.swift; sourceTree = "<group>"; };
@@ -132,6 +143,7 @@
 		B07AA62A27E658F200918E71 /* UpdateType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateType.swift; sourceTree = "<group>"; };
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
+		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerGridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
@@ -251,6 +263,9 @@
 				B07AA62727E658F200918E71 /* PlayerMoveMechanic.swift */,
 				B0592D3727F21986002EC0C3 /* BoundaryMechanic.swift */,
 				B0592D3927F219B1002EC0C3 /* PushMechanic.swift */,
+				B0562DD427F303D900F10324 /* WinMechanic.swift */,
+				B05687E027F377DC0046C26C /* StopMechanic.swift */,
+				B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -268,6 +283,8 @@
 				B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */,
 				B03EEE9A27F2CED90050D295 /* EntityState.swift */,
 				B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */,
+				B05687DE27F36CF00046C26C /* Game.swift */,
+				B05A807127F8451300F92D2C /* EntityActionCondition.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -474,6 +491,7 @@
 				E57ACB4527DC948400F73B27 /* Outlet.swift */,
 				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
+				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -681,6 +699,7 @@
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
+				B05A807227F8451300F92D2C /* EntityActionCondition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
@@ -696,9 +715,11 @@
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
+				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
@@ -710,11 +731,14 @@
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
+				B05687DF27F36CF00046C26C /* Game.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
+				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
+				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,

@@ -15,37 +15,44 @@ import Foundation
  Between Levels, the GameStateManager should be re-initalised.
  */
 struct GameStateManager {
-    private var levelHistory: [Int: [LevelLayer]]
+    private var initialState: Game
+    private var levelHistory: [Int: [Game]]
     private var levelLayerIndex: Int
 
+    var currentState: Game {
+        levelHistory[levelLayerIndex]?.last ?? initialState
+    }
+
     init(levelLayer: LevelLayer, levelLayerIndex: Int = 0) {
-        self.levelHistory = [levelLayerIndex: [levelLayer]]
+        initialState = Game(levelLayer: levelLayer)
+        self.levelHistory = [levelLayerIndex: [initialState]]
         self.levelLayerIndex = levelLayerIndex
     }
 
-    mutating func addToLayerHistory(_ levelLayer: LevelLayer) {
-        guard let latestLayer = levelHistory[levelLayerIndex]?.last else {
-            levelHistory[levelLayerIndex] = [levelLayer]
+    mutating func push(_ game: Game) {
+        guard let latest = levelHistory[levelLayerIndex]?.last else {
+            levelHistory[levelLayerIndex] = [game]
             return
         }
 
-        if latestLayer == levelLayer {
+        if latest == game {
             return
         }
 
         // already checked in guard clause that history exists
         var history = levelHistory[levelLayerIndex]!
-        history.append(levelLayer)
+        history.append(game)
         levelHistory[levelLayerIndex] = history
     }
 
-    mutating func getPreviousLayer() -> LevelLayer? {
+    mutating func undo() -> Game? {
         guard var history = levelHistory[levelLayerIndex] else {
             return nil
         }
 
-        assert(!history.isEmpty,
-               "State manager should not have empty history at any layer entered before.")
+        assert(
+            !history.isEmpty,
+            "State manager should not have empty history at any layer entered before.")
         if history.count == 1 {
             return history[0]
         }
