@@ -18,12 +18,11 @@ class AchievementsViewModel: ObservableObject {
     private var statistics = StatisticsViewModel()
 
     init(levelId: String = "") {
-        // jx todo: implement pre-loaded achievements
+        // jx todo: implement pre-loaded achievements from storage
         // let achievements = loadAchievements()
         self.levelId = levelId
         self.lockedAchievements = [
 //            Achievement(name: "Design your first level", unlockConditions: [EventUnlockCondition(eventType: )]),
-//            Achievement(name: "Win level Abc", unlockConditions: [EventUnlockCondition(eventType: .WIN, )])
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Lifetime Moves",
@@ -34,11 +33,16 @@ class AchievementsViewModel: ObservableObject {
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1_000_000)]),
-            Achievement(name: "ABC KASJHDLAKSHDLKAHDS", description: "Move 10 Steps in Level Abc",
+            Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
                         unlockConditions: [NumericUnlockCondition(statistics: statistics,
                                                                   statisticName: "Level Moves for Level Abc",
+                                                                  comparison: .LESS_THAN_OR_EQUAL_TO,
+                                                                  unlockValue: 10),
+                                           NumericUnlockCondition(statistics: statistics,
+                                                                  statisticName: "Level Win for Level Abc",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 10)])
+                                                                  unlockValue: 1)
+                                           ])
         ]
     }
 

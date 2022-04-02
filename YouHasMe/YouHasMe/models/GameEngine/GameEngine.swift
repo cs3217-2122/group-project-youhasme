@@ -44,10 +44,13 @@ struct GameEngine: GameEventPublisher {
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [currentGame]
         var nextAction = action
+        let originalState = currentGame
+
         while true {
             let newState = step(game: previousStates.last ?? currentGame, action: nextAction)
             if newState == previousStates.last {  // If reached steady state
                 gameStateManager.push(newState)
+                sendGameEvents(oldState: originalState, newState: newState)
                 return
             } else if previousStates.contains(newState) {  // If returning to earlier states
                 status = .infiniteLoop
@@ -79,9 +82,6 @@ struct GameEngine: GameEventPublisher {
             }
         } while curState != oldState
 
-        // if curState != originalState {
-        //     gameEventSubject.send(GameEvent(type: .move))
-        // }
         return applyConditions(state: curState)
     }
 
@@ -108,5 +108,24 @@ struct GameEngine: GameEventPublisher {
             newLayer.add(entity: curState.entity, x: curState.location.x, y: curState.location.y)
         }
         return ruleEngine.applyRules(to: newLayer)
+    }
+
+    private func sendGameEvents(oldState: Game, newState: Game) {
+        sendMoveGameEvent(oldState: oldState, newState: newState)
+        sendWinGameEvent(newState: newState)
+    }
+
+    private func sendMoveGameEvent(oldState: Game, newState: Game) {
+        if oldState == newState {
+            return
+        }
+        gameEventSubject.send(GameEvent(type: .move))
+    }
+
+    private func sendWinGameEvent(newState: Game) {
+        if !(newState.gameStatus == .win) {
+            return
+        }
+        gameEventSubject.send(GameEvent(type: .win))
     }
 }
