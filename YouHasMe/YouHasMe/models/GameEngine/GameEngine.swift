@@ -82,13 +82,11 @@ struct GameEngine {
     private func resolveActions(in state: LevelLayerState) -> LevelLayer {
         var newLayer = LevelLayer(dimensions: game.levelLayer.dimensions)
         for entityState in state.entityStates {
-            var cur = entityState
-            let location = cur.location
-            if case let .move(dx, dy) = cur.popAction() {  // If we are moving entity
-                newLayer.add(entity: cur.entity, x: location.x + dx, y: location.y + dy)
-            } else {
-                newLayer.add(entity: cur.entity, x: location.x, y: location.y)
+            var curState = entityState
+            while let curAction = curState.popAction() {  // While there are actions left to perform
+                curState = curAction.apply(on: curState)  // Perform action
             }
+            newLayer.add(entity: curState.entity, x: curState.location.x, y: curState.location.y)
         }
         return ruleEngine.applyRules(to: newLayer)
     }
