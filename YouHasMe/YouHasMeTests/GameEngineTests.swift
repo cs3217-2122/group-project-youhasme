@@ -20,8 +20,8 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveDown)
-        // print(gameEngine.game.levelLayer)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
+        // print(gameEngine.currentGame.levelLayer)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
 
     func testComplex() throws {
@@ -42,8 +42,8 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
-        // print(gameEngine.game.levelLayer)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
+        // print(gameEngine.currentGame.levelLayer)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
     }
 
     func testWin() throws {
@@ -63,7 +63,7 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
-        XCTAssertEqual(gameEngine.game.gameStatus, .win)
+        XCTAssertEqual(gameEngine.currentGame.gameStatus, .win)
     }
 
     func testStop() throws {
@@ -87,9 +87,9 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
-        // print(gameEngine.game.levelLayer)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
+        // print(gameEngine.currentGame.levelLayer)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
     }
 
     func testStopPush() throws {
@@ -109,9 +109,9 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
-        // print(gameEngine.game.levelLayer)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
-        XCTAssertEqual(gameEngine.game.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
+        // print(gameEngine.currentGame.levelLayer)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
+        XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
     }
 
     func testTransform() throws {
@@ -130,8 +130,8 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
-        // print(gameEngine.game.levelLayer)
-        let typeAt22 = gameEngine.game.levelLayer.getTileAt(x: 2, y: 2).entities[0].entityType
+        // print(gameEngine.currentGame.levelLayer)
+        let typeAt22 = gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 2).entities[0].entityType
         XCTAssertEqual(typeAt22, EntityTypes.NounInstances.wall)
     }
 
@@ -153,7 +153,7 @@ class GameEngineTests: XCTestCase {
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
-        // print(gameEngine.game.levelLayer)
+        // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.status, .infiniteLoop)
     }
 }

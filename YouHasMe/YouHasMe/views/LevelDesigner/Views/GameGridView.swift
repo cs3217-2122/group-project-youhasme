@@ -47,9 +47,9 @@ struct GameGridView: View {
                     }
                 }
                 gameEngine.apply(action: updateAction)
-                showingWinAlert = gameEngine.game.gameStatus == .win
+                showingWinAlert = gameEngine.currentGame.gameStatus == .win
                 showingLoopAlert = gameEngine.status == .infiniteLoop
-                levelDesignerViewModel.currLevelLayer = gameEngine.game.levelLayer
+                levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
             }
     }
 
@@ -91,8 +91,8 @@ struct GameGridView: View {
                     Spacer()
                    if gameState.state == .playing {
                        Button("Undo") {
-                           gameEngine.step(action: .undo)
-                           levelDesignerViewModel.currLevelLayer = gameEngine.levelLayer
+                           gameEngine.undo()
+                           levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
                        }
                    }
                 }

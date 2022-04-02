@@ -8,12 +8,14 @@
 struct GameEngine {
 
     private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic(),
+        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
     ]
     private let ruleEngine = RuleEngine()
 
-    var gameStateManager: GameStateManager
-    private(set) var game: Game  // Current game state
+    private var gameStateManager: GameStateManager
+    var currentGame: Game {
+        gameStateManager.currentState
+    }
 
     private(set) var status: GameEngineStatus = .running
     enum GameEngineStatus {
@@ -22,28 +24,27 @@ struct GameEngine {
     }
 
     init(levelLayer: LevelLayer) {
-        game = Game(levelLayer: ruleEngine.applyRules(to: levelLayer))
+        gameStateManager = GameStateManager(levelLayer: ruleEngine.applyRules(to: levelLayer))
+    }
+
+    mutating func undo() {
+        _ = gameStateManager.undo()
     }
 
     // Updates game state given action
     mutating func apply(action: UpdateType) {
         status = .running
-        if action == .undo {
-            performUndo()
-            return
-        }
         // Repeatedly run simulation step until no more updates or infinite loop detected
-        var previousStates = [game]
+        var previousStates = [currentGame]
         var nextAction = action
         while true {
-            let newState = step(game: previousStates.last ?? game, action: nextAction)
+            let newState = step(game: previousStates.last ?? currentGame, action: nextAction)
             if newState == previousStates.last {  // If reached steady state
-                game = newState
+                gameStateManager.push(newState)
                 return
             } else if previousStates.contains(newState) {  // If returning to earlier states
                 status = .infiniteLoop
                 return
-
             }
             previousStates.append(newState)
             nextAction = .tick  // Apply .tick after first action
@@ -57,15 +58,6 @@ struct GameEngine {
         newGame.levelLayer = resolveActions(in: state)  // Apply updates
         newGame.gameStatus = state.gameStatus
         return newGame
-    }
-
-    private mutating func performUndo() {
-        guard let previousLayer = gameStateManager.getPreviousLayer() else {
-            return
-        }
-
-        levelLayer = previousLayer
-        levelLayer = ruleEngine.applyRules(to: levelLayer)
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions
@@ -96,7 +88,7 @@ struct GameEngine {
 
     // Applies actions and returns new level layer
     private func resolveActions(in state: LevelLayerState) -> LevelLayer {
-        var newLayer = LevelLayer(dimensions: game.levelLayer.dimensions)
+        var newLayer = LevelLayer(dimensions: currentGame.levelLayer.dimensions)
         for entityState in state.entityStates {
             var curState = entityState
             while let curAction = curState.popAction() {  // While there are actions left to perform
