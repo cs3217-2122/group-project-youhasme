@@ -8,6 +8,8 @@
 import Foundation
 
 protocol AbstractGameEvent {
+    var type: GameEventType { get }
+
     func hasEntity(entityType: EntityType) -> Bool
     func hasEvent(eventType: GameEventType) -> Bool
     func hasLevel(levelName: String) -> Bool

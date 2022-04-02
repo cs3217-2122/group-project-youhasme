@@ -45,7 +45,9 @@ class StatisticsViewModel: Codable {
         let stat2 = GameStatistic(name: "Lifetime Moves", value: 0, statisticType: .lifetime, gameEvent: .move)
         let stat3 = GameStatistic(name: "Lifetime Wins", value: 0, statisticType: .lifetime, gameEvent: .win)
         let stat4 = GameStatistic(name: "Levels Designed", value: 0, statisticType: .lifetime, gameEvent: .designLevel)
-        let stats = [stat1, stat2, stat3, stat4]
+        let stat5 = GameStatistic(name: "Level Moves for Level Abc", value: 0, statisticType: .level, gameEvent: .move,
+                                  levelId: "Abc")
+        let stats = [stat1, stat2, stat3, stat4, stat5]
         for stat in stats {
             gameStatistics[stat.name] = stat
         }

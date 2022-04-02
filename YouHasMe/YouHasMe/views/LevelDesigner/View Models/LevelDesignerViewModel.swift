@@ -14,11 +14,11 @@ class LevelDesignerViewModel: ObservableObject, GameEventPublisher {
     @Published var currLevelLayer: LevelLayer
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
-    var gameEventPublisher: AnyPublisher<GameEvent, Never> {
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
     }
 
-    private let gameEventSubject = PassthroughSubject<GameEvent, Never>()
+    private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
     convenience init() {
         self.init(currLevel: Level())

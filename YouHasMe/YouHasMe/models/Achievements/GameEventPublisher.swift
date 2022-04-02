@@ -8,5 +8,5 @@
 import Combine
 
 protocol GameEventPublisher {
-    var gameEventPublisher: AnyPublisher<GameEvent, Never> { get }
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> { get }
 }

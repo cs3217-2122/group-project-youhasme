@@ -34,6 +34,9 @@
 		40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517D27F786B7008CBCE0 /* AchievementImages.swift */; };
 		40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */; };
 		40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */; };
+		40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */; };
+		40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */; };
+		40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -142,6 +145,9 @@
 		40E2517D27F786B7008CBCE0 /* AchievementImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementImages.swift; sourceTree = "<group>"; };
 		40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventPublisher.swift; sourceTree = "<group>"; };
 		40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractGameEvent.swift; sourceTree = "<group>"; };
+		40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventBaseDecorator.swift; sourceTree = "<group>"; };
+		40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEventDecorator.swift; sourceTree = "<group>"; };
+		40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityEventDecorator.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -279,6 +285,9 @@
 				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
 				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
 				40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */,
+				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
+				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
+				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -765,6 +774,7 @@
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */,
+				40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				40E2517C27F72963008CBCE0 /* AchievementView.swift in Sources */,
 				E573E96227EA32F7000D10E4 /* PersistableChunkNode.swift in Sources */,
@@ -793,6 +803,7 @@
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */,
+				40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
@@ -805,6 +816,7 @@
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableMetaLevel.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */,
+				40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */,
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,

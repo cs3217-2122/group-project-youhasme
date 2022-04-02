@@ -26,7 +26,7 @@ struct LevelSelectView: View {
                     ForEach(levelDesignerViewModel.savedLevels) { level in
                         Button(action: {
                             levelDesignerViewModel.selectLevel(level: level)
-                            achievementsViewModel.resetLevelStats()
+                            achievementsViewModel.selectLevel(level: level)
                             gameState.state = .designing
                         }) {
                             Text(level.name)

@@ -10,11 +10,11 @@ import Combine
 struct GameEngine: GameEventPublisher {
     let gameMechanics: [GameMechanic] = [PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic()]
     let ruleEngine = RuleEngine()
-    var gameEventPublisher: AnyPublisher<GameEvent, Never> {
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
     }
 
-    private let gameEventSubject = PassthroughSubject<GameEvent, Never>()
+    private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
     var levelLayer: LevelLayer
 
