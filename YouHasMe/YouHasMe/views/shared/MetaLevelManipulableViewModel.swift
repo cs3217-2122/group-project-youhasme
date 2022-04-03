@@ -8,15 +8,16 @@
 import Foundation
 protocol MetaLevelManipulableViewModel: IntegerViewTranslatable, ObservableObject {
     var currMetaLevel: MetaLevel { get set }
-    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool) -> MetaTile?
+    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile?
     func setTile(_ tile: MetaTile, at viewOffset: Vector)
 }
 
 extension MetaLevelManipulableViewModel {
-    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool) -> MetaTile? {
+    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
         currMetaLevel.getTile(
             at: viewPosition.translate(by: viewOffset),
-            createChunkIfNotExists: createChunkIfNotExists
+            createChunkIfNotExists: createChunkIfNotExists,
+            loadNeighboringChunks: loadNeighboringChunks
         )
     }
 

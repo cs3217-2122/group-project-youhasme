@@ -81,7 +81,24 @@ extension MetaLevel {
         )
     }
 
-    func getChunk(at worldPosition: Point, createIfNotExists: Bool = false) -> ChunkNode? {
+    func getChunk(at worldPosition: Point, createIfNotExists: Bool, loadNeighbors: Bool) -> ChunkNode? {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createIfNotExists) else {
+            return nil
+        }
+        let chunkPosition = worldToChunkPosition(worldPosition)
+        let neighbors = chunk.loadNeighbors(at: chunkPosition)
+        for (neighborPosition, neighboringChunk) in neighbors where
+            loadedChunks[neighborPosition] == nil {
+            loadedChunks[neighborPosition] = neighboringChunk
+        }
+
+        return chunk
+    }
+
+    private func getChunk(
+        at worldPosition: Point,
+        createIfNotExists: Bool
+    ) -> ChunkNode? {
         // The most basic behavior of getChunk is that it
         // 1. searches `loadedChunks` for the chunk at the given position and returns it
         // 2. tries to load a chunk with the same identifier as the given position
@@ -141,8 +158,8 @@ extension MetaLevel {
         }
     }
 
-    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool = false) -> MetaTile? {
-        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists) else {
+    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists, loadNeighbors: loadNeighboringChunks) else {
             return nil
         }
         let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
@@ -150,7 +167,7 @@ extension MetaLevel {
     }
 
     func setTile(_ tile: MetaTile, at worldPosition: Point) {
-        guard let chunk = getChunk(at: worldPosition) else {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: false) else {
             return
         }
         let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
@@ -186,7 +203,11 @@ extension MetaLevel {
             dimensions: persistableMetaLevel.dimensions,
             entryChunkPosition: persistableMetaLevel.entryChunkPosition
         )
-        metaLevel.currentChunk = metaLevel.getChunk(at: metaLevel.entryChunkPosition)
+        metaLevel.currentChunk = metaLevel.getChunk(
+            at: metaLevel.entryChunkPosition,
+            createIfNotExists: false,
+            loadNeighbors: false
+        )
         return metaLevel
     }
 }

@@ -268,6 +268,7 @@ class ChunkNode: AbstractChunkNode {
     var chunkTiles: [[MetaTile]]
     var neighbors = Neighborhood()
     var neighborFinder: AnyChunkNeighborFinder<Point>
+
     init<Finder: AbstractChunkNeighborFinder>(
         identifier: Point,
         neighborFinder: Finder

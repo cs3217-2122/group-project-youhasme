@@ -164,7 +164,7 @@ extension MetaLevelDesignerViewModel {
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset, createChunkIfNotExists: true),
+            tile: getTile(at: viewOffset, createChunkIfNotExists: true, loadNeighboringChunks: false),
             worldPosition: getWorldPosition(at: viewOffset)
         )
         metaEntityViewModel.basicCRUDDelegate = self
