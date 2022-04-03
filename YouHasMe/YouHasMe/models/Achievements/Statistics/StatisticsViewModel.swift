@@ -36,20 +36,21 @@ class StatisticsViewModel: Codable {
     }
 
     func addLevelsDesigned() {
-        getStatistic(name: "Levels Designed").increase()
+        getStatistic(name: "Lifetime Level Designs").increase()
     }
 
     // jx todo: change to load from storage
+
     func loadStatistics() {
-        let stat1 = GameStatistic(name: "Level Moves", value: 0, statisticType: .level, gameEvent: .move)
-        let stat2 = GameStatistic(name: "Lifetime Moves", value: 0, statisticType: .lifetime, gameEvent: .move)
-        let stat3 = GameStatistic(name: "Lifetime Wins", value: 0, statisticType: .lifetime, gameEvent: .win)
-        let stat4 = GameStatistic(name: "Levels Designed", value: 0, statisticType: .lifetime, gameEvent: .designLevel)
-        let stat5 = GameStatistic(name: "Level Moves for Abc", value: 0, statisticType: .level, gameEvent: .move,
+        let stat1 = GameStatistic(value: 0, statisticType: .level, gameEvent: .move)
+        let stat2 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .move)
+        let stat3 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .win)
+        let stat4 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .designLevel)
+        let stat5 = GameStatistic(value: 0, statisticType: .level, gameEvent: .move,
                                   levelId: "Abc")
-        let stat6 = GameStatistic(name: "Level Win for Abc", value: 0, statisticType: .level, gameEvent: .win,
+        let stat6 = GameStatistic(value: 0, statisticType: .level, gameEvent: .win,
                                   levelId: "Abc")
-        let stat7 = GameStatistic(name: "Levels Designed", value: 0, statisticType: .lifetime, gameEvent: .designLevel)
+        let stat7 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .designLevel)
         let stats = [stat1, stat2, stat3, stat4, stat5, stat6, stat7]
         for stat in stats {
             gameStatistics[stat.name] = stat

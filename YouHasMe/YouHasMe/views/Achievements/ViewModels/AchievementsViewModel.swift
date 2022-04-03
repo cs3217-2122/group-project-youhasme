@@ -15,7 +15,7 @@ class AchievementsViewModel: ObservableObject {
     var imageHeight: Float = 40
     var levelId: String = ""
     private var subscriptions = [AnyCancellable]()
-    private var statistics = StatisticsViewModel()
+    private var statisticsViewModel = StatisticsViewModel()
 
     init(levelId: String = "") {
         // jx todo: implement pre-loaded achievements from storage
@@ -23,27 +23,27 @@ class AchievementsViewModel: ObservableObject {
         self.levelId = levelId
         self.lockedAchievements = [
             Achievement(name: "Creativity", description: "Create your first level",
-                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
-                                                                  statisticName: "Levels Designed",
+                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
+                                                                  statisticName: "Lifetime Level Designs",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1)]),
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
-                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
+                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 10)]),
             Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
-                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
+                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1_000_000)]),
             Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
-                        unlockConditions: [NumericUnlockCondition(statistics: statistics,
+                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Level Moves for Abc",
                                                                   comparison: .LESS_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 10),
-                                           NumericUnlockCondition(statistics: statistics,
-                                                                  statisticName: "Level Win for Abc",
+                                           NumericUnlockCondition(statistics: statisticsViewModel,
+                                                                  statisticName: "Level Wins for Abc",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1)
                                            ])
@@ -56,7 +56,7 @@ class AchievementsViewModel: ObservableObject {
     }
 
     func resetLevelStats() {
-        statistics.resetLevelStats()
+        statisticsViewModel.resetLevelStats()
     }
 
     func setSubscriptionsFor(_ gameEventPublisher: AnyPublisher<AbstractGameEvent, Never>) {
@@ -71,7 +71,7 @@ class AchievementsViewModel: ObservableObject {
                 updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
             }
 
-            for statistic in self.statistics.gameStatistics.values {
+            for statistic in self.statisticsViewModel.gameStatistics.values {
                 statistic.handleGameEvent(event: updatedEvent)
             }
 
