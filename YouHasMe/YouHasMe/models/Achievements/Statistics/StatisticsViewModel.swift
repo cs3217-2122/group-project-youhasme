@@ -14,31 +14,6 @@ class StatisticsViewModel: Codable {
         loadStatistics()
     }
 
-    private func addLevelMove() {
-        getStatistic(name: "Level Moves").increase()
-    }
-
-    private func addLifetimeMove() {
-        getStatistic(name: "Lifetime Moves").increase()
-    }
-
-    func addMove() {
-        addLevelMove()
-        addLifetimeMove()
-    }
-
-    func addWin() {
-        getStatistic(name: "Lifetime Wins").increase()
-    }
-
-    func resetLevelMoves() {
-        getStatistic(name: "Level Moves").reset()
-    }
-
-    func addLevelsDesigned() {
-        getStatistic(name: "Lifetime Level Designs").increase()
-    }
-
     // jx todo: change to load from storage
 
     func loadStatistics() {

@@ -23,26 +23,26 @@ class AchievementsViewModel: ObservableObject {
         self.levelId = levelId
         self.lockedAchievements = [
             Achievement(name: "Creativity", description: "Create your first level",
-                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
+                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Lifetime Level Designs",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1)]),
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
-                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
+                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 10)]),
             Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
-                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
+                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Lifetime Moves",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1_000_000)]),
             Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
-                        unlockConditions: [NumericUnlockCondition(statistics: statisticsViewModel,
+                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Level Moves for Abc",
                                                                   comparison: .LESS_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 10),
-                                           NumericUnlockCondition(statistics: statisticsViewModel,
+                                           IntegerUnlockCondition(statistics: statisticsViewModel,
                                                                   statisticName: "Level Wins for Abc",
                                                                   comparison: .MORE_THAN_OR_EQUAL_TO,
                                                                   unlockValue: 1)
@@ -83,5 +83,41 @@ class AchievementsViewModel: ObservableObject {
                 }
             }
         }.store(in: &subscriptions)
+    }
+}
+
+struct AchievementUtil {
+    func createAchievementsIfNotExists() {
+        let statisticsViewModel = StatisticsViewModel()
+        let achievements = [Achievement(name: "Creativity", description: "Create your first level",
+                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+                                                                                         statisticName: "Lifetime Level Designs",
+                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                                         unlockValue: 1)]),
+                                   Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
+                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+                                                                                         statisticName: "Lifetime Moves",
+                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                                         unlockValue: 10)]),
+                                   Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
+                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+                                                                                         statisticName: "Lifetime Moves",
+                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                                         unlockValue: 1_000_000)]),
+                                   Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
+                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+                                                                                         statisticName: "Level Moves for Abc",
+                                                                                         comparison: .LESS_THAN_OR_EQUAL_TO,
+                                                                                         unlockValue: 10),
+                                                                  IntegerUnlockCondition(statistics: statisticsViewModel,
+                                                                                         statisticName: "Level Wins for Abc",
+                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                                                         unlockValue: 1)
+                                                                  ])]
+        for achievement in achievements {
+            if AchievementStorage().loadAchievement(name: achievement.name) == nil {
+
+            }
+        }
     }
 }

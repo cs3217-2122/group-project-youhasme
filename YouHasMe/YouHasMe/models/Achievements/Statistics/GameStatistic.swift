@@ -20,10 +20,10 @@ class GameStatistic: Codable, Hashable {
     var gameEvent: GameEventType?
     var levelId: String?
 
-    init(value: Int, statisticType: StatisticType, entity: EntityType? = nil,
-         gameEvent: GameEventType, levelId: String? = nil) {
+    init(value: Int, statisticType: StatisticType, gameEvent: GameEventType, entity: EntityType? = nil,
+         levelId: String? = nil) {
         self.name = GameStatistic.getNameFromProperties(statisticType: statisticType, entity: entity,
-                                          gameEvent: gameEvent, levelId: levelId)
+                                                        gameEvent: gameEvent, levelId: levelId)
         self.value = value
         self.type = statisticType
         self.entity = entity
@@ -41,7 +41,7 @@ class GameStatistic: Codable, Hashable {
     }
 
     static func getNameFromProperties(statisticType: StatisticType, entity: EntityType? = nil,
-                                     gameEvent: GameEventType, levelId: String? = nil) -> String {
+                                      gameEvent: GameEventType, levelId: String? = nil) -> String {
         var name = ""
 
         name += getStatisticTypeName(statisticType: statisticType)
@@ -79,6 +79,7 @@ class GameStatistic: Codable, Hashable {
             return " Wins"
         }
     }
+
     static func getEntityName(entity: EntityType?) -> String {
         guard let entity = entity else {
             return ""
@@ -87,6 +88,7 @@ class GameStatistic: Codable, Hashable {
         // todo: change so all entity types can be mapped to string
         return " by \(entityTypeToImageString(type: entity))"
     }
+
     static func == (lhs: GameStatistic, rhs: GameStatistic) -> Bool {
         lhs.name == rhs.name
     }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NumericUnlockCondition: UnlockCondition {
+class IntegerUnlockCondition: Codable, UnlockCondition {
     enum Comparison: Int, Codable {
          case MORE_THAN = 0
          case LESS_THAN = 1
@@ -39,5 +39,14 @@ class NumericUnlockCondition: UnlockCondition {
         case .LESS_THAN_OR_EQUAL_TO:
             return statistic.value <= unlockValue
         }
+    }
+}
+
+extension IntegerUnlockCondition {
+    func toPersistable() -> PersistableUnlockCondition {
+        PersistableUnlockCondition(
+            conditionType: .integer,
+            condition: self
+        )
     }
 }

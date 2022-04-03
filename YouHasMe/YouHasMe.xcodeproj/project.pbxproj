@@ -24,7 +24,7 @@
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
 		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
-		40E2516827F4359C008CBCE0 /* NumericUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516727F4359C008CBCE0 /* NumericUnlockCondition.swift */; };
+		40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */; };
 		40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516927F43C56008CBCE0 /* UnlockCondition.swift */; };
 		40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */; };
 		40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */; };
@@ -38,6 +38,7 @@
 		40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */; };
 		40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */; };
 		40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */; };
+		40E2518C27F9A292008CBCE0 /* PersistableUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -142,7 +143,7 @@
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
 		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
-		40E2516727F4359C008CBCE0 /* NumericUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericUnlockCondition.swift; sourceTree = "<group>"; };
+		40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerUnlockCondition.swift; sourceTree = "<group>"; };
 		40E2516927F43C56008CBCE0 /* UnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockCondition.swift; sourceTree = "<group>"; };
 		40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatistic.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventBaseDecorator.swift; sourceTree = "<group>"; };
 		40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEventDecorator.swift; sourceTree = "<group>"; };
 		40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityEventDecorator.swift; sourceTree = "<group>"; };
+		40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableUnlockCondition.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -293,7 +295,7 @@
 			children = (
 				40E2516D27F5D742008CBCE0 /* Statistics */,
 				40E2516527F43209008CBCE0 /* Achievement.swift */,
-				40E2516727F4359C008CBCE0 /* NumericUnlockCondition.swift */,
+				40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */,
 				40E2516927F43C56008CBCE0 /* UnlockCondition.swift */,
 				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
 				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
@@ -512,6 +514,7 @@
 				E573E96127EA32F7000D10E4 /* PersistableChunkNode.swift */,
 				E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */,
 				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
+				40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */,
 			);
 			path = persistable;
 			sourceTree = "<group>";
@@ -804,11 +807,12 @@
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				40E2518C27F9A292008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */,
-				40E2516827F4359C008CBCE0 /* NumericUnlockCondition.swift in Sources */,
+				40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
 				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,

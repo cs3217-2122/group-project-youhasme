@@ -45,3 +45,31 @@ extension Achievement: Identifiable {
         name
     }
 }
+
+struct PersistableAchievement: Codable {
+    var name: String
+    var description: String
+    var persistableUnlockConditions: [PersistableUnlockCondition]
+    var isUnlocked: Bool
+}
+
+extension Achievement {
+    func toPersistable() -> PersistableAchievement {
+        PersistableAchievement(name: name, description: description,
+                               persistableUnlockConditions: unlockConditions.map { $0.toPersistable() },
+                               isUnlocked: isUnlocked)
+    }
+
+    static func fromPersistable(persistable: PersistableAchievement) -> Achievement {
+        Achievement(name: persistable.name, description: persistable.description,
+                    unlockConditions: persistable
+                        .persistableUnlockConditions.map { UnlockConditionUtil.fromPersistable(persistable: $0) },
+                    isUnlocked: persistable.isUnlocked)
+    }
+}
+
+struct UnlockConditionUtil {
+    static func fromPersistable(persistable: PersistableUnlockCondition) -> UnlockCondition {
+        persistable.unlockCondition
+    }
+}
