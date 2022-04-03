@@ -93,6 +93,15 @@
 		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
 		E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594827F4180B009A79F9 /* MessagesViewModel.swift */; };
 		E578594B27F42C94009A79F9 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594A27F42C94009A79F9 /* Loadable.swift */; };
+		E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */; };
+		E57A19A527F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */; };
+		E57A19A727F9F91900312C39 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A627F9F91900312C39 /* Directions.swift */; };
+		E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */; };
+		E57A19AC27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */; };
+		E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */; };
+		E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */; };
+		E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */; };
+		E57A19B627F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -128,10 +137,9 @@
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
 		E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDF27E5A64B00E3952D /* Entity.swift */; };
 		E5BECBE227E5B6EF00E3952D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE127E5B6EF00E3952D /* String.swift */; };
-		E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */; };
 		E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE627E5E68200E3952D /* Behaviour.swift */; };
 		E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE827E5E7C700E3952D /* RuleParser.swift */; };
-		E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */; };
+		E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */; };
 		E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */; };
 		E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEE27E5E84200E3952D /* DefaultRules.swift */; };
 		E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF127E5E8B900E3952D /* Noun.swift */; };
@@ -240,6 +248,15 @@
 		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
 		E578594827F4180B009A79F9 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		E578594A27F42C94009A79F9 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
+		E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapAroundMatchingStrategy.swift; sourceTree = "<group>"; };
+		E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderDelegate.swift; sourceTree = "<group>"; };
+		E57A19A627F9F91900312C39 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
+		E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmediateNeighborhoodChunkNeighborFinder.swift; sourceTree = "<group>"; };
+		E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderReversedDecorator.swift; sourceTree = "<group>"; };
+		E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderRandomizerDecorator.swift; sourceTree = "<group>"; };
+		E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderWrapAroundDecorator.swift; sourceTree = "<group>"; };
+		E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeneratorDelegate.swift; sourceTree = "<group>"; };
+		E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkSelfEvolutionDelegate.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -277,10 +294,9 @@
 		E5BECBDD27E59E1000E3952D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E5BECBDF27E5A64B00E3952D /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E5BECBE127E5B6EF00E3952D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBuilder.swift; sourceTree = "<group>"; };
 		E5BECBE627E5E68200E3952D /* Behaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
 		E5BECBE827E5E7C700E3952D /* RuleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleParser.swift; sourceTree = "<group>"; };
-		E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidator.swift; sourceTree = "<group>"; };
+		E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaiveRuleValidationStrategy.swift; sourceTree = "<group>"; };
 		E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleEngine.swift; sourceTree = "<group>"; };
 		E5BECBEE27E5E84200E3952D /* DefaultRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRules.swift; sourceTree = "<group>"; };
 		E5BECBF127E5E8B900E3952D /* Noun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noun.swift; sourceTree = "<group>"; };
@@ -391,7 +407,6 @@
 			children = (
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
 				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
-				E575264B27E965410045D3D6 /* ChunkNode.swift */,
 				E573E95727EA1A34000D10E4 /* Rectangle.swift */,
 				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
 			);
@@ -543,6 +558,7 @@
 			children = (
 				E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */,
 				E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */,
+				E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */,
 			);
 			path = matching;
 			sourceTree = "<group>";
@@ -565,6 +581,46 @@
 				E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */,
 			);
 			path = parsing;
+			sourceTree = "<group>";
+		};
+		E57A19A327F9F8DB00312C39 /* chunk */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B427F9FEC500312C39 /* Self Evolution Delegate */,
+				E57A19B127F9FE6600312C39 /* ChunkGeneratorDelegate */,
+				E57A19A827F9FCB700312C39 /* Neighbor Finder Delegate */,
+				E575264B27E965410045D3D6 /* ChunkNode.swift */,
+				E57A19A627F9F91900312C39 /* Directions.swift */,
+			);
+			path = chunk;
+			sourceTree = "<group>";
+		};
+		E57A19A827F9FCB700312C39 /* Neighbor Finder Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */,
+				E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */,
+				E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */,
+				E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */,
+				E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */,
+			);
+			path = "Neighbor Finder Delegate";
+			sourceTree = "<group>";
+		};
+		E57A19B127F9FE6600312C39 /* ChunkGeneratorDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */,
+			);
+			path = ChunkGeneratorDelegate;
+			sourceTree = "<group>";
+		};
+		E57A19B427F9FEC500312C39 /* Self Evolution Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */,
+			);
+			path = "Self Evolution Delegate";
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -612,6 +668,7 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
+				E57A19A327F9F8DB00312C39 /* chunk */,
 				E573E96027EA32DC000D10E4 /* persistable */,
 				E5563C3A27E8B551007D2E86 /* helpers */,
 				B07AA62627E658F200918E71 /* GameEngine */,
@@ -714,9 +771,8 @@
 				E574658E27F8664600F79A52 /* matching */,
 				E574658F27F8665500F79A52 /* parsing */,
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
-				E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */,
 				E5BECBE827E5E7C700E3952D /* RuleParser.swift */,
-				E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */,
+				E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */,
 				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
 				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
 			);
@@ -873,6 +929,8 @@
 				E585AD5727F9649500A54202 /* MetaLevelSelectorView.swift in Sources */,
 				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
 				E585AD5927F964F900A54202 /* MessageView.swift in Sources */,
+				E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */,
+				E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				B05A807227F8451300F92D2C /* EntityActionCondition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
@@ -897,7 +955,6 @@
 				1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */,
 				E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
-				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E585AD5D27F9652E00A54202 /* MetaLevelInfoView.swift in Sources */,
@@ -907,7 +964,9 @@
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
+				E57A19AC27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift in Sources */,
 				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
@@ -919,16 +978,19 @@
 				E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */,
 				E574659927F8685C00F79A52 /* NounState.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
+				E57A19A727F9F91900312C39 /* Directions.swift in Sources */,
 				40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
 				E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */,
+				E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
 				B05687DF27F36CF00046C26C /* Game.swift in Sources */,
+				E57A19A527F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
-				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */,
 				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
 				E585AD5127F9410900A54202 /* UIColor.swift in Sources */,
@@ -971,6 +1033,7 @@
 				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
+				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
 				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
@@ -994,6 +1057,7 @@
 				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */,
+				E57A19B627F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */,

@@ -92,6 +92,9 @@ extension MetaLevel {
         guard let chunk = getChunk(at: worldPosition, createIfNotExists: createIfNotExists) else {
             return nil
         }
+        if loadNeighbors {
+            chunk.neighborFinderDelegate = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+        }
         let chunkPosition = worldToChunkPosition(worldPosition)
         let neighbors = chunk.loadNeighbors(at: chunkPosition)
         for (neighborPosition, neighboringChunk) in neighbors where
