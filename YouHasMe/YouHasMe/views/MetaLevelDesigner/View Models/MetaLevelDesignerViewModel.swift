@@ -79,20 +79,6 @@ extension MetaLevelDesignerViewModel {
     }
 }
 
-// MARK: CRUD
-extension MetaLevelDesignerViewModel {
-    func getTile(at viewOffset: Vector) -> MetaTile? {
-        currMetaLevel.getTile(
-            at: viewPosition.translate(by: viewOffset),
-            createChunkIfNotExists: true
-        )
-    }
-
-    func setTile(_ tile: MetaTile, at viewOffset: Vector) {
-        currMetaLevel.setTile(tile, at: getWorldPosition(at: viewOffset))
-    }
-}
-
 extension MetaLevelDesignerViewModel: MetaLevelDesignerToolbarViewModelDelegate {}
 
 extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
@@ -178,7 +164,7 @@ extension MetaLevelDesignerViewModel {
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset),
+            tile: getTile(at: viewOffset, createChunkIfNotExists: true),
             worldPosition: getWorldPosition(at: viewOffset)
         )
         metaEntityViewModel.basicCRUDDelegate = self

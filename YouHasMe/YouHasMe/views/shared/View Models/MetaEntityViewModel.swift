@@ -34,12 +34,12 @@ class MetaEntityViewModel: CellViewModel {
         self.worldPosition = worldPosition
 
         guard let tile = tile else {
-            super.init()
+            super.init(imageSource: nil)
             return
         }
 
         if tile.metaEntities.isEmpty {
-            super.init()
+            super.init(imageSource: .uiColor(.gray))
         } else {
             // TODO: Allow stacking of multiple images
             super.init(imageSource: metaEntityTypeToImageable(type: tile.metaEntities[0]))
@@ -54,7 +54,7 @@ class MetaEntityViewModel: CellViewModel {
 
         tile.$metaEntities.sink { [weak self] metaEntities in
             guard !metaEntities.isEmpty else {
-                self?.imageSource = nil
+                self?.imageSource = .uiColor(.gray)
                 return
             }
             self?.imageSource = metaEntityTypeToImageable(type: metaEntities[0])

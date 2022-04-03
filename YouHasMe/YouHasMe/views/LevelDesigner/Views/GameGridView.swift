@@ -89,7 +89,7 @@ struct GameGridView: View {
             }
                 HStack {
                     Spacer()
-                   if gameState.state == .playing {
+                    if case .playing = gameState.state {
                        Button("Undo") {
                            gameEngine.undo()
                            levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer

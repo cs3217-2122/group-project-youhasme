@@ -151,7 +151,7 @@ extension MetaLevelPlayViewModel: MetaEntityViewModelExaminableDelegate {
 extension MetaLevelPlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset),
+            tile: getTile(at: viewOffset, createChunkIfNotExists: false),
             worldPosition: getWorldPosition(at: viewOffset)
         )
         metaEntityViewModel.examinableDelegate = self
