@@ -39,6 +39,7 @@
 		40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */; };
 		40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */; };
 		40E2518C27F9A292008CBCE0 /* PersistableUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */; };
+		40E2519027F9FAB1008CBCE0 /* GameEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -158,6 +159,7 @@
 		40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEventDecorator.swift; sourceTree = "<group>"; };
 		40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityEventDecorator.swift; sourceTree = "<group>"; };
 		40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableUnlockCondition.swift; sourceTree = "<group>"; };
+		40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventTests.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */,
 				B07AA63127E65FC500918E71 /* GameEngineTests.swift */,
 				40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */,
+				40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */,
 			);
 			path = YouHasMeTests;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
+				40E2519027F9FAB1008CBCE0 /* GameEventTests.swift in Sources */,
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */,
 				40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */,
