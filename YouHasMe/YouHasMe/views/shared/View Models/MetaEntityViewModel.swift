@@ -13,19 +13,13 @@ protocol MetaEntityViewModelBasicCRUDDelegate: AnyObject {
     func removeEntity(from tile: MetaTile)
 }
 
-protocol MetaEntityViewModelDetailedUpdateDelegate: AnyObject {
+protocol MetaEntityViewModelExaminableDelegate: AnyObject {
     func examineTile(_ tile: MetaTile)
-}
-
-protocol MetaEntityViewModelLevelDelegate: AnyObject {
-    func getLevelInfo(_ loadable: Loadable)
-    func enterLevel(_ loadable: Loadable)
 }
 
 class MetaEntityViewModel: CellViewModel {
     weak var basicCRUDDelegate: MetaEntityViewModelBasicCRUDDelegate?
-    weak var detailedUpdateDelegate: MetaEntityViewModelDetailedUpdateDelegate?
-    weak var levelDelegate: MetaEntityViewModelLevelDelegate?
+    weak var examinableDelegate: MetaEntityViewModelExaminableDelegate?
     var tile: MetaTile?
     var worldPosition: Point?
 
@@ -85,22 +79,10 @@ class MetaEntityViewModel: CellViewModel {
     }
 
     func examine() {
-        guard let delegate = detailedUpdateDelegate, let tile = tile else {
+        guard let delegate = examinableDelegate, let tile = tile else {
             return
         }
 
         delegate.examineTile(tile)
-    }
-
-    func enterLevelIfExists() {
-        guard
-            let levelDelegate = levelDelegate,
-            let tile = tile,
-            let levelLoadable = tile.getLevelLoadable()
-            else {
-            return
-        }
-
-        levelDelegate.enterLevel(levelLoadable)
     }
 }

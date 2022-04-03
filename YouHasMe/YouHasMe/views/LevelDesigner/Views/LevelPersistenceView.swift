@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct LevelEditRowView: View {
+struct LevelPersistenceView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: LevelDesignerViewModel
     @State var showSaveLevelAlert = false

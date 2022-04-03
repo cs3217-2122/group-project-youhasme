@@ -17,23 +17,22 @@ struct MetaLevelPlayView: View {
 
     var body: some View {
         ZStack {
-            Group {
-                MetaLevelGridView(viewModel: viewModel)
-                Spacer()
-                HStack(alignment: .center) {
-                    ForEach(viewModel.contextualData) { data in
-                        Button(data.description, action: data.action)
+            VStack {
+                Group {
+                    MetaLevelGridView(viewModel: viewModel)
+                    Spacer()
+                    HStack(alignment: .center) {
+                        ForEach(viewModel.contextualData) { data in
+                            Button(data.description, action: data.action)
+                        }
                     }
                 }
             }
-            
-            if viewModel.overlayState != .off {
+            if viewModel.state != .normal {
                 NavigationFrame(
-                    verticalAlignment: .center,
-                    horizontalAlignment: .center,
                     backHandler: { viewModel.closeOverlay() }) {
                     Group {
-                        switch viewModel.overlayState {
+                        switch viewModel.state {
                         case .messages:
                             MessagesView(viewModel: viewModel.getMessagesViewModel())
                         case .travel:
@@ -41,7 +40,7 @@ struct MetaLevelPlayView: View {
                         case .level:
                             LevelInfoView(viewModel: viewModel.getLevelInfoViewModel())
                         default:
-                            Group {}
+                            EmptyView()
                         }
                     }
                 }

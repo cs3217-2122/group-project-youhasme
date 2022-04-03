@@ -16,18 +16,18 @@ struct MetaEntityView: View {
             .border(.pink)
             .onTapGesture {
                 switch gameState.state {
-                case .designingMeta(_):
+                case .designingMeta:
                     viewModel.addEntity()
                     viewModel.examine()
-                case .playing:
-                    viewModel.enterLevelIfExists()
+                case .playingMeta:
+                    viewModel.examine()
                 default:
                     return
                 }
             }
             .onLongPressGesture {
                 switch gameState.state {
-                case .designingMeta(_):
+                case .designingMeta:
                     viewModel.removeEntity()
                 default:
                     return

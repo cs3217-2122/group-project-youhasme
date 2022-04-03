@@ -2,7 +2,11 @@ import Foundation
 
 class RuleEngine {
     var wellFormedRules: [Rule] = []
-    private var ruleParser = RuleParser()
+    private var ruleParser = RuleParser(
+        sentenceMatchingStrategy: SouthwardEastwardMatchingStrategy(),
+        sentenceParsingStrategy: MaximumLengthParsingStrategy()
+    )
+
     private var ruleValidator = RuleValidator()
 
     // Adds behaviours to entities of levelLayer based on rules

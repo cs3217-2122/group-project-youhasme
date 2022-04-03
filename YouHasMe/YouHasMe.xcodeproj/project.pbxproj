@@ -18,6 +18,7 @@
 		1E96EB9127E725DF00321BEB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9027E725DF00321BEB /* GameView.swift */; };
 		1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9227E7264100321BEB /* LevelSelectView.swift */; };
 		1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9427E726CC00321BEB /* LevelPlayView.swift */; };
+		40AD869327E6073A00F42C42 /* LevelPersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */; };
 		1ED20DB227F84C10002E7683 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ED20DB127F84C10002E7683 /* GoogleService-Info.plist */; };
 		1ED20DB327F84C10002E7683 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1ED20DB127F84C10002E7683 /* GoogleService-Info.plist */; };
 		1ED20DB627F84C51002E7683 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1ED20DB527F84C51002E7683 /* FirebaseAuth */; };
@@ -97,6 +98,20 @@
 		E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658627F8096600F79A52 /* ConditionCreatorView.swift */; };
 		E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */; };
 		E574658B27F80B0300F79A52 /* LevelSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */; };
+		E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */; };
+		E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */; };
+		E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */; };
+		E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */; };
+		E574659727F8670F00F79A52 /* EpsilonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659627F8670F00F79A52 /* EpsilonState.swift */; };
+		E574659927F8685C00F79A52 /* NounState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659827F8685C00F79A52 /* NounState.swift */; };
+		E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659A27F8689000F79A52 /* NounConcatAndState.swift */; };
+		E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659C27F868AC00F79A52 /* IsVerbState.swift */; };
+		E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659E27F868BC00F79A52 /* HasVerbState.swift */; };
+		E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */; };
+		E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */; };
+		E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */; };
+		E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */; };
+		E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A827F86F6000F79A52 /* RejectingState.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
 		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
 		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
@@ -164,6 +179,7 @@
 		1E96EB9027E725DF00321BEB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		1E96EB9227E7264100321BEB /* LevelSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectView.swift; sourceTree = "<group>"; };
 		1E96EB9427E726CC00321BEB /* LevelPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPlayView.swift; sourceTree = "<group>"; };
+		40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPersistenceView.swift; sourceTree = "<group>"; };
 		1ED20DB127F84C10002E7683 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		1ED20DC027F84D2E002E7683 /* UploadedMetaLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedMetaLevel.swift; sourceTree = "<group>"; };
 		1ED20DC327F84D37002E7683 /* UploadedLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedLevel.swift; sourceTree = "<group>"; };
@@ -225,6 +241,20 @@
 		E574658627F8096600F79A52 /* ConditionCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorView.swift; sourceTree = "<group>"; };
 		E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoView.swift; sourceTree = "<group>"; };
 		E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewModel.swift; sourceTree = "<group>"; };
+		E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaEntityType.swift; sourceTree = "<group>"; };
+		E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SouthwardEastwardMatchingStrategy.swift; sourceTree = "<group>"; };
+		E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalMatchingStrategy.swift; sourceTree = "<group>"; };
+		E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicFiniteAutomaton.swift; sourceTree = "<group>"; };
+		E574659627F8670F00F79A52 /* EpsilonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpsilonState.swift; sourceTree = "<group>"; };
+		E574659827F8685C00F79A52 /* NounState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounState.swift; sourceTree = "<group>"; };
+		E574659A27F8689000F79A52 /* NounConcatAndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounConcatAndState.swift; sourceTree = "<group>"; };
+		E574659C27F868AC00F79A52 /* IsVerbState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbState.swift; sourceTree = "<group>"; };
+		E574659E27F868BC00F79A52 /* HasVerbState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbState.swift; sourceTree = "<group>"; };
+		E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbConcatNounPropState.swift; sourceTree = "<group>"; };
+		E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbConcatNounState.swift; sourceTree = "<group>"; };
+		E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbPrimedState.swift; sourceTree = "<group>"; };
+		E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbPrimedState.swift; sourceTree = "<group>"; };
+		E57465A827F86F6000F79A52 /* RejectingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectingState.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
 		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
 		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
@@ -431,7 +461,7 @@
 		E56752F427EEA7D90001305D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
+				40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */,
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
 				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
 				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
@@ -551,6 +581,7 @@
 				E573E96127EA32F7000D10E4 /* PersistableChunkNode.swift */,
 				E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */,
 				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
+				E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */,
 			);
 			path = persistable;
 			sourceTree = "<group>";
@@ -561,6 +592,33 @@
 				E574658027F8059000F79A52 /* MetaEntityViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E574658E27F8664600F79A52 /* matching */ = {
+			isa = PBXGroup;
+			children = (
+				E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */,
+				E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */,
+			);
+			path = matching;
+			sourceTree = "<group>";
+		};
+		E574658F27F8665500F79A52 /* parsing */ = {
+			isa = PBXGroup;
+			children = (
+				E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */,
+				E574659627F8670F00F79A52 /* EpsilonState.swift */,
+				E574659827F8685C00F79A52 /* NounState.swift */,
+				E574659A27F8689000F79A52 /* NounConcatAndState.swift */,
+				E574659C27F868AC00F79A52 /* IsVerbState.swift */,
+				E574659E27F868BC00F79A52 /* HasVerbState.swift */,
+				E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */,
+				E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */,
+				E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */,
+				E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */,
+				E57465A827F86F6000F79A52 /* RejectingState.swift */,
+			);
+			path = parsing;
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -704,6 +762,8 @@
 		E5BECBE327E5BE0200E3952D /* rules */ = {
 			isa = PBXGroup;
 			children = (
+				E574658E27F8664600F79A52 /* matching */,
+				E574658F27F8665500F79A52 /* parsing */,
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
 				E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */,
 				E5BECBE827E5E7C700E3952D /* RuleParser.swift */,
@@ -876,10 +936,14 @@
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				1ED20DCA27F84D49002E7683 /* OpenWorldRoom.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
+				E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
-				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
+				40AD869327E6073A00F42C42 /* LevelPersistenceView.swift in Sources */,
+				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */,
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
+				E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */,
+				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
 				E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
@@ -894,7 +958,9 @@
 				1ED20DC727F84D40002E7683 /* UploadedChunkNode.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
+				E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
+				E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
@@ -907,7 +973,9 @@
 				E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
 				E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */,
+				E574659927F8685C00F79A52 /* NounState.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
@@ -920,11 +988,14 @@
 				1ED20DC427F84D37002E7683 /* UploadedLevel.swift in Sources */,
 				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
+				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
 				E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */,
+				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
 				E567530227EEBACD0001305D /* MetaLevelSelectViewModel.swift in Sources */,
+				E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableMetaLevel.swift in Sources */,
@@ -937,12 +1008,14 @@
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
+				E574659727F8670F00F79A52 /* EpsilonState.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
 				E578594B27F42C94009A79F9 /* Loadable.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
+				E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
 				1ED20DD027F84D59002E7683 /* LevelRoom.swift in Sources */,
 				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
@@ -969,6 +1042,7 @@
 				E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */,
 				E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
+				E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
