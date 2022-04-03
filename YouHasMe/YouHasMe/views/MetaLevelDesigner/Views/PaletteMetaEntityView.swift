@@ -12,7 +12,7 @@ struct PaletteMetaEntityView: View {
     @State var borderColor: Color = .black
     var body: some View {
         
-        CellView(viewModel: viewModel)
+        CellView(backupDisplayColor: .gray, viewModel: viewModel)
             .onTapGesture {
                 viewModel.select()
             }

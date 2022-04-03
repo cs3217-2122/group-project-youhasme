@@ -120,6 +120,24 @@ class ConditionCreatorViewModel: ObservableObject {
     @Published var selectedObjectField: String?
     @Published var selectedObjectDependency: String?
 
+    var tempSubjectRepresentation: String {
+        guard let selectedSubjectConditionTypeId = selectedSubjectConditionTypeId else {
+            return ""
+        }
+        return """
+        \(selectedSubjectConditionTypeId)::\(selectedSubjectDependency ?? "UNKNOWN?") -> \(selectedSubjectField ?? "UNKNOWN?")
+        """
+    }
+
+    var tempObjectRepresentation: String {
+        guard let selectedObjectConditionTypeId = selectedObjectConditionTypeId else {
+            return ""
+        }
+        return """
+        \(selectedObjectConditionTypeId)::\(selectedObjectDependency ?? "UNKNOWN?") -> \(selectedObjectField ?? "UNKNOWN?")
+        """
+    }
+
     private var subscriptions: Set<AnyCancellable> = []
 
     init(entityIndex: Int) {

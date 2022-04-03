@@ -5,6 +5,7 @@ enum Noun: String, Hashable {
     case wall
     case flag
     case skull
+    case box
     case word
 }
 

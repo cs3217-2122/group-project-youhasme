@@ -11,11 +11,17 @@ let allAvailableEntityTypes: [EntityType] = EntityTypes.getAllEntityTypes()
 let demoTypes: [EntityType] = [
     EntityTypes.Nouns.baba,
     EntityTypes.Nouns.wall,
+    EntityTypes.Nouns.flag,
+    EntityTypes.Nouns.box,
     EntityTypes.Verbs.vIs,
     EntityTypes.Properties.you,
     EntityTypes.Properties.push,
+    EntityTypes.Properties.stop,
+    EntityTypes.Properties.win,
     EntityTypes.NounInstances.baba,
-    EntityTypes.NounInstances.wall
+    EntityTypes.NounInstances.wall,
+    EntityTypes.NounInstances.flag,
+    EntityTypes.NounInstances.box
 ]
 
 func entityTypeToImageString(type: EntityType) -> String {
@@ -24,16 +30,28 @@ func entityTypeToImageString(type: EntityType) -> String {
         return "baba_text"
     case EntityTypes.Nouns.wall:
         return "wall_text"
+    case EntityTypes.Nouns.flag:
+        return "flag_text"
+    case EntityTypes.Nouns.box:
+        return "box_text"
     case EntityTypes.Verbs.vIs:
         return "is"
     case EntityTypes.Properties.you:
         return "you"
     case EntityTypes.Properties.push:
         return "push"
+    case EntityTypes.Properties.stop:
+        return "stop"
+    case EntityTypes.Properties.win:
+        return "win"
     case EntityTypes.NounInstances.baba:
         return "baba"
     case EntityTypes.NounInstances.wall:
         return "wall"
+    case EntityTypes.NounInstances.flag:
+        return "flag"
+    case EntityTypes.NounInstances.box:
+        return "box"
     default:
         return "question"
     }
@@ -76,7 +94,7 @@ func entityTypeToImageColor(type: EntityType) -> Color {
     default:
         /// can change this if we have entity types in the future that cannot be added to the level designer
         print("Entity Type \(type.classification) does not have image")
-//        assert(false, "Entity Type \(type.classification) does not have image")
+        //        assert(false, "Entity Type \(type.classification) does not have image")
         return .gray
     }
 }
@@ -88,12 +106,12 @@ func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
     case .nonBlocking:
         return .string("flag")
     case .space:
-        return nil
+        return .uiColor(.gray)
     case .level:
-        return .string("question")
+        return .string("door")
     case .travel:
-        return nil
+        return .string("question")
     case .message:
-        return nil
+        return .uiColor(.darkGray)
     }
 }

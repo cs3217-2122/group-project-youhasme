@@ -36,7 +36,7 @@ struct MetaLevelPlayView: View {
                         case .messages:
                             MessagesView(viewModel: viewModel.getMessagesViewModel())
                         case .travel:
-                            TravelInfoView()
+                            MetaLevelInfoView(viewModel: viewModel.getMetaLevelInfoViewModel())
                         case .level:
                             LevelInfoView(viewModel: viewModel.getLevelInfoViewModel())
                         default:

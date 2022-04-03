@@ -151,7 +151,7 @@ extension MetaLevelPlayViewModel: MetaEntityViewModelExaminableDelegate {
 extension MetaLevelPlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset),
+            tile: getTile(at: viewOffset, createChunkIfNotExists: false, loadNeighboringChunks: true),
             worldPosition: getWorldPosition(at: viewOffset)
         )
         metaEntityViewModel.examinableDelegate = self
@@ -164,6 +164,14 @@ extension MetaLevelPlayViewModel {
         }
 
         return MessagesViewModel(tile: tile)
+    }
+
+    func getMetaLevelInfoViewModel() -> MetaLevelInfoViewModel {
+        guard let tile = selectedTile else {
+            fatalError("should not be nil")
+        }
+
+        return MetaLevelInfoViewModel(tile: tile)
     }
 
     func getLevelInfoViewModel() -> LevelInfoViewModel {

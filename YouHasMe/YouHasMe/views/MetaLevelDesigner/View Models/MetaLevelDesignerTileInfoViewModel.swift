@@ -22,7 +22,9 @@ class MetaLevelDesignerTileInfoViewModel: ObservableObject {
     }
 
     func getConditionCreatorViewModel(with entityIndex: Int) -> ConditionCreatorViewModel {
-        ConditionCreatorViewModel(entityIndex: entityIndex)
+        let conditionCreatorViewModel = ConditionCreatorViewModel(entityIndex: entityIndex)
+        conditionCreatorViewModel.delegate = self
+        return conditionCreatorViewModel
     }
 }
 

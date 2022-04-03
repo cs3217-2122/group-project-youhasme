@@ -28,10 +28,7 @@ struct ConditionCreatorView: View {
                 Button("Subject Condition") {
                     editingSubjectConditionType.toggle()
                 }
-                if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
-                   let selectedSubjectField = viewModel.selectedSubjectField {
-                    Text("\(selectedSubjectConditionTypeId) -> \(selectedSubjectField)")
-                }
+                Text(viewModel.tempSubjectRepresentation)
             }
             
             Group {
@@ -47,10 +44,7 @@ struct ConditionCreatorView: View {
                 Button("Object Condition") {
                     editingObjectConditionType.toggle()
                 }
-                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
-                   let selectedObjectField = viewModel.selectedObjectField {
-                    Text("\(selectedObjectConditionTypeId) -> \(selectedObjectField)")
-                }
+                Text(viewModel.tempObjectRepresentation)
             }
             
             Button("Save Condition") {
@@ -112,7 +106,6 @@ struct ConditionCreatorView: View {
         }
         .popover(isPresented: $editingObjectConditionType) {
             NavigationView {
-                
                 List(ConditionType.allCases, selection: $viewModel.selectedObjectConditionTypeId) {
                     Text($0.description).foregroundColor(getTextColor(
                         selected: $0.id == viewModel.selectedObjectConditionTypeId)
@@ -121,10 +114,11 @@ struct ConditionCreatorView: View {
                 .toolbar {
                     EditButton()
                 }
-                
+            }
                 
                 if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
                    let keyPaths = ConditionType.getEnum(by: selectedObjectConditionTypeId)?.getKeyPaths() {
+                    NavigationView {
                     List(keyPaths, selection: $viewModel.selectedObjectField) {
                         Text($0.description).foregroundColor(getTextColor(
                             selected: $0.id == viewModel.selectedObjectField)
@@ -133,6 +127,7 @@ struct ConditionCreatorView: View {
                         .toolbar {
                             EditButton()
                         }
+                    }
                 }
                 
                 if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
@@ -149,6 +144,6 @@ struct ConditionCreatorView: View {
                     }
                 }
             }
-        }
+        
     }
 }
