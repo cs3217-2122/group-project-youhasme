@@ -43,7 +43,6 @@ protocol DFATransitionDelegate: AnyObject {
     func stateTransition<State: DFAState>(to newState: State)
 }
 
-// tokenizer
 protocol DFAState: AnyObject {
     var delegate: DFATransitionDelegate? { get set }
     var unconfirmedRulesData: RulesData { get set }
@@ -116,39 +115,5 @@ extension DeterministicFiniteAutomaton {
         if state.isAccepting {
             rulesData.combine(with: state.unconfirmedRulesData)
         }
-    }
-}
-
-class MaximumLengthParsingStrategy: DeterministicFiniteAutomaton {
-    var rulesData = RulesData()
-
-    var stateHistory: [DFAState] = []
-
-    func parse(sentence: Sentence) -> [Rule] {
-        reset()
-
-        for word in sentence {
-            read(entityType: word)
-        }
-
-        return buildRules()
-    }
-}
-
-class MinimumLengthParsingStrategy: DeterministicFiniteAutomaton {
-    var rulesData = RulesData()
-
-    var stateHistory: [DFAState] = []
-
-    func parse(sentence: Sentence) -> [Rule] {
-        reset()
-        for word in sentence {
-            read(entityType: word)
-            if state.isAccepting {
-                break
-            }
-        }
-
-        return buildRules()
     }
 }

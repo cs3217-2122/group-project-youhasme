@@ -60,6 +60,13 @@ class MetaLevel {
     }
 }
 
+extension MetaLevel: Identifiable {
+    typealias ObjectIdentifier = String
+    var id: ObjectIdentifier {
+        name
+    }
+}
+
 extension MetaLevel {
     func worldToChunkPosition(_ worldPosition: Point) -> Point {
         Point(x: worldPosition.x.flooredDiv(chunkDimensions), y: worldPosition.y.flooredDiv(chunkDimensions))

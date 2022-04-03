@@ -166,6 +166,14 @@ extension MetaLevelPlayViewModel {
         return MessagesViewModel(tile: tile)
     }
 
+    func getMetaLevelInfoViewModel() -> MetaLevelInfoViewModel {
+        guard let tile = selectedTile else {
+            fatalError("should not be nil")
+        }
+
+        return MetaLevelInfoViewModel(tile: tile)
+    }
+
     func getLevelInfoViewModel() -> LevelInfoViewModel {
         guard let tile = selectedTile else {
             fatalError("should not be nil")

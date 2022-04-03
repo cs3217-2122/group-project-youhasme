@@ -5,7 +5,7 @@ import Combine
 enum MetaLevelDesignerState {
     case normal
     case choosingLevel(tile: MetaTile)
-    case choosingMetaLevel
+    case choosingMetaLevel(tile: MetaTile)
 }
 
 class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
@@ -106,6 +106,11 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelBasicCRUDDelegate {
             return
         }
 
+        if case .travel = selectedPaletteMetaEntity {
+            state = .choosingMetaLevel(tile: tile)
+            return
+        }
+
         tile.metaEntities.append(selectedPaletteMetaEntity)
     }
 
@@ -134,6 +139,17 @@ extension MetaLevelDesignerViewModel: LevelSelectorViewModelDelegate {
             return
         }
         tile.metaEntities.append(.level(levelLoadable: loadable))
+        state = .normal
+    }
+}
+
+extension MetaLevelDesignerViewModel: MetaLevelSelectorViewModelDelegate {
+    func selectMetaLevel(_ loadable: Loadable) {
+        guard case .choosingMetaLevel(tile: let tile) = state else {
+            return
+        }
+
+        tile.metaEntities.append(.travel(metaLevelLoadable: loadable))
         state = .normal
     }
 }
@@ -180,6 +196,12 @@ extension MetaLevelDesignerViewModel {
         let levelSelectorViewModel = LevelSelectorViewModel()
         levelSelectorViewModel.delegate = self
         return levelSelectorViewModel
+    }
+
+    func getMetaLevelSelectorViewModel() -> MetaLevelSelectorViewModel {
+        let metaLevelSelectorViewModel = MetaLevelSelectorViewModel()
+        metaLevelSelectorViewModel.delegate = self
+        return metaLevelSelectorViewModel
     }
 
     func getNameButtonViewModel() -> MetaLevelNameButtonViewModel {

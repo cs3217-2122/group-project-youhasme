@@ -29,37 +29,14 @@ struct MetaLevelDesignerView: View {
             case .normal:
                 EmptyView()
             case .choosingLevel:
-                LevelSelector(viewModel: viewModel.getLevelSelectorViewModel())
+                LevelSelectorView(viewModel: viewModel.getLevelSelectorViewModel())
             case .choosingMetaLevel:
-                EmptyView() // TODO
+                MetaLevelSelectorView(viewModel: viewModel.getMetaLevelSelectorViewModel())
             }
         }
     }
 }
 
-struct LevelSelector: View {
-    @ObservedObject var viewModel: LevelSelectorViewModel
-    var body: some View {
-        NavigationView {
-            List(viewModel.loadableLevels, selection: $viewModel.selectedLevelId) { loadable in
-                Text(loadable.name)
-            }.navigationTitle("Level")
-                .toolbar {
-                    EditButton()
-                }
-        }
-        
-        Button("Confirm") {
-            viewModel.confirmSelectLevel()
-        }.disabled(viewModel.selectedLevelId == nil)
-        
-    }
-}
 
-// struct MetaLevelDesignerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MetaLevelDesignerView().previewDevice(
-//            PreviewDevice(rawValue: "iPad (9th generation")
-//        )
-//    }
-// }
+
+
