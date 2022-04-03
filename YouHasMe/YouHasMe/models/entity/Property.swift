@@ -1,7 +1,8 @@
 import Foundation
 
-enum Property: String, Hashable {
+enum Property: Hashable {
     case you
+    case player(Int)
     case win
     case defeat
     case stop
@@ -11,7 +12,22 @@ enum Property: String, Hashable {
 
 extension Property: CustomDebugStringConvertible {
     var debugDescription: String {
-        rawValue
+        switch self {
+        case .you:
+            return "you"
+        case .win:
+            return "win"
+        case .defeat:
+            return "defeat"
+        case .stop:
+            return "stop"
+        case .push:
+            return "push"
+        case .pull:
+            return "pull"
+        case .player(let num):
+            return "player" + String(num)
+        }
     }
 }
 

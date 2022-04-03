@@ -59,6 +59,10 @@ struct EntityTypes {
         static var push = EntityType(classification: .property(.push))
         static var pull = EntityType(classification: .property(.pull))
 
+        static func getPlayer(num: Int) -> EntityType {
+            EntityType(classification: .property(.player(num)))
+        }
+
         static func getAllProperties() -> [EntityType] {
             [
                 Properties.you,

@@ -6,7 +6,31 @@
 //
 
 // Represents type of update to game state
-enum UpdateType {
+
+protocol UpdateType {
+    func getMovement() -> (Int, Int)
+    func getPlayer() -> Int
+    mutating func setAction(_: UpdateAction)
+}
+
+struct Move: UpdateType {
+    var playerNum: Int = 1
+    var updateAction: UpdateAction
+
+    func getMovement() -> (Int, Int) {
+        updateAction.getMovement()
+    }
+
+    func getPlayer() -> Int {
+        playerNum
+    }
+
+    mutating func setAction(_ action: UpdateAction) {
+        updateAction = action
+    }
+}
+
+enum UpdateAction {
     case moveUp
     case moveDown
     case moveLeft

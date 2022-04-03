@@ -10,6 +10,14 @@ struct Entity {
     func has(behaviour: Behaviour) -> Bool {
         activeBehaviours.contains(behaviour)
     }
+
+    mutating func addBehaviour(behaviour: Behaviour) {
+        activeBehaviours.append(behaviour)
+    }
+
+    mutating func removeBehaviour(behaviour: Behaviour) {
+        self.activeBehaviours = activeBehaviours.filter { $0 != behaviour }
+    }
 }
 
 extension Entity: Codable, Hashable {

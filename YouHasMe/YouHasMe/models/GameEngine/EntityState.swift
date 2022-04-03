@@ -22,6 +22,14 @@ struct EntityState: Hashable {
         intents.insert(intent)
     }
 
+    mutating func add(behaviour: Behaviour) {
+        entity.addBehaviour(behaviour: behaviour)
+    }
+
+    mutating func remove(behaviour: Behaviour) {
+        entity.removeBehaviour(behaviour: behaviour)
+    }
+
     // Adds intent to perform action given condition
     mutating func add(action: EntityAction, ifEntityAt condLocation: Location, performs condAction: EntityAction) {
         let condition = EntityActionCondition(location: condLocation, action: condAction)

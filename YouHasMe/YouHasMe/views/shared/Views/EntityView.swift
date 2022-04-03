@@ -61,7 +61,7 @@ class EntityViewModel: CellViewModel {
             return
         }
 
-        super.init(imageSource: .string(entityTypeToImageString(type: entityType)))
+        super.init(imageSource: entityTypeToImageable(type: entityType))
     }
 }
 
