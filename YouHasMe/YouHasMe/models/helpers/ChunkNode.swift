@@ -339,10 +339,23 @@ extension ChunkNode {
 
 // MARK: Dynamic loading / unloading
 extension ChunkNode {
+    var areAllNeighborsLoaded: Bool {
+        Directions.neighborhoodKeyPaths.allSatisfy {
+            neighbors[keyPath: $0] != nil
+        }
+    }
+
     func loadNeighbors(at position: Point) -> [Point: ChunkNode] {
         guard let chunkStorage = chunkStorage else {
             return [:]
         }
+
+        guard !areAllNeighborsLoaded else {
+            return [:]
+        }
+
+        globalLogger.info("Loading neighbors of chunk at \(position)")
+
         var newlyLoadedChunks: [Point: ChunkNode] = [:]
         let neighborIdentifiers = neighborFinder.getNeighborId(of: self)
         for direction in Directions.allCases {

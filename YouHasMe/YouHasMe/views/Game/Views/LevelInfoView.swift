@@ -9,9 +9,21 @@ import SwiftUI
 struct LevelInfoView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: LevelInfoViewModel
-    
-    func getConditionStatusImage(_ condition: Condition) -> Image {
-        condition.isConditionMet() ? Image.checkmark : Image.cross
+
+    func getConditionStatusView(_ condition: Condition) -> some View {
+        if condition.isConditionMet() {
+            return Group {
+                Image.checkmark
+                Text(condition.description)
+                    .foregroundColor(.green)
+            }
+        } else {
+            return Group {
+                Image.cross
+                Text(condition.description)
+                    .foregroundColor(.red)
+            }
+        }
     }
     
     var body: some View {
@@ -19,10 +31,10 @@ struct LevelInfoView: View {
             VStack {
                 ForEach(viewModel.levelInfo, id: \.self) { levelInfo in
                     Text(levelInfo.level.name)
+                        .foregroundColor(.white)
                     
                     if let unlockCondition = levelInfo.unlockCondition {
-                        getConditionStatusImage(unlockCondition)
-                        Text(unlockCondition.description)
+                        getConditionStatusView(unlockCondition)
                     }
                     
                     if levelInfo.isLevelUnlocked {

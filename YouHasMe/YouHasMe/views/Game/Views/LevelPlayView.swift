@@ -15,14 +15,6 @@ struct LevelPlayView: View {
         VStack {
             GameGridView(levelDesignerViewModel: levelDesignerViewModel)
                 .padding()
-            HStack {
-                Button(action: {
-                    gameState.stateStack.removeLast()
-                }) {
-                    Text("Back to Designing")
-                }
-                Spacer()
-            }.padding()
         }
     }
 }

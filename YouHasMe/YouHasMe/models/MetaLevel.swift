@@ -113,13 +113,13 @@ extension MetaLevel {
         // This behavior can be abstracted into a Position to Chunk handler.
 
         let chunkPosition = worldToChunkPosition(worldPosition)
-        print("\(worldPosition) \(chunkPosition) \(loadedChunks.count)")
+//        print("\(worldPosition) \(chunkPosition) \(loadedChunks.count)")
         if let foundChunk = loadedChunks[chunkPosition] {
             return foundChunk
         }
 
         if let loadedChunk: ChunkNode = chunkStorage.loadChunk(identifier: chunkPosition.dataString) {
-            print("Loaded chunk with position \(chunkPosition)")
+            globalLogger.info("Loaded chunk with position \(chunkPosition)")
             loadedChunks[chunkPosition] = loadedChunk
             return loadedChunk
         }
@@ -128,7 +128,7 @@ extension MetaLevel {
             return nil
         }
 
-        print("Creating new with position \(chunkPosition)")
+        globalLogger.info("Creating new with position \(chunkPosition)")
         let chunkNode = ChunkNode(identifier: chunkPosition)
 
         do {

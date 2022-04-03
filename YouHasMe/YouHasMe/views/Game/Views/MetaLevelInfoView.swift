@@ -20,10 +20,12 @@ struct MetaLevelInfoView: View {
             VStack {
                 ForEach(viewModel.metaLevelInfo) { metaLevelInfo in
                     Text(metaLevelInfo.metaLevel.name)
+                        .foregroundColor(.white)
                     
                     if let unlockCondition = metaLevelInfo.unlockCondition {
                         getConditionStatusImage(unlockCondition)
                         Text(unlockCondition.description)
+                            .foregroundColor(.white)
                     }
                     
                     if metaLevelInfo.isLevelUnlocked {
