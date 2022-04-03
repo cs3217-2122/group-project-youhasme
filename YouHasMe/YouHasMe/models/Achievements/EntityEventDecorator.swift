@@ -18,4 +18,12 @@ class EntityEventDecorator: GameEventBaseDecorator {
     override func hasEntity(entityType: EntityType) -> Bool {
         self.entityType == entityType || wrappedEvent.hasEntity(entityType: entityType)
     }
+
+    override func containsGameEvent(event: AbstractGameEvent) -> Bool {
+        event.isContainedBy(gameEvent: self)
+    }
+
+    override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
+        gameEvent.hasEntity(entityType: entityType)
+    }
 }

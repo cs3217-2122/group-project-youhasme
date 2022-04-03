@@ -17,4 +17,12 @@ class GameEvent: AbstractGameEvent {
     func hasEvent(eventType: GameEventType) -> Bool {
         type == eventType
     }
+
+    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
+        gameEvent.hasEvent(eventType: type)
+    }
+
+    func containsGameEvent(event: AbstractGameEvent) -> Bool {
+        event.isContainedBy(gameEvent: self)
+    }
 }

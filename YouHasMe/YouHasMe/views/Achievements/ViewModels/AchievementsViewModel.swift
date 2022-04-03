@@ -21,32 +21,31 @@ class AchievementsViewModel: ObservableObject {
         // jx todo: implement pre-loaded achievements from storage
         // let achievements = loadAchievements()
         self.levelId = levelId
+        let iuc = IntegerUnlockCondition(statistic: GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move)),
+                                         comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)
         self.lockedAchievements = [
-            Achievement(name: "Creativity", description: "Create your first level",
-                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                  statisticName: "Lifetime Level Designs",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 1)]),
+//            Achievement(name: "Creativity", description: "Create your first level",
+//                        unlockConditions: [IntegerUnlockCondition(statistic: GameStatistic(),
+//                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+//                                                                  unlockValue: 1)]),
             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
-                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                  statisticName: "Lifetime Moves",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 10)]),
-            Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
-                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                  statisticName: "Lifetime Moves",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 1_000_000)]),
-            Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
-                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                  statisticName: "Level Moves for Abc",
-                                                                  comparison: .LESS_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 10),
-                                           IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                  statisticName: "Level Wins for Abc",
-                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                  unlockValue: 1)
-                                           ])
+                        unlockConditions: [iuc])
+//            ,
+//            Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
+//                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+//                                                                  statisticName: "Lifetime Moves",
+//                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+//                                                                  unlockValue: 1_000_000)]),
+//            Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
+//                        unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
+//                                                                  statisticName: "Level Moves for Abc",
+//                                                                  comparison: .LESS_THAN_OR_EQUAL_TO,
+//                                                                  unlockValue: 10),
+//                                           IntegerUnlockCondition(statistics: statisticsViewModel,
+//                                                                  statisticName: "Level Wins for Abc",
+//                                                                  comparison: .MORE_THAN_OR_EQUAL_TO,
+//                                                                  unlockValue: 1)
+//                                           ])
         ]
     }
 
@@ -67,15 +66,14 @@ class AchievementsViewModel: ObservableObject {
 
             // jx todo: refactor
             var updatedEvent = gameEvent
-            if gameEvent.type != .designLevel {
-                updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
-            }
+            updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
 
-            for statistic in self.statisticsViewModel.gameStatistics.values {
-                statistic.handleGameEvent(event: updatedEvent)
-            }
+//            for statistic in self.statisticsViewModel.gameStatistics.values {
+//                statistic.handleGameEvent(event: updatedEvent)
+//            }
 
             for achievement in self.lockedAchievements {
+                achievement.updateStatistics(gameEvent: updatedEvent)
                 achievement.unlockIfConditionsMet()
                 if achievement.isUnlocked {
                     self.lockedAchievements.removeByIdentity(achievement)
@@ -83,41 +81,5 @@ class AchievementsViewModel: ObservableObject {
                 }
             }
         }.store(in: &subscriptions)
-    }
-}
-
-struct AchievementUtil {
-    func createAchievementsIfNotExists() {
-        let statisticsViewModel = StatisticsViewModel()
-        let achievements = [Achievement(name: "Creativity", description: "Create your first level",
-                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                                         statisticName: "Lifetime Level Designs",
-                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                                         unlockValue: 1)]),
-                                   Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
-                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                                         statisticName: "Lifetime Moves",
-                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                                         unlockValue: 10)]),
-                                   Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
-                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                                         statisticName: "Lifetime Moves",
-                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                                         unlockValue: 1_000_000)]),
-                                   Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
-                                               unlockConditions: [IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                                         statisticName: "Level Moves for Abc",
-                                                                                         comparison: .LESS_THAN_OR_EQUAL_TO,
-                                                                                         unlockValue: 10),
-                                                                  IntegerUnlockCondition(statistics: statisticsViewModel,
-                                                                                         statisticName: "Level Wins for Abc",
-                                                                                         comparison: .MORE_THAN_OR_EQUAL_TO,
-                                                                                         unlockValue: 1)
-                                                                  ])]
-        for achievement in achievements {
-            if AchievementStorage().loadAchievement(name: achievement.name) == nil {
-
-            }
-        }
     }
 }

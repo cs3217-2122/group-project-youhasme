@@ -13,6 +13,8 @@ protocol AbstractGameEvent {
     func hasEntity(entityType: EntityType) -> Bool
     func hasEvent(eventType: GameEventType) -> Bool
     func hasLevel(levelName: String) -> Bool
+    func containsGameEvent(event: AbstractGameEvent) -> Bool
+    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool
 }
 
 enum GameEventType: Int, Codable {

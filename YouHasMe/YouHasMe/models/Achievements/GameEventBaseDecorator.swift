@@ -28,4 +28,12 @@ class GameEventBaseDecorator: AbstractGameEvent {
     func hasLevel(levelName: String) -> Bool {
         wrappedEvent.hasLevel(levelName: levelName)
     }
+
+    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
+        type == gameEvent.type && wrappedEvent.isContainedBy(gameEvent: gameEvent)
+    }
+
+    func containsGameEvent(event: AbstractGameEvent) -> Bool {
+        event.isContainedBy(gameEvent: self) || event.isContainedBy(gameEvent: wrappedEvent)
+    }
 }

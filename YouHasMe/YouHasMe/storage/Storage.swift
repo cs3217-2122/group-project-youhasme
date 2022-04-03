@@ -216,31 +216,31 @@ class ChunkStorage: JSONStorage {
     }
 }
 
-class AchievementStorage: JSONStorage {
-    static let achievementStorageDirectoryName: String = "Achievements"
-
-    override func getDefaultDirectory() throws -> URL {
-        try super.getDefaultDirectory().appendingPathComponent(AchievementStorage.achievementStorageDirectoryName)
-    }
-
-    func loadAchievement(name: String) throws -> PersistableAchievement {
-        try loadAndDecode(filename: name)
-    }
-
-    func loadAchievement(name: String) -> Achievement? {
-        guard let persistableAchievement: PersistableAchievement = try? loadAndDecode(filename: name) else {
-            return nil
-        }
-
-        return Achievement.fromPersistable(persistable: persistableAchievement)
-    }
-
-    func saveAchievement(_ achievement: Achievement) throws {
-        try encodeAndSave(object: achievement.toPersistable(), filename: achievement.name)
-    }
-
-    func loadAllAchievements() -> [Achievement] {
-        let (_, filenames) = AchievementStorage().getAllFiles()
-        return filenames.compactMap { loadAchievement(name: $0) }
-    }
-}
+// class AchievementStorage: JSONStorage {
+//    static let achievementStorageDirectoryName: String = "Achievements"
+//
+//    override func getDefaultDirectory() throws -> URL {
+//        try super.getDefaultDirectory().appendingPathComponent(AchievementStorage.achievementStorageDirectoryName)
+//    }
+//
+//    func loadAchievement(name: String) throws -> PersistableAchievement {
+//        try loadAndDecode(filename: name)
+//    }
+//
+//    func loadAchievement(name: String) -> Achievement? {
+//        guard let persistableAchievement: PersistableAchievement = try? loadAndDecode(filename: name) else {
+//            return nil
+//        }
+//
+//        return Achievement.fromPersistable(persistable: persistableAchievement)
+//    }
+//
+//    func saveAchievement(_ achievement: Achievement) throws {
+//        try encodeAndSave(object: achievement.toPersistable(), filename: achievement.name)
+//    }
+//
+//    func loadAllAchievements() -> [Achievement] {
+//        let (_, filenames) = AchievementStorage().getAllFiles()
+//        return filenames.compactMap { loadAchievement(name: $0) }
+//    }
+// }

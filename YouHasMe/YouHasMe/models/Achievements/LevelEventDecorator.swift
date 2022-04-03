@@ -18,4 +18,12 @@ class LevelEventDecorator: GameEventBaseDecorator {
     override func hasLevel(levelName: String) -> Bool {
         self.levelName == levelName || wrappedEvent.hasLevel(levelName: levelName)
     }
+
+    override func containsGameEvent(event: AbstractGameEvent) -> Bool {
+        event.isContainedBy(gameEvent: self)
+    }
+
+    override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
+        gameEvent.hasLevel(levelName: levelName)
+    }
 }

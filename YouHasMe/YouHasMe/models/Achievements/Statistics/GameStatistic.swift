@@ -7,33 +7,31 @@
 
 import Foundation
 
-class GameStatistic: Codable, Hashable {
+class GameStatistic: Hashable {
     enum StatisticType: Int, Codable {
         case level
         case lifetime
     }
 
-    var name: String
     var value: Int
     var type: StatisticType
-    var entity: EntityType?
-    var gameEvent: GameEventType?
-    var levelId: String?
+    var gameEvent: AbstractGameEvent
+//    var entity: EntityType?
+//    var gameEvent: GameEventType?
+//    var levelId: String?
 
-    init(value: Int, statisticType: StatisticType, gameEvent: GameEventType, entity: EntityType? = nil,
-         levelId: String? = nil) {
-        self.name = GameStatistic.getNameFromProperties(statisticType: statisticType, entity: entity,
-                                                        gameEvent: gameEvent, levelId: levelId)
+    init(value: Int, statisticType: StatisticType, gameEvent: AbstractGameEvent) {
         self.value = value
         self.type = statisticType
-        self.entity = entity
         self.gameEvent = gameEvent
-        self.levelId = levelId
+//        self.entity = entity
+
+//        self.levelId = levelId
     }
 
     func increase() {
         value += 1
-        globalLogger.info("\(name) increased to \(value)")
+        globalLogger.info("increased to \(value)")
     }
 
     func reset() {
@@ -90,44 +88,37 @@ class GameStatistic: Codable, Hashable {
     }
 
     static func == (lhs: GameStatistic, rhs: GameStatistic) -> Bool {
-        lhs.name == rhs.name
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(name)
+        lhs === rhs
     }
 
     func handleGameEvent(event: AbstractGameEvent) {
-        if !hasValidEntity(event: event) {
-            return
-        }
-        if !hasValidEvent(event: event) {
-            return
-        }
-        if !hasValidLevel(event: event) {
+        if !event.containsGameEvent(event: self.gameEvent) {
             return
         }
         increase()
     }
 
-    func hasValidEntity(event: AbstractGameEvent) -> Bool {
-        guard let entity = entity else {
-            return true
-        }
-        return event.hasEntity(entityType: entity)
-    }
-
-    func hasValidEvent(event: AbstractGameEvent) -> Bool {
-        guard let gameEvent = gameEvent else {
-            return true
-        }
-        return event.hasEvent(eventType: gameEvent)
-    }
-
-    func hasValidLevel(event: AbstractGameEvent) -> Bool {
-        guard let levelId = levelId else {
-            return true
-        }
-        return event.hasLevel(levelName: levelId)
+//    func hasValidEntity(event: AbstractGameEvent) -> Bool {
+//        guard let entity = entity else {
+//            return true
+//        }
+//        return event.hasEntity(entityType: entity)
+//    }
+//
+//    func hasValidEvent(event: AbstractGameEvent) -> Bool {
+//        guard let gameEvent = gameEvent else {
+//            return true
+//        }
+//        return event.hasEvent(eventType: gameEvent)
+//    }
+//
+//    func hasValidLevel(event: AbstractGameEvent) -> Bool {
+//        guard let levelId = levelId else {
+//            return true
+//        }
+//        return event.hasLevel(levelName: levelId)
+//    }
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
 }

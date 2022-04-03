@@ -7,7 +7,7 @@
 
 import Foundation
 
-class IntegerUnlockCondition: Codable, UnlockCondition {
+class IntegerUnlockCondition: UnlockCondition {
     enum Comparison: Int, Codable {
          case MORE_THAN = 0
          case LESS_THAN = 1
@@ -20,8 +20,8 @@ class IntegerUnlockCondition: Codable, UnlockCondition {
     var comparison: Comparison
     var unlockValue: Int
 
-    init(statistics: StatisticsViewModel, statisticName: String, comparison: Comparison, unlockValue: Int) {
-        self.statistic = statistics.getStatistic(name: statisticName)
+    init(statistic: GameStatistic, comparison: Comparison, unlockValue: Int) {
+        self.statistic = statistic
         self.comparison = comparison
         self.unlockValue = unlockValue
     }
@@ -43,10 +43,10 @@ class IntegerUnlockCondition: Codable, UnlockCondition {
 }
 
 extension IntegerUnlockCondition {
-    func toPersistable() -> PersistableUnlockCondition {
-        PersistableUnlockCondition(
-            conditionType: .integer,
-            condition: self
-        )
-    }
+//    func toPersistable() -> PersistableUnlockCondition {
+//        PersistableUnlockCondition(
+//            conditionType: .integer,
+//            condition: self
+//        )
+//    }
 }
