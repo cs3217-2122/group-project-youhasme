@@ -36,6 +36,16 @@ class LevelDesignerViewModel: ObservableObject {
         self.currLevel = currLevel
     }
 
+    var playerEntityTypes: [EntityType] {
+        guard currLevelLayer.numPlayers > 1 else {
+            return []
+        }
+
+        return Array(1...currLevelLayer.numPlayers).map { num in
+            EntityType(classification: .property(.player(num)))
+        }
+    }
+
     func getWidth() -> Int {
         currLevelLayer.dimensions.width
     }

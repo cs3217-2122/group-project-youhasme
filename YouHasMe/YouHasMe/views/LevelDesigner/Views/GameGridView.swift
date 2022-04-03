@@ -11,6 +11,7 @@ struct GameGridView: View {
     @State var gameEngine: GameEngine
     @State var showingWinAlert = false
     @State var showingLoopAlert = false
+    @State var selectedPlayerNum = 1
 
     init(levelDesignerViewModel: LevelDesignerViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
@@ -29,24 +30,24 @@ struct GameGridView: View {
                 guard case .playing = gameState.state else {
                     return
                 }
-                var updateAction: UpdateType = .tick
+                var move: UpdateType = Move(playerNum: selectedPlayerNum, updateAction: .tick)
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height
                 if abs(horizontalAmount) > abs(verticalAmount) {
                     if horizontalAmount < 0 {
-                        updateAction = .moveLeft
+                        move.setAction(.moveLeft)
                     } else {
-                        updateAction = .moveRight
+                        move.setAction(.moveRight)
                     }
 
                 } else {
                     if verticalAmount < 0 {
-                        updateAction = .moveUp
+                        move.setAction(.moveUp)
                     } else {
-                        updateAction = .moveDown
+                        move.setAction(.moveDown)
                     }
                 }
-                gameEngine.apply(action: updateAction)
+                gameEngine.apply(action: move)
                 showingWinAlert = gameEngine.currentGame.gameStatus == .win
                 showingLoopAlert = gameEngine.status == .infiniteLoop
                 levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
@@ -57,6 +58,14 @@ struct GameGridView: View {
         GeometryReader { proxy in
             VStack {
                 Spacer()
+                
+                ForEach((1...levelDesignerViewModel.currLevelLayer.numPlayers), id: \.self) { playerNum in
+                Button(action: {
+                    selectedPlayerNum = playerNum
+                }) {
+                    Text("Player: \(playerNum)")
+                }
+            }
             HStack {
                 Spacer()
                 VStack(spacing: 0) {

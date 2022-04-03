@@ -12,6 +12,7 @@ protocol AbstractLevelLayer: Codable {
     var tiles: [TileType] { get set }
     func getTileAt(point: Point) -> TileType
     mutating func setTile(_ tile: TileType, at point: Point)
+    var numPlayers: Int { get set }
 }
 
 extension AbstractLevelLayer {
@@ -37,10 +38,16 @@ struct LevelLayer: AbstractLevelLayer {
     typealias TileType = Tile
     var dimensions: Rectangle
     var tiles: [Tile]
+    var numPlayers: Int = 1
 
     init(dimensions: Rectangle) {
         self.dimensions = dimensions
         self.tiles = Array(repeating: Tile(), count: dimensions.width * dimensions.height)
+    }
+
+    init(dimensions: Rectangle, numPlayers: Int) {
+        self.init(dimensions: dimensions)
+        self.numPlayers = numPlayers
     }
 
     mutating func add(entity: Entity, x: Int, y: Int) {

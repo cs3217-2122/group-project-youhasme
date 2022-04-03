@@ -24,36 +24,45 @@ let demoTypes: [EntityType] = [
     EntityTypes.NounInstances.box
 ]
 
-func entityTypeToImageString(type: EntityType) -> String {
+func entityTypeToImageable(type: EntityType) -> Imageable {
     switch type {
     case EntityTypes.Nouns.baba:
-        return "baba_text"
+        return .string("baba_text")
     case EntityTypes.Nouns.wall:
-        return "wall_text"
+        return .string("wall_text")
     case EntityTypes.Nouns.flag:
-        return "flag_text"
+        return .string("flag_text")
     case EntityTypes.Nouns.box:
-        return "box_text"
+        return .string("box_text")
     case EntityTypes.Verbs.vIs:
-        return "is"
+        return .string("is")
     case EntityTypes.Properties.you:
-        return "you"
+        return .string("you")
     case EntityTypes.Properties.push:
-        return "push"
+        return .string("push")
     case EntityTypes.Properties.stop:
-        return "stop"
+        return .string("stop")
     case EntityTypes.Properties.win:
-        return "win"
+        return .string("win")
     case EntityTypes.NounInstances.baba:
-        return "baba"
+        return .string("baba")
     case EntityTypes.NounInstances.wall:
-        return "wall"
+        return .string("wall")
     case EntityTypes.NounInstances.flag:
-        return "flag"
+        return .string("flag")
     case EntityTypes.NounInstances.box:
-        return "box"
+        return .string("box")
     default:
-        return "question"
+        switch type.classification {
+        case .property(.player(let num)):
+            if let uiImage = UIImage(systemName: "\(num).square.fill") {
+                return .uiImage(uiImage)
+            } else {
+                return .string("question")
+            }
+        default:
+            return .string("question")
+        }
     }
 }
 

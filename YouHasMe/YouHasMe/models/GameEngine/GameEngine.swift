@@ -8,7 +8,8 @@
 struct GameEngine {
 
     private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
+        MultiplayerMechanic(), PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(),
+        WinMechanic(), StopMechanic(), TransformMechanic()
     ]
     private let ruleEngine = RuleEngine()
 
@@ -33,6 +34,7 @@ struct GameEngine {
 
     // Updates game state given action
     mutating func apply(action: UpdateType) {
+        print(action)
         status = .running
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [currentGame]
@@ -47,7 +49,7 @@ struct GameEngine {
                 return
             }
             previousStates.append(newState)
-            nextAction = .tick  // Apply .tick after first action
+            nextAction.setAction(.tick)  // Apply .tick after first action
         }
     }
 
@@ -88,7 +90,7 @@ struct GameEngine {
 
     // Applies actions and returns new level layer
     private func resolveActions(in state: LevelLayerState) -> LevelLayer {
-        var newLayer = LevelLayer(dimensions: currentGame.levelLayer.dimensions)
+        var newLayer = LevelLayer(dimensions: currentGame.levelLayer.dimensions, numPlayers: currentGame.levelLayer.numPlayers)
         for entityState in state.entityStates {
             var curState = entityState
             while let curAction = curState.popAction() {  // While there are actions left to perform
