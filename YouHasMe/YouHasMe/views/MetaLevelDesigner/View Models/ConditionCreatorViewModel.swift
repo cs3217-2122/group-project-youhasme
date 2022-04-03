@@ -8,6 +8,13 @@
 import Foundation
 import Combine
 class ConditionBuilder {
+    enum BuildError: Error {
+        case componentError
+        case subjectNil
+        case relationNil
+        case objectNil
+    }
+
     var subject: ConditionEvaluable?
     var relation: ConditionRelation?
     var object: ConditionEvaluable?
@@ -17,7 +24,7 @@ class ConditionBuilder {
         literal: Int? = nil,
         fieldId: String? = nil,
         loadableId: String? = nil
-    ) -> ConditionEvaluable {
+    ) throws -> ConditionEvaluable {
         guard let type = ConditionType.getEnum(by: conditionTypeId) else {
             fatalError("condition type not found")
         }
@@ -27,7 +34,7 @@ class ConditionBuilder {
             guard let loadable = loadable,
                   let fieldId = fieldId,
                   let namedKeyPath = MetaLevel.getNamedKeyPath(given: fieldId)  else {
-                fatalError("should not be nil")
+                      throw BuildError.componentError
             }
             return .metaLevel(
                 loadable: loadable,
@@ -37,7 +44,7 @@ class ConditionBuilder {
             guard let loadable = loadable,
                   let fieldId = fieldId,
                   let namedKeyPath = Level.getNamedKeyPath(given: fieldId) else {
-                fatalError("should not be nil")
+                      throw BuildError.componentError
             }
             return .level(loadable: loadable, evaluatingKeyPath: namedKeyPath)
         case .player:
@@ -52,8 +59,8 @@ class ConditionBuilder {
         subjectLiteral: Int? = nil,
         subjectFieldId: String? = nil,
         subjectLoadableId: String? = nil
-    ) {
-        subject = createConditionEvaluable(
+    ) throws {
+        subject = try createConditionEvaluable(
             conditionTypeId: conditionSubjectTypeId,
             literal: subjectLiteral,
             fieldId: subjectFieldId,
@@ -63,7 +70,7 @@ class ConditionBuilder {
 
     func buildComparator(
         comparatorId: String
-    ) {
+    ) throws {
         guard let comparator = ComparatorType.getEnum(by: comparatorId) else {
             fatalError("cannot find comparator")
         }
@@ -87,8 +94,8 @@ class ConditionBuilder {
         objectLiteral: Int? = nil,
         objectFieldId: String? = nil,
         objectLoadableId: String? = nil
-    ) {
-        object = createConditionEvaluable(
+    ) throws {
+        object = try createConditionEvaluable(
             conditionTypeId: conditionObjectTypeId,
             literal: objectLiteral,
             fieldId: objectFieldId,
@@ -96,9 +103,17 @@ class ConditionBuilder {
         )
     }
 
-    func getResult() -> Condition {
-        guard let subject = subject, let relation = relation, let object = object else {
-            fatalError("build failed")
+    func getResult() throws -> Condition {
+        guard let subject = subject else {
+            throw BuildError.subjectNil
+        }
+
+        guard let relation = relation else {
+            throw BuildError.relationNil
+        }
+
+        guard let object = object else {
+            throw BuildError.objectNil
         }
 
         return Condition(subject: subject, relation: relation, object: object)
@@ -179,23 +194,31 @@ class ConditionCreatorViewModel: ObservableObject {
             return
         }
 
-        builder.buildSubject(
-            conditionSubjectTypeId: selectedSubjectConditionTypeId,
-            subjectLiteral: nil,
-            subjectFieldId: selectedSubjectField,
-            subjectLoadableId: selectedSubjectDependency
-        )
+        let condition: Condition
 
-        builder.buildComparator(comparatorId: selectedComparatorTypeId)
+        do {
+            try builder.buildSubject(
+                conditionSubjectTypeId: selectedSubjectConditionTypeId,
+                subjectLiteral: nil,
+                subjectFieldId: selectedSubjectField,
+                subjectLoadableId: selectedSubjectDependency
+            )
 
-        builder.buildObject(
-            conditionObjectTypeId: selectedObjectConditionTypeId,
-            objectLiteral: nil,
-            objectFieldId: selectedSubjectField,
-            objectLoadableId: selectedObjectDependency
-        )
+            try builder.buildComparator(comparatorId: selectedComparatorTypeId)
 
-        let condition = builder.getResult()
+            try builder.buildObject(
+                conditionObjectTypeId: selectedObjectConditionTypeId,
+                objectLiteral: nil,
+                objectFieldId: selectedSubjectField,
+                objectLoadableId: selectedObjectDependency
+            )
+
+            condition = try builder.getResult()
+        } catch {
+            globalLogger.error("build failed \(error.localizedDescription)")
+            return
+        }
+
         guard let delegate = delegate else {
             fatalError("should not be nil")
         }

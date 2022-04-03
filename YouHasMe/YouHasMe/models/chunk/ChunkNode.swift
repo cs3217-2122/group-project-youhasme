@@ -6,7 +6,6 @@ protocol AbstractChunkNode {
     var identifier: ChunkIdentifier { get set }
 }
 
-
 struct ExtremityData<ChunkIdentifier> {
     var topExtreme: ChunkIdentifier
     var leftExtreme: ChunkIdentifier
@@ -164,7 +163,7 @@ extension ChunkNode {
         guard let neighborFinderDelegate = neighborFinderDelegate else {
             fatalError("Not assigned a neighbor finder.")
         }
-        
+
         guard let chunkStorage = chunkStorage else {
             return [:]
         }

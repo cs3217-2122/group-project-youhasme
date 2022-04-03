@@ -8,7 +8,7 @@ class RuleEngine {
     var wellFormedRules: [Rule] = []
     private var ruleParser: RuleParser
     private var ruleValidator: RuleValidationStrategy
-    
+
     init() {
         self.ruleParser = RuleParser(
             sentenceMatchingStrategy: SouthwardEastwardMatchingStrategy(),
@@ -16,7 +16,7 @@ class RuleEngine {
         )
         self.ruleValidator = NaiveRuleValidationStrategy()
     }
-    
+
     init(ruleParser: RuleParser, ruleValidator: RuleValidationStrategy) {
         self.ruleParser = ruleParser
         self.ruleValidator = ruleValidator

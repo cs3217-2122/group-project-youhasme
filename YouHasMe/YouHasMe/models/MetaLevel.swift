@@ -23,6 +23,7 @@ class MetaLevel {
         return storage
     }
     @Published private(set) var name: String
+    let chunkNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
     var loadedChunks: [Point: ChunkNode] = [:]
@@ -92,14 +93,16 @@ extension MetaLevel {
         guard let chunk = getChunk(at: worldPosition, createIfNotExists: createIfNotExists) else {
             return nil
         }
+
         if loadNeighbors {
-            chunk.neighborFinderDelegate = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
-        }
-        let chunkPosition = worldToChunkPosition(worldPosition)
-        let neighbors = chunk.loadNeighbors(at: chunkPosition)
-        for (neighborPosition, neighboringChunk) in neighbors where
-            loadedChunks[neighborPosition] == nil {
-            loadedChunks[neighborPosition] = neighboringChunk
+            chunk.neighborFinderDelegate = chunkNeighborFinder
+
+            let chunkPosition = worldToChunkPosition(worldPosition)
+            let neighbors = chunk.loadNeighbors(at: chunkPosition)
+            for (neighborPosition, neighboringChunk) in neighbors where
+                loadedChunks[neighborPosition] == nil {
+                loadedChunks[neighborPosition] = neighboringChunk
+            }
         }
 
         return chunk

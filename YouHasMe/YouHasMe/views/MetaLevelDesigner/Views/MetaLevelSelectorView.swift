@@ -11,7 +11,7 @@ struct MetaLevelSelectorView: View {
     var body: some View {
         NavigationView {
             List(viewModel.loadableLevels, selection: $viewModel.selectedMetaLevelId) { loadable in
-                Text(loadable.name).foregroundColor(.white)
+                Text(loadable.name)
             }.navigationTitle("Level")
                 .toolbar {
                     EditButton()

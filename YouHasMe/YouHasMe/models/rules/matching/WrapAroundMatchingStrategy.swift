@@ -23,7 +23,7 @@ class WrapAroundMatchingStrategy: SentenceMatchingStrategy {
                 k = 0
             }
         } while k != i
-        
+
         var eastwardCandidateSentence: Sentence = []
         k = j
         repeat {
