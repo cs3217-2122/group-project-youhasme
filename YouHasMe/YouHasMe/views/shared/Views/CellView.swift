@@ -8,8 +8,7 @@ struct CellView: View {
     @ObservedObject var viewModel: CellViewModel
     var body: some View {
         if let image = viewModel.image {
-            image.resizable()
-                .scaledToFit()
+            image.interpolation(.none).resizable().scaledToFit().background(Color.gray)
         } else {
             backupDisplay
         }

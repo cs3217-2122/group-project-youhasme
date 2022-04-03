@@ -46,7 +46,7 @@ struct PushMechanic: GameMechanic {
             if entityState.hasRejected(action: move) {
                 return false  // Action already rejected
             }
-            state.entityStates[i].add(action: move)  // Push entity
+            state.entityStates[i].add(action: move, ifEntityAt: start, performs: move)  // Push entity
         }
         return true
     }
