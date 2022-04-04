@@ -262,7 +262,7 @@ extension MetaTile {
 enum MetaEntityType {
     case blocking
     case nonBlocking
-    case space
+    case grass
     case level(levelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
     case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
     // TODO: Perhaps the message can be associated with a user
@@ -274,8 +274,8 @@ enum MetaEntityType {
             return .blocking
         case .nonBlocking:
             return .nonBlocking
-        case .space:
-            return .space
+        case .grass:
+            return .grass
         case .level:
             return .level()
         case .travel:
@@ -288,7 +288,7 @@ enum MetaEntityType {
 
 extension MetaEntityType: CaseIterable {
     static var allCases: [MetaEntityType] {
-        [.blocking, .nonBlocking, .space, .level(), .travel(), .message()]
+        [.blocking, .nonBlocking, .grass, .level(), .travel(), .message()]
     }
 }
 
@@ -299,8 +299,8 @@ extension MetaEntityType: CustomStringConvertible {
             return "Blocking"
         case .nonBlocking:
             return "Nonblocking"
-        case .space:
-            return "Empty space"
+        case .grass:
+            return "Grass"
         case .level(let levelLoadable, let unlockCondition):
             return "Level"
         case .travel(let metaLevelLoadable, let unlockCondition):
@@ -318,8 +318,8 @@ extension MetaEntityType {
             return .blocking
         case .nonBlocking:
             return .nonBlocking
-        case .space:
-            return .space
+        case .grass:
+            return .grass
         case .level(let levelLoadable, let unlockCondition):
             return .level(
                 levelLoadable: levelLoadable,
@@ -338,8 +338,8 @@ extension MetaEntityType {
             return .blocking
         case .nonBlocking:
             return .nonBlocking
-        case .space:
-            return .space
+        case .grass:
+            return .grass
         case .level(let levelLoadable, let unlockCondition):
             guard let unlockCondition = unlockCondition else {
                 return .level(levelLoadable: levelLoadable, unlockCondition: nil)

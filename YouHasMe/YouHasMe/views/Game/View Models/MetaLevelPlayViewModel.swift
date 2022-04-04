@@ -27,7 +27,7 @@ class ContextualMenuData {
         }
         id = index
         switch metaEntity {
-        case .blocking, .nonBlocking, .space:
+        case .blocking, .nonBlocking, .grass:
             return nil
         case .level:
             description = "Levels"

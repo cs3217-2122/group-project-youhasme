@@ -40,6 +40,10 @@ extension Directions {
         }
     }
 
+    static var vectorialOffsets: [Vector] {
+        allCases.map(\.vectorialOffset)
+    }
+
     var neighborDataKeyPath: WritableKeyPath<NeighborData<Point>, Point> {
         switch self {
         case .top:
@@ -54,7 +58,7 @@ extension Directions {
     }
 
     static var neighborDataKeyPaths: [WritableKeyPath<NeighborData<Point>, Point>] {
-        allCases.map { $0.neighborDataKeyPath }
+        allCases.map(\.neighborDataKeyPath)
     }
 
     var neighborhoodKeyPath: WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?> {
@@ -71,6 +75,6 @@ extension Directions {
     }
 
     static var neighborhoodKeyPaths: [WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?>] {
-        allCases.map { $0.neighborhoodKeyPath }
+        allCases.map(\.neighborhoodKeyPath)
     }
 }

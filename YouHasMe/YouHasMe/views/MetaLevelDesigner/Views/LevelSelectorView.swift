@@ -16,7 +16,7 @@ struct LevelSelectorView: View {
                 .toolbar {
                     EditButton()
                 }
-        }
+        }.navigationViewStyle(.stack)
         
         Button("Confirm") {
             viewModel.confirmSelectLevel()

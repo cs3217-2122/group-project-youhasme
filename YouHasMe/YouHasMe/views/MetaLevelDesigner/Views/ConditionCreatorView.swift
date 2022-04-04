@@ -51,99 +51,115 @@ struct ConditionCreatorView: View {
                 viewModel.saveCondition()
             }
         }
-        .popover(isPresented: $editingSubjectConditionType) {
-            NavigationView {
-                List(ConditionType.allCases, selection: $viewModel.selectedSubjectConditionTypeId) {
-                    Text($0.description)
-                        .foregroundColor(getTextColor(
-                            selected: $0.id == viewModel.selectedSubjectConditionTypeId)
-                        )
-                }
-                .navigationTitle("Condition Type")
-                .toolbar {
-                    EditButton()
-                }
-            }
-            if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
-                let keyPaths = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getKeyPaths() {
-                NavigationView{
-                    List(keyPaths, selection: $viewModel.selectedSubjectField) {
-                        Text($0.description).foregroundColor(getTextColor(
-                            selected: $0.id == viewModel.selectedSubjectField)
-                        )
-                    }.navigationTitle("Field")
-                    .toolbar {
-                        EditButton()
-                    }
-                }
-            }
+        .fullScreenCover(isPresented: $editingSubjectConditionType) {
+            ConditionEvaluableCreatorView(
+                selectedConditionTypeId: $viewModel.selectedSubjectConditionTypeId,
+                selectedFieldId: $viewModel.selectedSubjectField,
+                selectedDependencyId: $viewModel.selectedSubjectDependency
+            )
             
-            if let selectedSubjectConditionTypeId = viewModel.selectedSubjectConditionTypeId,
-               let dependencies = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getStorageDependencies() {
-                NavigationView{
-                    List(dependencies, selection: $viewModel.selectedSubjectDependency) {
-                        Text($0.name).foregroundColor(getTextColor(
-                            selected: $0.id == viewModel.selectedSubjectDependency)
-                        )
-                    }.navigationTitle("Dependency")
-                    .toolbar {
-                        EditButton()
-                    }
-                }
-            }
-            
-        }.popover(isPresented: $editingComparatorType) {
-            NavigationView {
-                List(ComparatorType.allCases, selection: $viewModel.selectedComparatorTypeId) {
-                    Text($0.description).foregroundColor(getTextColor(
-                        selected: $0.id == viewModel.selectedComparatorTypeId)
-                    )
-                }.navigationTitle("Comparator")
-                .toolbar {
-                    EditButton()
-                }
-            }
         }
-        .popover(isPresented: $editingObjectConditionType) {
-            NavigationView {
-                List(ConditionType.allCases, selection: $viewModel.selectedObjectConditionTypeId) {
-                    Text($0.description).foregroundColor(getTextColor(
-                        selected: $0.id == viewModel.selectedObjectConditionTypeId)
+        .fullScreenCover(isPresented: $editingComparatorType) {
+            ConditionComparatorCreatorView(
+                selectedComparatorTypeId: $viewModel.selectedComparatorTypeId
+            )
+        }
+        .fullScreenCover(isPresented: $editingObjectConditionType) {
+            ConditionEvaluableCreatorView(
+                selectedConditionTypeId: $viewModel.selectedObjectConditionTypeId,
+                selectedFieldId: $viewModel.selectedObjectField,
+                selectedDependencyId: $viewModel.selectedObjectDependency
+            )
+        }
+    }
+}
+
+struct ConditionComparatorCreatorView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Binding var selectedComparatorTypeId: String?
+    
+    func getTextColor(selected: Bool) -> Color {
+        if (selected) {
+            return Color.blue.opacity(1)
+        } else {
+            return Color.gray.opacity(0.8)
+        }
+    }
+    
+    var body: some View {
+        NavigationView {
+            List(ComparatorType.allCases, selection: $selectedComparatorTypeId) {
+                Text($0.description).foregroundColor(getTextColor(
+                    selected: $0.id == selectedComparatorTypeId)
+                )
+            }.navigationTitle("Comparator")
+            .toolbar {
+                EditButton()
+            }
+        }.navigationViewStyle(.stack)
+        Button("Close") {
+            dismiss()
+        }
+    }
+}
+
+struct ConditionEvaluableCreatorView: View {
+    @Environment(\.dismiss) private var dismiss
+    @Binding var selectedConditionTypeId: String?
+    @Binding var selectedFieldId: String?
+    @Binding var selectedDependencyId: String?
+    
+    func getTextColor(selected: Bool) -> Color {
+        if (selected) {
+            return Color.blue.opacity(1)
+        } else {
+            return Color.gray.opacity(0.8)
+        }
+    }
+    
+    var body: some View {
+        NavigationView {
+            List(ConditionType.allCases, selection: $selectedConditionTypeId) {
+                Text($0.description)
+                    .foregroundColor(getTextColor(
+                        selected: $0.id == selectedConditionTypeId)
                     )
-                }.navigationTitle("Condition Type")
+            }
+            .navigationTitle("Condition Type")
+            .toolbar {
+                EditButton()
+            }
+        }.navigationViewStyle(.stack)
+        if let selectedSubjectConditionTypeId = selectedConditionTypeId,
+            let keyPaths = ConditionType.getEnum(by: selectedSubjectConditionTypeId)?.getKeyPaths() {
+            NavigationView{
+                List(keyPaths, selection: $selectedFieldId) {
+                    Text($0.description).foregroundColor(getTextColor(
+                        selected: $0.id == selectedFieldId)
+                    )
+                }.navigationTitle("Field")
                 .toolbar {
                     EditButton()
                 }
-            }
-                
-                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
-                   let keyPaths = ConditionType.getEnum(by: selectedObjectConditionTypeId)?.getKeyPaths() {
-                    NavigationView {
-                    List(keyPaths, selection: $viewModel.selectedObjectField) {
-                        Text($0.description).foregroundColor(getTextColor(
-                            selected: $0.id == viewModel.selectedObjectField)
-                        )
-                    }.navigationTitle("Field")
-                        .toolbar {
-                            EditButton()
-                        }
-                    }
-                }
-                
-                if let selectedObjectConditionTypeId = viewModel.selectedObjectConditionTypeId,
-                   let dependencies = ConditionType.getEnum(by: selectedObjectConditionTypeId)?.getStorageDependencies() {
-                    NavigationView{
-                        List(dependencies, selection: $viewModel.selectedObjectDependency) {
-                            Text($0.name).foregroundColor(getTextColor(
-                                selected: $0.id == viewModel.selectedObjectDependency)
-                            )
-                        }.navigationTitle("Dependency")
-                        .toolbar {
-                            EditButton()
-                        }
-                    }
-                }
-            }
+            }.navigationViewStyle(.stack)
+        }
         
+        if let selectedConditionTypeId = selectedConditionTypeId,
+           let dependencies = ConditionType.getEnum(by: selectedConditionTypeId)?.getStorageDependencies() {
+            NavigationView{
+                List(dependencies, selection: $selectedDependencyId) {
+                    Text($0.name).foregroundColor(getTextColor(
+                        selected: $0.id == selectedDependencyId)
+                    )
+                }.navigationTitle("Dependency")
+                .toolbar {
+                    EditButton()
+                }
+            }.navigationViewStyle(.stack)
+        }
+        
+        Button("Close") {
+            dismiss()
+        }
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 enum PersistableMetaEntityType {
     case blocking
     case nonBlocking
-    case space
+    case grass
     case level(levelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
     case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: PersistableCondition? = nil)
     // TODO: Perhaps the message can be associated with a user

@@ -16,7 +16,7 @@ struct MetaLevelSelectorView: View {
                 .toolbar {
                     EditButton()
                 }
-        }
+        }.navigationViewStyle(.stack)
         
         Button("Confirm") {
             viewModel.confirmSelectMetaLevel()
