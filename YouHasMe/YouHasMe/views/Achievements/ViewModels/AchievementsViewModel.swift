@@ -15,7 +15,11 @@ class AchievementsViewModel: ObservableObject {
     var imageHeight: Float = 40
     var levelId: String = ""
     private var subscriptions = [AnyCancellable]()
-    private var statisticsViewModel = StatisticsViewModel()
+//    private var statisticsViewModel = StatisticsViewModel()
+
+    var levelStatistics: [GameStatistic] {
+        lockedAchievements.flatMap { $0.getLevelStatistics() }
+    }
 
     init(levelId: String = "") {
         let achievements: [Achievement] = AchievementStorage().loadAllAchievements()
@@ -35,7 +39,7 @@ class AchievementsViewModel: ObservableObject {
     }
 
     func resetLevelStats() {
-        statisticsViewModel.resetLevelStats()
+        levelStatistics.forEach { $0.reset() }
     }
 
     func setSubscriptionsFor(_ gameEventPublisher: AnyPublisher<AbstractGameEvent, Never>) {
@@ -47,10 +51,6 @@ class AchievementsViewModel: ObservableObject {
             // jx todo: refactor
             var updatedEvent = gameEvent
             updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
-
-//            for statistic in self.statisticsViewModel.gameStatistics.values {
-//                statistic.handleGameEvent(event: updatedEvent)
-//            }
 
             for achievement in self.lockedAchievements {
                 achievement.updateStatistics(gameEvent: updatedEvent)

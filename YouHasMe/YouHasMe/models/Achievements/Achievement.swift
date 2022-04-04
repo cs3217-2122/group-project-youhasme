@@ -47,6 +47,19 @@ class Achievement {
             }
         }
     }
+
+    func getLevelStatistics() -> [GameStatistic] {
+        unlockConditions.compactMap { condition in
+            if let integerCond = condition as? IntegerUnlockCondition {
+                let stat = integerCond.statistic
+                if stat.type == .level {
+                    return stat
+                }
+            }
+            return nil
+
+        }
+    }
 }
 
 extension Achievement: Identifiable {
