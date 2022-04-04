@@ -243,4 +243,8 @@ class ChunkStorage: JSONStorage {
         let (_, filenames) = AchievementStorage().getAllFiles()
         return filenames.compactMap { loadAchievement(name: $0) }
     }
+    
+     func preloadedAchievements() -> [Achievement] {
+         return []
+     }
  }

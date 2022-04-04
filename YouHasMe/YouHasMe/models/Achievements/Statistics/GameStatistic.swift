@@ -53,13 +53,3 @@ extension GameStatistic {
         PersistableGameStatistic(value: value, statisticType: type, persistableGameEvent: gameEvent.toPersistable())
     }
 }
-
-public struct PersistableGameStatistic: Codable {
-    var value: Int
-    var statisticType: GameStatistic.StatisticType
-    var persistableGameEvent: PersistableAbstractGameEvent
-
-    func toGameStatistic() -> GameStatistic {
-        GameStatistic(value: value, statisticType: statisticType, gameEvent: persistableGameEvent.toAbstractGameEvent())
-    }
-}

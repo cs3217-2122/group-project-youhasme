@@ -57,13 +57,6 @@ extension Achievement: Identifiable {
     }
 }
 
- struct PersistableAchievement: Codable {
-    var name: String
-    var description: String
-    var persistableUnlockConditions: [PersistableUnlockCondition]
-    var isUnlocked: Bool
- }
-
  extension Achievement {
     func toPersistable() -> PersistableAchievement {
         PersistableAchievement(name: name, description: description,
@@ -76,11 +69,5 @@ extension Achievement: Identifiable {
                     unlockConditions: persistable
                         .persistableUnlockConditions.map { UnlockConditionUtil.fromPersistable(persistable: $0) },
                     isUnlocked: persistable.isUnlocked)
-    }
- }
-
- struct UnlockConditionUtil {
-    static func fromPersistable(persistable: PersistableUnlockCondition) -> UnlockCondition {
-        persistable.unlockCondition
     }
  }
