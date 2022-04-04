@@ -15,7 +15,6 @@ class AchievementsViewModel: ObservableObject {
     var imageHeight: Float = 40
     var levelId: String
     private var subscriptions = [AnyCancellable]()
-//    private var statisticsViewModel = StatisticsViewModel()
 
     var levelStatistics: [GameStatistic] {
         lockedAchievements.flatMap { $0.getLevelStatistics() }
@@ -49,23 +48,34 @@ class AchievementsViewModel: ObservableObject {
                 return
             }
 
-            // jx todo: refactor
-            var updatedEvent = gameEvent
-            updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
+            let updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
 
             for achievement in self.lockedAchievements {
-                achievement.updateStatistics(gameEvent: updatedEvent)
-                achievement.unlockIfConditionsMet()
-                if achievement.isUnlocked {
-                    self.lockedAchievements.removeByIdentity(achievement)
-                    self.unlockedAchievements.append(achievement)
-                }
-                do {
-                    try AchievementStorage().saveAchievement(achievement)
-                } catch {
-                    globalLogger.error("problem saving achievement \(achievement.name)")
-                }
+                self.updateAchievement(achievement, gameEvent: updatedEvent)
+                self.saveAchievement(achievement)
+                self.updateLockedUnlockedAchievements(updatedAchievement: achievement)
+
             }
         }.store(in: &subscriptions)
+    }
+
+    func updateAchievement(_ achievement: Achievement, gameEvent: AbstractGameEvent) {
+        achievement.updateStatistics(gameEvent: gameEvent)
+        achievement.unlockIfConditionsMet()
+    }
+
+    func updateLockedUnlockedAchievements(updatedAchievement: Achievement) {
+        if updatedAchievement.isUnlocked {
+            lockedAchievements.removeByIdentity(updatedAchievement)
+            unlockedAchievements.append(updatedAchievement)
+        }
+    }
+
+    func saveAchievement(_ achievement: Achievement) {
+        do {
+            try AchievementStorage().saveAchievement(achievement)
+        } catch {
+            globalLogger.error("problem saving achievement \(achievement.name)")
+        }
     }
 }
