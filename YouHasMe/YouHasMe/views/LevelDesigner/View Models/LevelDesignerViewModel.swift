@@ -6,7 +6,7 @@
 import Combine
 import Foundation
 
-class LevelDesignerViewModel: ObservableObject {
+class LevelDesignerViewModel: GameEventPublisher, ObservableObject {
 
     private var levelStorage = LevelStorage()
     var levelLoadables: [Loadable] {

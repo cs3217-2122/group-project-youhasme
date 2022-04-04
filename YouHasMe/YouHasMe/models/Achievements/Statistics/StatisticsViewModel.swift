@@ -8,33 +8,19 @@
 import Foundation
 
 class StatisticsViewModel {
-    var gameStatistics: [String: GameStatistic] = [:]
+    var gameStatistics: [Int: GameStatistic] = [:]
 
     init() {
         loadStatistics()
     }
 
-    // jx todo: change to load from storage
-
     func loadStatistics() {
-//        let stat1 = GameStatistic(value: 0, statisticType: .level, gameEvent: .move)
-//        let stat2 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .move)
-//        let stat3 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .win)
-//        let stat4 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .designLevel)
-//        let stat5 = GameStatistic(value: 0, statisticType: .level, gameEvent: .move,
-//                                  levelId: "Abc")
-//        let stat6 = GameStatistic(value: 0, statisticType: .level, gameEvent: .win,
-//                                  levelId: "Abc")
-//        let stat7 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: .designLevel)
-//        let stats = [stat1, stat2, stat3, stat4, stat5, stat6, stat7]
-//        for stat in stats {
-//            gameStatistics[stat.name] = stat
-//        }
+//        StatisticStorage.loadStatistics()
     }
 
-    func getStatistic(name: String) -> GameStatistic {
-        guard let stat = gameStatistics[name] else {
-            assert(false, "Game statistic \(name) does not exist")
+    func getStatistic(id: Int) -> GameStatistic {
+        guard let stat = gameStatistics[id] else {
+            assert(false, "Game statistic \(id) does not exist")
         }
 
         return stat

@@ -18,6 +18,8 @@ struct LevelDesignerView: View {
                 .padding()
             LevelPersistenceView(viewModel: levelDesignerViewModel)
                 .padding()
+        }.onAppear {
+            achievementsViewModel.setSubscriptionsFor(levelDesignerViewModel.gameEventPublisher)
         }
     }
 }

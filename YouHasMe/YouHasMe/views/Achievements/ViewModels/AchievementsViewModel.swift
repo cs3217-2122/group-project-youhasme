@@ -14,6 +14,7 @@ class AchievementsViewModel: ObservableObject {
     var imageWidth: Float = 40
     var imageHeight: Float = 40
     var levelId: String
+    var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
 
     var levelStatistics: [GameStatistic] {
@@ -21,7 +22,7 @@ class AchievementsViewModel: ObservableObject {
     }
 
     init(levelId: String = "") {
-        let achievements: [Achievement] = AchievementStorage().loadAllAchievements()
+        let achievements: [Achievement] = storage.loadAllAchievements()
         for achievement in achievements {
             if achievement.isUnlocked {
                 unlockedAchievements.append(achievement)
@@ -76,6 +77,19 @@ class AchievementsViewModel: ObservableObject {
             try AchievementStorage().saveAchievement(achievement)
         } catch {
             globalLogger.error("problem saving achievement \(achievement.name)")
+        }
+    }
+
+    func updateData() {
+        let achievements: [Achievement] = storage.loadAllAchievements()
+        lockedAchievements = []
+        unlockedAchievements = []
+        for achievement in achievements {
+            if achievement.isUnlocked {
+                unlockedAchievements.append(achievement)
+            } else {
+                lockedAchievements.append(achievement)
+            }
         }
     }
 }

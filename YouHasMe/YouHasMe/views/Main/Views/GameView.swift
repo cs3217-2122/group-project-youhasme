@@ -21,8 +21,7 @@ struct GameView: View {
             case .mainmenu:
                 MainMenuView()
             case .selecting:
-                LevelSelectView(levelDesignerViewModel: gameState.getLevelDesignerViewModel(),
-                                achievementsViewModel: gameState.getAchievementsViewModel())
+                LevelSelectView(levelDesignerViewModel: gameState.getLevelDesignerViewModel())
             case .selectingMeta:
                 MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
             

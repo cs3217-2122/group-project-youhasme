@@ -42,6 +42,8 @@ struct AchievementMainView: View {
                 }
                 Spacer()
             }.padding()
+        }.onAppear {
+            achievementsViewModel.updateData()
         }
     }
 

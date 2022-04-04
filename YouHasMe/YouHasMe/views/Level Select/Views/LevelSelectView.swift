@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LevelSelectView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
-    @ObservedObject var achievementsViewModel: AchievementsViewModel
 
     @EnvironmentObject var gameState: GameState
     var body: some View {
@@ -24,10 +23,6 @@ struct LevelSelectView: View {
                 Section(header: Text("Select an existing level")) {
                     ForEach(levelDesignerViewModel.levelLoadables) { levelLoadable in
                         Button(action: {
-                            // todo: update achievementsViewModel
-                            // levelDesignerViewModel.selectLevel(level: level)
-                            // achievementsViewModel.selectLevel(level: level)
-                            // gameState.state = .designing
                             gameState.state = .designing(
                                 playableLevel: .levelLoadable(levelLoadable)
                             )

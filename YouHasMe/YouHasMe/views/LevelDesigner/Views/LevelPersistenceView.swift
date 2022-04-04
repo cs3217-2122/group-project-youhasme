@@ -70,11 +70,7 @@ struct LevelPersistenceView: View {
 
     private func save() {
         showSaveLevelAlert = true
-        do {
-            try saveMessage = viewModel.saveLevel()
-        } catch {
-            saveMessage = "failed to save level"
-        }
+        saveMessage = viewModel.saveLevel()
     }
 
     private func getLoadLevelAlert(loadSuccess: Bool, levelName: String) -> String {
