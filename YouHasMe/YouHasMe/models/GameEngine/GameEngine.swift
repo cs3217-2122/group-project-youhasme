@@ -122,13 +122,26 @@ struct GameEngine: GameEventPublisher {
         if oldState == newState {
             return
         }
-        gameEventSubject.send(GameEvent(type: .move))
+
+        let event = GameEvent(type: .move)
+        // todo: fix. currently only assumes one entity
+        for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
+                .entityStates where entityState.has(behaviour: .property(.you)) {
+            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            return
+        }
     }
 
     private func sendWinGameEvent(newState: Game) {
         if !(newState.gameStatus == .win) {
             return
         }
-        gameEventSubject.send(GameEvent(type: .win))
+        let event = GameEvent(type: .win)
+        // todo: fix. currently only assumes one entity
+        for entityState in LevelLayerState(levelLayer: newState.levelLayer)
+                .entityStates where entityState.has(behaviour: .property(.you)) {
+            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            return
+        }
     }
 }

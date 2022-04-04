@@ -12,12 +12,19 @@ class Achievement {
     var description: String
     var unlockConditions: [UnlockCondition]
     var isUnlocked: Bool
+    var isHidden: Bool // hide (description and icon)
 
-    init(name: String, description: String, unlockConditions: [UnlockCondition], isUnlocked: Bool = false) {
+    var shouldHide: Bool {
+        !isUnlocked && isHidden
+    }
+
+    init(name: String, description: String, unlockConditions: [UnlockCondition], isUnlocked: Bool = false,
+         isHidden: Bool = false) {
         self.name = name
         self.description = description
         self.unlockConditions = unlockConditions
         self.isUnlocked = isUnlocked
+        self.isHidden = isHidden
     }
 
     func shouldUnlock() -> Bool {
@@ -72,13 +79,15 @@ extension Achievement: Identifiable {
     func toPersistable() -> PersistableAchievement {
         PersistableAchievement(name: name, description: description,
                                persistableUnlockConditions: unlockConditions.map { $0.toPersistable() },
-                               isUnlocked: isUnlocked)
+                               isUnlocked: isUnlocked,
+                               isHidden: isHidden)
     }
 
     static func fromPersistable(persistable: PersistableAchievement) -> Achievement {
         Achievement(name: persistable.name, description: persistable.description,
                     unlockConditions: persistable
                         .persistableUnlockConditions.map { UnlockConditionUtil.fromPersistable(persistable: $0) },
-                    isUnlocked: persistable.isUnlocked)
+                    isUnlocked: persistable.isUnlocked,
+                    isHidden: persistable.isHidden)
     }
  }

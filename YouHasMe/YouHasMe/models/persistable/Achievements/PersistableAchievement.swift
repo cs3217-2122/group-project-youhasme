@@ -8,8 +8,9 @@
 import Foundation
 
 struct PersistableAchievement: Codable {
-   var name: String
-   var description: String
-   var persistableUnlockConditions: [PersistableUnlockCondition]
-   var isUnlocked: Bool
+    var name: String
+    var description: String
+    var persistableUnlockConditions: [PersistableUnlockCondition]
+    var isUnlocked: Bool
+    var isHidden: Bool
 }

@@ -20,7 +20,7 @@ struct AchievementView: View {
                 .opacity(achievement.isUnlocked ? 1.0 : 0.5)
             VStack(alignment: .leading) {
                 Text(achievement.name)
-                Text(achievement.description).font(.caption)
+                Text(achievement.shouldHide ? "???" : achievement.description).font(.caption)
             }.padding(.leading)
         }
     }

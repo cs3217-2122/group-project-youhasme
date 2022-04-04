@@ -9,9 +9,21 @@ import Foundation
 
 struct AchievementImages {
     static func getAchievementImageString(achievement: Achievement) -> String {
+        if achievement.shouldHide {
+            return "question"
+        }
+
         switch achievement.name {
         case "Baby Steps":
-            return "baba"
+            return "baby_steps"
+        case "Over One Million":
+            return "over_one_million"
+        case "Creativity":
+            return "creativity"
+        case "Speedy Game":
+            return "speedy_game"
+        case "You are Baba":
+            return "baby_steps"
         default:
             return "question"
         }

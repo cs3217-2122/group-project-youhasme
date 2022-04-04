@@ -283,7 +283,7 @@ class ChunkStorage: JSONStorage {
 }
 
 class AchievementStorage: JSONStorage {
-    static let achievementStorageDirectoryName: String = "Achievements-test3"
+    static let achievementStorageDirectoryName: String = "Achievements"
 
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(AchievementStorage.achievementStorageDirectoryName)
@@ -355,7 +355,17 @@ class AchievementStorage: JSONStorage {
         let moveUnlockCondition = IntegerUnlockCondition(statistic: moveStat, comparison: .MORE_THAN_OR_EQUAL_TO,
                                                          unlockValue: 1_000_000)
         return Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
-                    unlockConditions: [moveUnlockCondition])
+                           unlockConditions: [moveUnlockCondition])
+    }
+
+    func getHiddenAchievement() -> Achievement {
+        let winEvent = GameEvent(type: .win)
+        let event = EntityEventDecorator(wrappedEvent: winEvent, entityType: EntityTypes.NounInstances.baba)
+        let statistic = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: event)
+        let unlockCondition = IntegerUnlockCondition(statistic: statistic, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                     unlockValue: 1)
+        return Achievement(name: "You are Baba", description: "Win a level as Baba",
+                           unlockConditions: [unlockCondition], isHidden: true)
     }
 
     func preloadedAchievements() -> [Achievement] {
@@ -363,7 +373,8 @@ class AchievementStorage: JSONStorage {
              getDesignLevelAchievement(),
              getTenMovesAchievement(),
              getWinLevelLimitedMovesAchievement(),
-             getOneMillionMovesAchievement()
+             getOneMillionMovesAchievement(),
+             getHiddenAchievement()
          ]
          return achievements
      }
