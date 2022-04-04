@@ -7,36 +7,38 @@ import SwiftUI
 
 struct GameView: View {
     @EnvironmentObject var gameState: GameState
-    @StateObject var achievementsViewModel = AchievementsViewModel()
-    @StateObject var levelDesignerViewModel = LevelDesignerViewModel()
 
     var body: some View {
-        NavigationFrame(verticalAlignment: .center, horizontalAlignment: .center, backHandler: gameState.state == .mainmenu ? nil : ({
+        NavigationFrame(backHandler: gameState.state == .mainmenu ? nil : ({
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .selectingMeta, .designing, .designingMeta, .playing, .achievements:
-                gameState.state = .mainmenu
+            case .selecting, .selectingMeta, .designing, .designingMeta, .playing, .playingMeta:
+                gameState.stateStack.removeLast()
             }
         })) {
             switch gameState.state {
             case .mainmenu:
                 MainMenuView()
             case .selecting:
-                LevelSelectView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
+                LevelSelectView(levelDesignerViewModel: gameState.getLevelDesignerViewModel(),
+                                achievementsViewModel: gameState.getAchievementsViewModel())
+            case .selectingMeta:
+                MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+            
             case .designing:
-                LevelDesignerView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
+                LevelDesignerView(levelDesignerViewModel: gameState.getLevelDesignerViewModel(),
+                                  achievementsViewModel: gameState.getAchievementsViewModel())
             case .designingMeta:
                 MetaLevelDesignerView(viewModel: gameState.getMetaLevelDesignerViewModel())
             case .playing:
-                LevelPlayView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
-            case .selectingMeta:
-                MetaLevelSelectView(viewModel: gameState.getMetaLevelSelectViewModel())
+                LevelPlayView(levelDesignerViewModel: gameState.getLevelPlayViewModel(),
+                              achievementsViewModel: gameState.getAchievementsViewModel())
+            case .playingMeta:
+                MetaLevelPlayView(viewModel: gameState.getMetaLevelPlayViewModel())
             case .achievements:
-                AchievementMainView(achievementsViewModel: achievementsViewModel)
+                AchievementsMainView(achievementsViewModel: gameState.getAchievementsViewModel())
             }
-        }.onAppear {
-            achievementsViewModel.setSubscriptionsFor(levelDesignerViewModel.gameEventPublisher)
         }
     }
 

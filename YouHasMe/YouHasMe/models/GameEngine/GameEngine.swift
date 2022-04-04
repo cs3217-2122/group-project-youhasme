@@ -87,14 +87,17 @@ struct GameEngine: GameEventPublisher {
 
     // Remove intents with unmet conditions
     private func applyConditions(state: LevelLayerState) -> LevelLayerState {
-        var newState = state
-        for (i, entityState) in state.entityStates.enumerated() {  // For each entity
-            let newIntents = entityState.intents.filter {  // Remove intents with rejected conditions
-                $0.conditionsMet(by: state)
+        var curState = state
+        var oldState = curState
+        repeat {  // Repeat until no more changes
+            oldState = curState
+            for (i, entityState) in curState.entityStates.enumerated() {  // For each entity
+                // Remove intents with rejected conditions
+                let newIntents = entityState.intents.filter { $0.conditionsMet(by: curState) }
+                curState.entityStates[i].intents = newIntents
             }
-            newState.entityStates[i].intents = newIntents
-        }
-        return newState
+        } while curState != oldState
+        return curState
     }
 
     // Applies actions and returns new level layer

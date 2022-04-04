@@ -7,18 +7,11 @@
 
 import Foundation
 
-struct URLListObject {
-    var url: URL
-    var name: String
-}
-
-extension URLListObject: Hashable {}
-
 class MetaLevelSelectViewModel: ObservableObject {
     var metaLevelStorage = MetaLevelStorage()
 
-    func getAllMetaLevels() -> [URLListObject] {
+    func getAllMetaLevels() -> [Loadable] {
         let (urls, filenames) = metaLevelStorage.getAllFiles()
-        return zip(urls, filenames).map { URLListObject(url: $0, name: $1) }
+        return zip(urls, filenames).map { Loadable(url: $0, name: $1) }
     }
 }

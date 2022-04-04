@@ -16,7 +16,7 @@ struct LevelDesignerView: View {
             GameGridView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
             
                 .padding()
-            LevelEditRowView(viewModel: levelDesignerViewModel)
+            LevelPersistenceView(viewModel: levelDesignerViewModel)
                 .padding()
         }
     }

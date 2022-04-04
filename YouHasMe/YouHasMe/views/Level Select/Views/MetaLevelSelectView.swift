@@ -13,7 +13,7 @@ struct MetaLevelSelectView: View {
     var body: some View {
         VStack {
             Button(action: {
-                gameState.state = .designingMeta(metaLevelURLData: nil)
+                gameState.state = .designingMeta()
             }) {
                 Text("Create New Meta Level")
             }.padding()
@@ -22,7 +22,7 @@ struct MetaLevelSelectView: View {
                 Section(header: Text("Select an existing Meta Level")) {
                     ForEach(viewModel.getAllMetaLevels(), id: \.self) { urlListObject in
                         Button(action: {
-                            gameState.state = .designingMeta(metaLevelURLData: urlListObject)
+                            gameState.state = .designingMeta(metaLevelLoadable: urlListObject)
                         }) {
                             Text(urlListObject.name)
                         }

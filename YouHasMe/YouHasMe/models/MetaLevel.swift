@@ -15,38 +15,56 @@ class MetaLevel {
     var loadableChunkRadius: Int {
         MetaLevel.loadableChunkRadius
     }
+    var metaLevelStorage = MetaLevelStorage()
     var chunkStorage: ChunkStorage {
-        guard let storage = try? MetaLevelStorage().getChunkStorage(for: name) else {
+        guard let storage = try? metaLevelStorage.getChunkStorage(for: name) else {
             fatalError("unexpected failure")
         }
         return storage
     }
-    var name: String
+    @Published private(set) var name: String
+    let chunkNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
     var loadedChunks: [Point: ChunkNode] = [:]
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
     var currentChunk: ChunkNode?
-    // TODO
-    // var outlets: [Outlet] = []
     var dimensions: PositionedRectangle
+    private var subscriptions: Set<AnyCancellable> = []
 
-    init() {
-        self.name = MetaLevel.defaultName
-        self.dimensions = PositionedRectangle(
-            rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
-            topLeft: .zero
+    convenience init() {
+        self.init(
+            name: MetaLevel.defaultName,
+            dimensions: PositionedRectangle(
+                rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
+                topLeft: .zero),
+            entryChunkPosition: .zero
         )
     }
 
-    init(name: String, entryChunkPosition: Point, dimensions: PositionedRectangle) {
+    init(name: String, dimensions: PositionedRectangle, entryChunkPosition: Point) {
         self.name = name
-        self.entryChunkPosition = entryChunkPosition
         self.dimensions = dimensions
+        self.entryChunkPosition = entryChunkPosition
     }
 
-    func hydrate(with persistableMetaLevel: PersistableMetaLevel) {
-        // TODO: This function may not be necessary
+    func renameLevel(to newName: String) {
+        let oldName = name
+        do {
+            globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
+            try metaLevelStorage.renameMetaLevel(from: oldName, to: newName)
+            name = newName
+            try metaLevelStorage.saveMetaLevel(self)
+        } catch {
+            globalLogger.error("\(error)")
+        }
+    }
+}
+
+extension MetaLevel: Identifiable {
+    typealias ObjectIdentifier = String
+    var id: ObjectIdentifier {
+        name
     }
 }
 
@@ -71,7 +89,29 @@ extension MetaLevel {
         )
     }
 
-    func getChunk(at worldPosition: Point, createIfNotExists: Bool = false) -> ChunkNode? {
+    func getChunk(at worldPosition: Point, createIfNotExists: Bool, loadNeighbors: Bool) -> ChunkNode? {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createIfNotExists) else {
+            return nil
+        }
+
+        if loadNeighbors {
+            chunk.neighborFinderDelegate = chunkNeighborFinder
+
+            let chunkPosition = worldToChunkPosition(worldPosition)
+            let neighbors = chunk.loadNeighbors(at: chunkPosition)
+            for (neighborPosition, neighboringChunk) in neighbors where
+                loadedChunks[neighborPosition] == nil {
+                loadedChunks[neighborPosition] = neighboringChunk
+            }
+        }
+
+        return chunk
+    }
+
+    private func getChunk(
+        at worldPosition: Point,
+        createIfNotExists: Bool
+    ) -> ChunkNode? {
         // The most basic behavior of getChunk is that it
         // 1. searches `loadedChunks` for the chunk at the given position and returns it
         // 2. tries to load a chunk with the same identifier as the given position
@@ -85,7 +125,7 @@ extension MetaLevel {
         }
 
         if let loadedChunk: ChunkNode = chunkStorage.loadChunk(identifier: chunkPosition.dataString) {
-            print("Loaded chunk with position \(chunkPosition)")
+            globalLogger.info("Loaded chunk with position \(chunkPosition)")
             loadedChunks[chunkPosition] = loadedChunk
             return loadedChunk
         }
@@ -94,7 +134,7 @@ extension MetaLevel {
             return nil
         }
 
-        print("Creating new with position \(chunkPosition)")
+        globalLogger.info("Creating new with position \(chunkPosition)")
         let chunkNode = ChunkNode(identifier: chunkPosition)
 
         do {
@@ -131,8 +171,8 @@ extension MetaLevel {
         }
     }
 
-    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool = false) -> MetaTile? {
-        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists) else {
+    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists, loadNeighbors: loadNeighboringChunks) else {
             return nil
         }
         let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
@@ -140,11 +180,17 @@ extension MetaLevel {
     }
 
     func setTile(_ tile: MetaTile, at worldPosition: Point) {
-        guard let chunk = getChunk(at: worldPosition) else {
+        guard let chunk = getChunk(at: worldPosition, createIfNotExists: false) else {
             return
         }
         let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
         chunk.setTile(tile, at: positionWithinChunk)
+    }
+}
+
+extension MetaLevel: Equatable {
+    static func == (lhs: MetaLevel, rhs: MetaLevel) -> Bool {
+        lhs === rhs
     }
 }
 
@@ -167,16 +213,33 @@ extension MetaLevel {
     static func fromPersistable(_ persistableMetaLevel: PersistableMetaLevel) -> MetaLevel {
         let metaLevel = MetaLevel(
             name: persistableMetaLevel.name,
-            entryChunkPosition: persistableMetaLevel.entryChunkPosition,
-            dimensions: persistableMetaLevel.dimensions
+            dimensions: persistableMetaLevel.dimensions,
+            entryChunkPosition: persistableMetaLevel.entryChunkPosition
         )
-        metaLevel.currentChunk = metaLevel.getChunk(at: metaLevel.entryChunkPosition)
+        metaLevel.currentChunk = metaLevel.getChunk(
+            at: metaLevel.entryChunkPosition,
+            createIfNotExists: false,
+            loadNeighbors: false
+        )
         return metaLevel
+    }
+}
+
+extension MetaLevel: KeyPathExposable {
+    static var exposedNumericKeyPathsMap: [String: KeyPath<MetaLevel, Int>] {
+        [
+            "Name length": \.name.count
+        ]
+    }
+
+    func evaluate(given keyPath: NamedKeyPath<MetaLevel, Int>) -> Int {
+        self[keyPath: keyPath.keyPath]
     }
 }
 
 class MetaTile {
     @Published var metaEntities: [MetaEntityType] = []
+
     init() {}
 
     init(metaEntities: [MetaEntityType]) {
@@ -187,19 +250,110 @@ class MetaTile {
 // MARK: Persistence
 extension MetaTile {
     func toPersistable() -> PersistableMetaTile {
-        PersistableMetaTile(metaEntities: metaEntities)
+        PersistableMetaTile(metaEntities: metaEntities.map { $0.toPersistable() })
     }
 
     static func fromPersistable(_ persistableMetaTile: PersistableMetaTile) -> MetaTile {
-        MetaTile(metaEntities: persistableMetaTile.metaEntities)
+        let metaEntities = persistableMetaTile.metaEntities.map(MetaEntityType.fromPersistable(_:))
+        return MetaTile(metaEntities: metaEntities)
     }
 }
 
-enum MetaEntityType: CaseIterable {
+enum MetaEntityType {
     case blocking
     case nonBlocking
-    case space
-    case level
+    case grass
+    case level(levelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
+    case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
+    // TODO: Perhaps the message can be associated with a user
+    case message(text: String? = nil)
+
+    func getSelfWithDefaultValues() -> MetaEntityType {
+        switch self {
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .grass:
+            return .grass
+        case .level:
+            return .level()
+        case .travel:
+            return .travel()
+        case .message:
+            return .message()
+        }
+    }
 }
 
-extension MetaEntityType: Codable {}
+extension MetaEntityType: CaseIterable {
+    static var allCases: [MetaEntityType] {
+        [.blocking, .nonBlocking, .grass, .level(), .travel(), .message()]
+    }
+}
+
+extension MetaEntityType: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .blocking:
+            return "Blocking"
+        case .nonBlocking:
+            return "Nonblocking"
+        case .grass:
+            return "Grass"
+        case .level(let levelLoadable, let unlockCondition):
+            return "Level"
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            return "Travel point"
+        case .message(let text):
+            return "Message"
+        }
+    }
+}
+
+extension MetaEntityType {
+    func toPersistable() -> PersistableMetaEntityType {
+        switch self {
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .grass:
+            return .grass
+        case .level(let levelLoadable, let unlockCondition):
+            return .level(
+                levelLoadable: levelLoadable,
+                unlockCondition: unlockCondition?.toPersistable()
+            )
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: unlockCondition?.toPersistable())
+        case .message(let text):
+            return .message(text: text)
+        }
+    }
+
+    static func fromPersistable(_ persistableMetaEntity: PersistableMetaEntityType) -> MetaEntityType {
+        switch persistableMetaEntity {
+        case .blocking:
+            return .blocking
+        case .nonBlocking:
+            return .nonBlocking
+        case .grass:
+            return .grass
+        case .level(let levelLoadable, let unlockCondition):
+            guard let unlockCondition = unlockCondition else {
+                return .level(levelLoadable: levelLoadable, unlockCondition: nil)
+            }
+            return .level(levelLoadable: levelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
+        case .travel(let metaLevelLoadable, let unlockCondition):
+            guard let unlockCondition = unlockCondition else {
+                return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: nil)
+            }
+            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
+        case .message(let text):
+            return .message(text: text)
+        }
+    }
+}
+
+extension MetaEntityType: Hashable {}

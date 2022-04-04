@@ -29,10 +29,17 @@ struct GridViewData {
     }
 }
 
-struct MetaLevelDesignerGridView: View {
-    let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
+protocol AbstractMetaLevelGridViewModel: ObservableObject {
+    var viewableDimensions: Rectangle { get set }
+    func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel
+    func translateView(by offset: CGVector)
+    func endTranslateView()
+}
 
-    @ObservedObject var viewModel: MetaLevelDesignerViewModel
+struct MetaLevelGridView<T: AbstractMetaLevelGridViewModel>: View {
+    let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
+        
+    @ObservedObject var viewModel: T
     @State var lastDragLocation: CGPoint?
 
     var body: some View {

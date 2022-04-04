@@ -34,7 +34,7 @@ struct MainMenuView: View {
                     Text("Design A Meta Level")
                 }.padding()
                 Button(action: {
-                    gameState.state = .designing
+                    gameState.state = .designing()
                 }) {
                     Text("Design A Level")
                 }.padding()

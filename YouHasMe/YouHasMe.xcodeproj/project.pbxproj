@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* EntityView.swift */; };
+		1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* CellView.swift */; };
 		1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C527E5B43F00161E63 /* Entities.swift */; };
 		1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */; };
 		1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C927E5B55100161E63 /* PaletteView.swift */; };
@@ -18,7 +18,7 @@
 		1E96EB9127E725DF00321BEB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9027E725DF00321BEB /* GameView.swift */; };
 		1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9227E7264100321BEB /* LevelSelectView.swift */; };
 		1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9427E726CC00321BEB /* LevelPlayView.swift */; };
-		40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelEditRowView.swift */; };
+		40AD869327E6073A00F42C42 /* LevelPersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */; };
 		40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869427E60AC400F42C42 /* StorageUtil.swift */; };
 		40AD869927E617B300F42C42 /* GameStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD869827E617B300F42C42 /* GameStorage.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
@@ -64,7 +64,7 @@
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
 		E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */; };
-		E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */; };
+		E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */; };
 		E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3827E8B213007D2E86 /* ViewConstants.swift */; };
 		E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3B27E8B55E007D2E86 /* Point.swift */; };
@@ -85,7 +85,45 @@
 		E573E96427EA3326000D10E4 /* PersistableMetaLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */; };
 		E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */; };
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
+		E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */; };
+		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
+		E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */; };
+		E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657B27F8032500F79A52 /* AudioRecorder.swift */; };
+		E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657D27F8056A00F79A52 /* MetaEntityView.swift */; };
+		E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658027F8059000F79A52 /* MetaEntityViewModel.swift */; };
+		E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */; };
+		E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */; };
+		E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658627F8096600F79A52 /* ConditionCreatorView.swift */; };
+		E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */; };
+		E574658B27F80B0300F79A52 /* LevelSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */; };
+		E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */; };
+		E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */; };
+		E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */; };
+		E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */; };
+		E574659727F8670F00F79A52 /* EpsilonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659627F8670F00F79A52 /* EpsilonState.swift */; };
+		E574659927F8685C00F79A52 /* NounState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659827F8685C00F79A52 /* NounState.swift */; };
+		E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659A27F8689000F79A52 /* NounConcatAndState.swift */; };
+		E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659C27F868AC00F79A52 /* IsVerbState.swift */; };
+		E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659E27F868BC00F79A52 /* HasVerbState.swift */; };
+		E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */; };
+		E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */; };
+		E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */; };
+		E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */; };
+		E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57465A827F86F6000F79A52 /* RejectingState.swift */; };
 		E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* ChunkNode.swift */; };
+		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
+		E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */; };
+		E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594827F4180B009A79F9 /* MessagesViewModel.swift */; };
+		E578594B27F42C94009A79F9 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594A27F42C94009A79F9 /* Loadable.swift */; };
+		E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */; };
+		E57A19A527F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */; };
+		E57A19A727F9F91900312C39 /* Directions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A627F9F91900312C39 /* Directions.swift */; };
+		E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */; };
+		E57A19AC27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */; };
+		E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */; };
+		E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */; };
+		E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */; };
+		E57A19B627F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -99,19 +137,31 @@
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
 		E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */; };
 		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
+		E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */; };
 		E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */; };
+		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
+		E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
 		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
 		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
+		E585AD5127F9410900A54202 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5027F9410900A54202 /* UIColor.swift */; };
+		E585AD5327F9629900A54202 /* MetaLevelSelectorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5227F9629900A54202 /* MetaLevelSelectorViewModel.swift */; };
+		E585AD5527F9648B00A54202 /* LevelSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5427F9648B00A54202 /* LevelSelectorView.swift */; };
+		E585AD5727F9649500A54202 /* MetaLevelSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5627F9649500A54202 /* MetaLevelSelectorView.swift */; };
+		E585AD5927F964F900A54202 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5827F964F900A54202 /* MessageView.swift */; };
+		E585AD5B27F9651500A54202 /* LevelInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5A27F9651500A54202 /* LevelInfoView.swift */; };
+		E585AD5D27F9652E00A54202 /* MetaLevelInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5C27F9652E00A54202 /* MetaLevelInfoView.swift */; };
+		E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */; };
+		E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */; };
+		E585AD6327F965F900A54202 /* MetaLevelInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD6227F965F900A54202 /* MetaLevelInfoViewModel.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
 		E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDF27E5A64B00E3952D /* Entity.swift */; };
 		E5BECBE227E5B6EF00E3952D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE127E5B6EF00E3952D /* String.swift */; };
-		E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */; };
 		E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE627E5E68200E3952D /* Behaviour.swift */; };
 		E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE827E5E7C700E3952D /* RuleParser.swift */; };
-		E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */; };
+		E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */; };
 		E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */; };
 		E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBEE27E5E84200E3952D /* DefaultRules.swift */; };
 		E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF127E5E8B900E3952D /* Noun.swift */; };
@@ -119,6 +169,8 @@
 		E5BECBF627E5E8C600E3952D /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF527E5E8C600E3952D /* Property.swift */; };
 		E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF727E5E8FF00E3952D /* Classification.swift */; };
 		E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBF927E5E91200E3952D /* Connective.swift */; };
+		E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */; };
+		E5EC5B5927F36ACE00BAE834 /* MetaLevelPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +184,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1E6B90C327E5B2BF00161E63 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
+		1E6B90C327E5B2BF00161E63 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		1E6B90C527E5B43F00161E63 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDesignerView.swift; sourceTree = "<group>"; };
 		1E6B90C927E5B55100161E63 /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
@@ -143,7 +195,7 @@
 		1E96EB9027E725DF00321BEB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		1E96EB9227E7264100321BEB /* LevelSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectView.swift; sourceTree = "<group>"; };
 		1E96EB9427E726CC00321BEB /* LevelPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPlayView.swift; sourceTree = "<group>"; };
-		40AD869227E6073A00F42C42 /* LevelEditRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEditRowView.swift; sourceTree = "<group>"; };
+		40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelPersistenceView.swift; sourceTree = "<group>"; };
 		40AD869427E60AC400F42C42 /* StorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtil.swift; sourceTree = "<group>"; };
 		40AD869827E617B300F42C42 /* GameStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStorage.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
@@ -189,7 +241,7 @@
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerView.swift; sourceTree = "<group>"; };
-		E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerGridView.swift; sourceTree = "<group>"; };
+		E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelGridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerViewModel.swift; sourceTree = "<group>"; };
 		E5563C3827E8B213007D2E86 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		E5563C3B27E8B55E007D2E86 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
@@ -210,7 +262,45 @@
 		E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaLevel.swift; sourceTree = "<group>"; };
 		E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaTile.swift; sourceTree = "<group>"; };
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
+		E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
+		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
+		E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorViewModel.swift; sourceTree = "<group>"; };
+		E574657B27F8032500F79A52 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		E574657D27F8056A00F79A52 /* MetaEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaEntityView.swift; sourceTree = "<group>"; };
+		E574658027F8059000F79A52 /* MetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaEntityViewModel.swift; sourceTree = "<group>"; };
+		E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteMetaEntityView.swift; sourceTree = "<group>"; };
+		E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteMetaEntityViewModel.swift; sourceTree = "<group>"; };
+		E574658627F8096600F79A52 /* ConditionCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorView.swift; sourceTree = "<group>"; };
+		E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoView.swift; sourceTree = "<group>"; };
+		E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectorViewModel.swift; sourceTree = "<group>"; };
+		E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaEntityType.swift; sourceTree = "<group>"; };
+		E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SouthwardEastwardMatchingStrategy.swift; sourceTree = "<group>"; };
+		E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalMatchingStrategy.swift; sourceTree = "<group>"; };
+		E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicFiniteAutomaton.swift; sourceTree = "<group>"; };
+		E574659627F8670F00F79A52 /* EpsilonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpsilonState.swift; sourceTree = "<group>"; };
+		E574659827F8685C00F79A52 /* NounState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounState.swift; sourceTree = "<group>"; };
+		E574659A27F8689000F79A52 /* NounConcatAndState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounConcatAndState.swift; sourceTree = "<group>"; };
+		E574659C27F868AC00F79A52 /* IsVerbState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbState.swift; sourceTree = "<group>"; };
+		E574659E27F868BC00F79A52 /* HasVerbState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbState.swift; sourceTree = "<group>"; };
+		E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbConcatNounPropState.swift; sourceTree = "<group>"; };
+		E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbConcatNounState.swift; sourceTree = "<group>"; };
+		E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbPrimedState.swift; sourceTree = "<group>"; };
+		E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasVerbPrimedState.swift; sourceTree = "<group>"; };
+		E57465A827F86F6000F79A52 /* RejectingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RejectingState.swift; sourceTree = "<group>"; };
 		E575264B27E965410045D3D6 /* ChunkNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNode.swift; sourceTree = "<group>"; };
+		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
+		E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelManipulableViewModel.swift; sourceTree = "<group>"; };
+		E578594827F4180B009A79F9 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
+		E578594A27F42C94009A79F9 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
+		E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapAroundMatchingStrategy.swift; sourceTree = "<group>"; };
+		E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderDelegate.swift; sourceTree = "<group>"; };
+		E57A19A627F9F91900312C39 /* Directions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Directions.swift; sourceTree = "<group>"; };
+		E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImmediateNeighborhoodChunkNeighborFinder.swift; sourceTree = "<group>"; };
+		E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderReversedDecorator.swift; sourceTree = "<group>"; };
+		E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderRandomizerDecorator.swift; sourceTree = "<group>"; };
+		E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderWrapAroundDecorator.swift; sourceTree = "<group>"; };
+		E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeneratorDelegate.swift; sourceTree = "<group>"; };
+		E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkSelfEvolutionDelegate.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -225,20 +315,32 @@
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		E57ACB4327DC684D00F73B27 /* BidirectionalArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BidirectionalArray.swift; sourceTree = "<group>"; };
 		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
+		E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfoViewModel.swift; sourceTree = "<group>"; };
 		E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerPaletteView.swift; sourceTree = "<group>"; };
+		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
 		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		E585AD5027F9410900A54202 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		E585AD5227F9629900A54202 /* MetaLevelSelectorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelSelectorViewModel.swift; sourceTree = "<group>"; };
+		E585AD5427F9648B00A54202 /* LevelSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectorView.swift; sourceTree = "<group>"; };
+		E585AD5627F9649500A54202 /* MetaLevelSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelSelectorView.swift; sourceTree = "<group>"; };
+		E585AD5827F964F900A54202 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
+		E585AD5A27F9651500A54202 /* LevelInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfoView.swift; sourceTree = "<group>"; };
+		E585AD5C27F9652E00A54202 /* MetaLevelInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelInfoView.swift; sourceTree = "<group>"; };
+		E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthParsingStrategy.swift; sourceTree = "<group>"; };
+		E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthParsingStrategy.swift; sourceTree = "<group>"; };
+		E585AD6227F965F900A54202 /* MetaLevelInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelInfoViewModel.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
 		E5BECBDD27E59E1000E3952D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E5BECBDF27E5A64B00E3952D /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E5BECBE127E5B6EF00E3952D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
-		E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleBuilder.swift; sourceTree = "<group>"; };
 		E5BECBE627E5E68200E3952D /* Behaviour.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Behaviour.swift; sourceTree = "<group>"; };
 		E5BECBE827E5E7C700E3952D /* RuleParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleParser.swift; sourceTree = "<group>"; };
-		E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidator.swift; sourceTree = "<group>"; };
+		E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NaiveRuleValidationStrategy.swift; sourceTree = "<group>"; };
 		E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleEngine.swift; sourceTree = "<group>"; };
 		E5BECBEE27E5E84200E3952D /* DefaultRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRules.swift; sourceTree = "<group>"; };
 		E5BECBF127E5E8B900E3952D /* Noun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Noun.swift; sourceTree = "<group>"; };
@@ -246,6 +348,8 @@
 		E5BECBF527E5E8C600E3952D /* Property.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Property.swift; sourceTree = "<group>"; };
 		E5BECBF727E5E8FF00E3952D /* Classification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classification.swift; sourceTree = "<group>"; };
 		E5BECBF927E5E91200E3952D /* Connective.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connective.swift; sourceTree = "<group>"; };
+		E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelPlayView.swift; sourceTree = "<group>"; };
+		E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelPlayViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -414,7 +518,6 @@
 			children = (
 				E5563C3B27E8B55E007D2E86 /* Point.swift */,
 				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
-				E575264B27E965410045D3D6 /* ChunkNode.swift */,
 				E573E95727EA1A34000D10E4 /* Rectangle.swift */,
 				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
 			);
@@ -424,7 +527,7 @@
 		E56752F427EEA7D90001305D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40AD869227E6073A00F42C42 /* LevelEditRowView.swift */,
+				40AD869227E6073A00F42C42 /* LevelPersistenceView.swift */,
 				1E6B90CB27E5B6DE00161E63 /* GameGridView.swift */,
 				1E6B90C927E5B55100161E63 /* PaletteView.swift */,
 				1E6B90C727E5B4B400161E63 /* LevelDesignerView.swift */,
@@ -478,6 +581,7 @@
 		E56752FA27EEA82B0001305D /* Game */ = {
 			isa = PBXGroup;
 			children = (
+				E5EC5B5727F36ABF00BAE834 /* View Models */,
 				E56752FB27EEA8330001305D /* Views */,
 			);
 			path = Game;
@@ -487,6 +591,10 @@
 			isa = PBXGroup;
 			children = (
 				1E96EB9427E726CC00321BEB /* LevelPlayView.swift */,
+				E5EC5B5527F3696200BAE834 /* MetaLevelPlayView.swift */,
+				E585AD5827F964F900A54202 /* MessageView.swift */,
+				E585AD5A27F9651500A54202 /* LevelInfoView.swift */,
+				E585AD5C27F9652E00A54202 /* MetaLevelInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -495,7 +603,9 @@
 			isa = PBXGroup;
 			children = (
 				E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */,
-				1E6B90C327E5B2BF00161E63 /* EntityView.swift */,
+				1E6B90C327E5B2BF00161E63 /* CellView.swift */,
+				E5563C3427E8AF34007D2E86 /* MetaLevelGridView.swift */,
+				E574657D27F8056A00F79A52 /* MetaEntityView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -521,6 +631,8 @@
 			children = (
 				E5563C4327E8DF87007D2E86 /* CGPoint.swift */,
 				E5563C4127E8DF6A007D2E86 /* CGVector.swift */,
+				E581F08727F75C3900B1CFCB /* Image.swift */,
+				E585AD5027F9410900A54202 /* UIColor.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -540,8 +652,87 @@
 				E573E96127EA32F7000D10E4 /* PersistableChunkNode.swift */,
 				E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */,
 				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
+				E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */,
 			);
 			path = persistable;
+			sourceTree = "<group>";
+		};
+		E574657F27F8058300F79A52 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E574658027F8059000F79A52 /* MetaEntityViewModel.swift */,
+			);
+			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E574658E27F8664600F79A52 /* matching */ = {
+			isa = PBXGroup;
+			children = (
+				E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */,
+				E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */,
+				E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */,
+			);
+			path = matching;
+			sourceTree = "<group>";
+		};
+		E574658F27F8665500F79A52 /* parsing */ = {
+			isa = PBXGroup;
+			children = (
+				E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */,
+				E574659627F8670F00F79A52 /* EpsilonState.swift */,
+				E574659827F8685C00F79A52 /* NounState.swift */,
+				E574659A27F8689000F79A52 /* NounConcatAndState.swift */,
+				E574659C27F868AC00F79A52 /* IsVerbState.swift */,
+				E574659E27F868BC00F79A52 /* HasVerbState.swift */,
+				E57465A027F868E200F79A52 /* IsVerbConcatNounPropState.swift */,
+				E57465A227F8691500F79A52 /* HasVerbConcatNounState.swift */,
+				E57465A427F8693000F79A52 /* IsVerbPrimedState.swift */,
+				E57465A627F8694700F79A52 /* HasVerbPrimedState.swift */,
+				E57465A827F86F6000F79A52 /* RejectingState.swift */,
+				E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */,
+				E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */,
+			);
+			path = parsing;
+			sourceTree = "<group>";
+		};
+		E57A19A327F9F8DB00312C39 /* chunk */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B427F9FEC500312C39 /* Self Evolution Delegate */,
+				E57A19B127F9FE6600312C39 /* ChunkGeneratorDelegate */,
+				E57A19A827F9FCB700312C39 /* Neighbor Finder Delegate */,
+				E575264B27E965410045D3D6 /* ChunkNode.swift */,
+				E57A19A627F9F91900312C39 /* Directions.swift */,
+			);
+			path = chunk;
+			sourceTree = "<group>";
+		};
+		E57A19A827F9FCB700312C39 /* Neighbor Finder Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19A427F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift */,
+				E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */,
+				E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */,
+				E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */,
+				E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */,
+			);
+			path = "Neighbor Finder Delegate";
+			sourceTree = "<group>";
+		};
+		E57A19B127F9FE6600312C39 /* ChunkGeneratorDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */,
+			);
+			path = ChunkGeneratorDelegate;
+			sourceTree = "<group>";
+		};
+		E57A19B427F9FEC500312C39 /* Self Evolution Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				E57A19B527F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift */,
+			);
+			path = "Self Evolution Delegate";
 			sourceTree = "<group>";
 		};
 		E57ACB1A27DC582300F73B27 = {
@@ -565,6 +756,7 @@
 		E57ACB2527DC582300F73B27 /* YouHasMe */ = {
 			isa = PBXGroup;
 			children = (
+				E581F08927F760D600B1CFCB /* audio */,
 				E573E95D27EA27BE000D10E4 /* logs */,
 				40AD869127E606F300F42C42 /* storage */,
 				1E6B90C127E5B2A300161E63 /* views */,
@@ -589,6 +781,7 @@
 			isa = PBXGroup;
 			children = (
 				40E2516227F427C0008CBCE0 /* Achievements */,
+				E57A19A327F9F8DB00312C39 /* chunk */,
 				E573E96027EA32DC000D10E4 /* persistable */,
 				E5563C3A27E8B551007D2E86 /* helpers */,
 				B07AA62627E658F200918E71 /* GameEngine */,
@@ -609,14 +802,27 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		E581F08927F760D600B1CFCB /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */,
+				E574657B27F8032500F79A52 /* AudioRecorder.swift */,
+			);
+			path = audio;
+			sourceTree = "<group>";
+		};
 		E581F52727ECCC5600CAC137 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E5563C3D27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift */,
-				E5563C3427E8AF34007D2E86 /* MetaLevelDesignerGridView.swift */,
 				E5563C3227E8ADCF007D2E86 /* MetaLevelDesignerView.swift */,
 				E569071827ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift */,
 				E57CA5E827EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift */,
+				E574658227F805B100F79A52 /* PaletteMetaEntityView.swift */,
+				E574658627F8096600F79A52 /* ConditionCreatorView.swift */,
+				E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */,
+				E585AD5427F9648B00A54202 /* LevelSelectorView.swift */,
+				E585AD5627F9649500A54202 /* MetaLevelSelectorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -626,6 +832,11 @@
 			children = (
 				E5563C3F27E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift */,
 				E5563C3627E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift */,
+				E573F43C27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift */,
+				E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */,
+				E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */,
+				E574658A27F80B0300F79A52 /* LevelSelectorViewModel.swift */,
+				E585AD5227F9629900A54202 /* MetaLevelSelectorViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -633,9 +844,13 @@
 		E581F52D27ECD27E00CAC137 /* shared */ = {
 			isa = PBXGroup;
 			children = (
+				E574657F27F8058300F79A52 /* View Models */,
 				E56FE99627EEF21100EBE865 /* extensions */,
 				E56752FD27EEA86F0001305D /* Protocols */,
 				E56752FC27EEA8650001305D /* Views */,
+				E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */,
+				E578594527F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift */,
+				E578594A27F42C94009A79F9 /* Loadable.swift */,
 			);
 			path = shared;
 			sourceTree = "<group>";
@@ -659,6 +874,7 @@
 				E5BECBE127E5B6EF00E3952D /* String.swift */,
 				E5563C4527E8E31B007D2E86 /* Double.swift */,
 				E581F52527ECBCD900CAC137 /* Int.swift */,
+				E573F43E27F4B806001E9877 /* CaseIterable.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -666,10 +882,11 @@
 		E5BECBE327E5BE0200E3952D /* rules */ = {
 			isa = PBXGroup;
 			children = (
+				E574658E27F8664600F79A52 /* matching */,
+				E574658F27F8665500F79A52 /* parsing */,
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
-				E5BECBE427E5BE1300E3952D /* RuleBuilder.swift */,
 				E5BECBE827E5E7C700E3952D /* RuleParser.swift */,
-				E5BECBEA27E5E7E900E3952D /* RuleValidator.swift */,
+				E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */,
 				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
 				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
 			);
@@ -688,6 +905,17 @@
 				E5BECBF927E5E91200E3952D /* Connective.swift */,
 			);
 			path = entity;
+			sourceTree = "<group>";
+		};
+		E5EC5B5727F36ABF00BAE834 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				E5EC5B5827F36ACE00BAE834 /* MetaLevelPlayViewModel.swift */,
+				E578594827F4180B009A79F9 /* MessagesViewModel.swift */,
+				E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */,
+				E585AD6227F965F900A54202 /* MetaLevelInfoViewModel.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -813,14 +1041,28 @@
 			files = (
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */,
+				E585AD5727F9649500A54202 /* MetaLevelSelectorView.swift in Sources */,
+				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
+				E585AD5927F964F900A54202 /* MessageView.swift in Sources */,
+				E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */,
+				E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */,
 				E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */,
 				B05A807227F8451300F92D2C /* EntityActionCondition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* MetaLevelSelectView.swift in Sources */,
+				E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
-				40AD869327E6073A00F42C42 /* LevelEditRowView.swift in Sources */,
+				40AD869327E6073A00F42C42 /* LevelPersistenceView.swift in Sources */,
+				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* MetaLevelDesignerToolbarViewModel.swift in Sources */,
+				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
+				E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */,
+				E585AD6327F965F900A54202 /* MetaLevelInfoViewModel.swift in Sources */,
+				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
+				E5EC5B5627F3696200BAE834 /* MetaLevelPlayView.swift in Sources */,
+				E585AD5327F9629900A54202 /* MetaLevelSelectorViewModel.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
+				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				40E2519527FAD835008CBCE0 /* PersistableIntegerUnlockCondition.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
@@ -831,37 +1073,55 @@
 				E573E96227EA32F7000D10E4 /* PersistableChunkNode.swift in Sources */,
 				40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */,
 				1E96EB9327E7264100321BEB /* LevelSelectView.swift in Sources */,
+				E574658327F805B100F79A52 /* PaletteMetaEntityView.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
-				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
+				E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
+				E585AD5D27F9652E00A54202 /* MetaLevelInfoView.swift in Sources */,
+				E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
+				E574657E27F8056A00F79A52 /* MetaEntityView.swift in Sources */,
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */,
 				40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */,
+				E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */,
 				E569071927ED4D830010E665 /* MetaLevelDesignerPersistenceView.swift in Sources */,
+				E57A19AC27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift in Sources */,
 				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* MetaLevelDesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
-				E5563C3527E8AF34007D2E86 /* MetaLevelDesignerGridView.swift in Sources */,
+				E5563C3527E8AF34007D2E86 /* MetaLevelGridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* MetaLevel.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
+				E578594627F3EA7C009A79F9 /* MetaLevelManipulableViewModel.swift in Sources */,
+				E574659927F8685C00F79A52 /* NounState.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
+				E57A19A727F9F91900312C39 /* Directions.swift in Sources */,
 				40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */,
 				E57ACB4427DC684D00F73B27 /* BidirectionalArray.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
+				E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */,
+				E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */,
 				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
 				40E2517327F71FCE008CBCE0 /* GameEvent.swift in Sources */,
 				B05687DF27F36CF00046C26C /* Game.swift in Sources */,
+				E57A19A527F9F8F500312C39 /* ChunkNeighborFinderDelegate.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				1E6B90CE27E5B8AF00161E63 /* LevelDesignerViewModel.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */,
 				40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */,
-				E5BECBEB27E5E7E900E3952D /* RuleValidator.swift in Sources */,
+				E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */,
+				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* ChunkNode.swift in Sources */,
+				E585AD5127F9410900A54202 /* UIColor.swift in Sources */,
+				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
+				E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */,
+				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
 				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
@@ -869,9 +1129,12 @@
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
 				40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */,
+				E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */,
 				E567530227EEBACD0001305D /* MetaLevelSelectViewModel.swift in Sources */,
+				E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */,
 				1E6B90CC27E5B6DE00161E63 /* GameGridView.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
+				E585AD5B27F9651500A54202 /* LevelInfoView.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableMetaLevel.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* MetaLevelDesignerView.swift in Sources */,
 				40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */,
@@ -879,40 +1142,57 @@
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
 				1E6B90C827E5B4B400161E63 /* LevelDesignerView.swift in Sources */,
-				1E6B90C427E5B2BF00161E63 /* EntityView.swift in Sources */,
+				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				1E6B90CA27E5B55100161E63 /* PaletteView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
+				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */,
+				E574659727F8670F00F79A52 /* EpsilonState.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				40AD869927E617B300F42C42 /* GameStorage.swift in Sources */,
+				E578594B27F42C94009A79F9 /* Loadable.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
+				E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
+				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
 				B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */,
 				B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */,
 				E581F52627ECBCD900CAC137 /* Int.swift in Sources */,
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
+				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
+				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
+				E574658B27F80B0300F79A52 /* LevelSelectorViewModel.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				E5EC5B5927F36ACE00BAE834 /* MetaLevelPlayViewModel.swift in Sources */,
+				E573F43D27F498BC001E9877 /* MetaLevelDesignerTileInfoViewModel.swift in Sources */,
+				E585AD5527F9648B00A54202 /* LevelSelectorView.swift in Sources */,
+				E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
+				E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */,
 				1E96EB9527E726CC00321BEB /* LevelPlayView.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
+				E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */,
 				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
 				40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */,
-				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */,
+				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
+				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
+				E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */,
+				E57A19B627F9FEFE00312C39 /* ChunkSelfEvolutionDelegate.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* MetaLevelDesignerPaletteView.swift in Sources */,

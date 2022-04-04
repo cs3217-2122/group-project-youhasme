@@ -2,7 +2,7 @@ import Foundation
 
 struct Level {
     var name: String
-    private(set) var layers: BidirectionalArray<LevelLayer>
+    var layers: BidirectionalArray<LevelLayer>
 
     init(name: String = "") {
         self.name = name
@@ -47,6 +47,22 @@ extension Level: Identifiable {
     }
 }
 
+extension Level: KeyPathExposable {
+    typealias PathRoot = Level
+
+    static var exposedNumericKeyPathsMap: [String: KeyPath<Level, Int>] {
+        [
+            "Name length": \.name.count
+        ]
+    }
+
+    func evaluate(given keyPath: NamedKeyPath<Level, Int>) -> Int {
+        self[keyPath: keyPath.keyPath]
+    }
+}
+
+extension Level: Hashable {}
+
 extension Level: Codable {}
 
 struct Tile {
@@ -54,4 +70,4 @@ struct Tile {
 }
 
 extension Tile: Codable {}
-extension Tile: Equatable {}
+extension Tile: Hashable {}

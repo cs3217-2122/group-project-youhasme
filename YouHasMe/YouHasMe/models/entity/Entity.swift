@@ -12,5 +12,5 @@ struct Entity {
     }
 }
 
-extension Entity: Codable, Hashable {
-}
+extension Entity: Codable {}
+extension Entity: Hashable {}
