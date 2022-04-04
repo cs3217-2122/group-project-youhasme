@@ -105,15 +105,14 @@ class LevelDesignerViewModel: ObservableObject {
         }
 
         do {
-            var isExistingLevel = false
-            if levelStorage.loadLevel(name: currLevel.name) != nil {
-                isExistingLevel = true
-            }
+            let isExistingLevel = (levelStorage.loadLevel(name: currLevel.name) != nil)
             try levelStorage.saveLevel(currLevel)
             if !isExistingLevel {
                 gameEventSubject.send(GameEvent(type: .designLevel))
             }
             return "Successfully saved level: \(levelName)"
+        } catch {
+            return "error saving level: \(error)"
         }
     }
 }

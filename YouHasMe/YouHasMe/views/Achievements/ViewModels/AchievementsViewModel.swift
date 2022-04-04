@@ -13,7 +13,7 @@ class AchievementsViewModel: ObservableObject {
     var unlockedAchievements: [Achievement] = []
     var imageWidth: Float = 40
     var imageHeight: Float = 40
-    var levelId: String = ""
+    var levelId: String
     private var subscriptions = [AnyCancellable]()
 //    private var statisticsViewModel = StatisticsViewModel()
 
@@ -31,6 +31,7 @@ class AchievementsViewModel: ObservableObject {
             }
         }
         self.levelId = levelId
+        resetLevelStats()
     }
 
     func selectLevel(level: Level) {
