@@ -229,6 +229,7 @@ class ChunkStorage: JSONStorage {
 
     func loadAchievement(name: String) -> Achievement? {
         guard let persistableAchievement: PersistableAchievement = try? loadAndDecode(filename: name) else {
+            print("could not load achievement from file called \(name)")
             return nil
         }
 
@@ -241,10 +242,44 @@ class ChunkStorage: JSONStorage {
 
     func loadAllAchievements() -> [Achievement] {
         let (_, filenames) = AchievementStorage().getAllFiles()
-        return filenames.compactMap { loadAchievement(name: $0) }
+        var allAchievements = filenames.compactMap { loadAchievement(name: $0) }
+
+        // todo: refactor
+        let preloadedAchievements = preloadedAchievements()
+        for preloaded in preloadedAchievements {
+            if allAchievements.first(where: { $0.name == preloaded.name }) == nil {
+                allAchievements.append(preloaded)
+            }
+        }
+        return allAchievements
     }
-    
-     func preloadedAchievements() -> [Achievement] {
-         return []
+
+    func preloadedAchievements() -> [Achievement] {
+        let moveStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
+        let designStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .designLevel))
+        let moveUnlockCondition1 = IntegerUnlockCondition(statistic: moveStat1, comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)
+        let designUnlockCondition1 = IntegerUnlockCondition(statistic: designStat1, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                            unlockValue: 1)
+        let moveStat2 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
+        let moveUnlockCondition2 = IntegerUnlockCondition(statistic: moveStat2, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                          unlockValue: 1_000_000)
+        let levelMoveStat1 = GameStatistic(value: 0, statisticType: .level,
+                                           gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .move),
+                                                                           levelName: "Abc"))
+        let levelMoveUnlockCondition1 = IntegerUnlockCondition(statistic: levelMoveStat1, comparison: .LESS_THAN, unlockValue: 10)
+        let levelWinStat1 = GameStatistic(value: 0, statisticType: .level,
+                                          gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelName: "Abc"))
+        let levelWinUnlockCondition1 = IntegerUnlockCondition(statistic: levelWinStat1, comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1)
+        let achievements = [
+             Achievement(name: "Creativity", description: "Create your first level",
+                         unlockConditions: [designUnlockCondition1]),
+             Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
+                         unlockConditions: [moveUnlockCondition1]),
+             Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
+                         unlockConditions: [moveUnlockCondition2]),
+             Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
+                         unlockConditions: [levelMoveUnlockCondition1, levelWinUnlockCondition1])
+         ]
+         return achievements
      }
  }
