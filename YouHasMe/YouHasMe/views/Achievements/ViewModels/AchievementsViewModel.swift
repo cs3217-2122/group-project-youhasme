@@ -59,11 +59,11 @@ class AchievementsViewModel: ObservableObject {
                     self.lockedAchievements.removeByIdentity(achievement)
                     self.unlockedAchievements.append(achievement)
                 }
-//                do {
-////                    try AchievementStorage().saveAchievement(achievement)
-//                } catch {
-//                    globalLogger.error("problem saving achievement \(achievement.name)")
-//                }
+                do {
+                    try AchievementStorage().saveAchievement(achievement)
+                } catch {
+                    globalLogger.error("problem saving achievement \(achievement.name)")
+                }
             }
         }.store(in: &subscriptions)
     }

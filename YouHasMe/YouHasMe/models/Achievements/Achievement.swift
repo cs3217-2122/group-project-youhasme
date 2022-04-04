@@ -41,11 +41,9 @@ class Achievement {
 
     func updateStatistics(gameEvent: AbstractGameEvent) {
         unlockConditions.forEach { condition in
-            if condition.isFulfilled() {
-                return
-            }
             if let integerCond = condition as? IntegerUnlockCondition {
-                integerCond.statistic.handleGameEvent(event: gameEvent)
+                let stat = integerCond.statistic
+                stat.handleGameEvent(event: gameEvent)
             }
         }
     }

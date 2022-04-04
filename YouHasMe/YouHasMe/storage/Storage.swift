@@ -217,7 +217,7 @@ class ChunkStorage: JSONStorage {
 }
 
  class AchievementStorage: JSONStorage {
-    static let achievementStorageDirectoryName: String = "Achievements"
+    static let achievementStorageDirectoryName: String = "Achievements-test1"
 
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(AchievementStorage.achievementStorageDirectoryName)
@@ -241,23 +241,27 @@ class ChunkStorage: JSONStorage {
     }
 
     func loadAllAchievements() -> [Achievement] {
-        let (_, filenames) = AchievementStorage().getAllFiles()
-        var allAchievements = filenames.compactMap { loadAchievement(name: $0) }
+//        let (_, filenames) = AchievementStorage().getAllFiles()
+//        var allAchievements = filenames.compactMap { loadAchievement(name: $0) }
+//
+//        // todo: refactor
+//        let preloadedAchievements = preloadedAchievements()
+//        for preloaded in preloadedAchievements {
+//            if allAchievements.first(where: { $0.name == preloaded.name }) == nil {
+//                allAchievements.append(preloaded)
+//            }
+//        }
+//        return allAchievements
 
-        // todo: refactor
-        let preloadedAchievements = preloadedAchievements()
-        for preloaded in preloadedAchievements {
-            if allAchievements.first(where: { $0.name == preloaded.name }) == nil {
-                allAchievements.append(preloaded)
-            }
-        }
-        return allAchievements
+        // for debugging purposes
+        return preloadedAchievements()
     }
 
     func preloadedAchievements() -> [Achievement] {
         let moveStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
         let designStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .designLevel))
-        let moveUnlockCondition1 = IntegerUnlockCondition(statistic: moveStat1, comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 10)
+        let moveUnlockCondition1 = IntegerUnlockCondition(statistic: moveStat1, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                          unlockValue: 10)
         let designUnlockCondition1 = IntegerUnlockCondition(statistic: designStat1, comparison: .MORE_THAN_OR_EQUAL_TO,
                                                             unlockValue: 1)
         let moveStat2 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
@@ -265,11 +269,14 @@ class ChunkStorage: JSONStorage {
                                                           unlockValue: 1_000_000)
         let levelMoveStat1 = GameStatistic(value: 0, statisticType: .level,
                                            gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .move),
-                                                                           levelName: "Abc"))
-        let levelMoveUnlockCondition1 = IntegerUnlockCondition(statistic: levelMoveStat1, comparison: .LESS_THAN, unlockValue: 10)
+                                                                          levelName: "Abc"))
+        let levelMoveUnlockCondition1 = IntegerUnlockCondition(statistic: levelMoveStat1,
+                                                               comparison: .LESS_THAN, unlockValue: 10)
         let levelWinStat1 = GameStatistic(value: 0, statisticType: .level,
-                                          gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelName: "Abc"))
-        let levelWinUnlockCondition1 = IntegerUnlockCondition(statistic: levelWinStat1, comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1)
+                                          gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .win),
+                                                                         levelName: "Abc"))
+        let levelWinUnlockCondition1 = IntegerUnlockCondition(statistic: levelWinStat1,
+                                                              comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1)
         let achievements = [
              Achievement(name: "Creativity", description: "Create your first level",
                          unlockConditions: [designUnlockCondition1]),

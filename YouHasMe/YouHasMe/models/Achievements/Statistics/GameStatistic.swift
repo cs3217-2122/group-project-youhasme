@@ -25,7 +25,7 @@ class GameStatistic: Hashable {
 
     func increase() {
         value += 1
-        globalLogger.info("increased to \(value)")
+        // globalLogger.info("increased to \(value)")
     }
 
     func reset() {
@@ -37,6 +37,10 @@ class GameStatistic: Hashable {
     }
 
     func handleGameEvent(event: AbstractGameEvent) {
+        if gameEvent.type == .win {
+            print(event.type)
+        }
+
         if !event.containsGameEvent(event: self.gameEvent) {
             return
         }

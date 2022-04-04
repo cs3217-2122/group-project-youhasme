@@ -8,7 +8,7 @@
 import Foundation
 
 struct PersistableUnlockCondition: Codable {
-    private enum CodingKeys: String, CodingKey {
+    private enum CodingKeys: Int, CodingKey {
         case conditionType
         case unlockCondition
     }
@@ -40,11 +40,10 @@ struct PersistableUnlockCondition: Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-
         switch unlockCondition {
         case let unlockCondition as IntegerUnlockCondition:
             try container.encode(ConditionType.integer, forKey: .conditionType)
-            try container.encode(unlockCondition.toPersistable(), forKey: .unlockCondition)
+            try container.encode(unlockCondition.toPersistableIntegerUnlockCondition(), forKey: .unlockCondition)
         default:
             break
         }

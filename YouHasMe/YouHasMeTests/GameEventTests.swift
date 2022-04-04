@@ -37,6 +37,13 @@ class GameEventTests: XCTestCase {
         XCTAssertTrue(moveEvent.isContainedBy(gameEvent: multiLayerEvent))
     }
 
+    func testSameLevelDifferentTypeEvents() {
+        let winEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelName: "Test")
+        let moveEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelName: "Test")
+        XCTAssertFalse(winEvent.isContainedBy(gameEvent: moveEvent))
+        XCTAssertFalse(moveEvent.isContainedBy(gameEvent: winEvent))
+    }
+
     func testSameMultiMultiLayerEvents() {
         // testing different order of decorators
         let entityLevelMoveEvent = EntityEventDecorator(

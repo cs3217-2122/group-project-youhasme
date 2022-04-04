@@ -49,4 +49,11 @@ extension IntegerUnlockCondition {
             unlockCondition: self
         )
     }
+
+    func toPersistableIntegerUnlockCondition() -> PersistableIntegerUnlockCondition {
+        PersistableIntegerUnlockCondition(
+            persistableStatistic: statistic.toPersistable(),
+            comparison: comparison,
+            unlockValue: unlockValue)
+    }
 }
