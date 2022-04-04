@@ -26,4 +26,10 @@ class EntityEventDecorator: GameEventBaseDecorator {
     override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
         gameEvent.hasEntity(entityType: entityType)
     }
+
+    override func toPersistable() -> PersistableAbstractGameEvent {
+        let persistable = wrappedEvent.toPersistable()
+        persistable.setEntityType(entityType)
+        return persistable
+    }
 }

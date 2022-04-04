@@ -48,11 +48,6 @@ class Achievement {
                 integerCond.statistic.handleGameEvent(event: gameEvent)
             }
         }
-//        let statistics = unlockConditions
-//            .compactMap { ($0.isFulfilled() ? nil : $0 as? IntegerUnlockCondition)?.statistic }
-//        statistics.forEach { statistic in
-//            statistic.handleGameEvent(event: gameEvent)
-//        }
     }
 }
 
@@ -62,31 +57,30 @@ extension Achievement: Identifiable {
     }
 }
 
-//
-// struct PersistableAchievement: Codable {
-//    var name: String
-//    var description: String
-//    var persistableUnlockConditions: [PersistableUnlockCondition]
-//    var isUnlocked: Bool
-// }
-//
-// extension Achievement {
-//    func toPersistable() -> PersistableAchievement {
-//        PersistableAchievement(name: name, description: description,
-//                               persistableUnlockConditions: unlockConditions.map { $0.toPersistable() },
-//                               isUnlocked: isUnlocked)
-//    }
-//
-//    static func fromPersistable(persistable: PersistableAchievement) -> Achievement {
-//        Achievement(name: persistable.name, description: persistable.description,
-//                    unlockConditions: persistable
-//                        .persistableUnlockConditions.map { UnlockConditionUtil.fromPersistable(persistable: $0) },
-//                    isUnlocked: persistable.isUnlocked)
-//    }
-// }
-//
-// struct UnlockConditionUtil {
-//    static func fromPersistable(persistable: PersistableUnlockCondition) -> UnlockCondition {
-//        persistable.unlockCondition
-//    }
-// }
+ struct PersistableAchievement: Codable {
+    var name: String
+    var description: String
+    var persistableUnlockConditions: [PersistableUnlockCondition]
+    var isUnlocked: Bool
+ }
+
+ extension Achievement {
+    func toPersistable() -> PersistableAchievement {
+        PersistableAchievement(name: name, description: description,
+                               persistableUnlockConditions: unlockConditions.map { $0.toPersistable() },
+                               isUnlocked: isUnlocked)
+    }
+
+    static func fromPersistable(persistable: PersistableAchievement) -> Achievement {
+        Achievement(name: persistable.name, description: persistable.description,
+                    unlockConditions: persistable
+                        .persistableUnlockConditions.map { UnlockConditionUtil.fromPersistable(persistable: $0) },
+                    isUnlocked: persistable.isUnlocked)
+    }
+ }
+
+ struct UnlockConditionUtil {
+    static func fromPersistable(persistable: PersistableUnlockCondition) -> UnlockCondition {
+        persistable.unlockCondition
+    }
+ }

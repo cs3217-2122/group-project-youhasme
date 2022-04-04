@@ -42,11 +42,27 @@ class IntegerUnlockCondition: UnlockCondition {
     }
 }
 
+struct PersistableIntegerUnlockCondition: Codable {
+    var persistableStatistic: PersistableGameStatistic
+    var comparison: IntegerUnlockCondition.Comparison
+    var unlockValue: Int
+
+    func toIntegerUnlockCondition() -> IntegerUnlockCondition {
+        IntegerUnlockCondition(statistic: persistableStatistic.toGameStatistic(),
+                               comparison: comparison, unlockValue: unlockValue)
+    }
+}
+
 extension IntegerUnlockCondition {
-//    func toPersistable() -> PersistableUnlockCondition {
-//        PersistableUnlockCondition(
-//            conditionType: .integer,
-//            condition: self
-//        )
-//    }
+    func toPersistableIntegerUnlockCondition() -> PersistableIntegerUnlockCondition {
+        PersistableIntegerUnlockCondition(persistableStatistic: statistic.toPersistable(),
+                                          comparison: comparison, unlockValue: unlockValue)
+    }
+
+    func toPersistable() -> PersistableUnlockCondition {
+        PersistableUnlockCondition(
+            conditionType: .integer,
+            unlockCondition: self
+        )
+    }
 }

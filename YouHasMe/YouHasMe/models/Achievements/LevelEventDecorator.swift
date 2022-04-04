@@ -26,4 +26,10 @@ class LevelEventDecorator: GameEventBaseDecorator {
     override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
         gameEvent.hasLevel(levelName: levelName)
     }
+
+    override func toPersistable() -> PersistableAbstractGameEvent {
+        let persistable = wrappedEvent.toPersistable()
+        persistable.setLevelName(levelName)
+        return persistable
+    }
 }

@@ -38,8 +38,8 @@
 		40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */; };
 		40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */; };
 		40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */; };
-		40E2518C27F9A292008CBCE0 /* PersistableUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */; };
 		40E2519027F9FAB1008CBCE0 /* GameEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */; };
+		40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519227FAD6CB008CBCE0 /* PersistableUnlockCondition.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -158,8 +158,8 @@
 		40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventBaseDecorator.swift; sourceTree = "<group>"; };
 		40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelEventDecorator.swift; sourceTree = "<group>"; };
 		40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityEventDecorator.swift; sourceTree = "<group>"; };
-		40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableUnlockCondition.swift; sourceTree = "<group>"; };
 		40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEventTests.swift; sourceTree = "<group>"; };
+		40E2519227FAD6CB008CBCE0 /* PersistableUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableUnlockCondition.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -345,6 +345,14 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		40E2519127FAD6C0008CBCE0 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				40E2519227FAD6CB008CBCE0 /* PersistableUnlockCondition.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
 		B0592D3627F21944002EC0C3 /* Mechanics */ = {
 			isa = PBXGroup;
 			children = (
@@ -513,10 +521,10 @@
 		E573E96027EA32DC000D10E4 /* persistable */ = {
 			isa = PBXGroup;
 			children = (
+				40E2519127FAD6C0008CBCE0 /* Achievements */,
 				E573E96127EA32F7000D10E4 /* PersistableChunkNode.swift */,
 				E573E96327EA3326000D10E4 /* PersistableMetaLevel.swift */,
 				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
-				40E2518B27F9A292008CBCE0 /* PersistableUnlockCondition.swift */,
 			);
 			path = persistable;
 			sourceTree = "<group>";
@@ -810,7 +818,6 @@
 				E5BECBE527E5BE1300E3952D /* RuleBuilder.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
-				40E2518C27F9A292008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				40AD869527E60AC400F42C42 /* StorageUtil.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
@@ -875,6 +882,7 @@
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* MetaLevelDesignerToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
+				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,

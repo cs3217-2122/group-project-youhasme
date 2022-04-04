@@ -25,4 +25,8 @@ class GameEvent: AbstractGameEvent {
     func containsGameEvent(event: AbstractGameEvent) -> Bool {
         event.isContainedBy(gameEvent: self)
     }
+
+    func toPersistable() -> PersistableAbstractGameEvent {
+        PersistableAbstractGameEvent(gameEventType: type)
+    }
 }

@@ -36,4 +36,9 @@ class GameEventBaseDecorator: AbstractGameEvent {
     func containsGameEvent(event: AbstractGameEvent) -> Bool {
         event.isContainedBy(gameEvent: self) || event.isContainedBy(gameEvent: wrappedEvent)
     }
+
+    func toPersistable() -> PersistableAbstractGameEvent {
+        assert(false, "should be implemented by children decorators")
+        return wrappedEvent.toPersistable()
+    }
 }
