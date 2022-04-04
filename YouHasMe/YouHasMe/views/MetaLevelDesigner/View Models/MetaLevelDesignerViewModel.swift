@@ -2,40 +2,46 @@ import Foundation
 import CoreGraphics
 import Combine
 
-class MetaLevelDesignerViewModel: ObservableObject {
-    // MARK: Palette
-    @Published var selectedPaletteMetaEntity: MetaEntityType?
+enum MetaLevelDesignerState {
+    case normal
+    case choosingLevel(tile: MetaTile)
+    case choosingMetaLevel(tile: MetaTile)
+}
 
+class MetaLevelDesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
+    @Published var selectedPaletteMetaEntity: MetaEntityType?
+    @Published var selectedTile: MetaTile?
+    private var levelStorage = LevelStorage()
     private var metaLevelStorage = MetaLevelStorage()
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
         height: ChunkNode.chunkDimensions
     )
     @Published var currMetaLevel: MetaLevel
-    var hasUnsavedChanges = false
+
     /// The view position relative to the coordinate system of the current meta level.
     @Published var viewPosition: Point
-    private var cumulativeTranslation: CGVector = .zero {
+    var cumulativeTranslation: CGVector = .zero {
         didSet {
-            let floor = cumulativeTranslation.absoluteFloor()
-            guard floor != .zero else {
-                return
-            }
-            viewPosition = viewPosition.translate(by: floor)
-//            print("floor \(floor) viewPos \(viewPosition)")
-            cumulativeTranslation = cumulativeTranslation.subtract(with: CGVector(floor))
+            applyCumulativeTranslationToViewPosition()
         }
     }
 
     private var toolbarViewModel: MetaLevelDesignerToolbarViewModel?
 
+    @Published var state: MetaLevelDesignerState = .normal
+
+    var editorMode: EditorMode? {
+        toolbarViewModel?.editorMode
+    }
+
     convenience init() {
         self.init(currMetaLevel: MetaLevel())
     }
 
-    convenience init(metaLevelURLData: URLListObject) {
+    convenience init(metaLevelLoadable: Loadable) {
         let metaLevelStorage = MetaLevelStorage()
-        guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelURLData.name) else {
+        guard let currMetaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: metaLevelLoadable.name) else {
             fatalError("should not be nil")
         }
 
@@ -47,44 +53,29 @@ class MetaLevelDesignerViewModel: ObservableObject {
         viewPosition = currMetaLevel.entryWorldPosition
     }
 
-    func endTranslateView() {
-        cumulativeTranslation = .zero
+    func deselectTile() {
+        selectedTile = nil
     }
 
-    func translateView(by offset: CGVector) {
-        cumulativeTranslation = cumulativeTranslation.add(with: offset)
+    func getPlayableMetaLevel() -> PlayableMetaLevel {
+        guard let metaLevel = metaLevelStorage.loadMetaLevel(name: currMetaLevel.name) else {
+            fatalError("Failed to load current meta level")
+        }
+        return .metaLevel(metaLevel)
     }
 
-    func getWorldPosition(at viewOffset: Vector) -> Point {
-        viewPosition.translate(by: viewOffset)
+    func getAllLoadableMetaLevels() -> [Loadable] {
+        metaLevelStorage.getAllLoadables()
     }
 }
 
-extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {
-    func getViewableRegion() -> PositionedRectangle {
-        PositionedRectangle(rectangle: viewableDimensions, topLeft: viewPosition)
-    }
-}
+extension MetaLevelDesignerViewModel: MetaLevelViewableDelegate {}
 
 // MARK: Persistence
 extension MetaLevelDesignerViewModel {
     func save() throws {
         try currMetaLevel.saveLoadedChunks()
         try metaLevelStorage.saveMetaLevel(currMetaLevel)
-    }
-}
-
-// MARK: CRUD
-extension MetaLevelDesignerViewModel {
-    func getTile(at viewOffset: Vector) -> MetaTile? {
-        currMetaLevel.getTile(
-            at: viewPosition.translate(by: viewOffset),
-            createChunkIfNotExists: true
-        )
-    }
-
-    func setTile(_ tile: MetaTile, at viewOffset: Vector) {
-        currMetaLevel.setTile(tile, at: getWorldPosition(at: viewOffset))
     }
 }
 
@@ -100,9 +91,23 @@ extension MetaLevelDesignerViewModel: PaletteMetaEntityViewModelDelegate {
     }
 }
 
-extension MetaLevelDesignerViewModel: MetaEntityViewModelDelegate {
+extension MetaLevelDesignerViewModel: MetaEntityViewModelBasicCRUDDelegate {
     func addSelectedEntity(to tile: MetaTile) {
+        guard editorMode == .addAndRemove else {
+            return
+        }
+
         guard let selectedPaletteMetaEntity = selectedPaletteMetaEntity else {
+            return
+        }
+
+        if case .level = selectedPaletteMetaEntity {
+            state = .choosingLevel(tile: tile)
+            return
+        }
+
+        if case .travel = selectedPaletteMetaEntity {
+            state = .choosingMetaLevel(tile: tile)
             return
         }
 
@@ -110,7 +115,42 @@ extension MetaLevelDesignerViewModel: MetaEntityViewModelDelegate {
     }
 
     func removeEntity(from tile: MetaTile) {
+        guard editorMode == .addAndRemove else {
+            return
+        }
+
         tile.metaEntities.removeAll()
+    }
+}
+
+extension MetaLevelDesignerViewModel: MetaEntityViewModelExaminableDelegate {
+    func examineTile(_ tile: MetaTile) {
+        guard editorMode == .select else {
+            return
+        }
+
+        selectedTile = tile
+    }
+}
+
+extension MetaLevelDesignerViewModel: LevelSelectorViewModelDelegate {
+    func selectLevel(_ loadable: Loadable) {
+        guard case .choosingLevel(tile: let tile) = state else {
+            return
+        }
+        tile.metaEntities.append(.level(levelLoadable: loadable))
+        state = .normal
+    }
+}
+
+extension MetaLevelDesignerViewModel: MetaLevelSelectorViewModelDelegate {
+    func selectMetaLevel(_ loadable: Loadable) {
+        guard case .choosingMetaLevel(tile: let tile) = state else {
+            return
+        }
+
+        tile.metaEntities.append(.travel(metaLevelLoadable: loadable))
+        state = .normal
     }
 }
 
@@ -140,10 +180,31 @@ extension MetaLevelDesignerViewModel {
 
     func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
         let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset),
+            tile: getTile(at: viewOffset, createChunkIfNotExists: true, loadNeighboringChunks: false),
             worldPosition: getWorldPosition(at: viewOffset)
         )
-        metaEntityViewModel.delegate = self
+        metaEntityViewModel.basicCRUDDelegate = self
+        metaEntityViewModel.examinableDelegate = self
         return metaEntityViewModel
+    }
+
+    func getTileInfoViewModel(tile: MetaTile) -> MetaLevelDesignerTileInfoViewModel {
+        MetaLevelDesignerTileInfoViewModel(tile: tile)
+    }
+
+    func getLevelSelectorViewModel() -> LevelSelectorViewModel {
+        let levelSelectorViewModel = LevelSelectorViewModel()
+        levelSelectorViewModel.delegate = self
+        return levelSelectorViewModel
+    }
+
+    func getMetaLevelSelectorViewModel() -> MetaLevelSelectorViewModel {
+        let metaLevelSelectorViewModel = MetaLevelSelectorViewModel()
+        metaLevelSelectorViewModel.delegate = self
+        return metaLevelSelectorViewModel
+    }
+
+    func getNameButtonViewModel() -> MetaLevelNameButtonViewModel {
+        MetaLevelNameButtonViewModel(namePublisher: currMetaLevel.$name.eraseToAnyPublisher())
     }
 }

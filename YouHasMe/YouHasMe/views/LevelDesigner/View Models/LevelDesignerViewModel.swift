@@ -6,11 +6,21 @@
 import Foundation
 
 class LevelDesignerViewModel: ObservableObject {
-    private(set) var savedLevels: [Level]
 
-    var currLevel: Level
-    private(set) var currLevelLayerIndex: Int
-    @Published var currLevelLayer: LevelLayer
+    private var levelStorage = LevelStorage()
+    var levelLoadables: [Loadable] {
+        levelStorage.getAllLoadables()
+    }
+    @Published var currLevel: Level
+    @Published private(set) var currLevelLayerIndex: Int = 0
+    var currLevelLayer: LevelLayer {
+        get {
+            currLevel.layers.getAtIndex(currLevelLayerIndex)! // TODO: Remove level layers maybe?
+        }
+        set {
+            currLevel.layers.setAtIndex(currLevelLayerIndex, value: newValue)
+        }
+    }
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
 
@@ -18,11 +28,12 @@ class LevelDesignerViewModel: ObservableObject {
         self.init(currLevel: Level())
     }
 
+    convenience init(playableLevel: PlayableLevel) {
+        self.init(currLevel: playableLevel.getLevel())
+    }
+
     init(currLevel: Level) {
-        self.currLevel = Level()
-        self.currLevelLayer = currLevel.baseLevel
-        self.currLevelLayerIndex = 0
-        self.savedLevels = StorageUtil.loadSavedLevels()
+        self.currLevel = currLevel
     }
 
     func getWidth() -> Int {
@@ -81,35 +92,6 @@ class LevelDesignerViewModel: ObservableObject {
         currLevelLayer != currLevel.getLayerAtIndex(currLevelLayerIndex)
     }
 
-    func selectLevel(level: Level) {
-        self.currLevel = level
-        self.currLevelLayer = level.baseLevel
-        self.currLevelLayerIndex = 0
-//        currentlySelectedLevel.dirty = false
-//        state = .designing
-    }
-
-    func createLevel() {
-        self.currLevel = Level()
-        self.currLevelLayerIndex = 0
-        self.currLevelLayer = self.currLevel.baseLevel
-
-    }
-
-    func resetFromPlay() {
-        self.currLevelLayer = self.currLevel.baseLevel
-    }
-
-    func loadLevel(levelName: String) -> Bool {
-        for level in savedLevels where level.name == levelName {
-            currLevel = level
-            currLevelLayer = level.baseLevel
-            return true
-        }
-
-        return false
-    }
-
     func saveLevel() -> String {
         let levelName = currLevel.name
         if levelName.isEmpty {
@@ -117,30 +99,16 @@ class LevelDesignerViewModel: ObservableObject {
         }
 
         do {
-            savedLevels = getUpdatedSavedLevels(levelName: levelName)
-            try StorageUtil.updateJsonFileSavedLevels(dataFileName: StorageUtil.defaultFileStorageName,
-                                                      savedLevels: savedLevels)
+//            print(currLevel.baseLevel)
+            try levelStorage.saveLevel(currLevel)
             return "Successfully saved level: \(levelName)"
         } catch {
             return "error saving level: \(error)"
         }
     }
-
-//    func playLevel() {
-//        
-//    }
-
-    func getUpdatedSavedLevels(levelName: String) -> [Level] {
-        // remove level with outdated data if it exists
-        var updatedLevels = savedLevels.filter { $0.name != levelName }
-        currLevel.setName(levelName)
-        currLevel.setLevelLayerAtIndex(currLevelLayerIndex, value: currLevelLayer)
-        updatedLevels.append(currLevel)
-        return updatedLevels
-    }
 }
 
-// MARK: Child view models
+// MARK: View model factories
 extension LevelDesignerViewModel {
     func getTileViewModel(for entityType: EntityType) -> EntityViewModel {
         EntityViewModel(entityType: entityType)

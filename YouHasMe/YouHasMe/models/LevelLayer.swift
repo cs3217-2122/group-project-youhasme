@@ -78,5 +78,5 @@ extension LevelLayer: CustomDebugStringConvertible {
     }
 }
 
-extension LevelLayer: Equatable {}
+extension LevelLayer: Hashable {}
 extension LevelLayer: Codable {}

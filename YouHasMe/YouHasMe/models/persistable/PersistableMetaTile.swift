@@ -8,7 +8,7 @@
 import Foundation
 
 struct PersistableMetaTile {
-    var metaEntities: [MetaEntityType]
+    var metaEntities: [PersistableMetaEntityType]
 }
 
 extension PersistableMetaTile: Codable {}

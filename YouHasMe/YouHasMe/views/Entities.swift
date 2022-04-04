@@ -105,9 +105,13 @@ func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
         return .string("wall")
     case .nonBlocking:
         return .string("flag")
-    case .space:
-        return nil
+    case .grass:
+        return .string("grass")
     case .level:
-        return nil
+        return .string("door")
+    case .travel:
+        return .string("question")
+    case .message:
+        return .uiColor(.darkGray)
     }
 }

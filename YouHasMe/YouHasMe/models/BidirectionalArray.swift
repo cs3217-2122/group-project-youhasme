@@ -1,5 +1,5 @@
 import Foundation
-struct BidirectionalArray<T: Codable> {
+struct BidirectionalArray<T> where T: Codable, T: Hashable {
     private var lowerBound: Int = 0
     private var upperBound: Int = 0
     private var backingArray: [T?] = []
@@ -31,5 +31,5 @@ struct BidirectionalArray<T: Codable> {
     }
 }
 
-extension BidirectionalArray: Codable {
-}
+extension BidirectionalArray: Codable {}
+extension BidirectionalArray: Hashable {}

@@ -26,7 +26,7 @@ struct GameGridView: View {
     var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
-                guard gameState.state == .playing else {
+                guard case .playing = gameState.state else {
                     return
                 }
                 var updateAction: UpdateType = .tick
@@ -68,12 +68,12 @@ struct GameGridView: View {
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
                                     .border(.pink)
                                     .onTapGesture {
-                                        if gameState.state == .designing {
+                                        if case .designing = gameState.state {
                                             levelDesignerViewModel.addEntityToPos(x: col, y: row)
                                         }
                                     }
                                     .onLongPressGesture {
-                                        if gameState.state == .designing {
+                                        if case .designing = gameState.state {
                                             levelDesignerViewModel.removeEntityFromPos(x: col, y: row)
                                         }
                                     }.gesture(dragGesture)
@@ -89,7 +89,7 @@ struct GameGridView: View {
             }
                 HStack {
                     Spacer()
-                   if gameState.state == .playing {
+                    if case .playing = gameState.state {
                        Button("Undo") {
                            gameEngine.undo()
                            levelDesignerViewModel.currLevelLayer = gameEngine.currentGame.levelLayer
