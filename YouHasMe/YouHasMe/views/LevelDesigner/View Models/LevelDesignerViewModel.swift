@@ -3,9 +3,10 @@
 //  YouHasMe
 //
 
+import Combine
 import Foundation
 
-class LevelDesignerViewModel: ObservableObject {
+class LevelDesignerViewModel: GameEventPublisher, ObservableObject {
 
     private var levelStorage = LevelStorage()
     var levelLoadables: [Loadable] {
@@ -23,6 +24,11 @@ class LevelDesignerViewModel: ObservableObject {
     }
     @Published private(set) var selectedEntityType: EntityType?
     @Published private(set) var availableEntityTypes: [EntityType] = demoTypes
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
+        gameEventSubject.eraseToAnyPublisher()
+    }
+
+    private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
     convenience init() {
         self.init(currLevel: Level())
@@ -99,8 +105,11 @@ class LevelDesignerViewModel: ObservableObject {
         }
 
         do {
-//            print(currLevel.baseLevel)
+            let isExistingLevel = (levelStorage.loadLevel(name: currLevel.name) != nil)
             try levelStorage.saveLevel(currLevel)
+            if !isExistingLevel {
+                gameEventSubject.send(GameEvent(type: .designLevel))
+            }
             return "Successfully saved level: \(levelName)"
         } catch {
             return "error saving level: \(error)"

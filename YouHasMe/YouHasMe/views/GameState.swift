@@ -57,6 +57,7 @@ enum ScreenState {
     case designing(playableLevel: PlayableLevel? = nil)
     case designingMeta(metaLevelLoadable: Loadable? = nil)
     case mainmenu
+    case achievements
 }
 
 extension ScreenState: Equatable {}
@@ -124,5 +125,16 @@ extension GameState {
 
     func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
         MetaLevelSelectViewModel()
+    }
+
+    func getAchievementsViewModel() -> AchievementsViewModel {
+        var levelId = ""
+        if case let .playing(playableLevel: playableLevel) = state {
+            levelId = playableLevel.getLevel().id
+        } else if case let .designing(playableLevel: playableLevel) = state {
+            levelId = playableLevel?.getLevel().id ?? ""
+        }
+
+        return AchievementsViewModel(levelId: levelId)
     }
 }

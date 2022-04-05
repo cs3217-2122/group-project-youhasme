@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct YouHasMeApp: App {
     @StateObject var gameState = GameState()
+
     var body: some Scene {
         WindowGroup {
             GameView()

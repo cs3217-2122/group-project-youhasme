@@ -20,6 +20,7 @@ class GameStateManagerTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
         levelLayer = RuleEngine().applyRules(to: levelLayer)
         gameEngine = GameEngine(levelLayer: levelLayer)
+        try super.setUpWithError()
     }
 
     func testSingleUndo() throws {

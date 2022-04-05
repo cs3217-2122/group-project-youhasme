@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LevelSelectView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+
     @EnvironmentObject var gameState: GameState
     var body: some View {
         VStack {

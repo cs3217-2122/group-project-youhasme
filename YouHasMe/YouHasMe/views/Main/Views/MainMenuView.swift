@@ -38,6 +38,11 @@ struct MainMenuView: View {
                 }) {
                     Text("Design A Level")
                 }.padding()
+                Button(action: {
+                    gameState.state = .achievements
+                }) {
+                    Text("View Achievements")
+                }.padding()
             }.font(transitionButtonFont)
         }.padding()
     }

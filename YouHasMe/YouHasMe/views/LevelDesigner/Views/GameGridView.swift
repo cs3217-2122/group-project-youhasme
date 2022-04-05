@@ -8,13 +8,16 @@ import SwiftUI
 struct GameGridView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
+    @ObservedObject var achievementsViewModel: AchievementsViewModel
     @State var gameEngine: GameEngine
     @State var showingWinAlert = false
     @State var showingLoopAlert = false
 
-    init(levelDesignerViewModel: LevelDesignerViewModel) {
+    init(levelDesignerViewModel: LevelDesignerViewModel, achievementsViewModel: AchievementsViewModel) {
         self.levelDesignerViewModel = levelDesignerViewModel
+        self.achievementsViewModel = achievementsViewModel
         self.gameEngine = GameEngine(levelLayer: levelDesignerViewModel.currLevelLayer)
+        achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
 
     func gridSize(proxy: GeometryProxy) -> CGFloat {

@@ -10,10 +10,11 @@ import SwiftUI
 struct LevelPlayView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
-    
+    @ObservedObject var achievementsViewModel: AchievementsViewModel
+
     var body: some View {
         VStack {
-            GameGridView(levelDesignerViewModel: levelDesignerViewModel)
+            GameGridView(levelDesignerViewModel: levelDesignerViewModel, achievementsViewModel: achievementsViewModel)
                 .padding()
         }
     }
