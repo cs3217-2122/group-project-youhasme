@@ -7,11 +7,10 @@
 
 import Foundation
 
-class MetaLevelSelectViewModel: ObservableObject {
-    var metaLevelStorage = MetaLevelStorage()
+class DungeonSelectViewModel: ObservableObject {
+    var dungeonStorage = DungeonStorage()
 
-    func getAllMetaLevels() -> [Loadable] {
-        let (urls, filenames) = metaLevelStorage.getAllFiles()
-        return zip(urls, filenames).map { Loadable(url: $0, name: $1) }
+    func getAllDungeons() -> [Loadable] {
+        return dungeonStorage.getAllLoadables()
     }
 }

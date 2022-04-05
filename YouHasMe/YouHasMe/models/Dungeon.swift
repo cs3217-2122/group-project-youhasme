@@ -56,6 +56,18 @@ class Dungeon {
             globalLogger.error("\(error)")
         }
     }
+    
+    func getPlayerPosition() -> Point {
+        Point(x: 0, y: 0)
+    }
+    
+    func setLevelLayer(_ levelLayer: LevelLayer) {
+        let playerPosition = getPlayerPosition()
+        guard let level = getLevel(at: playerPosition, loadNeighbors: false) else {
+            fatalError("should not be nil")
+        }
+        level.layer = levelLayer
+    }
 }
 
 
@@ -226,102 +238,3 @@ extension Dungeon: KeyPathExposable {
         self[keyPath: keyPath.keyPath]
     }
 }
-
-enum MetaEntityType {
-    case blocking
-    case nonBlocking
-    case grass
-    case level(levelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
-    case travel(metaLevelLoadable: Loadable? = nil, unlockCondition: Condition? = nil)
-    // TODO: Perhaps the message can be associated with a user
-    case message(text: String? = nil)
-
-    func getSelfWithDefaultValues() -> MetaEntityType {
-        switch self {
-        case .blocking:
-            return .blocking
-        case .nonBlocking:
-            return .nonBlocking
-        case .grass:
-            return .grass
-        case .level:
-            return .level()
-        case .travel:
-            return .travel()
-        case .message:
-            return .message()
-        }
-    }
-}
-
-extension MetaEntityType: CaseIterable {
-    static var allCases: [MetaEntityType] {
-        [.blocking, .nonBlocking, .grass, .level(), .travel(), .message()]
-    }
-}
-
-extension MetaEntityType: CustomStringConvertible {
-    var description: String {
-        switch self {
-        case .blocking:
-            return "Blocking"
-        case .nonBlocking:
-            return "Nonblocking"
-        case .grass:
-            return "Grass"
-        case .level(let levelLoadable, let unlockCondition):
-            return "Level"
-        case .travel(let metaLevelLoadable, let unlockCondition):
-            return "Travel point"
-        case .message(let text):
-            return "Message"
-        }
-    }
-}
-
-extension MetaEntityType {
-    func toPersistable() -> PersistableMetaEntityType {
-        switch self {
-        case .blocking:
-            return .blocking
-        case .nonBlocking:
-            return .nonBlocking
-        case .grass:
-            return .grass
-        case .level(let levelLoadable, let unlockCondition):
-            return .level(
-                levelLoadable: levelLoadable,
-                unlockCondition: unlockCondition?.toPersistable()
-            )
-        case .travel(let metaLevelLoadable, let unlockCondition):
-            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: unlockCondition?.toPersistable())
-        case .message(let text):
-            return .message(text: text)
-        }
-    }
-
-    static func fromPersistable(_ persistableMetaEntity: PersistableMetaEntityType) -> MetaEntityType {
-        switch persistableMetaEntity {
-        case .blocking:
-            return .blocking
-        case .nonBlocking:
-            return .nonBlocking
-        case .grass:
-            return .grass
-        case .level(let levelLoadable, let unlockCondition):
-            guard let unlockCondition = unlockCondition else {
-                return .level(levelLoadable: levelLoadable, unlockCondition: nil)
-            }
-            return .level(levelLoadable: levelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
-        case .travel(let metaLevelLoadable, let unlockCondition):
-            guard let unlockCondition = unlockCondition else {
-                return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: nil)
-            }
-            return .travel(metaLevelLoadable: metaLevelLoadable, unlockCondition: Condition.fromPersistable(unlockCondition))
-        case .message(let text):
-            return .message(text: text)
-        }
-    }
-}
-
-extension MetaEntityType: Hashable {}

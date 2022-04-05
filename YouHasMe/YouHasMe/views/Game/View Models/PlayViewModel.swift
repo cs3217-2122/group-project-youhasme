@@ -1,5 +1,5 @@
 //
-//  MetaLevelPlayViewModel.swift
+//  DungeonPlayViewModel.swift
 //  YouHasMe
 //
 //  Created by Jia Cheng Sun on 30/3/22.
@@ -10,8 +10,6 @@ import CoreGraphics
 import Combine
 
 protocol ContextualMenuDelegate: AnyObject {
-    func showLevel()
-    func showTravel()
     func showMessages()
 }
 
@@ -21,30 +19,8 @@ class ContextualMenuData {
     let description: String
     var action: () -> Void = {}
 
-    init?(metaEntity: MetaEntityType) {
-        guard let index = metaEntity.getSelfWithDefaultValues().index else {
-            return nil
-        }
-        id = index
-        switch metaEntity {
-        case .blocking, .nonBlocking, .grass:
-            return nil
-        case .level:
-            description = "Levels"
-            action = { [weak self] in
-                self?.delegate?.showLevel()
-            }
-        case .travel:
-            description = "Travel points"
-            action = { [weak self] in
-                self?.delegate?.showTravel()
-            }
-        case .message:
-            description = "Messages"
-            action = { [weak self] in
-                self?.delegate?.showMessages()
-            }
-        }
+    init?(entityType: EntityType) {
+        return nil // TODO
     }
 }
 
@@ -69,26 +45,23 @@ extension ContextualMenuData: Comparable {
 enum MetaLevelPlayViewState {
     case normal
     case messages
-    case level
-    case travel
 }
 
-class MetaLevelPlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var subscriptions: Set<AnyCancellable> = []
-    var viewableDimensions = Rectangle(
-        width: ChunkNode.chunkDimensions,
-        height: ChunkNode.chunkDimensions
-    )
-
-    var currMetaLevel: MetaLevel
+    var viewableDimensions = Dungeon.defaultLevelDimensions
+    @Published var hasWon = false
+    @Published var isLoopingInfinitely = false
+    var dungeon: Dungeon
     @Published var state: MetaLevelPlayViewState = .normal
+    var gameEngine: GameEngine
 
     var contextualData: [ContextualMenuData] {
-        guard let metaEntities = selectedTile?.metaEntities else {
+        guard let entities = selectedTile?.entities else {
             return []
         }
 
-        let data = Array(Set(metaEntities.compactMap { ContextualMenuData(metaEntity: $0) })).sorted()
+        let data = Array(Set(entities.compactMap { ContextualMenuData(entityType: $0.entityType) })).sorted()
         data.forEach { $0.delegate = self }
         return data
     }
@@ -100,16 +73,21 @@ class MetaLevelPlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel
         }
     }
 
-    @Published var selectedTile: MetaTile?
+    @Published var selectedTile: Tile?
 
-    convenience init(playableMetaLevel: PlayableMetaLevel) {
-        self.init(currMetaLevel: playableMetaLevel.getMetaLevel())
+    convenience init(playableDungeon: PlayableDungeon) {
+        self.init(dungeon: playableDungeon.getDungeon())
     }
 
-    init(currMetaLevel: MetaLevel) {
-        self.currMetaLevel = currMetaLevel
-        viewPosition = currMetaLevel.entryWorldPosition
+    init(dungeon: Dungeon) {
+        self.dungeon = dungeon
+        viewPosition = dungeon.entryWorldPosition
         setupBindings()
+        let playerPosition = dungeon.getPlayerPosition()
+        guard let level = dungeon.getLevel(at: playerPosition, loadNeighbors: false) else {
+            fatalError("should not be nil")
+        }
+        gameEngine = GameEngine(levelLayer: level.layer)
     }
 
     func setupBindings() {
@@ -122,19 +100,18 @@ class MetaLevelPlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel
             }
         }.store(in: &subscriptions)
     }
+    
+    func playerMove(updateAction: UpdateType) {
+        gameEngine.apply(action: updateAction)
+        hasWon = gameEngine.currentGame.gameStatus == .win
+        isLoopingInfinitely = gameEngine.status == .infiniteLoop
+        dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
+    }
 }
 
-extension MetaLevelPlayViewModel: ContextualMenuDelegate {
+extension PlayViewModel: ContextualMenuDelegate {
     func closeOverlay() {
         state = .normal
-    }
-
-    func showLevel() {
-        state = .level
-    }
-
-    func showTravel() {
-        state = .travel
     }
 
     func showMessages() {
@@ -142,20 +119,20 @@ extension MetaLevelPlayViewModel: ContextualMenuDelegate {
     }
 }
 
-extension MetaLevelPlayViewModel: MetaEntityViewModelExaminableDelegate {
-    func examineTile(_ tile: MetaTile) {
-        selectedTile = tile
+extension PlayViewModel: EntityViewModelExaminableDelegate {
+    func examineTile(at worldPosition: Point) {
+        selectedTile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false)
     }
 }
 
-extension MetaLevelPlayViewModel {
-    func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel {
-        let metaEntityViewModel = MetaEntityViewModel(
-            tile: getTile(at: viewOffset, createChunkIfNotExists: false, loadNeighboringChunks: true),
+extension PlayViewModel {
+    func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
+        let entityViewModel = EntityViewModel(
+            tile: getTile(at: viewOffset, loadNeighboringChunks: true),
             worldPosition: getWorldPosition(at: viewOffset)
         )
-        metaEntityViewModel.examinableDelegate = self
-        return metaEntityViewModel
+        entityViewModel.examinableDelegate = self
+        return entityViewModel
     }
 
     func getMessagesViewModel() -> MessagesViewModel {

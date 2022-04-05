@@ -7,21 +7,20 @@
 
 import Foundation
 protocol DungeonManipulableViewModel: IntegerViewTranslatable, ObservableObject {
-    var currMetaLevel: MetaLevel { get set }
-    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile?
-    func setTile(_ tile: MetaTile, at viewOffset: Vector)
+    var dungeon: Dungeon { get set }
+    func getTile(at viewOffset: Vector, loadNeighboringChunks: Bool) -> Tile?
+    func setTile(_ tile: Tile, at viewOffset: Vector)
 }
 
 extension DungeonManipulableViewModel {
-    func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
-        currMetaLevel.getTile(
+    func getTile(at viewOffset: Vector, loadNeighboringChunks: Bool) -> Tile? {
+        dungeon.getTile(
             at: viewPosition.translate(by: viewOffset),
-            createChunkIfNotExists: createChunkIfNotExists,
             loadNeighboringChunks: loadNeighboringChunks
         )
     }
 
-    func setTile(_ tile: MetaTile, at viewOffset: Vector) {
-        currMetaLevel.setTile(tile, at: getWorldPosition(at: viewOffset))
+    func setTile(_ tile: Tile, at viewOffset: Vector) {
+        dungeon.setTile(tile, at: getWorldPosition(at: viewOffset))
     }
 }

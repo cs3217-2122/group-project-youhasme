@@ -5,28 +5,6 @@
 
 import Foundation
 
-enum PlayableLevel {
-    case level(Level)
-    case levelLoadable(Loadable)
-}
-
-extension PlayableLevel {
-    func getLevel() -> Level {
-        switch self {
-        case .level(let level):
-            return level
-        case .levelLoadable(let loadable):
-            let levelStorage = LevelStorage()
-            guard let level: Level = levelStorage.loadLevel(name: loadable.name) else {
-                fatalError("should not be nil")
-            }
-            return level
-        }
-    }
-}
-
-extension PlayableLevel: Equatable {}
-
 enum PlayableDungeon {
     case dungeon(Dungeon)
     case dungeonLoadable(Loadable)
@@ -52,10 +30,8 @@ extension PlayableDungeon {
 enum ScreenState {
     case selecting
     case selectingMeta
-    case playing(playableLevel: PlayableLevel)
-    case playingMeta(PlayableDungeon: PlayableMetaLevel)
-    case designing(playableLevel: PlayableLevel? = nil)
-    case designingMeta(metaLevelLoadable: Loadable? = nil)
+    case playing(playableDungeon: PlayableDungeon)
+    case designing(loadable: Loadable? = nil)
     case mainmenu
 }
 
@@ -84,45 +60,24 @@ class GameState: ObservableObject {
 
 // MARK: View model factories
 extension GameState {
-    func getLevelPlayViewModel() -> LevelDesignerViewModel {
-        guard case let .playing(playableLevel: playableLevel) = state else {
+
+    func getDesignerViewModel() -> DesignerViewModel {
+        guard case let .designing(loadable: loadable) = state,
+            let loadable = loadable else {
+            return DesignerViewModel()
+        }
+        return DesignerViewModel(dungeonLoadable: loadable)
+    }
+
+    func getPlayViewModel() -> PlayViewModel {
+        guard case let .playing(playableDungeon: playableDungeon) = state else {
             fatalError("Unexpected state")
         }
 
-        let viewModel = LevelDesignerViewModel(playableLevel: playableLevel)
-        // TODO: Move this elsewhere; bad to place it here
-        // Even better: Make a specialized LevelPlayViewModel instead
-        viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
-        return viewModel
+        return PlayViewModel(playableDungeon: playableDungeon)
     }
 
-    func getLevelDesignerViewModel() -> LevelDesignerViewModel {
-        guard case let .designing(playableLevel: playableLevel) = state,
-              let playableLevel = playableLevel else {
-                  return LevelDesignerViewModel()
-              }
-
-        return LevelDesignerViewModel(playableLevel: playableLevel)
-    }
-
-    func getMetaLevelDesignerViewModel() -> MetaLevelDesignerViewModel {
-        guard case let .designingMeta(metaLevelLoadable: metaLevelLoadable) = state,
-            let metaLevelLoadable = metaLevelLoadable else {
-            return MetaLevelDesignerViewModel()
-        }
-        print("metalevelloadable: \(metaLevelLoadable.name) \(metaLevelLoadable.url)")
-        return MetaLevelDesignerViewModel(metaLevelLoadable: metaLevelLoadable)
-    }
-
-    func getMetaLevelPlayViewModel() -> MetaLevelPlayViewModel {
-        guard case let .playingMeta(playableMetaLevel: playableMetaLevel) = state else {
-            fatalError("Unexpected state")
-        }
-
-        return MetaLevelPlayViewModel(playableMetaLevel: playableMetaLevel)
-    }
-
-    func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
-        MetaLevelSelectViewModel()
+    func getSelectViewModel() -> DungeonSelectViewModel {
+        DungeonSelectViewModel()
     }
 }

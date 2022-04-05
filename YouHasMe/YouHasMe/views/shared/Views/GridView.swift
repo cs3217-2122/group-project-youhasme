@@ -41,7 +41,7 @@ struct GridView<T: AbstractGridViewModel>: View {
         
     @ObservedObject var viewModel: T
     @State var lastDragLocation: CGPoint?
-
+    
     var body: some View {
         Group {
             GeometryReader { proxy in
