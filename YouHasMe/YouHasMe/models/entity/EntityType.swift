@@ -20,9 +20,9 @@ extension EntityType {
     func toPersistable() -> PersistableEntityType {
         PersistableEntityType(classification: classification.toPersistable())
     }
-    
+
     static func fromPersistable(_ persistableEntityType: PersistableEntityType) -> EntityType {
-        EntityType(classification: persistableEntityType.classification)
+        EntityType(classification: Classification.fromPersistable(persistableEntityType.classification))
     }
 }
 

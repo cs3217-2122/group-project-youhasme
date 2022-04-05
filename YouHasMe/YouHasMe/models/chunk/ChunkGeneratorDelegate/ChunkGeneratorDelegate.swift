@@ -7,15 +7,15 @@
 
 import Foundation
 protocol ChunkGeneratorDelegate {
-    func generate(chunkDimensions: Int) -> [[Tile]]
+    func generate(dimensions: Int) -> [[Tile]]
 }
 
 extension ChunkGeneratorDelegate {
-    func getEmptyGrid(chunkDimensions: Int = ChunkNode.chunkDimensions) -> [[Tile]] {
+    func getEmptyGrid(dimensions: Int) -> [[Tile]] {
         Array(
             repeatingFactory:
-                Array(repeatingFactory: Tile(), count: chunkDimensions),
-            count: chunkDimensions
+                Array(repeatingFactory: Tile(), count: dimensions),
+            count: dimensions
         )
     }
 }

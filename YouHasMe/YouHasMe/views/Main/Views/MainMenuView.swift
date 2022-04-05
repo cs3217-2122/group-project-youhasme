@@ -19,24 +19,14 @@ struct MainMenuView: View {
                 .padding()
             Group {
                 Button(action: {
-                    gameState.state = .selectingMeta
-                }) {
-                    Text("Select A Meta Level")
-                }.padding()
-                Button(action: {
                     gameState.state = .selecting
                 }) {
-                    Text("Select A Level")
-                }.padding()
-                Button(action: {
-                    gameState.state = .designingMeta()
-                }) {
-                    Text("Design A Meta Level")
+                    Text("Dungeon Select")
                 }.padding()
                 Button(action: {
                     gameState.state = .designing()
                 }) {
-                    Text("Design A Level")
+                    Text("Design")
                 }.padding()
             }.font(transitionButtonFont)
         }.padding()

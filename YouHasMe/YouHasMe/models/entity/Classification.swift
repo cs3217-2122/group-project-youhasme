@@ -38,7 +38,7 @@ extension Classification {
             return .conditionEvaluable(conditionEvaluable.toPersistable())
         }
     }
-    
+
     static func fromPersistable(_ persistableClassification: PersistableClassification) -> Classification {
         switch persistableClassification {
         case .noun(let noun):

@@ -25,8 +25,10 @@ class Dungeon {
     let levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
-    var levelNameToPositionMap: [String:Point]
-    var loadedLevels: [Point: Level] = [:]
+    var levelNameToPositionMap: [String: Point] = [:]
+
+    @Published var loadedLevels: [Point: Level] = [:]
+
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
     var dimensions: Rectangle = Dungeon.defaultLevelDimensions
     private var subscriptions: Set<AnyCancellable> = []
@@ -56,11 +58,11 @@ class Dungeon {
             globalLogger.error("\(error)")
         }
     }
-    
+
     func getPlayerPosition() -> Point {
         Point(x: 0, y: 0)
     }
-    
+
     func setLevelLayer(_ levelLayer: LevelLayer) {
         let playerPosition = getPlayerPosition()
         guard let level = getLevel(at: playerPosition, loadNeighbors: false) else {
@@ -69,7 +71,6 @@ class Dungeon {
         level.layer = levelLayer
     }
 }
-
 
 extension Dungeon: Identifiable {
     typealias ObjectIdentifier = String
@@ -117,7 +118,7 @@ extension Dungeon {
 
         return level
     }
-    
+
     func createLevel(at levelPosition: Point) {
         let level = Level(id: levelPosition, name: levelPosition.dataString, dimensions: dimensions)
 
@@ -182,7 +183,7 @@ extension Dungeon {
             return nil
         }
         let positionWithinChunk = worldToPositionWithinLevel(worldPosition)
-        
+
         return level.getTileAt(point: positionWithinChunk)
     }
 

@@ -81,7 +81,7 @@ extension KeyPathExposable {
 
 protocol ConditionEvaluableDungeonDelegate: AnyObject {
     var dungeon: Dungeon { get }
-    var dungeonName: String {get}
+    var dungeonName: String { get }
     func getLevel(by id: Point) -> Level
     func getLevelName(by id: Point) -> String
 }
@@ -95,7 +95,7 @@ extension ConditionEvaluable: Hashable {
     static func == (lhs: ConditionEvaluable, rhs: ConditionEvaluable) -> Bool {
         lhs.evaluableType == rhs.evaluableType
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(evaluableType)
     }
@@ -105,7 +105,7 @@ extension ConditionEvaluable {
     func toPersistable() -> PersistableConditionEvaluable {
         PersistableConditionEvaluable(evaluableType: evaluableType.toPersistable())
     }
-    
+
     static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluable) -> ConditionEvaluable {
         ConditionEvaluable(evaluableType: ConditionEvaluableType.fromPersistable( persistableConditionEvaluable.evaluableType))
     }

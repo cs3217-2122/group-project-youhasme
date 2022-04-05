@@ -20,7 +20,7 @@ class ContextualMenuData {
     var action: () -> Void = {}
 
     init?(entityType: EntityType) {
-        return nil // TODO
+        nil // TODO
     }
 }
 
@@ -82,12 +82,12 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     init(dungeon: Dungeon) {
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
-        setupBindings()
         let playerPosition = dungeon.getPlayerPosition()
         guard let level = dungeon.getLevel(at: playerPosition, loadNeighbors: false) else {
             fatalError("should not be nil")
         }
         gameEngine = GameEngine(levelLayer: level.layer)
+        setupBindings()
     }
 
     func setupBindings() {
@@ -100,7 +100,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             }
         }.store(in: &subscriptions)
     }
-    
+
     func playerMove(updateAction: UpdateType) {
         gameEngine.apply(action: updateAction)
         hasWon = gameEngine.currentGame.gameStatus == .win
@@ -140,22 +140,6 @@ extension PlayViewModel {
             fatalError("should not be nil")
         }
 
-        return MessagesViewModel(tile: tile)
-    }
-
-    func getMetaLevelInfoViewModel() -> MetaLevelInfoViewModel {
-        guard let tile = selectedTile else {
-            fatalError("should not be nil")
-        }
-
-        return MetaLevelInfoViewModel(tile: tile)
-    }
-
-    func getLevelInfoViewModel() -> LevelInfoViewModel {
-        guard let tile = selectedTile else {
-            fatalError("should not be nil")
-        }
-
-        return LevelInfoViewModel(tile: tile)
+        return MessagesViewModel()
     }
 }

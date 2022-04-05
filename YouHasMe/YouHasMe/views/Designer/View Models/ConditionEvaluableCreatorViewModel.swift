@@ -15,7 +15,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
     @Published var selectedConditionTypeId: String?
     @Published var selectedFieldId: String?
     @Published var selectedDependencyId: String?
-    
+
     private func createConditionEvaluable(
         conditionTypeId: String,
         literal: Int? = nil,
@@ -26,7 +26,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
             fatalError("condition type not found")
         }
         switch type {
-        case .metaLevel:
+        case .dungeon:
             guard let fieldId = fieldId,
                   let namedKeyPath = Dungeon.getNamedKeyPath(given: fieldId)  else {
                       return nil
@@ -45,20 +45,20 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
             return .numericLiteral(-1)
         }
     }
-    
+
     func confirm() {
         guard let delegate = delegate else {
             fatalError("should not be nil")
         }
-        
+
         guard let selectedConditionTypeId = selectedConditionTypeId else {
             return
         }
-        
+
         guard let type = createConditionEvaluable(conditionTypeId: selectedConditionTypeId, literal: nil, fieldId: selectedFieldId, identifier: nil) else {
             return
         }
-        
+
         let conditionEvaluable = ConditionEvaluable(evaluableType: type)
         delegate.buildConditionEvaluable(conditionEvaluable: conditionEvaluable)
     }

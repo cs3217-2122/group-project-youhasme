@@ -14,7 +14,7 @@ struct LevelLayer {
         self.dimensions = dimensions
         self.tiles = Array(repeating: Tile(), count: dimensions.width * dimensions.height)
     }
-    
+
     init(dimensions: Rectangle, tiles: [Tile]) {
         self.dimensions = dimensions
         self.tiles = tiles
@@ -76,11 +76,11 @@ extension LevelLayer: CustomDebugStringConvertible {
 
 extension LevelLayer {
     func toPersistable() -> PersistableLevelLayer {
-        PersistableLevelLayer(dimensions: dimensions, tiles: tiles.map{$0.toPersistable()})
+        PersistableLevelLayer(dimensions: dimensions, tiles: tiles.map { $0.toPersistable() })
     }
-    
+
     static func fromPersistable(_ persistableLevelLayer: PersistableLevelLayer) -> LevelLayer {
-        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map {Tile.fromPersistable($0)})
+        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map { Tile.fromPersistable($0) })
     }
 }
 

@@ -10,7 +10,7 @@ class ImmediateNeighborhoodChunkNeighborFinder: NeighborFinderDelegate {
     typealias ChunkIdentifier = Point
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
     where T: Chunkable, ChunkIdentifier == T.ChunkIdentifier {
-        let currentChunkIdentifier = chunk.identifier
+        let currentChunkIdentifier = chunk.id
         return NeighborData(
             topNeighbor: currentChunkIdentifier.translateY(dy: -1),
             leftNeighbor: currentChunkIdentifier.translateX(dx: -1),

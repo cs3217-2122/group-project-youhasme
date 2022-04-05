@@ -57,7 +57,7 @@ extension View {
 
 struct DesignerPersistenceView: View {
     @EnvironmentObject var gameState: GameState
-    @ObservedObject var viewModel: DungeonDesignerViewModel
+    @ObservedObject var viewModel: DesignerViewModel
     
     @State var showSaveLevelAlert = false
     @State var saveMessage = ""
@@ -71,7 +71,7 @@ struct DesignerPersistenceView: View {
     var body: some View {
         HStack {
             Button("Load") {
-                gameState.state = .selectingMeta
+                gameState.state = .selecting
             }
 
             Button("Save") {
@@ -97,7 +97,7 @@ struct DesignerPersistenceView: View {
                 do {
                     try viewModel.save()
                     gameState.stateStack.append(
-                        .playingMeta(playableMetaLevel: viewModel.getPlayableMetaLevel())
+                        .playing(playableDungeon: viewModel.getPlayableDungeon())
                     )
                 } catch {
                     showSaveErrorAlert = true

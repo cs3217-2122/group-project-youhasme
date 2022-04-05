@@ -29,7 +29,6 @@ extension PlayableDungeon {
 
 enum ScreenState {
     case selecting
-    case selectingMeta
     case playing(playableDungeon: PlayableDungeon)
     case designing(loadable: Loadable? = nil)
     case mainmenu
@@ -78,6 +77,9 @@ extension GameState {
     }
 
     func getSelectViewModel() -> DungeonSelectViewModel {
-        DungeonSelectViewModel()
+        guard state == .selecting else {
+            fatalError("unexpected state")
+        }
+        return DungeonSelectViewModel()
     }
 }

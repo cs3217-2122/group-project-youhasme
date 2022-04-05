@@ -20,7 +20,10 @@ class NaiveRuleValidationStrategy: RuleValidationStrategy {
                 }
                 behaviours.append(rule.activateToBehaviour())
             }
+        default:
+            break
         }
+
         entity.activeBehaviours = behaviours
     }
 }

@@ -27,7 +27,7 @@ class Level: Chunkable {
             bottomNeighbor?.neighbors.rightNeighbor
         }
     }
-    
+
     var extremities: ExtremityData<Point> {
         guard let delegate = delegate else {
             fatalError("should not be nil")
@@ -41,7 +41,7 @@ class Level: Chunkable {
             bottomExtreme: Point(x: 0, y: extremityRectangle.bottomSide)
         )
     }
-    
+
     weak var delegate: LevelLocationalDelegate?
     weak var neighborFinderDelegate: AnyNeighborFinderDelegate<Point>?
     var levelStorage: LevelStorage?
@@ -50,8 +50,8 @@ class Level: Chunkable {
     var dimensions: Rectangle
     var neighbors = Neighborhood()
     typealias ChunkIdentifier = Point
-    
-    var layer: LevelLayer
+
+    @Published var layer: LevelLayer
 
     init(id: Point, name: String, dimensions: Rectangle) {
         self.id = id
@@ -59,14 +59,14 @@ class Level: Chunkable {
         self.name = name
         layer = LevelLayer(dimensions: dimensions)
     }
-    
+
     init(id: Point, name: String, dimensions: Rectangle, layer: LevelLayer) {
         self.id = id
         self.dimensions = dimensions
         self.name = name
         self.layer = layer
     }
-    
+
     /// Level zero.
     var baseLevel: LevelLayer {
         layer
@@ -82,9 +82,9 @@ class Level: Chunkable {
     }
 
     func getLayerAtIndex(_ index: Int) -> LevelLayer {
-        return layer
+        layer
     }
-    
+
     func getTileAt(point: Point) -> Tile {
         layer.getTileAt(point: point)
     }
@@ -176,7 +176,6 @@ extension Level {
     }
 }
 
-
 struct Tile {
     var entities: [Entity] = []
 }
@@ -187,7 +186,7 @@ extension Tile {
     func toPersistable() -> PersistableTile {
         PersistableTile(entities: entities.map { $0.toPersistable() })
     }
-    
+
     static func fromPersistable(_ persistableTile: PersistableTile) -> Tile {
         Tile(entities: persistableTile.entities.map { Entity.fromPersistable($0) })
     }

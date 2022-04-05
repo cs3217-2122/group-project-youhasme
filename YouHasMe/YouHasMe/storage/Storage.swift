@@ -173,11 +173,11 @@ class LevelStorage: JSONStorage {
     static let defaultFileStorageName = "TestDataFile1"
     static let preloadedLevelNames: [String] = []
     let dungeonDirectory: URL
-    
+
     init(dungeonDirectory: URL) {
         self.dungeonDirectory = dungeonDirectory
     }
-    
+
     override func getDefaultDirectory() -> URL {
         dungeonDirectory.appendingPathComponent(LevelStorage.levelDirectoryName)
     }
@@ -185,7 +185,7 @@ class LevelStorage: JSONStorage {
     func loadLevel(_ dataStringConvertible: DataStringConvertible) -> PersistableLevel? {
         try? loadAndDecode(filename: dataStringConvertible.dataString)
     }
-    
+
     func loadLevel(_ dataStringConvertible: DataStringConvertible) -> Level? {
         guard let persistableLevel: PersistableLevel = loadLevel(dataStringConvertible) else {
             return nil
@@ -197,26 +197,8 @@ class LevelStorage: JSONStorage {
         try encodeAndSave(object: level.toPersistable(), filename: level.name)
     }
 
-    func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {
-        let preloadedLevels = getPreloadedLevels()
-        guard let gameStorage: GameStorage = try? loadAndDecode(filename: fileName) else {
-            globalLogger.info("Cannot find saved levels")
-            return getPreloadedLevels()
-        }
-        var levels = gameStorage.levels
-        levels.append(contentsOf: preloadedLevels)
-        return levels
-    }
-
     func getPreloadedLevels() -> [Level] {
         []
-    }
-
-    func saveAllUserCreatedLevels(filename: String, levels: [Level]) throws {
-        let levelsWithoutPreLoaded = levels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
-        try encodeAndSave(
-            object: GameStorage(levels: levelsWithoutPreLoaded), filename: filename
-        )
     }
 }
 

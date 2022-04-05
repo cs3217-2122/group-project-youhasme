@@ -15,9 +15,9 @@ class ConditionBuilder {
         case objectNil
     }
 
-    var subject: ConditionEvaluable?
+    var subject: ConditionEvaluableType?
     var relation: ConditionRelation?
-    var object: ConditionEvaluable?
+    var object: ConditionEvaluableType?
 
     private func createConditionEvaluable(
         conditionTypeId: String,
@@ -29,7 +29,7 @@ class ConditionBuilder {
             fatalError("condition type not found")
         }
         switch type {
-        case .metaLevel:
+        case .dungeon:
             guard let fieldId = fieldId,
                   let namedKeyPath = Dungeon.getNamedKeyPath(given: fieldId)  else {
                       throw BuildError.componentError
@@ -53,13 +53,13 @@ class ConditionBuilder {
         conditionSubjectTypeId: String,
         subjectLiteral: Int? = nil,
         subjectFieldId: String? = nil,
-        subjectLoadableId: String? = nil
+        subjectIdentifier: Point? = nil
     ) throws {
         subject = try createConditionEvaluable(
             conditionTypeId: conditionSubjectTypeId,
             literal: subjectLiteral,
             fieldId: subjectFieldId,
-            loadableId: subjectLoadableId
+            identifier: subjectIdentifier
         )
     }
 
@@ -88,13 +88,13 @@ class ConditionBuilder {
         conditionObjectTypeId: String,
         objectLiteral: Int? = nil,
         objectFieldId: String? = nil,
-        objectLoadableId: String? = nil
+        objectIdentifier: Point? = nil
     ) throws {
         object = try createConditionEvaluable(
             conditionTypeId: conditionObjectTypeId,
             literal: objectLiteral,
             fieldId: objectFieldId,
-            loadableId: objectLoadableId
+            identifier: objectIdentifier
         )
     }
 
@@ -111,127 +111,24 @@ class ConditionBuilder {
             throw BuildError.objectNil
         }
 
-        return Condition(subject: subject, relation: relation, object: object)
-    }
-}
-
-protocol ConditionCreatorViewModelDelegate: AnyObject {
-    func saveCondition(_ condition: Condition, entityIndex: Int)
-}
-
-class ConditionCreatorViewModel: ObservableObject {
-    weak var delegate: ConditionCreatorViewModelDelegate?
-    var entityIndex: Int
-    @Published var selectedSubjectConditionTypeId: String?
-    @Published var selectedSubjectField: String?
-    @Published var selectedSubjectDependency: String?
-    @Published var selectedComparatorTypeId: String?
-    @Published var selectedObjectConditionTypeId: String?
-    @Published var selectedObjectField: String?
-    @Published var selectedObjectDependency: String?
-
-    var tempSubjectRepresentation: String {
-        guard let selectedSubjectConditionTypeId = selectedSubjectConditionTypeId else {
-            return ""
-        }
-        return """
-        \(selectedSubjectConditionTypeId)::\(selectedSubjectDependency ?? "UNKNOWN?") -> \(selectedSubjectField ?? "UNKNOWN?")
-        """
-    }
-
-    var tempObjectRepresentation: String {
-        guard let selectedObjectConditionTypeId = selectedObjectConditionTypeId else {
-            return ""
-        }
-        return """
-        \(selectedObjectConditionTypeId)::\(selectedObjectDependency ?? "UNKNOWN?") -> \(selectedObjectField ?? "UNKNOWN?")
-        """
-    }
-
-    private var subscriptions: Set<AnyCancellable> = []
-
-    init(entityIndex: Int) {
-        self.entityIndex = entityIndex
-        setupBindings()
-    }
-
-    private func setupBindings() {
-        $selectedSubjectConditionTypeId.removeDuplicates().sink { [weak self] _ in
-            self?.resetSubjectDetails()
-        }.store(in: &subscriptions)
-
-        $selectedObjectConditionTypeId.removeDuplicates().sink { [weak self] _ in
-            self?.resetObjectDetails()
-        }.store(in: &subscriptions)
-    }
-
-    func resetSubjectDetails() {
-        selectedSubjectField = nil
-        selectedSubjectDependency = nil
-    }
-
-    func resetObjectDetails() {
-        selectedObjectField = nil
-        selectedObjectDependency = nil
-    }
-
-    func saveCondition() {
-        let builder = ConditionBuilder()
-        guard let selectedSubjectConditionTypeId = selectedSubjectConditionTypeId else {
-            return
-        }
-
-        guard let selectedObjectConditionTypeId = selectedObjectConditionTypeId else {
-            return
-        }
-
-        guard let selectedComparatorTypeId = selectedComparatorTypeId else {
-            return
-        }
-
-        let condition: Condition
-
-        do {
-            try builder.buildSubject(
-                conditionSubjectTypeId: selectedSubjectConditionTypeId,
-                subjectLiteral: nil,
-                subjectFieldId: selectedSubjectField,
-                subjectLoadableId: selectedSubjectDependency
-            )
-
-            try builder.buildComparator(comparatorId: selectedComparatorTypeId)
-
-            try builder.buildObject(
-                conditionObjectTypeId: selectedObjectConditionTypeId,
-                objectLiteral: nil,
-                objectFieldId: selectedSubjectField,
-                objectLoadableId: selectedObjectDependency
-            )
-
-            condition = try builder.getResult()
-        } catch {
-            globalLogger.error("build failed \(error.localizedDescription)")
-            return
-        }
-
-        guard let delegate = delegate else {
-            fatalError("should not be nil")
-        }
-
-        delegate.saveCondition(condition, entityIndex: entityIndex)
+        return Condition(
+            subject: ConditionEvaluable(evaluableType: subject),
+            relation: relation,
+            object: ConditionEvaluable(evaluableType: object)
+        )
     }
 }
 
 enum ConditionType: String {
-    case metaLevel = "Meta Level"
+    case dungeon = "Dungeon"
     case level = "Level"
     case player = "Player"
     case numericLiteral = "Numeric"
 
     func getKeyPaths() -> [AnyNamedKeyPath] {
         switch self {
-        case .metaLevel:
-            return MetaLevel.typeErasedNamedKeyPaths
+        case .dungeon:
+            return Dungeon.typeErasedNamedKeyPaths
         case .level:
             return Level.typeErasedNamedKeyPaths
         case .player:
@@ -243,10 +140,10 @@ enum ConditionType: String {
 
     func getStorageDependencies() -> [Loadable]? {
         switch self {
-        case .metaLevel:
-            return MetaLevelStorage().getAllLoadables()
+        case .dungeon:
+            return nil
         case .level:
-            return LevelStorage().getAllLoadables()
+            return nil // TODO
         case .player:
             return nil
         case .numericLiteral:

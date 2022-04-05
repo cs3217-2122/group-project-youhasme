@@ -16,14 +16,13 @@ extension Entity {
     func toPersistable() -> PersistableEntity {
         PersistableEntity(entityType: entityType.toPersistable())
     }
-    
+
     static func fromPersistable(_ persistableEntity: PersistableEntity) -> Entity {
         Entity(entityType: EntityType.fromPersistable(persistableEntity.entityType))
     }
 }
 
 extension Entity: Hashable {}
-
 
 struct PersistableEntity {
     var entityType: PersistableEntityType

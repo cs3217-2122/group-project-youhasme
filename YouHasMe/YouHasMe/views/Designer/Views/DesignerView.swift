@@ -1,7 +1,7 @@
 import SwiftUI
 import Combine
 struct DesignerView: View {
-    @ObservedObject var viewModel: DungeonDesignerViewModel
+    @ObservedObject var viewModel: DesignerViewModel
     @State var shouldPresentConditionEvaluableCreator: Bool = false
     
     
@@ -10,16 +10,17 @@ struct DesignerView: View {
             VStack {
                 ToolbarView(viewModel: viewModel.getToolbarViewModel())
                     .padding()
-                DungeonDesignerPaletteView(viewModel: viewModel)
+                DesignerPaletteView(viewModel: viewModel)
                     .padding()
                 GridView(viewModel: viewModel)
                     .padding()
                 Spacer()
-                DungeonDesignerPersistenceView(viewModel: viewModel)
+                DesignerPersistenceView(viewModel: viewModel)
             }
             .onReceive(viewModel.$state, perform: {
                 guard case .choosingConditionEvaluable = $0 else {
                     shouldPresentConditionEvaluableCreator = false
+                    return
                 }
                 shouldPresentConditionEvaluableCreator = true
             })

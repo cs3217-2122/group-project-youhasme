@@ -11,6 +11,6 @@ class DungeonSelectViewModel: ObservableObject {
     var dungeonStorage = DungeonStorage()
 
     func getAllDungeons() -> [Loadable] {
-        return dungeonStorage.getAllLoadables()
+        dungeonStorage.getAllLoadables()
     }
 }

@@ -3,13 +3,16 @@ import Foundation
 protocol Chunkable {
     associatedtype ChunkIdentifier where ChunkIdentifier: DataStringConvertible
     var id: ChunkIdentifier { get set }
+    var extremities: ExtremityData<ChunkIdentifier> { get }
 }
 
 struct AnyChunkable<T>: Chunkable where T: DataStringConvertible {
     typealias ChunkIdentifier = T
     var id: T
+    var extremities: ExtremityData<T>
     init<Node: Chunkable>(chunk: Node) where Node.ChunkIdentifier == T {
         id = chunk.id
+        extremities = chunk.extremities
     }
 }
 
@@ -32,5 +35,3 @@ extension NeighborData {
         [topNeighbor, leftNeighbor, rightNeighbor, bottomNeighbor]
     }
 }
-
-

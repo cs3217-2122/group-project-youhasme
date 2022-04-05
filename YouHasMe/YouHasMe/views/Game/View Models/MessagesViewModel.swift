@@ -13,14 +13,14 @@ class MessagesViewModel: ObservableObject {
 
     private var subscriptions: Set<AnyCancellable> = []
 
-    init(tile: MetaTile) {
-        tile.$metaEntities.sink { [weak self] metaEntities in
-            self?.messages = metaEntities.compactMap { (metaEntity: MetaEntityType) -> String? in
-                guard case .message(let text) = metaEntity else {
-                    return nil
-                }
-                return text
-            }
-        }.store(in: &subscriptions)
-    }
+//    init(tile: MetaTile) {
+//        tile.$metaEntities.sink { [weak self] metaEntities in
+//            self?.messages = metaEntities.compactMap { (metaEntity: MetaEntityType) -> String? in
+//                guard case .message(let text) = metaEntity else {
+//                    return nil
+//                }
+//                return text
+//            }
+//        }.store(in: &subscriptions)
+//    }
 }

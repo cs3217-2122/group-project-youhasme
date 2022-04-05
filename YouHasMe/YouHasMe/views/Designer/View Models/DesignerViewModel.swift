@@ -29,6 +29,10 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     @Published var state: DesignerState = .normal
 
+    @Published var levelsUpdated = false
+
+    private var subscriptions: Set<AnyCancellable> = []
+
     var editorMode: EditorMode? {
         toolbarViewModel?.editorMode
     }
@@ -49,13 +53,14 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     init(dungeon: Dungeon) {
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
+        setupBindings()
     }
 
     func deselectTile() {
         selectedTile = nil
     }
 
-    func getPlayableMetaLevel() -> PlayableDungeon {
+    func getPlayableDungeon() -> PlayableDungeon {
         guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: dungeon.name) else {
             fatalError("Failed to load current meta level")
         }
@@ -64,6 +69,21 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     func getAllLoadableDungeons() -> [Loadable] {
         dungeonStorage.getAllLoadables()
+    }
+
+    func setupBindings() {
+        dungeon.$loadedLevels.sink { [weak self] loadedLevels in
+            guard let self = self else {
+                return
+            }
+            self.subscriptions.removeAll()
+            for (_, loadedLevel) in loadedLevels {
+                loadedLevel.$layer.sink { _ in
+                    self.levelsUpdated = true
+                }.store(in: &self.subscriptions)
+            }
+        }
+        .store(in: &subscriptions)
     }
 }
 
@@ -79,7 +99,7 @@ extension DesignerViewModel: PaletteEntityViewModelDelegate {
     func selectPaletteEntityType(_ entityType: EntityType) {
         selectedPaletteEntityType = entityType
     }
-    
+
     var selectedPaletteEntityTypePublisher: AnyPublisher<EntityType?, Never> {
         $selectedPaletteEntityType.eraseToAnyPublisher()
     }
@@ -125,7 +145,7 @@ extension DesignerViewModel: EntityViewModelExaminableDelegate {
         guard let tile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false) else {
             return
         }
-        
+
         selectedTile = tile
     }
 }
@@ -135,7 +155,7 @@ extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
         guard case .choosingConditionEvaluable(worldPosition: let worldPosition) = state else {
             return
         }
-        
+
         guard var tile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false) else {
             return
         }

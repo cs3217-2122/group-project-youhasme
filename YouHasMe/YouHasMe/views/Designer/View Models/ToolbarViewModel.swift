@@ -1,6 +1,5 @@
 import Foundation
 
-
 enum EditorMode: String {
     case panOnly = "Pan only"
 
