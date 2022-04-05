@@ -7,7 +7,7 @@ enum DesignerState {
     case choosingConditionEvaluable(worldPosition: Point)
 }
 
-class DesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
+class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     @Published var selectedPaletteEntityType: EntityType?
     @Published var selectedTile: Tile?
     private var levelStorage: LevelStorage? {
@@ -27,7 +27,7 @@ class DesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableVie
 
     private var toolbarViewModel: ToolbarViewModel?
 
-    @Published var state: DungeonDesignerState = .normal
+    @Published var state: DesignerState = .normal
 
     var editorMode: EditorMode? {
         toolbarViewModel?.editorMode
@@ -67,29 +67,25 @@ class DesignerViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableVie
     }
 }
 
-extension DungeonDesignerViewModel: MetaLevelViewableDelegate {}
-
 // MARK: Persistence
-extension DungeonDesignerViewModel {
+extension DesignerViewModel {
     func save() throws {
         try dungeon.saveLoadedLevels()
         try dungeonStorage.saveDungeon(dungeon)
     }
 }
 
-extension DungeonDesignerViewModel: ToolbarViewModelDelegate {}
-
-extension DungeonDesignerViewModel: PaletteEntityViewModelDelegate {
-    func selectPaletteMetaEntity(_ entityType: EntityType) {
+extension DesignerViewModel: PaletteEntityViewModelDelegate {
+    func selectPaletteEntityType(_ entityType: EntityType) {
         selectedPaletteEntityType = entityType
     }
-
-    var selectedPaletteEntityPublisher: AnyPublisher<EntityType?, Never> {
+    
+    var selectedPaletteEntityTypePublisher: AnyPublisher<EntityType?, Never> {
         $selectedPaletteEntityType.eraseToAnyPublisher()
     }
 }
 
-extension DungeonDesignerViewModel: EntityViewModelBasicCRUDDelegate {
+extension DesignerViewModel: EntityViewModelBasicCRUDDelegate {
     func addSelectedEntity(to worldPosition: Point) {
         guard editorMode == .addAndRemove else {
             return
@@ -120,7 +116,7 @@ extension DungeonDesignerViewModel: EntityViewModelBasicCRUDDelegate {
     }
 }
 
-extension DungeonDesignerViewModel: EntityViewModelExaminableDelegate {
+extension DesignerViewModel: EntityViewModelExaminableDelegate {
     func examineTile(at worldPosition: Point) {
         guard editorMode == .select else {
             return
@@ -134,7 +130,7 @@ extension DungeonDesignerViewModel: EntityViewModelExaminableDelegate {
     }
 }
 
-extension DungeonDesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
+extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
     func buildConditionEvaluable(conditionEvaluable: ConditionEvaluable) {
         guard case .choosingConditionEvaluable(worldPosition: let worldPosition) = state else {
             return
@@ -152,7 +148,7 @@ extension DungeonDesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
 }
 
 // MARK: Child view models
-extension DungeonDesignerViewModel {
+extension DesignerViewModel {
     func getToolbarViewModel() -> ToolbarViewModel {
         if toolbarViewModel == nil {
             let toolbarViewModel = ToolbarViewModel()
@@ -176,7 +172,7 @@ extension DungeonDesignerViewModel {
 
     func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
         let entityViewModel = EntityViewModel(
-            tile: getTile(at: viewOffset, createChunkIfNotExists: true, loadNeighboringChunks: false),
+            tile: getTile(at: viewOffset, loadNeighboringChunks: false),
             worldPosition: getWorldPosition(at: viewOffset)
         )
         entityViewModel.basicCRUDDelegate = self

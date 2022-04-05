@@ -99,12 +99,10 @@
 		E57ACB2E27DC582500F73B27 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2D27DC582500F73B27 /* Preview Assets.xcassets */; };
 		E57ACB3627DC58A000F73B27 /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3527DC58A000F73B27 /* Campaign.swift */; };
 		E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3727DC58B000F73B27 /* Dungeon.swift */; };
-		E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3927DC58B800F73B27 /* Connector.swift */; };
 		E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3B27DC58C700F73B27 /* Level.swift */; };
 		E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3D27DC58DD00F73B27 /* Condition.swift */; };
 		E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3F27DC675E00F73B27 /* EntityType.swift */; };
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
-		E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4527DC948400F73B27 /* Outlet.swift */; };
 		E57C329927F5D62900077BC9 /* LevelInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */; };
 		E57CA5E927EE1B2B008A3AFB /* DesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* DesignerPaletteView.swift */; };
 		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
@@ -243,12 +241,10 @@
 		E57ACB2D27DC582500F73B27 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E57ACB3527DC58A000F73B27 /* Campaign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		E57ACB3727DC58B000F73B27 /* Dungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dungeon.swift; sourceTree = "<group>"; };
-		E57ACB3927DC58B800F73B27 /* Connector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connector.swift; sourceTree = "<group>"; };
 		E57ACB3B27DC58C700F73B27 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		E57ACB3D27DC58DD00F73B27 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		E57ACB3F27DC675E00F73B27 /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
-		E57ACB4527DC948400F73B27 /* Outlet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Outlet.swift; sourceTree = "<group>"; };
 		E57C329827F5D62900077BC9 /* LevelInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelInfoViewModel.swift; sourceTree = "<group>"; };
 		E57CA5E827EE1B2B008A3AFB /* DesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerPaletteView.swift; sourceTree = "<group>"; };
 		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -613,9 +609,7 @@
 				E5BECBDC27E59E0300E3952D /* extensions */,
 				E57ACB3527DC58A000F73B27 /* Campaign.swift */,
 				E57ACB3727DC58B000F73B27 /* Dungeon.swift */,
-				E57ACB3927DC58B800F73B27 /* Connector.swift */,
 				E57ACB3B27DC58C700F73B27 /* Level.swift */,
-				E57ACB4527DC948400F73B27 /* Outlet.swift */,
 				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
@@ -911,7 +905,6 @@
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
 				E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */,
 				E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */,
-				E57ACB4627DC948400F73B27 /* Outlet.swift in Sources */,
 				B05687DF27F36CF00046C26C /* Game.swift in Sources */,
 				E57A19A527F9F8F500312C39 /* NeighborFinderDelegate.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
@@ -972,7 +965,6 @@
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
 				E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */,
-				E57ACB3A27DC58B800F73B27 /* Connector.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
 				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,

@@ -16,10 +16,10 @@ struct EntityView: View {
             .border(.pink)
             .onTapGesture {
                 switch gameState.state {
-                case .designingMeta:
+                case .designing:
                     viewModel.addEntity()
                     viewModel.examine()
-                case .playingMeta:
+                case .playing:
                     viewModel.examine()
                 default:
                     return
@@ -27,7 +27,7 @@ struct EntityView: View {
             }
             .onLongPressGesture {
                 switch gameState.state {
-                case .designingMeta:
+                case .designing:
                     viewModel.removeEntity()
                 default:
                     return

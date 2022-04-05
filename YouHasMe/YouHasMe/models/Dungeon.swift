@@ -28,7 +28,7 @@ class Dungeon {
     var levelNameToPositionMap: [String:Point]
     var loadedLevels: [Point: Level] = [:]
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
-    var dimensions: Rectangle
+    var dimensions: Rectangle = Dungeon.defaultLevelDimensions
     private var subscriptions: Set<AnyCancellable> = []
 
     convenience init() {
