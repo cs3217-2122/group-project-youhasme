@@ -6,41 +6,18 @@
 //
 
 import Foundation
-protocol AbstractLevelLayer: Codable {
-    associatedtype TileType
-    var dimensions: Rectangle { get set }
-    var tiles: [TileType] { get set }
-    func getTileAt(point: Point) -> TileType
-    mutating func setTile(_ tile: TileType, at point: Point)
-}
-
-extension AbstractLevelLayer {
-    func getTileAt(point: Point) -> TileType {
-        getTileAt(x: point.x, y: point.y)
-    }
-
-    func getTileAt(x: Int, y: Int) -> TileType {
-        tiles[x + y * dimensions.width]
-    }
-
-    mutating func setTile(_ tile: TileType, at point: Point) {
-        setTileAt(x: point.x, y: point.y, tile: tile)
-    }
-
-    // TODO: refactor to `setTile` style
-    mutating func setTileAt(x: Int, y: Int, tile: TileType) {
-        tiles[x + y * dimensions.width] = tile
-    }
-}
-
-struct LevelLayer: AbstractLevelLayer {
-    typealias TileType = Tile
+struct LevelLayer {
     var dimensions: Rectangle
     var tiles: [Tile]
 
     init(dimensions: Rectangle) {
         self.dimensions = dimensions
         self.tiles = Array(repeating: Tile(), count: dimensions.width * dimensions.height)
+    }
+    
+    init(dimensions: Rectangle, tiles: [Tile]) {
+        self.dimensions = dimensions
+        self.tiles = tiles
     }
 
     mutating func add(entity: Entity, x: Int, y: Int) {
@@ -64,6 +41,25 @@ struct LevelLayer: AbstractLevelLayer {
     }
 }
 
+extension LevelLayer {
+    func getTileAt(point: Point) -> Tile {
+        getTileAt(x: point.x, y: point.y)
+    }
+
+    func getTileAt(x: Int, y: Int) -> Tile {
+        tiles[x + y * dimensions.width]
+    }
+
+    mutating func setTile(_ tile: Tile, at point: Point) {
+        setTileAt(x: point.x, y: point.y, tile: tile)
+    }
+
+    // TODO: refactor to `setTile` style
+    mutating func setTileAt(x: Int, y: Int, tile: Tile) {
+        tiles[x + y * dimensions.width] = tile
+    }
+}
+
 extension LevelLayer: CustomDebugStringConvertible {
     var debugDescription: String {
         var s = ""
@@ -78,5 +74,21 @@ extension LevelLayer: CustomDebugStringConvertible {
     }
 }
 
+extension LevelLayer {
+    func toPersistable() -> PersistableLevelLayer {
+        PersistableLevelLayer(dimensions: dimensions, tiles: tiles.map{$0.toPersistable()})
+    }
+    
+    static func fromPersistable(_ persistableLevelLayer: PersistableLevelLayer) -> LevelLayer {
+        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map {Tile.fromPersistable($0)})
+    }
+}
+
 extension LevelLayer: Hashable {}
-extension LevelLayer: Codable {}
+
+struct PersistableLevelLayer {
+    var dimensions: Rectangle
+    var tiles: [PersistableTile]
+}
+
+extension PersistableLevelLayer: Codable {}

@@ -6,13 +6,13 @@
 //
 
 import Foundation
-protocol MetaLevelManipulableViewModel: IntegerViewTranslatable, ObservableObject {
+protocol DungeonManipulableViewModel: IntegerViewTranslatable, ObservableObject {
     var currMetaLevel: MetaLevel { get set }
     func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile?
     func setTile(_ tile: MetaTile, at viewOffset: Vector)
 }
 
-extension MetaLevelManipulableViewModel {
+extension DungeonManipulableViewModel {
     func getTile(at viewOffset: Vector, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
         currMetaLevel.getTile(
             at: viewPosition.translate(by: viewOffset),

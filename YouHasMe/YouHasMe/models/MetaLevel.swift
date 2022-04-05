@@ -1,48 +1,45 @@
 import Foundation
 import Combine
 
-protocol MetaLevelViewableDelegate: AnyObject {
+protocol DungeonViewableDelegate: AnyObject {
     func getViewableRegion() -> PositionedRectangle
 }
 
-class MetaLevel {
-    static let loadableChunkRadius: Int = 1
-    static let defaultName: String = "MetaLevel1"
-    weak var viewableDelegate: MetaLevelViewableDelegate?
-    var chunkDimensions: Int {
-        ChunkNode.chunkDimensions
-    }
+class Dungeon {
+    static let defaultLevelDimensions = Rectangle(width: 64, height: 64)
+    static let loadableRadius: Int = 1
+    static let defaultName: String = "Dungeon1"
+    weak var viewableDelegate: DungeonViewableDelegate?
+    let levelDimensions = Rectangle(width: 64, height: 64)
     var loadableChunkRadius: Int {
-        MetaLevel.loadableChunkRadius
+        Dungeon.loadableRadius
     }
-    var metaLevelStorage = MetaLevelStorage()
-    var chunkStorage: ChunkStorage {
-        guard let storage = try? metaLevelStorage.getChunkStorage(for: name) else {
+    var dungeonStorage = DungeonStorage()
+    var levelStorage: LevelStorage {
+        guard let storage = try? dungeonStorage.getLevelStorage(for: name) else {
             fatalError("unexpected failure")
         }
         return storage
     }
     @Published private(set) var name: String
-    let chunkNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+    let levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
-    var loadedChunks: [Point: ChunkNode] = [:]
+    var levelNameToPositionMap: [String:Point]
+    var loadedLevels: [Point: Level] = [:]
     // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
-    var currentChunk: ChunkNode?
-    var dimensions: PositionedRectangle
+    var dimensions: Rectangle
     private var subscriptions: Set<AnyCancellable> = []
 
     convenience init() {
         self.init(
-            name: MetaLevel.defaultName,
-            dimensions: PositionedRectangle(
-                rectangle: Rectangle(width: ChunkNode.chunkDimensions, height: ChunkNode.chunkDimensions),
-                topLeft: .zero),
+            name: Dungeon.defaultName,
+            dimensions: Dungeon.defaultLevelDimensions,
             entryChunkPosition: .zero
         )
     }
 
-    init(name: String, dimensions: PositionedRectangle, entryChunkPosition: Point) {
+    init(name: String, dimensions: Rectangle, entryChunkPosition: Point) {
         self.name = name
         self.dimensions = dimensions
         self.entryChunkPosition = entryChunkPosition
@@ -52,34 +49,35 @@ class MetaLevel {
         let oldName = name
         do {
             globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
-            try metaLevelStorage.renameMetaLevel(from: oldName, to: newName)
+            try dungeonStorage.renameDungeon(from: oldName, to: newName)
             name = newName
-            try metaLevelStorage.saveMetaLevel(self)
+            try dungeonStorage.saveDungeon(self)
         } catch {
             globalLogger.error("\(error)")
         }
     }
 }
 
-extension MetaLevel: Identifiable {
+
+extension Dungeon: Identifiable {
     typealias ObjectIdentifier = String
     var id: ObjectIdentifier {
         name
     }
 }
 
-extension MetaLevel {
-    func worldToChunkPosition(_ worldPosition: Point) -> Point {
-        Point(x: worldPosition.x.flooredDiv(chunkDimensions), y: worldPosition.y.flooredDiv(chunkDimensions))
+extension Dungeon {
+    func worldToLevelPosition(_ worldPosition: Point) -> Point {
+        Point(x: worldPosition.x.flooredDiv(levelDimensions.width), y: worldPosition.y.flooredDiv(levelDimensions.height))
     }
 
-    func worldToPositionWithinChunk(_ worldPosition: Point) -> Point {
-        Point(x: worldPosition.x.modulo(chunkDimensions), y: worldPosition.y.modulo(chunkDimensions))
+    func worldToPositionWithinLevel(_ worldPosition: Point) -> Point {
+        Point(x: worldPosition.x.modulo(levelDimensions.width), y: worldPosition.y.modulo(levelDimensions.height))
     }
 
-    func worldRegionToChunkRegion(_ worldRegion: PositionedRectangle) -> PositionedRectangle {
-        let chunkTopLeft = worldToChunkPosition(worldRegion.topLeft)
-        let chunkBottomRight = worldToChunkPosition(worldRegion.bottomRight)
+    func worldRegionToLevelRegion(_ worldRegion: PositionedRectangle) -> PositionedRectangle {
+        let chunkTopLeft = worldToLevelPosition(worldRegion.topLeft)
+        let chunkBottomRight = worldToLevelPosition(worldRegion.bottomRight)
         return PositionedRectangle(
             rectangle: Rectangle(
                 width: chunkBottomRight.x - chunkTopLeft.x,
@@ -89,173 +87,143 @@ extension MetaLevel {
         )
     }
 
-    func getChunk(at worldPosition: Point, createIfNotExists: Bool, loadNeighbors: Bool) -> ChunkNode? {
-        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createIfNotExists) else {
+    func getLevel(at worldPosition: Point, loadNeighbors: Bool) -> Level? {
+        guard let level = getLevel(at: worldPosition) else {
             return nil
         }
 
         if loadNeighbors {
-            chunk.neighborFinderDelegate = chunkNeighborFinder
+            level.neighborFinderDelegate = levelNeighborFinder
 
-            let chunkPosition = worldToChunkPosition(worldPosition)
-            let neighbors = chunk.loadNeighbors(at: chunkPosition)
-            for (neighborPosition, neighboringChunk) in neighbors where
-                loadedChunks[neighborPosition] == nil {
-                loadedChunks[neighborPosition] = neighboringChunk
+            let levelPosition = worldToLevelPosition(worldPosition)
+            let neighbors = level.loadNeighbors(at: levelPosition)
+            for (neighborPosition, neighboringLevel) in neighbors where
+                loadedLevels[neighborPosition] == nil {
+                loadedLevels[neighborPosition] = neighboringLevel
             }
         }
 
-        return chunk
+        return level
+    }
+    
+    func createLevel(at levelPosition: Point) {
+        let level = Level(id: levelPosition, name: levelPosition.dataString, dimensions: dimensions)
+
+        do {
+            try levelStorage.saveLevel(level)
+        } catch {
+            fatalError("unexpected save failure")
+        }
+
+        loadedLevels[levelPosition] = level
     }
 
-    private func getChunk(
-        at worldPosition: Point,
-        createIfNotExists: Bool
-    ) -> ChunkNode? {
+    private func getLevel(
+        at worldPosition: Point
+    ) -> Level? {
         // The most basic behavior of getChunk is that it
         // 1. searches `loadedChunks` for the chunk at the given position and returns it
         // 2. tries to load a chunk with the same identifier as the given position
         // 3. If all fails, return nil.
         // This behavior can be abstracted into a Position to Chunk handler.
 
-        let chunkPosition = worldToChunkPosition(worldPosition)
-//        print("\(worldPosition) \(chunkPosition) \(loadedChunks.count)")
-        if let foundChunk = loadedChunks[chunkPosition] {
+        let levelPosition = worldToLevelPosition(worldPosition)
+        if let foundChunk = loadedLevels[levelPosition] {
             return foundChunk
         }
 
-        if let loadedChunk: ChunkNode = chunkStorage.loadChunk(identifier: chunkPosition.dataString) {
-            globalLogger.info("Loaded chunk with position \(chunkPosition)")
-            loadedChunks[chunkPosition] = loadedChunk
-            return loadedChunk
-        }
-
-        guard createIfNotExists else {
+        guard let loadedLevel: Level = levelStorage.loadLevel(levelPosition) else {
             return nil
         }
 
-        globalLogger.info("Creating new with position \(chunkPosition)")
-        let chunkNode = ChunkNode(identifier: chunkPosition)
-
-        do {
-            try chunkStorage.saveChunk(chunkNode)
-        } catch {
-            fatalError("unexpected save failure")
-        }
-
-        loadedChunks[chunkPosition] = chunkNode
-        return chunkNode
+        globalLogger.info("Loaded level with position \(levelPosition)")
+        loadedLevels[levelPosition] = loadedLevel
+        return loadedLevel
     }
 
-    func unloadChunkNodes() {
+    func unloadLevels() {
         guard let delegate = viewableDelegate else {
             return
         }
         let viewableWorldRegion = delegate.getViewableRegion()
-        let viewableChunkRegion = worldRegionToChunkRegion(viewableWorldRegion)
+        let viewableChunkRegion = worldRegionToLevelRegion(viewableWorldRegion)
         let loadableChunkRegion = viewableChunkRegion.expandInAllDirections(by: loadableChunkRadius)
         // Unload all chunks that are very far away from the viewable region
         // In future, there may be multiple viewableChunkRegions due to multiplayer,
         // so we need to account for all of those.
-        for (position, loadedChunk) in loadedChunks {
+        for (position, loadedLevel) in loadedLevels {
             guard !loadableChunkRegion.contains(point: position) else {
                 continue
             }
 
             do {
-                try chunkStorage.saveChunk(loadedChunk)
+                try levelStorage.saveLevel(loadedLevel)
             } catch {
                 fatalError("unexpected failure")
             }
-            loadedChunks[position] = nil
+            loadedLevels[position] = nil
         }
     }
 
-    func getTile(at worldPosition: Point, createChunkIfNotExists: Bool, loadNeighboringChunks: Bool) -> MetaTile? {
-        guard let chunk = getChunk(at: worldPosition, createIfNotExists: createChunkIfNotExists, loadNeighbors: loadNeighboringChunks) else {
+    func getTile(at worldPosition: Point, loadNeighboringChunks: Bool) -> Tile? {
+        guard let level = getLevel(at: worldPosition, loadNeighbors: loadNeighboringChunks) else {
             return nil
         }
-        let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
-        return chunk.getTile(at: positionWithinChunk)
+        let positionWithinChunk = worldToPositionWithinLevel(worldPosition)
+        
+        return level.getTileAt(point: positionWithinChunk)
     }
 
-    func setTile(_ tile: MetaTile, at worldPosition: Point) {
-        guard let chunk = getChunk(at: worldPosition, createIfNotExists: false) else {
+    func setTile(_ tile: Tile, at worldPosition: Point) {
+        guard let level = getLevel(at: worldPosition) else {
             return
         }
-        let positionWithinChunk = worldToPositionWithinChunk(worldPosition)
-        chunk.setTile(tile, at: positionWithinChunk)
+        let positionWithinChunk = worldToPositionWithinLevel(worldPosition)
+        level.setTile(tile, at: positionWithinChunk)
     }
 }
 
-extension MetaLevel: Equatable {
-    static func == (lhs: MetaLevel, rhs: MetaLevel) -> Bool {
+extension Dungeon: Equatable {
+    static func == (lhs: Dungeon, rhs: Dungeon) -> Bool {
         lhs === rhs
     }
 }
 
 // MARK: Persistence
-extension MetaLevel {
-    func saveLoadedChunks() throws {
-        for loadedChunk in loadedChunks.values {
-            try chunkStorage.saveChunk(loadedChunk)
+extension Dungeon {
+    func saveLoadedLevels() throws {
+        for loadedLevel in loadedLevels.values {
+            try levelStorage.saveLevel(loadedLevel)
         }
     }
 
-    func toPersistable() -> PersistableMetaLevel {
-        PersistableMetaLevel(
+    func toPersistable() -> PersistableDungeon {
+        PersistableDungeon(
             name: name,
             entryChunkPosition: entryChunkPosition,
             dimensions: dimensions
         )
     }
 
-    static func fromPersistable(_ persistableMetaLevel: PersistableMetaLevel) -> MetaLevel {
-        let metaLevel = MetaLevel(
-            name: persistableMetaLevel.name,
-            dimensions: persistableMetaLevel.dimensions,
-            entryChunkPosition: persistableMetaLevel.entryChunkPosition
+    static func fromPersistable(_ persistableDungeon: PersistableDungeon) -> Dungeon {
+        let dungeon = Dungeon(
+            name: persistableDungeon.name,
+            dimensions: persistableDungeon.dimensions,
+            entryChunkPosition: persistableDungeon.entryChunkPosition
         )
-        metaLevel.currentChunk = metaLevel.getChunk(
-            at: metaLevel.entryChunkPosition,
-            createIfNotExists: false,
-            loadNeighbors: false
-        )
-        return metaLevel
+        return dungeon
     }
 }
 
-extension MetaLevel: KeyPathExposable {
-    static var exposedNumericKeyPathsMap: [String: KeyPath<MetaLevel, Int>] {
+extension Dungeon: KeyPathExposable {
+    static var exposedNumericKeyPathsMap: [String: KeyPath<Dungeon, Int>] {
         [
             "Name length": \.name.count
         ]
     }
 
-    func evaluate(given keyPath: NamedKeyPath<MetaLevel, Int>) -> Int {
+    func evaluate(given keyPath: NamedKeyPath<Dungeon, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
-    }
-}
-
-class MetaTile {
-    @Published var metaEntities: [MetaEntityType] = []
-
-    init() {}
-
-    init(metaEntities: [MetaEntityType]) {
-        self.metaEntities = metaEntities
-    }
-}
-
-// MARK: Persistence
-extension MetaTile {
-    func toPersistable() -> PersistableMetaTile {
-        PersistableMetaTile(metaEntities: metaEntities.map { $0.toPersistable() })
-    }
-
-    static func fromPersistable(_ persistableMetaTile: PersistableMetaTile) -> MetaTile {
-        let metaEntities = persistableMetaTile.metaEntities.map(MetaEntityType.fromPersistable(_:))
-        return MetaTile(metaEntities: metaEntities)
     }
 }
 

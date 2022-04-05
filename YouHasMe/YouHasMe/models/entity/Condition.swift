@@ -79,22 +79,59 @@ extension KeyPathExposable {
     }
 }
 
-enum ConditionEvaluable {
-    case metaLevel(loadable: Loadable, evaluatingKeyPath: NamedKeyPath<MetaLevel, Int>)
-    case level(loadable: Loadable, evaluatingKeyPath: NamedKeyPath<Level, Int>)
+protocol ConditionEvaluableDungeonDelegate: AnyObject {
+    var dungeon: Dungeon { get }
+    var dungeonName: String {get}
+    func getLevel(by id: Point) -> Level
+    func getLevelName(by id: Point) -> String
+}
+
+struct ConditionEvaluable {
+    weak var delegate: ConditionEvaluableDungeonDelegate?
+    var evaluableType: ConditionEvaluableType
+}
+
+extension ConditionEvaluable: Hashable {
+    static func == (lhs: ConditionEvaluable, rhs: ConditionEvaluable) -> Bool {
+        lhs.evaluableType == rhs.evaluableType
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(evaluableType)
+    }
+}
+
+extension ConditionEvaluable {
+    func toPersistable() -> PersistableConditionEvaluable {
+        PersistableConditionEvaluable(evaluableType: evaluableType.toPersistable())
+    }
+    
+    static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluable) -> ConditionEvaluable {
+        ConditionEvaluable(evaluableType: ConditionEvaluableType.fromPersistable( persistableConditionEvaluable.evaluableType))
+    }
+}
+
+struct PersistableConditionEvaluable {
+    var evaluableType: PersistableConditionEvaluableType
+}
+extension PersistableConditionEvaluable: Codable {}
+
+enum ConditionEvaluableType {
+    case dungeon(evaluatingKeyPath: NamedKeyPath<Dungeon, Int>)
+    case level(id: Point, evaluatingKeyPath: NamedKeyPath<Level, Int>)
     case player
     case numericLiteral(Int)
 }
 
-extension ConditionEvaluable: Hashable {}
+extension ConditionEvaluableType: Hashable {}
 
 extension ConditionEvaluable: CustomStringConvertible {
     var description: String {
-        switch self {
-        case .metaLevel(let loadable, let evaluatingKeyPath):
-            return "MetaLevel: \(loadable.name) -> \(evaluatingKeyPath.description)"
-        case .level(let loadable, let evaluatingKeyPath):
-            return "Level: \(loadable.name) -> \(evaluatingKeyPath.description)"
+        switch evaluableType {
+        case .dungeon(let evaluatingKeyPath):
+            return "Dungeon: \(delegate?.dungeonName ?? "") \(evaluatingKeyPath.description)"
+        case .level(let id, let evaluatingKeyPath):
+            return "Level: \(delegate?.getLevelName(by: id) ?? "") -> \(evaluatingKeyPath.description)"
         case .player:
             return "Player"
         case .numericLiteral(let int):
@@ -105,14 +142,14 @@ extension ConditionEvaluable: CustomStringConvertible {
 
 extension ConditionEvaluable {
     func getValue() -> Int? {
-        switch self {
-        case let .metaLevel(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
-            guard let metaLevel: MetaLevel = MetaLevelStorage().loadMetaLevel(name: loadable.name) else {
+        switch evaluableType {
+        case let .dungeon(evaluatingKeyPath):
+            guard let dungeon: Dungeon = delegate?.dungeon else {
                 return nil
             }
-            return metaLevel.evaluate(given: evaluatingKeyPath)
-        case let .level(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
-            guard let level = LevelStorage().loadLevel(name: loadable.name) else {
+            return dungeon.evaluate(given: evaluatingKeyPath)
+        case let .level(id: id, evaluatingKeyPath: evaluatingKeyPath):
+            guard let level = delegate?.getLevel(by: id) else {
                 return nil
             }
             return level.evaluate(given: evaluatingKeyPath)
@@ -126,17 +163,14 @@ extension ConditionEvaluable {
 }
 
 // MARK: Persistence
-extension ConditionEvaluable {
-    func toPersistable() -> PersistableConditionEvaluable {
+extension ConditionEvaluableType {
+    func toPersistable() -> PersistableConditionEvaluableType {
         switch self {
-        case let .metaLevel(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
-            return .metaLevel(
-                loadable: loadable,
-                evaluatingKeyPath: evaluatingKeyPath.toPersistable()
-            )
-        case let .level(loadable: loadable, evaluatingKeyPath: evaluatingKeyPath):
+        case let .dungeon(evaluatingKeyPath: evaluatingKeyPath):
+            return .dungeon(evaluatingKeyPath: evaluatingKeyPath.toPersistable())
+        case let .level(id: id, evaluatingKeyPath: evaluatingKeyPath):
             return .level(
-                loadable: loadable,
+                id: id,
                 evaluatingKeyPath: evaluatingKeyPath.toPersistable()
             )
         case .player:
@@ -146,22 +180,19 @@ extension ConditionEvaluable {
         }
     }
 
-    static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluable) -> ConditionEvaluable {
+    static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluableType) -> ConditionEvaluableType {
         switch persistableConditionEvaluable {
-        case let .metaLevel(loadable, evaluatingKeyPath):
-            guard let namedKeyPath = MetaLevel.keyPathfromPersistable(evaluatingKeyPath) else {
+        case let .dungeon(evaluatingKeyPath):
+            guard let namedKeyPath = Dungeon.keyPathfromPersistable(evaluatingKeyPath) else {
                 fatalError("missing key path")
             }
-            return .metaLevel(
-                loadable: loadable,
-                evaluatingKeyPath: namedKeyPath
-            )
-        case let .level(loadable, evaluatingKeyPath):
+            return .dungeon(evaluatingKeyPath: namedKeyPath)
+        case let .level(id, evaluatingKeyPath):
             guard let namedKeyPath = Level.keyPathfromPersistable(evaluatingKeyPath) else {
                 fatalError("missing key path")
             }
             return .level(
-                loadable: loadable,
+                id: id,
                 evaluatingKeyPath: namedKeyPath
             )
         case .player:
@@ -172,9 +203,9 @@ extension ConditionEvaluable {
     }
 }
 
-enum PersistableConditionEvaluable: Codable {
-    case metaLevel(loadable: Loadable, evaluatingKeyPath: PersistableNamedKeyPath)
-    case level(loadable: Loadable, evaluatingKeyPath: PersistableNamedKeyPath)
+enum PersistableConditionEvaluableType: Codable {
+    case dungeon(evaluatingKeyPath: PersistableNamedKeyPath)
+    case level(id: Point, evaluatingKeyPath: PersistableNamedKeyPath)
     case player
     case numericLiteral(Int)
 }

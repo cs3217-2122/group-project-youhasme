@@ -23,30 +23,25 @@ class ConditionBuilder {
         conditionTypeId: String,
         literal: Int? = nil,
         fieldId: String? = nil,
-        loadableId: String? = nil
-    ) throws -> ConditionEvaluable {
+        identifier: Point? = nil
+    ) throws -> ConditionEvaluableType {
         guard let type = ConditionType.getEnum(by: conditionTypeId) else {
             fatalError("condition type not found")
         }
-        let loadable = type.getStorageDependencies()?.first { $0.id == loadableId }
         switch type {
         case .metaLevel:
-            guard let loadable = loadable,
-                  let fieldId = fieldId,
-                  let namedKeyPath = MetaLevel.getNamedKeyPath(given: fieldId)  else {
+            guard let fieldId = fieldId,
+                  let namedKeyPath = Dungeon.getNamedKeyPath(given: fieldId)  else {
                       throw BuildError.componentError
             }
-            return .metaLevel(
-                loadable: loadable,
-                evaluatingKeyPath: namedKeyPath
-            )
+            return .dungeon(evaluatingKeyPath: namedKeyPath)
         case .level:
-            guard let loadable = loadable,
+            guard let identifier = identifier,
                   let fieldId = fieldId,
                   let namedKeyPath = Level.getNamedKeyPath(given: fieldId) else {
                       throw BuildError.componentError
             }
-            return .level(loadable: loadable, evaluatingKeyPath: namedKeyPath)
+            return .level(id: identifier, evaluatingKeyPath: namedKeyPath)
         case .player:
             return .player
         case .numericLiteral:

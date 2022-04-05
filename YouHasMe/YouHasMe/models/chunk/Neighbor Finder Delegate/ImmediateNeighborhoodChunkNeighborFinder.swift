@@ -6,10 +6,10 @@
 //
 
 import Foundation
-class ImmediateNeighborhoodChunkNeighborFinder: ChunkNeighborFinderDelegate {
+class ImmediateNeighborhoodChunkNeighborFinder: NeighborFinderDelegate {
     typealias ChunkIdentifier = Point
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: Chunkable, ChunkIdentifier == T.ChunkIdentifier {
         let currentChunkIdentifier = chunk.identifier
         return NeighborData(
             topNeighbor: currentChunkIdentifier.translateY(dy: -1),

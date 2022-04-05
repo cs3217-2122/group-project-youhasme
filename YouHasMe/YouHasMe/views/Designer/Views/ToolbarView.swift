@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct MetaLevelDesignerToolbarView: View {
-    @ObservedObject var viewModel: MetaLevelDesignerToolbarViewModel
+struct ToolbarView: View {
+    @ObservedObject var viewModel: ToolbarViewModel
     var body: some View {
         VStack {
             HStack {
@@ -13,13 +13,5 @@ struct MetaLevelDesignerToolbarView: View {
                 .pickerStyle(SegmentedPickerStyle())
             }
         }
-    }
-}
-
-struct MetaLevelDesignerToolbarView_Previews: PreviewProvider {
-    static var previews: some View {
-        MetaLevelDesignerToolbarView(
-            viewModel: MetaLevelDesignerToolbarViewModel()
-        )
     }
 }

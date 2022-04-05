@@ -8,28 +8,26 @@
 import Foundation
 import Combine
 
-protocol MetaEntityViewModelBasicCRUDDelegate: AnyObject {
-    func addSelectedEntity(to tile: MetaTile)
-    func removeEntity(from tile: MetaTile)
+protocol EntityViewModelBasicCRUDDelegate: AnyObject {
+    func addSelectedEntity(to worldPosition: Point)
+    func removeEntity(from worldPosition: Point)
 }
 
-protocol MetaEntityViewModelExaminableDelegate: AnyObject {
-    func examineTile(_ tile: MetaTile)
+protocol EntityViewModelExaminableDelegate: AnyObject {
+    func examineTile(at worldPosition: Point)
 }
 
-class MetaEntityViewModel: CellViewModel {
-    weak var basicCRUDDelegate: MetaEntityViewModelBasicCRUDDelegate?
-    weak var examinableDelegate: MetaEntityViewModelExaminableDelegate?
-    var tile: MetaTile?
+class EntityViewModel: CellViewModel {
+    weak var basicCRUDDelegate: EntityViewModelBasicCRUDDelegate?
+    weak var examinableDelegate: EntityViewModelExaminableDelegate?
+    var tile: Tile?
     var worldPosition: Point?
 
-    private var subscriptions: Set<AnyCancellable> = []
-
-    convenience init(tile: MetaTile?) {
+    convenience init(tile: Tile?) {
         self.init(tile: tile, worldPosition: nil)
     }
 
-    init(tile: MetaTile?, worldPosition: Point?) {
+    init(tile: Tile?, worldPosition: Point?) {
         self.tile = tile
         self.worldPosition = worldPosition
 
@@ -38,51 +36,34 @@ class MetaEntityViewModel: CellViewModel {
             return
         }
 
-        if tile.metaEntities.isEmpty {
+        if tile.entities.isEmpty {
             super.init(imageSource: .uiColor(.gray))
         } else {
-            // TODO: Allow stacking of multiple images
-            super.init(imageSource: metaEntityTypeToImageable(type: tile.metaEntities[0]))
+            super.init(imageSource: entityTypeToImageable(type: tile.entities[0].entityType))
         }
-        setupBindings()
-    }
-
-    private func setupBindings() {
-        guard let tile = tile else {
-            return
-        }
-
-        tile.$metaEntities.sink { [weak self] metaEntities in
-            guard !metaEntities.isEmpty else {
-                self?.imageSource = .uiColor(.gray)
-                return
-            }
-            self?.imageSource = metaEntityTypeToImageable(type: metaEntities[0])
-        }
-        .store(in: &subscriptions)
     }
 
     func addEntity() {
-        guard let delegate = basicCRUDDelegate, let tile = tile else {
+        guard let delegate = basicCRUDDelegate, let worldPosition = worldPosition else {
             return
         }
 
-        delegate.addSelectedEntity(to: tile)
+        delegate.addSelectedEntity(to: worldPosition)
     }
 
     func removeEntity() {
-        guard let delegate = basicCRUDDelegate, let tile = tile else {
+        guard let delegate = basicCRUDDelegate, let worldPosition = worldPosition else {
             return
         }
 
-        delegate.removeEntity(from: tile)
+        delegate.removeEntity(from: worldPosition)
     }
 
     func examine() {
-        guard let delegate = examinableDelegate, let tile = tile else {
+        guard let delegate = examinableDelegate, let worldPosition = worldPosition else {
             return
         }
 
-        delegate.examineTile(tile)
+        delegate.examineTile(at: worldPosition)
     }
 }

@@ -16,6 +16,16 @@ struct EntityType: Hashable {
     }
 }
 
+extension EntityType {
+    func toPersistable() -> PersistableEntityType {
+        PersistableEntityType(classification: classification.toPersistable())
+    }
+    
+    static func fromPersistable(_ persistableEntityType: PersistableEntityType) -> EntityType {
+        EntityType(classification: persistableEntityType.classification)
+    }
+}
+
 struct EntityTypes {
     struct NounInstances {
         static var baba = EntityType(classification: .nounInstance(.baba))
@@ -89,5 +99,8 @@ struct EntityTypes {
     }
 }
 
-extension EntityType: Codable {
+struct PersistableEntityType {
+    var classification: PersistableClassification
 }
+
+extension PersistableEntityType: Codable {}

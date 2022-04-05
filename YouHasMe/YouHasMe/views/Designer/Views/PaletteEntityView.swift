@@ -1,5 +1,5 @@
 //
-//  PaletteMetaEntityView.swift
+//  PaletteEntityView.swift
 //  YouHasMe
 //
 //  Created by Jia Cheng Sun on 2/4/22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct PaletteMetaEntityView: View {
-    var viewModel: PaletteMetaEntityViewModel
+struct PaletteEntityView: View {
+    var viewModel: PaletteEntityViewModel
     @State var borderColor: Color = .black
     var body: some View {
         

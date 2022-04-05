@@ -27,24 +27,24 @@ extension PlayableLevel {
 
 extension PlayableLevel: Equatable {}
 
-enum PlayableMetaLevel {
-    case metaLevel(MetaLevel)
-    case metaLevelLoadable(Loadable)
+enum PlayableDungeon {
+    case dungeon(Dungeon)
+    case dungeonLoadable(Loadable)
 }
 
-extension PlayableMetaLevel: Equatable {}
+extension PlayableDungeon: Equatable {}
 
-extension PlayableMetaLevel {
-    func getMetaLevel() -> MetaLevel {
+extension PlayableDungeon {
+    func getDungeon() -> Dungeon {
         switch self {
-        case .metaLevel(let metaLevel):
-            return metaLevel
-        case .metaLevelLoadable(let loadable):
-            let metaLevelStorage = MetaLevelStorage()
-            guard let metaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: loadable.name) else {
+        case .dungeon(let dungeon):
+            return dungeon
+        case .dungeonLoadable(let loadable):
+            let dungeonStorage = DungeonStorage()
+            guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: loadable.name) else {
                 fatalError("should not be nil")
             }
-            return metaLevel
+            return dungeon
         }
     }
 }
@@ -53,7 +53,7 @@ enum ScreenState {
     case selecting
     case selectingMeta
     case playing(playableLevel: PlayableLevel)
-    case playingMeta(playableMetaLevel: PlayableMetaLevel)
+    case playingMeta(PlayableDungeon: PlayableMetaLevel)
     case designing(playableLevel: PlayableLevel? = nil)
     case designingMeta(metaLevelLoadable: Loadable? = nil)
     case mainmenu

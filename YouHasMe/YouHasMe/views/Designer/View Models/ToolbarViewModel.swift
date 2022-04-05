@@ -1,8 +1,5 @@
 import Foundation
 
-protocol MetaLevelDesignerToolbarViewModelDelegate: AnyObject {
-
-}
 
 enum EditorMode: String {
     case panOnly = "Pan only"
@@ -16,9 +13,6 @@ enum EditorMode: String {
 
 extension EditorMode: CaseIterable, Hashable {}
 
-class MetaLevelDesignerToolbarViewModel: ObservableObject {
-    weak var delegate: MetaLevelDesignerToolbarViewModelDelegate?
-
+class ToolbarViewModel: ObservableObject {
     @Published var editorMode: EditorMode = .panOnly
-
 }

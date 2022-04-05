@@ -6,17 +6,17 @@
 //
 
 import Foundation
-class ChunkNeighborFinderReversedDecorator: ChunkNeighborFinderDelegate {
+class ChunkNeighborFinderReversedDecorator: NeighborFinderDelegate {
     typealias ChunkIdentifier = Point
-    var backingFinder: AnyChunkNeighborFinderDelegate<Point>
+    var backingFinder: AnyNeighborFinderDelegate<Point>
 
-    init<Finder: ChunkNeighborFinderDelegate>(neighborFinder: Finder)
+    init<Finder: NeighborFinderDelegate>(neighborFinder: Finder)
     where Finder.ChunkIdentifier == Point {
-        backingFinder = AnyChunkNeighborFinderDelegate(neighborFinder: neighborFinder)
+        backingFinder = AnyNeighborFinderDelegate(neighborFinder: neighborFinder)
     }
 
     func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
-    where T: AbstractChunkNode, ChunkIdentifier == T.ChunkIdentifier {
+    where T: Chunkable, ChunkIdentifier == T.ChunkIdentifier {
         let neighborData = backingFinder.getNeighborId(of: chunk)
         return NeighborData(
             topNeighbor: neighborData.bottomNeighbor,

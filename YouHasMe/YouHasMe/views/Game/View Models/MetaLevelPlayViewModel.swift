@@ -73,7 +73,7 @@ enum MetaLevelPlayViewState {
     case travel
 }
 
-class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
+class MetaLevelPlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var subscriptions: Set<AnyCancellable> = []
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,

@@ -52,21 +52,3 @@ class CellViewModel: ObservableObject {
         self.imageSource = imageSource
     }
 }
-
-struct EntityView: View {
-    var viewModel: EntityViewModel
-    var body: some View {
-        CellView(backupDisplayColor: .gray, viewModel: viewModel)
-    }
-}
-
-class EntityViewModel: CellViewModel {
-    init(entityType: EntityType?) {
-        guard let entityType = entityType else {
-            super.init(imageSource: nil)
-            return
-        }
-
-        super.init(imageSource: .string(entityTypeToImageString(type: entityType)))
-    }
-}

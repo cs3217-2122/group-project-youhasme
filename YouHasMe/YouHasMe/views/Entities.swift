@@ -99,19 +99,35 @@ func entityTypeToImageColor(type: EntityType) -> Color {
     }
 }
 
-func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
+func entityTypeToImageable(type: EntityType) -> Imageable {
     switch type {
-    case .blocking:
+    case EntityTypes.Nouns.baba:
+        return .string("baba_text")
+    case EntityTypes.Nouns.wall:
+        return .string("wall_text")
+    case EntityTypes.Nouns.flag:
+        return .string("flag_text")
+    case EntityTypes.Nouns.box:
+        return .string("box_text")
+    case EntityTypes.Verbs.vIs:
+        return .string("is")
+    case EntityTypes.Properties.you:
+        return .string("you")
+    case EntityTypes.Properties.push:
+        return .string("push")
+    case EntityTypes.Properties.stop:
+        return .string("stop")
+    case EntityTypes.Properties.win:
+        return .string("win")
+    case EntityTypes.NounInstances.baba:
+        return .string("baba")
+    case EntityTypes.NounInstances.wall:
         return .string("wall")
-    case .nonBlocking:
+    case EntityTypes.NounInstances.flag:
         return .string("flag")
-    case .grass:
-        return .string("grass")
-    case .level:
-        return .string("door")
-    case .travel:
+    case EntityTypes.NounInstances.box:
+        return .string("box")
+    default:
         return .string("question")
-    case .message:
-        return .uiColor(.darkGray)
     }
 }

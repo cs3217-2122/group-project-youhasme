@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct MetaEntityView: View {
+struct EntityView: View {
     @EnvironmentObject var gameState: GameState
-    var viewModel: MetaEntityViewModel
+    var viewModel: EntityViewModel
 
     var body: some View {
         CellView(backupDisplayColor: .black, viewModel: viewModel)

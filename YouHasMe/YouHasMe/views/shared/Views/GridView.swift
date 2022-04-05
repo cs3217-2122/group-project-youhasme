@@ -29,14 +29,14 @@ struct GridViewData {
     }
 }
 
-protocol AbstractMetaLevelGridViewModel: ObservableObject {
+protocol AbstractGridViewModel: ObservableObject {
     var viewableDimensions: Rectangle { get set }
-    func getTileViewModel(at viewOffset: Vector) -> MetaEntityViewModel
+    func getTileViewModel(at viewOffset: Vector) -> EntityViewModel
     func translateView(by offset: CGVector)
     func endTranslateView()
 }
 
-struct MetaLevelGridView<T: AbstractMetaLevelGridViewModel>: View {
+struct GridView<T: AbstractGridViewModel>: View {
     let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
         
     @ObservedObject var viewModel: T
@@ -53,7 +53,7 @@ struct MetaLevelGridView<T: AbstractMetaLevelGridViewModel>: View {
                         ForEach(0..<gridViewData.heightInCells, id: \.self) { y in
                             HStack(spacing: 0) {
                                 ForEach(0..<gridViewData.widthInCells, id: \.self) { x in
-                                    MetaEntityView(
+                                    EntityView(
                                         viewModel: viewModel.getTileViewModel(at: Vector(dx: x, dy: y))
                                     )
                                     .frame(width: gridViewData.cellWidth, height: gridViewData.cellHeight)
@@ -86,9 +86,3 @@ struct MetaLevelGridView<T: AbstractMetaLevelGridViewModel>: View {
 
     }
 }
-
-// struct MetaLevelGridView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        MetaLevelGridView()
-//    }
-// }

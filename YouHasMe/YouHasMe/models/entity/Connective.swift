@@ -10,5 +10,4 @@ extension Connective: CustomDebugStringConvertible {
     }
 }
 
-extension Connective: Codable {
-}
+extension Connective: Codable {}
