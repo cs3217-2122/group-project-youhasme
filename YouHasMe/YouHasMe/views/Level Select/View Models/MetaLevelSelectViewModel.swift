@@ -14,4 +14,8 @@ class MetaLevelSelectViewModel: ObservableObject {
         let (urls, filenames) = metaLevelStorage.getAllFiles()
         return zip(urls, filenames).map { Loadable(url: $0, name: $1) }
     }
+
+    func uploadMetaLevel(loadable: Loadable) {
+        FirebaseMetaLevelStorage.uploadMetaLevel(metaLevelLoadable: loadable)
+    }
 }

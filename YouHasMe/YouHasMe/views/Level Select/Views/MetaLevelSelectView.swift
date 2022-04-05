@@ -21,12 +21,21 @@ struct MetaLevelSelectView: View {
             List {
                 Section(header: Text("Select an existing Meta Level")) {
                     ForEach(viewModel.getAllMetaLevels(), id: \.self) { urlListObject in
-                        Button(action: {
-                            gameState.state = .designingMeta(metaLevelLoadable: urlListObject)
-                        }) {
-                            Text(urlListObject.name)
+                        HStack {
+                            Button(action: {
+                                gameState.state = .designingMeta(metaLevelLoadable: urlListObject)
+                            }) {
+                                Text(urlListObject.name)
+                            }
+                            Spacer()
+                            Button(action: {
+                                viewModel.uploadMetaLevel(loadable: urlListObject)
+                            }) {
+                                Text("Upload online")
+                            }
                         }
-                    }
+                    }.buttonStyle(BorderlessButtonStyle())
+                    
                 }
             }
         }

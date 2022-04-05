@@ -38,6 +38,11 @@ struct MainMenuView: View {
                 }) {
                     Text("Design A Level")
                 }.padding()
+                Button(action: {
+                    gameState.state = .roomselection
+                }) {
+                    Text("Join A Room")
+                }.padding()
             }.font(transitionButtonFont)
         }.padding()
     }

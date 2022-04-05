@@ -74,7 +74,7 @@ enum MetaLevelPlayViewState {
 }
 
 class MetaLevelPlayViewModel: AbstractMetaLevelGridViewModel, MetaLevelManipulableViewModel {
-    private var subscriptions: Set<AnyCancellable> = []
+    var subscriptions: Set<AnyCancellable> = []
     var viewableDimensions = Rectangle(
         width: ChunkNode.chunkDimensions,
         height: ChunkNode.chunkDimensions

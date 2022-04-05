@@ -7,6 +7,18 @@ struct Entity {
         self.entityType = entityType
     }
 
+    func isPlayer() -> Bool {
+        for behaviour in activeBehaviours {
+            switch behaviour {
+            case .property(.player):
+                 return true
+            default:
+                continue
+            }
+        }
+        return false
+    }
+
     func has(behaviour: Behaviour) -> Bool {
         activeBehaviours.contains(behaviour)
     }

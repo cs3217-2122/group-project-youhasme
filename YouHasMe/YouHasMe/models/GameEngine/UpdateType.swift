@@ -10,6 +10,7 @@
 protocol UpdateType {
     func getMovement() -> (Int, Int)
     func getPlayer() -> Int
+    func getAction() -> UpdateAction
     mutating func setAction(_: UpdateAction)
 }
 
@@ -25,17 +26,22 @@ struct Move: UpdateType {
         playerNum
     }
 
+    func getAction() -> UpdateAction {
+        updateAction
+    }
+
     mutating func setAction(_ action: UpdateAction) {
         updateAction = action
     }
 }
 
-enum UpdateAction {
+enum UpdateAction: String, Codable {
     case moveUp
     case moveDown
     case moveLeft
     case moveRight
     case tick  // No movement
+    case undo
 
     // Returns (dx, dy)
     func getMovement() -> (Int, Int) {

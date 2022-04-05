@@ -17,12 +17,20 @@ struct WinMechanic: GameMechanic {
     func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState {
         let youEntities = state.entitiesWith(behaviour: .property(.you))
         let winEntities = state.entitiesWith(behaviour: .property(.win))
+        let playerEntities = state.playerEntities()
 
         // Check for overlap of any YOU block with any WIN block
         var newState = state
         for youEntity in youEntities {
             let youLocation = youEntity.location
             if winEntities.contains(where: { $0.location.isOverlapping(with: youLocation) }) {
+                newState.gameStatus = .win
+            }
+        }
+
+        for playerEntity in playerEntities {
+            let playerLocation = playerEntity.location
+            if winEntities.contains(where: { $0.location.isOverlapping(with: playerLocation) }) {
                 newState.gameStatus = .win
             }
         }

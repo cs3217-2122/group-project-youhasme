@@ -34,7 +34,10 @@ struct GameEngine {
 
     // Updates game state given action
     mutating func apply(action: UpdateType) {
-        print(action)
+        if action.getAction() == .undo {
+            undo()
+            return
+        }
         status = .running
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [currentGame]

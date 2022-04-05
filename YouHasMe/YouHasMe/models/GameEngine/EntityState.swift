@@ -15,6 +15,10 @@ struct EntityState: Hashable {
         entity.has(behaviour: behaviour)
     }
 
+    func isPlayer() -> Bool {
+        entity.isPlayer()
+    }
+
     // Adds intent to perform action unconditionally
     mutating func add(action: EntityAction) {
         var intent = popIntent(action: action) ?? EntityIntent(action: action)

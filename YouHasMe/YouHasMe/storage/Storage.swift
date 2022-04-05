@@ -252,6 +252,12 @@ class MetaLevelStorage: JSONStorage {
 
 }
 
+protocol ChunkLoader {
+    func loadChunk(identifier: String) -> ChunkNode?
+    func loadChunk(identifier: String) -> PersistableChunkNode?
+    func saveChunk(_ chunk: ChunkNode) throws
+}
+
 class ChunkStorage: JSONStorage {
     static let chunkStorageDirectoryName: String = "Chunks"
     var metaLevelDirectory: URL
@@ -279,4 +285,8 @@ class ChunkStorage: JSONStorage {
     func saveChunk(_ chunk: ChunkNode) throws {
         try encodeAndSave(object: chunk.toPersistable(), filename: chunk.identifier.dataString)
     }
+}
+
+extension ChunkStorage: ChunkLoader {
+
 }

@@ -116,6 +116,14 @@ class LevelDesignerViewModel: ObservableObject {
             return "error saving level: \(error)"
         }
     }
+
+    func playOnline() -> String {
+        FirebaseLevelRoomStorage.createLevelRoom(using: currLevel)
+    }
+
+    func joinRoom(code: String) {
+        FirebaseLevelRoomStorage.joinRoom(code: code)
+    }
 }
 
 // MARK: View model factories

@@ -56,6 +56,12 @@ struct LevelPersistenceView: View {
             }) {
                 Text("Play")
             }.disabled(viewModel.unsavedChanges)
+            Button(action: {
+                let roomId = viewModel.playOnline()
+                gameState.stateStack.append(.multiplayerLevel(roomId: roomId))
+            }) {
+                Text("Play Online")
+            }.disabled(viewModel.unsavedChanges)
         }
         .padding([.leading, .trailing], 10.0)
     }

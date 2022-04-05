@@ -57,6 +57,11 @@ enum ScreenState {
     case designing(playableLevel: PlayableLevel? = nil)
     case designingMeta(metaLevelLoadable: Loadable? = nil)
     case mainmenu
+    case roomselection
+    case selectingOnlineMeta
+    case multiplayerMetaLevel(openWorldRoom: OpenWorldRoom)
+    case multiplayerLevel(roomId: String)
+    case selectingOnlineLevel
 }
 
 extension ScreenState: Equatable {}
@@ -124,5 +129,31 @@ extension GameState {
 
     func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
         MetaLevelSelectViewModel()
+    }
+
+    func getRoomListViewModel() -> RoomListViewModel {
+        RoomListViewModel()
+    }
+
+    func getOnlineMetaLevelSelectViewModel() -> OnlineMetaLevelSelectionViewModel {
+        OnlineMetaLevelSelectionViewModel()
+    }
+
+    func getMultiplayerMetaLevelViewModel() -> MultiplayerMetaLevelViewModel {
+        guard case let .multiplayerMetaLevel(openWorldRoom: openWorldRoom) = state else {
+            fatalError("Unexpected state")
+        }
+        return MultiplayerMetaLevelViewModel(openWorldRoom: openWorldRoom)
+    }
+
+    func getMultiplayerLevelViewModel() -> MultiplayerLevelViewModel {
+        guard case let .multiplayerLevel(roomId: roomId) = state else {
+            fatalError("Unexpected state")
+        }
+        return MultiplayerLevelViewModel(roomId: roomId)
+    }
+
+    func getLevelRoomListViewModel() -> LevelRoomViewModel {
+        LevelRoomViewModel()
     }
 }

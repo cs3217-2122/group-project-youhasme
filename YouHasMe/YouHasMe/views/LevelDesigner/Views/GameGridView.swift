@@ -58,14 +58,6 @@ struct GameGridView: View {
         GeometryReader { proxy in
             VStack {
                 Spacer()
-                
-                ForEach((1...levelDesignerViewModel.currLevelLayer.numPlayers), id: \.self) { playerNum in
-                Button(action: {
-                    selectedPlayerNum = playerNum
-                }) {
-                    Text("Player: \(playerNum)")
-                }
-            }
             HStack {
                 Spacer()
                 VStack(spacing: 0) {

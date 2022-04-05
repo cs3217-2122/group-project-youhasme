@@ -10,6 +10,7 @@ import SwiftUI
 struct LevelSelectView: View {
     @ObservedObject var levelDesignerViewModel: LevelDesignerViewModel
     @EnvironmentObject var gameState: GameState
+    @State private var code = ""
     var body: some View {
         VStack {
             Button(action: {
@@ -31,6 +32,12 @@ struct LevelSelectView: View {
                     }
                 }
             }
+            
+            TextField("Code", text: $code)
+                .onSubmit {
+                    levelDesignerViewModel.joinRoom(code: code)
+                    gameState.state = .selectingOnlineLevel
+                }
         }
     }
 }
