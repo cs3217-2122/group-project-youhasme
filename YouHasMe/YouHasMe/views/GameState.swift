@@ -85,13 +85,13 @@ extension GameState {
     }
 
     func getAchievementsViewModel() -> AchievementsViewModel {
-        var levelId = ""
-        if case let .playing(playableLevel: playableLevel) = state {
-            levelId = playableLevel.getLevel().id
-        } else if case let .designing(playableLevel: playableLevel) = state {
-            levelId = playableLevel?.getLevel().id ?? ""
+        var dungeonId = ""
+        if case let .playing(playableDungeon: playableDungeon) = state {
+            dungeonId = playableDungeon.getDungeon().id
+        } else if case let .designing(loadable: loadable) = state, let loadable = loadable {
+            dungeonId = loadable.name
         }
 
-        return AchievementsViewModel(levelId: levelId)
+        return AchievementsViewModel(levelId: dungeonId)
     }
 }

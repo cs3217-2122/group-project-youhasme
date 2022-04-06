@@ -40,7 +40,6 @@ struct GridView<T: AbstractGridViewModel>: View {
     let inverseDragThreshold: Double = 20.0.multiplicativeInverse()
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: T
-    @ObservedObject var achievementsViewModel: AchievementsViewModel
     @State var lastDragLocation: CGPoint?
     
     var body: some View {
@@ -83,9 +82,7 @@ struct GridView<T: AbstractGridViewModel>: View {
                     lastDragLocation = nil
                     viewModel.endTranslateView()
                 }
-        ).onAppear {
-            achievementsViewModel.setSubscriptionsFor(viewModel.gameEventPublisher)
-        }
+        )
 
     }
 }

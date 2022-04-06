@@ -35,7 +35,7 @@ class AchievementsViewModel: ObservableObject {
     }
 
     func selectLevel(level: Level) {
-        levelId = level.id
+        levelId = level.id.dataString
         resetLevelStats()
     }
 
