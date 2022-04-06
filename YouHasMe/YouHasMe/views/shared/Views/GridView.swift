@@ -37,10 +37,8 @@ protocol AbstractGridViewModel: ObservableObject {
 }
 
 struct GridView<T: AbstractGridViewModel>: View {
-    let inverseDragThreshold: Double = 20.0.multiplicativeInverse()
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: T
-    @State var lastDragLocation: CGPoint?
     
     var body: some View {
         Group {
@@ -65,24 +63,5 @@ struct GridView<T: AbstractGridViewModel>: View {
                 }
             }
         }
-        .gesture(
-            DragGesture()
-                .onChanged { value in
-                    let currentDragLocation = value.location
-
-                    if let lastDragLocation = lastDragLocation {
-                        let translation =
-                            CGVector(from: currentDragLocation, to: lastDragLocation)
-                            .scaleBy(factor: inverseDragThreshold)
-                        viewModel.translateView(by: translation)
-                    }
-                    lastDragLocation = value.location
-                }
-                .onEnded { _ in
-                    lastDragLocation = nil
-                    viewModel.endTranslateView()
-                }
-        )
-
     }
 }

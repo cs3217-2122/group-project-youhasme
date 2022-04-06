@@ -48,6 +48,7 @@ struct PlayView: View {
             VStack {
                 Group {
                     GridView(viewModel: viewModel)
+                        .gesture(dragGesture)
                     Spacer()
                     HStack(alignment: .center) {
                         ForEach(viewModel.contextualData) { data in
