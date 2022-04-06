@@ -44,7 +44,7 @@
 		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
 		E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4727E8E5D5007D2E86 /* Vector.swift */; };
 		E56752FF27EEB9FC0001305D /* DungeonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56752FE27EEB9FC0001305D /* DungeonSelectView.swift */; };
-		E567530227EEBACD0001305D /* MetaLevelSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567530127EEBACD0001305D /* MetaLevelSelectViewModel.swift */; };
+		E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */; };
 		E569071927ED4D830010E665 /* DesignerPersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569071827ED4D830010E665 /* DesignerPersistenceView.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
@@ -52,19 +52,19 @@
 		E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95E27EA27CC000D10E4 /* LoggerWrapper.swift */; };
 		E573E96227EA32F7000D10E4 /* PersistableLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96127EA32F7000D10E4 /* PersistableLevel.swift */; };
 		E573E96427EA3326000D10E4 /* PersistableDungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96327EA3326000D10E4 /* PersistableDungeon.swift */; };
-		E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */; };
+		E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96527EA3548000D10E4 /* PersistableTile.swift */; };
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
 		E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */; };
 		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
 		E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */; };
 		E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657B27F8032500F79A52 /* AudioRecorder.swift */; };
 		E574657E27F8056A00F79A52 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657D27F8056A00F79A52 /* EntityView.swift */; };
-		E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658027F8059000F79A52 /* MetaEntityViewModel.swift */; };
+		E574658127F8059000F79A52 /* EntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658027F8059000F79A52 /* EntityViewModel.swift */; };
 		E574658327F805B100F79A52 /* PaletteEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658227F805B100F79A52 /* PaletteEntityView.swift */; };
 		E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */; };
 		E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658627F8096600F79A52 /* ConditionCreatorView.swift */; };
 		E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */; };
-		E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */; };
+		E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658C27F835D300F79A52 /* PersistableEntityType.swift */; };
 		E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */; };
 		E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */; };
 		E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */; };
@@ -100,7 +100,13 @@
 		E57ACB3E27DC58DD00F73B27 /* Condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3D27DC58DD00F73B27 /* Condition.swift */; };
 		E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB3F27DC675E00F73B27 /* EntityType.swift */; };
 		E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB4127DC677A00F73B27 /* Rule.swift */; };
-		E57CA5E927EE1B2B008A3AFB /* DesignerPaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* DesignerPaletteView.swift */; };
+		E57B533F27FD32B90071E623 /* PersistableClassification.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B533E27FD32B90071E623 /* PersistableClassification.swift */; };
+		E57B534127FD32E50071E623 /* PersistableEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B534027FD32E50071E623 /* PersistableEntity.swift */; };
+		E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B534227FD33230071E623 /* PersistableConditionEvaluable.swift */; };
+		E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B534427FD333C0071E623 /* PersistableCondition.swift */; };
+		E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B534827FD34020071E623 /* ConditionRelation.swift */; };
+		E57B534B27FD341D0071E623 /* ConditionEvaluable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B534A27FD341D0071E623 /* ConditionEvaluable.swift */; };
+		E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */; };
 		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
 		E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */; };
 		E581F52627ECBCD900CAC137 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52527ECBCD900CAC137 /* Int.swift */; };
@@ -178,7 +184,7 @@
 		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		E5563C4727E8E5D5007D2E86 /* Vector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 		E56752FE27EEB9FC0001305D /* DungeonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSelectView.swift; sourceTree = "<group>"; };
-		E567530127EEBACD0001305D /* MetaLevelSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelSelectViewModel.swift; sourceTree = "<group>"; };
+		E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSelectViewModel.swift; sourceTree = "<group>"; };
 		E569071827ED4D830010E665 /* DesignerPersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerPersistenceView.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
@@ -186,19 +192,19 @@
 		E573E95E27EA27CC000D10E4 /* LoggerWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerWrapper.swift; sourceTree = "<group>"; };
 		E573E96127EA32F7000D10E4 /* PersistableLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableLevel.swift; sourceTree = "<group>"; };
 		E573E96327EA3326000D10E4 /* PersistableDungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableDungeon.swift; sourceTree = "<group>"; };
-		E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaTile.swift; sourceTree = "<group>"; };
+		E573E96527EA3548000D10E4 /* PersistableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableTile.swift; sourceTree = "<group>"; };
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
 		E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
 		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
 		E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorViewModel.swift; sourceTree = "<group>"; };
 		E574657B27F8032500F79A52 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		E574657D27F8056A00F79A52 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
-		E574658027F8059000F79A52 /* MetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaEntityViewModel.swift; sourceTree = "<group>"; };
+		E574658027F8059000F79A52 /* EntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityViewModel.swift; sourceTree = "<group>"; };
 		E574658227F805B100F79A52 /* PaletteEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEntityView.swift; sourceTree = "<group>"; };
 		E574658427F805CC00F79A52 /* PaletteMetaEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteMetaEntityViewModel.swift; sourceTree = "<group>"; };
 		E574658627F8096600F79A52 /* ConditionCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorView.swift; sourceTree = "<group>"; };
 		E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoView.swift; sourceTree = "<group>"; };
-		E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMetaEntityType.swift; sourceTree = "<group>"; };
+		E574658C27F835D300F79A52 /* PersistableEntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableEntityType.swift; sourceTree = "<group>"; };
 		E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SouthwardEastwardMatchingStrategy.swift; sourceTree = "<group>"; };
 		E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalMatchingStrategy.swift; sourceTree = "<group>"; };
 		E574659427F866A400F79A52 /* DeterministicFiniteAutomaton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeterministicFiniteAutomaton.swift; sourceTree = "<group>"; };
@@ -235,7 +241,13 @@
 		E57ACB3D27DC58DD00F73B27 /* Condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Condition.swift; sourceTree = "<group>"; };
 		E57ACB3F27DC675E00F73B27 /* EntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityType.swift; sourceTree = "<group>"; };
 		E57ACB4127DC677A00F73B27 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
-		E57CA5E827EE1B2B008A3AFB /* DesignerPaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerPaletteView.swift; sourceTree = "<group>"; };
+		E57B533E27FD32B90071E623 /* PersistableClassification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableClassification.swift; sourceTree = "<group>"; };
+		E57B534027FD32E50071E623 /* PersistableEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableEntity.swift; sourceTree = "<group>"; };
+		E57B534227FD33230071E623 /* PersistableConditionEvaluable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableConditionEvaluable.swift; sourceTree = "<group>"; };
+		E57B534427FD333C0071E623 /* PersistableCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableCondition.swift; sourceTree = "<group>"; };
+		E57B534827FD34020071E623 /* ConditionRelation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRelation.swift; sourceTree = "<group>"; };
+		E57B534A27FD341D0071E623 /* ConditionEvaluable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionEvaluable.swift; sourceTree = "<group>"; };
+		E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E581F08A27F760EA00B1CFCB /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		E581F52527ECBCD900CAC137 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -433,7 +445,7 @@
 		E567530027EEBABC0001305D /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				E567530127EEBACD0001305D /* MetaLevelSelectViewModel.swift */,
+				E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -462,8 +474,12 @@
 			children = (
 				E573E96127EA32F7000D10E4 /* PersistableLevel.swift */,
 				E573E96327EA3326000D10E4 /* PersistableDungeon.swift */,
-				E573E96527EA3548000D10E4 /* PersistableMetaTile.swift */,
-				E574658C27F835D300F79A52 /* PersistableMetaEntityType.swift */,
+				E573E96527EA3548000D10E4 /* PersistableTile.swift */,
+				E574658C27F835D300F79A52 /* PersistableEntityType.swift */,
+				E57B533E27FD32B90071E623 /* PersistableClassification.swift */,
+				E57B534027FD32E50071E623 /* PersistableEntity.swift */,
+				E57B534227FD33230071E623 /* PersistableConditionEvaluable.swift */,
+				E57B534427FD333C0071E623 /* PersistableCondition.swift */,
 			);
 			path = persistable;
 			sourceTree = "<group>";
@@ -471,7 +487,7 @@
 		E574657F27F8058300F79A52 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				E574658027F8059000F79A52 /* MetaEntityViewModel.swift */,
+				E574658027F8059000F79A52 /* EntityViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -598,6 +614,16 @@
 			path = models;
 			sourceTree = "<group>";
 		};
+		E57B534727FD33F20071E623 /* Condition */ = {
+			isa = PBXGroup;
+			children = (
+				E57ACB3D27DC58DD00F73B27 /* Condition.swift */,
+				E57B534827FD34020071E623 /* ConditionRelation.swift */,
+				E57B534A27FD341D0071E623 /* ConditionEvaluable.swift */,
+			);
+			path = Condition;
+			sourceTree = "<group>";
+		};
 		E581F08927F760D600B1CFCB /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,7 +639,7 @@
 				E5563C3D27E8CFCC007D2E86 /* ToolbarView.swift */,
 				E5563C3227E8ADCF007D2E86 /* DesignerView.swift */,
 				E569071827ED4D830010E665 /* DesignerPersistenceView.swift */,
-				E57CA5E827EE1B2B008A3AFB /* DesignerPaletteView.swift */,
+				E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */,
 				E574658227F805B100F79A52 /* PaletteEntityView.swift */,
 				E574658627F8096600F79A52 /* ConditionCreatorView.swift */,
 				E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */,
@@ -688,7 +714,7 @@
 		E5BECBF027E5E87A00E3952D /* entity */ = {
 			isa = PBXGroup;
 			children = (
-				E57ACB3D27DC58DD00F73B27 /* Condition.swift */,
+				E57B534727FD33F20071E623 /* Condition */,
 				E5BECBDF27E5A64B00E3952D /* Entity.swift */,
 				E57ACB3F27DC675E00F73B27 /* EntityType.swift */,
 				E5BECBF127E5E8B900E3952D /* Noun.swift */,
@@ -840,17 +866,18 @@
 				E56752FF27EEB9FC0001305D /* DungeonSelectView.swift in Sources */,
 				E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
+				E57B534127FD32E50071E623 /* PersistableEntity.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
-				E574658D27F835D300F79A52 /* PersistableMetaEntityType.swift in Sources */,
+				E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */,
 				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
 				E5EC5B5627F3696200BAE834 /* PlayView.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
-				E573E96627EA3548000D10E4 /* PersistableMetaTile.swift in Sources */,
+				E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				E573E96227EA32F7000D10E4 /* PersistableLevel.swift in Sources */,
 				E574658327F805B100F79A52 /* PaletteEntityView.swift in Sources */,
@@ -861,6 +888,7 @@
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				E574657E27F8056A00F79A52 /* EntityView.swift in Sources */,
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
+				E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */,
 				E569071927ED4D830010E665 /* DesignerPersistenceView.swift in Sources */,
@@ -871,6 +899,7 @@
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
 				E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
+				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
 				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
 				E578594627F3EA7C009A79F9 /* DungeonManipulableViewModel.swift in Sources */,
@@ -889,6 +918,7 @@
 				E574658527F805CC00F79A52 /* PaletteMetaEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* Chunkable.swift in Sources */,
 				E585AD5127F9410900A54202 /* UIColor.swift in Sources */,
+				E57B534B27FD341D0071E623 /* ConditionEvaluable.swift in Sources */,
 				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
 				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
@@ -897,7 +927,7 @@
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
 				E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */,
-				E567530227EEBACD0001305D /* MetaLevelSelectViewModel.swift in Sources */,
+				E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */,
 				E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableDungeon.swift in Sources */,
@@ -922,6 +952,7 @@
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
+				E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
 				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
@@ -931,7 +962,7 @@
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
-				E574658127F8059000F79A52 /* MetaEntityViewModel.swift in Sources */,
+				E574658127F8059000F79A52 /* EntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
 				E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
@@ -942,8 +973,9 @@
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
+				E57B533F27FD32B90071E623 /* PersistableClassification.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
-				E57CA5E927EE1B2B008A3AFB /* DesignerPaletteView.swift in Sources */,
+				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
 				E5D0A22D27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

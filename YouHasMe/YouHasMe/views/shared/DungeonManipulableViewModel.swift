@@ -16,7 +16,7 @@ extension DungeonManipulableViewModel {
     func getTile(at viewOffset: Vector, loadNeighboringChunks: Bool) -> Tile? {
         dungeon.getTile(
             at: viewPosition.translate(by: viewOffset),
-            loadNeighboringChunks: loadNeighboringChunks
+            loadNeighboringLevels: loadNeighboringChunks
         )
     }
 

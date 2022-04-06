@@ -60,15 +60,3 @@ extension Classification {
         }
     }
 }
-
-enum PersistableClassification {
-    case noun(Noun)
-    case verb(Verb)
-    case connective(Connective)
-    case property(Property)
-    case nounInstance(Noun)
-    case conditionRelation(ConditionRelation)
-    case conditionEvaluable(PersistableConditionEvaluable)
-}
-
-extension PersistableClassification: Codable {}

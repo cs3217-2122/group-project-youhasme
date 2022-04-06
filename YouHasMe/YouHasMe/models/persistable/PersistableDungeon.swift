@@ -8,8 +8,9 @@
 import Foundation
 struct PersistableDungeon {
     var name: String
-    var entryChunkPosition: Point
     var dimensions: Rectangle
+    var levelDimensions: Rectangle
+    var entryChunkPosition: Point
 }
 
 extension PersistableDungeon: Codable {}

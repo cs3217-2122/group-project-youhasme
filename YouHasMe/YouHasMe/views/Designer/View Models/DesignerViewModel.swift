@@ -120,7 +120,7 @@ extension DesignerViewModel: EntityViewModelBasicCRUDDelegate {
             return
         }
 
-        guard var tile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false) else {
+        guard var tile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false) else {
             return
         }
         tile.entities.append(Entity(entityType: selectedPaletteEntityType))
@@ -142,7 +142,7 @@ extension DesignerViewModel: EntityViewModelExaminableDelegate {
             return
         }
 
-        guard let tile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false) else {
+        guard let tile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false) else {
             return
         }
 
@@ -156,7 +156,7 @@ extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
             return
         }
 
-        guard var tile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false) else {
+        guard var tile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false) else {
             return
         }
         tile.entities.append(
@@ -199,10 +199,6 @@ extension DesignerViewModel {
         entityViewModel.examinableDelegate = self
         return entityViewModel
     }
-
-//    func getTileInfoViewModel(tile: Tile) -> MetaLevelDesignerTileInfoViewModel {
-//        MetaLevelDesignerTileInfoViewModel(tile: tile)
-//    }
 
     func getConditionEvaluableCreatorViewModel() -> ConditionEvaluableCreatorViewModel {
         ConditionEvaluableCreatorViewModel()

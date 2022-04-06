@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DesignerPaletteView: View {
+struct PaletteView: View {
     @ObservedObject var viewModel: DesignerViewModel
     var body: some View {
         ScrollView(.horizontal) {

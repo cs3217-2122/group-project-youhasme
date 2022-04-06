@@ -10,7 +10,7 @@ struct DesignerView: View {
             VStack {
                 ToolbarView(viewModel: viewModel.getToolbarViewModel())
                     .padding()
-                DesignerPaletteView(viewModel: viewModel)
+                PaletteView(viewModel: viewModel)
                     .padding()
                 GridView(viewModel: viewModel)
                     .padding()

@@ -64,7 +64,7 @@ struct DesignerPersistenceView: View {
     var saveErrorMessage = "Save Error"
     @State var showSaveErrorAlert = false
     @State var loadSuccess = false
-    @State var showMetaLevelNameAlert = false
+    @State var showDungeonNameAlert = false
     @State var dungeonButtonText: String = ""
     @State var unconfirmedDungeonName = ""
 
@@ -88,7 +88,7 @@ struct DesignerPersistenceView: View {
 
             DungeonNameButton(viewModel: viewModel.getNameButtonViewModel()) {
                 unconfirmedDungeonName = viewModel.dungeon.name
-                showMetaLevelNameAlert = true
+                showDungeonNameAlert = true
             }
             
             Spacer()
@@ -105,13 +105,13 @@ struct DesignerPersistenceView: View {
             }
         }
         .padding([.leading, .trailing], 10.0)
-        .textFieldAlert(isShowing: $showMetaLevelNameAlert, text: $unconfirmedDungeonName, title: "Change name")
-        .onChange(of: showMetaLevelNameAlert) { isShowing in
+        .textFieldAlert(isShowing: $showDungeonNameAlert, text: $unconfirmedDungeonName, title: "Change name")
+        .onChange(of: showDungeonNameAlert) { isShowing in
             guard !isShowing else {
                 return
             }
-            viewModel.dungeon.renameLevel(to: unconfirmedDungeonName)
-            showMetaLevelNameAlert = false
+            viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
+            showDungeonNameAlert = false
         }
     }
 }

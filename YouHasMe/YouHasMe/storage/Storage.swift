@@ -54,11 +54,13 @@ class Storage {
     }
 
     final func save(data: Data, to file: URL) throws {
+        print("saving to \(file)")
         try data.write(to: file)
     }
 
     final func load(from file: URL) throws -> Data {
-        try Data(contentsOf: file)
+        print("loading from \(file)")
+        return try Data(contentsOf: file)
     }
 
     final func delete(file: URL) throws {
@@ -194,11 +196,7 @@ class LevelStorage: JSONStorage {
     }
 
     func saveLevel(_ level: Level) throws {
-        try encodeAndSave(object: level.toPersistable(), filename: level.name)
-    }
-
-    func getPreloadedLevels() -> [Level] {
-        []
+        try encodeAndSave(object: level.toPersistable(), filename: level.id.dataString)
     }
 }
 

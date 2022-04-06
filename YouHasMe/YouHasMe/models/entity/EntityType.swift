@@ -98,9 +98,3 @@ struct EntityTypes {
         return entityTypes
     }
 }
-
-struct PersistableEntityType {
-    var classification: PersistableClassification
-}
-
-extension PersistableEntityType: Codable {}

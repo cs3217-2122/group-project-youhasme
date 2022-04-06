@@ -23,9 +23,3 @@ extension Entity {
 }
 
 extension Entity: Hashable {}
-
-struct PersistableEntity {
-    var entityType: PersistableEntityType
-}
-
-extension PersistableEntity: Codable {}

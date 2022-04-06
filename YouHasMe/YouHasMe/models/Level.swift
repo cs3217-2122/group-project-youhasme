@@ -191,9 +191,3 @@ extension Tile {
         Tile(entities: persistableTile.entities.map { Entity.fromPersistable($0) })
     }
 }
-
-struct PersistableTile {
-    var entities: [PersistableEntity] = []
-}
-
-extension PersistableTile: Codable {}

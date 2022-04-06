@@ -7,10 +7,14 @@ protocol DungeonViewableDelegate: AnyObject {
 
 class Dungeon {
     static let defaultLevelDimensions = Rectangle(width: 64, height: 64)
+    static let defaultDimensions = Rectangle(width: 2, height: 2)
     static let loadableRadius: Int = 1
     static let defaultName: String = "Dungeon1"
     weak var viewableDelegate: DungeonViewableDelegate?
-    let levelDimensions = Rectangle(width: 64, height: 64)
+    /// Uniform dimensions of each level within a dungeon.
+    let levelDimensions: Rectangle
+    /// Dimensions of the dungeon in terms of levels.
+    let dimensions: Rectangle
     var loadableChunkRadius: Int {
         Dungeon.loadableRadius
     }
@@ -29,25 +33,45 @@ class Dungeon {
 
     @Published var loadedLevels: [Point: Level] = [:]
 
-    // TODO: As we add multiplayer feature, this will become a dictionary mapping players to chunk instead
-    var dimensions: Rectangle = Dungeon.defaultLevelDimensions
     private var subscriptions: Set<AnyCancellable> = []
 
     convenience init() {
         self.init(
+            isNewDungeon: true,
             name: Dungeon.defaultName,
-            dimensions: Dungeon.defaultLevelDimensions,
+            dimensions: Dungeon.defaultDimensions,
+            levelDimensions: Dungeon.defaultLevelDimensions,
             entryChunkPosition: .zero
         )
     }
 
-    init(name: String, dimensions: Rectangle, entryChunkPosition: Point) {
+    init(
+        isNewDungeon: Bool,
+        name: String,
+        dimensions: Rectangle,
+        levelDimensions: Rectangle,
+        entryChunkPosition: Point
+    ) {
         self.name = name
         self.dimensions = dimensions
+        self.levelDimensions = levelDimensions
         self.entryChunkPosition = entryChunkPosition
+
+        if isNewDungeon {
+            for x in 0..<dimensions.height {
+                for y in 0..<dimensions.width {
+                    createLevel(at: Point(x: x, y: y))
+                }
+            }
+            do {
+                try dungeonStorage.saveDungeon(self)
+            } catch {
+                fatalError(error.localizedDescription)
+            }
+        }
     }
 
-    func renameLevel(to newName: String) {
+    func renameDungeon(to newName: String) {
         let oldName = name
         do {
             globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
@@ -55,7 +79,7 @@ class Dungeon {
             name = newName
             try dungeonStorage.saveDungeon(self)
         } catch {
-            globalLogger.error("\(error)")
+            globalLogger.error("\(error.localizedDescription)")
         }
     }
 
@@ -81,11 +105,17 @@ extension Dungeon: Identifiable {
 
 extension Dungeon {
     func worldToLevelPosition(_ worldPosition: Point) -> Point {
-        Point(x: worldPosition.x.flooredDiv(levelDimensions.width), y: worldPosition.y.flooredDiv(levelDimensions.height))
+        Point(
+            x: worldPosition.x.flooredDiv(levelDimensions.width),
+            y: worldPosition.y.flooredDiv(levelDimensions.height)
+        )
     }
 
     func worldToPositionWithinLevel(_ worldPosition: Point) -> Point {
-        Point(x: worldPosition.x.modulo(levelDimensions.width), y: worldPosition.y.modulo(levelDimensions.height))
+        Point(
+            x: worldPosition.x.modulo(levelDimensions.width),
+            y: worldPosition.y.modulo(levelDimensions.height)
+        )
     }
 
     func worldRegionToLevelRegion(_ worldRegion: PositionedRectangle) -> PositionedRectangle {
@@ -120,7 +150,7 @@ extension Dungeon {
     }
 
     func createLevel(at levelPosition: Point) {
-        let level = Level(id: levelPosition, name: levelPosition.dataString, dimensions: dimensions)
+        let level = Level(id: levelPosition, name: levelPosition.dataString, dimensions: levelDimensions)
 
         do {
             try levelStorage.saveLevel(level)
@@ -178,21 +208,21 @@ extension Dungeon {
         }
     }
 
-    func getTile(at worldPosition: Point, loadNeighboringChunks: Bool) -> Tile? {
-        guard let level = getLevel(at: worldPosition, loadNeighbors: loadNeighboringChunks) else {
+    func getTile(at worldPosition: Point, loadNeighboringLevels: Bool) -> Tile? {
+        guard let level = getLevel(at: worldPosition, loadNeighbors: loadNeighboringLevels) else {
             return nil
         }
-        let positionWithinChunk = worldToPositionWithinLevel(worldPosition)
+        let positionWithinLevel = worldToPositionWithinLevel(worldPosition)
 
-        return level.getTileAt(point: positionWithinChunk)
+        return level.getTileAt(point: positionWithinLevel)
     }
 
     func setTile(_ tile: Tile, at worldPosition: Point) {
         guard let level = getLevel(at: worldPosition) else {
             return
         }
-        let positionWithinChunk = worldToPositionWithinLevel(worldPosition)
-        level.setTile(tile, at: positionWithinChunk)
+        let positionWithinLevel = worldToPositionWithinLevel(worldPosition)
+        level.setTile(tile, at: positionWithinLevel)
     }
 }
 
@@ -213,15 +243,18 @@ extension Dungeon {
     func toPersistable() -> PersistableDungeon {
         PersistableDungeon(
             name: name,
-            entryChunkPosition: entryChunkPosition,
-            dimensions: dimensions
+            dimensions: dimensions,
+            levelDimensions: levelDimensions,
+            entryChunkPosition: entryChunkPosition
         )
     }
 
     static func fromPersistable(_ persistableDungeon: PersistableDungeon) -> Dungeon {
         let dungeon = Dungeon(
+            isNewDungeon: false,
             name: persistableDungeon.name,
             dimensions: persistableDungeon.dimensions,
+            levelDimensions: persistableDungeon.levelDimensions,
             entryChunkPosition: persistableDungeon.entryChunkPosition
         )
         return dungeon

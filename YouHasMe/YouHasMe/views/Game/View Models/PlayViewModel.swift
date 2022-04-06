@@ -121,7 +121,7 @@ extension PlayViewModel: ContextualMenuDelegate {
 
 extension PlayViewModel: EntityViewModelExaminableDelegate {
     func examineTile(at worldPosition: Point) {
-        selectedTile = dungeon.getTile(at: worldPosition, loadNeighboringChunks: false)
+        selectedTile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false)
     }
 }
 
