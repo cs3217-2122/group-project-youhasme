@@ -33,9 +33,18 @@ struct EntityTypes {
         static var wall = EntityType(classification: .nounInstance(.wall))
         static var skull = EntityType(classification: .nounInstance(.skull))
         static var box = EntityType(classification: .nounInstance(.box))
-
+        static var bedrock = EntityType(classification: .nounInstance(.bedrock))
+        static var connectorWall = EntityType(classification: .nounInstance(.connectorWall))
         static func getAllNounInstances() -> [EntityType] {
-            [NounInstances.baba, NounInstances.flag, NounInstances.wall, NounInstances.skull, NounInstances.box]
+            [
+                NounInstances.baba,
+                NounInstances.flag,
+                NounInstances.wall,
+                NounInstances.skull,
+                NounInstances.box,
+                NounInstances.bedrock,
+                NounInstances.connectorWall
+            ]
         }
     }
 
@@ -46,9 +55,19 @@ struct EntityTypes {
         static var skull = EntityType(classification: .noun(.skull))
         static var box = EntityType(classification: .noun(.box))
         static var word = EntityType(classification: .noun(.word))
-
+        static var bedrock = EntityType(classification: .noun(.bedrock))
+        static var connectorWall = EntityType(classification: .noun(.connectorWall))
         static func getAllNouns() -> [EntityType] {
-            [Nouns.baba, Nouns.flag, Nouns.wall, Nouns.skull, Nouns.box, Nouns.word]
+            [
+                Nouns.baba,
+                Nouns.flag,
+                Nouns.wall,
+                Nouns.skull,
+                Nouns.box,
+                Nouns.word,
+                Nouns.bedrock,
+                Nouns.connectorWall
+            ]
         }
     }
 
@@ -83,9 +102,35 @@ struct EntityTypes {
 
     struct Connectives {
         static var and = EntityType(classification: .connective(.and))
+        static var cIf = EntityType(classification: .connective(.cIf))
 
         static func getAllConnectives() -> [EntityType] {
-            [Connectives.and]
+            [
+                Connectives.and,
+                Connectives.cIf
+            ]
+        }
+    }
+
+    struct ConditionRelations {
+        static var gt = EntityType(classification: .conditionRelation(.gt))
+        static var eq = EntityType(classification: .conditionRelation(.eq))
+        static var lt = EntityType(classification: .conditionRelation(.lt))
+
+        static func getAllConditionRelations() -> [EntityType] {
+            [
+                ConditionRelations.gt,
+                ConditionRelations.eq,
+                ConditionRelations.lt
+            ]
+        }
+    }
+
+    struct ConditionEvaluables {
+        static var dummyEvaluable = EntityType(classification: .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(1))))
+
+        static func getAllConditionEvaluables() -> [EntityType] {
+            [dummyEvaluable]
         }
     }
 
@@ -95,6 +140,8 @@ struct EntityTypes {
         entityTypes.append(contentsOf: Verbs.getAllVerbs())
         entityTypes.append(contentsOf: Properties.getAllProperties())
         entityTypes.append(contentsOf: Connectives.getAllConnectives())
+        entityTypes.append(contentsOf: ConditionRelations.getAllConditionRelations())
+        entityTypes.append(contentsOf: ConditionEvaluables.getAllConditionEvaluables())
         return entityTypes
     }
 }

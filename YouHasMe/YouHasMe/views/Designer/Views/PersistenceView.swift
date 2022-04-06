@@ -55,7 +55,7 @@ extension View {
 
 }
 
-struct DesignerPersistenceView: View {
+struct PersistenceView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: DesignerViewModel
     

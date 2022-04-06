@@ -26,6 +26,17 @@ extension Array where Element: AnyObject {
     }
 }
 
+extension Array where Element == [Tile] {
+    subscript(_ point: Point) -> Tile {
+        get {
+            self[point.y][point.x]
+        }
+        set {
+            self[point.y][point.x] = newValue
+        }
+    }
+}
+
 // Random
 extension Array {
     static func getRandomPermutation(in range: Range<Int>) -> [Int] {

@@ -34,15 +34,15 @@ extension ConditionEvaluable {
     }
 
     static func fromPersistable(_ persistableConditionEvaluable: PersistableConditionEvaluable) -> ConditionEvaluable {
-        ConditionEvaluable(evaluableType: ConditionEvaluableType.fromPersistable( persistableConditionEvaluable.evaluableType))
+        ConditionEvaluable(
+            evaluableType: ConditionEvaluableType.fromPersistable( persistableConditionEvaluable.evaluableType)
+        )
     }
 }
 
-
-
 enum ConditionEvaluableType {
-    case dungeon(evaluatingKeyPath: NamedKeyPath<Dungeon, Int>)
-    case level(id: Point, evaluatingKeyPath: NamedKeyPath<Level, Int>)
+    case dungeon(evaluatingKeyPath: NamedKeyPath<Dungeon.PathIdentifier, Dungeon, Int>)
+    case level(id: Point, evaluatingKeyPath: NamedKeyPath<Level.PathIdentifier, Level, Int>)
     case player
     case numericLiteral(Int)
 }

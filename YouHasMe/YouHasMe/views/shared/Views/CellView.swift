@@ -22,6 +22,7 @@ struct CellView: View {
 
 enum Imageable {
     case string(String)
+    case sfSymbol(String)
     case uiImage(UIImage)
     case cgImage(CGImage)
     case uiColor(UIColor)
@@ -32,6 +33,8 @@ extension Imageable {
         switch self {
         case .string(let string):
             return Image(string)
+        case .sfSymbol(let string):
+            return Image(systemName: string)
         case .uiImage(let uiImage):
             return Image(uiImage: uiImage).renderingMode(.original)
         case .cgImage(let cgImage):

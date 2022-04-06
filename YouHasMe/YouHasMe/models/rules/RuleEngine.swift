@@ -26,9 +26,12 @@ class RuleEngine {
     func applyRules(to levelLayer: LevelLayer) -> LevelLayer {
         let rules = ruleParser.parse(block: levelLayer.getAbstractRepresentation())
         var newLayer = levelLayer
-        for i in 0..<newLayer.tiles.count {
-            for j in 0..<newLayer.tiles[i].entities.count {
-                ruleValidator.validate(rules: rules, for: &newLayer.tiles[i].entities[j], environment: newLayer)
+        for y in 0..<newLayer.tiles.count {
+            for x in 0..<newLayer.tiles[0].count {
+                let point = Point(x: x, y: y)
+                for i in 0..<newLayer.tiles[point].entities.count {
+                    ruleValidator.validate(rules: rules, for: &newLayer.tiles[point].entities[i], environment: newLayer)
+                }
             }
         }
         return newLayer

@@ -37,7 +37,7 @@ protocol AbstractGridViewModel: ObservableObject {
 }
 
 struct GridView<T: AbstractGridViewModel>: View {
-    let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
+    let inverseDragThreshold: Double = 20.0.multiplicativeInverse()
         
     @ObservedObject var viewModel: T
     @State var lastDragLocation: CGPoint?

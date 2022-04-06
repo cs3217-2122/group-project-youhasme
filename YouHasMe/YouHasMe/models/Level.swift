@@ -1,7 +1,7 @@
 import Foundation
 import Combine
 protocol LevelLocationalDelegate: AnyObject {
-    var chunkExtremities: PositionedRectangle { get }
+    var extremities: Rectangle { get }
 }
 
 class Level: Chunkable {
@@ -28,25 +28,31 @@ class Level: Chunkable {
         }
     }
 
-    var extremities: ExtremityData<Point> {
-        guard let delegate = delegate else {
+    weak var locationalDelegate: LevelLocationalDelegate?
+    weak var neighborFinderDelegate: AnyNeighborFinderDelegate<Point>?
+    weak var generatorDelegate: AnyChunkGeneratorDelegate? {
+        didSet {
+            guard let generatorDelegate = generatorDelegate else {
+                return
+            }
+
+            self.layer.tiles = generatorDelegate.generate(
+                dimensions: dimensions,
+                levelPosition: id,
+                extremities: extremities
+            )
+        }
+    }
+    var extremities: Rectangle {
+        guard let locationalDelegate = locationalDelegate else {
             fatalError("should not be nil")
         }
-
-        let extremityRectangle = delegate.chunkExtremities
-        return ExtremityData(
-            topExtreme: Point(x: 0, y: extremityRectangle.topSide),
-            leftExtreme: Point(x: extremityRectangle.leftSide, y: 0),
-            rightExtreme: Point(x: extremityRectangle.rightSide, y: 0),
-            bottomExtreme: Point(x: 0, y: extremityRectangle.bottomSide)
-        )
+        return locationalDelegate.extremities
     }
-
-    weak var delegate: LevelLocationalDelegate?
-    weak var neighborFinderDelegate: AnyNeighborFinderDelegate<Point>?
     var levelStorage: LevelStorage?
     var id: Point
     var name: String
+    var winCount: Int = 0
     var dimensions: Rectangle
     var neighbors = Neighborhood()
     typealias ChunkIdentifier = Point
@@ -96,22 +102,25 @@ class Level: Chunkable {
     func setTile(_ tile: Tile, at point: Point) {
         layer.setTile(tile, at: point)
     }
-
-    func setTileAt(x: Int, y: Int, tile: Tile) {
-        layer.setTileAt(x: x, y: y, tile: tile)
-    }
 }
 
 extension Level: Identifiable {}
 
+enum LevelKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
+    case winCount = "Win Count"
+}
+
 extension Level: KeyPathExposable {
+    typealias PathIdentifier = LevelKeyPathKeys
     typealias PathRoot = Level
 
-    static var exposedNumericKeyPathsMap: [String: KeyPath<Level, Int>] {
-        [:]
+    static var exposedNumericKeyPathsMap: [LevelKeyPathKeys: KeyPath<Level, Int>] {
+        [
+            .winCount: \.winCount
+        ]
     }
 
-    func evaluate(given keyPath: NamedKeyPath<Level, Int>) -> Int {
+    func evaluate(given keyPath: NamedKeyPath<LevelKeyPathKeys, Level, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
     }
 }
@@ -173,21 +182,5 @@ extension Level {
             dimensions: persistableLevel.dimensions,
             layer: LevelLayer.fromPersistable(persistableLevel.layer)
         )
-    }
-}
-
-struct Tile {
-    var entities: [Entity] = []
-}
-
-extension Tile: Hashable {}
-
-extension Tile {
-    func toPersistable() -> PersistableTile {
-        PersistableTile(entities: entities.map { $0.toPersistable() })
-    }
-
-    static func fromPersistable(_ persistableTile: PersistableTile) -> Tile {
-        Tile(entities: persistableTile.entities.map { Entity.fromPersistable($0) })
     }
 }

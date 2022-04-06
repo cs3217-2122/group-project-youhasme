@@ -6,11 +6,15 @@ protocol DungeonViewableDelegate: AnyObject {
 }
 
 class Dungeon {
-    static let defaultLevelDimensions = Rectangle(width: 64, height: 64)
+    static let defaultLevelDimensions = Rectangle(width: 16, height: 16)
     static let defaultDimensions = Rectangle(width: 2, height: 2)
     static let loadableRadius: Int = 1
     static let defaultName: String = "Dungeon1"
     weak var viewableDelegate: DungeonViewableDelegate?
+    var levelGenerator = CompletelyEnclosedGenerator()
+        .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
+        .decorateWith(SnakeLikeConnectorLockGeneratorDecorator.self)
+    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
@@ -26,7 +30,7 @@ class Dungeon {
         return storage
     }
     @Published private(set) var name: String
-    let levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+
     var entryChunkPosition: Point = .zero
     var entryWorldPosition: Point = .zero
     var levelNameToPositionMap: [String: Point] = [:]
@@ -150,7 +154,13 @@ extension Dungeon {
     }
 
     func createLevel(at levelPosition: Point) {
-        let level = Level(id: levelPosition, name: levelPosition.dataString, dimensions: levelDimensions)
+        let level = Level(
+            id: levelPosition,
+            name: levelPosition.dataString,
+            dimensions: levelDimensions
+        )
+        level.locationalDelegate = self
+        level.generatorDelegate = self.levelGenerator
 
         do {
             try levelStorage.saveLevel(level)
@@ -261,14 +271,24 @@ extension Dungeon {
     }
 }
 
+enum DungeonKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
+    case name // TODO: placeholder
+}
+
 extension Dungeon: KeyPathExposable {
-    static var exposedNumericKeyPathsMap: [String: KeyPath<Dungeon, Int>] {
+    static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
-            "Name length": \.name.count
+            :
         ]
     }
 
-    func evaluate(given keyPath: NamedKeyPath<Dungeon, Int>) -> Int {
+    func evaluate(given keyPath: NamedKeyPath<DungeonKeyPathKeys, Dungeon, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
+    }
+}
+
+extension Dungeon: LevelLocationalDelegate {
+    var extremities: Rectangle {
+        dimensions
     }
 }

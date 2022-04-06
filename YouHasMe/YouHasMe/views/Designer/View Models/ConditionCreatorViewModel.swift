@@ -30,22 +30,26 @@ class ConditionBuilder {
         }
         switch type {
         case .dungeon:
-            guard let fieldId = fieldId,
-                  let namedKeyPath = Dungeon.getNamedKeyPath(given: fieldId)  else {
+            guard let fieldId = fieldId else {
                       throw BuildError.componentError
             }
+            let namedKeyPath = Dungeon.getNamedKeyPath(given: fieldId)
             return .dungeon(evaluatingKeyPath: namedKeyPath)
         case .level:
             guard let identifier = identifier,
-                  let fieldId = fieldId,
-                  let namedKeyPath = Level.getNamedKeyPath(given: fieldId) else {
+                  let fieldId = fieldId else {
                       throw BuildError.componentError
             }
+            let namedKeyPath = Level.getNamedKeyPath(given: fieldId)
             return .level(id: identifier, evaluatingKeyPath: namedKeyPath)
         case .player:
             return .player
         case .numericLiteral:
-            return .numericLiteral(-1)
+            guard let literal = literal else {
+                throw BuildError.componentError
+            }
+
+            return .numericLiteral(literal)
         }
     }
 

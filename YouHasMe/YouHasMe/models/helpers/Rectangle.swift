@@ -9,6 +9,36 @@ struct Rectangle {
     }
 }
 
+extension Rectangle {
+    var topSide: Int {
+        0
+    }
+
+    var bottomSide: Int {
+        height
+    }
+
+    var leftSide: Int {
+        0
+    }
+
+    var rightSide: Int {
+        width
+    }
+
+    var topRight: Point {
+        Point(x: rightSide, y: topSide)
+    }
+
+    var bottomLeft: Point {
+        Point(x: leftSide, y: bottomSide)
+    }
+
+    var bottomRight: Point {
+        Point(x: rightSide, y: bottomSide)
+    }
+}
+
 extension Rectangle: Codable {}
 extension Rectangle: Hashable {}
 

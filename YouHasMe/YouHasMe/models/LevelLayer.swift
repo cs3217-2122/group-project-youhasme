@@ -8,20 +8,24 @@
 import Foundation
 struct LevelLayer {
     var dimensions: Rectangle
-    var tiles: [Tile]
+    var tiles: [[Tile]]
 
     init(dimensions: Rectangle) {
         self.dimensions = dimensions
-        self.tiles = Array(repeating: Tile(), count: dimensions.width * dimensions.height)
+        self.tiles = Array(
+            repeatingFactory:
+                Array(repeatingFactory: Tile(), count: dimensions.width),
+            count: dimensions.height
+        )
     }
 
-    init(dimensions: Rectangle, tiles: [Tile]) {
+    init(dimensions: Rectangle, tiles: [[Tile]]) {
         self.dimensions = dimensions
         self.tiles = tiles
     }
 
     mutating func add(entity: Entity, x: Int, y: Int) {
-        tiles[x + y * dimensions.width].entities.append(entity)
+        tiles[y][x].entities.append(entity)
     }
 
     func getAbstractRepresentation() -> EntityBlock {
@@ -30,13 +34,17 @@ struct LevelLayer {
             count: dimensions.height
         )
 
-        for (index, tile) in tiles.enumerated() {
-            guard !tile.entities.isEmpty else {
-                continue
+        for y in 0..<tiles.count {
+            for x in 0..<tiles[0].count {
+                let tile = tiles[y][x]
+                guard !tile.entities.isEmpty else {
+                    continue
+                }
+                grid[y][x] =
+                    Set(tile.entities.map { $0.entityType.classification })
             }
-            grid[index / dimensions.width][index % dimensions.width] =
-                Set(tile.entities.map { $0.entityType.classification })
         }
+
         return grid
     }
 }
@@ -47,16 +55,16 @@ extension LevelLayer {
     }
 
     func getTileAt(x: Int, y: Int) -> Tile {
-        tiles[x + y * dimensions.width]
+        tiles[y][x]
     }
 
     mutating func setTile(_ tile: Tile, at point: Point) {
-        setTileAt(x: point.x, y: point.y, tile: tile)
+        setTile(tile, x: point.x, y: point.y)
     }
 
     // TODO: refactor to `setTile` style
-    mutating func setTileAt(x: Int, y: Int, tile: Tile) {
-        tiles[x + y * dimensions.width] = tile
+    mutating func setTile(_ tile: Tile, x: Int, y: Int) {
+        tiles[y][x] = tile
     }
 }
 
@@ -76,19 +84,15 @@ extension LevelLayer: CustomDebugStringConvertible {
 
 extension LevelLayer {
     func toPersistable() -> PersistableLevelLayer {
-        PersistableLevelLayer(dimensions: dimensions, tiles: tiles.map { $0.toPersistable() })
+        PersistableLevelLayer(
+            dimensions: dimensions,
+            tiles: tiles.map { $0.map { $0.toPersistable() } }
+        )
     }
 
     static func fromPersistable(_ persistableLevelLayer: PersistableLevelLayer) -> LevelLayer {
-        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map { Tile.fromPersistable($0) })
+        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map { $0.map { Tile.fromPersistable($0) } })
     }
 }
 
 extension LevelLayer: Hashable {}
-
-struct PersistableLevelLayer {
-    var dimensions: Rectangle
-    var tiles: [PersistableTile]
-}
-
-extension PersistableLevelLayer: Codable {}

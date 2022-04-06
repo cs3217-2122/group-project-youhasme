@@ -15,7 +15,7 @@ struct DesignerView: View {
                 GridView(viewModel: viewModel)
                     .padding()
                 Spacer()
-                DesignerPersistenceView(viewModel: viewModel)
+                PersistenceView(viewModel: viewModel)
             }
             .onReceive(viewModel.$state, perform: {
                 guard case .choosingConditionEvaluable = $0 else {

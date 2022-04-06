@@ -14,6 +14,8 @@ enum ConditionRelation: String {
     case gt = ">"
 }
 
+extension ConditionRelation: CaseIterable {}
+
 extension ConditionRelation: Codable {}
 
 extension ConditionRelation: Hashable {}
