@@ -11,6 +11,7 @@ struct Rule {
     var receiver: Noun
     var verb: Verb
     var performer: RulePerformer
+    var conditions: [Condition] = []
     var relevantEntities: [EntityType] = []
     init(receiver: Noun, verb: Verb, performer: RulePerformer) {
         self.receiver = receiver

@@ -1,12 +1,12 @@
 //
-//  IsVerbConcatNounPropState.swift
+//  RHSEvaluableState.swift
 //  YouHasMe
 //
-//  Created by Jia Cheng Sun on 2/4/22.
+//  Created by Jia Cheng Sun on 6/4/22.
 //
 
 import Foundation
-final class IsVerbConcatNounPropState: DFAState {
+final class RHSEvaluableState: DFAState {
     weak var delegate: DFATransitionDelegate?
     var unconfirmedRulesData: RulesData
     let isAccepting = true
@@ -20,16 +20,11 @@ final class IsVerbConcatNounPropState: DFAState {
             fatalError("should not be nil")
         }
 
-        guard case .connective(let connective) = entityType else {
+        guard case .connective(let connective) = entityType, connective == .and else {
             delegate.stateTransition(to: RejectingState())
             return
         }
 
-        switch connective {
-        case .and:
-            delegate.stateTransition(to: IsVerbPrimedState(unconfirmedRulesData: unconfirmedRulesData))
-        case .cIf:
-            delegate.stateTransition(to: IfState(unconfirmedRulesData: unconfirmedRulesData))
-        }
+        delegate.stateTransition(to: IfState(unconfirmedRulesData: unconfirmedRulesData))
     }
 }

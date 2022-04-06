@@ -78,7 +78,7 @@
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
 		E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */; };
 		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
-		E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */; };
+		E57453B327F555B3003DAD5C /* ConditionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionBuilder.swift */; };
 		E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657B27F8032500F79A52 /* AudioRecorder.swift */; };
 		E574657E27F8056A00F79A52 /* EntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657D27F8056A00F79A52 /* EntityView.swift */; };
 		E574658127F8059000F79A52 /* EntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658027F8059000F79A52 /* EntityViewModel.swift */; };
@@ -149,6 +149,11 @@
 		E585AD5927F964F900A54202 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5827F964F900A54202 /* MessageView.swift */; };
 		E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */; };
 		E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */; };
+		E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBDB27FDC9140035E517 /* IfState.swift */; };
+		E58ACBDE27FDCA4E0035E517 /* LHSEvaluableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBDD27FDCA4E0035E517 /* LHSEvaluableState.swift */; };
+		E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBDF27FDCA9D0035E517 /* ConditionRelationState.swift */; };
+		E58ACBE227FDCAC00035E517 /* RHSEvaluableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBE127FDCAC00035E517 /* RHSEvaluableState.swift */; };
+		E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -251,7 +256,7 @@
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
 		E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
 		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
-		E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorViewModel.swift; sourceTree = "<group>"; };
+		E57453B227F555B3003DAD5C /* ConditionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionBuilder.swift; sourceTree = "<group>"; };
 		E574657B27F8032500F79A52 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 		E574657D27F8056A00F79A52 /* EntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityView.swift; sourceTree = "<group>"; };
 		E574658027F8059000F79A52 /* EntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityViewModel.swift; sourceTree = "<group>"; };
@@ -323,6 +328,11 @@
 		E585AD5827F964F900A54202 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthParsingStrategy.swift; sourceTree = "<group>"; };
 		E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthParsingStrategy.swift; sourceTree = "<group>"; };
+		E58ACBDB27FDC9140035E517 /* IfState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfState.swift; sourceTree = "<group>"; };
+		E58ACBDD27FDCA4E0035E517 /* LHSEvaluableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LHSEvaluableState.swift; sourceTree = "<group>"; };
+		E58ACBDF27FDCA9D0035E517 /* ConditionRelationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRelationState.swift; sourceTree = "<group>"; };
+		E58ACBE127FDCAC00035E517 /* RHSEvaluableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RHSEvaluableState.swift; sourceTree = "<group>"; };
+		E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalRuleValidationStrategy.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -616,7 +626,6 @@
 				E57B534427FD333C0071E623 /* PersistableCondition.swift */,
 				E57B534E27FD369B0071E623 /* PersistableLevelLayer.swift */,
 				40E2519127FAD6C0008CBCE0 /* Achievements */,
-
 			);
 			path = persistable;
 			sourceTree = "<group>";
@@ -655,6 +664,10 @@
 				E57465A827F86F6000F79A52 /* RejectingState.swift */,
 				E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */,
 				E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */,
+				E58ACBDB27FDC9140035E517 /* IfState.swift */,
+				E58ACBDD27FDCA4E0035E517 /* LHSEvaluableState.swift */,
+				E58ACBDF27FDCA9D0035E517 /* ConditionRelationState.swift */,
+				E58ACBE127FDCAC00035E517 /* RHSEvaluableState.swift */,
 			);
 			path = parsing;
 			sourceTree = "<group>";
@@ -766,6 +779,7 @@
 				E57B535227FD687A0071E623 /* KeyPathExposable.swift */,
 				E57B535427FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift */,
 				E57B535627FD68A70071E623 /* NamedKeyPath.swift */,
+				E57453B227F555B3003DAD5C /* ConditionBuilder.swift */,
 			);
 			path = Condition;
 			sourceTree = "<group>";
@@ -799,7 +813,6 @@
 				E5563C3F27E8D09E007D2E86 /* ToolbarViewModel.swift */,
 				E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */,
 				E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */,
-				E57453B227F555B3003DAD5C /* ConditionCreatorViewModel.swift */,
 				E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */,
 				E5D0A22C27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift */,
 			);
@@ -855,6 +868,7 @@
 				E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */,
 				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
 				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
+				E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -1014,6 +1028,7 @@
 				B05A807227F8451300F92D2C /* EntityActionCondition.swift in Sources */,
 				E56752FF27EEB9FC0001305D /* DungeonSelectView.swift in Sources */,
 				E57465A127F868E200F79A52 /* IsVerbConcatNounPropState.swift in Sources */,
+				E58ACBE227FDCAC00035E517 /* RHSEvaluableState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				E57B534127FD32E50071E623 /* PersistableEntity.swift in Sources */,
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
@@ -1061,6 +1076,7 @@
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
 				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */,
 				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
 				E578594627F3EA7C009A79F9 /* DungeonManipulableViewModel.swift in Sources */,
 				E574659927F8685C00F79A52 /* NounState.swift in Sources */,
@@ -1093,6 +1109,7 @@
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
 				40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */,
+				E58ACBDE27FDCA4E0035E517 /* LHSEvaluableState.swift in Sources */,
 				E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */,
 				E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */,
 				E57B536127FD73A60071E623 /* StringView.swift in Sources */,
@@ -1104,6 +1121,7 @@
 				40E2519727FAD853008CBCE0 /* UnlockConditionUtil.swift in Sources */,
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
+				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
@@ -1136,13 +1154,14 @@
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
+				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,
 				E574658127F8059000F79A52 /* EntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
 				E57B535B27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift in Sources */,
 				E57465A727F8694700F79A52 /* HasVerbPrimedState.swift in Sources */,
 				B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */,
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
-				E57453B327F555B3003DAD5C /* ConditionCreatorViewModel.swift in Sources */,
+				E57453B327F555B3003DAD5C /* ConditionBuilder.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
 				40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */,

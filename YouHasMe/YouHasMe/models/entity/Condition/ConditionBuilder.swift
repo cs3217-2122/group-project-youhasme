@@ -15,9 +15,9 @@ class ConditionBuilder {
         case objectNil
     }
 
-    var subject: ConditionEvaluableType?
+    var subject: ConditionEvaluable?
     var relation: ConditionRelation?
-    var object: ConditionEvaluableType?
+    var object: ConditionEvaluable?
 
     private func createConditionEvaluable(
         conditionTypeId: String,
@@ -59,15 +59,24 @@ class ConditionBuilder {
         subjectFieldId: String? = nil,
         subjectIdentifier: Point? = nil
     ) throws {
-        subject = try createConditionEvaluable(
+        let subjectType = try createConditionEvaluable(
             conditionTypeId: conditionSubjectTypeId,
             literal: subjectLiteral,
             fieldId: subjectFieldId,
             identifier: subjectIdentifier
         )
+        buildSubject(subjectType: subjectType)
     }
 
-    func buildComparator(
+    func buildSubject(subjectType: ConditionEvaluableType) {
+        buildSubject(ConditionEvaluable(evaluableType: subjectType))
+    }
+
+    func buildSubject(_ subject: ConditionEvaluable) {
+        self.subject = subject
+    }
+
+    func buildRelation(
         comparatorId: String
     ) throws {
         guard let comparator = ComparatorType.getEnum(by: comparatorId) else {
@@ -88,18 +97,31 @@ class ConditionBuilder {
         }
     }
 
+    func buildRelation(_ relation: ConditionRelation) {
+        self.relation = relation
+    }
+
     func buildObject(
         conditionObjectTypeId: String,
         objectLiteral: Int? = nil,
         objectFieldId: String? = nil,
         objectIdentifier: Point? = nil
     ) throws {
-        object = try createConditionEvaluable(
+        let objectType = try createConditionEvaluable(
             conditionTypeId: conditionObjectTypeId,
             literal: objectLiteral,
             fieldId: objectFieldId,
             identifier: objectIdentifier
         )
+        buildObject(objectType: objectType)
+    }
+
+    func buildObject(objectType: ConditionEvaluableType) {
+        buildObject(ConditionEvaluable(evaluableType: objectType))
+    }
+
+    func buildObject(_ object: ConditionEvaluable) {
+        self.object = object
     }
 
     func getResult() throws -> Condition {
@@ -116,9 +138,9 @@ class ConditionBuilder {
         }
 
         return Condition(
-            subject: ConditionEvaluable(evaluableType: subject),
+            subject: subject,
             relation: relation,
-            object: ConditionEvaluable(evaluableType: object)
+            object: subject
         )
     }
 }
