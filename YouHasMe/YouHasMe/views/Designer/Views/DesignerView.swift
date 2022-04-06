@@ -2,6 +2,7 @@ import SwiftUI
 import Combine
 struct DesignerView: View {
     @ObservedObject var viewModel: DesignerViewModel
+    @ObservedObject var achievementsViewModel: AchievementsViewModel
     @State var shouldPresentConditionEvaluableCreator: Bool = false
     
     
@@ -40,6 +41,8 @@ struct DesignerView: View {
 //                }
 //            }
 
+        }.onAppear {
+            achievementsViewModel.setSubscriptionsFor(viewModel.gameEventPublisher)
         }
     }
 }

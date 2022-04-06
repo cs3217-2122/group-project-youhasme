@@ -11,10 +11,14 @@ import Combine
 struct PlayView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: PlayViewModel
-    
+    @ObservedObject achievementsViewModel: AchievementsViewModel
     let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
     @State var lastDragLocation: CGPoint?
     
+    init(viewModel: PlayViewModel, achievementsViewModel: AchievementsViewModel) {
+        achievementsViewModel.setSubscriptionsFor(viewModel.gameEngine.gameEventPublisher)
+    }
+
     var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in

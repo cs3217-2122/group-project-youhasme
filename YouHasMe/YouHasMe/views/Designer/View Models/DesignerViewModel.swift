@@ -37,6 +37,12 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         toolbarViewModel?.editorMode
     }
 
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
+        gameEventSubject.eraseToAnyPublisher()
+    }
+
+    private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
+
     convenience init() {
         self.init(dungeon: Dungeon())
     }

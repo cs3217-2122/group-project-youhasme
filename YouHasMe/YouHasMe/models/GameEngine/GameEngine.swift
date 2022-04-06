@@ -5,7 +5,14 @@
 //  Created by wayne on 19/3/22.
 //
 
-struct GameEngine {
+import Combine
+
+struct GameEngine: GameEventPublisher {
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
+        gameEventSubject.eraseToAnyPublisher()
+    }
+
+    private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
     private let gameMechanics: [GameMechanic] = [
         PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
@@ -37,10 +44,13 @@ struct GameEngine {
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [currentGame]
         var nextAction = action
+        let originalState = currentGame
+
         while true {
             let newState = step(game: previousStates.last ?? currentGame, action: nextAction)
             if newState == previousStates.last {  // If reached steady state
                 gameStateManager.push(newState)
+                sendGameEvents(oldState: originalState, newState: newState)
                 return
             } else if previousStates.contains(newState) {  // If returning to earlier states
                 status = .infiniteLoop
@@ -71,6 +81,7 @@ struct GameEngine {
                 curState = mechanic.apply(update: action, state: curState)
             }
         } while curState != oldState
+
         return applyConditions(state: curState)
     }
 
@@ -100,5 +111,37 @@ struct GameEngine {
             newLayer.add(entity: curState.entity, x: curState.location.x, y: curState.location.y)
         }
         return ruleEngine.applyRules(to: newLayer)
+    }
+
+    private func sendGameEvents(oldState: Game, newState: Game) {
+        sendMoveGameEvent(oldState: oldState, newState: newState)
+        sendWinGameEvent(newState: newState)
+    }
+
+    private func sendMoveGameEvent(oldState: Game, newState: Game) {
+        if oldState == newState {
+            return
+        }
+
+        let event = GameEvent(type: .move)
+        // todo: fix. currently only assumes one entity
+        for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
+                .entityStates where entityState.has(behaviour: .property(.you)) {
+            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            return
+        }
+    }
+
+    private func sendWinGameEvent(newState: Game) {
+        if !(newState.gameStatus == .win) {
+            return
+        }
+        let event = GameEvent(type: .win)
+        // todo: fix. currently only assumes one entity
+        for entityState in LevelLayerState(levelLayer: newState.levelLayer)
+                .entityStates where entityState.has(behaviour: .property(.you)) {
+            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            return
+        }
     }
 }

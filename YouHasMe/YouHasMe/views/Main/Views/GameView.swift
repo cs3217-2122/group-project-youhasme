@@ -13,7 +13,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu:
                 break
-            case .selecting, .designing, .playing:
+            case .selecting, .designing, .playing, .achievements:
                 gameState.stateStack.removeLast()
             }
         })) {
@@ -22,13 +22,12 @@ struct GameView: View {
                 MainMenuView()
             case .selecting:
                 DungeonSelectView(viewModel: gameState.getSelectViewModel())
-            
             case .designing:
-                DesignerView(viewModel: gameState.getDesignerViewModel())
-            
+                DesignerView(viewModel: gameState.getDesignerViewModel(), achievementsViewModel: gameState.getAchievementsViewModel())
             case .playing:
-                PlayView(viewModel: gameState.getPlayViewModel())
-            
+                PlayView(viewModel: gameState.getPlayViewModel(), achievementsViewModel: gameState.getAchievementsViewModel())
+            case .achievements:
+                AchievementMainView(achievementsViewModel: gameState.getAchievementsViewModel())
             }
         }
     }

@@ -243,3 +243,101 @@ class DungeonStorage: JSONStorage {
     }
 
 }
+
+class AchievementStorage: JSONStorage {
+    static let achievementStorageDirectoryName: String = "Achievements"
+
+    override func getDefaultDirectory() throws -> URL {
+        try super.getDefaultDirectory().appendingPathComponent(AchievementStorage.achievementStorageDirectoryName)
+    }
+
+    func loadAchievement(name: String) throws -> PersistableAchievement {
+        try loadAndDecode(filename: name)
+    }
+
+    func loadAchievement(name: String) -> Achievement? {
+        guard let persistableAchievement: PersistableAchievement = try? loadAndDecode(filename: name) else {
+            print("could not load achievement from file called \(name)")
+            return nil
+        }
+
+        return Achievement.fromPersistable(persistable: persistableAchievement)
+    }
+
+    func saveAchievement(_ achievement: Achievement) throws {
+        try encodeAndSave(object: achievement.toPersistable(), filename: achievement.name)
+    }
+
+    func loadAllAchievements() -> [Achievement] {
+        let (_, filenames) = AchievementStorage().getAllFiles()
+        var allAchievements = filenames.compactMap { loadAchievement(name: $0) }
+
+        let preloadedAchievements = preloadedAchievements()
+        for preloaded in preloadedAchievements {
+            if !allAchievements.contains(where: { $0.name == preloaded.name }) {
+                allAchievements.append(preloaded)
+            }
+        }
+        return allAchievements
+    }
+
+    func getDesignLevelAchievement() -> Achievement {
+        let designStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .designLevel))
+        let designUnlockCondition1 = IntegerUnlockCondition(statistic: designStat1, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                            unlockValue: 1)
+        return Achievement(name: "Creativity", description: "Create your first level",
+                           unlockConditions: [designUnlockCondition1])
+    }
+
+    func getTenMovesAchievement() -> Achievement {
+        let moveStat1 = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
+        let moveUnlockCondition1 = IntegerUnlockCondition(statistic: moveStat1, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                          unlockValue: 10)
+        return Achievement(name: "Baby Steps", description: "Move 10 Steps in Total",
+                           unlockConditions: [moveUnlockCondition1])
+    }
+
+    func getWinLevelLimitedMovesAchievement() -> Achievement {
+        let levelMoveStat1 = GameStatistic(value: 0, statisticType: .level,
+                                           gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .move),
+                                                                          levelName: "Abc"))
+        let levelMoveUnlockCondition1 = IntegerUnlockCondition(statistic: levelMoveStat1,
+                                                               comparison: .LESS_THAN, unlockValue: 10)
+        let levelWinStat1 = GameStatistic(value: 0, statisticType: .level,
+                                          gameEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .win),
+                                                                         levelName: "Abc"))
+        let levelWinUnlockCondition1 = IntegerUnlockCondition(statistic: levelWinStat1,
+                                                              comparison: .MORE_THAN_OR_EQUAL_TO, unlockValue: 1)
+        return Achievement(name: "Speedy Game", description: "Win Level Abc in Less than 10 Moves",
+                           unlockConditions: [levelMoveUnlockCondition1, levelWinUnlockCondition1])
+    }
+
+    func getOneMillionMovesAchievement() -> Achievement {
+        let moveStat = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: GameEvent(type: .move))
+        let moveUnlockCondition = IntegerUnlockCondition(statistic: moveStat, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                         unlockValue: 1_000_000)
+        return Achievement(name: "Over One Million", description: "Move 1,000,000 Steps in Total",
+                           unlockConditions: [moveUnlockCondition])
+    }
+
+    func getHiddenAchievement() -> Achievement {
+        let winEvent = GameEvent(type: .win)
+        let event = EntityEventDecorator(wrappedEvent: winEvent, entityType: EntityTypes.NounInstances.baba)
+        let statistic = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: event)
+        let unlockCondition = IntegerUnlockCondition(statistic: statistic, comparison: .MORE_THAN_OR_EQUAL_TO,
+                                                     unlockValue: 1)
+        return Achievement(name: "You are Baba", description: "Win a level as Baba",
+                           unlockConditions: [unlockCondition], isHidden: true)
+    }
+
+    func preloadedAchievements() -> [Achievement] {
+        let achievements = [
+             getDesignLevelAchievement(),
+             getTenMovesAchievement(),
+             getWinLevelLimitedMovesAchievement(),
+             getOneMillionMovesAchievement(),
+             getHiddenAchievement()
+         ]
+         return achievements
+     }
+ }

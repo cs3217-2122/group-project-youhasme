@@ -32,6 +32,7 @@ enum ScreenState {
     case playing(playableDungeon: PlayableDungeon)
     case designing(loadable: Loadable? = nil)
     case mainmenu
+    case achievements
 }
 
 extension ScreenState: Equatable {}
@@ -81,5 +82,16 @@ extension GameState {
             fatalError("unexpected state")
         }
         return DungeonSelectViewModel()
+    }
+
+    func getAchievementsViewModel() -> AchievementsViewModel {
+        var levelId = ""
+        if case let .playing(playableLevel: playableLevel) = state {
+            levelId = playableLevel.getLevel().id
+        } else if case let .designing(playableLevel: playableLevel) = state {
+            levelId = playableLevel?.getLevel().id ?? ""
+        }
+
+        return AchievementsViewModel(levelId: levelId)
     }
 }
