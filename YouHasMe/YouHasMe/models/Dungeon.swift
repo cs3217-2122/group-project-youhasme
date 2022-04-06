@@ -10,6 +10,7 @@ class Dungeon {
     static let defaultDimensions = Rectangle(width: 2, height: 2)
     static let loadableRadius: Int = 1
     static let defaultName: String = "Dungeon1"
+    static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
     var levelGenerator = CompletelyEnclosedGenerator()
         .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
@@ -31,10 +32,10 @@ class Dungeon {
     }
     @Published private(set) var name: String
 
-    var entryChunkPosition: Point = .zero
-    var entryWorldPosition: Point = .zero
+    let entryLevelPosition: Point
+    let entryWorldPosition: Point = .zero
     var levelNameToPositionMap: [String: Point] = [:]
-
+    var playerLevelPosition: Point
     @Published var loadedLevels: [Point: Level] = [:]
 
     private var subscriptions: Set<AnyCancellable> = []
@@ -45,7 +46,7 @@ class Dungeon {
             name: Dungeon.defaultName,
             dimensions: Dungeon.defaultDimensions,
             levelDimensions: Dungeon.defaultLevelDimensions,
-            entryChunkPosition: .zero
+            entryLevelPosition: Dungeon.defaultEntryLevelPosition
         )
     }
 
@@ -54,13 +55,13 @@ class Dungeon {
         name: String,
         dimensions: Rectangle,
         levelDimensions: Rectangle,
-        entryChunkPosition: Point
+        entryLevelPosition: Point
     ) {
         self.name = name
         self.dimensions = dimensions
         self.levelDimensions = levelDimensions
-        self.entryChunkPosition = entryChunkPosition
-
+        self.entryLevelPosition = entryLevelPosition
+        playerLevelPosition = entryLevelPosition
         if isNewDungeon {
             for x in 0..<dimensions.height {
                 for y in 0..<dimensions.width {
@@ -87,16 +88,26 @@ class Dungeon {
         }
     }
 
-    func getPlayerPosition() -> Point {
-        Point(x: 0, y: 0)
-    }
-
     func setLevelLayer(_ levelLayer: LevelLayer) {
-        let playerPosition = getPlayerPosition()
-        guard let level = getLevel(at: playerPosition, loadNeighbors: false) else {
+        guard let level = getLevel(levelPosition: playerLevelPosition) else {
             fatalError("should not be nil")
         }
         level.layer = levelLayer
+    }
+
+    func movePlayer(by vector: Vector) {
+        let newPlayerLevelPosition = playerLevelPosition.translate(by: vector)
+        guard dimensions.isWithinBounds(newPlayerLevelPosition) else {
+            return
+        }
+        playerLevelPosition = newPlayerLevelPosition
+    }
+
+    func getActiveLevel() -> Level {
+        guard let level = getLevel(levelPosition: playerLevelPosition) else {
+            fatalError("should not be nil")
+        }
+        return level
     }
 }
 
@@ -135,7 +146,7 @@ extension Dungeon {
     }
 
     func getLevel(at worldPosition: Point, loadNeighbors: Bool) -> Level? {
-        guard let level = getLevel(at: worldPosition) else {
+        guard let level = getLevel(levelPosition: worldToLevelPosition(worldPosition)) else {
             return nil
         }
 
@@ -171,16 +182,7 @@ extension Dungeon {
         loadedLevels[levelPosition] = level
     }
 
-    private func getLevel(
-        at worldPosition: Point
-    ) -> Level? {
-        // The most basic behavior of getChunk is that it
-        // 1. searches `loadedChunks` for the chunk at the given position and returns it
-        // 2. tries to load a chunk with the same identifier as the given position
-        // 3. If all fails, return nil.
-        // This behavior can be abstracted into a Position to Chunk handler.
-
-        let levelPosition = worldToLevelPosition(worldPosition)
+    func getLevel(levelPosition: Point) -> Level? {
         if let foundChunk = loadedLevels[levelPosition] {
             return foundChunk
         }
@@ -228,7 +230,7 @@ extension Dungeon {
     }
 
     func setTile(_ tile: Tile, at worldPosition: Point) {
-        guard let level = getLevel(at: worldPosition) else {
+        guard let level = getLevel(at: worldPosition, loadNeighbors: false) else {
             return
         }
         let positionWithinLevel = worldToPositionWithinLevel(worldPosition)
@@ -255,7 +257,7 @@ extension Dungeon {
             name: name,
             dimensions: dimensions,
             levelDimensions: levelDimensions,
-            entryChunkPosition: entryChunkPosition
+            entryLevelPosition: entryLevelPosition
         )
     }
 
@@ -265,7 +267,7 @@ extension Dungeon {
             name: persistableDungeon.name,
             dimensions: persistableDungeon.dimensions,
             levelDimensions: persistableDungeon.levelDimensions,
-            entryChunkPosition: persistableDungeon.entryChunkPosition
+            entryLevelPosition: persistableDungeon.entryLevelPosition
         )
         return dungeon
     }

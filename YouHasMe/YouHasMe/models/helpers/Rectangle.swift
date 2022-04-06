@@ -51,6 +51,10 @@ extension Rectangle {
     func isWithinBounds(x: Int, y: Int) -> Bool {
         x >= 0 && y >= 0 && x < width && y < height
     }
+
+    func isWithinBounds(_ point: Point) -> Bool {
+        isWithinBounds(x: point.x, y: point.y)
+    }
 }
 
 struct PositionedRectangle {

@@ -7,6 +7,7 @@
 
 // Mechanic to prevent movement beyond level bounds
 struct BoundaryMechanic: GameMechanic {
+    weak var publishingDelegate: AbstractGameEngineEventPublishingDelegate?
 
     // Applies mechanic to current state
     //
@@ -23,7 +24,11 @@ struct BoundaryMechanic: GameMechanic {
                 }
                 let newX = entityState.location.x + dx
                 let newY = entityState.location.y + dy
+                let isYouTryingToCrossBoundary = entityState.has(behaviour: .property(.you))
                 if !state.dimensions.isWithinBounds(x: newX, y: newY) {  // If moving out of bounds
+                    if isYouTryingToCrossBoundary {
+                        publishingDelegate?.send(GameEvent(type: .movingAcrossLevel))
+                    }
                     newState.entityStates[i].reject(action: action)
                 }
             }

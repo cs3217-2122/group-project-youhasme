@@ -10,7 +10,7 @@ struct PersistableDungeon {
     var name: String
     var dimensions: Rectangle
     var levelDimensions: Rectangle
-    var entryChunkPosition: Point
+    var entryLevelPosition: Point
 }
 
 extension PersistableDungeon: Codable {}

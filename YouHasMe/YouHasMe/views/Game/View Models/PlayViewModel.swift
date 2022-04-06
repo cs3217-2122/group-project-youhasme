@@ -49,12 +49,17 @@ enum MetaLevelPlayViewState {
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var subscriptions: Set<AnyCancellable> = []
+    private var gameEngineSubscription: AnyCancellable?
     var viewableDimensions = Dungeon.defaultLevelDimensions
     @Published var hasWon = false
     @Published var isLoopingInfinitely = false
     var dungeon: Dungeon
     @Published var state: MetaLevelPlayViewState = .normal
-    var gameEngine: GameEngine
+    var gameEngine: GameEngine {
+        didSet {
+            setupBindingsWithGameEngine()
+        }
+    }
 
     var contextualData: [ContextualMenuData] {
         guard let entities = selectedTile?.entities else {
@@ -75,6 +80,9 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     @Published var selectedTile: Tile?
 
+    private var mostRecentPlayerMove: UpdateType?
+    private var playerMovementAcrossLevel: Vector?
+
     convenience init(playableDungeon: PlayableDungeon) {
         self.init(dungeon: playableDungeon.getDungeon())
     }
@@ -82,12 +90,12 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     init(dungeon: Dungeon) {
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
-        let playerPosition = dungeon.getPlayerPosition()
-        guard let level = dungeon.getLevel(at: playerPosition, loadNeighbors: false) else {
+        guard let level = dungeon.getLevel(at: dungeon.playerLevelPosition, loadNeighbors: false) else {
             fatalError("should not be nil")
         }
         gameEngine = GameEngine(levelLayer: level.layer)
         setupBindings()
+        setupBindingsWithGameEngine()
     }
 
     func setupBindings() {
@@ -101,11 +109,48 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }.store(in: &subscriptions)
     }
 
+    func setupBindingsWithGameEngine() {
+        gameEngineSubscription = gameEngine.gameEventPublisher.sink { [weak self] gameEvent in
+            guard let self = self else {
+                return
+            }
+            guard gameEvent.type == .movingAcrossLevel else {
+                return
+            }
+            guard let mostRecentPlayerMove = self.mostRecentPlayerMove else {
+                return
+            }
+            self.playerMovementAcrossLevel = mostRecentPlayerMove.getMovementAsVector()
+        }
+    }
+
     func playerMove(updateAction: UpdateType) {
+        mostRecentPlayerMove = updateAction
         gameEngine.apply(action: updateAction)
         hasWon = gameEngine.currentGame.gameStatus == .win
         isLoopingInfinitely = gameEngine.status == .infiniteLoop
         dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
+
+        guard let playerMovementAcrossLevel = playerMovementAcrossLevel else {
+            return
+        }
+
+        guard let movementVector = self.mostRecentPlayerMove?.getMovementAsVector() else {
+            return
+        }
+
+        dungeon.movePlayer(by: playerMovementAcrossLevel)
+        self.playerMovementAcrossLevel = nil
+
+        let level = dungeon.getActiveLevel()
+
+        let viewVector = CGVector(movementVector).scale(
+            factorX: Double(self.dungeon.levelDimensions.width),
+            factorY: Double(self.dungeon.levelDimensions.height)
+        )
+        self.translateView(by: viewVector)
+        self.gameEngine = GameEngine(levelLayer: level.layer)
+
     }
 }
 

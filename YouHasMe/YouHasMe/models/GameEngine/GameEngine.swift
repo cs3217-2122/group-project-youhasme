@@ -7,16 +7,28 @@
 
 import Combine
 
-struct GameEngine: GameEventPublisher {
+protocol AbstractGameEngineEventPublishingDelegate: GameEventPublisher, AnyObject {
+    func send(_ gameEvent: AbstractGameEvent)
+}
+
+class GameEngineEventPublishingDelegate: AbstractGameEngineEventPublishingDelegate {
     var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
     }
 
     private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
+    func send(_ gameEvent: AbstractGameEvent) {
+        gameEventSubject.send(gameEvent)
+    }
+}
 
-    private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
-    ]
+struct GameEngine: GameEventPublisher {
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> { publishingDelegate.gameEventPublisher
+    }
+
+    var publishingDelegate: AbstractGameEngineEventPublishingDelegate = GameEngineEventPublishingDelegate()
+
+    private let gameMechanics: [GameMechanic]
     private let ruleEngine = RuleEngine()
 
     private var gameStateManager: GameStateManager
@@ -32,6 +44,14 @@ struct GameEngine: GameEventPublisher {
 
     init(levelLayer: LevelLayer) {
         gameStateManager = GameStateManager(levelLayer: ruleEngine.applyRules(to: levelLayer))
+        gameMechanics = [
+            PlayerMoveMechanic(),
+            BoundaryMechanic(publishingDelegate: publishingDelegate),
+            PushMechanic(),
+            WinMechanic(),
+            StopMechanic(),
+            TransformMechanic()
+        ]
     }
 
     mutating func undo() {
@@ -127,7 +147,7 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
             return
         }
     }
@@ -140,7 +160,7 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: newState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
             return
         }
     }

@@ -28,4 +28,9 @@ enum UpdateType {
             return (0, 0)
         }
     }
+
+    func getMovementAsVector() -> Vector {
+        let movement = getMovement()
+        return Vector(dx: movement.0, dy: movement.1)
+    }
 }
