@@ -4,17 +4,32 @@ protocol RuleValidationStrategy {
     func validate(rules: [Rule], for entity: inout Entity, environment: LevelLayer)
 }
 
+protocol RuleEngineDelegate: ConditionEvaluableDungeonDelegate {}
+
 class RuleEngine {
+    weak var ruleEngineDelegate: RuleEngineDelegate? {
+        didSet {
+            let matchingStrategy = SouthwardEastwardMatchingStrategy()
+            let parsingStrategy = MaximumLengthParsingStrategy()
+            parsingStrategy.dungeonDelegate = ruleEngineDelegate
+            self.ruleParser = RuleParser(
+                sentenceMatchingStrategy: matchingStrategy,
+                sentenceParsingStrategy: parsingStrategy
+            )
+        }
+    }
     var wellFormedRules: [Rule] = []
     private var ruleParser: RuleParser
     private var ruleValidator: RuleValidationStrategy
 
     init() {
+        let matchingStrategy = SouthwardEastwardMatchingStrategy()
+        let parsingStrategy = MaximumLengthParsingStrategy()
         self.ruleParser = RuleParser(
-            sentenceMatchingStrategy: SouthwardEastwardMatchingStrategy(),
-            sentenceParsingStrategy: MaximumLengthParsingStrategy()
+            sentenceMatchingStrategy: matchingStrategy,
+            sentenceParsingStrategy: parsingStrategy
         )
-        self.ruleValidator = NaiveRuleValidationStrategy()
+        self.ruleValidator = ConditionalRuleValidationStrategy()
     }
 
     init(ruleParser: RuleParser, ruleValidator: RuleValidationStrategy) {

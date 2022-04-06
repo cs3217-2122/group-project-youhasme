@@ -23,8 +23,9 @@ final class SnakeLikeConnectorLockGeneratorDecorator: ChunkGeneratorDecorator {
             .verb(.vIs),
             .property(.stop),
             .connective(.cIf),
-            .conditionEvaluable(ConditionEvaluable(evaluableType: .level(id: levelPosition, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))),
-            .conditionRelation(.gt),
+            .conditionEvaluable(
+                ConditionEvaluable(evaluableType: .level(id: levelPosition, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))),
+            .conditionRelation(.leq),
             .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(0)))
         ]
         let startingCoord: Point

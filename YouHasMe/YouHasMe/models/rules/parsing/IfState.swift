@@ -7,6 +7,7 @@
 
 import Foundation
 final class IfState: DFAState {
+    weak var dungeonDelegate: ConditionEvaluableDungeonDelegate?
     weak var delegate: DFATransitionDelegate?
     var unconfirmedRulesData: RulesData
     let isAccepting = false

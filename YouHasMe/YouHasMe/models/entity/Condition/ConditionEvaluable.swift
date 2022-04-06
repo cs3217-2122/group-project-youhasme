@@ -9,8 +9,8 @@ import Foundation
 protocol ConditionEvaluableDungeonDelegate: AnyObject {
     var dungeon: Dungeon { get }
     var dungeonName: String { get }
-    func getLevel(by id: Point) -> Level
-    func getLevelName(by id: Point) -> String
+    func getLevel(by id: Point) -> Level?
+    func getLevelName(by id: Point) -> String?
 }
 
 struct ConditionEvaluable {

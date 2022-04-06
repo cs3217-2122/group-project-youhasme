@@ -25,7 +25,6 @@ class ConditionalRuleValidationStrategy: RuleValidationStrategy {
                 guard rule.receiver == noun else {
                     continue
                 }
-
                 if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
                     behaviours.append(rule.activateToBehaviour())
                 }

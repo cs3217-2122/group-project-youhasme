@@ -60,7 +60,6 @@ class GameState: ObservableObject {
 
 // MARK: View model factories
 extension GameState {
-
     func getDesignerViewModel() -> DesignerViewModel {
         guard case let .designing(loadable: loadable) = state,
             let loadable = loadable else {

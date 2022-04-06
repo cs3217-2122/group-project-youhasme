@@ -15,6 +15,7 @@ class Dungeon {
     var levelGenerator = CompletelyEnclosedGenerator()
         .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
         .decorateWith(SnakeLikeConnectorLockGeneratorDecorator.self)
+        .decorateWith(BabaGeneratorDecorator.self)
     var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
@@ -292,5 +293,23 @@ extension Dungeon: KeyPathExposable {
 extension Dungeon: LevelLocationalDelegate {
     var extremities: Rectangle {
         dimensions
+    }
+}
+
+extension Dungeon: RuleEngineDelegate {
+    var dungeon: Dungeon {
+        self
+    }
+
+    var dungeonName: String {
+        name
+    }
+
+    func getLevel(by id: Point) -> Level? {
+        getLevel(levelPosition: id)
+    }
+
+    func getLevelName(by id: Point) -> String? {
+        getLevel(levelPosition: id)?.name
     }
 }

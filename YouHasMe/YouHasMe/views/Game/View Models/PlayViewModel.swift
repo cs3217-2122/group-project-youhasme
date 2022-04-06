@@ -42,7 +42,7 @@ extension ContextualMenuData: Comparable {
     }
 }
 
-enum MetaLevelPlayViewState {
+enum PlayViewState {
     case normal
     case messages
 }
@@ -54,7 +54,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     @Published var hasWon = false
     @Published var isLoopingInfinitely = false
     var dungeon: Dungeon
-    @Published var state: MetaLevelPlayViewState = .normal
+    @Published var state: PlayViewState = .normal
     var gameEngine: GameEngine {
         didSet {
             setupBindingsWithGameEngine()
@@ -90,10 +90,8 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     init(dungeon: Dungeon) {
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
-        guard let level = dungeon.getLevel(at: dungeon.playerLevelPosition, loadNeighbors: false) else {
-            fatalError("should not be nil")
-        }
-        gameEngine = GameEngine(levelLayer: level.layer)
+        let level = dungeon.getActiveLevel()
+        gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
         setupBindings()
         setupBindingsWithGameEngine()
     }
@@ -143,14 +141,12 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.playerMovementAcrossLevel = nil
 
         let level = dungeon.getActiveLevel()
-
+        gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
         let viewVector = CGVector(movementVector).scale(
             factorX: Double(self.dungeon.levelDimensions.width),
             factorY: Double(self.dungeon.levelDimensions.height)
         )
-        self.translateView(by: viewVector)
-        self.gameEngine = GameEngine(levelLayer: level.layer)
-
+        translateView(by: viewVector)
     }
 }
 

@@ -54,6 +54,7 @@
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
+		E525251327FDE1430014BF0B /* BabaGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */; };
 		E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* DesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* GridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* DesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */; };
@@ -232,6 +233,7 @@
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
+		E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabaGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* DesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerViewModel.swift; sourceTree = "<group>"; };
@@ -702,6 +704,7 @@
 				E57B535827FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift */,
 				E57B535A27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift */,
 				E57B535C27FD72640071E623 /* ConnectorGeneratorDecorator.swift */,
+				E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */,
 				E57B535E27FD72770071E623 /* CompletelyEnclosedGenerator.swift */,
 			);
 			path = ChunkGeneratorDelegate;
@@ -1114,6 +1117,7 @@
 				E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */,
 				E57B536127FD73A60071E623 /* StringView.swift in Sources */,
 				E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */,
+				E525251327FDE1430014BF0B /* BabaGeneratorDecorator.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableDungeon.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */,

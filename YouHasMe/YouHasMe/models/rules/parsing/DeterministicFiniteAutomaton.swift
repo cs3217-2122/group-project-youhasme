@@ -47,6 +47,7 @@ protocol DFATransitionDelegate: AnyObject {
 }
 
 protocol DFAState: AnyObject {
+    var dungeonDelegate: ConditionEvaluableDungeonDelegate? { get set }
     var delegate: DFATransitionDelegate? { get set }
     var unconfirmedRulesData: RulesData { get set }
     var isAccepting: Bool { get }
@@ -80,6 +81,7 @@ extension DFAState {
         var conditions: [Condition] = []
         for builder in rulesData.conditionBuilders {
             do {
+                builder.buildConditionEvaluableDelegate(dungeonDelegate)
                 let condition = try builder.getResult()
                 conditions.append(condition)
             } catch {
@@ -96,6 +98,7 @@ extension DFAState {
 }
 
 protocol DeterministicFiniteAutomaton: SentenceParsingStrategy, DFATransitionDelegate {
+    var dungeonDelegate: ConditionEvaluableDungeonDelegate? { get }
     var rulesData: RulesData { get set }
     var stateHistory: [DFAState] { get set }
 }
@@ -109,6 +112,7 @@ extension DeterministicFiniteAutomaton {
             return mostRecentState
         }
         set {
+            newValue.dungeonDelegate = dungeonDelegate
             stateHistory.append(newValue)
         }
     }

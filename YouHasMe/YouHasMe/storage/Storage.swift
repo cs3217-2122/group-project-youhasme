@@ -54,13 +54,11 @@ class Storage {
     }
 
     final func save(data: Data, to file: URL) throws {
-        print("saving to \(file)")
         try data.write(to: file)
     }
 
     final func load(from file: URL) throws -> Data {
-        print("loading from \(file)")
-        return try Data(contentsOf: file)
+        try Data(contentsOf: file)
     }
 
     final func delete(file: URL) throws {

@@ -7,6 +7,7 @@
 
 import Foundation
 class MinimumLengthParsingStrategy: DeterministicFiniteAutomaton {
+    weak var dungeonDelegate: ConditionEvaluableDungeonDelegate?
     var rulesData = RulesData()
 
     var stateHistory: [DFAState] = []

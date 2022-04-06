@@ -29,7 +29,7 @@ struct GameEngine: GameEventPublisher {
     var publishingDelegate: AbstractGameEngineEventPublishingDelegate = GameEngineEventPublishingDelegate()
 
     private let gameMechanics: [GameMechanic]
-    private let ruleEngine = RuleEngine()
+    private let ruleEngine: RuleEngine
 
     private var gameStateManager: GameStateManager
     var currentGame: Game {
@@ -42,7 +42,10 @@ struct GameEngine: GameEventPublisher {
         case infiniteLoop  // Player has attempted to create infinite loop
     }
 
-    init(levelLayer: LevelLayer) {
+    init(levelLayer: LevelLayer, ruleEngineDelegate: RuleEngineDelegate? = nil) {
+        let ruleEngine = RuleEngine()
+        ruleEngine.ruleEngineDelegate = ruleEngineDelegate
+        self.ruleEngine = ruleEngine
         gameStateManager = GameStateManager(levelLayer: ruleEngine.applyRules(to: levelLayer))
         gameMechanics = [
             PlayerMoveMechanic(),

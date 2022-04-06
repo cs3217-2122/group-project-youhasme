@@ -18,9 +18,10 @@ struct Condition {
 
     func isConditionMet() -> Bool {
         guard let lhsValue = subject.getValue(), let rhsValue = object.getValue() else {
+            print("Failed to evaluate condition")
             return true
         }
-
+        print("\(lhsValue) \(relation.rawValue) \(rhsValue)")
         return relation.evaluate(lhs: lhsValue, rhs: rhsValue)
     }
 }

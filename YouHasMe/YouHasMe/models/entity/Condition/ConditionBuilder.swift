@@ -15,9 +15,14 @@ class ConditionBuilder {
         case objectNil
     }
 
+    weak var conditionEvaluableDelegate: ConditionEvaluableDungeonDelegate?
     var subject: ConditionEvaluable?
     var relation: ConditionRelation?
     var object: ConditionEvaluable?
+
+    func buildConditionEvaluableDelegate(_ delegate: ConditionEvaluableDungeonDelegate?) {
+        conditionEvaluableDelegate = delegate
+    }
 
     private func createConditionEvaluable(
         conditionTypeId: String,
@@ -125,17 +130,19 @@ class ConditionBuilder {
     }
 
     func getResult() throws -> Condition {
-        guard let subject = subject else {
+        guard var subject = subject else {
             throw BuildError.subjectNil
         }
+        subject.delegate = conditionEvaluableDelegate
 
         guard let relation = relation else {
             throw BuildError.relationNil
         }
 
-        guard let object = object else {
+        guard var object = object else {
             throw BuildError.objectNil
         }
+        object.delegate = conditionEvaluableDelegate
 
         return Condition(
             subject: subject,
