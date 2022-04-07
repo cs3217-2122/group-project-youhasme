@@ -67,8 +67,8 @@ class Dungeon {
         self.entryLevelPosition = entryLevelPosition
         playerLevelPosition = entryLevelPosition
         if isNewDungeon {
-            for x in 0..<dimensions.height {
-                for y in 0..<dimensions.width {
+            for x in 0..<dimensions.width {
+                for y in 0..<dimensions.height {
                     createLevel(at: Point(x: x, y: y))
                 }
             }

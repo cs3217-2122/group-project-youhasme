@@ -13,7 +13,7 @@ struct DungeonSelectView: View {
     var body: some View {
         VStack {
             Button(action: {
-                gameState.state = .designing()
+                gameState.state = .choosingDimensions
             }) {
                 Text("Create New Dungeon")
             }.padding()
@@ -22,7 +22,7 @@ struct DungeonSelectView: View {
                 Section(header: Text("Select an existing dungeon")) {
                     ForEach(viewModel.getAllDungeons(), id: \.self) { loadable in
                         Button(action: {
-                            gameState.state = .designing(loadable: loadable)
+                            gameState.state = .designing(designableDungeon: .dungeonLoadable(loadable))
                         }) {
                             Text(loadable.name)
                         }

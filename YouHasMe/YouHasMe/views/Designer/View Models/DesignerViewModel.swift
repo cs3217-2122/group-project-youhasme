@@ -47,13 +47,8 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.init(dungeon: Dungeon())
     }
 
-    convenience init(dungeonLoadable: Loadable) {
-        let dungeonStorage = DungeonStorage()
-        guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: dungeonLoadable.name) else {
-            fatalError("should not be nil")
-        }
-
-        self.init(dungeon: dungeon)
+    convenience init(designableDungeon: DesignableDungeon) {
+        self.init(dungeon: designableDungeon.getDungeon())
     }
 
     init(dungeon: Dungeon) {

@@ -5,6 +5,34 @@
 
 import Foundation
 
+enum DesignableDungeon {
+    case dungeonLoadable(Loadable)
+    case newDungeonDimensions(Rectangle)
+}
+
+extension DesignableDungeon: Equatable {}
+
+extension DesignableDungeon {
+    func getDungeon() -> Dungeon {
+        switch self {
+        case .dungeonLoadable(let loadable):
+            let dungeonStorage = DungeonStorage()
+            guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: loadable.name) else {
+                fatalError("should not be nil")
+            }
+            return dungeon
+        case .newDungeonDimensions(let rectangle):
+            return Dungeon(
+                isNewDungeon: true,
+                name: Dungeon.defaultName,
+                dimensions: rectangle,
+                levelDimensions: Dungeon.defaultLevelDimensions,
+                entryLevelPosition: Dungeon.defaultEntryLevelPosition
+            )
+        }
+    }
+}
+
 enum PlayableDungeon {
     case dungeon(Dungeon)
     case dungeonLoadable(Loadable)
@@ -30,7 +58,8 @@ extension PlayableDungeon {
 enum ScreenState {
     case selecting
     case playing(playableDungeon: PlayableDungeon)
-    case designing(loadable: Loadable? = nil)
+    case choosingDimensions
+    case designing(designableDungeon: DesignableDungeon?)
     case mainmenu
     case achievements
 }
@@ -53,6 +82,7 @@ class GameState: ObservableObject {
         }
     }
     @Published var stateStack: [ScreenState] = []
+
     init() {
         stateStack.append(.mainmenu)
     }
@@ -61,11 +91,11 @@ class GameState: ObservableObject {
 // MARK: View model factories
 extension GameState {
     func getDesignerViewModel() -> DesignerViewModel {
-        guard case let .designing(loadable: loadable) = state,
-            let loadable = loadable else {
+        guard case let .designing(designableDungeon: designableDungeon) = state,
+              let designableDungeon = designableDungeon else {
             return DesignerViewModel()
         }
-        return DesignerViewModel(dungeonLoadable: loadable)
+        return DesignerViewModel(designableDungeon: designableDungeon)
     }
 
     func getPlayViewModel() -> PlayViewModel {
@@ -90,8 +120,9 @@ extension GameState {
         var dungeonId = ""
         if case let .playing(playableDungeon: playableDungeon) = state {
             dungeonId = playableDungeon.getDungeon().id
-        } else if case let .designing(loadable: loadable) = state, let loadable = loadable {
-            dungeonId = loadable.name
+        } else if case let .designing(designableDungeon: designableDungeon) = state,
+                  let designableDungeon = designableDungeon {
+            dungeonId = designableDungeon.getDungeon().id
         }
 
         return AchievementsViewModel(dungeonId: dungeonId)

@@ -24,7 +24,7 @@ struct MainMenuView: View {
                     Text("Dungeon Select")
                 }.padding()
                 Button(action: {
-                    gameState.state = .designing()
+                    gameState.state = .choosingDimensions
                 }) {
                     Text("Design")
                 }.padding()
