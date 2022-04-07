@@ -2,7 +2,7 @@ import Foundation
 
 struct Entity {
     var entityType: EntityType
-    var activeBehaviours: [Behaviour] = []
+    var activeBehaviours: Set<Behaviour> = []
     init(entityType: EntityType) {
         self.entityType = entityType
     }

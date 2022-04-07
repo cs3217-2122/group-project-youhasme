@@ -9,19 +9,11 @@ import SwiftUI
 import Combine
 
 struct PlayView: View {
-    @EnvironmentObject var gameState: GameState
     @ObservedObject var viewModel: PlayViewModel
-    @ObservedObject var achievementsViewModel: AchievementsViewModel
-    let inverseDragThreshold: Double = 5.0.multiplicativeInverse()
-    @State var lastDragLocation: CGPoint?
-
 
     var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
-                guard case .playing = gameState.state else {
-                    return
-                }
                 var updateAction: UpdateType = .tick
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height
@@ -31,7 +23,6 @@ struct PlayView: View {
                     } else {
                         updateAction = .moveRight
                     }
-
                 } else {
                     if verticalAmount < 0 {
                         updateAction = .moveUp
@@ -76,8 +67,6 @@ struct PlayView: View {
                     
                 }
             }
-        }.onAppear {
-            achievementsViewModel.setSubscriptionsFor(viewModel.gameEngine.gameEventPublisher)
         }
     }
 }

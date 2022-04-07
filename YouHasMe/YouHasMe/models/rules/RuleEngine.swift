@@ -7,34 +7,19 @@ protocol RuleValidationStrategy {
 protocol RuleEngineDelegate: ConditionEvaluableDungeonDelegate {}
 
 class RuleEngine {
-    weak var ruleEngineDelegate: RuleEngineDelegate? {
-        didSet {
-            let matchingStrategy = SouthwardEastwardMatchingStrategy()
-            let parsingStrategy = MaximumLengthParsingStrategy()
-            parsingStrategy.dungeonDelegate = ruleEngineDelegate
-            self.ruleParser = RuleParser(
-                sentenceMatchingStrategy: matchingStrategy,
-                sentenceParsingStrategy: parsingStrategy
-            )
-        }
-    }
-    var wellFormedRules: [Rule] = []
+    weak var ruleEngineDelegate: RuleEngineDelegate?
     private var ruleParser: RuleParser
     private var ruleValidator: RuleValidationStrategy
 
-    init() {
+    init(ruleEngineDelegate: RuleEngineDelegate?) {
         let matchingStrategy = SouthwardEastwardMatchingStrategy()
         let parsingStrategy = MaximumLengthParsingStrategy()
+        parsingStrategy.dungeonDelegate = ruleEngineDelegate
         self.ruleParser = RuleParser(
             sentenceMatchingStrategy: matchingStrategy,
             sentenceParsingStrategy: parsingStrategy
         )
         self.ruleValidator = ConditionalRuleValidationStrategy()
-    }
-
-    init(ruleParser: RuleParser, ruleValidator: RuleValidationStrategy) {
-        self.ruleParser = ruleParser
-        self.ruleValidator = ruleValidator
     }
 
     // Adds behaviours to entities of levelLayer based on rules

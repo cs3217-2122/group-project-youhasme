@@ -34,19 +34,6 @@ class CompletelyEnclosedGenerator: ChunkGeneratorDelegate {
     func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
         var tiles = getEmptyGrid(dimensions: dimensions)
         tiles = withSurroundingWalls(dimensions: dimensions, tiles: tiles)
-
-        let blocks: [Classification] = [
-            .noun(.bedrock),
-            .verb(.vIs),
-            .property(.stop)
-        ]
-        var coord = Point(x: 1, y: 1)
-        for i in 0..<blocks.count {
-            tiles[coord].entities.append(Entity(
-                entityType: EntityType(classification: blocks[i])
-            ))
-            coord = coord.translateX(dx: 1)
-        }
         return tiles
     }
 }

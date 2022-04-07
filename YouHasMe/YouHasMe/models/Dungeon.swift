@@ -15,8 +15,11 @@ class Dungeon {
     var levelGenerator = CompletelyEnclosedGenerator()
         .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
         .decorateWith(SnakeLikeConnectorLockGeneratorDecorator.self)
-        .decorateWith(BabaGeneratorDecorator.self)
-    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+        .decorateWith(BedrockIsStopGeneratorDecorator.self)
+        .decorateWith(BabaIsYouGeneratorDecorator.self)
+        .decorateWith(FlagIsWinGeneratorDecorator.self)
+    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder()
+        .eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
@@ -90,9 +93,7 @@ class Dungeon {
     }
 
     func setLevelLayer(_ levelLayer: LevelLayer) {
-        guard let level = getLevel(levelPosition: playerLevelPosition) else {
-            fatalError("should not be nil")
-        }
+        let level = getActiveLevel()
         level.layer = levelLayer
     }
 
@@ -109,6 +110,11 @@ class Dungeon {
             fatalError("should not be nil")
         }
         return level
+    }
+
+    func winActiveLevel() {
+        let level = getActiveLevel()
+        level.winCount += 1
     }
 }
 

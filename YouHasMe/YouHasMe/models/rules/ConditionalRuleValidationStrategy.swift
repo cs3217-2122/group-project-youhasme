@@ -8,7 +8,7 @@
 import Foundation
 class ConditionalRuleValidationStrategy: RuleValidationStrategy {
     func validate(rules: [Rule], for entity: inout Entity, environment: LevelLayer) {
-        var behaviours: [Behaviour] = []
+        var behaviours: Set<Behaviour> = []
         switch entity.entityType.classification {
         case .noun, .verb, .connective, .property:
             for rule in rules {
@@ -17,7 +17,7 @@ class ConditionalRuleValidationStrategy: RuleValidationStrategy {
                 }
 
                 if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
-                    behaviours.append(rule.activateToBehaviour())
+                    behaviours.insert(rule.activateToBehaviour())
                 }
             }
         case .nounInstance(let noun):
@@ -26,7 +26,7 @@ class ConditionalRuleValidationStrategy: RuleValidationStrategy {
                     continue
                 }
                 if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
-                    behaviours.append(rule.activateToBehaviour())
+                    behaviours.insert(rule.activateToBehaviour())
                 }
             }
         default:

@@ -54,7 +54,7 @@
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
-		E525251327FDE1430014BF0B /* BabaGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */; };
+		E525251327FDE1430014BF0B /* NounIsPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */; };
 		E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* DesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* GridView.swift */; };
 		E5563C3727E8AF69007D2E86 /* DesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */; };
@@ -69,6 +69,9 @@
 		E56752FF27EEB9FC0001305D /* DungeonSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56752FE27EEB9FC0001305D /* DungeonSelectView.swift */; };
 		E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */; };
 		E569071927ED4D830010E665 /* PersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569071827ED4D830010E665 /* PersistenceView.swift */; };
+		E569858A27FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */; };
+		E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */; };
+		E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
 		E573E95C27EA2797000D10E4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95B27EA2797000D10E4 /* Storage.swift */; };
@@ -233,7 +236,7 @@
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
-		E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabaGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounIsPropertyGenerator.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* DesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
 		E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerViewModel.swift; sourceTree = "<group>"; };
@@ -248,6 +251,9 @@
 		E56752FE27EEB9FC0001305D /* DungeonSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSelectView.swift; sourceTree = "<group>"; };
 		E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonSelectViewModel.swift; sourceTree = "<group>"; };
 		E569071827ED4D830010E665 /* PersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceView.swift; sourceTree = "<group>"; };
+		E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabaIsYouGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagIsWinGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedrockIsStopGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
 		E573E95B27EA2797000D10E4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -704,8 +710,11 @@
 				E57B535827FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift */,
 				E57B535A27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift */,
 				E57B535C27FD72640071E623 /* ConnectorGeneratorDecorator.swift */,
-				E525251227FDE1430014BF0B /* BabaGeneratorDecorator.swift */,
+				E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */,
 				E57B535E27FD72770071E623 /* CompletelyEnclosedGenerator.swift */,
+				E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */,
+				E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */,
+				E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */,
 			);
 			path = ChunkGeneratorDelegate;
 			sourceTree = "<group>";
@@ -1037,6 +1046,7 @@
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
+				E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */,
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
 				E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */,
 				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
@@ -1060,6 +1070,7 @@
 				E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
 				E574657E27F8056A00F79A52 /* EntityView.swift in Sources */,
+				E569858A27FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift in Sources */,
 				B0562DD527F303D900F10324 /* WinMechanic.swift in Sources */,
 				E57B535D27FD72640071E623 /* ConnectorGeneratorDecorator.swift in Sources */,
 				E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */,
@@ -1117,7 +1128,7 @@
 				E567530227EEBACD0001305D /* DungeonSelectViewModel.swift in Sources */,
 				E57B536127FD73A60071E623 /* StringView.swift in Sources */,
 				E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */,
-				E525251327FDE1430014BF0B /* BabaGeneratorDecorator.swift in Sources */,
+				E525251327FDE1430014BF0B /* NounIsPropertyGenerator.swift in Sources */,
 				1E96EB8F27E7255200321BEB /* GameState.swift in Sources */,
 				E573E96427EA3326000D10E4 /* PersistableDungeon.swift in Sources */,
 				E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */,
@@ -1127,6 +1138,7 @@
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
+				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,

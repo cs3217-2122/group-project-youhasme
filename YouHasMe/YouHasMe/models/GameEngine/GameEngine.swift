@@ -43,9 +43,7 @@ struct GameEngine: GameEventPublisher {
     }
 
     init(levelLayer: LevelLayer, ruleEngineDelegate: RuleEngineDelegate? = nil) {
-        let ruleEngine = RuleEngine()
-        ruleEngine.ruleEngineDelegate = ruleEngineDelegate
-        self.ruleEngine = ruleEngine
+        self.ruleEngine = RuleEngine(ruleEngineDelegate: ruleEngineDelegate)
         gameStateManager = GameStateManager(levelLayer: ruleEngine.applyRules(to: levelLayer))
         gameMechanics = [
             PlayerMoveMechanic(),
@@ -150,7 +148,9 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            publishingDelegate.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(
+                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
+            )
             return
         }
     }
@@ -163,7 +163,9 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: newState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            publishingDelegate.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(
+                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
+            )
             return
         }
     }

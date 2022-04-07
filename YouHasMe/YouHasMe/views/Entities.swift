@@ -37,7 +37,7 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         case .box:
             return .string("box_text")
         case .bedrock:
-            return .uiImage("bedrock".asImage()!)
+            return .uiImage("BR".asImage()!)
         case .connectorWall:
             return .uiImage("CW".asImage()!)
         default:

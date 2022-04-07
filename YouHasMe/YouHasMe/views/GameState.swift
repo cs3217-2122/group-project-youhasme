@@ -73,7 +73,10 @@ extension GameState {
             fatalError("Unexpected state")
         }
 
-        return PlayViewModel(playableDungeon: playableDungeon)
+        return PlayViewModel(
+            playableDungeon: playableDungeon,
+            achievementsViewModel: AchievementsViewModel(dungeonId: playableDungeon.getDungeon().id)
+        )
     }
 
     func getSelectViewModel() -> DungeonSelectViewModel {
@@ -91,6 +94,6 @@ extension GameState {
             dungeonId = loadable.name
         }
 
-        return AchievementsViewModel(levelId: dungeonId)
+        return AchievementsViewModel(dungeonId: dungeonId)
     }
 }

@@ -61,6 +61,8 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }
     }
 
+    var achievementsViewModel: AchievementsViewModel
+
     var contextualData: [ContextualMenuData] {
         guard let entities = selectedTile?.entities else {
             return []
@@ -83,17 +85,19 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
 
-    convenience init(playableDungeon: PlayableDungeon) {
-        self.init(dungeon: playableDungeon.getDungeon())
+    convenience init(playableDungeon: PlayableDungeon, achievementsViewModel: AchievementsViewModel) {
+        self.init(dungeon: playableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel)
     }
 
-    init(dungeon: Dungeon) {
+    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel) {
+        self.achievementsViewModel = achievementsViewModel
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
         let level = dungeon.getActiveLevel()
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
         setupBindings()
         setupBindingsWithGameEngine()
+        achievementsViewModel.levelId = level.id.dataString
     }
 
     func setupBindings() {
@@ -112,14 +116,29 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             guard let self = self else {
                 return
             }
-            guard gameEvent.type == .movingAcrossLevel else {
-                return
+
+            switch gameEvent.type {
+            case .movingAcrossLevel:
+                self.handleMoveAcrossLevel()
+            case .win:
+                self.handleWin()
+            default:
+                break
             }
-            guard let mostRecentPlayerMove = self.mostRecentPlayerMove else {
-                return
-            }
-            self.playerMovementAcrossLevel = mostRecentPlayerMove.getMovementAsVector()
         }
+        achievementsViewModel.resetSubscriptions()
+        achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
+    }
+
+    private func handleMoveAcrossLevel() {
+        guard let mostRecentPlayerMove = self.mostRecentPlayerMove else {
+            return
+        }
+        self.playerMovementAcrossLevel = mostRecentPlayerMove.getMovementAsVector()
+    }
+
+    private func handleWin() {
+        dungeon.winActiveLevel()
     }
 
     func playerMove(updateAction: UpdateType) {
@@ -129,6 +148,11 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         isLoopingInfinitely = gameEngine.status == .infiniteLoop
         dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
 
+        handlePostGameEngineUpdate()
+        mostRecentPlayerMove = nil
+    }
+
+    private func handlePostGameEngineUpdate() {
         guard let playerMovementAcrossLevel = playerMovementAcrossLevel else {
             return
         }
@@ -141,7 +165,9 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.playerMovementAcrossLevel = nil
 
         let level = dungeon.getActiveLevel()
+        achievementsViewModel.levelId = level.id.dataString
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
+
         let viewVector = CGVector(movementVector).scale(
             factorX: Double(self.dungeon.levelDimensions.width),
             factorY: Double(self.dungeon.levelDimensions.height)

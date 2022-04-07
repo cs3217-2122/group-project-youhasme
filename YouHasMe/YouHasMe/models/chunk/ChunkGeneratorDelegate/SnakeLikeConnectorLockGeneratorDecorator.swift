@@ -24,7 +24,10 @@ final class SnakeLikeConnectorLockGeneratorDecorator: ChunkGeneratorDecorator {
             .property(.stop),
             .connective(.cIf),
             .conditionEvaluable(
-                ConditionEvaluable(evaluableType: .level(id: levelPosition, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))),
+                ConditionEvaluable(
+                    evaluableType:
+                            .level(id: levelPosition, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))
+            ),
             .conditionRelation(.leq),
             .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(0)))
         ]

@@ -147,7 +147,7 @@ class ConditionBuilder {
         return Condition(
             subject: subject,
             relation: relation,
-            object: subject
+            object: object
         )
     }
 }
