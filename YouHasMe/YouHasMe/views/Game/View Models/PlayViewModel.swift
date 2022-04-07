@@ -54,6 +54,9 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     @Published var hasWon = false
     @Published var isLoopingInfinitely = false
     var dungeon: Dungeon
+    var currentLevelName: String {
+        dungeon.getActiveLevel().name
+    }
     @Published var state: PlayViewState = .normal
     var gameEngine: GameEngine {
         didSet {

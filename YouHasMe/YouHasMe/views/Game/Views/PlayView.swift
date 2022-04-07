@@ -38,6 +38,7 @@ struct PlayView: View {
         ZStack {
             VStack {
                 Group {
+                    Text(viewModel.currentLevelName)
                     GridView(viewModel: viewModel)
                         .gesture(dragGesture)
                     Spacer()
