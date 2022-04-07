@@ -38,7 +38,7 @@ class Dungeon {
 
     let entryLevelPosition: Point
     let entryWorldPosition: Point = .zero
-    var levelNameToPositionMap: [String: Point] = [:]
+    @Published var levelNameToPositionMap: [String: Point] = [:]
     var playerLevelPosition: Point
     @Published var loadedLevels: [Point: Level] = [:]
 
@@ -67,6 +67,7 @@ class Dungeon {
         self.dimensions = dimensions
         self.levelDimensions = levelDimensions
         self.entryLevelPosition = entryLevelPosition
+        self.levelNameToPositionMap = levelNameToPositionMap
         playerLevelPosition = entryLevelPosition
         if isNewDungeon {
             for x in 0..<dimensions.width {
@@ -117,6 +118,12 @@ class Dungeon {
         level.name = newName
         levelNameToPositionMap[newName] = levelPosition
         levelNameToPositionMap[oldName] = nil
+        do {
+            try saveLoadedLevels()
+            try dungeonStorage.saveDungeon(self)
+        } catch {
+            fatalError("failed to save")
+        }
     }
 
     func setLevelLayer(_ levelLayer: LevelLayer) {
@@ -239,8 +246,6 @@ extension Dungeon {
         let viewableChunkRegion = worldRegionToLevelRegion(viewableWorldRegion)
         let loadableChunkRegion = viewableChunkRegion.expandInAllDirections(by: loadableChunkRadius)
         // Unload all chunks that are very far away from the viewable region
-        // In future, there may be multiple viewableChunkRegions due to multiplayer,
-        // so we need to account for all of those.
         for (position, loadedLevel) in loadedLevels {
             guard !loadableChunkRegion.contains(point: position) else {
                 continue

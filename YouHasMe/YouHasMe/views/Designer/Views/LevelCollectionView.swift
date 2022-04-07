@@ -17,7 +17,7 @@ struct LevelCollectionView: View {
         GeometryReader { geometry in
            ScrollView {
                VStack(alignment: .leading, spacing: 8) {
-                   ForEach(0..<viewModel.levelNames.count) { i in
+                   ForEach(0..<viewModel.levelMetadata.count) { i in
                        if i % Int(viewModel.itemsPerRow) == 0 {
                            buildView(rowIndex: i, geometry: geometry)
                        }
@@ -30,8 +30,8 @@ struct LevelCollectionView: View {
     func buildView(rowIndex: Int, geometry: GeometryProxy) -> RowView? {
         var rowItems = [LevelMetadata]()
         for itemIndex in 0..<Int(viewModel.itemsPerRow) {
-            if rowIndex + itemIndex < viewModel.levelNames.count {
-                rowItems.append(viewModel.levelNames[rowIndex + itemIndex])
+            if rowIndex + itemIndex < viewModel.levelMetadata.count {
+                rowItems.append(viewModel.levelMetadata[rowIndex + itemIndex])
             }
         }
         if !rowItems.isEmpty {
@@ -62,7 +62,7 @@ struct RowView: View {
     var body: some View {
         HStack(spacing: horizontalSpacing) {
             ForEach(rowItems) { rowItem in
-                LevelMetadataView(levelMetadata: rowItem)
+                LevelMetadataView(viewModel: viewModel, levelMetadata: rowItem)
                     .frame(width: width, height: height)
             }
         }
@@ -71,14 +71,28 @@ struct RowView: View {
 }
 
 struct LevelMetadataView: View {
+    @ObservedObject var viewModel: LevelCollectionViewModel
+    @State var isEditing: Bool = false
+    @State var tempName: String = ""
     var levelMetadata: LevelMetadata
     var body: some View {
         VStack {
             Text(levelMetadata.id.description).padding()
-            Text(levelMetadata.name).padding()
-            Button("Edit") {
-                
+            if !isEditing {
+                Text(levelMetadata.name).padding()
+                Button("Edit Name") {
+                    isEditing = true
+                    tempName = levelMetadata.name
+                }
+            } else {
+                TextField("New name", text: $tempName).padding()
+                Button("Confirm Name") {
+                    isEditing = false
+                    viewModel.renameLevel(with: levelMetadata.name, to: tempName)
+                    tempName = ""
+                }
             }
+            
         }
     }
 }

@@ -12,6 +12,15 @@ extension Point: CustomStringConvertible {
     }
 }
 
+extension Point: Comparable {
+    static func < (lhs: Point, rhs: Point) -> Bool {
+        guard lhs.y != rhs.y else {
+            return lhs.x < rhs.x
+        }
+        return lhs.y < rhs.y
+    }
+}
+
 extension Point: Codable {}
 
 extension Point: Hashable {}

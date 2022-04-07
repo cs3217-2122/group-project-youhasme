@@ -176,6 +176,12 @@ extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
     }
 }
 
+extension DesignerViewModel: LevelCollectionViewModelDelegate {
+    func renameLevel(with oldName: String, to newName: String) {
+        dungeon.renameLevel(with: oldName, to: newName)
+    }
+}
+
 // MARK: Child view models
 extension DesignerViewModel {
     func getToolbarViewModel() -> ToolbarViewModel {
@@ -218,11 +224,14 @@ extension DesignerViewModel {
     }
 
     func getLevelCollectionViewModel() -> LevelCollectionViewModel {
-        LevelCollectionViewModel(
+        let levelCollectionViewModel = LevelCollectionViewModel(
             dungeonDimensions: dungeon.dimensions,
-            levelNames: dungeon.levelNameToPositionMap.map { (name: String, id: Point) in
-                LevelMetadata(id: id, name: name)
-            }
+            levelNameToPositionMapPublisher:
+                dungeon
+                .$levelNameToPositionMap
+                .eraseToAnyPublisher()
         )
+        levelCollectionViewModel.delegate = self
+        return levelCollectionViewModel
     }
 }
