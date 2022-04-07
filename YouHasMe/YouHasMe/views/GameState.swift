@@ -27,7 +27,8 @@ extension DesignableDungeon {
                 name: Dungeon.defaultName,
                 dimensions: rectangle,
                 levelDimensions: Dungeon.defaultLevelDimensions,
-                entryLevelPosition: Dungeon.defaultEntryLevelPosition
+                entryLevelPosition: Dungeon.defaultEntryLevelPosition,
+                levelNameToPositionMap: [:]
             )
         }
     }

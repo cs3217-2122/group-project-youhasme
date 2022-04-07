@@ -48,14 +48,14 @@ struct DimensionSelectView: View {
                 ForEach(heightRange) {
                     Text("\($0) levels")
                 }
-            }
+            }.padding()
 
             Text("Dungeon Width")
             Picker("Dungeon Width", selection: $widthSelection) {
                 ForEach(widthRange) {
                     Text("\($0) levels")
                 }
-            }
+            }.padding()
            
             
             Button("Confirm") {
@@ -67,7 +67,7 @@ struct DimensionSelectView: View {
                         )
                     )
                 )
-            }
+            }.padding()
             
             Button("Cancel") {
                 gameState.state = .mainmenu

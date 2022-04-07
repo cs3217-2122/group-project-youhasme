@@ -11,6 +11,7 @@ struct PersistableDungeon {
     var dimensions: Rectangle
     var levelDimensions: Rectangle
     var entryLevelPosition: Point
+    var levelNameToPositionMap: [String: Point] = [:]
 }
 
 extension PersistableDungeon: Codable {}

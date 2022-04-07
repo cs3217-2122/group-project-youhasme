@@ -117,6 +117,8 @@
 		E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */; };
 		E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */; };
 		E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */; };
+		E57A96DD27FEDF9300264A28 /* LevelCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A96DC27FEDF9300264A28 /* LevelCollectionView.swift */; };
+		E57A96DF27FEE2AC00264A28 /* LevelCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */; };
 		E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */; };
 		E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57ACB2827DC582300F73B27 /* ContentView.swift */; };
 		E57ACB2B27DC582500F73B27 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E57ACB2A27DC582500F73B27 /* Assets.xcassets */; };
@@ -299,6 +301,8 @@
 		E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderRandomizerDecorator.swift; sourceTree = "<group>"; };
 		E57A19AF27F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkNeighborFinderWrapAroundDecorator.swift; sourceTree = "<group>"; };
 		E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeneratorDelegate.swift; sourceTree = "<group>"; };
+		E57A96DC27FEDF9300264A28 /* LevelCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCollectionView.swift; sourceTree = "<group>"; };
+		E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCollectionViewModel.swift; sourceTree = "<group>"; };
 		E57ACB2327DC582300F73B27 /* YouHasMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouHasMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E57ACB2627DC582300F73B27 /* YouHasMeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeApp.swift; sourceTree = "<group>"; };
 		E57ACB2827DC582300F73B27 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -815,6 +819,7 @@
 				E574658227F805B100F79A52 /* PaletteEntityView.swift */,
 				E574658627F8096600F79A52 /* ConditionCreatorView.swift */,
 				E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */,
+				E57A96DC27FEDF9300264A28 /* LevelCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -827,6 +832,7 @@
 				E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */,
 				E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */,
 				E5D0A22C27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift */,
+				E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1103,6 +1109,7 @@
 				E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */,
 				40E2517327F71FCE008CBCE0 /* GameEvent.swift in Sources */,
 				B05687DF27F36CF00046C26C /* Game.swift in Sources */,
+				E57A96DF27FEE2AC00264A28 /* LevelCollectionViewModel.swift in Sources */,
 				E57A19A527F9F8F500312C39 /* NeighborFinderDelegate.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
@@ -1144,6 +1151,7 @@
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
 				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57B535327FD687A0071E623 /* KeyPathExposable.swift in Sources */,
+				E57A96DD27FEDF9300264A28 /* LevelCollectionView.swift in Sources */,
 				E574659727F8670F00F79A52 /* EpsilonState.swift in Sources */,
 				E5BECBE727E5E68200E3952D /* Behaviour.swift in Sources */,
 				E5BECBDE27E59E1000E3952D /* Array.swift in Sources */,

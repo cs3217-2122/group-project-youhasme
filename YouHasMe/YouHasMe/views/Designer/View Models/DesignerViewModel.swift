@@ -76,10 +76,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         return .dungeon(dungeon)
     }
 
-    func getAllLoadableDungeons() -> [Loadable] {
-        dungeonStorage.getAllLoadables()
-    }
-
     func setupBindings() {
         dungeon.$loadedLevels.sink { [weak self] loadedLevels in
             guard let self = self else {
@@ -219,5 +215,14 @@ extension DesignerViewModel {
 
     func getNameButtonViewModel() -> DungeonNameButtonViewModel {
         DungeonNameButtonViewModel(namePublisher: dungeon.$name.eraseToAnyPublisher())
+    }
+
+    func getLevelCollectionViewModel() -> LevelCollectionViewModel {
+        LevelCollectionViewModel(
+            dungeonDimensions: dungeon.dimensions,
+            levelNames: dungeon.levelNameToPositionMap.map { (name: String, id: Point) in
+                LevelMetadata(id: id, name: name)
+            }
+        )
     }
 }

@@ -50,7 +50,8 @@ class Dungeon {
             name: Dungeon.defaultName,
             dimensions: Dungeon.defaultDimensions,
             levelDimensions: Dungeon.defaultLevelDimensions,
-            entryLevelPosition: Dungeon.defaultEntryLevelPosition
+            entryLevelPosition: Dungeon.defaultEntryLevelPosition,
+            levelNameToPositionMap: [:]
         )
     }
 
@@ -59,7 +60,8 @@ class Dungeon {
         name: String,
         dimensions: Rectangle,
         levelDimensions: Rectangle,
-        entryLevelPosition: Point
+        entryLevelPosition: Point,
+        levelNameToPositionMap: [String: Point]
     ) {
         self.name = name
         self.dimensions = dimensions
@@ -90,6 +92,31 @@ class Dungeon {
         } catch {
             globalLogger.error("\(error.localizedDescription)")
         }
+    }
+
+    func renameLevel(with oldName: String, to newName: String) {
+        guard oldName != newName else {
+            return
+        }
+
+        guard let levelPosition = levelNameToPositionMap[oldName] else {
+            globalLogger.error("level with name not found")
+            return
+        }
+
+        guard levelNameToPositionMap[newName] == nil else {
+            globalLogger.info("level name is already in use")
+            return
+        }
+
+        guard let level = getLevel(levelPosition: levelPosition) else {
+            fatalError("should not be nil")
+        }
+
+        assert(level.name == oldName)
+        level.name = newName
+        levelNameToPositionMap[newName] = levelPosition
+        levelNameToPositionMap[oldName] = nil
     }
 
     func setLevelLayer(_ levelLayer: LevelLayer) {
@@ -186,6 +213,7 @@ extension Dungeon {
             fatalError("unexpected save failure")
         }
 
+        levelNameToPositionMap[level.name] = levelPosition
         loadedLevels[levelPosition] = level
     }
 
@@ -264,7 +292,8 @@ extension Dungeon {
             name: name,
             dimensions: dimensions,
             levelDimensions: levelDimensions,
-            entryLevelPosition: entryLevelPosition
+            entryLevelPosition: entryLevelPosition,
+            levelNameToPositionMap: levelNameToPositionMap
         )
     }
 
@@ -274,7 +303,8 @@ extension Dungeon {
             name: persistableDungeon.name,
             dimensions: persistableDungeon.dimensions,
             levelDimensions: persistableDungeon.levelDimensions,
-            entryLevelPosition: persistableDungeon.entryLevelPosition
+            entryLevelPosition: persistableDungeon.entryLevelPosition,
+            levelNameToPositionMap: persistableDungeon.levelNameToPositionMap
         )
         return dungeon
     }

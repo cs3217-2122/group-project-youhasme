@@ -26,29 +26,30 @@ struct DesignerView: View {
     }
     
     var body: some View {
-        ZStack {
-            VStack {
-                ToolbarView(viewModel: viewModel.getToolbarViewModel())
-                    .padding()
-                PaletteView(viewModel: viewModel)
-                    .padding()
-                GridView(viewModel: viewModel)
-                    .padding()
-                Spacer()
-                PersistenceView(viewModel: viewModel)
-            }
-            .onReceive(viewModel.$state, perform: {
-                guard case .choosingConditionEvaluable = $0 else {
-                    shouldPresentConditionEvaluableCreator = false
-                    return
+        TabView {
+            ZStack {
+                VStack {
+                    ToolbarView(viewModel: viewModel.getToolbarViewModel())
+                        .padding()
+                    PaletteView(viewModel: viewModel)
+                        .padding()
+                    GridView(viewModel: viewModel)
+                        .padding()
+                    Spacer()
+                    PersistenceView(viewModel: viewModel)
                 }
-                shouldPresentConditionEvaluableCreator = true
-            })
-            .fullScreenCover(isPresented: $shouldPresentConditionEvaluableCreator) {
-                ConditionEvaluableCreatorView(
-                    viewModel: viewModel.getConditionEvaluableCreatorViewModel()
-                )
-            }
+                .onReceive(viewModel.$state, perform: {
+                    guard case .choosingConditionEvaluable = $0 else {
+                        shouldPresentConditionEvaluableCreator = false
+                        return
+                    }
+                    shouldPresentConditionEvaluableCreator = true
+                })
+                .fullScreenCover(isPresented: $shouldPresentConditionEvaluableCreator) {
+                    ConditionEvaluableCreatorView(
+                        viewModel: viewModel.getConditionEvaluableCreatorViewModel()
+                    )
+                }
             
 //            if let selectedTile = viewModel.selectedTile {
 //                NavigationFrame(backHandler: {
@@ -60,7 +61,17 @@ struct DesignerView: View {
 //                }
 //            }
 
-        }.gesture(dragGesture)
+            }
+                .gesture(dragGesture)
+                .tabItem {
+                    Label("Grid View", systemImage: "grid")
+                }
+            
+            LevelCollectionView(viewModel: viewModel.getLevelCollectionViewModel())
+                .tabItem {
+                    Label("Level View", systemImage: "note")
+                }
+        }
     }
 }
 

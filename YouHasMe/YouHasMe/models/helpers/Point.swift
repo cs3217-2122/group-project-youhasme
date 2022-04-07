@@ -6,6 +6,12 @@ struct Point {
     var y: Int
 }
 
+extension Point: CustomStringConvertible {
+    var description: String {
+        "(\(x), \(y))"
+    }
+}
+
 extension Point: Codable {}
 
 extension Point: Hashable {}
