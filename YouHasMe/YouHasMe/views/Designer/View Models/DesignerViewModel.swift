@@ -26,10 +26,13 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     private var toolbarViewModel: ToolbarViewModel?
+    private var achievementsViewModel: AchievementsViewModel
 
     @Published var state: DesignerState = .normal
 
     @Published var levelsUpdated = false
+
+    var isExistingLevel = true
 
     private var subscriptions: Set<AnyCancellable> = []
 
@@ -43,16 +46,21 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
-    convenience init() {
-        self.init(dungeon: Dungeon())
+    convenience init(achievementsViewModel: AchievementsViewModel) {
+        self.init(dungeon: Dungeon(), achievementsViewModel: achievementsViewModel)
+        isExistingLevel = false
     }
 
-    convenience init(designableDungeon: DesignableDungeon) {
-        self.init(dungeon: designableDungeon.getDungeon())
+    convenience init(designableDungeon: DesignableDungeon, achievementsViewModel: AchievementsViewModel) {
+        self.init(dungeon: designableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel)
+        if case .newDungeonDimensions = designableDungeon {
+            isExistingLevel = false
+        }
     }
 
-    init(dungeon: Dungeon) {
+    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel) {
         self.dungeon = dungeon
+        self.achievementsViewModel = achievementsViewModel
         viewPosition = dungeon.entryWorldPosition
         setupBindings()
     }
@@ -85,12 +93,16 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             }
         }
         .store(in: &subscriptions)
+        achievementsViewModel.setSubscriptionsFor(gameEventPublisher)
     }
 }
 
 // MARK: Persistence
 extension DesignerViewModel {
     func save() throws {
+        if !isExistingLevel {
+            gameEventSubject.send(GameEvent(type: .designLevel))
+        }
         try dungeon.saveLoadedLevels()
         try dungeonStorage.saveDungeon(dungeon)
     }

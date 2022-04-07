@@ -25,9 +25,7 @@ struct GameView: View {
             case .choosingDimensions:
                 DimensionSelectView()
             case .designing:
-                DesignerView(
-                    viewModel: gameState.getDesignerViewModel(),
-                    achievementsViewModel: gameState.getAchievementsViewModel())
+                DesignerView(viewModel: gameState.getDesignerViewModel())
             case .playing:
                 PlayView(viewModel: gameState.getPlayViewModel())
             case .achievements:

@@ -2,7 +2,6 @@ import SwiftUI
 import Combine
 struct DesignerView: View {
     @ObservedObject var viewModel: DesignerViewModel
-    @ObservedObject var achievementsViewModel: AchievementsViewModel
     @State var shouldPresentConditionEvaluableCreator: Bool = false
     @State var lastDragLocation: CGPoint?
     let inverseDragThreshold: Double = 20.0.multiplicativeInverse()
@@ -61,8 +60,6 @@ struct DesignerView: View {
 //                }
 //            }
 
-        }.onAppear {
-            achievementsViewModel.setSubscriptionsFor(viewModel.gameEventPublisher)
         }.gesture(dragGesture)
     }
 }

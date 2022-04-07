@@ -91,21 +91,26 @@ class GameState: ObservableObject {
 // MARK: View model factories
 extension GameState {
     func getDesignerViewModel() -> DesignerViewModel {
+        let achievementsViewModel = getAchievementsViewModel()
         guard case let .designing(designableDungeon: designableDungeon) = state,
               let designableDungeon = designableDungeon else {
-            return DesignerViewModel()
+            return DesignerViewModel(achievementsViewModel: achievementsViewModel)
         }
-        return DesignerViewModel(designableDungeon: designableDungeon)
+        return DesignerViewModel(
+            designableDungeon: designableDungeon,
+            achievementsViewModel: achievementsViewModel
+        )
     }
 
     func getPlayViewModel() -> PlayViewModel {
+        let achievementsViewModel = getAchievementsViewModel()
         guard case let .playing(playableDungeon: playableDungeon) = state else {
             fatalError("Unexpected state")
         }
 
         return PlayViewModel(
             playableDungeon: playableDungeon,
-            achievementsViewModel: AchievementsViewModel(dungeonId: playableDungeon.getDungeon().id)
+            achievementsViewModel: achievementsViewModel
         )
     }
 

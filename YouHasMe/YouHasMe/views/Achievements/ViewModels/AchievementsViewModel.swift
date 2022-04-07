@@ -53,14 +53,13 @@ class AchievementsViewModel: ObservableObject {
             guard let self = self else {
                 return
             }
-
-            guard let levelId = self.levelId else {
-                return
+            var gameEvent = gameEvent
+            if let levelId = self.levelId {
+                gameEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: levelId)
             }
-            let updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: levelId)
 
             for achievement in self.lockedAchievements {
-                self.updateAchievement(achievement, gameEvent: updatedEvent)
+                self.updateAchievement(achievement, gameEvent: gameEvent)
                 self.saveAchievement(achievement)
                 self.updateLockedUnlockedAchievements(updatedAchievement: achievement)
 
