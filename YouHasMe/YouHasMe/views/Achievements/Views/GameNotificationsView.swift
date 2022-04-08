@@ -9,14 +9,14 @@ import Foundation
 import SwiftUI
 
 struct GameNotificationsView: View {
-    @ObservedObject var notificationsViewModel: GameNotificationsViewModel
+    @ObservedObject var gameNotificationsViewModel: GameNotificationsViewModel
 
     var body: some View {
         ZStack {
-            if let gameNotif = notificationsViewModel.notificationShown {
-                GameNotificationView(gameNotif: gameNotif, gameNotifsViewModel: notificationsViewModel)
+            if let gameNotif = gameNotificationsViewModel.notificationShown {
+                GameNotificationView(gameNotif: gameNotif, gameNotifsViewModel: gameNotificationsViewModel)
             }
         }.animation(.easeInOut(duration: 1.0),
-                    value: notificationsViewModel.notificationShown)
+                    value: gameNotificationsViewModel.notificationShown)
     }
 }

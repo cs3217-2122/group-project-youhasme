@@ -10,10 +10,8 @@ import SwiftUI
 struct AchievementMainView: View {
     @EnvironmentObject var gameState: GameState
     @ObservedObject var achievementsViewModel: AchievementsViewModel
-    @ObservedObject var notificationsViewModel: GameNotificationsViewModel
 
     var body: some View {
-        ZStack {
         VStack(alignment: .leading) {
             Text("Achievements")
             List {
@@ -44,10 +42,6 @@ struct AchievementMainView: View {
                 }
                 Spacer()
             }.padding()
-        }
-
-            GameNotificationsView(notificationsViewModel: notificationsViewModel)
-
         }.onAppear {
             achievementsViewModel.updateData()
         }

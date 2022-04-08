@@ -93,13 +93,16 @@ class GameState: ObservableObject {
 extension GameState {
     func getDesignerViewModel() -> DesignerViewModel {
         let achievementsViewModel = getAchievementsViewModel()
+        let gameNotificationsViewModel = getGameNotificationsViewModel()
         guard case let .designing(designableDungeon: designableDungeon) = state,
               let designableDungeon = designableDungeon else {
-            return DesignerViewModel(achievementsViewModel: achievementsViewModel)
+            return DesignerViewModel(achievementsViewModel: achievementsViewModel,
+                                     gameNotificationsViewModel: gameNotificationsViewModel)
         }
         return DesignerViewModel(
             designableDungeon: designableDungeon,
-            achievementsViewModel: achievementsViewModel
+            achievementsViewModel: achievementsViewModel,
+            gameNotificationsViewModel: gameNotificationsViewModel
         )
     }
 

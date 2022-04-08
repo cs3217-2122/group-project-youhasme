@@ -71,7 +71,9 @@ struct DesignerView: View {
                 .tabItem {
                     Label("Level View", systemImage: "note")
                 }
-        }
+        }.overlay(alignment: .top, content: {
+            GameNotificationsView(gameNotificationsViewModel: viewModel.gameNotificationsViewModel)
+        })
     }
 }
 

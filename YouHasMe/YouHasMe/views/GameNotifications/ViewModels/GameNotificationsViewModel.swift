@@ -37,7 +37,7 @@ class GameNotificationsViewModel: ObservableObject {
     func showNotif(notification: GameNotification) {
         notificationShown = notification
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.hasFinishedShowing(notification)
         }
     }
