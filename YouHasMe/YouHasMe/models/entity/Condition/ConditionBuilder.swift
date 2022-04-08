@@ -152,13 +152,17 @@ class ConditionBuilder {
     }
 }
 
+protocol ConditionTypeDependencyDelegate: AnyObject {
+    func getLevelMetadata() -> [LevelMetadata]
+}
+
 enum ConditionType: String {
     case dungeon = "Dungeon"
     case level = "Level"
     case player = "Player"
     case numericLiteral = "Numeric"
 
-    func getKeyPaths() -> [AnyNamedKeyPath] {
+    func getKeyPaths() -> [AnyNamedKeyPath]? {
         switch self {
         case .dungeon:
             return Dungeon.typeErasedNamedKeyPaths
@@ -166,19 +170,6 @@ enum ConditionType: String {
             return Level.typeErasedNamedKeyPaths
         case .player:
             return []
-        case .numericLiteral:
-            return []
-        }
-    }
-
-    func getStorageDependencies() -> [Loadable]? {
-        switch self {
-        case .dungeon:
-            return nil
-        case .level:
-            return nil // TODO
-        case .player:
-            return nil
         case .numericLiteral:
             return nil
         }

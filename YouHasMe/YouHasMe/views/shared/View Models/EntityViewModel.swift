@@ -23,6 +23,7 @@ class EntityViewModel: CellViewModel {
     var status: LevelStatus = .active
     var tile: Tile?
     var worldPosition: Point?
+    @Published var tileDescription: String?
 
     convenience init(tile: Tile?, status: LevelStatus? = nil) {
         self.init(tile: tile, worldPosition: nil, status: status)
@@ -63,10 +64,17 @@ class EntityViewModel: CellViewModel {
     }
 
     func examine() {
-        guard let delegate = examinableDelegate, let worldPosition = worldPosition else {
-            return
+        if let examinableDelegate = examinableDelegate, let worldPosition = worldPosition {
+            examinableDelegate.examineTile(at: worldPosition)
         }
 
-        delegate.examineTile(at: worldPosition)
+        if let tile = tile {
+            for entity in tile.entities {
+                if case .conditionEvaluable(let evaluable) = entity.entityType.classification {
+                    tileDescription = evaluable.description
+                    break
+                }
+            }
+        }
     }
 }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct EntityView: View {
     @EnvironmentObject var gameState: GameState
-    var viewModel: EntityViewModel
+    @State var shouldShowPopover: Bool = false
+    @ObservedObject var viewModel: EntityViewModel
     var foregroundColor: Color {
         switch viewModel.status {
         case .active:
@@ -23,6 +24,17 @@ struct EntityView: View {
     var body: some View {
         ZStack {
             CellView(backupDisplayColor: .black, viewModel: viewModel)
+                .onReceive(viewModel.$tileDescription, perform: {
+                    shouldShowPopover = $0 != nil
+                })
+                .popover(isPresented: $shouldShowPopover) {
+                    if let tileDescription = viewModel.tileDescription {
+                        Text(tileDescription)
+                        Button("Close") {
+                            shouldShowPopover = false
+                        }
+                    }
+                }
                 .border(.pink)
                 .onTapGesture {
                     switch gameState.state {

@@ -160,7 +160,15 @@ extension DesignerViewModel: EntityViewModelExaminableDelegate {
 }
 
 extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
-    func buildConditionEvaluable(conditionEvaluable: ConditionEvaluable) {
+    func getLevelNameToPositionMap() -> [String: Point] {
+        dungeon.levelNameToPositionMap
+    }
+
+    func getConditionEvaluableDelegate() -> ConditionEvaluableDungeonDelegate {
+        dungeon
+    }
+
+    func addConditionEvaluable(conditionEvaluable: ConditionEvaluable) {
         guard case .choosingConditionEvaluable(worldPosition: let worldPosition) = state else {
             return
         }
@@ -172,6 +180,9 @@ extension DesignerViewModel: ConditionEvaluableCreatorViewModelDelegate {
             Entity(entityType: EntityType(classification: .conditionEvaluable(conditionEvaluable)))
         )
         dungeon.setTile(tile, at: worldPosition)
+    }
+
+    func finishCreation() {
         state = .normal
     }
 }
@@ -216,7 +227,9 @@ extension DesignerViewModel {
     }
 
     func getConditionEvaluableCreatorViewModel() -> ConditionEvaluableCreatorViewModel {
-        ConditionEvaluableCreatorViewModel()
+        let conditionEvaluableCreatorViewModel = ConditionEvaluableCreatorViewModel()
+        conditionEvaluableCreatorViewModel.delegate = self
+        return conditionEvaluableCreatorViewModel
     }
 
     func getNameButtonViewModel() -> DungeonNameButtonViewModel {
