@@ -14,6 +14,10 @@ struct PlayView: View {
     var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
+                guard viewModel.state != .disabled else {
+                    return
+                }
+                
                 var updateAction: UpdateType = .tick
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height

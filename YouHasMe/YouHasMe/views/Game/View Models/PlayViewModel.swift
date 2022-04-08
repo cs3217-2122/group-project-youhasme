@@ -43,6 +43,7 @@ extension ContextualMenuData: Comparable {
 }
 
 enum PlayViewState {
+    case disabled
     case normal
     case messages
 }
@@ -84,6 +85,8 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     @Published var selectedTile: Tile?
+    private var timer: Timer?
+    private var timedOffset: Vector = .zero
 
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
@@ -155,6 +158,24 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         mostRecentPlayerMove = nil
     }
 
+    func translateViewSlowly(by offset: Vector) {
+        timedOffset = offset
+        state = .disabled
+        timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] timer in
+            guard let self = self else {
+                timer.invalidate()
+                return
+            }
+            let unit = self.timedOffset.getUnit()
+            self.timedOffset = self.timedOffset.subtract(unit)
+            self.translateView(by: CGVector(unit))
+            if self.timedOffset == .zero {
+                timer.invalidate()
+                self.state = .normal
+            }
+        }
+    }
+
     private func handlePostGameEngineUpdate() {
         guard let playerMovementAcrossLevel = playerMovementAcrossLevel else {
             return
@@ -175,7 +196,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             factorX: Double(self.dungeon.levelDimensions.width),
             factorY: Double(self.dungeon.levelDimensions.height)
         )
-        translateView(by: viewVector)
+        translateViewSlowly(by: viewVector.toVector())
     }
 }
 

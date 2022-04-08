@@ -31,6 +31,10 @@ extension Vector {
         Vector(dx: dx + vector.dx, dy: dy + vector.dy)
     }
 
+    func subtract(_ vector: Vector) -> Vector {
+        Vector(dx: dx - vector.dx, dy: dy - vector.dy)
+    }
+
     func addX(dx: Int) -> Vector {
         Vector(dx: self.dx + dx, dy: dy)
     }
@@ -49,5 +53,9 @@ extension Vector {
 
     func reflectY() -> Vector {
         Vector(dx: dx, dy: -dy)
+    }
+
+    func getUnit() -> Vector {
+        Vector(dx: dx.signum(), dy: dy.signum())
     }
 }
