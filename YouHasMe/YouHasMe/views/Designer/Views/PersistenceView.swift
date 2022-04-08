@@ -6,54 +6,7 @@
 //
 
 import SwiftUI
-
-struct TextFieldAlert<Presenting>: View where Presenting: View {
-    @Binding var isShowing: Bool
-    @Binding var text: String
-    let presenting: () -> Presenting
-    let title: String
-
-    var body: some View {
-        GeometryReader { (deviceSize: GeometryProxy) in
-            ZStack {
-                self.presenting()
-                    .blur(radius: self.isShowing ? 2 : 0)
-                    .disabled(self.isShowing)
-                VStack {
-                    Text(self.title)
-                    TextField(self.title, text: self.$text)
-                    Divider()
-                    HStack {
-                        Button(action: {
-                            withAnimation {
-                                self.isShowing.toggle()
-                            }
-                        }) {
-                            Text("Dismiss")
-                        }
-                    }
-                }
-                .shadow(radius: 1)
-                .opacity(self.isShowing ? 1 : 0)
-            }
-        }
-    }
-
-}
-
-extension View {
-
-    func textFieldAlert(isShowing: Binding<Bool>,
-                        text: Binding<String>,
-                        title: String) -> some View {
-        
-        TextFieldAlert(isShowing: isShowing,
-                       text: text,
-                       presenting: { self },
-                       title: title)
-    }
-
-}
+import Combine
 
 struct PersistenceView: View {
     @EnvironmentObject var gameState: GameState
@@ -64,7 +17,7 @@ struct PersistenceView: View {
     var saveErrorMessage = "Save Error"
     @State var showSaveErrorAlert = false
     @State var loadSuccess = false
-    @State var showDungeonNameAlert = false
+    @State var isChangingDungeonName = false
     @State var dungeonButtonText: String = ""
     @State var unconfirmedDungeonName = ""
 
@@ -85,10 +38,18 @@ struct PersistenceView: View {
             }.alert(isPresented: $showSaveErrorAlert) {
                 Alert(title: Text(saveErrorMessage), dismissButton: .cancel(Text("close")))
             }
-
-            DungeonNameButton(viewModel: viewModel.getNameButtonViewModel()) {
-                unconfirmedDungeonName = viewModel.dungeon.name
-                showDungeonNameAlert = true
+            
+            if isChangingDungeonName {
+                TextField("", text: $unconfirmedDungeonName)
+                Button("Confirm new name") {
+                    viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
+                    isChangingDungeonName = false
+                }
+            } else {
+                DungeonNameButton(viewModel: viewModel.getNameButtonViewModel()) {
+                    unconfirmedDungeonName = viewModel.dungeon.name
+                    isChangingDungeonName = true
+                }
             }
             
             Spacer()
@@ -105,24 +66,6 @@ struct PersistenceView: View {
             }
         }
         .padding([.leading, .trailing], 10.0)
-        .textFieldAlert(isShowing: $showDungeonNameAlert, text: $unconfirmedDungeonName, title: "Change name")
-        .onChange(of: showDungeonNameAlert) { isShowing in
-            guard !isShowing else {
-                return
-            }
-            viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
-            showDungeonNameAlert = false
-        }
-    }
-}
-import Combine
-class DungeonNameButtonViewModel: ObservableObject {
-    @Published var name: String = ""
-    private var subscriptions: Set<AnyCancellable> = []
-    init(namePublisher: AnyPublisher<String, Never>) {
-        namePublisher
-            .sink { [weak self] name in self?.name = name }
-            .store(in: &subscriptions)
     }
 }
 

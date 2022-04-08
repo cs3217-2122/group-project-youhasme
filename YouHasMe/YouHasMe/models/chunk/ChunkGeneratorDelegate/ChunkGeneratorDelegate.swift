@@ -20,7 +20,7 @@ extension ChunkGeneratorDelegate {
     }
 
     func decorateWith<T: ChunkGeneratorDecorator>(_ decoratorClass: T.Type) -> AnyChunkGeneratorDelegate {
-        AnyChunkGeneratorDelegate(generator: decoratorClass.init(generator: self))
+        decoratorClass.init(generator: self).eraseToAnyGenerator()
     }
 
     func eraseToAnyGenerator() -> AnyChunkGeneratorDelegate {

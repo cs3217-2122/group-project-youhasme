@@ -81,6 +81,10 @@ extension CGVector {
         assert(norm > 0, "Cannot normalize the zero vector")
         return CGVector(dx: dx / norm, dy: dy / norm)
     }
+
+    func toVector() -> Vector {
+        Vector(dx: Int(dx), dy: Int(dy))
+    }
 }
 
 // MARK: Lengths and distances

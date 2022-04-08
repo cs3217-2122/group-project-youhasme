@@ -12,7 +12,13 @@ struct GridViewData {
     var cellHeight: Double {
         cellDimensions
     }
-    init(displayWidth: Double, displayHeight: Double, cellDimensions: Double = ViewConstants.gridCellDimensions) {
+    
+    
+    init(
+        displayWidth: Double,
+        displayHeight: Double,
+        cellDimensions: Double = ViewConstants.gridCellDimensions
+    ) {
         self.displayWidth = displayWidth
         self.displayHeight = displayHeight
         self.cellDimensions = cellDimensions

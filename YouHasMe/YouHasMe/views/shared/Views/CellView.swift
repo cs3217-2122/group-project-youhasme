@@ -4,16 +4,12 @@ import Combine
 struct CellView: View {
     let backupDisplayColor: Color
     
-    var backupDisplay: some View {
-        SwiftUI.Rectangle().fill(backupDisplayColor)
-    }
-    
     @ObservedObject var viewModel: CellViewModel
     var body: some View {
         if let image = viewModel.image {
             image.interpolation(.none).resizable().scaledToFit().background(Color.gray)
         } else {
-            backupDisplay
+            backupDisplayColor
         }
     }
 }
