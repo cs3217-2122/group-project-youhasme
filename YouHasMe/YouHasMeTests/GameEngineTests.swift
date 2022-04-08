@@ -16,7 +16,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 0)
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 2, y: 0)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveDown)
@@ -38,7 +38,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 3, y: 2)
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 4, y: 2)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
@@ -59,7 +59,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 1, y: 3)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.flag), x: 2, y: 3)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
@@ -83,7 +83,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 1, y: 3)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.wall), x: 2, y: 3)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
@@ -105,7 +105,7 @@ class GameEngineTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 1, y: 3)
         levelLayer.add(entity: Entity(entityType: EntityTypes.Nouns.baba), x: 2, y: 3)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveRight)
@@ -126,7 +126,7 @@ class GameEngineTests: XCTestCase {
 
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
@@ -149,7 +149,7 @@ class GameEngineTests: XCTestCase {
 
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
 
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
         gameEngine.apply(action: .moveUp)
