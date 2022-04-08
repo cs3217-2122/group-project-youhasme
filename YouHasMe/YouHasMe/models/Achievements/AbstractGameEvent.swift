@@ -10,11 +10,8 @@ import Foundation
 protocol AbstractGameEvent {
     var type: GameEventType { get }
 
-    func hasEntity(entityType: EntityType) -> Bool
-    func hasEvent(eventType: GameEventType) -> Bool
-    func hasLevel(levelName: String) -> Bool
-    func containsGameEvent(event: AbstractGameEvent) -> Bool
-    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool
+    func containsGameEvent(otherGameEvent: AbstractGameEvent) -> Bool
+    func isContainedBy(otherGameEvent: AbstractGameEvent) -> Bool
     func toPersistable() -> PersistableAbstractGameEvent
 }
 
@@ -25,16 +22,3 @@ enum GameEventType: Int, Codable {
     case movingAcrossLevel
 }
 
-extension AbstractGameEvent {
-    func hasEntity(entityType: EntityType) -> Bool {
-        false
-    }
-
-    func hasEvent(eventType: GameEventType) -> Bool {
-        false
-    }
-
-    func hasLevel(levelName: String) -> Bool {
-        false
-    }
-}

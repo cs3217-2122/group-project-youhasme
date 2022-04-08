@@ -15,16 +15,24 @@ class EntityEventDecorator: GameEventBaseDecorator {
         super.init(wrappedEvent: wrappedEvent)
     }
 
-    override func hasEntity(entityType: EntityType) -> Bool {
-        self.entityType == entityType || wrappedEvent.hasEntity(entityType: entityType)
+    func hasSameEntity(_ otherEntityEventDecorator: EntityEventDecorator) -> Bool {
+        entityType == otherEntityEventDecorator.entityType
     }
 
-    override func containsGameEvent(event: AbstractGameEvent) -> Bool {
-        event.isContainedBy(gameEvent: self)
+    override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
+        entityTypeIsContainedBy(otherGameEvent: otherGameEvent)
     }
 
-    override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
-        gameEvent.hasEntity(entityType: entityType) && wrappedEvent.isContainedBy(gameEvent: gameEvent)
+    func entityTypeIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+        if let entityEvent = otherGameEvent as? EntityEventDecorator {
+            if hasSameEntity(entityEvent) {
+                return true
+            }
+        }
+        if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
+            return entityTypeIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+        }
+        return false
     }
 
     override func toPersistable() -> PersistableAbstractGameEvent {

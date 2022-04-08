@@ -437,6 +437,7 @@
 		405467FF28008D8600C577EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				405467F828006DC100C577EF /* GameNotificationsView.swift */,
 				405467F62800562800C577EF /* GameNotificationView.swift */,
 				405467FA280074A400C577EF /* GameNotificationViewUtil.swift */,
 			);
@@ -502,7 +503,6 @@
 				40E2517727F72645008CBCE0 /* AchiementMainView.swift */,
 				40E2517B27F72963008CBCE0 /* AchievementView.swift */,
 				40E2517D27F786B7008CBCE0 /* AchievementImages.swift */,
-				405467F828006DC100C577EF /* GameNotificationsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

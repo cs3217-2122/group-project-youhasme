@@ -15,16 +15,24 @@ class LevelEventDecorator: GameEventBaseDecorator {
         super.init(wrappedEvent: wrappedEvent)
     }
 
-    override func hasLevel(levelName: String) -> Bool {
-        self.levelName == levelName || wrappedEvent.hasLevel(levelName: levelName)
+    func hasSameLevel(_ otherLevelEvent: LevelEventDecorator) -> Bool {
+        levelName == otherLevelEvent.levelName
     }
 
-    override func containsGameEvent(event: AbstractGameEvent) -> Bool {
-        event.isContainedBy(gameEvent: self)
+    override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
+        levelNameIsContainedBy(otherGameEvent: otherGameEvent)
     }
 
-    override func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
-        gameEvent.hasLevel(levelName: levelName) && wrappedEvent.isContainedBy(gameEvent: gameEvent)
+    func levelNameIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+        if let levelEvent = otherGameEvent as? LevelEventDecorator {
+            if hasSameLevel(levelEvent) {
+                return true
+            }
+        }
+        if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
+            return levelNameIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+        }
+        return false
     }
 
     override func toPersistable() -> PersistableAbstractGameEvent {

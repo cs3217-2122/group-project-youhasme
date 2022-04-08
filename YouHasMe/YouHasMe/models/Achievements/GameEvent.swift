@@ -14,16 +14,17 @@ class GameEvent: AbstractGameEvent {
         self.type = type
     }
 
-    func hasEvent(eventType: GameEventType) -> Bool {
-        type == eventType
+    func isContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+        if otherGameEvent.type == type {
+            return true
+        } else if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
+            return self.isContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+        }
+        return false
     }
 
-    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
-        gameEvent.hasEvent(eventType: type)
-    }
-
-    func containsGameEvent(event: AbstractGameEvent) -> Bool {
-        event.isContainedBy(gameEvent: self)
+    func containsGameEvent(otherGameEvent: AbstractGameEvent) -> Bool {
+        otherGameEvent.isContainedBy(otherGameEvent: self)
     }
 
     func toPersistable() -> PersistableAbstractGameEvent {

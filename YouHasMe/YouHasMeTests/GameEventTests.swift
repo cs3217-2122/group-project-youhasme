@@ -12,36 +12,36 @@ class GameEventTests: XCTestCase {
     func testSameSingleLayerEvent() {
         let moveEvent1 = GameEvent(type: .move)
         let moveEvent2 = GameEvent(type: .move)
-        XCTAssertTrue(moveEvent1.containsGameEvent(event: moveEvent2))
-        XCTAssertTrue(moveEvent1.isContainedBy(gameEvent: moveEvent2))
-        XCTAssertTrue(moveEvent2.containsGameEvent(event: moveEvent1))
-        XCTAssertTrue(moveEvent2.isContainedBy(gameEvent: moveEvent1))
+        XCTAssertTrue(moveEvent1.containsGameEvent(otherGameEvent: moveEvent2))
+        XCTAssertTrue(moveEvent1.isContainedBy(otherGameEvent: moveEvent2))
+        XCTAssertTrue(moveEvent2.containsGameEvent(otherGameEvent: moveEvent1))
+        XCTAssertTrue(moveEvent2.isContainedBy(otherGameEvent: moveEvent1))
     }
 
     func testDifferentSingleLayerEvent() {
         let moveEvent = GameEvent(type: .move)
         let winEvent = GameEvent(type: .win)
-        XCTAssertFalse(moveEvent.containsGameEvent(event: winEvent))
-        XCTAssertFalse(moveEvent.isContainedBy(gameEvent: winEvent))
-        XCTAssertFalse(winEvent.containsGameEvent(event: moveEvent))
-        XCTAssertFalse(winEvent.isContainedBy(gameEvent: moveEvent))
+        XCTAssertFalse(moveEvent.containsGameEvent(otherGameEvent: winEvent))
+        XCTAssertFalse(moveEvent.isContainedBy(otherGameEvent: winEvent))
+        XCTAssertFalse(winEvent.containsGameEvent(otherGameEvent: moveEvent))
+        XCTAssertFalse(winEvent.isContainedBy(otherGameEvent: moveEvent))
     }
 
     func testMultiSingleLayerEvents() {
         let moveEvent = GameEvent(type: .move)
         let multiLayerEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move),
                                                   levelName: "Test")
-        XCTAssertTrue(multiLayerEvent.containsGameEvent(event: moveEvent))
-        XCTAssertFalse(multiLayerEvent.isContainedBy(gameEvent: moveEvent))
-        XCTAssertFalse(moveEvent.containsGameEvent(event: multiLayerEvent))
-        XCTAssertTrue(moveEvent.isContainedBy(gameEvent: multiLayerEvent))
+        XCTAssertTrue(multiLayerEvent.containsGameEvent(otherGameEvent: moveEvent))
+        XCTAssertFalse(multiLayerEvent.isContainedBy(otherGameEvent: moveEvent))
+        XCTAssertFalse(moveEvent.containsGameEvent(otherGameEvent: multiLayerEvent))
+        XCTAssertTrue(moveEvent.isContainedBy(otherGameEvent: multiLayerEvent))
     }
 
     func testSameLevelDifferentTypeEvents() {
         let winEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelName: "Test")
         let moveEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelName: "Test")
-        XCTAssertFalse(winEvent.isContainedBy(gameEvent: moveEvent))
-        XCTAssertFalse(moveEvent.isContainedBy(gameEvent: winEvent))
+        XCTAssertFalse(winEvent.isContainedBy(otherGameEvent: moveEvent))
+        XCTAssertFalse(moveEvent.isContainedBy(otherGameEvent: winEvent))
     }
 
     func testSameMultiMultiLayerEvents() {
@@ -53,14 +53,14 @@ class GameEventTests: XCTestCase {
             wrappedEvent: EntityEventDecorator(wrappedEvent: GameEvent(type: .move),
                                                entityType: EntityTypes.NounInstances.baba),
             levelName: "Test")
-        XCTAssertTrue(entityLevelMoveEvent.isContainedBy(gameEvent: levelEntityMoveEvent))
-        XCTAssertTrue(entityLevelMoveEvent.containsGameEvent(event: levelEntityMoveEvent))
-        XCTAssertTrue(levelEntityMoveEvent.isContainedBy(gameEvent: entityLevelMoveEvent))
-        XCTAssertTrue(levelEntityMoveEvent.containsGameEvent(event: entityLevelMoveEvent))
+        XCTAssertTrue(entityLevelMoveEvent.isContainedBy(otherGameEvent: levelEntityMoveEvent))
+        XCTAssertTrue(entityLevelMoveEvent.containsGameEvent(otherGameEvent: levelEntityMoveEvent))
+        XCTAssertTrue(levelEntityMoveEvent.isContainedBy(otherGameEvent: entityLevelMoveEvent))
+        XCTAssertTrue(levelEntityMoveEvent.containsGameEvent(otherGameEvent: entityLevelMoveEvent))
 
         let entityWrappedEvent = EntityEventDecorator(wrappedEvent: entityLevelMoveEvent,
                                                       entityType: EntityTypes.NounInstances.box)
-        XCTAssertTrue(entityWrappedEvent.containsGameEvent(event: entityLevelMoveEvent))
-        XCTAssertFalse(entityWrappedEvent.isContainedBy(gameEvent: entityLevelMoveEvent))
+        XCTAssertTrue(entityWrappedEvent.containsGameEvent(otherGameEvent: entityLevelMoveEvent))
+        XCTAssertFalse(entityWrappedEvent.isContainedBy(otherGameEvent: entityLevelMoveEvent))
     }
 }

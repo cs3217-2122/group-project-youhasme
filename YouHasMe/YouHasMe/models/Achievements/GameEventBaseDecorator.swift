@@ -17,24 +17,20 @@ class GameEventBaseDecorator: AbstractGameEvent {
         self.wrappedEvent = wrappedEvent
     }
 
-    func hasEntity(entityType: EntityType) -> Bool {
-        wrappedEvent.hasEntity(entityType: entityType)
+    func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
+        assert(false, "should be implemented by children decorators")
+        return false
     }
 
-    func hasEvent(eventType: GameEventType) -> Bool {
-        wrappedEvent.hasEvent(eventType: eventType)
+    func isContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+        if !hasSameDecoratedDetails(otherGameEvent: otherGameEvent) {
+            return false
+        }
+        return wrappedEvent.isContainedBy(otherGameEvent: otherGameEvent)
     }
 
-    func hasLevel(levelName: String) -> Bool {
-        wrappedEvent.hasLevel(levelName: levelName)
-    }
-
-    func isContainedBy(gameEvent: AbstractGameEvent) -> Bool {
-        type == gameEvent.type && wrappedEvent.isContainedBy(gameEvent: gameEvent)
-    }
-
-    func containsGameEvent(event: AbstractGameEvent) -> Bool {
-        event.isContainedBy(gameEvent: self) || event.isContainedBy(gameEvent: wrappedEvent)
+    func containsGameEvent(otherGameEvent: AbstractGameEvent) -> Bool {
+        otherGameEvent.isContainedBy(otherGameEvent: self)
     }
 
     func toPersistable() -> PersistableAbstractGameEvent {
