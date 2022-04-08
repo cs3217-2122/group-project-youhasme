@@ -59,6 +59,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
             return
         }
 
+
         guard let type = createConditionEvaluable(conditionTypeId: selectedConditionTypeId, literal: nil, fieldId: selectedFieldId, identifier: nil) else {
             return
         }

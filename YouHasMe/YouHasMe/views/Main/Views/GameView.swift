@@ -29,7 +29,8 @@ struct GameView: View {
             case .playing:
                 PlayView(viewModel: gameState.getPlayViewModel())
             case .achievements:
-                AchievementMainView(achievementsViewModel: gameState.getAchievementsViewModel())
+                AchievementMainView(achievementsViewModel: gameState.getAchievementsViewModel(),
+                notificationsViewModel: GameNotificationsViewModel())
             }
         }
     }

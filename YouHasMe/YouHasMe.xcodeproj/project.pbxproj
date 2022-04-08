@@ -12,6 +12,12 @@
 		1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8C27E7254000321BEB /* MainMenuView.swift */; };
 		1E96EB8F27E7255200321BEB /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8E27E7255200321BEB /* GameState.swift */; };
 		1E96EB9127E725DF00321BEB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9027E725DF00321BEB /* GameView.swift */; };
+		405467F12800479500C577EF /* GameNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F02800479500C577EF /* GameNotification.swift */; };
+		405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F2280053DB00C577EF /* GameNotificationPublisher.swift */; };
+		405467F52800560200C577EF /* GameNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F42800560200C577EF /* GameNotificationsViewModel.swift */; };
+		405467F72800562800C577EF /* GameNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F62800562800C577EF /* GameNotificationView.swift */; };
+		405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F828006DC100C577EF /* GameNotificationsView.swift */; };
+		405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FA280074A400C577EF /* GameNotificationViewUtil.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
 		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
@@ -196,6 +202,12 @@
 		1E96EB8C27E7254000321BEB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		1E96EB8E27E7255200321BEB /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		1E96EB9027E725DF00321BEB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		405467F02800479500C577EF /* GameNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotification.swift; sourceTree = "<group>"; };
+		405467F2280053DB00C577EF /* GameNotificationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublisher.swift; sourceTree = "<group>"; };
+		405467F42800560200C577EF /* GameNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsViewModel.swift; sourceTree = "<group>"; };
+		405467F62800562800C577EF /* GameNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationView.swift; sourceTree = "<group>"; };
+		405467F828006DC100C577EF /* GameNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsView.swift; sourceTree = "<group>"; };
+		405467FA280074A400C577EF /* GameNotificationViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationViewUtil.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
 		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -400,6 +412,18 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		405467EF2800478900C577EF /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				405467F02800479500C577EF /* GameNotification.swift */,
+				405467F2280053DB00C577EF /* GameNotificationPublisher.swift */,
+				405467F42800560200C577EF /* GameNotificationsViewModel.swift */,
+				405467F62800562800C577EF /* GameNotificationView.swift */,
+				405467FA280074A400C577EF /* GameNotificationViewUtil.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		40AD869127E606F300F42C42 /* storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +461,7 @@
 		40E2517427F725F9008CBCE0 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				405467EF2800478900C577EF /* Notifications */,
 				40E2517627F72631008CBCE0 /* ViewModels */,
 				40E2517527F72629008CBCE0 /* Views */,
 			);
@@ -449,6 +474,7 @@
 				40E2517727F72645008CBCE0 /* AchiementMainView.swift */,
 				40E2517B27F72963008CBCE0 /* AchievementView.swift */,
 				40E2517D27F786B7008CBCE0 /* AchievementImages.swift */,
+				405467F828006DC100C577EF /* GameNotificationsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1027,7 +1053,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1049,6 +1075,7 @@
 				E58ACBE227FDCAC00035E517 /* RHSEvaluableState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				E57B534127FD32E50071E623 /* PersistableEntity.swift in Sources */,
+				405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */,
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
@@ -1096,6 +1123,7 @@
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
 				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				405467F12800479500C577EF /* GameNotification.swift in Sources */,
 				E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */,
 				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
 				E578594627F3EA7C009A79F9 /* DungeonManipulableViewModel.swift in Sources */,
@@ -1146,6 +1174,7 @@
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
+				405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
@@ -1167,6 +1196,7 @@
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
+				405467F52800560200C577EF /* GameNotificationsViewModel.swift in Sources */,
 				E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
@@ -1187,6 +1217,7 @@
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
 				E57453B327F555B3003DAD5C /* ConditionBuilder.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
+				405467F72800562800C577EF /* GameNotificationView.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
 				40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */,
 				40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */,
@@ -1198,6 +1229,7 @@
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
 				E57B535527FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift in Sources */,
+				405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */,
 				E57B535927FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift in Sources */,
 				E5D0A22D27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift in Sources */,
 			);
