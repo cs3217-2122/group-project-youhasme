@@ -18,6 +18,7 @@
 		405467F72800562800C577EF /* GameNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F62800562800C577EF /* GameNotificationView.swift */; };
 		405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F828006DC100C577EF /* GameNotificationsView.swift */; };
 		405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FA280074A400C577EF /* GameNotificationViewUtil.swift */; };
+		405467FD28008D3600C577EF /* GameNotificationPublishingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
 		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
@@ -208,6 +209,7 @@
 		405467F62800562800C577EF /* GameNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationView.swift; sourceTree = "<group>"; };
 		405467F828006DC100C577EF /* GameNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsView.swift; sourceTree = "<group>"; };
 		405467FA280074A400C577EF /* GameNotificationViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationViewUtil.swift; sourceTree = "<group>"; };
+		405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublishingDelegate.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
 		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 		1E6B90C127E5B2A300161E63 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				405467EF2800478900C577EF /* GameNotifications */,
 				40E2517427F725F9008CBCE0 /* Achievements */,
 				E56752FA27EEA82B0001305D /* Game */,
 				E56752F827EEA8110001305D /* Level Select */,
@@ -412,16 +415,40 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		405467EF2800478900C577EF /* Notifications */ = {
+		405467EF2800478900C577EF /* GameNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				405467FF28008D8600C577EF /* Views */,
+				405467FE28008D7000C577EF /* ViewModels */,
+			);
+			path = GameNotifications;
+			sourceTree = "<group>";
+		};
+		405467FE28008D7000C577EF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				405467F42800560200C577EF /* GameNotificationsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		405467FF28008D8600C577EF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				405467F62800562800C577EF /* GameNotificationView.swift */,
+				405467FA280074A400C577EF /* GameNotificationViewUtil.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4054680028008DC800C577EF /* GameNotifications */ = {
 			isa = PBXGroup;
 			children = (
 				405467F02800479500C577EF /* GameNotification.swift */,
 				405467F2280053DB00C577EF /* GameNotificationPublisher.swift */,
-				405467F42800560200C577EF /* GameNotificationsViewModel.swift */,
-				405467F62800562800C577EF /* GameNotificationView.swift */,
-				405467FA280074A400C577EF /* GameNotificationViewUtil.swift */,
+				405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */,
 			);
-			path = Notifications;
+			path = GameNotifications;
 			sourceTree = "<group>";
 		};
 		40AD869127E606F300F42C42 /* storage */ = {
@@ -461,7 +488,6 @@
 		40E2517427F725F9008CBCE0 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
-				405467EF2800478900C577EF /* Notifications */,
 				40E2517627F72631008CBCE0 /* ViewModels */,
 				40E2517527F72629008CBCE0 /* Views */,
 			);
@@ -794,20 +820,21 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				40E2516227F427C0008CBCE0 /* Achievements */,
-				E57A19A327F9F8DB00312C39 /* chunk */,
-				E573E96027EA32DC000D10E4 /* persistable */,
-				E5563C3A27E8B551007D2E86 /* helpers */,
-				B07AA62627E658F200918E71 /* GameEngine */,
-				E5BECBF027E5E87A00E3952D /* entity */,
-				E5BECBE327E5BE0200E3952D /* rules */,
-				E5BECBDC27E59E0300E3952D /* extensions */,
+				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
 				E57ACB3727DC58B000F73B27 /* Dungeon.swift */,
+				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
 				E57ACB3B27DC58C700F73B27 /* Level.swift */,
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 				E57B534C27FD35600071E623 /* Tile.swift */,
-				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
-				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
+				40E2516227F427C0008CBCE0 /* Achievements */,
+				E57A19A327F9F8DB00312C39 /* chunk */,
+				E5BECBF027E5E87A00E3952D /* entity */,
+				E5BECBDC27E59E0300E3952D /* extensions */,
+				B07AA62627E658F200918E71 /* GameEngine */,
+				4054680028008DC800C577EF /* GameNotifications */,
+				E5563C3A27E8B551007D2E86 /* helpers */,
+				E573E96027EA32DC000D10E4 /* persistable */,
+				E5BECBE327E5BE0200E3952D /* rules */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1206,6 +1233,7 @@
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				405467FD28008D3600C577EF /* GameNotificationPublishingDelegate.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
 				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,

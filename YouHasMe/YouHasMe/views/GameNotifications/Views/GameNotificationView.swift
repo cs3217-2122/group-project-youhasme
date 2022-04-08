@@ -4,12 +4,12 @@
 //
 //  Created by Neo Jing Xuan on 8/4/22.
 //
+//  Reference: https://prafullkumar77.medium.com/swiftui-how-to-make-toast-and-notification-banners-bc8aae313b33
 
 import Foundation
 import SwiftUI
 
 struct GameNotificationView: View {
-
     var gameNotif: GameNotification
     @ObservedObject var gameNotifsViewModel: GameNotificationsViewModel
 

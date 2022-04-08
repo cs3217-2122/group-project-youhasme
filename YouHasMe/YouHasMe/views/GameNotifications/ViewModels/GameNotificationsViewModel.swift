@@ -34,7 +34,6 @@ class GameNotificationsViewModel: ObservableObject {
         showNextNotif()
     }
 
-    
     func showNotif(notification: GameNotification) {
         notificationShown = notification
 
