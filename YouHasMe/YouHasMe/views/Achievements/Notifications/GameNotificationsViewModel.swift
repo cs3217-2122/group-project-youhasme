@@ -9,10 +9,11 @@ import Combine
 import Foundation
 
 class GameNotificationsViewModel: ObservableObject {
-    @Published var notificationShown: GameNotification? = GameNotification(title: "test", subtitle: "Test")
+    @Published var notificationShown: GameNotification?
 
-    @Published var gameNotificationsQueue: [GameNotification] =
-    [GameNotification(title: "notif 2", subtitle: "")]
+    @Published var gameNotificationsQueue: [GameNotification] = []
+
+    private var subscriptions = [AnyCancellable]()
 
     func addNotification(_ notif: GameNotification) {
         if notificationShown != nil {
@@ -20,7 +21,7 @@ class GameNotificationsViewModel: ObservableObject {
             return
         }
 
-        notificationShown = notif
+        showNotif(notification: notif)
     }
 
     func hasFinishedShowing(_ notif: GameNotification) {
@@ -30,20 +31,39 @@ class GameNotificationsViewModel: ObservableObject {
             return
         }
 
+        showNextNotif()
+    }
+
+    
+    func showNotif(notification: GameNotification) {
+        notificationShown = notification
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.hasFinishedShowing(notification)
+        }
+    }
+
+    func showNextNotif() {
         if gameNotificationsQueue.isEmpty {
             return
         }
 
         let nextNotif = gameNotificationsQueue.removeFirst()
-        notificationShown = nextNotif
-        // for some reason onAppear is only called once
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.hasFinishedShowing(nextNotif)
-        }
+        showNotif(notification: nextNotif)
     }
 
     func remove(_ notif: GameNotification) {
         gameNotificationsQueue = gameNotificationsQueue.filter { $0 != notif }
+    }
+
+    func setSubscriptionsFor(_ notificationPublisher: AnyPublisher<GameNotification, Never>) {
+        notificationPublisher.sink { [weak self] gameNotif in
+            guard let self = self else {
+                return
+            }
+
+            self.addNotification(gameNotif)
+        }.store(in: &subscriptions)
     }
 }
 

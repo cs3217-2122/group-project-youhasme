@@ -65,6 +65,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     var achievementsViewModel: AchievementsViewModel
+    var notificationsViewModel: GameNotificationsViewModel
 
     var contextualData: [ContextualMenuData] {
         guard let entities = selectedTile?.entities else {
@@ -88,19 +89,24 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
 
-    convenience init(playableDungeon: PlayableDungeon, achievementsViewModel: AchievementsViewModel) {
-        self.init(dungeon: playableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel)
+    convenience init(playableDungeon: PlayableDungeon, achievementsViewModel: AchievementsViewModel,
+                     gameNotificationsViewModel: GameNotificationsViewModel) {
+        self.init(dungeon: playableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel,
+                  gameNotificationsViewModel: gameNotificationsViewModel)
     }
 
-    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel) {
+    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel,
+         gameNotificationsViewModel: GameNotificationsViewModel) {
         self.achievementsViewModel = achievementsViewModel
         self.dungeon = dungeon
         viewPosition = dungeon.entryWorldPosition
         let level = dungeon.getActiveLevel()
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
+        self.notificationsViewModel = gameNotificationsViewModel
         setupBindings()
         setupBindingsWithGameEngine()
-        achievementsViewModel.levelId = level.id.dataString
+        setupBindingForNotifications()
+        achievementsViewModel.levelId = level.name
     }
 
     func setupBindings() {
@@ -131,6 +137,10 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }
         achievementsViewModel.resetSubscriptions()
         achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
+    }
+
+    func setupBindingForNotifications() {
+        notificationsViewModel.setSubscriptionsFor(achievementsViewModel.gameNotifPublisher)
     }
 
     private func handleMoveAcrossLevel() {
@@ -168,7 +178,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.playerMovementAcrossLevel = nil
 
         let level = dungeon.getActiveLevel()
-        achievementsViewModel.levelId = level.id.dataString
+        achievementsViewModel.levelId = level.name
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
 
         let viewVector = CGVector(movementVector).scale(

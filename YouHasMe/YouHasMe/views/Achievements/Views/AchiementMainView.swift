@@ -49,7 +49,6 @@ struct AchievementMainView: View {
             GameNotificationsView(notificationsViewModel: notificationsViewModel)
 
         }.onAppear {
-            print("called")
             achievementsViewModel.updateData()
         }
     }

@@ -16,7 +16,7 @@ struct GameNotificationsView: View {
             if let gameNotif = notificationsViewModel.notificationShown {
                 GameNotificationView(gameNotif: gameNotif, gameNotifsViewModel: notificationsViewModel)
             }
-        }.animation(.easeInOut(duration: 0.5),
+        }.animation(.easeInOut(duration: 1.0),
                     value: notificationsViewModel.notificationShown)
     }
 }

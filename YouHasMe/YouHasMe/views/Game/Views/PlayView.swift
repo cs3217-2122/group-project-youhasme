@@ -68,6 +68,7 @@ struct PlayView: View {
                     
                 }
             }
+            GameNotificationsView(notificationsViewModel: viewModel.notificationsViewModel)
         }
     }
 }

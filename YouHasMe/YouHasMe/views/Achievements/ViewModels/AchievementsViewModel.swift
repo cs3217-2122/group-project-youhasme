@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class AchievementsViewModel: ObservableObject {
+class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     var lockedAchievements: [Achievement] = []
     var unlockedAchievements: [Achievement] = []
     var imageWidth: Float = 40
@@ -17,6 +17,7 @@ class AchievementsViewModel: ObservableObject {
     var levelId: String?
     var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
+    var gameNotificationPublishingDelegate = GameNotificationPublishingDelegate()
 
     var levelStatistics: [GameStatistic] {
         lockedAchievements.flatMap { $0.getLevelStatistics() }
@@ -36,7 +37,7 @@ class AchievementsViewModel: ObservableObject {
     }
 
     func selectLevel(level: Level) {
-        levelId = level.id.dataString
+        levelId = level.name
         resetLevelStats()
     }
 
@@ -76,6 +77,7 @@ class AchievementsViewModel: ObservableObject {
         if updatedAchievement.isUnlocked {
             lockedAchievements.removeByIdentity(updatedAchievement)
             unlockedAchievements.append(updatedAchievement)
+            sendGameNotification(GameNotificationViewUtil.createAchievementNotification(updatedAchievement))
         }
     }
 

@@ -8,10 +8,20 @@
 import Combine
 
 protocol GameNotificationPublisher {
-    var gameNotifPublisher: AnyPublisher<GameNotification, Never> { get }
+    var gameNotificationPublishingDelegate: GameNotificationPublishingDelegate { get }
 }
 
-class GameNotificationPublishingDelegate: GameNotificationPublisher {
+extension GameNotificationPublisher {
+    var gameNotifPublisher: AnyPublisher<GameNotification, Never> {
+        gameNotificationPublishingDelegate.gameNotifPublisher
+    }
+
+    func sendGameNotification(_ gameNotification: GameNotification) {
+        gameNotificationPublishingDelegate.send(gameNotification)
+    }
+}
+
+class GameNotificationPublishingDelegate {
     var gameNotifPublisher: AnyPublisher<GameNotification, Never> {
         gameNotifSubject.eraseToAnyPublisher()
     }

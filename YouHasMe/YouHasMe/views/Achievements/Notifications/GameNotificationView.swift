@@ -26,16 +26,12 @@ struct GameNotificationView: View {
                 }
                 .foregroundColor(Color.white)
                 .padding(12)
-                .background(.gray)
+                .background(.black)
                 .cornerRadius(8)
                 Spacer()
         }
             .padding()
             .transition(AnyTransition.move(edge: .top).combined(with: .opacity))
-            .onAppear(perform: {
-                GameNotificationViewUtil.handleRemoveGameNotification(
-                        viewModel: gameNotifsViewModel, toRemove: gameNotif)
-            })
             .onTapGesture {
                 withAnimation {
                     gameNotifsViewModel.hasFinishedShowing(gameNotif)
