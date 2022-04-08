@@ -197,9 +197,13 @@ extension PlayViewModel: EntityViewModelExaminableDelegate {
 
 extension PlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
+        let tile = getTile(at: viewOffset, loadNeighboringChunks: true)
+        let worldPosition = getWorldPosition(at: viewOffset)
+        let levelStatus = dungeon.getLevelStatus(forLevelAt: worldPosition)
         let entityViewModel = EntityViewModel(
-            tile: getTile(at: viewOffset, loadNeighboringChunks: true),
-            worldPosition: getWorldPosition(at: viewOffset)
+            tile: tile,
+            worldPosition: worldPosition,
+            status: levelStatus
         )
         entityViewModel.examinableDelegate = self
         return entityViewModel

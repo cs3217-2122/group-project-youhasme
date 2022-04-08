@@ -20,17 +20,20 @@ protocol EntityViewModelExaminableDelegate: AnyObject {
 class EntityViewModel: CellViewModel {
     weak var basicCRUDDelegate: EntityViewModelBasicCRUDDelegate?
     weak var examinableDelegate: EntityViewModelExaminableDelegate?
+    var status: LevelStatus = .active
     var tile: Tile?
     var worldPosition: Point?
 
-    convenience init(tile: Tile?) {
-        self.init(tile: tile, worldPosition: nil)
+    convenience init(tile: Tile?, status: LevelStatus? = nil) {
+        self.init(tile: tile, worldPosition: nil, status: status)
     }
 
-    init(tile: Tile?, worldPosition: Point?) {
+    init(tile: Tile?, worldPosition: Point?, status: LevelStatus? = nil) {
         self.tile = tile
         self.worldPosition = worldPosition
-
+        if let status = status {
+            self.status = status
+        }
         guard let tile = tile else {
             super.init(imageSource: nil)
             return

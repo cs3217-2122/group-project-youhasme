@@ -10,28 +10,40 @@ import SwiftUI
 struct EntityView: View {
     @EnvironmentObject var gameState: GameState
     var viewModel: EntityViewModel
-
+    var foregroundColor: Color {
+        switch viewModel.status {
+        case .active:
+            return .clear
+        case .inactiveAndComplete:
+            return .gray
+        case .inactiveAndIncomplete:
+            return .black
+        }
+    }
     var body: some View {
-        CellView(backupDisplayColor: .black, viewModel: viewModel)
-            .border(.pink)
-            .onTapGesture {
-                switch gameState.state {
-                case .designing:
-                    viewModel.addEntity()
-                    viewModel.examine()
-                case .playing:
-                    viewModel.examine()
-                default:
-                    return
+        ZStack {
+            CellView(backupDisplayColor: .black, viewModel: viewModel)
+                .border(.pink)
+                .onTapGesture {
+                    switch gameState.state {
+                    case .designing:
+                        viewModel.addEntity()
+                        viewModel.examine()
+                    case .playing:
+                        viewModel.examine()
+                    default:
+                        return
+                    }
                 }
-            }
-            .onLongPressGesture {
-                switch gameState.state {
-                case .designing:
-                    viewModel.removeEntity()
-                default:
-                    return
+                .onLongPressGesture {
+                    switch gameState.state {
+                    case .designing:
+                        viewModel.removeEntity()
+                    default:
+                        return
+                    }
                 }
-            }
+            foregroundColor.opacity(0.5)
+        }
     }
 }

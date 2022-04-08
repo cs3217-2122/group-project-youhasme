@@ -5,6 +5,12 @@ protocol DungeonViewableDelegate: AnyObject {
     func getViewableRegion() -> PositionedRectangle
 }
 
+enum LevelStatus {
+    case active
+    case inactiveAndComplete
+    case inactiveAndIncomplete
+}
+
 class Dungeon {
     static let defaultLevelDimensions = Rectangle(width: 16, height: 16)
     static let defaultDimensions = Rectangle(width: 2, height: 2)
@@ -257,6 +263,23 @@ extension Dungeon {
                 fatalError("unexpected failure")
             }
             loadedLevels[position] = nil
+        }
+    }
+
+    func getLevelStatus(forLevelAt worldPosition: Point) -> LevelStatus {
+        let levelPosition = worldToLevelPosition(worldPosition)
+        if playerLevelPosition == levelPosition {
+            return .active
+        }
+
+        guard let level = getLevel(levelPosition: levelPosition) else {
+            return .inactiveAndIncomplete
+        }
+
+        if level.winCount > 0 {
+            return .inactiveAndComplete
+        } else {
+            return .inactiveAndIncomplete
         }
     }
 

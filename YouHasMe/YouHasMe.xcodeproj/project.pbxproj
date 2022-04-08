@@ -72,6 +72,7 @@
 		E569858A27FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */; };
 		E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */; };
 		E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */; };
+		E56AC06E2800756400FDD4CD /* DungeonNameButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
 		E573E95C27EA2797000D10E4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95B27EA2797000D10E4 /* Storage.swift */; };
@@ -256,6 +257,7 @@
 		E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabaIsYouGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagIsWinGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedrockIsStopGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonNameButtonViewModel.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
 		E573E95B27EA2797000D10E4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */,
 				E5D0A22C27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift */,
 				E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */,
+				E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1167,6 +1170,7 @@
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
+				E56AC06E2800756400FDD4CD /* DungeonNameButtonViewModel.swift in Sources */,
 				E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
