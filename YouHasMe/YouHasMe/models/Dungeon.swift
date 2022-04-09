@@ -44,7 +44,7 @@ class Dungeon {
 
     let entryLevelPosition: Point
     let entryWorldPosition: Point = .zero
-    @Published var levelNameToPositionMap: [String: Point] = [:]
+    @Published var levelNameToPositionMap: [String: Point]
     var playerLevelPosition: Point
     @Published var loadedLevels: [Point: Level] = [:]
 

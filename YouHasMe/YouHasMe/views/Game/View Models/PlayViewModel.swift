@@ -44,7 +44,7 @@ extension ContextualMenuData: Comparable {
 
 enum PlayViewState {
     case disabled
-    case normal
+    case normalPlay
     case messages
 }
 
@@ -58,7 +58,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     var currentLevelName: String {
         dungeon.getActiveLevel().name
     }
-    @Published var state: PlayViewState = .normal
+    @Published var state: PlayViewState = .normalPlay
     var gameEngine: GameEngine {
         didSet {
             setupBindingsWithGameEngine()
@@ -118,7 +118,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
                 return
             }
             if selectedTile == nil {
-                self.state = .normal
+                self.state = .normalPlay
             }
         }.store(in: &subscriptions)
     }
@@ -171,7 +171,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     func translateViewSlowly(by offset: Vector) {
         timedOffset = offset
         state = .disabled
-        timer = Timer.scheduledTimer(withTimeInterval: 0.25, repeats: true) { [weak self] timer in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.10, repeats: true) { [weak self] timer in
             guard let self = self else {
                 timer.invalidate()
                 return
@@ -181,7 +181,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             self.translateView(by: CGVector(unit))
             if self.timedOffset == .zero {
                 timer.invalidate()
-                self.state = .normal
+                self.state = .normalPlay
             }
         }
     }
@@ -208,21 +208,20 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         )
         translateViewSlowly(by: viewVector.toVector())
     }
+
+    func playerUndo() {
+        gameEngine.undo()
+        dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
+    }
 }
 
 extension PlayViewModel: ContextualMenuDelegate {
     func closeOverlay() {
-        state = .normal
+        state = .normalPlay
     }
 
     func showMessages() {
         state = .messages
-    }
-}
-
-extension PlayViewModel: EntityViewModelExaminableDelegate {
-    func examineTile(at worldPosition: Point) {
-        selectedTile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false)
     }
 }
 
@@ -236,7 +235,6 @@ extension PlayViewModel {
             worldPosition: worldPosition,
             status: levelStatus
         )
-        entityViewModel.examinableDelegate = self
         return entityViewModel
     }
 

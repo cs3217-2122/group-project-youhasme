@@ -40,7 +40,6 @@ struct DesignerView: View {
                 }
                 .onReceive(viewModel.$state, perform: {
                     guard case .choosingConditionEvaluable = $0 else {
-                        shouldPresentConditionEvaluableCreator = false
                         return
                     }
                     shouldPresentConditionEvaluableCreator = true

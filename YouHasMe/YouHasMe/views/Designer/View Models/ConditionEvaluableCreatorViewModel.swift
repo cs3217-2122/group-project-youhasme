@@ -7,14 +7,39 @@
 
 import Foundation
 protocol ConditionEvaluableCreatorViewModelDelegate: AnyObject {
-    func buildConditionEvaluable(conditionEvaluable: ConditionEvaluable)
+    func getLevelNameToPositionMap() -> [String: Point]
+    func addConditionEvaluable(conditionEvaluable: ConditionEvaluable)
+    func getConditionEvaluableDelegate() -> ConditionEvaluableDungeonDelegate
+    func finishCreation()
+}
+
+enum ConditionEvaluableBuildError: String, Error {
+    case emptyConditionType = "Empty Condition Type"
+    case buildError = "Failed to build condition"
 }
 
 class ConditionEvaluableCreatorViewModel: ObservableObject {
     weak var delegate: ConditionEvaluableCreatorViewModelDelegate?
+    @Published var buildResultMessage: String?
     @Published var selectedConditionTypeId: String?
     @Published var selectedFieldId: String?
-    @Published var selectedDependencyId: String?
+    @Published var selectedIdentifier: Point?
+    @Published var selectedNumericLiteralIndex: Int = 0
+    let numericLiteralRange = 0..<20
+
+    var levelMetadata: [LevelMetadata] {
+        guard let delegate = delegate else {
+            return []
+        }
+
+        return LevelMetadata.levelNameToPositionMapToMetadata(delegate.getLevelNameToPositionMap())
+    }
+
+    private var selectedNumericLiteral: Int {
+        numericLiteralRange.index(
+            numericLiteralRange.startIndex, offsetBy: selectedNumericLiteralIndex
+        )
+    }
 
     private func createConditionEvaluable(
         conditionTypeId: String,
@@ -50,21 +75,34 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
         }
     }
 
-    func confirm() {
+    func confirm() -> Result<ConditionEvaluable, ConditionEvaluableBuildError> {
         guard let delegate = delegate else {
             fatalError("should not be nil")
         }
 
         guard let selectedConditionTypeId = selectedConditionTypeId else {
-            return
+            return .failure(.emptyConditionType)
         }
 
-
-        guard let type = createConditionEvaluable(conditionTypeId: selectedConditionTypeId, literal: nil, fieldId: selectedFieldId, identifier: nil) else {
-            return
+        guard let type = createConditionEvaluable(
+            conditionTypeId: selectedConditionTypeId,
+            literal: selectedNumericLiteral,
+            fieldId: selectedFieldId,
+            identifier: selectedIdentifier
+        ) else {
+            return .failure(.buildError)
         }
 
-        let conditionEvaluable = ConditionEvaluable(evaluableType: type)
-        delegate.buildConditionEvaluable(conditionEvaluable: conditionEvaluable)
+        var conditionEvaluable = ConditionEvaluable(evaluableType: type)
+        delegate.addConditionEvaluable(conditionEvaluable: conditionEvaluable)
+        conditionEvaluable.delegate = delegate.getConditionEvaluableDelegate()
+        return .success(conditionEvaluable)
+    }
+
+    func finish() {
+        guard let delegate = delegate else {
+            fatalError("should not be nil")
+        }
+        delegate.finishCreation()
     }
 }
