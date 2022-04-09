@@ -7,7 +7,7 @@
 
 import Combine
 
-class GameNotificationPublishingDelegate {
+class GameNotificationPublishingHelper {
     var gameNotifPublisher: AnyPublisher<GameNotification, Never> {
         gameNotifSubject.eraseToAnyPublisher()
     }

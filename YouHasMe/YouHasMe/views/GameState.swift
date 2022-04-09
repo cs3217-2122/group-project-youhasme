@@ -140,6 +140,6 @@ extension GameState {
     }
 
     func getGameNotificationsViewModel() -> GameNotificationsViewModel {
-        return GameNotificationsViewModel()
+        GameNotificationsViewModel()
     }
 }

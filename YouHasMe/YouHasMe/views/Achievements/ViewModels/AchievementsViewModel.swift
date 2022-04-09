@@ -17,7 +17,7 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     var levelId: String?
     var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
-    var gameNotificationPublishingDelegate = GameNotificationPublishingDelegate()
+    var gameNotificationPublishingHelper = GameNotificationPublishingHelper()
 
     var levelStatistics: [GameStatistic] {
         lockedAchievements.flatMap { $0.getLevelStatistics() }

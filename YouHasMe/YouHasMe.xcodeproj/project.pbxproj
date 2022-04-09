@@ -18,7 +18,7 @@
 		405467F72800562800C577EF /* GameNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F62800562800C577EF /* GameNotificationView.swift */; };
 		405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F828006DC100C577EF /* GameNotificationsView.swift */; };
 		405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FA280074A400C577EF /* GameNotificationViewUtil.swift */; };
-		405467FD28008D3600C577EF /* GameNotificationPublishingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */; };
+		405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
 		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
@@ -210,7 +210,7 @@
 		405467F62800562800C577EF /* GameNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationView.swift; sourceTree = "<group>"; };
 		405467F828006DC100C577EF /* GameNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsView.swift; sourceTree = "<group>"; };
 		405467FA280074A400C577EF /* GameNotificationViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationViewUtil.swift; sourceTree = "<group>"; };
-		405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublishingDelegate.swift; sourceTree = "<group>"; };
+		405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublishingHelper.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
 		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -449,9 +449,39 @@
 			children = (
 				405467F02800479500C577EF /* GameNotification.swift */,
 				405467F2280053DB00C577EF /* GameNotificationPublisher.swift */,
-				405467FC28008D3600C577EF /* GameNotificationPublishingDelegate.swift */,
+				405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */,
 			);
 			path = GameNotifications;
+			sourceTree = "<group>";
+		};
+		405468012801380200C577EF /* GameEvent */ = {
+			isa = PBXGroup;
+			children = (
+				405468022801381D00C577EF /* Decorators */,
+				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
+				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
+				40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */,
+			);
+			path = GameEvent;
+			sourceTree = "<group>";
+		};
+		405468022801381D00C577EF /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
+				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
+				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
+			);
+			path = Decorators;
+			sourceTree = "<group>";
+		};
+		405468032801394800C577EF /* UnlockConditions */ = {
+			isa = PBXGroup;
+			children = (
+				40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */,
+				40E2516927F43C56008CBCE0 /* UnlockCondition.swift */,
+			);
+			path = UnlockConditions;
 			sourceTree = "<group>";
 		};
 		40AD869127E606F300F42C42 /* storage */ = {
@@ -465,16 +495,10 @@
 		40E2516227F427C0008CBCE0 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				405468032801394800C577EF /* UnlockConditions */,
+				405468012801380200C577EF /* GameEvent */,
 				40E2516D27F5D742008CBCE0 /* Statistics */,
 				40E2516527F43209008CBCE0 /* Achievement.swift */,
-				40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */,
-				40E2516927F43C56008CBCE0 /* UnlockCondition.swift */,
-				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
-				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
-				40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */,
-				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
-				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
-				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -1237,7 +1261,7 @@
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
-				405467FD28008D3600C577EF /* GameNotificationPublishingDelegate.swift in Sources */,
+				405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
 				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,

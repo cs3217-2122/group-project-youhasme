@@ -21,4 +21,3 @@ enum GameEventType: Int, Codable {
     case designLevel
     case movingAcrossLevel
 }
-

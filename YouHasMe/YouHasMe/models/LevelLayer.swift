@@ -91,7 +91,10 @@ extension LevelLayer {
     }
 
     static func fromPersistable(_ persistableLevelLayer: PersistableLevelLayer) -> LevelLayer {
-        LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: persistableLevelLayer.tiles.map { $0.map { Tile.fromPersistable($0) } })
+        LevelLayer(
+            dimensions: persistableLevelLayer.dimensions,
+            tiles: persistableLevelLayer.tiles.map { $0.map { Tile.fromPersistable($0) } }
+        )
     }
 }
 

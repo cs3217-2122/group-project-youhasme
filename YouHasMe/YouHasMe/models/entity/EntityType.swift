@@ -127,7 +127,9 @@ struct EntityTypes {
     }
 
     struct ConditionEvaluables {
-        static var dummyEvaluable = EntityType(classification: .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(1))))
+        static var dummyEvaluable = EntityType(
+            classification: .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(1)))
+        )
 
         static func getAllConditionEvaluables() -> [EntityType] {
             [dummyEvaluable]

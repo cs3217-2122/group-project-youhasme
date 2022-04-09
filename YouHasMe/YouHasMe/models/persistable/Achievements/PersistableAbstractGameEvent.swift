@@ -32,7 +32,10 @@ class PersistableAbstractGameEvent: Codable {
             gameEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: levelName)
         }
         if let entityType = entityType {
-            gameEvent = EntityEventDecorator(wrappedEvent: gameEvent, entityType: EntityType.fromPersistable(entityType))
+            gameEvent = EntityEventDecorator(
+                wrappedEvent: gameEvent,
+                entityType: EntityType.fromPersistable(entityType)
+            )
         }
         return gameEvent
     }
