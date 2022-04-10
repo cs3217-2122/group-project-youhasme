@@ -163,6 +163,13 @@
 		E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBDF27FDCA9D0035E517 /* ConditionRelationState.swift */; };
 		E58ACBE227FDCAC00035E517 /* RHSEvaluableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBE127FDCAC00035E517 /* RHSEvaluableState.swift */; };
 		E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */; };
+		E58E836928027FE400C06A59 /* RuleApplicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E836828027FE400C06A59 /* RuleApplicator.swift */; };
+		E58E836B2802840400C06A59 /* UnionFind.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E836A2802840400C06A59 /* UnionFind.swift */; };
+		E58E836D28028B9900C06A59 /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E836C28028B9900C06A59 /* Graph.swift */; };
+		E58E836F28028EE500C06A59 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E836E28028EE500C06A59 /* Queue.swift */; };
+		E58E83722802916100C06A59 /* IsVerbCyclePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */; };
+		E58E8374280294B900C06A59 /* ActiveRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8373280294B900C06A59 /* ActiveRulesView.swift */; };
+		E58E8376280294CC00C06A59 /* ActiveRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -351,6 +358,13 @@
 		E58ACBDF27FDCA9D0035E517 /* ConditionRelationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionRelationState.swift; sourceTree = "<group>"; };
 		E58ACBE127FDCAC00035E517 /* RHSEvaluableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RHSEvaluableState.swift; sourceTree = "<group>"; };
 		E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionalRuleValidationStrategy.swift; sourceTree = "<group>"; };
+		E58E836828027FE400C06A59 /* RuleApplicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleApplicator.swift; sourceTree = "<group>"; };
+		E58E836A2802840400C06A59 /* UnionFind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnionFind.swift; sourceTree = "<group>"; };
+		E58E836C28028B9900C06A59 /* Graph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
+		E58E836E28028EE500C06A59 /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbCyclePolicy.swift; sourceTree = "<group>"; };
+		E58E8373280294B900C06A59 /* ActiveRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesView.swift; sourceTree = "<group>"; };
+		E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesViewModel.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -528,6 +542,9 @@
 				E5563C4727E8E5D5007D2E86 /* Vector.swift */,
 				E573E95727EA1A34000D10E4 /* Rectangle.swift */,
 				E573E95927EA2120000D10E4 /* DataStringConvertible.swift */,
+				E58E836A2802840400C06A59 /* UnionFind.swift */,
+				E58E836C28028B9900C06A59 /* Graph.swift */,
+				E58E836E28028EE500C06A59 /* Queue.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -580,6 +597,7 @@
 			children = (
 				E5EC5B5527F3696200BAE834 /* PlayView.swift */,
 				E585AD5827F964F900A54202 /* MessageView.swift */,
+				E58E8373280294B900C06A59 /* ActiveRulesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -860,6 +878,14 @@
 			path = shared;
 			sourceTree = "<group>";
 		};
+		E58E83702802915300C06A59 /* validation */ = {
+			isa = PBXGroup;
+			children = (
+				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
+			);
+			path = validation;
+			sourceTree = "<group>";
+		};
 		E5BECBD227E599F100E3952D /* YouHasMeTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -888,6 +914,7 @@
 		E5BECBE327E5BE0200E3952D /* rules */ = {
 			isa = PBXGroup;
 			children = (
+				E58E83702802915300C06A59 /* validation */,
 				E574658E27F8664600F79A52 /* matching */,
 				E574658F27F8665500F79A52 /* parsing */,
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
@@ -896,6 +923,7 @@
 				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
 				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
 				E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */,
+				E58E836828027FE400C06A59 /* RuleApplicator.swift */,
 			);
 			path = rules;
 			sourceTree = "<group>";
@@ -920,6 +948,7 @@
 			children = (
 				E5EC5B5827F36ACE00BAE834 /* PlayViewModel.swift */,
 				E578594827F4180B009A79F9 /* MessagesViewModel.swift */,
+				E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1091,6 +1120,7 @@
 				E57B535D27FD72640071E623 /* ConnectorGeneratorDecorator.swift in Sources */,
 				E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				E58E836928027FE400C06A59 /* RuleApplicator.swift in Sources */,
 				40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */,
 				40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */,
 				E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */,
@@ -1123,6 +1153,7 @@
 				E57A19A527F9F8F500312C39 /* NeighborFinderDelegate.swift in Sources */,
 				B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */,
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
+				E58E836F28028EE500C06A59 /* Queue.swift in Sources */,
 				E569FC1B280094F80042D15B /* DimensionSelectView.swift in Sources */,
 				40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */,
 				40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */,
@@ -1138,8 +1169,12 @@
 				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				40E2516627F43209008CBCE0 /* Achievement.swift in Sources */,
+				E58E836D28028B9900C06A59 /* Graph.swift in Sources */,
+				E58E8374280294B900C06A59 /* ActiveRulesView.swift in Sources */,
 				E5BECBF627E5E8C600E3952D /* Property.swift in Sources */,
+				E58E83722802916100C06A59 /* IsVerbCyclePolicy.swift in Sources */,
 				E573E95C27EA2797000D10E4 /* Storage.swift in Sources */,
+				E58E8376280294CC00C06A59 /* ActiveRulesViewModel.swift in Sources */,
 				40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */,
 				E58ACBDE27FDCA4E0035E517 /* LHSEvaluableState.swift in Sources */,
 				E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */,
@@ -1185,6 +1220,7 @@
 				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
 				E5563C3E27E8CFCC007D2E86 /* ToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
+				E58E836B2802840400C06A59 /* UnionFind.swift in Sources */,
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,

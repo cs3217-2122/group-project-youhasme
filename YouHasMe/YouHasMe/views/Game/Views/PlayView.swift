@@ -45,6 +45,10 @@ struct PlayView: View {
                 GridView(viewModel: viewModel)
                     .gesture(dragGesture)
                 Spacer()
+                
+                ActiveRulesView(viewModel: viewModel.getActiveRulesViewModel())
+                
+                
                 HStack(alignment: .center) {
                     ForEach(viewModel.contextualData) { data in
                         Button(data.description, action: data.action)
@@ -60,6 +64,8 @@ struct PlayView: View {
             }.alert("No infinite loops allowed!", isPresented: $viewModel.isLoopingInfinitely) {
                 Button("ok!", role: .cancel) {}
             }
+            
+            
             if viewModel.state != .normalPlay {
                 NavigationFrame(
                     backHandler: { viewModel.closeOverlay() }) {
@@ -71,8 +77,6 @@ struct PlayView: View {
                     }
                 }
             }
-            
-            
         }
     }
 }

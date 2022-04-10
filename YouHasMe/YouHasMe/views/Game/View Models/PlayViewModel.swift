@@ -132,6 +132,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
                 break
             }
         }
+
         achievementsViewModel.resetSubscriptions()
         achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
@@ -234,5 +235,9 @@ extension PlayViewModel {
         }
 
         return MessagesViewModel()
+    }
+
+    func getActiveRulesViewModel() -> ActiveRulesViewModel {
+        ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
     }
 }
