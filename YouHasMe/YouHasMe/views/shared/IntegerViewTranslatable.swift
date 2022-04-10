@@ -9,6 +9,7 @@ import Foundation
 import CoreGraphics
 
 protocol IntegerViewTranslatable: AnyObject {
+    var baseViewOffset: Vector { get }
     var cumulativeTranslation: CGVector { get set }
     var viewPosition: Point { get set }
     var viewableDimensions: Rectangle { get }
@@ -41,6 +42,6 @@ extension IntegerViewTranslatable {
     }
 
     func getWorldPosition(at viewOffset: Vector) -> Point {
-        viewPosition.translate(by: viewOffset)
+        viewPosition.translate(by: baseViewOffset.add(with: viewOffset))
     }
 }

@@ -49,6 +49,12 @@ enum PlayViewState {
 }
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+    var baseViewOffset: Vector {
+        let dx = max((viewableDimensions.width - levelDimensions.width) / 2, 0)
+        let dy = max((viewableDimensions.height - levelDimensions.height) / 2, 0)
+        return Vector(dx: -dx, dy: -dy)
+    }
+
     @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
         cellSize: ViewConstants.gridCellDimensions
     )

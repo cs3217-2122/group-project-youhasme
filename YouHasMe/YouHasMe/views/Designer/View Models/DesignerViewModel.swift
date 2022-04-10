@@ -8,6 +8,7 @@ enum DesignerState {
 }
 
 class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+    let baseViewOffset: Vector = .zero
     @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
         cellSize: ViewConstants.gridCellDimensions
     )

@@ -34,7 +34,11 @@ struct GridViewData {
     ) {
         self.displayWidth = displayWidth
         self.displayHeight = displayHeight
-        self.cellDimensions = floor(displayWidth / Double(widthInCells))
+        
+        self.cellDimensions = min(
+            floor(displayWidth / Double(widthInCells)),
+            floor(displayHeight / Double(heightInCells))
+        )
         self.widthInCells = widthInCells
         self.heightInCells = heightInCells
     }
