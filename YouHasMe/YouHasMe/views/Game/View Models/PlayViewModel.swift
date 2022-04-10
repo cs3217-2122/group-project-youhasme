@@ -106,7 +106,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     @Published var selectedTile: Tile?
     private var timer: Timer?
     private var timedOffset: Vector = .zero
-
+    @Published var levelsUpdated = false
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
 
@@ -126,6 +126,19 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     func setupBindings() {
+        dungeon.$loadedLevels.sink { [weak self] loadedLevels in
+            guard let self = self else {
+                return
+            }
+            self.subscriptions.removeAll()
+            for (_, loadedLevel) in loadedLevels {
+                loadedLevel.$layer.sink { _ in
+                    self.levelsUpdated = true
+                }.store(in: &self.subscriptions)
+            }
+        }
+        .store(in: &subscriptions)
+
         $selectedTile.sink { [weak self] selectedTile in
             guard let self = self else {
                 return
