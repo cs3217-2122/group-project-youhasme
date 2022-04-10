@@ -49,9 +49,22 @@ enum PlayViewState {
 }
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+    @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
+        cellSize: ViewConstants.gridCellDimensions
+    )
+    var displayModeOptions: [GridDisplayMode] {
+        [
+            .scaleToFitCellSize(cellSize: ViewConstants.gridCellDimensions),
+            .fixedDimensionsInCells(dimensions: dungeon.levelDimensions)
+        ]
+    }
+
     private var subscriptions: Set<AnyCancellable> = []
     private var gameEngineSubscription: AnyCancellable?
     var viewableDimensions = Dungeon.defaultLevelDimensions
+    var levelDimensions: Rectangle {
+        dungeon.levelDimensions
+    }
     @Published var hasWon = false
     @Published var isLoopingInfinitely = false
     var dungeon: Dungeon

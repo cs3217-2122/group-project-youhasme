@@ -8,6 +8,16 @@ enum DesignerState {
 }
 
 class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+    @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
+        cellSize: ViewConstants.gridCellDimensions
+    )
+    var displayModeOptions: [GridDisplayMode] {
+        [
+            .scaleToFitCellSize(cellSize: ViewConstants.gridCellDimensions),
+            .fixedDimensionsInCells(dimensions: dungeon.levelDimensions)
+        ]
+    }
+
     @Published var selectedPaletteEntityType: EntityType?
     @Published var selectedTile: Tile?
     private var levelStorage: LevelStorage? {

@@ -47,7 +47,7 @@ class Dungeon {
     @Published var levelNameToPositionMap: [String: Point]
     var playerLevelPosition: Point
     @Published var loadedLevels: [Point: Level] = [:]
-
+    var totalWins: Int = 0
     private var subscriptions: Set<AnyCancellable> = []
 
     convenience init() {
@@ -87,6 +87,10 @@ class Dungeon {
                 fatalError(error.localizedDescription)
             }
         }
+    }
+
+    var numberOfPlayers: Int {
+        0 // TODO
     }
 
     func renameDungeon(to newName: String) {
@@ -155,6 +159,7 @@ class Dungeon {
     func winActiveLevel() {
         let level = getActiveLevel()
         level.winCount += 1
+        totalWins += 1
     }
 }
 
@@ -339,13 +344,16 @@ extension Dungeon {
 }
 
 enum DungeonKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
-    case name // TODO: placeholder
+    case totalWins = "Total Wins"
+    case numberOfPlayers = "Number of dungeon players"
 }
 
 extension Dungeon: KeyPathExposable {
+
     static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
-            :
+            .totalWins: \.totalWins,
+            .numberOfPlayers: \.numberOfPlayers
         ]
     }
 
