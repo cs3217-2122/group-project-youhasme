@@ -13,7 +13,7 @@ protocol RuleResolutionPolicy {
 
 class ConditionalRuleValidationStrategy: RuleValidationStrategy {
     private let ruleResolutionPolicies: [RuleResolutionPolicy] = [
-        IsVerbCyclePolicy()
+        IsVerbDisjointSetPolicy()
     ]
 
     func validate(rules: [Rule]) -> [Rule] {

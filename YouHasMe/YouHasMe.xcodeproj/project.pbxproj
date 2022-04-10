@@ -170,6 +170,7 @@
 		E58E83722802916100C06A59 /* IsVerbCyclePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */; };
 		E58E8374280294B900C06A59 /* ActiveRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8373280294B900C06A59 /* ActiveRulesView.swift */; };
 		E58E8376280294CC00C06A59 /* ActiveRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */; };
+		E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -365,6 +366,7 @@
 		E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbCyclePolicy.swift; sourceTree = "<group>"; };
 		E58E8373280294B900C06A59 /* ActiveRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesView.swift; sourceTree = "<group>"; };
 		E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesViewModel.swift; sourceTree = "<group>"; };
+		E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbDisjointSetPolicy.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -882,6 +884,7 @@
 			isa = PBXGroup;
 			children = (
 				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
+				E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */,
 			);
 			path = validation;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				E57B535727FD68A70071E623 /* NamedKeyPath.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
+				E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				40E2519527FAD835008CBCE0 /* PersistableIntegerUnlockCondition.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,

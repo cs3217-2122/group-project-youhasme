@@ -41,6 +41,7 @@ class IsVerbCyclePolicy: RuleResolutionPolicy {
     func resolve(given candidateActiveRules: [Rule]) -> [Rule] {
         var activeRules: [Rule] = []
         let graph = AdjacencyListGraph<Noun>()
+
         for activeRule in candidateActiveRules {
             guard activeRule.verb == .vIs else {
                 continue
