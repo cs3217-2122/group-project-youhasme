@@ -224,7 +224,8 @@ extension PlayViewModel {
         let entityViewModel = EntityViewModel(
             tile: tile,
             worldPosition: worldPosition,
-            status: levelStatus
+            status: levelStatus,
+            conditionEvaluableDelegate: dungeon
         )
         return entityViewModel
     }

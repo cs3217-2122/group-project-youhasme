@@ -91,8 +91,11 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         default:
             return .uiImage(relation.rawValue.asImage()!)
         }
-    case .conditionEvaluable:
-        return .sfSymbol("plus.circle")
+    case .conditionEvaluable(let conditionEvaluable):
+        guard let value = conditionEvaluable.getValue() else {
+            return .uiImage("Evaluable".asImage()!)
+        }
+        return .uiImage("\(value)".asImage()!)
     case .connective(let connective):
         return .uiImage(connective.rawValue.asImage()!)
     }
