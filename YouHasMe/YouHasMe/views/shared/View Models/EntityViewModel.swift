@@ -46,7 +46,7 @@ class EntityViewModel: CellViewModel {
         }
 
         if tile.entities.isEmpty {
-            super.init(imageSource: .uiColor(.gray))
+            super.init(imageSource: .uiColor(.black))
         } else {
             let entityType = tile.entities[0].entityType
             if case .conditionEvaluable(var conditionEvaluable) = entityType.classification {

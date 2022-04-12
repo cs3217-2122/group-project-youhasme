@@ -16,7 +16,7 @@ struct EntityView: View {
         case .active:
             return .clear
         case .inactiveAndComplete:
-            return .gray
+            return .black
         case .inactiveAndIncomplete:
             return .black
         }
@@ -35,7 +35,7 @@ struct EntityView: View {
                         }
                     }
                 }
-                .border(.pink)
+                .border(.cyan)
                 .onTapGesture {
                     switch gameState.state {
                     case .designing:

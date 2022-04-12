@@ -29,13 +29,13 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
     case .noun(let noun):
         switch noun {
         case .baba:
-            return .string("baba_text")
+            return .string("gogo_text")
         case .wall:
-            return .string("wall_text")
+            return .string("wall_text_new")
         case .flag:
-            return .string("flag_text")
+            return .string("flag_text_new")
         case .box:
-            return .string("box_text")
+            return .string("box_text_new")
         case .bedrock:
             return .uiImage("BR".asImage()!)
         case .connectorWall:
@@ -46,33 +46,33 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
     case .verb(let verb):
         switch verb {
         case .vIs:
-            return .string("is")
+            return .string("is_text_new")
         default:
             break
         }
     case .property(let property):
         switch property {
         case .you:
-            return .string("you")
+            return .string("you_new")
         case .win:
-            return .string("win")
+            return .string("win_new")
         case .stop:
-            return .string("stop")
+            return .string("stop_new")
         case .push:
-            return .string("push")
+            return .string("push_new")
         default:
             break
         }
     case .nounInstance(let noun):
         switch noun {
         case .baba:
-            return .string("baba")
+            return .string("baba_new")
         case .wall:
-            return .string("wall")
+            return .string("wall_new")
         case .flag:
-            return .string("flag")
+            return .string("flag_new")
         case .box:
-            return .string("box")
+            return .string("box_new")
         case .bedrock:
             return .string("rock")
         case .connectorWall:
