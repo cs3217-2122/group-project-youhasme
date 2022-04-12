@@ -15,8 +15,12 @@ class GameNotificationsViewModel: ObservableObject {
 
     private var subscriptions = [AnyCancellable]()
 
+    private var isShowingNotification: Bool {
+        notificationShown != nil
+    }
+
     func addNotification(_ notif: GameNotification) {
-        if notificationShown != nil {
+        if isShowingNotification {
             gameNotificationsQueue.append(notif)
             return
         }
@@ -24,13 +28,16 @@ class GameNotificationsViewModel: ObservableObject {
         showNotif(notification: notif)
     }
 
-    func hasFinishedShowing(_ notif: GameNotification) {
-        if notificationShown != nil && notificationShown! == notif {
-            notificationShown = nil
-        } else {
+    func hasFinishedShowing(_ finishedNotif: GameNotification) {
+        guard let currentShowingNotification = notificationShown else {
             return
         }
 
+        if currentShowingNotification != finishedNotif {
+            return
+        }
+
+        notificationShown = nil
         showNextNotif()
     }
 
