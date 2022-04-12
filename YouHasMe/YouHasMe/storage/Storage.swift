@@ -53,6 +53,10 @@ class Storage {
         return directoryUrl
     }
 
+    final func exists(file: URL) -> Bool {
+        FileManager.default.fileExists(atPath: file.path)
+    }
+
     final func save(data: Data, to file: URL) throws {
         try data.write(to: file)
     }
@@ -98,6 +102,10 @@ class Storage {
 }
 
 extension Storage {
+    func exists(filename: String) throws -> Bool {
+        try exists(file: getURL(filename: filename))
+    }
+
     func save(data: Data, filename: String) throws {
         try save(data: data, to: getURL(filename: filename))
     }
@@ -203,6 +211,23 @@ class DungeonStorage: JSONStorage {
 
     override func getDefaultDirectory() throws -> URL {
         try super.getDefaultDirectory().appendingPathComponent(DungeonStorage.dungeonDirectoryName)
+    }
+
+    func existsDungeon(name: String) -> Bool {
+        do {
+            return try exists(filename: name)
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+
+    func deleteDungeon(name: String) throws {
+        try delete(filename: name)
+        let levelDirectory = try getURL(
+            directoryName: name,
+            createIfNotExists: false
+        )
+        try delete(file: levelDirectory)
     }
 
     func loadDungeon(name: String) throws -> PersistableDungeon {
