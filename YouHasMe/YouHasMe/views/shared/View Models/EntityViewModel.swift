@@ -29,7 +29,12 @@ class EntityViewModel: CellViewModel {
         self.init(tile: tile, worldPosition: nil, status: status)
     }
 
-    init(tile: Tile?, worldPosition: Point?, status: LevelStatus? = nil) {
+    init(
+        tile: Tile?,
+        worldPosition: Point?,
+        status: LevelStatus? = nil,
+        conditionEvaluableDelegate: ConditionEvaluableDungeonDelegate? = nil
+    ) {
         self.tile = tile
         self.worldPosition = worldPosition
         if let status = status {
@@ -43,7 +48,20 @@ class EntityViewModel: CellViewModel {
         if tile.entities.isEmpty {
             super.init(imageSource: .uiColor(.gray))
         } else {
-            super.init(imageSource: entityTypeToImageable(type: tile.entities[0].entityType))
+            let entityType = tile.entities[0].entityType
+            if case .conditionEvaluable(var conditionEvaluable) = entityType.classification {
+                conditionEvaluable.delegate = conditionEvaluableDelegate
+                super.init(
+                    imageSource: entityTypeToImageable(
+                        type: EntityType(
+                            classification: .conditionEvaluable(conditionEvaluable)
+                        )
+                    )
+                )
+            } else {
+                super.init(imageSource: entityTypeToImageable(type: entityType))
+            }
+
         }
     }
 

@@ -15,7 +15,7 @@ protocol DungeonManipulableViewModel: IntegerViewTranslatable, ObservableObject 
 extension DungeonManipulableViewModel {
     func getTile(at viewOffset: Vector, loadNeighboringChunks: Bool) -> Tile? {
         dungeon.getTile(
-            at: viewPosition.translate(by: viewOffset),
+            at: getWorldPosition(at: viewOffset),
             loadNeighboringLevels: loadNeighboringChunks
         )
     }

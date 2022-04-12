@@ -27,7 +27,9 @@ struct GameEngine: GameEventPublisher {
     }
 
     var publishingDelegate: AbstractGameEngineEventPublishingDelegate = GameEngineEventPublishingDelegate()
-
+    var lastActiveRulesPublisher: AnyPublisher<[Rule], Never> {
+        ruleEngine.lastActiveRulesPublisher
+    }
     private let gameMechanics: [GameMechanic]
     private let ruleEngine: RuleEngine
 

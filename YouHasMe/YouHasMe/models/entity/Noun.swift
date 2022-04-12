@@ -17,5 +17,6 @@ extension Noun: CustomDebugStringConvertible {
     }
 }
 
-extension Noun: Codable {
-}
+extension Noun: Codable {}
+
+extension Noun: CaseIterable {}

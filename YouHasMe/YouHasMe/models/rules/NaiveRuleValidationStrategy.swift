@@ -1,29 +1,8 @@
 import Foundation
 
-/// Encapsulates a strategy that naively applies all possible parsed rules to a target,
-/// as long as the rule's receiver matches the entity type.
+/// Encapsulates a strategy that naively accepts all rules.
 class NaiveRuleValidationStrategy: RuleValidationStrategy {
-    func validate(rules: [Rule], for entity: inout Entity, environment: LevelLayer) {
-        var behaviours: Set<Behaviour> = []
-        switch entity.entityType.classification {
-        case .noun, .verb, .connective, .property:
-            for rule in rules {
-                guard rule.receiver == .word else {
-                    continue
-                }
-                behaviours.insert(rule.activateToBehaviour())
-            }
-        case .nounInstance(let noun):
-            for rule in rules {
-                guard rule.receiver == noun else {
-                    continue
-                }
-                behaviours.insert(rule.activateToBehaviour())
-            }
-        default:
-            break
-        }
-
-        entity.activeBehaviours = behaviours
+    func validate(rules: [Rule]) -> [Rule] {
+        rules
     }
 }

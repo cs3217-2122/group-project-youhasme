@@ -57,6 +57,12 @@ extension Rule.RulePerformer: CustomDebugStringConvertible {
     }
 }
 
+extension Rule: CustomStringConvertible {
+    var description: String {
+        debugDescription
+    }
+}
+
 extension Rule: CustomDebugStringConvertible {
     var debugDescription: String {
         """

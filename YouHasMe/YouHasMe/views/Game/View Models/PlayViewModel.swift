@@ -49,9 +49,28 @@ enum PlayViewState {
 }
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
+    var baseViewOffset: Vector {
+        let dx = max((viewableDimensions.width - levelDimensions.width) / 2, 0)
+        let dy = max((viewableDimensions.height - levelDimensions.height) / 2, 0)
+        return Vector(dx: -dx, dy: -dy)
+    }
+
+    @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
+        cellSize: ViewConstants.gridCellDimensions
+    )
+    var displayModeOptions: [GridDisplayMode] {
+        [
+            .scaleToFitCellSize(cellSize: ViewConstants.gridCellDimensions),
+            .fixedDimensionsInCells(dimensions: dungeon.levelDimensions)
+        ]
+    }
+
     private var subscriptions: Set<AnyCancellable> = []
     private var gameEngineSubscription: AnyCancellable?
     var viewableDimensions = Dungeon.defaultLevelDimensions
+    var levelDimensions: Rectangle {
+        dungeon.levelDimensions
+    }
     @Published var hasWon = false
     @Published var isLoopingInfinitely = false
     var dungeon: Dungeon
@@ -88,7 +107,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     @Published var selectedTile: Tile?
     private var timer: Timer?
     private var timedOffset: Vector = .zero
-
+    @Published var levelsUpdated = false
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
 
@@ -113,6 +132,19 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     func setupBindings() {
+        dungeon.$loadedLevels.sink { [weak self] loadedLevels in
+            guard let self = self else {
+                return
+            }
+            self.subscriptions.removeAll()
+            for (_, loadedLevel) in loadedLevels {
+                loadedLevel.$layer.sink { _ in
+                    self.levelsUpdated = true
+                }.store(in: &self.subscriptions)
+            }
+        }
+        .store(in: &subscriptions)
+
         $selectedTile.sink { [weak self] selectedTile in
             guard let self = self else {
                 return
@@ -138,6 +170,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
                 break
             }
         }
+
         achievementsViewModel.resetSubscriptions()
         achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
@@ -233,7 +266,8 @@ extension PlayViewModel {
         let entityViewModel = EntityViewModel(
             tile: tile,
             worldPosition: worldPosition,
-            status: levelStatus
+            status: levelStatus,
+            conditionEvaluableDelegate: dungeon
         )
         return entityViewModel
     }
@@ -244,5 +278,9 @@ extension PlayViewModel {
         }
 
         return MessagesViewModel()
+    }
+
+    func getActiveRulesViewModel() -> ActiveRulesViewModel {
+        ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
     }
 }

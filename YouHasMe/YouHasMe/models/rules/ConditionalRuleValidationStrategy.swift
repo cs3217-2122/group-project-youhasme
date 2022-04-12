@@ -6,33 +6,28 @@
 //
 
 import Foundation
-class ConditionalRuleValidationStrategy: RuleValidationStrategy {
-    func validate(rules: [Rule], for entity: inout Entity, environment: LevelLayer) {
-        var behaviours: Set<Behaviour> = []
-        switch entity.entityType.classification {
-        case .noun, .verb, .connective, .property:
-            for rule in rules {
-                guard rule.receiver == .word else {
-                    continue
-                }
 
-                if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
-                    behaviours.insert(rule.activateToBehaviour())
-                }
+protocol RuleResolutionPolicy {
+    func resolve(given candidateActiveRules: [Rule]) -> [Rule]
+}
+
+class ConditionalRuleValidationStrategy: RuleValidationStrategy {
+    private let ruleResolutionPolicies: [RuleResolutionPolicy] = [
+        IsVerbDisjointSetPolicy()
+    ]
+
+    func validate(rules: [Rule]) -> [Rule] {
+        var activeRules: [Rule] = []
+        for rule in rules {
+            if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
+                activeRules.append(rule)
             }
-        case .nounInstance(let noun):
-            for rule in rules {
-                guard rule.receiver == noun else {
-                    continue
-                }
-                if rule.conditions.allSatisfy({ $0.isConditionMet() }) {
-                    behaviours.insert(rule.activateToBehaviour())
-                }
-            }
-        default:
-            break
         }
 
-        entity.activeBehaviours = behaviours
+        for ruleResolutionPolicy in ruleResolutionPolicies {
+            activeRules = ruleResolutionPolicy.resolve(given: activeRules)
+        }
+
+        return activeRules
     }
 }
