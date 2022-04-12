@@ -27,31 +27,31 @@ let demoTypes: [EntityType] = [
 func entityTypeToImageString(type: EntityType) -> String {
     switch type {
     case EntityTypes.Nouns.baba:
-        return "baba_text"
+        return "gogo_text_new"
     case EntityTypes.Nouns.wall:
-        return "wall_text"
+        return "wall_text_new"
     case EntityTypes.Nouns.flag:
-        return "flag_text"
+        return "flag_text_new"
     case EntityTypes.Nouns.box:
-        return "box_text"
+        return "box_text_new"
     case EntityTypes.Verbs.vIs:
-        return "is"
+        return "is_new"
     case EntityTypes.Properties.you:
-        return "you"
+        return "you_new"
     case EntityTypes.Properties.push:
-        return "push"
+        return "push_new"
     case EntityTypes.Properties.stop:
-        return "stop"
+        return "stop_new"
     case EntityTypes.Properties.win:
-        return "win"
+        return "win_new"
     case EntityTypes.NounInstances.baba:
-        return "baba"
+        return "gogo_new"
     case EntityTypes.NounInstances.wall:
-        return "wall"
+        return "wall_new"
     case EntityTypes.NounInstances.flag:
-        return "flag"
+        return "flag_new"
     case EntityTypes.NounInstances.box:
-        return "box"
+        return "box_new"
     default:
         return "question"
     }

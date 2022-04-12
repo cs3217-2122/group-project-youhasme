@@ -69,7 +69,7 @@ struct GameGridView: View {
                                 let tileViewModel = levelDesignerViewModel.getTileViewModel(at: Point(x: col, y: row))
                                 EntityView(viewModel: tileViewModel)
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
-                                    .border(.pink)
+                                    .border(.cyan)
                                     .onTapGesture {
                                         if case .designing = gameState.state {
                                             levelDesignerViewModel.addEntityToPos(x: col, y: row)
