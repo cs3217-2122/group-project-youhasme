@@ -24,9 +24,9 @@ struct GameNotificationView: View {
                     }
                     Spacer()
                 }
-                .foregroundColor(Color.white)
+                .foregroundColor(Color("NotificationFGColor"))
                 .padding(12)
-                .background(.black)
+                .background(Color("NotificationBGColor"))
                 .cornerRadius(8)
                 Spacer()
         }
