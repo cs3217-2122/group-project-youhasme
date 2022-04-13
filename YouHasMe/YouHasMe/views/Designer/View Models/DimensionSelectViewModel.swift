@@ -9,8 +9,8 @@ import Foundation
 class DimensionSelectViewModel: ObservableObject {
     @Published var widthSelection: Int = 0
     @Published var heightSelection: Int = 0
-    let widthRange = 2..<9
-    let heightRange = 2..<9
+    let widthRange = 1..<9
+    let heightRange = 1..<9
     @Published var dungeonName: String = ""
     @Published var requiresOverwrite = false
     var dungeonStorage = DungeonStorage()
