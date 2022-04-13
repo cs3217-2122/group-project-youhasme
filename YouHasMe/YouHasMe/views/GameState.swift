@@ -7,7 +7,7 @@ import Foundation
 
 enum DesignableDungeon {
     case dungeonLoadable(Loadable)
-    case newDungeonDimensions(Rectangle)
+    case newDungeon(name: String, dimensions: Rectangle)
 }
 
 extension DesignableDungeon: Equatable {}
@@ -21,10 +21,10 @@ extension DesignableDungeon {
                 fatalError("should not be nil")
             }
             return dungeon
-        case .newDungeonDimensions(let rectangle):
+        case .newDungeon(let name, let rectangle):
             return Dungeon(
                 isNewDungeon: true,
-                name: Dungeon.defaultName,
+                name: name,
                 dimensions: rectangle,
                 levelDimensions: Dungeon.defaultLevelDimensions,
                 entryLevelPosition: Dungeon.defaultEntryLevelPosition,
@@ -91,6 +91,10 @@ class GameState: ObservableObject {
 
 // MARK: View model factories
 extension GameState {
+    func getDimensionSelectViewModel() -> DimensionSelectViewModel {
+        DimensionSelectViewModel()
+    }
+
     func getDesignerViewModel() -> DesignerViewModel {
         let achievementsViewModel = getAchievementsViewModel()
         let gameNotificationsViewModel = getGameNotificationsViewModel()

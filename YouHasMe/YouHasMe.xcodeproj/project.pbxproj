@@ -82,6 +82,7 @@
 		E569FC1B280094F80042D15B /* DimensionSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569FC1A280094F70042D15B /* DimensionSelectView.swift */; };
 		E569FC1D280096FE0042D15B /* LevelMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569FC1C280096FE0042D15B /* LevelMetadata.swift */; };
 		E56AC06E2800756400FDD4CD /* DungeonNameButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */; };
+		E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E572AD652805BC8000FC6053 /* DimensionSelectViewModel.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
 		E573E95C27EA2797000D10E4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95B27EA2797000D10E4 /* Storage.swift */; };
@@ -284,6 +285,7 @@
 		E569FC1A280094F70042D15B /* DimensionSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionSelectView.swift; sourceTree = "<group>"; };
 		E569FC1C280096FE0042D15B /* LevelMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMetadata.swift; sourceTree = "<group>"; };
 		E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonNameButtonViewModel.swift; sourceTree = "<group>"; };
+		E572AD652805BC8000FC6053 /* DimensionSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionSelectViewModel.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
 		E573E95B27EA2797000D10E4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 				E5D0A22C27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift */,
 				E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */,
 				E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */,
+				E572AD652805BC8000FC6053 /* DimensionSelectViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -1331,6 +1334,7 @@
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E57B533F27FD32B90071E623 /* PersistableClassification.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
+				E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
 				E57B535527FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift in Sources */,
 				405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */,

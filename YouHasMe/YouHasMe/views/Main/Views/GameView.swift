@@ -23,7 +23,7 @@ struct GameView: View {
             case .selecting:
                 DungeonSelectView(viewModel: gameState.getSelectViewModel())
             case .choosingDimensions:
-                DimensionSelectView()
+                DimensionSelectView(viewModel: gameState.getDimensionSelectViewModel())
             case .designing:
                 DesignerView(viewModel: gameState.getDesignerViewModel())
             case .playing:
