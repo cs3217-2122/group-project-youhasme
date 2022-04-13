@@ -13,7 +13,8 @@ class AchievementsViewModel: ObservableObject {
     var unlockedAchievements: [Achievement] = []
     var imageWidth: Float = 40
     var imageHeight: Float = 40
-    var levelId: String
+    var dungeonId: String
+    var levelId: String?
     var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
 
@@ -21,7 +22,7 @@ class AchievementsViewModel: ObservableObject {
         lockedAchievements.flatMap { $0.getLevelStatistics() }
     }
 
-    init(levelId: String = "") {
+    init(dungeonId: String = "") {
         let achievements: [Achievement] = storage.loadAllAchievements()
         for achievement in achievements {
             if achievement.isUnlocked {
@@ -30,12 +31,12 @@ class AchievementsViewModel: ObservableObject {
                 lockedAchievements.append(achievement)
             }
         }
-        self.levelId = levelId
+        self.dungeonId = dungeonId
         resetLevelStats()
     }
 
     func selectLevel(level: Level) {
-        levelId = level.id
+        levelId = level.id.dataString
         resetLevelStats()
     }
 
@@ -43,16 +44,22 @@ class AchievementsViewModel: ObservableObject {
         levelStatistics.forEach { $0.reset() }
     }
 
+    func resetSubscriptions() {
+        subscriptions.removeAll()
+    }
+
     func setSubscriptionsFor(_ gameEventPublisher: AnyPublisher<AbstractGameEvent, Never>) {
         gameEventPublisher.sink { [weak self] gameEvent in
             guard let self = self else {
                 return
             }
-
-            let updatedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: self.levelId)
+            var gameEvent = gameEvent
+            if let levelId = self.levelId {
+                gameEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: levelId)
+            }
 
             for achievement in self.lockedAchievements {
-                self.updateAchievement(achievement, gameEvent: updatedEvent)
+                self.updateAchievement(achievement, gameEvent: gameEvent)
                 self.saveAchievement(achievement)
                 self.updateLockedUnlockedAchievements(updatedAchievement: achievement)
 

@@ -7,6 +7,7 @@
 
 import Foundation
 final class IsVerbConcatNounPropState: DFAState {
+    weak var dungeonDelegate: ConditionEvaluableDungeonDelegate?
     weak var delegate: DFATransitionDelegate?
     var unconfirmedRulesData: RulesData
     let isAccepting = true
@@ -20,11 +21,16 @@ final class IsVerbConcatNounPropState: DFAState {
             fatalError("should not be nil")
         }
 
-        guard case .connective(let connective) = entityType, connective == .and else {
+        guard case .connective(let connective) = entityType else {
             delegate.stateTransition(to: RejectingState())
             return
         }
 
-        delegate.stateTransition(to: IsVerbPrimedState(unconfirmedRulesData: unconfirmedRulesData))
+        switch connective {
+        case .and:
+            delegate.stateTransition(to: IsVerbPrimedState(unconfirmedRulesData: unconfirmedRulesData))
+        case .cIf:
+            delegate.stateTransition(to: IfState(unconfirmedRulesData: unconfirmedRulesData))
+        }
     }
 }

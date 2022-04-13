@@ -7,6 +7,7 @@
 
 import Foundation
 final class NounConcatAndState: DFAState {
+    weak var dungeonDelegate: ConditionEvaluableDungeonDelegate?
     weak var delegate: DFATransitionDelegate?
     let isAccepting = false
     var unconfirmedRulesData: RulesData

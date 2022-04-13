@@ -24,94 +24,80 @@ let demoTypes: [EntityType] = [
     EntityTypes.NounInstances.box
 ]
 
-func entityTypeToImageString(type: EntityType) -> String {
-    switch type {
-    case EntityTypes.Nouns.baba:
-        return "baba_text"
-    case EntityTypes.Nouns.wall:
-        return "wall_text"
-    case EntityTypes.Nouns.flag:
-        return "flag_text"
-    case EntityTypes.Nouns.box:
-        return "box_text"
-    case EntityTypes.Verbs.vIs:
-        return "is"
-    case EntityTypes.Properties.you:
-        return "you"
-    case EntityTypes.Properties.push:
-        return "push"
-    case EntityTypes.Properties.stop:
-        return "stop"
-    case EntityTypes.Properties.win:
-        return "win"
-    case EntityTypes.NounInstances.baba:
-        return "baba"
-    case EntityTypes.NounInstances.wall:
-        return "wall"
-    case EntityTypes.NounInstances.flag:
-        return "flag"
-    case EntityTypes.NounInstances.box:
-        return "box"
-    default:
-        return "question"
+func entityTypeToImageable(type: EntityType) -> Imageable {
+    switch type.classification {
+    case .noun(let noun):
+        switch noun {
+        case .baba:
+            return .string("baba_text")
+        case .wall:
+            return .string("wall_text")
+        case .flag:
+            return .string("flag_text")
+        case .box:
+            return .string("box_text")
+        case .bedrock:
+            return .uiImage("BR".asImage()!)
+        case .connectorWall:
+            return .uiImage("CW".asImage()!)
+        default:
+            break
+        }
+    case .verb(let verb):
+        switch verb {
+        case .vIs:
+            return .string("is")
+        default:
+            break
+        }
+    case .property(let property):
+        switch property {
+        case .you:
+            return .string("you")
+        case .win:
+            return .string("win")
+        case .stop:
+            return .string("stop")
+        case .push:
+            return .string("push")
+        default:
+            break
+        }
+    case .nounInstance(let noun):
+        switch noun {
+        case .baba:
+            return .string("baba")
+        case .wall:
+            return .string("wall")
+        case .flag:
+            return .string("flag")
+        case .box:
+            return .string("box")
+        case .bedrock:
+            return .string("rock")
+        case .connectorWall:
+            return .string("door")
+        default:
+            break
+        }
+    case .conditionRelation(let relation):
+        switch relation {
+        case .eq:
+            return .sfSymbol("equal")
+        case .lt:
+            return .sfSymbol("lessthan")
+        case .gt:
+            return .sfSymbol("greaterthan")
+        default:
+            return .uiImage(relation.rawValue.asImage()!)
+        }
+    case .conditionEvaluable(let conditionEvaluable):
+        guard let value = conditionEvaluable.getValue() else {
+            return .uiImage("Evaluable".asImage()!)
+        }
+        return .uiImage("\(value)".asImage()!)
+    case .connective(let connective):
+        return .uiImage(connective.rawValue.asImage()!)
     }
-}
-
-func entityTypeToImageColor(type: EntityType) -> Color {
-    switch type {
-    case EntityTypes.Nouns.baba:
-        return .red
-    case EntityTypes.Nouns.wall:
-        return .blue
-    case EntityTypes.Nouns.skull:
-        return .blue
-    case EntityTypes.Nouns.flag:
-        return .purple
-    case EntityTypes.Nouns.word:
-        return .indigo
-    case EntityTypes.Connectives.and:
-        return .gray
-    case EntityTypes.Verbs.vIs:
-        return .green
-    case EntityTypes.Verbs.vHas:
-        return .orange
-    case EntityTypes.Properties.you:
-        return .yellow
-    case EntityTypes.Properties.win:
-        return .cyan
-    case EntityTypes.Properties.defeat:
-        return .mint
-    case EntityTypes.Properties.stop:
-        return .gray
-    case EntityTypes.NounInstances.baba:
-        return .white
-    case EntityTypes.NounInstances.wall:
-        return .black
-    case EntityTypes.NounInstances.flag:
-        return .pink
-    case EntityTypes.Properties.push:
-        return .orange
-    default:
-        /// can change this if we have entity types in the future that cannot be added to the level designer
-        print("Entity Type \(type.classification) does not have image")
-        //        assert(false, "Entity Type \(type.classification) does not have image")
-        return .gray
-    }
-}
-
-func metaEntityTypeToImageable(type: MetaEntityType) -> Imageable? {
-    switch type {
-    case .blocking:
-        return .string("wall")
-    case .nonBlocking:
-        return .string("flag")
-    case .grass:
-        return .string("grass")
-    case .level:
-        return .string("door")
-    case .travel:
-        return .string("question")
-    case .message:
-        return .uiColor(.darkGray)
-    }
+    return .string("question")
 }

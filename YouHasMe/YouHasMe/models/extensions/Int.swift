@@ -16,4 +16,12 @@ extension Int {
         let remainder = self % residualClass
         return remainder >= 0 ? remainder : remainder + residualClass
     }
+
+    var isEven: Bool {
+        self % 2 == 0
+    }
+
+    var isOdd: Bool {
+        !isEven
+    }
 }

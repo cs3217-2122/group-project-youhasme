@@ -9,6 +9,36 @@ struct Rectangle {
     }
 }
 
+extension Rectangle {
+    var topSide: Int {
+        0
+    }
+
+    var bottomSide: Int {
+        height
+    }
+
+    var leftSide: Int {
+        0
+    }
+
+    var rightSide: Int {
+        width
+    }
+
+    var topRight: Point {
+        Point(x: rightSide, y: topSide)
+    }
+
+    var bottomLeft: Point {
+        Point(x: leftSide, y: bottomSide)
+    }
+
+    var bottomRight: Point {
+        Point(x: rightSide, y: bottomSide)
+    }
+}
+
 extension Rectangle: Codable {}
 extension Rectangle: Hashable {}
 
@@ -20,6 +50,10 @@ extension Rectangle {
 
     func isWithinBounds(x: Int, y: Int) -> Bool {
         x >= 0 && y >= 0 && x < width && y < height
+    }
+
+    func isWithinBounds(_ point: Point) -> Bool {
+        isWithinBounds(x: point.x, y: point.y)
     }
 }
 

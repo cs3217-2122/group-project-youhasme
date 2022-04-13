@@ -61,7 +61,7 @@ extension Directions {
         allCases.map(\.neighborDataKeyPath)
     }
 
-    var neighborhoodKeyPath: WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?> {
+    var neighborhoodKeyPath: WritableKeyPath<Level.Neighborhood, Level?> {
         switch self {
         case .top:
             return \.topNeighbor
@@ -74,7 +74,7 @@ extension Directions {
         }
     }
 
-    static var neighborhoodKeyPaths: [WritableKeyPath<ChunkNode.Neighborhood, ChunkNode?>] {
+    static var neighborhoodKeyPaths: [WritableKeyPath<Level.Neighborhood, Level?>] {
         allCases.map(\.neighborhoodKeyPath)
     }
 }

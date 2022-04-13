@@ -12,16 +12,19 @@ class RulesData {
     var properties: [Property] = []
     var isObjects: [Noun] = []
     var hasObjects: [Noun] = []
+    var conditionBuilders: [ConditionBuilder] = []
 
     func combine(with otherRulesData: RulesData) {
         self.receivers.append(contentsOf: otherRulesData.receivers)
         self.properties.append(contentsOf: otherRulesData.properties)
         self.isObjects.append(contentsOf: otherRulesData.isObjects)
         self.hasObjects.append(contentsOf: otherRulesData.hasObjects)
+        self.conditionBuilders.append(contentsOf: otherRulesData.conditionBuilders)
         otherRulesData.receivers.removeAll()
         otherRulesData.properties.removeAll()
         otherRulesData.isObjects.removeAll()
         otherRulesData.hasObjects.removeAll()
+        otherRulesData.conditionBuilders.removeAll()
     }
 }
 
@@ -44,6 +47,7 @@ protocol DFATransitionDelegate: AnyObject {
 }
 
 protocol DFAState: AnyObject {
+    var dungeonDelegate: ConditionEvaluableDungeonDelegate? { get set }
     var delegate: DFATransitionDelegate? { get set }
     var unconfirmedRulesData: RulesData { get set }
     var isAccepting: Bool { get }
@@ -73,11 +77,28 @@ extension DFAState {
                 rules.append(Rule(receiver: noun, verb: .vHas, performer: .noun(otherNoun)))
             }
         }
+
+        var conditions: [Condition] = []
+        for builder in rulesData.conditionBuilders {
+            do {
+                builder.buildConditionEvaluableDelegate(dungeonDelegate)
+                let condition = try builder.getResult()
+                conditions.append(condition)
+            } catch {
+                fatalError("unexpected build error")
+            }
+        }
+
+        for i in 0..<rules.count {
+            rules[i].conditions.append(contentsOf: conditions)
+        }
+
         return rules
     }
 }
 
 protocol DeterministicFiniteAutomaton: SentenceParsingStrategy, DFATransitionDelegate {
+    var dungeonDelegate: ConditionEvaluableDungeonDelegate? { get }
     var rulesData: RulesData { get set }
     var stateHistory: [DFAState] { get set }
 }
@@ -91,6 +112,7 @@ extension DeterministicFiniteAutomaton {
             return mostRecentState
         }
         set {
+            newValue.dungeonDelegate = dungeonDelegate
             stateHistory.append(newValue)
         }
     }

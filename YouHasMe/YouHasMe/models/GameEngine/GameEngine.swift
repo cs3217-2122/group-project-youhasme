@@ -7,17 +7,31 @@
 
 import Combine
 
-struct GameEngine: GameEventPublisher {
+protocol AbstractGameEngineEventPublishingDelegate: GameEventPublisher, AnyObject {
+    func send(_ gameEvent: AbstractGameEvent)
+}
+
+class GameEngineEventPublishingDelegate: AbstractGameEngineEventPublishingDelegate {
     var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
     }
 
     private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
+    func send(_ gameEvent: AbstractGameEvent) {
+        gameEventSubject.send(gameEvent)
+    }
+}
 
-    private let gameMechanics: [GameMechanic] = [
-        PlayerMoveMechanic(), BoundaryMechanic(), PushMechanic(), WinMechanic(), StopMechanic(), TransformMechanic()
-    ]
-    private let ruleEngine = RuleEngine()
+struct GameEngine: GameEventPublisher {
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> { publishingDelegate.gameEventPublisher
+    }
+
+    var publishingDelegate: AbstractGameEngineEventPublishingDelegate = GameEngineEventPublishingDelegate()
+    var lastActiveRulesPublisher: AnyPublisher<[Rule], Never> {
+        ruleEngine.lastActiveRulesPublisher
+    }
+    private let gameMechanics: [GameMechanic]
+    private let ruleEngine: RuleEngine
 
     private var gameStateManager: GameStateManager
     var currentGame: Game {
@@ -30,8 +44,17 @@ struct GameEngine: GameEventPublisher {
         case infiniteLoop  // Player has attempted to create infinite loop
     }
 
-    init(levelLayer: LevelLayer) {
+    init(levelLayer: LevelLayer, ruleEngineDelegate: RuleEngineDelegate? = nil) {
+        self.ruleEngine = RuleEngine(ruleEngineDelegate: ruleEngineDelegate)
         gameStateManager = GameStateManager(levelLayer: ruleEngine.applyRules(to: levelLayer))
+        gameMechanics = [
+            PlayerMoveMechanic(),
+            BoundaryMechanic(publishingDelegate: publishingDelegate),
+            PushMechanic(),
+            WinMechanic(),
+            StopMechanic(),
+            TransformMechanic()
+        ]
     }
 
     mutating func undo() {
@@ -127,7 +150,9 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(
+                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
+            )
             return
         }
     }
@@ -140,7 +165,9 @@ struct GameEngine: GameEventPublisher {
         // todo: fix. currently only assumes one entity
         for entityState in LevelLayerState(levelLayer: newState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            gameEventSubject.send(EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType))
+            publishingDelegate.send(
+                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
+            )
             return
         }
     }

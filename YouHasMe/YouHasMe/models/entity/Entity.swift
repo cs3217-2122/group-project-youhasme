@@ -2,7 +2,7 @@ import Foundation
 
 struct Entity {
     var entityType: EntityType
-    var activeBehaviours: [Behaviour] = []
+    var activeBehaviours: Set<Behaviour> = []
     init(entityType: EntityType) {
         self.entityType = entityType
     }
@@ -12,5 +12,14 @@ struct Entity {
     }
 }
 
-extension Entity: Codable {}
+extension Entity {
+    func toPersistable() -> PersistableEntity {
+        PersistableEntity(entityType: entityType.toPersistable())
+    }
+
+    static func fromPersistable(_ persistableEntity: PersistableEntity) -> Entity {
+        Entity(entityType: EntityType.fromPersistable(persistableEntity.entityType))
+    }
+}
+
 extension Entity: Hashable {}

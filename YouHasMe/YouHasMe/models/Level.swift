@@ -1,73 +1,186 @@
 import Foundation
+import Combine
+protocol LevelLocationalDelegate: AnyObject {
+    var extremities: Rectangle { get }
+}
 
-struct Level {
+class Level: Chunkable {
+    struct Neighborhood {
+        weak var topNeighbor: Level?
+        weak var leftNeighbor: Level?
+        weak var rightNeighbor: Level?
+        weak var bottomNeighbor: Level?
+
+        var topLeftNeighbor: Level? {
+            topNeighbor?.neighbors.leftNeighbor
+        }
+
+        var topRightNeighbor: Level? {
+            topNeighbor?.neighbors.rightNeighbor
+        }
+
+        var bottomLeftNeighbor: Level? {
+            bottomNeighbor?.neighbors.leftNeighbor
+        }
+
+        var bottomRightNeighbor: Level? {
+            bottomNeighbor?.neighbors.rightNeighbor
+        }
+    }
+
+    weak var locationalDelegate: LevelLocationalDelegate?
+    weak var neighborFinderDelegate: AnyNeighborFinderDelegate<Point>?
+    weak var generatorDelegate: AnyChunkGeneratorDelegate? {
+        didSet {
+            guard let generatorDelegate = generatorDelegate else {
+                return
+            }
+
+            self.layer.tiles = generatorDelegate.generate(
+                dimensions: dimensions,
+                levelPosition: id,
+                extremities: extremities
+            )
+        }
+    }
+    var extremities: Rectangle {
+        guard let locationalDelegate = locationalDelegate else {
+            fatalError("should not be nil")
+        }
+        return locationalDelegate.extremities
+    }
+    var levelStorage: LevelStorage?
+    var id: Point
     var name: String
-    var layers: BidirectionalArray<LevelLayer>
+    var winCount: Int = 0
+    var dimensions: Rectangle
+    var neighbors = Neighborhood()
+    typealias ChunkIdentifier = Point
 
-    init(name: String = "") {
+    @Published var layer: LevelLayer
+
+    init(id: Point, name: String, dimensions: Rectangle) {
+        self.id = id
+        self.dimensions = dimensions
         self.name = name
-        layers = BidirectionalArray()
-        layers.append(LevelLayer(dimensions: Rectangle(width: 10, height: 10)))
+        layer = LevelLayer(dimensions: dimensions)
+    }
+
+    init(id: Point, name: String, dimensions: Rectangle, layer: LevelLayer) {
+        self.id = id
+        self.dimensions = dimensions
+        self.name = name
+        self.layer = layer
     }
 
     /// Level zero.
     var baseLevel: LevelLayer {
-        getLayerAtIndex(0)
+        layer
     }
 
-    mutating func resetLayerAtIndex(_ index: Int) {
-        guard let originalLayer = layers.getAtIndex(index) else {
-            assert(false, "Level does not have layer at index \(index)")
-        }
-
-        let emptyLayer = LevelLayer(dimensions: originalLayer.dimensions)
-        layers.setAtIndex(index, value: emptyLayer)
+    func resetLayerAtIndex(_ index: Int) {
+        let emptyLayer = LevelLayer(dimensions: layer.dimensions)
+        layer = emptyLayer
     }
 
-    mutating func setName(_ name: String) {
-        self.name = name
-    }
-
-    mutating func setLevelLayerAtIndex(_ index: Int, value: LevelLayer) {
-        layers.setAtIndex(index, value: value)
+    func setLevelLayerAtIndex(_ index: Int, value: LevelLayer) {
+        layer = value
     }
 
     func getLayerAtIndex(_ index: Int) -> LevelLayer {
-        guard let layer = layers.getAtIndex(index) else {
-            assert(false, "Level does not have layer at index \(index)")
-        }
+        layer
+    }
 
-        return layer
+    func getTileAt(point: Point) -> Tile {
+        layer.getTileAt(point: point)
+    }
+
+    func getTileAt(x: Int, y: Int) -> Tile {
+        layer.getTileAt(x: x, y: y)
+    }
+
+    func setTile(_ tile: Tile, at point: Point) {
+        layer.setTile(tile, at: point)
     }
 }
 
-extension Level: Identifiable {
-    var id: String {
-        name
-    }
+extension Level: Identifiable {}
+
+enum LevelKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
+    case winCount = "Win Count"
 }
 
 extension Level: KeyPathExposable {
+    typealias PathIdentifier = LevelKeyPathKeys
     typealias PathRoot = Level
 
-    static var exposedNumericKeyPathsMap: [String: KeyPath<Level, Int>] {
+    static var exposedNumericKeyPathsMap: [LevelKeyPathKeys: KeyPath<Level, Int>] {
         [
-            "Name length": \.name.count
+            .winCount: \.winCount
         ]
     }
 
-    func evaluate(given keyPath: NamedKeyPath<Level, Int>) -> Int {
+    func evaluate(given keyPath: NamedKeyPath<LevelKeyPathKeys, Level, Int>) -> Int {
         self[keyPath: keyPath.keyPath]
     }
 }
 
-extension Level: Hashable {}
+// MARK: Dynamic loading / unloading
+extension Level {
+    var areAllNeighborsLoaded: Bool {
+        Directions.neighborhoodKeyPaths.allSatisfy {
+            neighbors[keyPath: $0] != nil
+        }
+    }
 
-extension Level: Codable {}
+    func loadNeighbors(at position: Point) -> [Point: Level] {
+        guard let neighborFinderDelegate = neighborFinderDelegate else {
+            fatalError("Not assigned a neighbor finder.")
+        }
 
-struct Tile {
-    var entities: [Entity] = []
+        guard let levelStorage = levelStorage else {
+            return [:]
+        }
+
+        guard !areAllNeighborsLoaded else {
+            return [:]
+        }
+
+        globalLogger.info("Loading neighbors of level at \(position)")
+
+        var newlyLoadedLevels: [Point: Level] = [:]
+        let neighborIdentifiers = neighborFinderDelegate.getNeighborId(of: self)
+        for direction in Directions.allCases {
+            let offset = direction.vectorialOffset
+            let neighborPosition = position.translate(by: offset)
+            let neighborhoodKeyPath = direction.neighborhoodKeyPath
+            let oppositeNeighborhoodKeyPath = direction.opposite.neighborhoodKeyPath
+            let neighborDataKeyPath = direction.neighborDataKeyPath
+            if neighbors[keyPath: neighborhoodKeyPath] == nil,
+               let neighbor: Level = levelStorage.loadLevel(
+                neighborIdentifiers[keyPath: neighborDataKeyPath]
+               ) {
+                neighbors[keyPath: neighborhoodKeyPath] = neighbor
+                neighbor.neighbors[keyPath: oppositeNeighborhoodKeyPath] = self
+                newlyLoadedLevels[neighborPosition] = neighbor
+            }
+        }
+        return newlyLoadedLevels
+    }
 }
 
-extension Tile: Codable {}
-extension Tile: Hashable {}
+// MARK: Persistence
+extension Level {
+    func toPersistable() -> PersistableLevel {
+        PersistableLevel(id: id, name: name, dimensions: dimensions, layer: layer.toPersistable())
+    }
+
+    static func fromPersistable(_ persistableLevel: PersistableLevel) -> Level {
+        Level(
+            id: persistableLevel.id,
+            name: persistableLevel.name,
+            dimensions: persistableLevel.dimensions,
+            layer: LevelLayer.fromPersistable(persistableLevel.layer)
+        )
+    }
+}

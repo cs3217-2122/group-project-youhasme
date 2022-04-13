@@ -2,6 +2,7 @@ import Foundation
 
 enum Connective: String, Hashable {
     case and
+    case cIf = "if"
 }
 
 extension Connective: CustomDebugStringConvertible {
@@ -10,5 +11,4 @@ extension Connective: CustomDebugStringConvertible {
     }
 }
 
-extension Connective: Codable {
-}
+extension Connective: Codable {}

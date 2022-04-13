@@ -22,6 +22,7 @@ enum GameEventType: Int, Codable {
     case move
     case win
     case designLevel
+    case movingAcrossLevel
 }
 
 extension AbstractGameEvent {

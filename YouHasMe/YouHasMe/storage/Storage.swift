@@ -53,6 +53,10 @@ class Storage {
         return directoryUrl
     }
 
+    final func exists(file: URL) -> Bool {
+        FileManager.default.fileExists(atPath: file.path)
+    }
+
     final func save(data: Data, to file: URL) throws {
         try data.write(to: file)
     }
@@ -98,6 +102,10 @@ class Storage {
 }
 
 extension Storage {
+    func exists(filename: String) throws -> Bool {
+        try exists(file: getURL(filename: filename))
+    }
+
     func save(data: Data, filename: String) throws {
         try save(data: data, to: getURL(filename: filename))
     }
@@ -172,114 +180,91 @@ class LevelStorage: JSONStorage {
     static let levelDirectoryName: String = "Levels"
     static let defaultFileStorageName = "TestDataFile1"
     static let preloadedLevelNames: [String] = []
+    let dungeonDirectory: URL
 
-    override func getDefaultDirectory() throws -> URL {
-        try super.getDefaultDirectory().appendingPathComponent(LevelStorage.levelDirectoryName)
+    init(dungeonDirectory: URL) {
+        self.dungeonDirectory = dungeonDirectory
     }
 
-    func loadLevel(name: String) -> Level? {
-        try? loadAndDecode(filename: name)
+    override func getDefaultDirectory() -> URL {
+        dungeonDirectory.appendingPathComponent(LevelStorage.levelDirectoryName)
+    }
+
+    func loadLevel(_ dataStringConvertible: DataStringConvertible) -> PersistableLevel? {
+        try? loadAndDecode(filename: dataStringConvertible.dataString)
+    }
+
+    func loadLevel(_ dataStringConvertible: DataStringConvertible) -> Level? {
+        guard let persistableLevel: PersistableLevel = loadLevel(dataStringConvertible) else {
+            return nil
+        }
+        return Level.fromPersistable(persistableLevel)
     }
 
     func saveLevel(_ level: Level) throws {
-        try encodeAndSave(object: level, filename: level.name)
-    }
-
-    func loadSavedLevels(fileName: String = LevelStorage.defaultFileStorageName) -> [Level] {
-        let preloadedLevels = getPreloadedLevels()
-        guard let gameStorage: GameStorage = try? loadAndDecode(filename: fileName) else {
-            globalLogger.info("Cannot find saved levels")
-            return getPreloadedLevels()
-        }
-
-        var levels = gameStorage.levels
-        levels.append(contentsOf: preloadedLevels)
-        return levels
-    }
-
-    func getPreloadedLevels() -> [Level] {
-        []
-    }
-
-    func saveAllUserCreatedLevels(filename: String, levels: [Level]) throws {
-        let levelsWithoutPreLoaded = levels.filter({ !LevelStorage.preloadedLevelNames.contains($0.name) })
-        try encodeAndSave(
-            object: GameStorage(levels: levelsWithoutPreLoaded), filename: filename
-        )
+        try encodeAndSave(object: level.toPersistable(), filename: level.id.dataString)
     }
 }
 
-class MetaLevelStorage: JSONStorage {
-    static let metaLevelDirectoryName: String = "MetaLevels"
+class DungeonStorage: JSONStorage {
+    static let dungeonDirectoryName: String = "Dungeons"
 
     override func getDefaultDirectory() throws -> URL {
-        try super.getDefaultDirectory().appendingPathComponent(MetaLevelStorage.metaLevelDirectoryName)
+        try super.getDefaultDirectory().appendingPathComponent(DungeonStorage.dungeonDirectoryName)
     }
 
-    func loadMetaLevel(name: String) throws -> PersistableMetaLevel {
+    func existsDungeon(name: String) -> Bool {
+        do {
+            return try exists(filename: name)
+        } catch {
+            fatalError("\(error)")
+        }
+    }
+
+    func deleteDungeon(name: String) throws {
+        try delete(filename: name)
+        let levelDirectory = try getURL(
+            directoryName: name,
+            createIfNotExists: false
+        )
+        try delete(file: levelDirectory)
+    }
+
+    func loadDungeon(name: String) throws -> PersistableDungeon {
         try loadAndDecode(filename: name)
     }
 
-    func loadMetaLevel(name: String) -> MetaLevel? {
-        guard let persistableMetaLevel: PersistableMetaLevel = try? loadAndDecode(filename: name) else {
+    func loadDungeon(name: String) -> Dungeon? {
+        guard let persistableDungeon: PersistableDungeon = try? loadAndDecode(filename: name) else {
             return nil
         }
 
-        return MetaLevel.fromPersistable(persistableMetaLevel)
+        return Dungeon.fromPersistable(persistableDungeon)
     }
 
-    func renameMetaLevel(from oldName: String, to newName: String) throws {
-        let oldMetaLevelURL = try getURL(filename: oldName)
-        let newMetaLevelURL = try getURL(filename: newName)
-        let oldChunkDirectory = try getURL(
+    func renameDungeon(from oldName: String, to newName: String) throws {
+        let oldDungeonURL = try getURL(filename: oldName)
+        let newDungeonURL = try getURL(filename: newName)
+        let oldLevelDirectory = try getURL(
             directoryName: oldName,
             createIfNotExists: false
         )
-        let newChunkDirectory = try getURL(
+        let newLevelDirectory = try getURL(
             directoryName: newName,
             createIfNotExists: false
         )
-        try rename(source: oldMetaLevelURL, to: newMetaLevelURL)
-        try rename(source: oldChunkDirectory, to: newChunkDirectory)
+        try rename(source: oldDungeonURL, to: newDungeonURL)
+        try rename(source: oldLevelDirectory, to: newLevelDirectory)
     }
 
-    func saveMetaLevel(_ metaLevel: MetaLevel) throws {
-        try encodeAndSave(object: metaLevel.toPersistable(), filename: metaLevel.name)
+    func saveDungeon(_ dungeon: Dungeon) throws {
+        try encodeAndSave(object: dungeon.toPersistable(), filename: dungeon.name)
     }
 
-    func getChunkStorage(for metaLevelName: String) throws -> ChunkStorage {
-        try ChunkStorage(metaLevelDirectory: getDefaultDirectory().appendingPathComponent(metaLevelName))
+    func getLevelStorage(for dungeonName: String) throws -> LevelStorage {
+        try LevelStorage(dungeonDirectory: getDefaultDirectory().appendingPathComponent(dungeonName))
     }
 
-}
-
-class ChunkStorage: JSONStorage {
-    static let chunkStorageDirectoryName: String = "Chunks"
-    var metaLevelDirectory: URL
-
-    init(metaLevelDirectory: URL) {
-        self.metaLevelDirectory = metaLevelDirectory
-    }
-
-    override func getDefaultDirectory() throws -> URL {
-        metaLevelDirectory.appendingPathComponent(ChunkStorage.chunkStorageDirectoryName)
-    }
-
-    func loadChunk(identifier: String) -> PersistableChunkNode? {
-        try? loadAndDecode(filename: identifier)
-    }
-
-    func loadChunk(identifier: String) -> ChunkNode? {
-        guard let persistableChunk: PersistableChunkNode = loadChunk(identifier: identifier) else {
-            return nil
-        }
-
-        return ChunkNode.fromPersistable(persistableChunk)
-    }
-
-    func saveChunk(_ chunk: ChunkNode) throws {
-        try encodeAndSave(object: chunk.toPersistable(), filename: chunk.identifier.dataString)
-    }
 }
 
 class AchievementStorage: JSONStorage {

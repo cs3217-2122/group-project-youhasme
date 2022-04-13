@@ -5,57 +5,62 @@
 
 import Foundation
 
-enum PlayableLevel {
-    case level(Level)
-    case levelLoadable(Loadable)
+enum DesignableDungeon {
+    case dungeonLoadable(Loadable)
+    case newDungeon(name: String, dimensions: Rectangle)
 }
 
-extension PlayableLevel {
-    func getLevel() -> Level {
+extension DesignableDungeon: Equatable {}
+
+extension DesignableDungeon {
+    func getDungeon() -> Dungeon {
         switch self {
-        case .level(let level):
-            return level
-        case .levelLoadable(let loadable):
-            let levelStorage = LevelStorage()
-            guard let level: Level = levelStorage.loadLevel(name: loadable.name) else {
+        case .dungeonLoadable(let loadable):
+            let dungeonStorage = DungeonStorage()
+            guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: loadable.name) else {
                 fatalError("should not be nil")
             }
-            return level
+            return dungeon
+        case .newDungeon(let name, let rectangle):
+            return Dungeon(
+                isNewDungeon: true,
+                name: name,
+                dimensions: rectangle,
+                levelDimensions: Dungeon.defaultLevelDimensions,
+                entryLevelPosition: Dungeon.defaultEntryLevelPosition,
+                levelNameToPositionMap: [:]
+            )
         }
     }
 }
 
-extension PlayableLevel: Equatable {}
-
-enum PlayableMetaLevel {
-    case metaLevel(MetaLevel)
-    case metaLevelLoadable(Loadable)
+enum PlayableDungeon {
+    case dungeon(Dungeon)
+    case dungeonLoadable(Loadable)
 }
 
-extension PlayableMetaLevel: Equatable {}
+extension PlayableDungeon: Equatable {}
 
-extension PlayableMetaLevel {
-    func getMetaLevel() -> MetaLevel {
+extension PlayableDungeon {
+    func getDungeon() -> Dungeon {
         switch self {
-        case .metaLevel(let metaLevel):
-            return metaLevel
-        case .metaLevelLoadable(let loadable):
-            let metaLevelStorage = MetaLevelStorage()
-            guard let metaLevel: MetaLevel = metaLevelStorage.loadMetaLevel(name: loadable.name) else {
+        case .dungeon(let dungeon):
+            return dungeon
+        case .dungeonLoadable(let loadable):
+            let dungeonStorage = DungeonStorage()
+            guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: loadable.name) else {
                 fatalError("should not be nil")
             }
-            return metaLevel
+            return dungeon
         }
     }
 }
 
 enum ScreenState {
     case selecting
-    case selectingMeta
-    case playing(playableLevel: PlayableLevel)
-    case playingMeta(playableMetaLevel: PlayableMetaLevel)
-    case designing(playableLevel: PlayableLevel? = nil)
-    case designingMeta(metaLevelLoadable: Loadable? = nil)
+    case playing(playableDungeon: PlayableDungeon)
+    case choosingDimensions
+    case designing(designableDungeon: DesignableDungeon?)
     case mainmenu
     case achievements
 }
@@ -78,6 +83,7 @@ class GameState: ObservableObject {
         }
     }
     @Published var stateStack: [ScreenState] = []
+
     init() {
         stateStack.append(.mainmenu)
     }
@@ -85,56 +91,50 @@ class GameState: ObservableObject {
 
 // MARK: View model factories
 extension GameState {
-    func getLevelPlayViewModel() -> LevelDesignerViewModel {
-        guard case let .playing(playableLevel: playableLevel) = state else {
+    func getDimensionSelectViewModel() -> DimensionSelectViewModel {
+        DimensionSelectViewModel()
+    }
+
+    func getDesignerViewModel() -> DesignerViewModel {
+        let achievementsViewModel = getAchievementsViewModel()
+        guard case let .designing(designableDungeon: designableDungeon) = state,
+              let designableDungeon = designableDungeon else {
+            return DesignerViewModel(achievementsViewModel: achievementsViewModel)
+        }
+        return DesignerViewModel(
+            designableDungeon: designableDungeon,
+            achievementsViewModel: achievementsViewModel
+        )
+    }
+
+    func getPlayViewModel() -> PlayViewModel {
+        let achievementsViewModel = getAchievementsViewModel()
+        guard case let .playing(playableDungeon: playableDungeon) = state else {
             fatalError("Unexpected state")
         }
 
-        let viewModel = LevelDesignerViewModel(playableLevel: playableLevel)
-        // TODO: Move this elsewhere; bad to place it here
-        // Even better: Make a specialized LevelPlayViewModel instead
-        viewModel.currLevelLayer = RuleEngine().applyRules(to: viewModel.currLevelLayer)
-        return viewModel
+        return PlayViewModel(
+            playableDungeon: playableDungeon,
+            achievementsViewModel: achievementsViewModel
+        )
     }
 
-    func getLevelDesignerViewModel() -> LevelDesignerViewModel {
-        guard case let .designing(playableLevel: playableLevel) = state,
-              let playableLevel = playableLevel else {
-                  return LevelDesignerViewModel()
-              }
-
-        return LevelDesignerViewModel(playableLevel: playableLevel)
-    }
-
-    func getMetaLevelDesignerViewModel() -> MetaLevelDesignerViewModel {
-        guard case let .designingMeta(metaLevelLoadable: metaLevelLoadable) = state,
-            let metaLevelLoadable = metaLevelLoadable else {
-            return MetaLevelDesignerViewModel()
+    func getSelectViewModel() -> DungeonSelectViewModel {
+        guard state == .selecting else {
+            fatalError("unexpected state")
         }
-        print("metalevelloadable: \(metaLevelLoadable.name) \(metaLevelLoadable.url)")
-        return MetaLevelDesignerViewModel(metaLevelLoadable: metaLevelLoadable)
-    }
-
-    func getMetaLevelPlayViewModel() -> MetaLevelPlayViewModel {
-        guard case let .playingMeta(playableMetaLevel: playableMetaLevel) = state else {
-            fatalError("Unexpected state")
-        }
-
-        return MetaLevelPlayViewModel(playableMetaLevel: playableMetaLevel)
-    }
-
-    func getMetaLevelSelectViewModel() -> MetaLevelSelectViewModel {
-        MetaLevelSelectViewModel()
+        return DungeonSelectViewModel()
     }
 
     func getAchievementsViewModel() -> AchievementsViewModel {
-        var levelId = ""
-        if case let .playing(playableLevel: playableLevel) = state {
-            levelId = playableLevel.getLevel().id
-        } else if case let .designing(playableLevel: playableLevel) = state {
-            levelId = playableLevel?.getLevel().id ?? ""
+        var dungeonId = ""
+        if case let .playing(playableDungeon: playableDungeon) = state {
+            dungeonId = playableDungeon.getDungeon().id
+        } else if case let .designing(designableDungeon: designableDungeon) = state,
+                  let designableDungeon = designableDungeon {
+            dungeonId = designableDungeon.getDungeon().id
         }
 
-        return AchievementsViewModel(levelId: levelId)
+        return AchievementsViewModel(dungeonId: dungeonId)
     }
 }
