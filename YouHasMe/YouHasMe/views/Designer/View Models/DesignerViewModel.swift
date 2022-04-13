@@ -69,7 +69,7 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
                      gameNotificationsViewModel: GameNotificationsViewModel) {
         self.init(dungeon: designableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel,
                   gameNotificationsViewModel: gameNotificationsViewModel)
-        if case .newDungeonDimensions = designableDungeon {
+        if case .newDungeon = designableDungeon {
             isExistingLevel = false
         }
     }
