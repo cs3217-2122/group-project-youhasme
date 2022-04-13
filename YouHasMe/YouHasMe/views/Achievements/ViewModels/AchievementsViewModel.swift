@@ -24,15 +24,8 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     }
 
     init(dungeonId: String = "") {
-        let achievements: [Achievement] = storage.loadAllAchievements()
-        for achievement in achievements {
-            if achievement.isUnlocked {
-                unlockedAchievements.append(achievement)
-            } else {
-                lockedAchievements.append(achievement)
-            }
-        }
         self.dungeonId = dungeonId
+        setAchievementsData()
         resetLevelStats()
     }
 
@@ -89,7 +82,7 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
         }
     }
 
-    func updateData() {
+    func setAchievementsData() {
         let achievements: [Achievement] = storage.loadAllAchievements()
         lockedAchievements = []
         unlockedAchievements = []
