@@ -87,7 +87,7 @@ struct MultiplayerLevelView: View {
                                 let tileViewModel = viewModel.getTileViewModel(at: Point(x: col, y: row))
                                 EntityView(viewModel: tileViewModel)
                                     .frame(width: gridSize(proxy: proxy), height: gridSize(proxy: proxy))
-                                    .border(.pink)
+                                    .border(.cyan)
                             }
                         }
                     }

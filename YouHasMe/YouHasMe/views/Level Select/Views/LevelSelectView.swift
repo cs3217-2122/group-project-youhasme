@@ -18,7 +18,17 @@ struct LevelSelectView: View {
             }) {
                 Text("Create New Level")
             }.padding()
+            
             Spacer()
+            
+            TextField("Join a Room: Enter Code", text: $code)
+                .onSubmit {
+                    levelDesignerViewModel.joinRoom(code: code)
+                    gameState.state = .selectingOnlineLevel
+                }.padding()
+            
+            Spacer()
+            
             List {
                 Section(header: Text("Select an existing level")) {
                     ForEach(levelDesignerViewModel.levelLoadables) { levelLoadable in
@@ -33,11 +43,7 @@ struct LevelSelectView: View {
                 }
             }
             
-            TextField("Code", text: $code)
-                .onSubmit {
-                    levelDesignerViewModel.joinRoom(code: code)
-                    gameState.state = .selectingOnlineLevel
-                }
+            
         }
     }
 }

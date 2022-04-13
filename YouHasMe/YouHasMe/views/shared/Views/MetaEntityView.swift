@@ -13,7 +13,7 @@ struct MetaEntityView: View {
 
     var body: some View {
         CellView(backupDisplayColor: .black, viewModel: viewModel)
-            .border(.pink)
+            .border(.cyan)
             .onTapGesture {
                 switch gameState.state {
                 case .designingMeta:

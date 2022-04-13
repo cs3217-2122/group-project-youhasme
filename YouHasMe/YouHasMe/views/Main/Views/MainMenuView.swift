@@ -18,31 +18,31 @@ struct MainMenuView: View {
                 .font(titleFont)
                 .padding()
             Group {
-                Button(action: {
-                    gameState.state = .selectingMeta
-                }) {
-                    Text("Select A Meta Level")
-                }.padding()
+//                Button(action: {
+//                    gameState.state = .selectingMeta
+//                }) {
+//                    Text("Select A Meta Level")
+//                }.padding()
                 Button(action: {
                     gameState.state = .selecting
                 }) {
                     Text("Select A Level")
                 }.padding()
-                Button(action: {
-                    gameState.state = .designingMeta()
-                }) {
-                    Text("Design A Meta Level")
-                }.padding()
+//                Button(action: {
+//                    gameState.state = .designingMeta()
+//                }) {
+//                    Text("Design A Meta Level")
+//                }.padding()
                 Button(action: {
                     gameState.state = .designing()
                 }) {
                     Text("Design A Level")
                 }.padding()
-                Button(action: {
-                    gameState.state = .roomselection
-                }) {
-                    Text("Join A Room")
-                }.padding()
+//                Button(action: {
+//                    gameState.state = .roomselection
+//                }) {
+//                    Text("Join A Room")
+//                }.padding()
             }.font(transitionButtonFont)
         }.padding()
     }

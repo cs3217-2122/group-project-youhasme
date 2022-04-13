@@ -11,7 +11,7 @@ struct CellView: View {
     @ObservedObject var viewModel: CellViewModel
     var body: some View {
         if let image = viewModel.image {
-            image.interpolation(.none).resizable().scaledToFit().background(Color.gray)
+            image.interpolation(.none).resizable().scaledToFit().background(Color.black)
         } else {
             backupDisplay
         }
@@ -56,7 +56,7 @@ class CellViewModel: ObservableObject {
 struct EntityView: View {
     var viewModel: EntityViewModel
     var body: some View {
-        CellView(backupDisplayColor: .gray, viewModel: viewModel)
+        CellView(backupDisplayColor: .black, viewModel: viewModel)
     }
 }
 

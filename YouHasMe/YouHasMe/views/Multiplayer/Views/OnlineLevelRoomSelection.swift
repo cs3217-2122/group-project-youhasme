@@ -14,18 +14,23 @@ struct OnlineLevelRoomSelection: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Your rooms")) {
-                    ForEach(viewModel.rooms, id: \.self.id) { room in
-                        Button(action: {
-                            gameState.state = .multiplayerLevel(roomId: room.id!)
-                        }) {
-                            HStack{
-                                Text(room.persistedLevel.name)
-                                Text(room.joinCode)
+                if viewModel.rooms.count == 0 {
+                    ProgressView()
+                } else {
+                    Section(header: Text("Your rooms")) {
+                        ForEach(viewModel.rooms, id: \.self.id) { room in
+                            Button(action: {
+                                gameState.state = .multiplayerLevel(roomId: room.id!)
+                            }) {
+                                HStack{
+                                    Text(room.persistedLevel.name)
+                                    Text(room.joinCode)
+                                }
                             }
                         }
                     }
                 }
+                
             }
         }
 //        }.onAppear(perform: {
