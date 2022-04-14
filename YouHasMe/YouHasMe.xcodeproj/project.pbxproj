@@ -12,6 +12,13 @@
 		1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8C27E7254000321BEB /* MainMenuView.swift */; };
 		1E96EB8F27E7255200321BEB /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8E27E7255200321BEB /* GameState.swift */; };
 		1E96EB9127E725DF00321BEB /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB9027E725DF00321BEB /* GameView.swift */; };
+		405467F12800479500C577EF /* GameNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F02800479500C577EF /* GameNotification.swift */; };
+		405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F2280053DB00C577EF /* GameNotificationPublisher.swift */; };
+		405467F52800560200C577EF /* GameNotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F42800560200C577EF /* GameNotificationsViewModel.swift */; };
+		405467F72800562800C577EF /* GameNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F62800562800C577EF /* GameNotificationView.swift */; };
+		405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467F828006DC100C577EF /* GameNotificationsView.swift */; };
+		405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FA280074A400C577EF /* GameNotificationViewUtil.swift */; };
+		405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */; };
 		40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86A527E6E71F00F42C42 /* GameStateManager.swift */; };
 		40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */; };
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
@@ -36,6 +43,7 @@
 		40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519827FAD875008CBCE0 /* PersistableAchievement.swift */; };
 		40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */; };
 		40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */; };
+		40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -208,6 +216,13 @@
 		1E96EB8C27E7254000321BEB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		1E96EB8E27E7255200321BEB /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		1E96EB9027E725DF00321BEB /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		405467F02800479500C577EF /* GameNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotification.swift; sourceTree = "<group>"; };
+		405467F2280053DB00C577EF /* GameNotificationPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublisher.swift; sourceTree = "<group>"; };
+		405467F42800560200C577EF /* GameNotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsViewModel.swift; sourceTree = "<group>"; };
+		405467F62800562800C577EF /* GameNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationView.swift; sourceTree = "<group>"; };
+		405467F828006DC100C577EF /* GameNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationsView.swift; sourceTree = "<group>"; };
+		405467FA280074A400C577EF /* GameNotificationViewUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationViewUtil.swift; sourceTree = "<group>"; };
+		405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameNotificationPublishingHelper.swift; sourceTree = "<group>"; };
 		40AD86A527E6E71F00F42C42 /* GameStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManager.swift; sourceTree = "<group>"; };
 		40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStateManagerTests.swift; sourceTree = "<group>"; };
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
@@ -232,6 +247,7 @@
 		40E2519827FAD875008CBCE0 /* PersistableAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAchievement.swift; sourceTree = "<group>"; };
 		40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableGameStatistic.swift; sourceTree = "<group>"; };
 		40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAbstractGameEvent.swift; sourceTree = "<group>"; };
+		40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedAchievementsUtil.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -411,6 +427,7 @@
 		1E6B90C127E5B2A300161E63 /* views */ = {
 			isa = PBXGroup;
 			children = (
+				405467EF2800478900C577EF /* GameNotifications */,
 				40E2517427F725F9008CBCE0 /* Achievements */,
 				E56752FA27EEA82B0001305D /* Game */,
 				E56752F827EEA8110001305D /* Level Select */,
@@ -424,10 +441,78 @@
 			path = views;
 			sourceTree = "<group>";
 		};
+		405467EF2800478900C577EF /* GameNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				405467FF28008D8600C577EF /* Views */,
+				405467FE28008D7000C577EF /* ViewModels */,
+			);
+			path = GameNotifications;
+			sourceTree = "<group>";
+		};
+		405467FE28008D7000C577EF /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				405467F42800560200C577EF /* GameNotificationsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		405467FF28008D8600C577EF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				405467F828006DC100C577EF /* GameNotificationsView.swift */,
+				405467F62800562800C577EF /* GameNotificationView.swift */,
+				405467FA280074A400C577EF /* GameNotificationViewUtil.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4054680028008DC800C577EF /* GameNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				405467F02800479500C577EF /* GameNotification.swift */,
+				405467F2280053DB00C577EF /* GameNotificationPublisher.swift */,
+				405467FC28008D3600C577EF /* GameNotificationPublishingHelper.swift */,
+			);
+			path = GameNotifications;
+			sourceTree = "<group>";
+		};
+		405468012801380200C577EF /* GameEvent */ = {
+			isa = PBXGroup;
+			children = (
+				405468022801381D00C577EF /* Decorators */,
+				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
+				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
+				40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */,
+			);
+			path = GameEvent;
+			sourceTree = "<group>";
+		};
+		405468022801381D00C577EF /* Decorators */ = {
+			isa = PBXGroup;
+			children = (
+				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
+				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
+				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
+			);
+			path = Decorators;
+			sourceTree = "<group>";
+		};
+		405468032801394800C577EF /* UnlockConditions */ = {
+			isa = PBXGroup;
+			children = (
+				40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */,
+				40E2516927F43C56008CBCE0 /* UnlockCondition.swift */,
+			);
+			path = UnlockConditions;
+			sourceTree = "<group>";
+		};
 		40AD869127E606F300F42C42 /* storage */ = {
 			isa = PBXGroup;
 			children = (
 				E573E95B27EA2797000D10E4 /* Storage.swift */,
+				40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */,
 			);
 			path = storage;
 			sourceTree = "<group>";
@@ -435,16 +520,10 @@
 		40E2516227F427C0008CBCE0 /* Achievements */ = {
 			isa = PBXGroup;
 			children = (
+				405468032801394800C577EF /* UnlockConditions */,
+				405468012801380200C577EF /* GameEvent */,
 				40E2516D27F5D742008CBCE0 /* Statistics */,
 				40E2516527F43209008CBCE0 /* Achievement.swift */,
-				40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */,
-				40E2516927F43C56008CBCE0 /* UnlockCondition.swift */,
-				40E2517227F71FCE008CBCE0 /* GameEvent.swift */,
-				40E2517F27F8306E008CBCE0 /* GameEventPublisher.swift */,
-				40E2518327F8B324008CBCE0 /* AbstractGameEvent.swift */,
-				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
-				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
-				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
 			);
 			path = Achievements;
 			sourceTree = "<group>";
@@ -796,20 +875,21 @@
 		E57ACB3427DC588100F73B27 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				40E2516227F427C0008CBCE0 /* Achievements */,
-				E57A19A327F9F8DB00312C39 /* chunk */,
-				E573E96027EA32DC000D10E4 /* persistable */,
-				E5563C3A27E8B551007D2E86 /* helpers */,
-				B07AA62627E658F200918E71 /* GameEngine */,
-				E5BECBF027E5E87A00E3952D /* entity */,
-				E5BECBE327E5BE0200E3952D /* rules */,
-				E5BECBDC27E59E0300E3952D /* extensions */,
+				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
 				E57ACB3727DC58B000F73B27 /* Dungeon.swift */,
+				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
 				E57ACB3B27DC58C700F73B27 /* Level.swift */,
 				E573E96727EA38E2000D10E4 /* LevelLayer.swift */,
 				E57B534C27FD35600071E623 /* Tile.swift */,
-				E5BECBE627E5E68200E3952D /* Behaviour.swift */,
-				B0562DD227F2FFD300F10324 /* GameStatus.swift */,
+				40E2516227F427C0008CBCE0 /* Achievements */,
+				E57A19A327F9F8DB00312C39 /* chunk */,
+				E5BECBF027E5E87A00E3952D /* entity */,
+				E5BECBDC27E59E0300E3952D /* extensions */,
+				B07AA62627E658F200918E71 /* GameEngine */,
+				4054680028008DC800C577EF /* GameNotifications */,
+				E5563C3A27E8B551007D2E86 /* helpers */,
+				E573E96027EA32DC000D10E4 /* persistable */,
+				E5BECBE327E5BE0200E3952D /* rules */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -1071,7 +1151,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --fix && swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1094,6 +1174,7 @@
 				E58ACBE227FDCAC00035E517 /* RHSEvaluableState.swift in Sources */,
 				B07AA62F27E658F200918E71 /* UpdateType.swift in Sources */,
 				E57B534127FD32E50071E623 /* PersistableEntity.swift in Sources */,
+				405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */,
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
@@ -1107,6 +1188,7 @@
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
+				40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */,
 				40E2519527FAD835008CBCE0 /* PersistableIntegerUnlockCondition.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */,
@@ -1143,6 +1225,7 @@
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
 				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				405467F12800479500C577EF /* GameNotification.swift in Sources */,
 				E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */,
 				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
 				E578594627F3EA7C009A79F9 /* DungeonManipulableViewModel.swift in Sources */,
@@ -1199,6 +1282,7 @@
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
+				405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
@@ -1220,6 +1304,7 @@
 				E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */,
 				E5563C4827E8E5D5007D2E86 /* Vector.swift in Sources */,
 				E57A19AE27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift in Sources */,
+				405467F52800560200C577EF /* GameNotificationsViewModel.swift in Sources */,
 				E56AC06E2800756400FDD4CD /* DungeonNameButtonViewModel.swift in Sources */,
 				E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
@@ -1231,6 +1316,7 @@
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
 				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,
@@ -1242,6 +1328,7 @@
 				E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */,
 				E57453B327F555B3003DAD5C /* ConditionBuilder.swift in Sources */,
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
+				405467F72800562800C577EF /* GameNotificationView.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
 				40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */,
 				40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */,
@@ -1254,6 +1341,7 @@
 				E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
 				E57B535527FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift in Sources */,
+				405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */,
 				E57B535927FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift in Sources */,
 				E5D0A22D27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift in Sources */,
 			);

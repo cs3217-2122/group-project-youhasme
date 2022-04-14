@@ -77,6 +77,8 @@ struct PlayView: View {
                     }
                 }
             }
-        }
+        }.overlay(alignment: .top, content: {
+            GameNotificationsView(gameNotificationsViewModel: viewModel.notificationsViewModel)
+        })
     }
 }

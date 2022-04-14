@@ -41,7 +41,7 @@ class GameStatistic: Hashable {
             print(event.type)
         }
 
-        if !event.containsGameEvent(event: self.gameEvent) {
+        if !event.containsGameEvent(otherGameEvent: self.gameEvent) {
             return
         }
         increase()

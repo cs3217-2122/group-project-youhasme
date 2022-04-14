@@ -1,5 +1,5 @@
 //
-//  BabaGenerator.swift
+//  NounIsPropertyRuleGenerator.swift
 //  YouHasMe
 //
 //  Created by Jia Cheng Sun on 6/4/22.

@@ -97,25 +97,30 @@ extension GameState {
 
     func getDesignerViewModel() -> DesignerViewModel {
         let achievementsViewModel = getAchievementsViewModel()
+        let gameNotificationsViewModel = getGameNotificationsViewModel()
         guard case let .designing(designableDungeon: designableDungeon) = state,
               let designableDungeon = designableDungeon else {
-            return DesignerViewModel(achievementsViewModel: achievementsViewModel)
+            return DesignerViewModel(achievementsViewModel: achievementsViewModel,
+                                     gameNotificationsViewModel: gameNotificationsViewModel)
         }
         return DesignerViewModel(
             designableDungeon: designableDungeon,
-            achievementsViewModel: achievementsViewModel
+            achievementsViewModel: achievementsViewModel,
+            gameNotificationsViewModel: gameNotificationsViewModel
         )
     }
 
     func getPlayViewModel() -> PlayViewModel {
         let achievementsViewModel = getAchievementsViewModel()
+        let gameNotificationsViewModel = getGameNotificationsViewModel()
         guard case let .playing(playableDungeon: playableDungeon) = state else {
             fatalError("Unexpected state")
         }
 
         return PlayViewModel(
             playableDungeon: playableDungeon,
-            achievementsViewModel: achievementsViewModel
+            achievementsViewModel: achievementsViewModel,
+            gameNotificationsViewModel: gameNotificationsViewModel
         )
     }
 
@@ -136,5 +141,9 @@ extension GameState {
         }
 
         return AchievementsViewModel(dungeonId: dungeonId)
+    }
+
+    func getGameNotificationsViewModel() -> GameNotificationsViewModel {
+        GameNotificationsViewModel()
     }
 }

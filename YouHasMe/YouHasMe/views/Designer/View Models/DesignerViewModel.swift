@@ -38,6 +38,7 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     private var toolbarViewModel: ToolbarViewModel?
     private var achievementsViewModel: AchievementsViewModel
+    private(set) var gameNotificationsViewModel: GameNotificationsViewModel
 
     @Published var state: DesignerState = .normal
 
@@ -57,21 +58,27 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     private let gameEventSubject = PassthroughSubject<AbstractGameEvent, Never>()
 
-    convenience init(achievementsViewModel: AchievementsViewModel) {
-        self.init(dungeon: Dungeon(), achievementsViewModel: achievementsViewModel)
+    convenience init(achievementsViewModel: AchievementsViewModel,
+                     gameNotificationsViewModel: GameNotificationsViewModel) {
+        self.init(dungeon: Dungeon(), achievementsViewModel: achievementsViewModel,
+                  gameNotificationsViewModel: gameNotificationsViewModel)
         isExistingLevel = false
     }
 
-    convenience init(designableDungeon: DesignableDungeon, achievementsViewModel: AchievementsViewModel) {
-        self.init(dungeon: designableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel)
+    convenience init(designableDungeon: DesignableDungeon, achievementsViewModel: AchievementsViewModel,
+                     gameNotificationsViewModel: GameNotificationsViewModel) {
+        self.init(dungeon: designableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel,
+                  gameNotificationsViewModel: gameNotificationsViewModel)
         if case .newDungeon = designableDungeon {
             isExistingLevel = false
         }
     }
 
-    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel) {
+    init(dungeon: Dungeon, achievementsViewModel: AchievementsViewModel,
+         gameNotificationsViewModel: GameNotificationsViewModel) {
         self.dungeon = dungeon
         self.achievementsViewModel = achievementsViewModel
+        self.gameNotificationsViewModel = gameNotificationsViewModel
         viewPosition = dungeon.entryWorldPosition
         setupBindings()
     }
@@ -101,6 +108,7 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }
         .store(in: &subscriptions)
         achievementsViewModel.setSubscriptionsFor(gameEventPublisher)
+        gameNotificationsViewModel.setSubscriptionsFor(achievementsViewModel.gameNotifPublisher)
     }
 }
 

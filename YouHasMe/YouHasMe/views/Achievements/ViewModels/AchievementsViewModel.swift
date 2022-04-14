@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class AchievementsViewModel: ObservableObject {
+class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     var lockedAchievements: [Achievement] = []
     var unlockedAchievements: [Achievement] = []
     var imageWidth: Float = 40
@@ -17,26 +17,20 @@ class AchievementsViewModel: ObservableObject {
     var levelId: String?
     var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
+    var gameNotificationPublishingHelper = GameNotificationPublishingHelper()
 
     var levelStatistics: [GameStatistic] {
         lockedAchievements.flatMap { $0.getLevelStatistics() }
     }
 
     init(dungeonId: String = "") {
-        let achievements: [Achievement] = storage.loadAllAchievements()
-        for achievement in achievements {
-            if achievement.isUnlocked {
-                unlockedAchievements.append(achievement)
-            } else {
-                lockedAchievements.append(achievement)
-            }
-        }
         self.dungeonId = dungeonId
+        setAchievementsData()
         resetLevelStats()
     }
 
     func selectLevel(level: Level) {
-        levelId = level.id.dataString
+        levelId = level.name
         resetLevelStats()
     }
 
@@ -76,6 +70,7 @@ class AchievementsViewModel: ObservableObject {
         if updatedAchievement.isUnlocked {
             lockedAchievements.removeByIdentity(updatedAchievement)
             unlockedAchievements.append(updatedAchievement)
+            sendGameNotification(GameNotificationViewUtil.createAchievementNotification(updatedAchievement))
         }
     }
 
@@ -87,7 +82,7 @@ class AchievementsViewModel: ObservableObject {
         }
     }
 
-    func updateData() {
+    func setAchievementsData() {
         let achievements: [Achievement] = storage.loadAllAchievements()
         lockedAchievements = []
         unlockedAchievements = []

@@ -18,7 +18,7 @@ class GameStateManagerTests: XCTestCase {
         levelLayer.add(entity: Entity(entityType: EntityTypes.Verbs.vIs), x: 1, y: 0)
         levelLayer.add(entity: Entity(entityType: EntityTypes.Properties.you), x: 2, y: 0)
         levelLayer.add(entity: Entity(entityType: EntityTypes.NounInstances.baba), x: 2, y: 3)
-        levelLayer = RuleEngine().applyRules(to: levelLayer)
+        levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         gameEngine = GameEngine(levelLayer: levelLayer)
         try super.setUpWithError()
     }
