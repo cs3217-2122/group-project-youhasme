@@ -1,5 +1,5 @@
 //
-//  GameNotificationPublishingDelegate.swift
+//  GameNotificationPublishingHelper.swift
 //  YouHasMe
 //
 //  Created by Neo Jing Xuan on 8/4/22.

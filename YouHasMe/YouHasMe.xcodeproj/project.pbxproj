@@ -43,6 +43,7 @@
 		40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519827FAD875008CBCE0 /* PersistableAchievement.swift */; };
 		40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */; };
 		40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */; };
+		40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -246,6 +247,7 @@
 		40E2519827FAD875008CBCE0 /* PersistableAchievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAchievement.swift; sourceTree = "<group>"; };
 		40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableGameStatistic.swift; sourceTree = "<group>"; };
 		40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAbstractGameEvent.swift; sourceTree = "<group>"; };
+		40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedAchievementsUtil.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 			isa = PBXGroup;
 			children = (
 				E573E95B27EA2797000D10E4 /* Storage.swift */,
+				40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */,
 			);
 			path = storage;
 			sourceTree = "<group>";
@@ -1185,6 +1188,7 @@
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
+				40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */,
 				40E2519527FAD835008CBCE0 /* PersistableIntegerUnlockCondition.swift in Sources */,
 				E57ACB3C27DC58C700F73B27 /* Level.swift in Sources */,
 				E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */,
