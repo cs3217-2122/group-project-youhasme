@@ -14,7 +14,7 @@ struct WinMechanic: GameMechanic {
     //  - update: What triggered the update (e.g. user moves right)
     //  - state: Current game state
     // Returns new state containing updates triggered by mechanic
-    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState {
+    func apply(update: Action, state: LevelLayerState) -> LevelLayerState {
         let youEntities = state.entitiesWith(behaviour: .property(.you))
         let winEntities = state.entitiesWith(behaviour: .property(.win))
 

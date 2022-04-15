@@ -24,7 +24,7 @@ class GameStateManagerTests: XCTestCase {
     }
 
     func testSingleUndo() throws {
-        gameEngine.apply(action: .moveDown)
+        gameEngine.apply(action: Action(actionType: .moveDown))
         print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
         gameEngine.undo()
@@ -34,11 +34,11 @@ class GameStateManagerTests: XCTestCase {
 
     func testMultipleUndo() throws {
         let state0 = levelLayer
-        gameEngine.apply(action: .moveUp)
+        gameEngine.apply(action: Action(actionType: .moveUp))
         let state1 = gameEngine.currentGame.levelLayer
-        gameEngine.apply(action: .moveRight)
+        gameEngine.apply(action: Action(actionType: .moveRight))
         let state2 = gameEngine.currentGame.levelLayer
-        gameEngine.apply(action: .moveDown)
+        gameEngine.apply(action: Action(actionType: .moveDown))
 
         gameEngine.undo()
         XCTAssertEqual(gameEngine.currentGame.levelLayer, state2)
@@ -51,12 +51,12 @@ class GameStateManagerTests: XCTestCase {
     }
 
     func testMultipleSameStateUndo() throws {
-        gameEngine.apply(action: .moveDown)
+        gameEngine.apply(action: Action(actionType: .moveDown))
         // test that if user doesn't move for a few ticks, undo still returns previous state
         // with changes, not just the same state
-        gameEngine.apply(action: .tick)
-        gameEngine.apply(action: .tick)
-        gameEngine.apply(action: .tick)
+        gameEngine.apply(action: Action(actionType: .tick))
+        gameEngine.apply(action: Action(actionType: .tick))
+        gameEngine.apply(action: Action(actionType: .tick))
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
         gameEngine.undo()
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 0)
@@ -65,7 +65,7 @@ class GameStateManagerTests: XCTestCase {
 
     func testUndoAtOldestLayer() throws {
         let oldestLayer = levelLayer
-        gameEngine.apply(action: .moveDown)
+        gameEngine.apply(action: Action(actionType: .moveDown))
         gameEngine.undo()
         gameEngine.undo()
         gameEngine.undo()

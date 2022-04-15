@@ -62,7 +62,7 @@ struct GameEngine: GameEventPublisher {
     }
 
     // Updates game state given action
-    mutating func apply(action: UpdateType) {
+    mutating func apply(action: Action) {
         status = .running
         // Repeatedly run simulation step until no more updates or infinite loop detected
         var previousStates = [currentGame]
@@ -80,12 +80,12 @@ struct GameEngine: GameEventPublisher {
                 return
             }
             previousStates.append(newState)
-            nextAction = .tick  // Apply .tick after first action
+            nextAction.actionType = .tick // Apply .tick after first action
         }
     }
 
     // Runs single step of simulation and returns new game state
-    private func step(game: Game, action: UpdateType) -> Game {
+    private func step(game: Game, action: Action) -> Game {
         var newGame = game
         let state = applyMechanics(action: action, levelLayer: game.levelLayer)  // Get updates
         newGame.levelLayer = resolveActions(in: state)  // Apply updates
@@ -94,7 +94,7 @@ struct GameEngine: GameEventPublisher {
     }
 
     // Applies mechanics to level layer and returns resulting state with entities and their actions
-    private func applyMechanics(action: UpdateType, levelLayer: LevelLayer) -> LevelLayerState {
+    private func applyMechanics(action: Action, levelLayer: LevelLayer) -> LevelLayerState {
         var curState = LevelLayerState(levelLayer: levelLayer)  // Initialise state from current level layer
         var oldState = curState
         // Apply all mechanics until there are no more changes to state (all mechanics agree on next set of actions)

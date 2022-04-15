@@ -60,6 +60,8 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("stop")
         case .push:
             return .string("push")
+        case .player(let num):
+            return .sfSymbol("\(num).square")
         default:
             break
         }

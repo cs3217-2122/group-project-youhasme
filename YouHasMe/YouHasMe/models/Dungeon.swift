@@ -49,7 +49,9 @@ class Dungeon {
     @Published var loadedLevels: [Point: Level] = [:]
     var totalWins: Int = 0
     private var subscriptions: Set<AnyCancellable> = []
-
+    
+    var numberOfPlayers: Int = 1
+    
     convenience init() {
         self.init(
             isNewDungeon: true,
@@ -87,10 +89,6 @@ class Dungeon {
                 fatalError(error.localizedDescription)
             }
         }
-    }
-
-    var numberOfPlayers: Int {
-        0 // TODO
     }
 
     func renameDungeon(to newName: String) {

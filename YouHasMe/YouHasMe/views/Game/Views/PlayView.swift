@@ -18,23 +18,23 @@ struct PlayView: View {
                     return
                 }
                 
-                var updateAction: UpdateType = .tick
+                var actionType : ActionType  = .tick
                 let horizontalAmount = value.translation.width
                 let verticalAmount = value.translation.height
                 if abs(horizontalAmount) > abs(verticalAmount) {
                     if horizontalAmount < 0 {
-                        updateAction = .moveLeft
+                        actionType = .moveLeft
                     } else {
-                        updateAction = .moveRight
+                        actionType = .moveRight
                     }
                 } else {
                     if verticalAmount < 0 {
-                        updateAction = .moveUp
+                        actionType = .moveUp
                     } else {
-                        updateAction = .moveDown
+                        actionType = .moveDown
                     }
                 }
-                viewModel.playerMove(updateAction: updateAction)
+                viewModel.playerMove(actionType: actionType)
             }
     }
     

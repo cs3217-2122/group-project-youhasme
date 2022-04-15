@@ -6,7 +6,21 @@
 //
 
 // Represents type of update to game state
-enum UpdateType {
+
+struct Action {
+    var playerNum: Int = 1
+    var actionType: ActionType
+    
+    func getMovement() -> (Int, Int) {
+        actionType.getMovement()
+    }
+    
+    func getMovementAsVector() -> Vector {
+        actionType.getMovementAsVector()
+    }
+}
+
+enum ActionType {
     case moveUp
     case moveDown
     case moveLeft

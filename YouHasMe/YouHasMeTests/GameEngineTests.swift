@@ -19,7 +19,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveDown)
+        gameEngine.apply(action: Action(actionType: .moveDown))
         // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
     }
@@ -41,7 +41,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveRight)
+        gameEngine.apply(action: Action(actionType: .moveRight))
         // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 4, y: 1).entities.count, 2)
     }
@@ -62,7 +62,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveRight)
+        gameEngine.apply(action: Action(actionType: .moveRight))
         XCTAssertEqual(gameEngine.currentGame.gameStatus, .win)
     }
 
@@ -86,7 +86,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveRight)
+        gameEngine.apply(action: Action(actionType: .moveRight))
         // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
@@ -108,7 +108,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveRight)
+        gameEngine.apply(action: Action(actionType: .moveRight))
         // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 3).entities.count, 1)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 3, y: 3).entities.count, 0)
@@ -129,7 +129,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveUp)
+        gameEngine.apply(action: Action(actionType: .moveUp))
         // print(gameEngine.currentGame.levelLayer)
         let typeAt22 = gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 2).entities[0].entityType
         XCTAssertEqual(typeAt22, EntityTypes.NounInstances.wall)
@@ -152,7 +152,7 @@ class GameEngineTests: XCTestCase {
         levelLayer = RuleEngine(ruleEngineDelegate: Dungeon()).applyRules(to: levelLayer)
         // print(levelLayer)
         var gameEngine = GameEngine(levelLayer: levelLayer)
-        gameEngine.apply(action: .moveUp)
+        gameEngine.apply(action: Action(actionType: .moveUp))
         // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.status, .infiniteLoop)
     }
