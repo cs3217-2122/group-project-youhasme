@@ -84,17 +84,27 @@ extension LevelLayer: CustomDebugStringConvertible {
 
 extension LevelLayer {
     func toPersistable() -> PersistableLevelLayer {
-        PersistableLevelLayer(
-            dimensions: dimensions,
-            tiles: tiles.map { $0.map { $0.toPersistable() } }
-        )
+        var tileMap: [Point: PersistableTile] = [:]
+        for x in 0..<tiles.count {
+            for y in 0..<tiles[0].count {
+                let point = Point(x: x, y: y)
+                tileMap[point] = tiles[x][y].toPersistable()
+            }
+        }
+        return PersistableLevelLayer(dimensions: dimensions, tileMap: tileMap)
     }
 
     static func fromPersistable(_ persistableLevelLayer: PersistableLevelLayer) -> LevelLayer {
-        LevelLayer(
-            dimensions: persistableLevelLayer.dimensions,
-            tiles: persistableLevelLayer.tiles.map { $0.map { Tile.fromPersistable($0) } }
-        )
+        var tiles = Array(
+            repeatingFactory:
+                Array(repeatingFactory: Tile(), count: persistableLevelLayer.dimensions.width),
+            count:persistableLevelLayer.dimensions.height)
+        
+        for (point, persistedTile) in persistableLevelLayer.tileMap {
+            tiles[point] = Tile.fromPersistable(persistedTile)
+        }
+    
+        return LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: tiles)
     }
 }
 

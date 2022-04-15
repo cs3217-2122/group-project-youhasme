@@ -21,12 +21,21 @@ struct DungeonSelectView: View {
             List {
                 Section(header: Text("Select an existing dungeon")) {
                     ForEach(viewModel.getAllDungeons(), id: \.self) { loadable in
-                        Button(action: {
-                            gameState.state = .designing(designableDungeon: .dungeonLoadable(loadable))
-                        }) {
-                            Text(loadable.name)
+                        HStack {
+                            Button(action: {
+                                gameState.state = .designing(designableDungeon: .dungeonLoadable(loadable))
+                            }) {
+                                Text(loadable.name)
+                            }
+                            Spacer()
+                            Button(action: {
+                                viewModel.upload(loadable: loadable)
+                            }) {
+                                Text("Upload")
+                            }
                         }
-                    }
+                        
+                    }.buttonStyle(BorderlessButtonStyle())
                 }
             }
         }
