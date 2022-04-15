@@ -30,7 +30,7 @@ class GameEventTests: XCTestCase {
     func testMultiSingleLayerEvents() {
         let moveEvent = GameEvent(type: .move)
         let multiLayerEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move),
-                                                  levelName: "Test")
+                                                  levelId: Point(x: 0, y: 0))
         XCTAssertTrue(multiLayerEvent.containsGameEvent(otherGameEvent: moveEvent))
         XCTAssertFalse(multiLayerEvent.isContainedBy(otherGameEvent: moveEvent))
         XCTAssertFalse(moveEvent.containsGameEvent(otherGameEvent: multiLayerEvent))
@@ -38,8 +38,8 @@ class GameEventTests: XCTestCase {
     }
 
     func testSameLevelDifferentTypeEvents() {
-        let winEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelName: "Test")
-        let moveEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelName: "Test")
+        let winEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .win), levelId: Point(x: 0, y: 0))
+        let moveEvent = LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelId: Point(x: 0, y: 0))
         XCTAssertFalse(winEvent.isContainedBy(otherGameEvent: moveEvent))
         XCTAssertFalse(moveEvent.isContainedBy(otherGameEvent: winEvent))
     }
@@ -47,12 +47,12 @@ class GameEventTests: XCTestCase {
     func testSameMultiMultiLayerEvents() {
         // testing different order of decorators
         let entityLevelMoveEvent = EntityEventDecorator(
-            wrappedEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelName: "Test"),
+            wrappedEvent: LevelEventDecorator(wrappedEvent: GameEvent(type: .move), levelId: Point(x: 0, y: 0)),
             entityType: EntityTypes.NounInstances.baba)
         let levelEntityMoveEvent = LevelEventDecorator(
             wrappedEvent: EntityEventDecorator(wrappedEvent: GameEvent(type: .move),
                                                entityType: EntityTypes.NounInstances.baba),
-            levelName: "Test")
+            levelId: Point(x: 0, y: 0))
         XCTAssertTrue(entityLevelMoveEvent.isContainedBy(otherGameEvent: levelEntityMoveEvent))
         XCTAssertTrue(entityLevelMoveEvent.containsGameEvent(otherGameEvent: levelEntityMoveEvent))
         XCTAssertTrue(levelEntityMoveEvent.isContainedBy(otherGameEvent: entityLevelMoveEvent))
@@ -67,12 +67,12 @@ class GameEventTests: XCTestCase {
     func testDungeonEvent() {
         // testing different order of decorators
         let entityDungeonMoveEvent = EntityEventDecorator(
-            wrappedEvent: DungeonEventDecorator(wrappedEvent: GameEvent(type: .move), dungeonName: "Test"),
+            wrappedEvent: DungeonEventDecorator(wrappedEvent: GameEvent(type: .move), dungeonId: "Dungeon1"),
             entityType: EntityTypes.NounInstances.baba)
         let dungeonEntityMoveEvent = DungeonEventDecorator(
             wrappedEvent: EntityEventDecorator(wrappedEvent: GameEvent(type: .move),
                                                entityType: EntityTypes.NounInstances.baba),
-            dungeonName: "Test")
+            dungeonId: "Dungeon1")
         XCTAssertTrue(entityDungeonMoveEvent.isContainedBy(otherGameEvent: dungeonEntityMoveEvent))
         XCTAssertTrue(entityDungeonMoveEvent.containsGameEvent(otherGameEvent: dungeonEntityMoveEvent))
         XCTAssertTrue(dungeonEntityMoveEvent.isContainedBy(otherGameEvent: entityDungeonMoveEvent))

@@ -66,7 +66,7 @@ class PersistableAbstractGameEvent: Codable {
 
     private func getDungeonDecoratedEvent(gameEvent: AbstractGameEvent) -> AbstractGameEvent {
         if let dungeonId = dungeonId {
-            return DungeonEventDecorator(wrappedEvent: gameEvent, dungeonName: dungeonId)
+            return DungeonEventDecorator(wrappedEvent: gameEvent, dungeonId: dungeonId)
         }
         return gameEvent
     }

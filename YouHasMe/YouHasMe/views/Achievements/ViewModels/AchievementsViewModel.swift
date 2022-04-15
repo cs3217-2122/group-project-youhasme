@@ -64,7 +64,7 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
         if let levelId = levelId {
             decoratedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelId: levelId)
         }
-        decoratedEvent = DungeonEventDecorator(wrappedEvent: gameEvent, dungeonName: dungeonId)
+        decoratedEvent = DungeonEventDecorator(wrappedEvent: gameEvent, dungeonId: dungeonId)
         return decoratedEvent
     }
 

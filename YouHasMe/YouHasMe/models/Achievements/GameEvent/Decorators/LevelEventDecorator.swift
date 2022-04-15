@@ -20,17 +20,17 @@ class LevelEventDecorator: GameEventBaseDecorator {
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
-        levelNameIsContainedBy(otherGameEvent: otherGameEvent)
+        levelIdIsContainedBy(otherGameEvent: otherGameEvent)
     }
 
-    func levelNameIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+    func levelIdIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
         if let levelEvent = otherGameEvent as? LevelEventDecorator {
             if hasSameLevel(levelEvent) {
                 return true
             }
         }
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
-            return levelNameIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+            return levelIdIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
         }
         return false
     }

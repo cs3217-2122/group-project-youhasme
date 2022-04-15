@@ -9,11 +9,11 @@ import Foundation
 
 class IntegerUnlockCondition: UnlockCondition {
     enum Comparison: Int, Codable {
-         case MORE_THAN = 0
-         case LESS_THAN = 1
-         case EQUAL_TO = 2
-         case MORE_THAN_OR_EQUAL_TO = 3
-         case LESS_THAN_OR_EQUAL_TO = 4
+         case moreThan = 0
+         case lessThan = 1
+         case equalTo = 2
+         case moreThanOrEqualTo = 3
+         case lessThanOrEqualTo = 4
     }
 
     var statistic: GameStatistic
@@ -28,15 +28,15 @@ class IntegerUnlockCondition: UnlockCondition {
 
     func isFulfilled() -> Bool {
         switch comparison {
-        case .MORE_THAN:
+        case .moreThan:
             return statistic.value > unlockValue
-        case .LESS_THAN:
+        case .lessThan:
             return statistic.value < unlockValue
-        case .EQUAL_TO:
+        case .equalTo:
             return statistic.value == unlockValue
-        case .MORE_THAN_OR_EQUAL_TO:
+        case .moreThanOrEqualTo:
             return statistic.value >= unlockValue
-        case .LESS_THAN_OR_EQUAL_TO:
+        case .lessThanOrEqualTo:
             return statistic.value <= unlockValue
         }
     }

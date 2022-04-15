@@ -10,8 +10,8 @@ import Foundation
 class DungeonEventDecorator: GameEventBaseDecorator {
     var dungeonId: String
 
-    init(wrappedEvent: AbstractGameEvent, dungeonName: String) {
-        self.dungeonId = dungeonName
+    init(wrappedEvent: AbstractGameEvent, dungeonId: String) {
+        self.dungeonId = dungeonId
         super.init(wrappedEvent: wrappedEvent)
     }
 
@@ -20,17 +20,17 @@ class DungeonEventDecorator: GameEventBaseDecorator {
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
-        dungeonNameIsContainedBy(otherGameEvent: otherGameEvent)
+        dungeonIdIsContainedBy(otherGameEvent: otherGameEvent)
     }
 
-    func dungeonNameIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
+    func dungeonIdIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
         if let dungeonEvent = otherGameEvent as? DungeonEventDecorator {
             if hasSameDungeon(dungeonEvent) {
                 return true
             }
         }
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
-            return dungeonNameIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+            return dungeonIdIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
         }
         return false
     }
