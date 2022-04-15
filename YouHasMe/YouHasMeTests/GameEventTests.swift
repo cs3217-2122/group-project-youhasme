@@ -63,4 +63,19 @@ class GameEventTests: XCTestCase {
         XCTAssertTrue(entityWrappedEvent.containsGameEvent(otherGameEvent: entityLevelMoveEvent))
         XCTAssertFalse(entityWrappedEvent.isContainedBy(otherGameEvent: entityLevelMoveEvent))
     }
+
+    func testDungeonEvent() {
+        // testing different order of decorators
+        let entityDungeonMoveEvent = EntityEventDecorator(
+            wrappedEvent: DungeonEventDecorator(wrappedEvent: GameEvent(type: .move), dungeonName: "Test"),
+            entityType: EntityTypes.NounInstances.baba)
+        let dungeonEntityMoveEvent = DungeonEventDecorator(
+            wrappedEvent: EntityEventDecorator(wrappedEvent: GameEvent(type: .move),
+                                               entityType: EntityTypes.NounInstances.baba),
+            dungeonName: "Test")
+        XCTAssertTrue(entityDungeonMoveEvent.isContainedBy(otherGameEvent: dungeonEntityMoveEvent))
+        XCTAssertTrue(entityDungeonMoveEvent.containsGameEvent(otherGameEvent: dungeonEntityMoveEvent))
+        XCTAssertTrue(dungeonEntityMoveEvent.isContainedBy(otherGameEvent: entityDungeonMoveEvent))
+        XCTAssertTrue(dungeonEntityMoveEvent.containsGameEvent(otherGameEvent: entityDungeonMoveEvent))
+    }
 }

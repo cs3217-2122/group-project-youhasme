@@ -14,7 +14,7 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     var imageWidth: Float = 40
     var imageHeight: Float = 40
     var dungeonId: String
-    var levelId: String?
+    var levelId: Point?
     var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
     var gameNotificationPublishingHelper = GameNotificationPublishingHelper()
@@ -30,7 +30,7 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
     }
 
     func selectLevel(level: Level) {
-        levelId = level.name
+        levelId = level.id
         resetLevelStats()
     }
 
@@ -47,18 +47,25 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
             guard let self = self else {
                 return
             }
-            var gameEvent = gameEvent
-            if let levelId = self.levelId {
-                gameEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelName: levelId)
-            }
+
+            let decoratedEvent = self.getDecoratedGameEvent(gameEvent: gameEvent)
 
             for achievement in self.lockedAchievements {
-                self.updateAchievement(achievement, gameEvent: gameEvent)
+                self.updateAchievement(achievement, gameEvent: decoratedEvent)
                 self.saveAchievement(achievement)
                 self.updateLockedUnlockedAchievements(updatedAchievement: achievement)
 
             }
         }.store(in: &subscriptions)
+    }
+
+    func getDecoratedGameEvent(gameEvent: AbstractGameEvent) -> AbstractGameEvent {
+        var decoratedEvent = gameEvent
+        if let levelId = levelId {
+            decoratedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelId: levelId)
+        }
+        decoratedEvent = DungeonEventDecorator(wrappedEvent: gameEvent, dungeonName: dungeonId)
+        return decoratedEvent
     }
 
     func updateAchievement(_ achievement: Achievement, gameEvent: AbstractGameEvent) {

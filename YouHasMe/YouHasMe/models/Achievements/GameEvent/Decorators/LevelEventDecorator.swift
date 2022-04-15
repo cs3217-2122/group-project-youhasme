@@ -8,15 +8,15 @@
 import Foundation
 
 class LevelEventDecorator: GameEventBaseDecorator {
-    var levelName: String
+    var levelId: Point
 
-    init(wrappedEvent: AbstractGameEvent, levelName: String) {
-        self.levelName = levelName
+    init(wrappedEvent: AbstractGameEvent, levelId: Point) {
+        self.levelId = levelId
         super.init(wrappedEvent: wrappedEvent)
     }
 
     func hasSameLevel(_ otherLevelEvent: LevelEventDecorator) -> Bool {
-        levelName == otherLevelEvent.levelName
+        levelId == otherLevelEvent.levelId
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
@@ -37,7 +37,7 @@ class LevelEventDecorator: GameEventBaseDecorator {
 
     override func toPersistable() -> PersistableAbstractGameEvent {
         let persistable = wrappedEvent.toPersistable()
-        persistable.setLevelName(levelName)
+        persistable.setLevelId(levelId)
         return persistable
     }
 }
