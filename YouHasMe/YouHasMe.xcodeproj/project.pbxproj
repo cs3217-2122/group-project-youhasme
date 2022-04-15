@@ -27,7 +27,7 @@
 		40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */; };
 		40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */; };
 		40E2517327F71FCE008CBCE0 /* GameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517227F71FCE008CBCE0 /* GameEvent.swift */; };
-		40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517727F72645008CBCE0 /* AchiementMainView.swift */; };
+		40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517727F72645008CBCE0 /* AchievementMainView.swift */; };
 		40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */; };
 		40E2517C27F72963008CBCE0 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517B27F72963008CBCE0 /* AchievementView.swift */; };
 		40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517D27F786B7008CBCE0 /* AchievementImages.swift */; };
@@ -231,7 +231,7 @@
 		40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatistic.swift; sourceTree = "<group>"; };
 		40E2517227F71FCE008CBCE0 /* GameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvent.swift; sourceTree = "<group>"; };
-		40E2517727F72645008CBCE0 /* AchiementMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchiementMainView.swift; sourceTree = "<group>"; };
+		40E2517727F72645008CBCE0 /* AchievementMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementMainView.swift; sourceTree = "<group>"; };
 		40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewModel.swift; sourceTree = "<group>"; };
 		40E2517B27F72963008CBCE0 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
 		40E2517D27F786B7008CBCE0 /* AchievementImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementImages.swift; sourceTree = "<group>"; };
@@ -549,7 +549,7 @@
 		40E2517527F72629008CBCE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40E2517727F72645008CBCE0 /* AchiementMainView.swift */,
+				40E2517727F72645008CBCE0 /* AchievementMainView.swift */,
 				40E2517B27F72963008CBCE0 /* AchievementView.swift */,
 				40E2517D27F786B7008CBCE0 /* AchievementImages.swift */,
 			);
@@ -1278,7 +1278,7 @@
 				40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */,
 				40E2519727FAD853008CBCE0 /* UnlockConditionUtil.swift in Sources */,
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
-				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
+				40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */,
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
