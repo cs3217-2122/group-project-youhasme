@@ -88,7 +88,7 @@ extension LevelLayer {
         for x in 0..<tiles.count {
             for y in 0..<tiles[0].count {
                 let point = Point(x: x, y: y)
-                tileMap[point] = tiles[x][y].toPersistable()
+                tileMap[point] = tiles[y][x].toPersistable()
             }
         }
         return PersistableLevelLayer(dimensions: dimensions, tileMap: tileMap)
