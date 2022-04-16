@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class NounIsPropertyRuleGenerator: ChunkGeneratorDelegate {
     var shouldGenerateNounInstance: Bool
     var noun: Noun

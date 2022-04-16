@@ -147,14 +147,14 @@ struct GameEngine: GameEventPublisher {
         }
 
         let event = GameEvent(type: .move)
-        // todo: fix. currently only assumes one entity
+        var entityTypes: Set<EntityType> = []
         for entityState in LevelLayerState(levelLayer: oldState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            publishingDelegate.send(
-                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
-            )
-            return
+            entityTypes.insert(entityState.entity.entityType)
         }
+        publishingDelegate.send(
+            EntityEventDecorator(wrappedEvent: event, entityTypes: entityTypes)
+        )
     }
 
     private func sendWinGameEvent(newState: Game) {
@@ -162,13 +162,13 @@ struct GameEngine: GameEventPublisher {
             return
         }
         let event = GameEvent(type: .win)
-        // todo: fix. currently only assumes one entity
+        var entityTypes: Set<EntityType> = []
         for entityState in LevelLayerState(levelLayer: newState.levelLayer)
                 .entityStates where entityState.has(behaviour: .property(.you)) {
-            publishingDelegate.send(
-                EntityEventDecorator(wrappedEvent: event, entityType: entityState.entity.entityType)
-            )
-            return
+            entityTypes.insert(entityState.entity.entityType)
         }
+        publishingDelegate.send(
+            EntityEventDecorator(wrappedEvent: event, entityTypes: entityTypes)
+        )
     }
 }

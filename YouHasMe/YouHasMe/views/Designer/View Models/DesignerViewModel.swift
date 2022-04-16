@@ -24,6 +24,7 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var levelStorage: LevelStorage? {
         try? dungeonStorage.getLevelStorage(for: dungeon.name)
     }
+
     private var dungeonStorage = DungeonStorage()
     var viewableDimensions = Dungeon.defaultLevelDimensions
     @Published var dungeon: Dungeon

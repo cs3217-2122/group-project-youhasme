@@ -8,11 +8,11 @@
 import Foundation
 
 class Achievement {
-    var name: String
-    var description: String
-    var unlockConditions: [UnlockCondition]
-    var isUnlocked: Bool
-    var isHidden: Bool // hide (description and icon)
+    private(set) var name: String
+    private(set) var description: String
+    private(set) var unlockConditions: [UnlockCondition]
+    private(set) var isUnlocked: Bool
+    private(set) var isHidden: Bool // hide (description and image) from users
 
     var shouldHide: Bool {
         !isUnlocked && isHidden

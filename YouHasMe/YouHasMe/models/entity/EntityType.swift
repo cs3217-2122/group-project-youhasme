@@ -131,7 +131,8 @@ struct EntityTypes {
             classification:
                     .conditionEvaluable(
                         ConditionEvaluable(
-                            evaluableType: .level(id: .zero, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))))
+                            evaluableType: .level(id: .zero,
+                                                  evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))))
 
         static func getAllConditionEvaluables() -> [EntityType] {
             [dummyEvaluable]
