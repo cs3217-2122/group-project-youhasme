@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ConditionEvaluableCreatorView: View {
     @Environment(\.dismiss) private var dismiss
@@ -42,11 +43,15 @@ struct ConditionEvaluableCreatorView: View {
                 if conditionType == .numericLiteral {
                     NavigationView{
                         Group {
-                            Picker("Number", selection: $viewModel.selectedNumericLiteralIndex) {
-                                ForEach(viewModel.numericLiteralRange) {
-                                    Text("\($0)")
-                                }
-                            }.padding()
+                            // reference: https://stackoverflow.com/questions/58733003/how-to-create-textfield-that-only-accepts-numbers
+                            TextField("Number", text: $viewModel.numericLiteral)
+                                        .keyboardType(.numberPad)
+                                        .onReceive(Just(viewModel.numericLiteral)) { newValue in
+                                            let filtered = newValue.filter { "0123456789".contains($0) }
+                                            if filtered != newValue {
+                                                viewModel.numericLiteral = filtered
+                                            }
+                                        }
                         }.navigationTitle("Pick a Number")
                     }.navigationViewStyle(.stack)
                 }
@@ -77,8 +82,6 @@ struct ConditionEvaluableCreatorView: View {
                     }.navigationViewStyle(.stack)
                 }
             }
-            
-            
             
             Button("Confirm") {
                 let result = viewModel.confirm()

@@ -29,8 +29,6 @@ struct DesignerView: View {
         TabView {
             ZStack {
                 VStack {
-                    ToolbarView(viewModel: viewModel.getToolbarViewModel())
-                        .padding()
                     PaletteView(viewModel: viewModel)
                         .padding()
                     GridView(viewModel: viewModel)

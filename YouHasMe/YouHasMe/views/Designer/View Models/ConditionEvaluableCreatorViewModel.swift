@@ -25,6 +25,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
     @Published var selectedFieldId: String?
     @Published var selectedIdentifier: Point?
     @Published var selectedNumericLiteralIndex: Int = 0
+    @Published var numericLiteral: String = "0"
     let numericLiteralRange = 0..<20
 
     var levelMetadata: [LevelMetadata] {

@@ -9,17 +9,15 @@ import Foundation
 class DimensionSelectViewModel: ObservableObject {
     @Published var widthSelection: Int = 0
     @Published var heightSelection: Int = 0
-    let widthRange = 1..<9
-    let heightRange = 1..<9
+    let widthRange = 1..<6
+    let heightRange = 1..<6
     @Published var dungeonName: String = ""
     @Published var requiresOverwrite = false
     var dungeonStorage = DungeonStorage()
-    func aboutToCreateLevel() -> Bool {
+    func aboutToCreateLevel() {
         if dungeonStorage.existsDungeon(name: dungeonName) {
             requiresOverwrite = true
-            return true
         }
-        return false
     }
 
     func getDungeon() -> DesignableDungeon {

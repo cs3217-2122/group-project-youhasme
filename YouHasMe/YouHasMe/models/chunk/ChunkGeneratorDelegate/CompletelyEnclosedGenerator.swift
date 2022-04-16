@@ -9,7 +9,7 @@ import Foundation
 class CompletelyEnclosedGenerator: ChunkGeneratorDelegate {
     private func withSurroundingWalls(dimensions: Rectangle, tiles: [[Tile]]) -> [[Tile]] {
         var tiles = tiles
-        let bedrockEntity = Entity(entityType: EntityType(classification: .nounInstance(.bedrock)))
+        let bedrockEntity = Entity(entityType: EntityType(classification: .nounInstance(.rock)))
         for y in 0..<dimensions.height {
             tiles[y][0].entities.append(
                 bedrockEntity

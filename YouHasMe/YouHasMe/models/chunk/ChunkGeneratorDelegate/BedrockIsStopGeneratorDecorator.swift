@@ -9,7 +9,7 @@ import Foundation
 final class BedrockIsStopGeneratorDecorator: ChunkGeneratorDecorator {
     var backingGenerator: AnyChunkGeneratorDelegate
     var nounIsPropertyGenerator = NounIsPropertyRuleGenerator(
-        noun: .bedrock, property: .stop, shouldGenerateNounInstance: false
+        noun: .rock, property: .stop, shouldGenerateNounInstance: false
     )
     init<T>(generator: T) where T: ChunkGeneratorDelegate {
         backingGenerator = generator.eraseToAnyGenerator()

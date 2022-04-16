@@ -80,9 +80,9 @@ extension GridDisplayMode: CustomStringConvertible {
     var description: String {
         switch self {
         case .scaleToFitCellSize:
-            return "Scale to fit cellsize"
+            return "World View"
         case .fixedDimensionsInCells:
-            return "Fixed dimensions in cells"
+            return "Level View"
         }
     }
 }

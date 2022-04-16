@@ -9,43 +9,9 @@ import Foundation
 import CoreGraphics
 import Combine
 
-protocol ContextualMenuDelegate: AnyObject {
-    func showMessages()
-}
-
-class ContextualMenuData {
-    weak var delegate: ContextualMenuDelegate?
-    let id: Int
-    let description: String
-    var action: () -> Void = {}
-
-    init?(entityType: EntityType) {
-        nil // TODO
-    }
-}
-
-extension ContextualMenuData: Identifiable {}
-
-extension ContextualMenuData: Hashable {
-    static func == (lhs: ContextualMenuData, rhs: ContextualMenuData) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-extension ContextualMenuData: Comparable {
-    static func < (lhs: ContextualMenuData, rhs: ContextualMenuData) -> Bool {
-        lhs.id < rhs.id
-    }
-}
-
 enum PlayViewState {
     case disabled
     case normalPlay
-    case messages
 }
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
@@ -86,16 +52,6 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     var achievementsViewModel: AchievementsViewModel
     var notificationsViewModel: GameNotificationsViewModel
-
-    var contextualData: [ContextualMenuData] {
-        guard let entities = selectedTile?.entities else {
-            return []
-        }
-
-        let data = Array(Set(entities.compactMap { ContextualMenuData(entityType: $0.entityType) })).sorted()
-        data.forEach { $0.delegate = self }
-        return data
-    }
 
     @Published var viewPosition: Point
     var cumulativeTranslation: CGVector = .zero {
@@ -248,16 +204,6 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 }
 
-extension PlayViewModel: ContextualMenuDelegate {
-    func closeOverlay() {
-        state = .normalPlay
-    }
-
-    func showMessages() {
-        state = .messages
-    }
-}
-
 extension PlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
         let tile = getTile(at: viewOffset, loadNeighboringChunks: true)
@@ -270,14 +216,6 @@ extension PlayViewModel {
             conditionEvaluableDelegate: dungeon
         )
         return entityViewModel
-    }
-
-    func getMessagesViewModel() -> MessagesViewModel {
-        guard let tile = selectedTile else {
-            fatalError("should not be nil")
-        }
-
-        return MessagesViewModel()
     }
 
     func getActiveRulesViewModel() -> ActiveRulesViewModel {

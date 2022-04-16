@@ -18,7 +18,7 @@ final class SnakeLikeConnectorGeneratorDecorator: ChunkGeneratorDecorator {
             levelPosition: levelPosition,
             extremities: extremities
         )
-        let connectorEntity = Entity(entityType: EntityType(classification: .nounInstance(.connectorWall)))
+        let connectorEntity = Entity(entityType: EntityType(classification: .nounInstance(.door)))
         let midX = dimensions.width / 2
         let midY = dimensions.height / 2
         let topConnector = Point(x: midX, y: 0)

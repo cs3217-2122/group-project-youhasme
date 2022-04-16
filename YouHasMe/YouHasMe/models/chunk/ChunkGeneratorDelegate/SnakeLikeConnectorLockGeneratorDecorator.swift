@@ -19,7 +19,7 @@ final class SnakeLikeConnectorLockGeneratorDecorator: ChunkGeneratorDecorator {
             extremities: extremities
         )
         let blocks: [Classification] = [
-            .noun(.connectorWall),
+            .noun(.door),
             .verb(.vIs),
             .property(.stop),
             .connective(.cIf),
