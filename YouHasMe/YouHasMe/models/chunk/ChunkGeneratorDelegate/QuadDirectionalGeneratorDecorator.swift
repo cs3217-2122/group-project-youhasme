@@ -1,5 +1,5 @@
 //
-//  AllDirectionalGeneratorDecorator.swift
+//  QuadDirectionalGeneratorDecorator.swift
 //  YouHasMe
 //
 //  Created by Jia Cheng Sun on 16/4/22.

@@ -55,6 +55,7 @@ struct DimensionSelectView: View {
                     .environment(\.editMode, Binding.constant(EditMode.active))
                 }
                 
+                Text("Level Preview (Does not lie on dungeon boundary)")
                 GeometryReader { proxy in
                     HStack {
                         Spacer()

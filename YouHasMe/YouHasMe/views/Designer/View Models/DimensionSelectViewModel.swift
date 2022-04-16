@@ -15,7 +15,10 @@ enum LevelTransitionStyle: String {
     func toGeneratorDecorators() -> [IdentityGeneratorDecorator.Type] {
         switch self {
         case .quadDirectional:
-            return [QuadDirectionalGeneratorDecorator.self]
+            return [
+                QuadDirectionalGeneratorDecorator.self,
+                QuadDirectionalLockGeneratorDecorator.self
+            ]
         case .snakeLike:
             return [
                 SnakeLikeConnectorGeneratorDecorator.self,
@@ -86,7 +89,7 @@ class DimensionSelectViewModel: ObservableObject {
     
     private func setupBindings() {
         Publishers.CombineLatest(self.$levelTransitionStyle, self.$initialRuleBlocks)
-            .sink { [weak self] (levelTransitionStyle, initialRuleBlocks) in
+            .sink { [weak self] levelTransitionStyle, initialRuleBlocks in
                 guard let self = self else {
                     return
                 }
@@ -110,7 +113,10 @@ class DimensionSelectViewModel: ObservableObject {
         )
     }
     
-    func getGenerators(initialRuleBlocks: Set<RuleBlocks>) -> [IdentityGeneratorDecorator.Type] {
+    func getGenerators(
+        levelTransitionStyle: LevelTransitionStyle,
+        initialRuleBlocks: Set<RuleBlocks>
+    ) -> [IdentityGeneratorDecorator.Type] {
         var generators: [IdentityGeneratorDecorator.Type] = [CompletelyEnclosedGeneratorDecorator.self]
         generators.append(contentsOf: levelTransitionStyle.toGeneratorDecorators())
         generators.append(contentsOf: initialRuleBlocks.flatMap {
@@ -127,7 +133,7 @@ class DimensionSelectViewModel: ObservableObject {
         }
 
         let dimensions = getDimensions()
-        let generators = getGenerators(initialRuleBlocks: initialRuleBlocks)
+        let generators = getGenerators(levelTransitionStyle: levelTransitionStyle, initialRuleBlocks: initialRuleBlocks)
         
         return .newDungeon(
             DungeonParams(
@@ -142,11 +148,13 @@ class DimensionSelectViewModel: ObservableObject {
         levelTransitionStyle: LevelTransitionStyle,
         initialRuleBlocks: Set<RuleBlocks>
     ) -> [[Tile]] {
-        let generator = BaseGenerator().decorateWithAll(getGenerators(initialRuleBlocks: initialRuleBlocks))
+        let generator = BaseGenerator().decorateWithAll(
+            getGenerators(levelTransitionStyle: levelTransitionStyle,
+            initialRuleBlocks: initialRuleBlocks))
         return generator.generate(
             dimensions: Dungeon.defaultLevelDimensions,
-            levelPosition: .zero,
-            extremities: Rectangle(width: 1, height: 1)
+            levelPosition: Point(x: 1, y: 1), // We are generating a preview of a non-boundary level
+            extremities: Rectangle(width: 6, height: 6)
         )
     }
     
