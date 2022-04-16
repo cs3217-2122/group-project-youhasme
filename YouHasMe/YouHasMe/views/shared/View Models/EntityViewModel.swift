@@ -13,13 +13,8 @@ protocol EntityViewModelBasicCRUDDelegate: AnyObject {
     func removeEntity(from worldPosition: Point)
 }
 
-protocol EntityViewModelExaminableDelegate: AnyObject {
-    func examineTile(at worldPosition: Point)
-}
-
 class EntityViewModel: CellViewModel {
     weak var basicCRUDDelegate: EntityViewModelBasicCRUDDelegate?
-    weak var examinableDelegate: EntityViewModelExaminableDelegate?
     var status: LevelStatus = .active
     var tile: Tile?
     var worldPosition: Point?
@@ -66,6 +61,14 @@ class EntityViewModel: CellViewModel {
     }
 
     func addEntity() {
+        guard let tile = tile else {
+            return
+        }
+
+        guard tile.entities.isEmpty else {
+            return
+        }
+        
         guard let delegate = basicCRUDDelegate, let worldPosition = worldPosition else {
             return
         }
@@ -82,10 +85,6 @@ class EntityViewModel: CellViewModel {
     }
 
     func examine() {
-        if let examinableDelegate = examinableDelegate, let worldPosition = worldPosition {
-            examinableDelegate.examineTile(at: worldPosition)
-        }
-
         if let tile = tile {
             for entity in tile.entities {
                 if case .conditionEvaluable(let evaluable) = entity.entityType.classification {

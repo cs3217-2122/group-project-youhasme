@@ -47,8 +47,6 @@ class ConditionBuilder {
             }
             let namedKeyPath = Level.getNamedKeyPath(given: fieldId)
             return .level(id: identifier, evaluatingKeyPath: namedKeyPath)
-        case .player:
-            return .player
         case .numericLiteral:
             guard let literal = literal else {
                 throw BuildError.componentError
@@ -159,7 +157,6 @@ protocol ConditionTypeDependencyDelegate: AnyObject {
 enum ConditionType: String {
     case dungeon = "Dungeon"
     case level = "Level"
-    case player = "Player"
     case numericLiteral = "Numeric"
 
     func getKeyPaths() -> [AnyNamedKeyPath]? {
@@ -168,8 +165,6 @@ enum ConditionType: String {
             return Dungeon.typeErasedNamedKeyPaths
         case .level:
             return Level.typeErasedNamedKeyPaths
-        case .player:
-            return []
         case .numericLiteral:
             return nil
         }

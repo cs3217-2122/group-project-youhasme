@@ -65,8 +65,6 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
             }
             let namedKeyPath = Level.getNamedKeyPath(given: fieldId)
             return .level(id: identifier, evaluatingKeyPath: namedKeyPath)
-        case .player:
-            return .player
         case .numericLiteral:
             guard let literal = literal else {
                 return nil

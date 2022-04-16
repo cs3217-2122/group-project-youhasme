@@ -20,7 +20,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     @Published var selectedPaletteEntityType: EntityType?
-    @Published var selectedTile: Tile?
     private var levelStorage: LevelStorage? {
         try? dungeonStorage.getLevelStorage(for: dungeon.name)
     }
@@ -77,10 +76,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.gameNotificationsViewModel = gameNotificationsViewModel
         viewPosition = dungeon.entryWorldPosition
         setupBindings()
-    }
-
-    func deselectTile() {
-        selectedTile = nil
     }
 
     func getPlayableDungeon() -> PlayableDungeon {
@@ -145,20 +140,12 @@ extension DesignerViewModel: EntityViewModelBasicCRUDDelegate {
         }
         tile.entities.append(Entity(entityType: selectedPaletteEntityType))
         dungeon.setTile(tile, at: worldPosition)
+        objectWillChange.send()
     }
 
     func removeEntity(from worldPosition: Point) {
         dungeon.setTile(Tile(), at: worldPosition)
-    }
-}
-
-extension DesignerViewModel: EntityViewModelExaminableDelegate {
-    func examineTile(at worldPosition: Point) {
-        guard let tile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false) else {
-            return
-        }
-
-        selectedTile = tile
+        objectWillChange.send()
     }
 }
 
@@ -212,7 +199,6 @@ extension DesignerViewModel {
             worldPosition: getWorldPosition(at: viewOffset)
         )
         entityViewModel.basicCRUDDelegate = self
-        entityViewModel.examinableDelegate = self
         return entityViewModel
     }
 

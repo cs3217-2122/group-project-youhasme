@@ -86,10 +86,6 @@ class Dungeon {
         }
     }
 
-    var numberOfPlayers: Int {
-        0 // TODO
-    }
-
     func renameDungeon(to newName: String) {
         let oldName = name
         do {
@@ -341,8 +337,35 @@ extension Dungeon {
 }
 
 enum DungeonKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
-    case totalWins = "Total Wins"
-    case numberOfPlayers = "Number of dungeon players"
+    case totalWins = "Total Wins across all levels"
+    case youCount = "Number of entities with YOU property in current level"
+    case stopCount = "Number of entites with STOP property in current level"
+    case pushCount = "Number of entities with PUSH property in current level"
+    case babaCount = "Number of Baba entities in current level"
+    case wallCount = "Number of Wall entities in current level"
+}
+
+// MARK: Queries
+extension Dungeon {
+    var youCount: Int {
+        getActiveLevel().youCount
+    }
+    
+    var stopCount: Int {
+        getActiveLevel().stopCount
+    }
+    
+    var pushCount: Int {
+        getActiveLevel().pushCount
+    }
+    
+    var babaCount: Int {
+        getActiveLevel().babaCount
+    }
+    
+    var wallCount: Int {
+        getActiveLevel().pushCount
+    }
 }
 
 extension Dungeon: KeyPathExposable {
@@ -350,7 +373,11 @@ extension Dungeon: KeyPathExposable {
     static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
             .totalWins: \.totalWins,
-            .numberOfPlayers: \.numberOfPlayers
+            .youCount: \.youCount,
+            .stopCount: \.stopCount,
+            .pushCount: \.pushCount,
+            .babaCount: \.babaCount,
+            .wallCount: \.wallCount
         ]
     }
 
