@@ -10,14 +10,14 @@ import Foundation
 class PersistableAbstractGameEvent: Codable {
     var levelId: Point?
     var dungeonId: String?
-    var entityType: PersistableEntityType?
+    var entityTypes: [PersistableEntityType]
     var gameEventType: GameEventType
 
-    init(gameEventType: GameEventType, levelId: Point? = nil, entityType: EntityType? = nil,
+    init(gameEventType: GameEventType, levelId: Point? = nil, entityTypes: Set<EntityType> = [],
          dungeonId: String? = nil) {
         self.gameEventType = gameEventType
         self.levelId = levelId
-        self.entityType = entityType?.toPersistable()
+        self.entityTypes = entityTypes.map { $0.toPersistable() }
         self.dungeonId = dungeonId
     }
 
@@ -25,8 +25,8 @@ class PersistableAbstractGameEvent: Codable {
         self.levelId = levelId
     }
 
-    func setEntityType(_ entityType: EntityType) {
-        self.entityType = entityType.toPersistable()
+    func setEntityTypes(_ entityTypes: Set<EntityType>) {
+        self.entityTypes = entityTypes.map { $0.toPersistable() }
     }
 
     func setDungeonId(_ dungeonId: String) {
@@ -55,10 +55,10 @@ class PersistableAbstractGameEvent: Codable {
     }
 
     private func getEntityDecoratedEvent(gameEvent: AbstractGameEvent) -> AbstractGameEvent {
-        if let entityType = entityType {
+        if !entityTypes.isEmpty {
             return EntityEventDecorator(
                 wrappedEvent: gameEvent,
-                entityType: EntityType.fromPersistable(entityType)
+                entityTypes: Set(entityTypes.map { EntityType.fromPersistable($0) })
             )
         }
         return gameEvent

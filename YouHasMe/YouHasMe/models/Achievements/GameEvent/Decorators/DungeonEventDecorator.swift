@@ -20,17 +20,13 @@ class DungeonEventDecorator: GameEventBaseDecorator {
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
-        dungeonIdIsContainedBy(otherGameEvent: otherGameEvent)
-    }
-
-    func dungeonIdIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
         if let dungeonEvent = otherGameEvent as? DungeonEventDecorator {
             if hasSameDungeon(dungeonEvent) {
                 return true
             }
         }
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
-            return dungeonIdIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+            return hasSameDecoratedDetails(otherGameEvent: decoratedEvent.wrappedEvent)
         }
 
         return false
