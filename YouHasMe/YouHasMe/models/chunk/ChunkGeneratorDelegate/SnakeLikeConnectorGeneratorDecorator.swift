@@ -6,14 +6,9 @@
 //
 
 import Foundation
-final class SnakeLikeConnectorGeneratorDecorator: ChunkGeneratorDecorator {
-    let backingGenerator: AnyChunkGeneratorDelegate
-    init<T: ChunkGeneratorDelegate>(generator: T) {
-        backingGenerator = generator.eraseToAnyGenerator()
-    }
-
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = backingGenerator.generate(
+final class SnakeLikeConnectorGeneratorDecorator: IdentityGeneratorDecorator {
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
             dimensions: dimensions,
             levelPosition: levelPosition,
             extremities: extremities

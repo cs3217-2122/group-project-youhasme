@@ -31,10 +31,8 @@ struct ConditionEvaluableCreatorView: View {
                             selected: $0.id == viewModel.selectedConditionTypeId)
                         )
                 }
+                .environment(\.editMode, Binding.constant(EditMode.active))
                 .navigationTitle("Condition Type")
-                .toolbar {
-                    EditButton()
-                }
             }.navigationViewStyle(.stack)
             
             if let selectedConditionTypeId = viewModel.selectedConditionTypeId,
@@ -45,13 +43,13 @@ struct ConditionEvaluableCreatorView: View {
                         Group {
                             // reference: https://stackoverflow.com/questions/58733003/how-to-create-textfield-that-only-accepts-numbers
                             TextField("Number", text: $viewModel.numericLiteral)
-                                        .keyboardType(.numberPad)
-                                        .onReceive(Just(viewModel.numericLiteral)) { newValue in
-                                            let filtered = newValue.filter { "0123456789".contains($0) }
-                                            if filtered != newValue {
-                                                viewModel.numericLiteral = filtered
-                                            }
-                                        }
+                                .keyboardType(.numberPad)
+                                .onReceive(Just(viewModel.numericLiteral)) { newValue in
+                                    let filtered = newValue.filter { "0123456789".contains($0) }
+                                    if filtered != newValue {
+                                        viewModel.numericLiteral = filtered
+                                    }
+                                }
                         }.navigationTitle("Pick a Number")
                     }.navigationViewStyle(.stack)
                 }
@@ -62,23 +60,24 @@ struct ConditionEvaluableCreatorView: View {
                             Text($0.description).foregroundColor(getTextColor(
                                 selected: $0.id == viewModel.selectedFieldId)
                             )
-                        }.navigationTitle("Field")
-                        .toolbar {
-                            EditButton()
                         }
+                        .environment(\.editMode, Binding.constant(EditMode.active))
+                        .navigationTitle("Property to Query")
+                        
                     }.navigationViewStyle(.stack)
                 }
                 
                 if conditionType == .level {
                     NavigationView{
-                        List(viewModel.levelMetadata, selection: $viewModel.selectedIdentifier) {
-                            Text($0.name).foregroundColor(getTextColor(
-                                selected: $0.id == viewModel.selectedIdentifier)
-                            )
-                        }.navigationTitle("Level Dependency")
-                        .toolbar {
-                            EditButton()
+                        List(viewModel.levelMetadata, selection: $viewModel.selectedIdentifier) { (metaData: LevelMetadata) in
+                            Text("Id: \(metaData.id.description)\nName: \(metaData.name)")
+                                .fixedSize(horizontal: false, vertical: true)
+                                .foregroundColor(getTextColor(
+                                    selected: metaData.id == viewModel.selectedIdentifier)
+                                )
                         }
+                        .environment(\.editMode, Binding.constant(EditMode.active))
+                        .navigationTitle("Level Dependency")
                     }.navigationViewStyle(.stack)
                 }
             }

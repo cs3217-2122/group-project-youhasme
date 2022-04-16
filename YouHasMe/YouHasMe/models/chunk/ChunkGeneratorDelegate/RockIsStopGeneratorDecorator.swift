@@ -6,17 +6,13 @@
 //
 
 import Foundation
-final class BedrockIsStopGeneratorDecorator: ChunkGeneratorDecorator {
-    var backingGenerator: AnyChunkGeneratorDelegate
+final class RockIsStopGeneratorDecorator: IdentityGeneratorDecorator {
     var nounIsPropertyGenerator = NounIsPropertyRuleGenerator(
         noun: .rock, property: .stop, shouldGenerateNounInstance: false
     )
-    init<T>(generator: T) where T: ChunkGeneratorDelegate {
-        backingGenerator = generator.eraseToAnyGenerator()
-    }
 
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = backingGenerator.generate(
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
             dimensions: dimensions, levelPosition: levelPosition, extremities: extremities
         )
 

@@ -93,7 +93,7 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         }
     case .conditionEvaluable(let conditionEvaluable):
         guard let value = conditionEvaluable.getValue() else {
-            return .uiImage("Evaluable".asImage()!)
+            return .uiImage("EVAL".asImage()!)
         }
         return .uiImage("\(value)".asImage()!)
     case .connective(let connective):

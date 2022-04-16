@@ -5,12 +5,19 @@
 
 import Foundation
 
-enum DesignableDungeon {
-    case dungeonLoadable(Loadable)
-    case newDungeon(name: String, dimensions: Rectangle)
+struct DungeonParams: Equatable {
+    var name: String
+    var dimensions: Rectangle
+    var generators: [IdentityGeneratorDecorator.Type]
+    static func ==(lhs: DungeonParams, rhs: DungeonParams) -> Bool {
+        lhs.name == rhs.name
+    }
 }
 
-extension DesignableDungeon: Equatable {}
+enum DesignableDungeon {
+    case dungeonLoadable(Loadable)
+    case newDungeon(DungeonParams)
+}
 
 extension DesignableDungeon {
     func getDungeon() -> Dungeon {
@@ -21,18 +28,24 @@ extension DesignableDungeon {
                 fatalError("should not be nil")
             }
             return dungeon
-        case .newDungeon(let name, let rectangle):
+        case .newDungeon(let params):
+            let name = params.name
+            let dimensions = params.dimensions
+            let generators = params.generators
             return Dungeon(
                 isNewDungeon: true,
                 name: name,
-                dimensions: rectangle,
+                dimensions: dimensions,
                 levelDimensions: Dungeon.defaultLevelDimensions,
                 entryLevelPosition: Dungeon.defaultEntryLevelPosition,
-                levelNameToPositionMap: [:]
+                levelNameToPositionMap: [:],
+                levelGenerators: generators
             )
         }
     }
 }
+
+extension DesignableDungeon: Equatable {}
 
 enum PlayableDungeon {
     case dungeon(Dungeon)

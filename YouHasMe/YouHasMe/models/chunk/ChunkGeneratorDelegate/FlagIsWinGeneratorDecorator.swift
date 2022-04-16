@@ -6,17 +6,13 @@
 //
 
 import Foundation
-final class FlagIsWinGeneratorDecorator: ChunkGeneratorDecorator {
-    var backingGenerator: AnyChunkGeneratorDelegate
+final class FlagIsWinGeneratorDecorator: IdentityGeneratorDecorator {
     var nounIsPropertyGenerator = NounIsPropertyRuleGenerator(
         noun: .flag, property: .win, shouldGenerateNounInstance: true
     )
-    init<T>(generator: T) where T: ChunkGeneratorDelegate {
-        backingGenerator = generator.eraseToAnyGenerator()
-    }
 
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = backingGenerator.generate(
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
             dimensions: dimensions, levelPosition: levelPosition, extremities: extremities
         )
 

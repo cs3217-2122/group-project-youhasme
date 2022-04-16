@@ -18,12 +18,7 @@ class Dungeon {
     static let defaultName: String = "Dungeon1"
     static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
-    var levelGenerator = CompletelyEnclosedGenerator()
-        .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
-        .decorateWith(SnakeLikeConnectorLockGeneratorDecorator.self)
-        .decorateWith(BedrockIsStopGeneratorDecorator.self)
-        .decorateWith(BabaIsYouGeneratorDecorator.self)
-        .decorateWith(FlagIsWinGeneratorDecorator.self)
+    var levelGenerator: AnyChunkGeneratorDelegate
     var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder()
         .eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
@@ -67,7 +62,8 @@ class Dungeon {
         dimensions: Rectangle,
         levelDimensions: Rectangle,
         entryLevelPosition: Point,
-        levelNameToPositionMap: [String: Point]
+        levelNameToPositionMap: [String: Point],
+        levelGenerators: [IdentityGeneratorDecorator.Type] = []
     ) {
         self.name = name
         self.dimensions = dimensions
@@ -75,6 +71,7 @@ class Dungeon {
         self.entryLevelPosition = entryLevelPosition
         self.levelNameToPositionMap = levelNameToPositionMap
         playerLevelPosition = entryLevelPosition
+        self.levelGenerator = BaseGenerator().decorateWithAll(levelGenerators)
         if isNewDungeon {
             for x in 0..<dimensions.width {
                 for y in 0..<dimensions.height {
