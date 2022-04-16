@@ -13,6 +13,6 @@ struct OnlineDungeon {
     var persistedDungeon: PersistableDungeon
 }
 
-extension OnlineDungeon: Codable {
+extension OnlineDungeon: Codable, Identifiable {
     
 }

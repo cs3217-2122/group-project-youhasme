@@ -24,12 +24,30 @@
 		1E54070128096D23006D546F /* DungeonRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */; };
 		1E54070428096E4A006D546F /* DungeonRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070328096E4A006D546F /* DungeonRoomStorage.swift */; };
 		1E54070528096E4A006D546F /* DungeonRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070328096E4A006D546F /* DungeonRoomStorage.swift */; };
-		1E54070828097049006D546F /* DungeonRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070728097049006D546F /* DungeonRoom.swift */; };
-		1E54070928097049006D546F /* DungeonRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070728097049006D546F /* DungeonRoom.swift */; };
+		1E54070828097049006D546F /* MultiplayerRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070728097049006D546F /* MultiplayerRoom.swift */; };
+		1E54070928097049006D546F /* MultiplayerRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070728097049006D546F /* MultiplayerRoom.swift */; };
 		1E54070B28097500006D546F /* OnlineDungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070A28097500006D546F /* OnlineDungeon.swift */; };
 		1E54070C28097500006D546F /* OnlineDungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070A28097500006D546F /* OnlineDungeon.swift */; };
 		1E54070E28097DE4006D546F /* OnlineLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070D28097DE4006D546F /* OnlineLevel.swift */; };
 		1E54070F28097DE4006D546F /* OnlineLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070D28097DE4006D546F /* OnlineLevel.swift */; };
+		1E540711280B116E006D546F /* MultiplayerEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540710280B116E006D546F /* MultiplayerEntryView.swift */; };
+		1E540712280B116E006D546F /* MultiplayerEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540710280B116E006D546F /* MultiplayerEntryView.swift */; };
+		1E540714280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540713280B133D006D546F /* MultiplayerEntryViewModel.swift */; };
+		1E540715280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540713280B133D006D546F /* MultiplayerEntryViewModel.swift */; };
+		1E540717280B22D5006D546F /* MultiplayerWaitRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540716280B22D5006D546F /* MultiplayerWaitRoomView.swift */; };
+		1E540718280B22D5006D546F /* MultiplayerWaitRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540716280B22D5006D546F /* MultiplayerWaitRoomView.swift */; };
+		1E54071D280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54071C280B243B006D546F /* MultiplayerRoomViewModel.swift */; };
+		1E54071E280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54071C280B243B006D546F /* MultiplayerRoomViewModel.swift */; };
+		1E540720280B31AD006D546F /* OnlineDungeonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54071F280B31AD006D546F /* OnlineDungeonListView.swift */; };
+		1E540721280B31AD006D546F /* OnlineDungeonListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54071F280B31AD006D546F /* OnlineDungeonListView.swift */; };
+		1E540723280B31C0006D546F /* OnlineDungeonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540722280B31C0006D546F /* OnlineDungeonListViewModel.swift */; };
+		1E540724280B31C0006D546F /* OnlineDungeonListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540722280B31C0006D546F /* OnlineDungeonListViewModel.swift */; };
+		1E540726280B5CFF006D546F /* MultiplayerRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540725280B5CFF006D546F /* MultiplayerRoomView.swift */; };
+		1E540727280B5CFF006D546F /* MultiplayerRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540725280B5CFF006D546F /* MultiplayerRoomView.swift */; };
+		1E540729280B5F98006D546F /* MultiplayerPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540728280B5F98006D546F /* MultiplayerPlayView.swift */; };
+		1E54072A280B5F98006D546F /* MultiplayerPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540728280B5F98006D546F /* MultiplayerPlayView.swift */; };
+		1E54072C280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */; };
+		1E54072D280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */; };
 		1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* CellView.swift */; };
 		1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C527E5B43F00161E63 /* Entities.swift */; };
 		1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8C27E7254000321BEB /* MainMenuView.swift */; };
@@ -238,9 +256,18 @@
 		1E5406FC28096D10006D546F /* DungeonRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomView.swift; sourceTree = "<group>"; };
 		1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomViewModel.swift; sourceTree = "<group>"; };
 		1E54070328096E4A006D546F /* DungeonRoomStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomStorage.swift; sourceTree = "<group>"; };
-		1E54070728097049006D546F /* DungeonRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoom.swift; sourceTree = "<group>"; };
+		1E54070728097049006D546F /* MultiplayerRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoom.swift; sourceTree = "<group>"; };
 		1E54070A28097500006D546F /* OnlineDungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeon.swift; sourceTree = "<group>"; };
 		1E54070D28097DE4006D546F /* OnlineLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineLevel.swift; sourceTree = "<group>"; };
+		1E540710280B116E006D546F /* MultiplayerEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerEntryView.swift; sourceTree = "<group>"; };
+		1E540713280B133D006D546F /* MultiplayerEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerEntryViewModel.swift; sourceTree = "<group>"; };
+		1E540716280B22D5006D546F /* MultiplayerWaitRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerWaitRoomView.swift; sourceTree = "<group>"; };
+		1E54071C280B243B006D546F /* MultiplayerRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomViewModel.swift; sourceTree = "<group>"; };
+		1E54071F280B31AD006D546F /* OnlineDungeonListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeonListView.swift; sourceTree = "<group>"; };
+		1E540722280B31C0006D546F /* OnlineDungeonListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeonListViewModel.swift; sourceTree = "<group>"; };
+		1E540725280B5CFF006D546F /* MultiplayerRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomView.swift; sourceTree = "<group>"; };
+		1E540728280B5F98006D546F /* MultiplayerPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayView.swift; sourceTree = "<group>"; };
+		1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayViewModel.swift; sourceTree = "<group>"; };
 		1E6B90C327E5B2BF00161E63 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		1E6B90C527E5B43F00161E63 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		1E96EB8C27E7254000321BEB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -476,6 +503,11 @@
 			isa = PBXGroup;
 			children = (
 				1E5406FC28096D10006D546F /* DungeonRoomView.swift */,
+				1E540710280B116E006D546F /* MultiplayerEntryView.swift */,
+				1E540716280B22D5006D546F /* MultiplayerWaitRoomView.swift */,
+				1E54071F280B31AD006D546F /* OnlineDungeonListView.swift */,
+				1E540725280B5CFF006D546F /* MultiplayerRoomView.swift */,
+				1E540728280B5F98006D546F /* MultiplayerPlayView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -484,6 +516,10 @@
 			isa = PBXGroup;
 			children = (
 				1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */,
+				1E540713280B133D006D546F /* MultiplayerEntryViewModel.swift */,
+				1E54071C280B243B006D546F /* MultiplayerRoomViewModel.swift */,
+				1E540722280B31C0006D546F /* OnlineDungeonListViewModel.swift */,
+				1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -499,7 +535,7 @@
 		1E54070628097038006D546F /* Multiplayer */ = {
 			isa = PBXGroup;
 			children = (
-				1E54070728097049006D546F /* DungeonRoom.swift */,
+				1E54070728097049006D546F /* MultiplayerRoom.swift */,
 				1E54070A28097500006D546F /* OnlineDungeon.swift */,
 				1E54070D28097DE4006D546F /* OnlineLevel.swift */,
 			);
@@ -1265,6 +1301,7 @@
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */,
 				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
+				1E540717280B22D5006D546F /* MultiplayerWaitRoomView.swift in Sources */,
 				E585AD5927F964F900A54202 /* MessageView.swift in Sources */,
 				E569FC1D280096FE0042D15B /* LevelMetadata.swift in Sources */,
 				E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */,
@@ -1280,6 +1317,7 @@
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
 				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
+				1E540726280B5CFF006D546F /* MultiplayerRoomView.swift in Sources */,
 				E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */,
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
 				E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */,
@@ -1313,7 +1351,8 @@
 				E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E58E836928027FE400C06A59 /* RuleApplicator.swift in Sources */,
-				1E54070828097049006D546F /* DungeonRoom.swift in Sources */,
+				1E54070828097049006D546F /* MultiplayerRoom.swift in Sources */,
+				1E54071D280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
 				40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */,
 				40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */,
 				E57A19B027F9FD4A00312C39 /* ChunkNeighborFinderWrapAroundDecorator.swift in Sources */,
@@ -1350,6 +1389,7 @@
 				B06FEA0327E73D58005A3D1B /* Location.swift in Sources */,
 				E58E836F28028EE500C06A59 /* Queue.swift in Sources */,
 				E569FC1B280094F80042D15B /* DimensionSelectView.swift in Sources */,
+				1E54072C280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */,
 				40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */,
 				40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */,
@@ -1358,11 +1398,13 @@
 				E575264C27E965410045D3D6 /* Chunkable.swift in Sources */,
 				E585AD5127F9410900A54202 /* UIColor.swift in Sources */,
 				E57B534B27FD341D0071E623 /* ConditionEvaluable.swift in Sources */,
+				1E540720280B31AD006D546F /* OnlineDungeonListView.swift in Sources */,
 				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
 				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
 				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
+				1E540723280B31C0006D546F /* OnlineDungeonListViewModel.swift in Sources */,
 				40E2516627F43209008CBCE0 /* Achievement.swift in Sources */,
 				E58E836D28028B9900C06A59 /* Graph.swift in Sources */,
 				E58E8374280294B900C06A59 /* ActiveRulesView.swift in Sources */,
@@ -1384,6 +1426,7 @@
 				40E2519727FAD853008CBCE0 /* UnlockConditionUtil.swift in Sources */,
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
+				1E540714280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */,
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
@@ -1391,6 +1434,7 @@
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
 				E57ACB4027DC675E00F73B27 /* EntityType.swift in Sources */,
+				1E540711280B116E006D546F /* MultiplayerEntryView.swift in Sources */,
 				E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */,
 				E57B535327FD687A0071E623 /* KeyPathExposable.swift in Sources */,
 				1E54070E28097DE4006D546F /* OnlineLevel.swift in Sources */,
@@ -1402,6 +1446,7 @@
 				E5BECBF227E5E8B900E3952D /* Noun.swift in Sources */,
 				E578594B27F42C94009A79F9 /* Loadable.swift in Sources */,
 				1E96EB9127E725DF00321BEB /* GameView.swift in Sources */,
+				1E540729280B5F98006D546F /* MultiplayerPlayView.swift in Sources */,
 				E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
 				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
@@ -1459,8 +1504,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E54070928097049006D546F /* DungeonRoom.swift in Sources */,
+				1E540712280B116E006D546F /* MultiplayerEntryView.swift in Sources */,
+				1E54070928097049006D546F /* MultiplayerRoom.swift in Sources */,
+				1E540724280B31C0006D546F /* OnlineDungeonListViewModel.swift in Sources */,
+				1E540721280B31AD006D546F /* OnlineDungeonListView.swift in Sources */,
+				1E540715280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */,
+				1E540718280B22D5006D546F /* MultiplayerWaitRoomView.swift in Sources */,
+				1E540727280B5CFF006D546F /* MultiplayerRoomView.swift in Sources */,
+				1E54072D280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */,
 				1E54070F28097DE4006D546F /* OnlineLevel.swift in Sources */,
+				1E54071E280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
 				1E5406FE28096D10006D546F /* DungeonRoomView.swift in Sources */,
 				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
 				1E54070128096D23006D546F /* DungeonRoomViewModel.swift in Sources */,
@@ -1468,6 +1521,7 @@
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				1E54070528096E4A006D546F /* DungeonRoomStorage.swift in Sources */,
 				B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */,
+				1E54072A280B5F98006D546F /* MultiplayerPlayView.swift in Sources */,
 				40AD86AC27E6F05600F42C42 /* GameStateManagerTests.swift in Sources */,
 				1E54070C28097500006D546F /* OnlineDungeon.swift in Sources */,
 			);
