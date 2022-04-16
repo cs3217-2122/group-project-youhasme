@@ -25,7 +25,7 @@ class GameStateManagerTests: XCTestCase {
 
     func testSingleUndo() throws {
         gameEngine.apply(action: .moveDown)
-        print(gameEngine.currentGame.levelLayer)
+        // print(gameEngine.currentGame.levelLayer)
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 1)
         gameEngine.undo()
         XCTAssertEqual(gameEngine.currentGame.levelLayer.getTileAt(x: 2, y: 4).entities.count, 0)

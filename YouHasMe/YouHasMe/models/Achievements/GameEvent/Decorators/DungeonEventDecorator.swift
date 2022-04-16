@@ -32,6 +32,7 @@ class DungeonEventDecorator: GameEventBaseDecorator {
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
             return dungeonIdIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
         }
+
         return false
     }
 

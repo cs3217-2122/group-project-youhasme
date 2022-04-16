@@ -34,8 +34,8 @@ struct PreloadedAchievementsUtil {
                 levelName = existingName
             }
         }
-
         let numMoves = 10
+
         let dungeonLevelMoves = getWrappedDungeonLevelEvent(dungeonId: dungeonId, levelId: levelId,
                                                             event: GameEvent(type: .move))
         let levelMoveStat1 = GameStatistic(value: 0, statisticType: .level, gameEvent: dungeonLevelMoves)
@@ -49,7 +49,8 @@ struct PreloadedAchievementsUtil {
         let levelWinUnlockCondition1 = IntegerUnlockCondition(statistic: levelWinStat1,
                                                               comparison: .moreThanOrEqualTo, unlockValue: 1)
 
-        return Achievement(name: "Speedy Game", description: "Win Level \(levelName) in Less than \(numMoves) Moves",
+        return Achievement(name: "Speedy Game", description: "Win Dungeon \(dungeonId) Level \(levelName)"
+                           + " in Less than \(numMoves) Moves",
                            unlockConditions: [levelMoveUnlockCondition1, levelWinUnlockCondition1])
     }
 

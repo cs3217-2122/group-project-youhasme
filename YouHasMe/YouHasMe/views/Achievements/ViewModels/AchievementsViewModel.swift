@@ -9,17 +9,15 @@ import Foundation
 import Combine
 
 class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
-    var lockedAchievements: [Achievement] = []
-    var unlockedAchievements: [Achievement] = []
-    var imageWidth: Float = 40
-    var imageHeight: Float = 40
-    var dungeonId: String
-    var levelId: Point?
-    var storage = AchievementStorage()
+    private(set) var lockedAchievements: [Achievement] = []
+    private(set) var unlockedAchievements: [Achievement] = []
+    private(set) var dungeonId: String
+    private(set) var levelId: Point?
+    private var storage = AchievementStorage()
     private var subscriptions = [AnyCancellable]()
-    var gameNotificationPublishingHelper = GameNotificationPublishingHelper()
+    private(set) var gameNotificationPublishingHelper = GameNotificationPublishingHelper()
 
-    var levelStatistics: [GameStatistic] {
+    private var levelStatistics: [GameStatistic] {
         lockedAchievements.flatMap { $0.getLevelStatistics() }
     }
 
@@ -29,9 +27,8 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
         resetLevelStats()
     }
 
-    func selectLevel(level: Level) {
-        levelId = level.id
-        resetLevelStats()
+    func selectLevel(levelId: Point) {
+        self.levelId = levelId
     }
 
     func resetLevelStats() {
@@ -50,43 +47,8 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
 
             let decoratedEvent = self.getDecoratedGameEvent(gameEvent: gameEvent)
 
-            for achievement in self.lockedAchievements {
-                self.updateAchievement(achievement, gameEvent: decoratedEvent)
-                self.saveAchievement(achievement)
-                self.updateLockedUnlockedAchievements(updatedAchievement: achievement)
-
-            }
+            self.updateLockedAchievements(gameEvent: decoratedEvent)
         }.store(in: &subscriptions)
-    }
-
-    func getDecoratedGameEvent(gameEvent: AbstractGameEvent) -> AbstractGameEvent {
-        var decoratedEvent = gameEvent
-        if let levelId = levelId {
-            decoratedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelId: levelId)
-        }
-        decoratedEvent = DungeonEventDecorator(wrappedEvent: gameEvent, dungeonId: dungeonId)
-        return decoratedEvent
-    }
-
-    func updateAchievement(_ achievement: Achievement, gameEvent: AbstractGameEvent) {
-        achievement.updateStatistics(gameEvent: gameEvent)
-        achievement.unlockIfConditionsMet()
-    }
-
-    func updateLockedUnlockedAchievements(updatedAchievement: Achievement) {
-        if updatedAchievement.isUnlocked {
-            lockedAchievements.removeByIdentity(updatedAchievement)
-            unlockedAchievements.append(updatedAchievement)
-            sendGameNotification(GameNotificationViewUtil.createAchievementNotification(updatedAchievement))
-        }
-    }
-
-    func saveAchievement(_ achievement: Achievement) {
-        do {
-            try AchievementStorage().saveAchievement(achievement)
-        } catch {
-            globalLogger.error("problem saving achievement \(achievement.name)")
-        }
     }
 
     func setAchievementsData() {
@@ -99,6 +61,44 @@ class AchievementsViewModel: GameNotificationPublisher, ObservableObject {
             } else {
                 lockedAchievements.append(achievement)
             }
+        }
+    }
+
+    private func updateLockedAchievements(gameEvent: AbstractGameEvent) {
+        for achievement in lockedAchievements {
+            updateAchievement(achievement, gameEvent: gameEvent)
+            saveAchievement(achievement)
+            updateLockedUnlockedAchievements(updatedAchievement: achievement)
+        }
+    }
+
+    private func getDecoratedGameEvent(gameEvent: AbstractGameEvent) -> AbstractGameEvent {
+        var decoratedEvent = gameEvent
+        if let levelId = levelId {
+            decoratedEvent = LevelEventDecorator(wrappedEvent: gameEvent, levelId: levelId)
+        }
+        decoratedEvent = DungeonEventDecorator(wrappedEvent: decoratedEvent, dungeonId: dungeonId)
+        return decoratedEvent
+    }
+
+    private func updateAchievement(_ achievement: Achievement, gameEvent: AbstractGameEvent) {
+        achievement.updateStatistics(gameEvent: gameEvent)
+        achievement.unlockIfConditionsMet()
+    }
+
+    private func updateLockedUnlockedAchievements(updatedAchievement: Achievement) {
+        if updatedAchievement.isUnlocked {
+            lockedAchievements.removeByIdentity(updatedAchievement)
+            unlockedAchievements.append(updatedAchievement)
+            sendGameNotification(GameNotificationViewUtil.createAchievementNotification(updatedAchievement))
+        }
+    }
+
+    private func saveAchievement(_ achievement: Achievement) {
+        do {
+            try AchievementStorage().saveAchievement(achievement)
+        } catch {
+            globalLogger.error("problem saving achievement \(achievement.name)")
         }
     }
 }
