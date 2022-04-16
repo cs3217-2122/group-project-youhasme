@@ -43,6 +43,8 @@ struct ConditionEvaluableCreatorView: View {
                         Group {
                             // reference: https://stackoverflow.com/questions/58733003/how-to-create-textfield-that-only-accepts-numbers
                             TextField("Number", text: $viewModel.numericLiteral)
+                                .font(Font.title)
+                                .multilineTextAlignment(TextAlignment.center)
                                 .keyboardType(.numberPad)
                                 .onReceive(Just(viewModel.numericLiteral)) { newValue in
                                     let filtered = newValue.filter { "0123456789".contains($0) }
@@ -54,7 +56,7 @@ struct ConditionEvaluableCreatorView: View {
                     }.navigationViewStyle(.stack)
                 }
                 
-                if let keyPaths = conditionType.getKeyPaths() {
+                if let keyPaths = conditionType.getSortedKeyPaths() {
                     NavigationView{
                         List(keyPaths, selection: $viewModel.selectedFieldId) {
                             Text($0.description).foregroundColor(getTextColor(
@@ -93,16 +95,14 @@ struct ConditionEvaluableCreatorView: View {
                     isShowingFailureAlert = true
                 }
             }
-            
-            Button("Close") {
-                viewModel.finish()
-                dismiss()
-            }
         }
         .alert(alertMessage, isPresented: $isShowingFailureAlert) {
             Button("Ok", role: .cancel) {}
         }.alert(alertMessage, isPresented: $isShowingSuccessAlert) {
-            Button("Ok", role: .cancel) {}
+            Button("Ok", role: .cancel) {
+                viewModel.finish()
+                dismiss()
+            }
         }
     }
 }

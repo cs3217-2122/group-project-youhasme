@@ -19,8 +19,7 @@ class Dungeon {
     static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
     var levelGenerator: AnyChunkGeneratorDelegate
-    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder()
-        .eraseToAnyNeighborFinder()
+    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
@@ -134,15 +133,20 @@ class Dungeon {
         level.layer = levelLayer
     }
 
-    func movePlayer(by vector: Vector) {
+    func movePlayer(by vector: Vector) -> Bool {
         let newPlayerLevelPosition = playerLevelPosition.translate(by: vector)
-        guard dimensions.isWithinBounds(newPlayerLevelPosition) else {
-            return
+        guard loadedLevels[newPlayerLevelPosition] != nil else {
+            return false
         }
+//        guard dimensions.isWithinBounds(newPlayerLevelPosition) else {
+//            return
+//        }
         playerLevelPosition = newPlayerLevelPosition
+        return true
     }
 
     func getActiveLevel() -> Level {
+        print(playerLevelPosition)
         guard let level = getLevel(levelPosition: playerLevelPosition) else {
             fatalError("should not be nil")
         }
@@ -151,7 +155,10 @@ class Dungeon {
 
     func winActiveLevel() {
         let level = getActiveLevel()
-        level.winCount += 1
+        guard let trueLevel = getLevel(levelPosition: level.id) else {
+            return
+        }
+        trueLevel.winCount += 1
         totalWins += 1
     }
 }
@@ -194,6 +201,8 @@ extension Dungeon {
         guard let level = getLevel(levelPosition: worldToLevelPosition(worldPosition)) else {
             return nil
         }
+        level.locationalDelegate = self
+        level.levelStorage = self.levelStorage
 
         if loadNeighbors {
             level.neighborFinderDelegate = levelNeighborFinder

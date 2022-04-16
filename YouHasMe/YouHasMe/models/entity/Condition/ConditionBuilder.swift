@@ -169,6 +169,13 @@ enum ConditionType: String {
             return nil
         }
     }
+    
+    func getSortedKeyPaths() -> [AnyNamedKeyPath]? {
+        guard let keyPaths = getKeyPaths() else {
+            return nil
+        }
+        return keyPaths.sorted(by: { $0.id > $1.id })
+    }
 }
 
 extension ConditionType: CaseIterable {}

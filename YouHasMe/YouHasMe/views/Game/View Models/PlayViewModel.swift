@@ -184,8 +184,11 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             return
         }
 
-        dungeon.movePlayer(by: playerMovementAcrossLevel)
+        let isMoveSuccessful = dungeon.movePlayer(by: playerMovementAcrossLevel)
         self.playerMovementAcrossLevel = nil
+        guard isMoveSuccessful else {
+            return
+        }
 
         let level = dungeon.getActiveLevel()
         achievementsViewModel.levelId = level.name
@@ -201,6 +204,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     func playerUndo() {
         gameEngine.undo()
         dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
+        objectWillChange.send()
     }
 }
 

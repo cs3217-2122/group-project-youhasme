@@ -55,6 +55,7 @@ class Level: Chunkable {
     var winCount: Int = 0
     var dimensions: Rectangle
     var neighbors = Neighborhood()
+    var hasLoadedNeighbors = false
     typealias ChunkIdentifier = Point
 
     @Published var layer: LevelLayer
@@ -196,6 +197,9 @@ extension Level {
     }
 
     func loadNeighbors(at position: Point) -> [Point: Level] {
+        guard !hasLoadedNeighbors else {
+            return [:]
+        }
         guard let neighborFinderDelegate = neighborFinderDelegate else {
             fatalError("Not assigned a neighbor finder.")
         }
@@ -227,6 +231,7 @@ extension Level {
                 newlyLoadedLevels[neighborPosition] = neighbor
             }
         }
+        hasLoadedNeighbors = true
         return newlyLoadedLevels
     }
 }

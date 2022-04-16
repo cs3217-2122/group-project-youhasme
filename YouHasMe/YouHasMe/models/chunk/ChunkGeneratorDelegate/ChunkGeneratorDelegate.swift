@@ -47,8 +47,3 @@ class AnyChunkGeneratorDelegate: ChunkGeneratorDelegate {
         _generate(dimensions, levelPosition, extremities)
     }
 }
-
-protocol ChunkGeneratorDecorator: ChunkGeneratorDelegate {
-    var backingGenerator: AnyChunkGeneratorDelegate { get }
-    init<T: ChunkGeneratorDelegate>(generator: T)
-}
