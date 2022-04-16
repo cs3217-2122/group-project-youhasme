@@ -78,4 +78,17 @@ class GameEventTests: XCTestCase {
         XCTAssertTrue(dungeonEntityMoveEvent.isContainedBy(otherGameEvent: entityDungeonMoveEvent))
         XCTAssertTrue(dungeonEntityMoveEvent.containsGameEvent(otherGameEvent: entityDungeonMoveEvent))
     }
+
+    func testMultipleEntityEvents() {
+        let moveEvent = GameEvent(type: .move)
+        let boxMoveEvent = EntityEventDecorator(wrappedEvent: moveEvent,
+                                                entityType: EntityTypes.NounInstances.box)
+        let boxAndWallMoveEvent = EntityEventDecorator(wrappedEvent: moveEvent,
+                                                       entityTypes: [EntityTypes.NounInstances.box,
+                                                                     EntityTypes.NounInstances.wall])
+        XCTAssertTrue(boxMoveEvent.isContainedBy(otherGameEvent: boxAndWallMoveEvent))
+        XCTAssertFalse(boxMoveEvent.containsGameEvent(otherGameEvent: boxAndWallMoveEvent))
+        XCTAssertTrue(boxAndWallMoveEvent.containsGameEvent(otherGameEvent: boxMoveEvent))
+        XCTAssertFalse(boxAndWallMoveEvent.isContainedBy(otherGameEvent: boxMoveEvent))
+    }
 }
