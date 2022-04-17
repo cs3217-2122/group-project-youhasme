@@ -5,10 +5,8 @@ enum Property: Hashable {
     case win
     case stop
     case push
-    case pull
     case player(Int)
     case sink
-    case defeat
 }
 
 extension Property: CustomDebugStringConvertible {
@@ -18,14 +16,10 @@ extension Property: CustomDebugStringConvertible {
             return "you"
         case .win:
             return "win"
-        case .defeat:
-            return "defeat"
         case .stop:
             return "stop"
         case .push:
             return "push"
-        case .pull:
-            return "pull"
         case .player(let num):
             return "player\(num)"
         case .sink:
