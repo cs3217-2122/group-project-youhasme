@@ -24,8 +24,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
     @Published var selectedConditionTypeId: String?
     @Published var selectedFieldId: String?
     @Published var selectedIdentifier: Point?
-    @Published var selectedNumericLiteralIndex: Int = 0
-    let numericLiteralRange = 0..<20
+    @Published var numericLiteral: String = "0"
 
     var levelMetadata: [LevelMetadata] {
         guard let delegate = delegate else {
@@ -36,9 +35,7 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
     }
 
     private var selectedNumericLiteral: Int {
-        numericLiteralRange.index(
-            numericLiteralRange.startIndex, offsetBy: selectedNumericLiteralIndex
-        )
+        Int(numericLiteral) ?? 0
     }
 
     private func createConditionEvaluable(
@@ -64,8 +61,6 @@ class ConditionEvaluableCreatorViewModel: ObservableObject {
             }
             let namedKeyPath = Level.getNamedKeyPath(given: fieldId)
             return .level(id: identifier, evaluatingKeyPath: namedKeyPath)
-        case .player:
-            return .player
         case .numericLiteral:
             guard let literal = literal else {
                 return nil

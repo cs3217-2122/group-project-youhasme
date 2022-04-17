@@ -76,23 +76,31 @@ struct LevelMetadataView: View {
     @State var tempName: String = ""
     var levelMetadata: LevelMetadata
     var body: some View {
-        VStack {
-            Text(levelMetadata.id.description).padding()
-            if !isEditing {
-                Text(levelMetadata.name).padding()
-                Button("Edit Name") {
-                    isEditing = true
-                    tempName = levelMetadata.name
+        HStack{
+            Spacer()
+            VStack {
+                Text("Lvl ID: \(levelMetadata.id.description)").padding()
+                if !isEditing {
+                    Text("Lvl Name: \(levelMetadata.name)").padding()
+                    Button("Edit Name") {
+                        isEditing = true
+                        tempName = levelMetadata.name
+                    }
+                } else {
+                    TextField("New name", text: $tempName)
+                        .padding()
+                        .textFieldStyle(.roundedBorder)
+                        .multilineTextAlignment(.center)
+                    Button("Confirm Name") {
+                        isEditing = false
+                        viewModel.renameLevel(with: levelMetadata.name, to: tempName)
+                        tempName = ""
+                    }
                 }
-            } else {
-                TextField("New name", text: $tempName).padding()
-                Button("Confirm Name") {
-                    isEditing = false
-                    viewModel.renameLevel(with: levelMetadata.name, to: tempName)
-                    tempName = ""
-                }
+                
             }
-            
+            .frame(maxWidth: 300)
+            Spacer()
         }
     }
 }

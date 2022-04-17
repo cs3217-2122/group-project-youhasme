@@ -9,6 +9,7 @@ import Foundation
 
 class GameEventBaseDecorator: AbstractGameEvent {
     private(set) var wrappedEvent: AbstractGameEvent
+
     var type: GameEventType {
         wrappedEvent.type
     }

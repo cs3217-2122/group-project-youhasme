@@ -65,10 +65,9 @@
 		40E2516627F43209008CBCE0 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516527F43209008CBCE0 /* Achievement.swift */; };
 		40E2516827F4359C008CBCE0 /* IntegerUnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */; };
 		40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516927F43C56008CBCE0 /* UnlockCondition.swift */; };
-		40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */; };
 		40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */; };
 		40E2517327F71FCE008CBCE0 /* GameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517227F71FCE008CBCE0 /* GameEvent.swift */; };
-		40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517727F72645008CBCE0 /* AchiementMainView.swift */; };
+		40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517727F72645008CBCE0 /* AchievementMainView.swift */; };
 		40E2517A27F7270A008CBCE0 /* AchievementsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */; };
 		40E2517C27F72963008CBCE0 /* AchievementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517B27F72963008CBCE0 /* AchievementView.swift */; };
 		40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2517D27F786B7008CBCE0 /* AchievementImages.swift */; };
@@ -85,6 +84,7 @@
 		40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */; };
 		40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */; };
 		40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */; };
+		40F43B2E28099D79000DCAA5 /* DungeonEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -109,8 +109,6 @@
 		E5563C3727E8AF69007D2E86 /* DesignerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */; };
 		E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3827E8B213007D2E86 /* ViewConstants.swift */; };
 		E5563C3C27E8B55E007D2E86 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3B27E8B55E007D2E86 /* Point.swift */; };
-		E5563C3E27E8CFCC007D2E86 /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3D27E8CFCC007D2E86 /* ToolbarView.swift */; };
-		E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3F27E8D09E007D2E86 /* ToolbarViewModel.swift */; };
 		E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4127E8DF6A007D2E86 /* CGVector.swift */; };
 		E5563C4427E8DF87007D2E86 /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4327E8DF87007D2E86 /* CGPoint.swift */; };
 		E5563C4627E8E31B007D2E86 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C4527E8E31B007D2E86 /* Double.swift */; };
@@ -120,10 +118,13 @@
 		E569071927ED4D830010E665 /* PersistenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569071827ED4D830010E665 /* PersistenceView.swift */; };
 		E569858A27FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */; };
 		E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */; };
-		E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */; };
+		E569858E27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569858D27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift */; };
 		E569FC1B280094F80042D15B /* DimensionSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569FC1A280094F70042D15B /* DimensionSelectView.swift */; };
 		E569FC1D280096FE0042D15B /* LevelMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = E569FC1C280096FE0042D15B /* LevelMetadata.swift */; };
 		E56AC06E2800756400FDD4CD /* DungeonNameButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */; };
+		E56B92C3280AD3C500DDBD0E /* BaseGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B92C2280AD3C500DDBD0E /* BaseGenerator.swift */; };
+		E56B92C7280AD4BC00DDBD0E /* IdentityGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B92C6280AD4BB00DDBD0E /* IdentityGeneratorDecorator.swift */; };
+		E56B92C9280AD70C00DDBD0E /* QuadDirectionalGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E56B92C8280AD70C00DDBD0E /* QuadDirectionalGeneratorDecorator.swift */; };
 		E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E572AD652805BC8000FC6053 /* DimensionSelectViewModel.swift */; };
 		E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95727EA1A34000D10E4 /* Rectangle.swift */; };
 		E573E95A27EA2120000D10E4 /* DataStringConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E95927EA2120000D10E4 /* DataStringConvertible.swift */; };
@@ -133,7 +134,6 @@
 		E573E96427EA3326000D10E4 /* PersistableDungeon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96327EA3326000D10E4 /* PersistableDungeon.swift */; };
 		E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96527EA3548000D10E4 /* PersistableTile.swift */; };
 		E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573E96727EA38E2000D10E4 /* LevelLayer.swift */; };
-		E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */; };
 		E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E573F43E27F4B806001E9877 /* CaseIterable.swift */; };
 		E57453B327F555B3003DAD5C /* ConditionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57453B227F555B3003DAD5C /* ConditionBuilder.swift */; };
 		E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574657B27F8032500F79A52 /* AudioRecorder.swift */; };
@@ -142,7 +142,6 @@
 		E574658327F805B100F79A52 /* PaletteEntityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658227F805B100F79A52 /* PaletteEntityView.swift */; };
 		E574658527F805CC00F79A52 /* PaletteEntityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */; };
 		E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658627F8096600F79A52 /* ConditionCreatorView.swift */; };
-		E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */; };
 		E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574658C27F835D300F79A52 /* PersistableEntityType.swift */; };
 		E574659127F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */; };
 		E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */; };
@@ -160,7 +159,6 @@
 		E575264C27E965410045D3D6 /* Chunkable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E575264B27E965410045D3D6 /* Chunkable.swift */; };
 		E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */; };
 		E578594627F3EA7C009A79F9 /* DungeonManipulableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594527F3EA7C009A79F9 /* DungeonManipulableViewModel.swift */; };
-		E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594827F4180B009A79F9 /* MessagesViewModel.swift */; };
 		E578594B27F42C94009A79F9 /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E578594A27F42C94009A79F9 /* Loadable.swift */; };
 		E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */; };
 		E57A19A527F9F8F500312C39 /* NeighborFinderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57A19A427F9F8F500312C39 /* NeighborFinderDelegate.swift */; };
@@ -196,7 +194,7 @@
 		E57B535927FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B535827FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift */; };
 		E57B535B27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B535A27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift */; };
 		E57B535D27FD72640071E623 /* ConnectorGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B535C27FD72640071E623 /* ConnectorGeneratorDecorator.swift */; };
-		E57B535F27FD72770071E623 /* CompletelyEnclosedGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B535E27FD72770071E623 /* CompletelyEnclosedGenerator.swift */; };
+		E57B535F27FD72770071E623 /* CompletelyEnclosedGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B535E27FD72770071E623 /* CompletelyEnclosedGeneratorDecorator.swift */; };
 		E57B536127FD73A60071E623 /* StringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57B536027FD73A60071E623 /* StringView.swift */; };
 		E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */; };
 		E581F08827F75C3900B1CFCB /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F08727F75C3900B1CFCB /* Image.swift */; };
@@ -205,7 +203,6 @@
 		E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */; };
 		E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E581F52E27ECD29800CAC137 /* ContainerView.swift */; };
 		E585AD5127F9410900A54202 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5027F9410900A54202 /* UIColor.swift */; };
-		E585AD5927F964F900A54202 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5827F964F900A54202 /* MessageView.swift */; };
 		E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */; };
 		E585AD6127F9657700A54202 /* MinimumLengthParsingStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */; };
 		E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58ACBDB27FDC9140035E517 /* IfState.swift */; };
@@ -221,6 +218,10 @@
 		E58E8374280294B900C06A59 /* ActiveRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8373280294B900C06A59 /* ActiveRulesView.swift */; };
 		E58E8376280294CC00C06A59 /* ActiveRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */; };
 		E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */; };
+		E5A28903280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28902280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift */; };
+		E5A28905280B185500CC637D /* IdentityFinderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28904280B185500CC637D /* IdentityFinderDecorator.swift */; };
+		E5A28907280B186C00CC637D /* NeighborFinderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28906280B186C00CC637D /* NeighborFinderDecorator.swift */; };
+		E5A28909280B194500CC637D /* ChunkGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28908280B194500CC637D /* ChunkGeneratorDecorator.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
 		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
@@ -285,10 +286,9 @@
 		40E2516527F43209008CBCE0 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
 		40E2516727F4359C008CBCE0 /* IntegerUnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerUnlockCondition.swift; sourceTree = "<group>"; };
 		40E2516927F43C56008CBCE0 /* UnlockCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockCondition.swift; sourceTree = "<group>"; };
-		40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStatistic.swift; sourceTree = "<group>"; };
 		40E2517227F71FCE008CBCE0 /* GameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEvent.swift; sourceTree = "<group>"; };
-		40E2517727F72645008CBCE0 /* AchiementMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchiementMainView.swift; sourceTree = "<group>"; };
+		40E2517727F72645008CBCE0 /* AchievementMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementMainView.swift; sourceTree = "<group>"; };
 		40E2517927F7270A008CBCE0 /* AchievementsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsViewModel.swift; sourceTree = "<group>"; };
 		40E2517B27F72963008CBCE0 /* AchievementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementView.swift; sourceTree = "<group>"; };
 		40E2517D27F786B7008CBCE0 /* AchievementImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementImages.swift; sourceTree = "<group>"; };
@@ -305,6 +305,7 @@
 		40E2519A27FAD891008CBCE0 /* PersistableGameStatistic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableGameStatistic.swift; sourceTree = "<group>"; };
 		40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAbstractGameEvent.swift; sourceTree = "<group>"; };
 		40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedAchievementsUtil.swift; sourceTree = "<group>"; };
+		40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonEventDecorator.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -329,8 +330,6 @@
 		E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerViewModel.swift; sourceTree = "<group>"; };
 		E5563C3827E8B213007D2E86 /* ViewConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConstants.swift; sourceTree = "<group>"; };
 		E5563C3B27E8B55E007D2E86 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
-		E5563C3D27E8CFCC007D2E86 /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
-		E5563C3F27E8D09E007D2E86 /* ToolbarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarViewModel.swift; sourceTree = "<group>"; };
 		E5563C4127E8DF6A007D2E86 /* CGVector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGVector.swift; sourceTree = "<group>"; };
 		E5563C4327E8DF87007D2E86 /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 		E5563C4527E8E31B007D2E86 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
@@ -340,10 +339,13 @@
 		E569071827ED4D830010E665 /* PersistenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceView.swift; sourceTree = "<group>"; };
 		E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabaIsYouGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagIsWinGeneratorDecorator.swift; sourceTree = "<group>"; };
-		E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BedrockIsStopGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E569858D27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RockIsStopGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E569FC1A280094F70042D15B /* DimensionSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionSelectView.swift; sourceTree = "<group>"; };
 		E569FC1C280096FE0042D15B /* LevelMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMetadata.swift; sourceTree = "<group>"; };
 		E56AC06D2800756400FDD4CD /* DungeonNameButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonNameButtonViewModel.swift; sourceTree = "<group>"; };
+		E56B92C2280AD3C500DDBD0E /* BaseGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseGenerator.swift; sourceTree = "<group>"; };
+		E56B92C6280AD4BB00DDBD0E /* IdentityGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E56B92C8280AD70C00DDBD0E /* QuadDirectionalGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E572AD652805BC8000FC6053 /* DimensionSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimensionSelectViewModel.swift; sourceTree = "<group>"; };
 		E573E95727EA1A34000D10E4 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		E573E95927EA2120000D10E4 /* DataStringConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStringConvertible.swift; sourceTree = "<group>"; };
@@ -353,7 +355,6 @@
 		E573E96327EA3326000D10E4 /* PersistableDungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableDungeon.swift; sourceTree = "<group>"; };
 		E573E96527EA3548000D10E4 /* PersistableTile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableTile.swift; sourceTree = "<group>"; };
 		E573E96727EA38E2000D10E4 /* LevelLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayer.swift; sourceTree = "<group>"; };
-		E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerTileInfoViewModel.swift; sourceTree = "<group>"; };
 		E573F43E27F4B806001E9877 /* CaseIterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseIterable.swift; sourceTree = "<group>"; };
 		E57453B227F555B3003DAD5C /* ConditionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionBuilder.swift; sourceTree = "<group>"; };
 		E574657B27F8032500F79A52 /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -362,7 +363,6 @@
 		E574658227F805B100F79A52 /* PaletteEntityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEntityView.swift; sourceTree = "<group>"; };
 		E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEntityViewModel.swift; sourceTree = "<group>"; };
 		E574658627F8096600F79A52 /* ConditionCreatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConditionCreatorView.swift; sourceTree = "<group>"; };
-		E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaLevelDesignerTileInfoView.swift; sourceTree = "<group>"; };
 		E574658C27F835D300F79A52 /* PersistableEntityType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableEntityType.swift; sourceTree = "<group>"; };
 		E574659027F8666700F79A52 /* SouthwardEastwardMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SouthwardEastwardMatchingStrategy.swift; sourceTree = "<group>"; };
 		E574659227F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalMatchingStrategy.swift; sourceTree = "<group>"; };
@@ -380,7 +380,6 @@
 		E575264B27E965410045D3D6 /* Chunkable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chunkable.swift; sourceTree = "<group>"; };
 		E578594327F3EA58009A79F9 /* IntegerViewTranslatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntegerViewTranslatable.swift; sourceTree = "<group>"; };
 		E578594527F3EA7C009A79F9 /* DungeonManipulableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonManipulableViewModel.swift; sourceTree = "<group>"; };
-		E578594827F4180B009A79F9 /* MessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewModel.swift; sourceTree = "<group>"; };
 		E578594A27F42C94009A79F9 /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		E57A19A127F9F10600312C39 /* WrapAroundMatchingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrapAroundMatchingStrategy.swift; sourceTree = "<group>"; };
 		E57A19A427F9F8F500312C39 /* NeighborFinderDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborFinderDelegate.swift; sourceTree = "<group>"; };
@@ -417,7 +416,7 @@
 		E57B535827FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeLikeConnectorLockGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E57B535A27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnakeLikeConnectorGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E57B535C27FD72640071E623 /* ConnectorGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorGeneratorDecorator.swift; sourceTree = "<group>"; };
-		E57B535E27FD72770071E623 /* CompletelyEnclosedGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletelyEnclosedGenerator.swift; sourceTree = "<group>"; };
+		E57B535E27FD72770071E623 /* CompletelyEnclosedGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletelyEnclosedGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E57B536027FD73A60071E623 /* StringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringView.swift; sourceTree = "<group>"; };
 		E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		E581F08727F75C3900B1CFCB /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -426,7 +425,6 @@
 		E581F52B27ECD0E500CAC137 /* NavigationFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationFrame.swift; sourceTree = "<group>"; };
 		E581F52E27ECD29800CAC137 /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
 		E585AD5027F9410900A54202 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
-		E585AD5827F964F900A54202 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		E585AD5E27F9655C00A54202 /* MaximumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaximumLengthParsingStrategy.swift; sourceTree = "<group>"; };
 		E585AD6027F9657700A54202 /* MinimumLengthParsingStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumLengthParsingStrategy.swift; sourceTree = "<group>"; };
 		E58ACBDB27FDC9140035E517 /* IfState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IfState.swift; sourceTree = "<group>"; };
@@ -442,6 +440,10 @@
 		E58E8373280294B900C06A59 /* ActiveRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesView.swift; sourceTree = "<group>"; };
 		E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveRulesViewModel.swift; sourceTree = "<group>"; };
 		E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsVerbDisjointSetPolicy.swift; sourceTree = "<group>"; };
+		E5A28902280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadDirectionalLockGeneratorDecorator.swift; sourceTree = "<group>"; };
+		E5A28904280B185500CC637D /* IdentityFinderDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdentityFinderDecorator.swift; sourceTree = "<group>"; };
+		E5A28906280B186C00CC637D /* NeighborFinderDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeighborFinderDecorator.swift; sourceTree = "<group>"; };
+		E5A28908280B194500CC637D /* ChunkGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
 		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 				40E2518527F8E134008CBCE0 /* GameEventBaseDecorator.swift */,
 				40E2518727F8E22A008CBCE0 /* LevelEventDecorator.swift */,
 				40E2518927F8E2A9008CBCE0 /* EntityEventDecorator.swift */,
+				40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */,
 			);
 			path = Decorators;
 			sourceTree = "<group>";
@@ -651,7 +654,6 @@
 		40E2516D27F5D742008CBCE0 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				40E2516E27F5D74F008CBCE0 /* StatisticsViewModel.swift */,
 				40E2517027F5EB7D008CBCE0 /* GameStatistic.swift */,
 			);
 			path = Statistics;
@@ -669,7 +671,7 @@
 		40E2517527F72629008CBCE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				40E2517727F72645008CBCE0 /* AchiementMainView.swift */,
+				40E2517727F72645008CBCE0 /* AchievementMainView.swift */,
 				40E2517B27F72963008CBCE0 /* AchievementView.swift */,
 				40E2517D27F786B7008CBCE0 /* AchievementImages.swift */,
 			);
@@ -799,7 +801,6 @@
 			isa = PBXGroup;
 			children = (
 				E5EC5B5527F3696200BAE834 /* PlayView.swift */,
-				E585AD5827F964F900A54202 /* MessageView.swift */,
 				E58E8373280294B900C06A59 /* ActiveRulesView.swift */,
 			);
 			path = Views;
@@ -830,6 +831,15 @@
 				E567530127EEBACD0001305D /* DungeonSelectViewModel.swift */,
 			);
 			path = "View Models";
+			sourceTree = "<group>";
+		};
+		E56B92CA280AD75700DDBD0E /* policies */ = {
+			isa = PBXGroup;
+			children = (
+				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
+				E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */,
+			);
+			path = policies;
 			sourceTree = "<group>";
 		};
 		E56FE99627EEF21100EBE865 /* extensions */ = {
@@ -926,6 +936,8 @@
 			isa = PBXGroup;
 			children = (
 				E57A19A427F9F8F500312C39 /* NeighborFinderDelegate.swift */,
+				E5A28906280B186C00CC637D /* NeighborFinderDecorator.swift */,
+				E5A28904280B185500CC637D /* IdentityFinderDecorator.swift */,
 				E57A19A927F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift */,
 				E57A19AB27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift */,
 				E57A19AD27F9FD3700312C39 /* ChunkNeighborFinderRandomizerDecorator.swift */,
@@ -938,14 +950,19 @@
 			isa = PBXGroup;
 			children = (
 				E57A19B227F9FE8600312C39 /* ChunkGeneratorDelegate.swift */,
+				E5A28908280B194500CC637D /* ChunkGeneratorDecorator.swift */,
+				E56B92C2280AD3C500DDBD0E /* BaseGenerator.swift */,
+				E56B92C6280AD4BB00DDBD0E /* IdentityGeneratorDecorator.swift */,
 				E57B535827FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift */,
 				E57B535A27FD724B0071E623 /* SnakeLikeConnectorGeneratorDecorator.swift */,
 				E57B535C27FD72640071E623 /* ConnectorGeneratorDecorator.swift */,
 				E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */,
-				E57B535E27FD72770071E623 /* CompletelyEnclosedGenerator.swift */,
+				E57B535E27FD72770071E623 /* CompletelyEnclosedGeneratorDecorator.swift */,
 				E569858927FE6F76001C628A /* BabaIsYouGeneratorDecorator.swift */,
 				E569858B27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift */,
-				E569858D27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift */,
+				E569858D27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift */,
+				E56B92C8280AD70C00DDBD0E /* QuadDirectionalGeneratorDecorator.swift */,
+				E5A28902280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift */,
 			);
 			path = ChunkGeneratorDelegate;
 			sourceTree = "<group>";
@@ -1042,13 +1059,11 @@
 		E581F52727ECCC5600CAC137 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E5563C3D27E8CFCC007D2E86 /* ToolbarView.swift */,
 				E5563C3227E8ADCF007D2E86 /* DesignerView.swift */,
 				E569071827ED4D830010E665 /* PersistenceView.swift */,
 				E57CA5E827EE1B2B008A3AFB /* PaletteView.swift */,
 				E574658227F805B100F79A52 /* PaletteEntityView.swift */,
 				E574658627F8096600F79A52 /* ConditionCreatorView.swift */,
-				E574658827F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift */,
 				E57A96DC27FEDF9300264A28 /* LevelCollectionView.swift */,
 				E569FC1A280094F70042D15B /* DimensionSelectView.swift */,
 			);
@@ -1058,9 +1073,7 @@
 		E581F52827ECCC6000CAC137 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				E5563C3F27E8D09E007D2E86 /* ToolbarViewModel.swift */,
 				E5563C3627E8AF69007D2E86 /* DesignerViewModel.swift */,
-				E573F43C27F498BC001E9877 /* DesignerTileInfoViewModel.swift */,
 				E574658427F805CC00F79A52 /* PaletteEntityViewModel.swift */,
 				E5D0A22C27FC91C000F8E162 /* ConditionEvaluableCreatorViewModel.swift */,
 				E57A96DE27FEE2AC00264A28 /* LevelCollectionViewModel.swift */,
@@ -1088,8 +1101,9 @@
 		E58E83702802915300C06A59 /* validation */ = {
 			isa = PBXGroup;
 			children = (
-				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
-				E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */,
+				E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */,
+				E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */,
+				E56B92CA280AD75700DDBD0E /* policies */,
 			);
 			path = validation;
 			sourceTree = "<group>";
@@ -1127,10 +1141,8 @@
 				E574658F27F8665500F79A52 /* parsing */,
 				E57ACB4127DC677A00F73B27 /* Rule.swift */,
 				E5BECBE827E5E7C700E3952D /* RuleParser.swift */,
-				E5BECBEA27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift */,
 				E5BECBEC27E5E7FD00E3952D /* RuleEngine.swift */,
 				E5BECBEE27E5E84200E3952D /* DefaultRules.swift */,
-				E58ACBE527FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift */,
 				E58E836828027FE400C06A59 /* RuleApplicator.swift */,
 			);
 			path = rules;
@@ -1155,7 +1167,6 @@
 			isa = PBXGroup;
 			children = (
 				E5EC5B5827F36ACE00BAE834 /* PlayViewModel.swift */,
-				E578594827F4180B009A79F9 /* MessagesViewModel.swift */,
 				E58E8375280294CC00C06A59 /* ActiveRulesViewModel.swift */,
 			);
 			path = "View Models";
@@ -1298,6 +1309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5A28903280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift in Sources */,
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */,
 				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
@@ -1324,9 +1336,11 @@
 				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
 				E5EC5B5627F3696200BAE834 /* PlayView.swift in Sources */,
 				E57B535727FD68A70071E623 /* NamedKeyPath.swift in Sources */,
+				E56B92C3280AD3C500DDBD0E /* BaseGenerator.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */,
+				E5A28909280B194500CC637D /* ChunkGeneratorDecorator.swift in Sources */,
 				E5BECBED27E5E7FD00E3952D /* RuleEngine.swift in Sources */,
 				40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */,
 				40E2519527FAD835008CBCE0 /* PersistableIntegerUnlockCondition.swift in Sources */,
@@ -1350,6 +1364,7 @@
 				E57B535D27FD72640071E623 /* ConnectorGeneratorDecorator.swift in Sources */,
 				E57B534327FD33230071E623 /* PersistableConditionEvaluable.swift in Sources */,
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
+				E5A28905280B185500CC637D /* IdentityFinderDecorator.swift in Sources */,
 				E58E836928027FE400C06A59 /* RuleApplicator.swift in Sources */,
 				1E54070828097049006D546F /* MultiplayerRoom.swift in Sources */,
 				1E54071D280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
@@ -1363,7 +1378,7 @@
 				E5563C3727E8AF69007D2E86 /* DesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
 				E5BECBE227E5B6EF00E3952D /* String.swift in Sources */,
-				E57B535F27FD72770071E623 /* CompletelyEnclosedGenerator.swift in Sources */,
+				E57B535F27FD72770071E623 /* CompletelyEnclosedGeneratorDecorator.swift in Sources */,
 				E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */,
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
 				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
@@ -1375,6 +1390,8 @@
 				E574659927F8685C00F79A52 /* NounState.swift in Sources */,
 				E57B534F27FD369B0071E623 /* PersistableLevelLayer.swift in Sources */,
 				1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */,
+				E5A28907280B186C00CC637D /* NeighborFinderDecorator.swift in Sources */,
+				E56B92C9280AD70C00DDBD0E /* QuadDirectionalGeneratorDecorator.swift in Sources */,
 				E57A19A727F9F91900312C39 /* Directions.swift in Sources */,
 				40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
@@ -1427,9 +1444,10 @@
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
 				1E540714280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */,
+				40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */,
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
-				E569858E27FE7F09001C628A /* BedrockIsStopGeneratorDecorator.swift in Sources */,
+				E569858E27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift in Sources */,
 				405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
@@ -1449,6 +1467,7 @@
 				1E540729280B5F98006D546F /* MultiplayerPlayView.swift in Sources */,
 				E574659527F866A400F79A52 /* DeterministicFiniteAutomaton.swift in Sources */,
 				E581F52C27ECD0E500CAC137 /* NavigationFrame.swift in Sources */,
+				E56B92C7280AD4BC00DDBD0E /* IdentityGeneratorDecorator.swift in Sources */,
 				E574658727F8096600F79A52 /* ConditionCreatorView.swift in Sources */,
 				B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */,
 				B07AA62C27E658F200918E71 /* PlayerMoveMechanic.swift in Sources */,
@@ -1461,8 +1480,6 @@
 				E57B534927FD34020071E623 /* ConditionRelation.swift in Sources */,
 				B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */,
 				E5563C4227E8DF6A007D2E86 /* CGVector.swift in Sources */,
-				E578594927F4180B009A79F9 /* MessagesViewModel.swift in Sources */,
-				E5563C3E27E8CFCC007D2E86 /* ToolbarView.swift in Sources */,
 				E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */,
 				E58E836B2802840400C06A59 /* UnionFind.swift in Sources */,
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
@@ -1470,7 +1487,6 @@
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
 				405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
-				E573F43D27F498BC001E9877 /* DesignerTileInfoViewModel.swift in Sources */,
 				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,
 				E574658127F8059000F79A52 /* EntityViewModel.swift in Sources */,
 				E581F52F27ECD29800CAC137 /* ContainerView.swift in Sources */,
@@ -1482,7 +1498,6 @@
 				B0592D3A27F219B1002EC0C3 /* PushMechanic.swift in Sources */,
 				405467F72800562800C577EF /* GameNotificationView.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
-				40E2516F27F5D74F008CBCE0 /* StatisticsViewModel.swift in Sources */,
 				40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */,
 				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
 				1E54070428096E4A006D546F /* DungeonRoomStorage.swift in Sources */,
@@ -1493,6 +1508,7 @@
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 				E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
+				40F43B2E28099D79000DCAA5 /* DungeonEventDecorator.swift in Sources */,
 				E57B535527FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift in Sources */,
 				405467F3280053DB00C577EF /* GameNotificationPublisher.swift in Sources */,
 				E57B535927FD72360071E623 /* SnakeLikeConnectorLockGeneratorDecorator.swift in Sources */,

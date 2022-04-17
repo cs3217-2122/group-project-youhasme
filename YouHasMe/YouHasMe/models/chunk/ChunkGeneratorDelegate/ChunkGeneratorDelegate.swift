@@ -22,6 +22,14 @@ extension ChunkGeneratorDelegate {
     func decorateWith<T: ChunkGeneratorDecorator>(_ decoratorClass: T.Type) -> AnyChunkGeneratorDelegate {
         decoratorClass.init(generator: self).eraseToAnyGenerator()
     }
+    
+    func decorateWithAll(_ decoratorClasses: [IdentityGeneratorDecorator.Type]) -> AnyChunkGeneratorDelegate {
+        var generator = self.eraseToAnyGenerator()
+        for decoratorClass in decoratorClasses {
+            generator = generator.decorateWith(decoratorClass)
+        }
+        return generator
+    }
 
     func eraseToAnyGenerator() -> AnyChunkGeneratorDelegate {
         AnyChunkGeneratorDelegate(generator: self)
@@ -38,9 +46,4 @@ class AnyChunkGeneratorDelegate: ChunkGeneratorDelegate {
     func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
         _generate(dimensions, levelPosition, extremities)
     }
-}
-
-protocol ChunkGeneratorDecorator: ChunkGeneratorDelegate {
-    var backingGenerator: AnyChunkGeneratorDelegate { get }
-    init<T: ChunkGeneratorDelegate>(generator: T)
 }

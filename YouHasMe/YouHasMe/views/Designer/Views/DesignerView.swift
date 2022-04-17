@@ -29,8 +29,6 @@ struct DesignerView: View {
         TabView {
             ZStack {
                 VStack {
-                    ToolbarView(viewModel: viewModel.getToolbarViewModel())
-                        .padding()
                     PaletteView(viewModel: viewModel)
                         .padding()
                     GridView(viewModel: viewModel)
@@ -49,17 +47,6 @@ struct DesignerView: View {
                         viewModel: viewModel.getConditionEvaluableCreatorViewModel()
                     )
                 }
-            
-//            if let selectedTile = viewModel.selectedTile {
-//                NavigationFrame(backHandler: {
-//                    viewModel.deselectTile()
-//                }) {
-//                    MetaLevelDesignerTileInfoView(
-//                        viewModel: viewModel.getTileInfoViewModel(tile: selectedTile)
-//                    )
-//                }
-//            }
-
             }
                 .gesture(dragGesture)
                 .tabItem {

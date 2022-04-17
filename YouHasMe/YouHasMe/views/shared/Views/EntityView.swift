@@ -24,8 +24,8 @@ struct EntityView: View {
     var body: some View {
         ZStack {
             CellView(backupDisplayColor: .black, viewModel: viewModel)
-                .onReceive(viewModel.$tileDescription, perform: {
-                    shouldShowPopover = $0 != nil
+                .onReceive(viewModel.$tileDescription, perform: { description in
+                    shouldShowPopover = description != nil
                 })
                 .popover(isPresented: $shouldShowPopover) {
                     if let tileDescription = viewModel.tileDescription {

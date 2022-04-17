@@ -1,39 +1,40 @@
 //
-//  LevelEventDecorator.swift
+//  DungeonEventDecorator.swift
 //  YouHasMe
 //
-//  Created by Neo Jing Xuan on 3/4/22.
+//  Created by Neo Jing Xuan on 15/4/22.
 //
 
 import Foundation
 
-class LevelEventDecorator: GameEventBaseDecorator {
-    var levelId: Point
+class DungeonEventDecorator: GameEventBaseDecorator {
+    var dungeonId: String
 
-    init(wrappedEvent: AbstractGameEvent, levelId: Point) {
-        self.levelId = levelId
+    init(wrappedEvent: AbstractGameEvent, dungeonId: String) {
+        self.dungeonId = dungeonId
         super.init(wrappedEvent: wrappedEvent)
     }
 
-    func hasSameLevel(_ otherLevelEvent: LevelEventDecorator) -> Bool {
-        levelId == otherLevelEvent.levelId
+    func hasSameDungeon(_ otherDungeonEvent: DungeonEventDecorator) -> Bool {
+        dungeonId == otherDungeonEvent.dungeonId
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
-        if let levelEvent = otherGameEvent as? LevelEventDecorator {
-            if hasSameLevel(levelEvent) {
+        if let dungeonEvent = otherGameEvent as? DungeonEventDecorator {
+            if hasSameDungeon(dungeonEvent) {
                 return true
             }
         }
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
             return hasSameDecoratedDetails(otherGameEvent: decoratedEvent.wrappedEvent)
         }
+
         return false
     }
 
     override func toPersistable() -> PersistableAbstractGameEvent {
         let persistable = wrappedEvent.toPersistable()
-        persistable.setLevelId(levelId)
+        persistable.setDungeonId(dungeonId)
         return persistable
     }
 }

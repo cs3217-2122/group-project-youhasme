@@ -13,9 +13,9 @@ class GameStatistic: Hashable {
         case lifetime
     }
 
-    var value: Int
-    var type: StatisticType
-    var gameEvent: AbstractGameEvent
+    private(set) var value: Int
+    private(set) var type: StatisticType
+    private(set) var gameEvent: AbstractGameEvent
 
     init(value: Int, statisticType: StatisticType, gameEvent: AbstractGameEvent) {
         self.value = value
@@ -25,7 +25,6 @@ class GameStatistic: Hashable {
 
     func increase() {
         value += 1
-        // globalLogger.info("increased to \(value)")
     }
 
     func reset() {
@@ -37,10 +36,6 @@ class GameStatistic: Hashable {
     }
 
     func handleGameEvent(event: AbstractGameEvent) {
-        if gameEvent.type == .win {
-//            print(event.type)
-        }
-
         if !event.containsGameEvent(otherGameEvent: self.gameEvent) {
             return
         }

@@ -10,7 +10,13 @@ class RuleApplicator {
     func applyRules(_ rules: [Rule], to entity: inout Entity) {
         var behaviours: Set<Behaviour> = []
         switch entity.entityType.classification {
-        case .noun, .verb, .connective, .property:
+        case
+                .noun,
+                .verb,
+                .connective,
+                .property,
+                .conditionRelation,
+                .conditionEvaluable:
             for rule in rules {
                 guard rule.receiver == .word else {
                     continue
@@ -25,8 +31,6 @@ class RuleApplicator {
 
                 behaviours.insert(rule.activateToBehaviour())
             }
-        default:
-            break
         }
 
         entity.activeBehaviours = behaviours

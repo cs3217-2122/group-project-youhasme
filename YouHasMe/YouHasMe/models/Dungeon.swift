@@ -18,14 +18,8 @@ class Dungeon {
     static let defaultName: String = "Dungeon1"
     static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
-    var levelGenerator = CompletelyEnclosedGenerator()
-        .decorateWith(SnakeLikeConnectorGeneratorDecorator.self)
-        .decorateWith(SnakeLikeConnectorLockGeneratorDecorator.self)
-        .decorateWith(BedrockIsStopGeneratorDecorator.self)
-        .decorateWith(BabaIsYouGeneratorDecorator.self)
-        .decorateWith(FlagIsWinGeneratorDecorator.self)
-    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder()
-        .eraseToAnyNeighborFinder()
+    var levelGenerator: AnyChunkGeneratorDelegate
+    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
@@ -69,7 +63,8 @@ class Dungeon {
         dimensions: Rectangle,
         levelDimensions: Rectangle,
         entryLevelPosition: Point,
-        levelNameToPositionMap: [String: Point]
+        levelNameToPositionMap: [String: Point],
+        levelGenerators: [IdentityGeneratorDecorator.Type] = []
     ) {
         self.name = name
         self.dimensions = dimensions
@@ -77,6 +72,7 @@ class Dungeon {
         self.entryLevelPosition = entryLevelPosition
         self.levelNameToPositionMap = levelNameToPositionMap
         playerLevelPosition = entryLevelPosition
+        self.levelGenerator = BaseGenerator().decorateWithAll(levelGenerators)
         if isNewDungeon {
             for x in 0..<dimensions.width {
                 for y in 0..<dimensions.height {
@@ -139,15 +135,18 @@ class Dungeon {
         level.layer = levelLayer
     }
 
-    func movePlayer(by vector: Vector) {
+    func movePlayer(by vector: Vector) -> Bool {
         let newPlayerLevelPosition = playerLevelPosition.translate(by: vector)
-        guard dimensions.isWithinBounds(newPlayerLevelPosition) else {
-            return
+        guard loadedLevels[newPlayerLevelPosition] != nil else {
+            return false
         }
+        
         playerLevelPosition = newPlayerLevelPosition
+        return true
     }
 
     func getActiveLevel() -> Level {
+        print(playerLevelPosition)
         guard let level = getLevel(levelPosition: playerLevelPosition) else {
             fatalError("should not be nil")
         }
@@ -156,7 +155,10 @@ class Dungeon {
 
     func winActiveLevel() {
         let level = getActiveLevel()
-        level.winCount += 1
+        guard let trueLevel = getLevel(levelPosition: level.id) else {
+            return
+        }
+        trueLevel.winCount += 1
         totalWins += 1
     }
 }
@@ -199,6 +201,8 @@ extension Dungeon {
         guard let level = getLevel(levelPosition: worldToLevelPosition(worldPosition)) else {
             return nil
         }
+        level.locationalDelegate = self
+        level.levelStorage = self.levelStorage
 
         if loadNeighbors {
             level.neighborFinderDelegate = levelNeighborFinder
@@ -342,8 +346,35 @@ extension Dungeon {
 }
 
 enum DungeonKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
-    case totalWins = "Total Wins"
-    case numberOfPlayers = "Number of dungeon players"
+    case totalWins = "Total Wins across all levels"
+    case youCount = "Number of entities with YOU property in current level"
+    case stopCount = "Number of entites with STOP property in current level"
+    case pushCount = "Number of entities with PUSH property in current level"
+    case babaCount = "Number of Baba entities in current level"
+    case wallCount = "Number of Wall entities in current level"
+}
+
+// MARK: Queries
+extension Dungeon {
+    var youCount: Int {
+        getActiveLevel().youCount
+    }
+    
+    var stopCount: Int {
+        getActiveLevel().stopCount
+    }
+    
+    var pushCount: Int {
+        getActiveLevel().pushCount
+    }
+    
+    var babaCount: Int {
+        getActiveLevel().babaCount
+    }
+    
+    var wallCount: Int {
+        getActiveLevel().pushCount
+    }
 }
 
 extension Dungeon: KeyPathExposable {
@@ -351,7 +382,11 @@ extension Dungeon: KeyPathExposable {
     static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
             .totalWins: \.totalWins,
-            .numberOfPlayers: \.numberOfPlayers
+            .youCount: \.youCount,
+            .stopCount: \.stopCount,
+            .pushCount: \.pushCount,
+            .babaCount: \.babaCount,
+            .wallCount: \.wallCount
         ]
     }
 

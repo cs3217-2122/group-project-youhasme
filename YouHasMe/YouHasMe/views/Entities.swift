@@ -36,10 +36,10 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("flag_text")
         case .box:
             return .string("box_text")
-        case .bedrock:
-            return .uiImage("BR".asImage()!)
-        case .connectorWall:
-            return .uiImage("CW".asImage()!)
+        case .rock:
+            return .string("rock_text")
+        case .door:
+            return .string("door_text")
         default:
             break
         }
@@ -75,9 +75,9 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("flag")
         case .box:
             return .string("box")
-        case .bedrock:
+        case .rock:
             return .string("rock")
-        case .connectorWall:
+        case .door:
             return .string("door")
         default:
             break
@@ -95,7 +95,7 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         }
     case .conditionEvaluable(let conditionEvaluable):
         guard let value = conditionEvaluable.getValue() else {
-            return .uiImage("Evaluable".asImage()!)
+            return .uiImage("EVAL".asImage()!)
         }
         return .uiImage("\(value)".asImage()!)
     case .connective(let connective):

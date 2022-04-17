@@ -6,10 +6,10 @@
 //
 
 import Foundation
-class CompletelyEnclosedGenerator: ChunkGeneratorDelegate {
+final class CompletelyEnclosedGeneratorDecorator: IdentityGeneratorDecorator {
     private func withSurroundingWalls(dimensions: Rectangle, tiles: [[Tile]]) -> [[Tile]] {
         var tiles = tiles
-        let bedrockEntity = Entity(entityType: EntityType(classification: .nounInstance(.bedrock)))
+        let bedrockEntity = Entity(entityType: EntityType(classification: .nounInstance(.rock)))
         for y in 0..<dimensions.height {
             tiles[y][0].entities.append(
                 bedrockEntity
@@ -31,8 +31,12 @@ class CompletelyEnclosedGenerator: ChunkGeneratorDelegate {
         return tiles
     }
 
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = getEmptyGrid(dimensions: dimensions)
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
+            dimensions: dimensions,
+            levelPosition: levelPosition,
+            extremities: extremities
+        )
         tiles = withSurroundingWalls(dimensions: dimensions, tiles: tiles)
         return tiles
     }

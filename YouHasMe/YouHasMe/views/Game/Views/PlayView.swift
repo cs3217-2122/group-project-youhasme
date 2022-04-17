@@ -41,19 +41,13 @@ struct PlayView: View {
     var body: some View {
         ZStack {
             VStack {
-                Text(viewModel.currentLevelName)
+                Text("Current Lvl: \(viewModel.currentLevelName)")
+                    .font(.title2)
                 GridView(viewModel: viewModel)
                     .gesture(dragGesture)
                 Spacer()
                 
                 ActiveRulesView(viewModel: viewModel.getActiveRulesViewModel())
-                
-                
-                HStack(alignment: .center) {
-                    ForEach(viewModel.contextualData) { data in
-                        Button(data.description, action: data.action)
-                    }
-                }
                 
                 Button("Undo") {
                     viewModel.playerUndo()
@@ -63,19 +57,6 @@ struct PlayView: View {
                                 Button("yay!", role: .cancel) {}
             }.alert("No infinite loops allowed!", isPresented: $viewModel.isLoopingInfinitely) {
                 Button("ok!", role: .cancel) {}
-            }
-            
-            
-            if viewModel.state != .normalPlay {
-                NavigationFrame(
-                    backHandler: { viewModel.closeOverlay() }) {
-                    switch viewModel.state {
-                    case .messages:
-                        MessagesView(viewModel: viewModel.getMessagesViewModel())
-                    default:
-                        EmptyView()
-                    }
-                }
             }
         }.overlay(alignment: .top, content: {
             GameNotificationsView(gameNotificationsViewModel: viewModel.notificationsViewModel)

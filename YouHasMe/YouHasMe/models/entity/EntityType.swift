@@ -33,8 +33,8 @@ struct EntityTypes {
         static var wall = EntityType(classification: .nounInstance(.wall))
         static var skull = EntityType(classification: .nounInstance(.skull))
         static var box = EntityType(classification: .nounInstance(.box))
-        static var bedrock = EntityType(classification: .nounInstance(.bedrock))
-        static var connectorWall = EntityType(classification: .nounInstance(.connectorWall))
+        static var bedrock = EntityType(classification: .nounInstance(.rock))
+        static var door = EntityType(classification: .nounInstance(.door))
         static func getAllNounInstances() -> [EntityType] {
             [
                 NounInstances.baba,
@@ -43,7 +43,7 @@ struct EntityTypes {
                 NounInstances.skull,
                 NounInstances.box,
                 NounInstances.bedrock,
-                NounInstances.connectorWall
+                NounInstances.door
             ]
         }
     }
@@ -55,8 +55,8 @@ struct EntityTypes {
         static var skull = EntityType(classification: .noun(.skull))
         static var box = EntityType(classification: .noun(.box))
         static var word = EntityType(classification: .noun(.word))
-        static var bedrock = EntityType(classification: .noun(.bedrock))
-        static var connectorWall = EntityType(classification: .noun(.connectorWall))
+        static var bedrock = EntityType(classification: .noun(.rock))
+        static var door = EntityType(classification: .noun(.door))
         static func getAllNouns() -> [EntityType] {
             [
                 Nouns.baba,
@@ -66,7 +66,7 @@ struct EntityTypes {
                 Nouns.box,
                 Nouns.word,
                 Nouns.bedrock,
-                Nouns.connectorWall
+                Nouns.door
             ]
         }
     }
@@ -131,7 +131,13 @@ struct EntityTypes {
             classification:
                     .conditionEvaluable(
                         ConditionEvaluable(
-                            evaluableType: .level(id: .zero, evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)))))
+                            evaluableType: .level(
+                                id: .zero,
+                                evaluatingKeyPath: Level.getNamedKeyPath(given: .winCount)
+                            )
+                        )
+                    )
+        )
 
         static func getAllConditionEvaluables() -> [EntityType] {
             [dummyEvaluable]
