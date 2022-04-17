@@ -61,7 +61,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var timer: Timer?
     private var timedOffset: Vector = .zero
     @Published var levelsUpdated = false
-    private var mostRecentPlayerMove: UpdateType?
+    private var mostRecentPlayerMove: ActionType?
     private var playerMovementAcrossLevel: Vector?
 
     convenience init(playableDungeon: PlayableDungeon,
@@ -145,9 +145,9 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         dungeon.winActiveLevel()
     }
 
-    func playerMove(updateAction: UpdateType) {
-        mostRecentPlayerMove = updateAction
-        gameEngine.apply(action: updateAction)
+    func playerMove(actionType: ActionType) {
+        mostRecentPlayerMove = actionType
+        gameEngine.apply(action: Action(actionType: actionType))
         hasWon = gameEngine.currentGame.gameStatus == .win
         isLoopingInfinitely = gameEngine.status == .infiniteLoop
         dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)

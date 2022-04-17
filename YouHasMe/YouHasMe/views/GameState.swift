@@ -83,6 +83,8 @@ enum ScreenState {
     case designing(designableDungeon: DesignableDungeon?)
     case mainmenu
     case achievements
+    case multiplayerEntry
+    case multiplayer(roomId: String)
 }
 
 extension ScreenState: Equatable {}
@@ -165,5 +167,12 @@ extension GameState {
 
     func getGameNotificationsViewModel() -> GameNotificationsViewModel {
         GameNotificationsViewModel()
+    }
+    
+    func getMultiplayerRoomViewModel() -> MultiplayerRoomViewModel {
+        if case let .multiplayer(roomId: roomId) = state {
+            return MultiplayerRoomViewModel(roomId: roomId)
+        }
+        fatalError("unexpected state")
     }
 }

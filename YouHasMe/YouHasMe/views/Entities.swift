@@ -40,6 +40,8 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("rock_text")
         case .door:
             return .string("door_text")
+        case .water:
+            return .string("water_text")
         default:
             break
         }
@@ -48,7 +50,7 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         case .vIs:
             return .string("is")
         case .vHas:
-            return .uiImage("HAS".asImage()!)
+            return .string("has")
         }
     case .property(let property):
         switch property {
@@ -60,6 +62,10 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("stop")
         case .push:
             return .string("push")
+        case .sink:
+            return .string("sink")
+        case .player(let num):
+            return .sfSymbol("\(num).square")
         default:
             break
         }
@@ -77,6 +83,8 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("rock")
         case .door:
             return .string("door")
+        case .water:
+            return .string("water")
         default:
             break
         }

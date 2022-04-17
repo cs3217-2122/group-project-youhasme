@@ -14,7 +14,7 @@ struct TransformMechanic: GameMechanic {
     //  - update: What triggered the update (e.g. user moves right)
     //  - state: Current game state
     // Returns new state containing updates triggered by mechanic
-    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState {
+    func apply(update: Action, state: LevelLayerState) -> LevelLayerState {
         var newState = state
         for (i, entityState) in state.entityStates.enumerated() {
             for behaviour in entityState.entity.activeBehaviours {

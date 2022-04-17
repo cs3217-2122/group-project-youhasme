@@ -14,5 +14,5 @@ protocol GameMechanic {
     //  - update: What triggered the update (e.g. user moves right)
     //  - state: Current game state
     // Returns new state containing updates triggered by mechanic
-    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState
+    func apply(update: Action, state: LevelLayerState) -> LevelLayerState
 }

@@ -33,16 +33,6 @@ struct EntityState: Hashable {
         }
     }
 
-    // Returns next unrejected action to be performed or nil if there is no such action
-    mutating func popAction() -> EntityAction? {
-        let nextIntent = intents.first { !$0.isRejected }  // First unrejected intent
-        guard let intent = nextIntent else {
-            return nil  // No unrejected actions
-        }
-        intents.remove(intent)
-        return intent.action
-    }
-
     // Returns unrejected actions
     func getActions() -> [EntityAction] {
         intents.filter {
@@ -65,6 +55,10 @@ struct EntityState: Hashable {
         intents.contains {
             $0.action == action && $0.isRejected
         }
+    }
+    
+    func isPlayer() -> Bool {
+        entity.isPlayer()
     }
 
     // Pops intent to perform specified action from intents, returns nil if there is no such intent

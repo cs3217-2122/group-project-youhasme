@@ -33,6 +33,11 @@ struct MainMenuView: View {
                 }) {
                     Text("View Achievements")
                 }.padding()
+                Button(action: {
+                    gameState.state = .multiplayerEntry
+                }) {
+                    Text("Play Multiplayer")
+                }.padding()
             }.font(transitionButtonFont)
         }.padding()
     }
