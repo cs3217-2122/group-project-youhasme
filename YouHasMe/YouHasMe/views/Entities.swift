@@ -47,8 +47,8 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
         switch verb {
         case .vIs:
             return .string("is")
-        default:
-            break
+        case .vHas:
+            return .uiImage("HAS".asImage()!)
         }
     case .property(let property):
         switch property {

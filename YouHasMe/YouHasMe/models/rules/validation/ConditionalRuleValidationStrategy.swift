@@ -13,7 +13,8 @@ protocol RuleResolutionPolicy {
 
 class ConditionalRuleValidationStrategy: RuleValidationStrategy {
     private let ruleResolutionPolicies: [RuleResolutionPolicy] = [
-        IsVerbDisjointSetPolicy()
+        IsVerbDisjointSetPolicy(),
+        HasAtMostOnePolicy()
     ]
 
     func validate(rules: [Rule]) -> [Rule] {

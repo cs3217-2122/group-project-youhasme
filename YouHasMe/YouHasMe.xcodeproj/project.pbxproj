@@ -62,6 +62,7 @@
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
+		E516D9BD280C2FBD00851D4A /* HasAtMostOnePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */; };
 		E525251327FDE1430014BF0B /* NounIsPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */; };
 		E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* DesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* GridView.swift */; };
@@ -267,6 +268,7 @@
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
+		E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasAtMostOnePolicy.swift; sourceTree = "<group>"; };
 		E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounIsPropertyGenerator.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* DesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
@@ -718,6 +720,7 @@
 			children = (
 				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
 				E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */,
+				E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */,
 			);
 			path = policies;
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
 				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
+				E516D9BD280C2FBD00851D4A /* HasAtMostOnePolicy.swift in Sources */,
 				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				40E2516627F43209008CBCE0 /* Achievement.swift in Sources */,

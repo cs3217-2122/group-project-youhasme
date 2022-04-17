@@ -17,6 +17,7 @@ class IsVerbDisjointSetPolicy: RuleResolutionPolicy {
 
         for activeRule in candidateActiveRules {
             guard activeRule.verb == .vIs else {
+                activeRules.append(activeRule)
                 continue
             }
 
