@@ -85,15 +85,17 @@ class Dungeon {
         }
     }
 
-    func renameDungeon(to newName: String) {
+    func renameDungeon(to newName: String) -> Loadable? {
         let oldName = name
         do {
             globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
             try dungeonStorage.renameDungeon(from: oldName, to: newName)
             name = newName
             try dungeonStorage.saveDungeon(self)
+            return try dungeonStorage.getLoadable(name: name)
         } catch {
             globalLogger.error("\(error.localizedDescription)")
+            return nil
         }
     }
 

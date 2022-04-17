@@ -42,8 +42,13 @@ struct PersistenceView: View {
             if isChangingDungeonName {
                 TextField("", text: $unconfirmedDungeonName)
                 Button("Confirm new name") {
-                    viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
+                    let loadable = viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
                     isChangingDungeonName = false
+                    guard let loadable = loadable else {
+                        return
+                    }
+
+                    gameState.state = .designing(designableDungeon: .dungeonLoadable(loadable))
                 }
             } else {
                 DungeonNameButton(viewModel: viewModel.getNameButtonViewModel()) {

@@ -229,6 +229,10 @@ class DungeonStorage: JSONStorage {
         )
         try delete(file: levelDirectory)
     }
+    
+    func getLoadable(name: String) throws -> Loadable {
+        Loadable(url: try getURL(filename: name), name: name)
+    }
 
     func loadDungeon(name: String) throws -> PersistableDungeon {
         try loadAndDecode(filename: name)
