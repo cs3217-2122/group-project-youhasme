@@ -3,11 +3,11 @@ import Foundation
 enum Property: Hashable {
     case you
     case win
-    case defeat
     case stop
     case push
     case pull
     case player(Int)
+    case sink
 }
 
 extension Property: CustomDebugStringConvertible {

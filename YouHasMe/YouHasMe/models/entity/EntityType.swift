@@ -31,18 +31,16 @@ struct EntityTypes {
         static var baba = EntityType(classification: .nounInstance(.baba))
         static var flag = EntityType(classification: .nounInstance(.flag))
         static var wall = EntityType(classification: .nounInstance(.wall))
-        static var skull = EntityType(classification: .nounInstance(.skull))
+        static var water = EntityType(classification: .nounInstance(.water))
         static var box = EntityType(classification: .nounInstance(.box))
-        static var bedrock = EntityType(classification: .nounInstance(.rock))
         static var door = EntityType(classification: .nounInstance(.door))
         static func getAllNounInstances() -> [EntityType] {
             [
                 NounInstances.baba,
                 NounInstances.flag,
                 NounInstances.wall,
-                NounInstances.skull,
+                NounInstances.water,
                 NounInstances.box,
-                NounInstances.bedrock,
                 NounInstances.door
             ]
         }
@@ -52,20 +50,16 @@ struct EntityTypes {
         static var baba = EntityType(classification: .noun(.baba))
         static var flag = EntityType(classification: .noun(.flag))
         static var wall = EntityType(classification: .noun(.wall))
-        static var skull = EntityType(classification: .noun(.skull))
+        static var water = EntityType(classification: .noun(.water))
         static var box = EntityType(classification: .noun(.box))
-        static var word = EntityType(classification: .noun(.word))
-        static var bedrock = EntityType(classification: .noun(.rock))
         static var door = EntityType(classification: .noun(.door))
         static func getAllNouns() -> [EntityType] {
             [
                 Nouns.baba,
                 Nouns.flag,
                 Nouns.wall,
-                Nouns.skull,
+                Nouns.water,
                 Nouns.box,
-                Nouns.word,
-                Nouns.bedrock,
                 Nouns.door
             ]
         }
@@ -83,19 +77,17 @@ struct EntityTypes {
     struct Properties {
         static var you = EntityType(classification: .property(.you))
         static var win = EntityType(classification: .property(.win))
-        static var defeat = EntityType(classification: .property(.defeat))
         static var stop = EntityType(classification: .property(.stop))
         static var push = EntityType(classification: .property(.push))
-        static var pull = EntityType(classification: .property(.pull))
+        static var sink = EntityType(classification: .property(.sink))
 
         static func getAllProperties() -> [EntityType] {
             [
                 Properties.you,
                 Properties.win,
-                Properties.defeat,
                 Properties.stop,
                 Properties.push,
-                Properties.pull
+                Properties.sink
             ]
         }
     }

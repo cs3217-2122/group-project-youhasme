@@ -44,14 +44,11 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         dungeon.getActiveLevel().name
     }
     @Published var state: PlayViewState = .normalPlay
-    var gameEngine: GameEngine {
-        didSet {
-            setupBindingsWithGameEngine()
-        }
-    }
+    var gameEngine: GameEngine
 
     var achievementsViewModel: AchievementsViewModel
     var notificationsViewModel: GameNotificationsViewModel
+    var activeRulesViewModel: ActiveRulesViewModel?
 
     @Published var viewPosition: Point
     var cumulativeTranslation: CGVector = .zero {
@@ -193,7 +190,8 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         let level = dungeon.getActiveLevel()
         achievementsViewModel.selectLevel(levelId: level.id)
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
-
+        activeRulesViewModel = nil
+        setupBindingsWithGameEngine()
         let viewVector = CGVector(movementVector).scale(
             factorX: Double(self.dungeon.levelDimensions.width),
             factorY: Double(self.dungeon.levelDimensions.height)
@@ -223,6 +221,14 @@ extension PlayViewModel {
     }
 
     func getActiveRulesViewModel() -> ActiveRulesViewModel {
-        ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
+        if activeRulesViewModel == nil {
+            activeRulesViewModel = ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
+        }
+        
+        guard let activeRulesViewModel = activeRulesViewModel else {
+            fatalError("should not be nil")
+        }
+        
+        return activeRulesViewModel
     }
 }

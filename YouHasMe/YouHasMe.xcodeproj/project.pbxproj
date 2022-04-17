@@ -91,6 +91,9 @@
 		40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */; };
 		40F43B2A280808EE000DCAA5 /* PreloadedAchievementsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */; };
 		40F43B2E28099D79000DCAA5 /* DungeonEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */; };
+		B03ADBBC280C12D70057CCD2 /* SinkMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */; };
+		B03ADBBE280C15A20057CCD2 /* CompoundEntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBD280C15A20057CCD2 /* CompoundEntityAction.swift */; };
+		B03ADBC0280C27160057CCD2 /* HasMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBF280C27160057CCD2 /* HasMechanic.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -109,6 +112,7 @@
 		B07AA63027E658F200918E71 /* GameMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA62B27E658F200918E71 /* GameMechanic.swift */; };
 		B07AA63227E65FC600918E71 /* GameEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07AA63127E65FC500918E71 /* GameEngineTests.swift */; };
 		B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */; };
+		E516D9BD280C2FBD00851D4A /* HasAtMostOnePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */; };
 		E525251327FDE1430014BF0B /* NounIsPropertyGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */; };
 		E5563C3327E8ADCF007D2E86 /* DesignerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3227E8ADCF007D2E86 /* DesignerView.swift */; };
 		E5563C3527E8AF34007D2E86 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5563C3427E8AF34007D2E86 /* GridView.swift */; };
@@ -229,7 +233,6 @@
 		E5A28907280B186C00CC637D /* NeighborFinderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28906280B186C00CC637D /* NeighborFinderDecorator.swift */; };
 		E5A28909280B194500CC637D /* ChunkGeneratorDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5A28908280B194500CC637D /* ChunkGeneratorDecorator.swift */; };
 		E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBD327E599F100E3952D /* YouHasMeTests.swift */; };
-		E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */; };
 		E5BECBDE27E59E1000E3952D /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDD27E59E1000E3952D /* Array.swift */; };
 		E5BECBE027E5A64B00E3952D /* Entity.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBDF27E5A64B00E3952D /* Entity.swift */; };
 		E5BECBE227E5B6EF00E3952D /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BECBE127E5B6EF00E3952D /* String.swift */; };
@@ -320,6 +323,9 @@
 		40E2519C27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableAbstractGameEvent.swift; sourceTree = "<group>"; };
 		40F43B29280808EE000DCAA5 /* PreloadedAchievementsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloadedAchievementsUtil.swift; sourceTree = "<group>"; };
 		40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonEventDecorator.swift; sourceTree = "<group>"; };
+		B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkMechanic.swift; sourceTree = "<group>"; };
+		B03ADBBD280C15A20057CCD2 /* CompoundEntityAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundEntityAction.swift; sourceTree = "<group>"; };
+		B03ADBBF280C27160057CCD2 /* HasMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMechanic.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -338,6 +344,7 @@
 		B07AA62B27E658F200918E71 /* GameMechanic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameMechanic.swift; sourceTree = "<group>"; };
 		B07AA63127E65FC500918E71 /* GameEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameEngineTests.swift; sourceTree = "<group>"; };
 		B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformMechanic.swift; sourceTree = "<group>"; };
+		E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasAtMostOnePolicy.swift; sourceTree = "<group>"; };
 		E525251227FDE1430014BF0B /* NounIsPropertyGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NounIsPropertyGenerator.swift; sourceTree = "<group>"; };
 		E5563C3227E8ADCF007D2E86 /* DesignerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerView.swift; sourceTree = "<group>"; };
 		E5563C3427E8AF34007D2E86 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
@@ -460,7 +467,6 @@
 		E5A28908280B194500CC637D /* ChunkGeneratorDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChunkGeneratorDecorator.swift; sourceTree = "<group>"; };
 		E5BECBD127E599F100E3952D /* YouHasMeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YouHasMeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5BECBD327E599F100E3952D /* YouHasMeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouHasMeTests.swift; sourceTree = "<group>"; };
-		E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerTests.swift; sourceTree = "<group>"; };
 		E5BECBDD27E59E1000E3952D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E5BECBDF27E5A64B00E3952D /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
 		E5BECBE127E5B6EF00E3952D /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
@@ -738,6 +744,8 @@
 				B0562DD427F303D900F10324 /* WinMechanic.swift */,
 				B05687E027F377DC0046C26C /* StopMechanic.swift */,
 				B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */,
+				B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */,
+				B03ADBBF280C27160057CCD2 /* HasMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -757,6 +765,7 @@
 				B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */,
 				B05687DE27F36CF00046C26C /* Game.swift */,
 				B05A807127F8451300F92D2C /* EntityActionCondition.swift */,
+				B03ADBBD280C15A20057CCD2 /* CompoundEntityAction.swift */,
 			);
 			path = GameEngine;
 			sourceTree = "<group>";
@@ -868,6 +877,7 @@
 			children = (
 				E58E83712802916100C06A59 /* IsVerbCyclePolicy.swift */,
 				E58E83772802997C00C06A59 /* IsVerbDisjointSetPolicy.swift */,
+				E516D9BC280C2FBD00851D4A /* HasAtMostOnePolicy.swift */,
 			);
 			path = policies;
 			sourceTree = "<group>";
@@ -1142,7 +1152,6 @@
 			isa = PBXGroup;
 			children = (
 				E5BECBD327E599F100E3952D /* YouHasMeTests.swift */,
-				E5BECBDA27E59B2400E3952D /* LevelLayerTests.swift */,
 				B07AA63127E65FC500918E71 /* GameEngineTests.swift */,
 				40AD86AB27E6F05600F42C42 /* GameStateManagerTests.swift */,
 				40E2518F27F9FAB1008CBCE0 /* GameEventTests.swift */,
@@ -1367,6 +1376,7 @@
 				E5EC5B5627F3696200BAE834 /* PlayView.swift in Sources */,
 				E57B535727FD68A70071E623 /* NamedKeyPath.swift in Sources */,
 				E56B92C3280AD3C500DDBD0E /* BaseGenerator.swift in Sources */,
+				B03ADBBC280C12D70057CCD2 /* SinkMechanic.swift in Sources */,
 				E573E96827EA38E2000D10E4 /* LevelLayer.swift in Sources */,
 				E581F08827F75C3900B1CFCB /* Image.swift in Sources */,
 				E58E83782802997C00C06A59 /* IsVerbDisjointSetPolicy.swift in Sources */,
@@ -1415,6 +1425,7 @@
 				E57ACB3827DC58B000F73B27 /* Dungeon.swift in Sources */,
 				E57B534527FD333C0071E623 /* PersistableCondition.swift in Sources */,
 				E5BECBFA27E5E91200E3952D /* Connective.swift in Sources */,
+				B03ADBBE280C15A20057CCD2 /* CompoundEntityAction.swift in Sources */,
 				405467F12800479500C577EF /* GameNotification.swift in Sources */,
 				E58ACBE027FDCA9D0035E517 /* ConditionRelationState.swift in Sources */,
 				E57465A927F86F6000F79A52 /* RejectingState.swift in Sources */,
@@ -1452,6 +1463,7 @@
 				E574659B27F8689000F79A52 /* NounConcatAndState.swift in Sources */,
 				E574659D27F868AC00F79A52 /* IsVerbState.swift in Sources */,
 				B0562DD327F2FFD300F10324 /* GameStatus.swift in Sources */,
+				E516D9BD280C2FBD00851D4A /* HasAtMostOnePolicy.swift in Sources */,
 				B0E7962C27F88AB500DE5CBC /* TransformMechanic.swift in Sources */,
 				B0592D3827F21986002EC0C3 /* BoundaryMechanic.swift in Sources */,
 				1E540723280B31C0006D546F /* OnlineDungeonListViewModel.swift in Sources */,
@@ -1481,6 +1493,7 @@
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift in Sources */,
+				B03ADBC0280C27160057CCD2 /* HasMechanic.swift in Sources */,
 				405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
@@ -1711,7 +1724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YouHasMe/Preview Content\"";
-				DEVELOPMENT_TEAM = JY6LUU8KFT;
+				DEVELOPMENT_TEAM = 3L5QJ3M5M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1740,7 +1753,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"YouHasMe/Preview Content\"";
-				DEVELOPMENT_TEAM = JY6LUU8KFT;
+				DEVELOPMENT_TEAM = 3L5QJ3M5M9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

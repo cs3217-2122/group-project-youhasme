@@ -23,7 +23,8 @@ class GameEngineEventPublishingDelegate: AbstractGameEngineEventPublishingDelega
 }
 
 struct GameEngine: GameEventPublisher {
-    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> { publishingDelegate.gameEventPublisher
+    var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
+        publishingDelegate.gameEventPublisher
     }
 
     var publishingDelegate: AbstractGameEngineEventPublishingDelegate = GameEngineEventPublishingDelegate()
@@ -53,7 +54,9 @@ struct GameEngine: GameEventPublisher {
             PushMechanic(),
             WinMechanic(),
             StopMechanic(),
-            TransformMechanic()
+            TransformMechanic(),
+            SinkMechanic(),
+            HasMechanic()
         ]
     }
 
@@ -128,11 +131,13 @@ struct GameEngine: GameEventPublisher {
     private func resolveActions(in state: LevelLayerState) -> LevelLayer {
         var newLayer = LevelLayer(dimensions: currentGame.levelLayer.dimensions)
         for entityState in state.entityStates {
-            var curState = entityState
-            while let curAction = curState.popAction() {  // While there are actions left to perform
-                curState = curAction.apply(on: curState)  // Perform action
+            // Apply actions to entity
+            let compoundAction = CompoundEntityAction(actions: entityState.getActions())
+            let newStates = compoundAction.apply(state: entityState)
+            for state in newStates {
+                // Add resulting entities game board
+                newLayer.add(entity: state.entity, x: state.location.x, y: state.location.y)
             }
-            newLayer.add(entity: curState.entity, x: curState.location.x, y: curState.location.y)
         }
         return ruleEngine.applyRules(to: newLayer)
     }
