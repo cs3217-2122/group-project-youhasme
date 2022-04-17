@@ -4,7 +4,7 @@ enum Noun: String, Hashable {
     case baba
     case wall
     case flag
-    case skull
+    case water
     case box
     case word
     case rock

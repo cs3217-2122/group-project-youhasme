@@ -3,10 +3,9 @@ import Foundation
 enum Property: String, Hashable {
     case you
     case win
-    case defeat
     case stop
     case push
-    case pull
+    case sink
 }
 
 extension Property: CustomDebugStringConvertible {
