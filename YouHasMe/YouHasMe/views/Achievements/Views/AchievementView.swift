@@ -15,8 +15,8 @@ struct AchievementView: View {
         HStack {
             Image(AchievementImages.getAchievementImageString(achievement: achievement))
                 .resizable()
-                .frame(width: CGFloat(achievementsViewModel.imageWidth),
-                       height: CGFloat(achievementsViewModel.imageHeight))
+                .frame(width: CGFloat(ViewConstants.achievementImageWidth),
+                       height: CGFloat(ViewConstants.achievementImageHeight))
                 .opacity(achievement.isUnlocked ? 1.0 : 0.5)
             VStack(alignment: .leading) {
                 Text(achievement.name)

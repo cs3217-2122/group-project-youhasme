@@ -8,36 +8,36 @@
 import Foundation
 
 class EntityEventDecorator: GameEventBaseDecorator {
-    var entityType: EntityType
+    var entityTypes: Set<EntityType>
 
-    init(wrappedEvent: AbstractGameEvent, entityType: EntityType) {
-        self.entityType = entityType
+    convenience init(wrappedEvent: AbstractGameEvent, entityType: EntityType) {
+        self.init(wrappedEvent: wrappedEvent, entityTypes: [entityType])
+    }
+
+    init(wrappedEvent: AbstractGameEvent, entityTypes: Set<EntityType>) {
+        self.entityTypes = entityTypes
         super.init(wrappedEvent: wrappedEvent)
     }
 
-    func hasSameEntity(_ otherEntityEventDecorator: EntityEventDecorator) -> Bool {
-        entityType == otherEntityEventDecorator.entityType
+    func entityTypesAreContainedBy(_ otherEntityEventDecorator: EntityEventDecorator) -> Bool {
+        entityTypes.isSubset(of: otherEntityEventDecorator.entityTypes)
     }
 
     override func hasSameDecoratedDetails(otherGameEvent: AbstractGameEvent) -> Bool {
-        entityTypeIsContainedBy(otherGameEvent: otherGameEvent)
-    }
-
-    func entityTypeIsContainedBy(otherGameEvent: AbstractGameEvent) -> Bool {
         if let entityEvent = otherGameEvent as? EntityEventDecorator {
-            if hasSameEntity(entityEvent) {
+            if entityTypesAreContainedBy(entityEvent) {
                 return true
             }
         }
         if let decoratedEvent = otherGameEvent as? GameEventBaseDecorator {
-            return entityTypeIsContainedBy(otherGameEvent: decoratedEvent.wrappedEvent)
+            return hasSameDecoratedDetails(otherGameEvent: decoratedEvent.wrappedEvent)
         }
         return false
     }
 
     override func toPersistable() -> PersistableAbstractGameEvent {
         let persistable = wrappedEvent.toPersistable()
-        persistable.setEntityType(entityType)
+        persistable.setEntityTypes(entityTypes)
         return persistable
     }
 }

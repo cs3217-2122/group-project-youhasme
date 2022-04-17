@@ -84,7 +84,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         setupBindings()
         setupBindingsWithGameEngine()
         setupBindingForNotifications()
-        achievementsViewModel.levelId = level.name
+        achievementsViewModel.selectLevel(levelId: level.id)
     }
 
     func setupBindings() {
@@ -191,7 +191,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }
 
         let level = dungeon.getActiveLevel()
-        achievementsViewModel.levelId = level.name
+        achievementsViewModel.selectLevel(levelId: level.id)
         gameEngine = GameEngine(levelLayer: level.layer, ruleEngineDelegate: dungeon)
 
         let viewVector = CGVector(movementVector).scale(
