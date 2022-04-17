@@ -22,8 +22,8 @@ struct AchievementImages {
             return "creativity"
         case "Speedy Game":
             return "speedy_game"
-        case "GOGO IS YOU":
-            return "gogo_is_you"
+        case "BABA IS YOU":
+            return "baba_is_you"
         default:
             return "question"
         }

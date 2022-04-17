@@ -15,7 +15,7 @@ class RuleEngine {
     var lastActiveRulesPublisher: AnyPublisher<[Rule], Never> {
         lastActiveRulesSubject.eraseToAnyPublisher()
     }
-    private var lastActiveRulesSubject: CurrentValueSubject<[Rule], Never> = CurrentValueSubject([])
+    private let lastActiveRulesSubject: CurrentValueSubject<[Rule], Never> = CurrentValueSubject([])
 
     init(ruleEngineDelegate: RuleEngineDelegate?) {
         let matchingStrategy = SouthwardEastwardMatchingStrategy()
