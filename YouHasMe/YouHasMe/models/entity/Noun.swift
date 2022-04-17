@@ -7,8 +7,8 @@ enum Noun: String, Hashable {
     case skull
     case box
     case word
-    case bedrock
-    case connectorWall
+    case rock
+    case door
 }
 
 extension Noun: CustomDebugStringConvertible {

@@ -6,17 +6,13 @@
 //
 
 import Foundation
-final class BabaIsYouGeneratorDecorator: ChunkGeneratorDecorator {
-    var backingGenerator: AnyChunkGeneratorDelegate
+final class BabaIsYouGeneratorDecorator: IdentityGeneratorDecorator {
     var nounIsPropertyGenerator = NounIsPropertyRuleGenerator(
         noun: .baba, property: .you, shouldGenerateNounInstance: true
     )
-    init<T>(generator: T) where T: ChunkGeneratorDelegate {
-        backingGenerator = generator.eraseToAnyGenerator()
-    }
 
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = backingGenerator.generate(
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
             dimensions: dimensions, levelPosition: levelPosition, extremities: extremities
         )
 

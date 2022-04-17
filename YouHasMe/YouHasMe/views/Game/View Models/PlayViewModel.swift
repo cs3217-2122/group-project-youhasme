@@ -9,43 +9,9 @@ import Foundation
 import CoreGraphics
 import Combine
 
-protocol ContextualMenuDelegate: AnyObject {
-    func showMessages()
-}
-
-class ContextualMenuData {
-    weak var delegate: ContextualMenuDelegate?
-    let id: Int
-    let description: String
-    var action: () -> Void = {}
-
-    init?(entityType: EntityType) {
-        nil // TODO
-    }
-}
-
-extension ContextualMenuData: Identifiable {}
-
-extension ContextualMenuData: Hashable {
-    static func == (lhs: ContextualMenuData, rhs: ContextualMenuData) -> Bool {
-        lhs.id == rhs.id
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-extension ContextualMenuData: Comparable {
-    static func < (lhs: ContextualMenuData, rhs: ContextualMenuData) -> Bool {
-        lhs.id < rhs.id
-    }
-}
-
 enum PlayViewState {
     case disabled
     case normalPlay
-    case messages
 }
 
 class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
@@ -86,16 +52,6 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     var achievementsViewModel: AchievementsViewModel
     var notificationsViewModel: GameNotificationsViewModel
-
-    var contextualData: [ContextualMenuData] {
-        guard let entities = selectedTile?.entities else {
-            return []
-        }
-
-        let data = Array(Set(entities.compactMap { ContextualMenuData(entityType: $0.entityType) })).sorted()
-        data.forEach { $0.delegate = self }
-        return data
-    }
 
     @Published var viewPosition: Point
     var cumulativeTranslation: CGVector = .zero {
@@ -228,8 +184,11 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
             return
         }
 
-        dungeon.movePlayer(by: playerMovementAcrossLevel)
+        let isMoveSuccessful = dungeon.movePlayer(by: playerMovementAcrossLevel)
         self.playerMovementAcrossLevel = nil
+        guard isMoveSuccessful else {
+            return
+        }
 
         let level = dungeon.getActiveLevel()
         achievementsViewModel.selectLevel(levelId: level.id)
@@ -245,16 +204,7 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     func playerUndo() {
         gameEngine.undo()
         dungeon.setLevelLayer(gameEngine.currentGame.levelLayer)
-    }
-}
-
-extension PlayViewModel: ContextualMenuDelegate {
-    func closeOverlay() {
-        state = .normalPlay
-    }
-
-    func showMessages() {
-        state = .messages
+        objectWillChange.send()
     }
 }
 
@@ -270,14 +220,6 @@ extension PlayViewModel {
             conditionEvaluableDelegate: dungeon
         )
         return entityViewModel
-    }
-
-    func getMessagesViewModel() -> MessagesViewModel {
-        guard let tile = selectedTile else {
-            fatalError("should not be nil")
-        }
-
-        return MessagesViewModel()
     }
 
     func getActiveRulesViewModel() -> ActiveRulesViewModel {

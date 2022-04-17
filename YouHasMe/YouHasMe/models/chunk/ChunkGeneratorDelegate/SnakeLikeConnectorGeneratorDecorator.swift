@@ -6,19 +6,14 @@
 //
 
 import Foundation
-final class SnakeLikeConnectorGeneratorDecorator: ChunkGeneratorDecorator {
-    let backingGenerator: AnyChunkGeneratorDelegate
-    init<T: ChunkGeneratorDelegate>(generator: T) {
-        backingGenerator = generator.eraseToAnyGenerator()
-    }
-
-    func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
-        var tiles = backingGenerator.generate(
+final class SnakeLikeConnectorGeneratorDecorator: IdentityGeneratorDecorator {
+    override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
+        var tiles = super.generate(
             dimensions: dimensions,
             levelPosition: levelPosition,
             extremities: extremities
         )
-        let connectorEntity = Entity(entityType: EntityType(classification: .nounInstance(.connectorWall)))
+        let connectorEntity = Entity(entityType: EntityType(classification: .nounInstance(.door)))
         let midX = dimensions.width / 2
         let midY = dimensions.height / 2
         let topConnector = Point(x: midX, y: 0)

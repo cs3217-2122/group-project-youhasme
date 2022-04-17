@@ -43,7 +43,6 @@ extension ConditionEvaluable {
 enum ConditionEvaluableType {
     case dungeon(evaluatingKeyPath: NamedKeyPath<Dungeon.PathIdentifier, Dungeon, Int>)
     case level(id: Point, evaluatingKeyPath: NamedKeyPath<Level.PathIdentifier, Level, Int>)
-    case player
     case numericLiteral(Int)
 }
 
@@ -56,8 +55,6 @@ extension ConditionEvaluable: CustomStringConvertible {
             return "Dungeon: \(delegate?.dungeonName ?? "") \(evaluatingKeyPath.description)"
         case let .level(id, evaluatingKeyPath):
             return "Level: \(delegate?.getLevelName(by: id) ?? "") -> \(evaluatingKeyPath.description)"
-        case .player:
-            return "Player"
         case .numericLiteral(let int):
             return "Value: \(int)"
         }
@@ -77,9 +74,6 @@ extension ConditionEvaluable {
                 return nil
             }
             return level.evaluate(given: evaluatingKeyPath)
-        case .player:
-            // TODO
-            return -1
         case .numericLiteral(let literal):
             return literal
         }
@@ -97,8 +91,6 @@ extension ConditionEvaluableType {
                 id: id,
                 evaluatingKeyPath: evaluatingKeyPath.toPersistable()
             )
-        case .player:
-            return .player
         case .numericLiteral(let literal):
             return .numericLiteral(literal)
         }
@@ -121,8 +113,6 @@ extension ConditionEvaluableType {
                 id: id,
                 evaluatingKeyPath: namedKeyPath
             )
-        case .player:
-            return .player
         case .numericLiteral(let literal):
             return .numericLiteral(literal)
         }

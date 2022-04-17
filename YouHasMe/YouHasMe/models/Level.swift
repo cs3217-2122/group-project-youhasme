@@ -55,6 +55,7 @@ class Level: Chunkable {
     var winCount: Int = 0
     var dimensions: Rectangle
     var neighbors = Neighborhood()
+    var hasLoadedNeighbors = false
     typealias ChunkIdentifier = Point
 
     @Published var layer: LevelLayer
@@ -108,6 +109,63 @@ extension Level: Identifiable {}
 
 enum LevelKeyPathKeys: String, AbstractKeyPathIdentifierEnum {
     case winCount = "Win Count"
+    case youCount = "Number of entities with YOU property"
+    case stopCount = "Number of entities with STOP property"
+    case pushCount = "Number of entities with PUSH property"
+    case babaCount = "Number of Baba entities"
+    case wallCount = "Number of Wall entities"
+}
+
+// MARK: Queries
+extension Level {
+    private func countByProperty(_ property: Property) -> Int {
+        var count = 0
+        for x in 0..<dimensions.width {
+            for y in 0..<dimensions.height {
+                let point = Point(x: x, y: y)
+                count += layer.tiles[point].entities.filter { entity in
+                    return entity.has(behaviour: .property(property))
+                }.count
+            }
+        }
+        return count
+    }
+    
+    private func countByNounInstance(_ noun: Noun) -> Int {
+        var count = 0
+        for x in 0..<dimensions.width {
+            for y in 0..<dimensions.height {
+                let point = Point(x: x, y: y)
+                count += layer.tiles[point].entities.filter { entity in
+                    if case .nounInstance(let entityNoun) = entity.entityType.classification {
+                        return noun == entityNoun
+                    }
+                    return false
+                }.count
+            }
+        }
+        return count
+    }
+    
+    var youCount: Int {
+        countByProperty(.you)
+    }
+    
+    var stopCount: Int {
+        countByProperty(.stop)
+    }
+    
+    var pushCount: Int {
+        countByProperty(.push)
+    }
+    
+    var babaCount: Int {
+        countByNounInstance(.baba)
+    }
+    
+    var wallCount: Int {
+        countByNounInstance(.wall)
+    }
 }
 
 extension Level: KeyPathExposable {
@@ -116,7 +174,12 @@ extension Level: KeyPathExposable {
 
     static var exposedNumericKeyPathsMap: [LevelKeyPathKeys: KeyPath<Level, Int>] {
         [
-            .winCount: \.winCount
+            .winCount: \.winCount,
+            .youCount: \.youCount,
+            .stopCount: \.stopCount,
+            .pushCount: \.pushCount,
+            .babaCount: \.babaCount,
+            .wallCount: \.wallCount
         ]
     }
 
@@ -134,6 +197,9 @@ extension Level {
     }
 
     func loadNeighbors(at position: Point) -> [Point: Level] {
+        guard !hasLoadedNeighbors else {
+            return [:]
+        }
         guard let neighborFinderDelegate = neighborFinderDelegate else {
             fatalError("Not assigned a neighbor finder.")
         }
@@ -165,6 +231,7 @@ extension Level {
                 newlyLoadedLevels[neighborPosition] = neighbor
             }
         }
+        hasLoadedNeighbors = true
         return newlyLoadedLevels
     }
 }

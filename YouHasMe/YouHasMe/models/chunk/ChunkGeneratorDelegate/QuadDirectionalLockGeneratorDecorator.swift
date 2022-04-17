@@ -1,12 +1,13 @@
 //
-//  SnakeLikeConnectorLockGeneratorDecorator.swift
+//  QuadDirectionalLockGeneratorDecorator.swift
 //  YouHasMe
 //
-//  Created by Jia Cheng Sun on 6/4/22.
+//  Created by Jia Cheng Sun on 16/4/22.
 //
 
 import Foundation
-final class SnakeLikeConnectorLockGeneratorDecorator: IdentityGeneratorDecorator {
+
+final class QuadDirectionalLockGeneratorDecorator: IdentityGeneratorDecorator {
     override func generate(dimensions: Rectangle, levelPosition: Point, extremities: Rectangle) -> [[Tile]] {
         var tiles = super.generate(
             dimensions: dimensions,
@@ -26,21 +27,9 @@ final class SnakeLikeConnectorLockGeneratorDecorator: IdentityGeneratorDecorator
             .conditionRelation(.leq),
             .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(0)))
         ]
-        let startingCoord: Point
-        if levelPosition.y.isEven {
-            if levelPosition.x < extremities.rightSide - 1 {
-                startingCoord = Point(x: 1, y: dimensions.bottomSide - 2)
-            } else {
-                startingCoord = Point(x: 1, y: 1)
-            }
-        } else {
-            if levelPosition.x > 0 {
-                startingCoord = Point(x: 1, y: dimensions.bottomSide - 2)
-            } else {
-                startingCoord = Point(x: 1, y: 1)
-            }
-        }
-        var coord = startingCoord
+        
+        var coord = Point(x: 0, y: 1)
+        tiles[coord].entities.removeAll()
         for i in 0..<blocks.count {
             tiles[coord].entities.append(Entity(
                 entityType: EntityType(classification: blocks[i])

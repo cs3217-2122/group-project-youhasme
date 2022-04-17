@@ -14,7 +14,6 @@ extension PersistableConditionEvaluable: Codable {}
 enum PersistableConditionEvaluableType {
     case dungeon(evaluatingKeyPath: PersistableNamedKeyPath<Dungeon.PathIdentifier>)
     case level(id: Point, evaluatingKeyPath: PersistableNamedKeyPath<Level.PathIdentifier>)
-    case player
     case numericLiteral(Int)
 }
 

@@ -20,7 +20,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     }
 
     @Published var selectedPaletteEntityType: EntityType?
-    @Published var selectedTile: Tile?
     private var levelStorage: LevelStorage? {
         try? dungeonStorage.getLevelStorage(for: dungeon.name)
     }
@@ -37,7 +36,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         }
     }
 
-    private var toolbarViewModel: ToolbarViewModel?
     private var achievementsViewModel: AchievementsViewModel
     private(set) var gameNotificationsViewModel: GameNotificationsViewModel
 
@@ -49,9 +47,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     private var subscriptions: Set<AnyCancellable> = []
 
-    var editorMode: EditorMode? {
-        toolbarViewModel?.editorMode
-    }
 
     var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
@@ -82,10 +77,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         self.gameNotificationsViewModel = gameNotificationsViewModel
         viewPosition = dungeon.entryWorldPosition
         setupBindings()
-    }
-
-    func deselectTile() {
-        selectedTile = nil
     }
 
     func getPlayableDungeon() -> PlayableDungeon {
@@ -136,10 +127,6 @@ extension DesignerViewModel: PaletteEntityViewModelDelegate {
 
 extension DesignerViewModel: EntityViewModelBasicCRUDDelegate {
     func addSelectedEntity(to worldPosition: Point) {
-        guard editorMode == .addAndRemove else {
-            return
-        }
-
         guard let selectedPaletteEntityType = selectedPaletteEntityType else {
             return
         }
@@ -154,28 +141,12 @@ extension DesignerViewModel: EntityViewModelBasicCRUDDelegate {
         }
         tile.entities.append(Entity(entityType: selectedPaletteEntityType))
         dungeon.setTile(tile, at: worldPosition)
+        objectWillChange.send()
     }
 
     func removeEntity(from worldPosition: Point) {
-        guard editorMode == .addAndRemove else {
-            return
-        }
-
         dungeon.setTile(Tile(), at: worldPosition)
-    }
-}
-
-extension DesignerViewModel: EntityViewModelExaminableDelegate {
-    func examineTile(at worldPosition: Point) {
-        guard editorMode == .select else {
-            return
-        }
-
-        guard let tile = dungeon.getTile(at: worldPosition, loadNeighboringLevels: false) else {
-            return
-        }
-
-        selectedTile = tile
+        objectWillChange.send()
     }
 }
 
@@ -215,19 +186,6 @@ extension DesignerViewModel: LevelCollectionViewModelDelegate {
 
 // MARK: Child view models
 extension DesignerViewModel {
-    func getToolbarViewModel() -> ToolbarViewModel {
-        if toolbarViewModel == nil {
-            let toolbarViewModel = ToolbarViewModel()
-            self.toolbarViewModel = toolbarViewModel
-        }
-
-        guard let toolbarViewModel = self.toolbarViewModel else {
-            fatalError("should not be nil")
-        }
-
-        return toolbarViewModel
-    }
-
     func getPaletteEntityViewModels() -> [PaletteEntityViewModel] {
         allAvailableEntityTypes.map {
             let viewModel = PaletteEntityViewModel(entityType: $0)
@@ -242,7 +200,6 @@ extension DesignerViewModel {
             worldPosition: getWorldPosition(at: viewOffset)
         )
         entityViewModel.basicCRUDDelegate = self
-        entityViewModel.examinableDelegate = self
         return entityViewModel
     }
 

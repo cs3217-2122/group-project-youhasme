@@ -59,6 +59,7 @@ struct GameEngine: GameEventPublisher {
 
     mutating func undo() {
         _ = gameStateManager.undo()
+        _ = ruleEngine.applyRules(to: gameStateManager.currentState.levelLayer)
     }
 
     // Updates game state given action

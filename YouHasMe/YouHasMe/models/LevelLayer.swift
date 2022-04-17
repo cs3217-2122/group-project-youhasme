@@ -62,7 +62,6 @@ extension LevelLayer {
         setTile(tile, x: point.x, y: point.y)
     }
 
-    // TODO: refactor to `setTile` style
     mutating func setTile(_ tile: Tile, x: Int, y: Int) {
         tiles[y][x] = tile
     }
