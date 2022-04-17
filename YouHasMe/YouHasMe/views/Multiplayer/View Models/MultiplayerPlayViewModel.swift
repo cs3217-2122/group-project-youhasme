@@ -52,13 +52,19 @@ class LevelRoomListener: ObservableObject {
                 }
 
                 if let querySnapshot = querySnapshot {
-                    self.levelMoves = querySnapshot.documents.compactMap { document in
-                        return try? document.data(as: LevelMove.self)
-//                        if document.metadata.hasPendingWrites {
-//                            return nil
-//                        } else {
-//                            return try? document.data(as: LevelMove.self)
-//                        }
+                    var isPendingWrite = false
+                    let levelMoves: [LevelMove] = querySnapshot.documents.compactMap { document in
+//                        return try? document.data(as: LevelMove.self)
+                        if document.metadata.hasPendingWrites  {
+                            isPendingWrite = true
+                            return nil
+                        } else {
+                            return try? document.data(as: LevelMove.self)
+                        }
+                    }
+                    
+                    if !isPendingWrite {
+                        self.levelMoves = levelMoves
                     }
                 }
             }
@@ -82,6 +88,8 @@ class LevelRoomListener: ObservableObject {
             guard let currentUserId = Auth.auth().currentUser?.uid else {
                 return
             }
+        
+            print("SEND ACTION")
 
             let move = LevelMove(playerId: currentUserId, move: actionType)
             let moveRef = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
@@ -163,12 +171,18 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     var dungeonRoomListener: DungeonRoomListener?
     var levelRoomListener: LevelRoomListener?
     var lastAction: ActionType = .tick
+    
+    var dungeon: Dungeon
+    var playerNumAssignment: [String: Int] = [:]
+    var level: Level?
+    var moves: [LevelMove] = []
+    var playerPos: Point = Point.zero
 
-    @Published var dungeon: Dungeon
-    @Published var playerNumAssignment: [String: Int] = [:]
-    @Published var level: Level?
-    @Published var moves: [LevelMove] = []
-    @Published var playerPos: Point = Point.zero
+//    @Published var dungeon: Dungeon
+//    @Published var playerNumAssignment: [String: Int] = [:]
+//    @Published var level: Level?
+//    @Published var moves: [LevelMove] = []
+//    @Published var playerPos: Point = Point.zero
     @Published var levelLayer: LevelLayer?
     @Published var showingWinAlert = false
     @Published var showingLoopAlert = false
@@ -250,9 +264,10 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
             guard let self = self else {
                 return
             }
-            print("GAME EVENT: \(gameEvent.type)")
+//            print("GAME EVENT: \(gameEvent.type)")
             switch gameEvent.type {
             case .movingAcrossLevel(let playerNum):
+                self.levelLayer = nil
                 self.handleMoveAcrossLevel(playerNum: playerNum)
 //            case .win:
 //                self.handleWin()
@@ -274,6 +289,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     }
 
     func handleMoveAcrossLevel(playerNum: Int) {
+        self.levelLayer = nil
         let newPlayerLevelPosition = playerPos.translate(by: lastAction.getMovementAsVector())
         guard dungeon.dimensions.isWithinBounds(newPlayerLevelPosition) else {
             return
@@ -305,6 +321,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                     return
                 }
                 self.playerPos = pos
+                print("CHANGED POSITION")
                 self.setUpLevelRoomListener(pos: pos)
             }.store(in: &cancellables)
 
@@ -318,6 +335,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     }
 
     func setUpLevelRoomListener(pos: Point) {
+        self.levelLayer = nil
         self.levelRoomListener?.unsubscribe()
         self.levelRoomListener = LevelRoomListener(roomId: self.roomId, dungeonRoomId: self.dungeonRoomId, point: pos)
         self.levelRoomListener?.subscribe()
@@ -337,6 +355,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                 level.winCount = levelRoom?.winCount ?? 0
                 self.level = level
                 self.applyMoves()
+                print("CHANED LEVEL ROOM")
             }.store(in: &cancellables)
 
         self.levelRoomListener?.$levelMoves
@@ -344,6 +363,8 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                 guard let self = self else {
                     return
                 }
+                print("RECIEVED MOVES")
+                print(moves)
                 self.moves = moves
                 self.applyMoves()
             }.store(in: &cancellables)
@@ -360,7 +381,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         for (index, move) in self.moves.enumerated() {
             
             if index == self.moves.count - 1 {
-                print("LAST MOVE")
+//                print("LAST MOVE")
                 setupBindingsWithGameEngine(gameEngine: gameEngine)
             }
             if let playerNum = playerNumAssignment[move.playerId] {

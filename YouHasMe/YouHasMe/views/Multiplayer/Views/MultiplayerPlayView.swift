@@ -36,6 +36,7 @@ struct MultiplayerPlayView: View {
             }
     }
     var body: some View {
+        let _ = print("RERENDER")
         VStack {
             Spacer()
             GridView(viewModel: viewModel)
@@ -57,6 +58,5 @@ struct MultiplayerPlayView: View {
             
             Spacer()
         }
-        
     }
 }
