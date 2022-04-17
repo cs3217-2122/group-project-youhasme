@@ -44,6 +44,7 @@ class MultiplayerRoomListener: ObservableObject {
             return
         }
         roomCopy.dungeon = dungeon
+        roomCopy.uploadedDungeonId = dungeon.id
         do {
             try roomStorage.updateRoom(room: roomCopy)
         } catch {

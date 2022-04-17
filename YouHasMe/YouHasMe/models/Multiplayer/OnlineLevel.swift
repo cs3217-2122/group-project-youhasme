@@ -9,7 +9,6 @@ import Foundation
 import FirebaseFirestoreSwift
 
 struct OnlineLevel {
-    @DocumentID var id: String?
     var persistedLevel: PersistableLevel
 }
 

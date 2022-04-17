@@ -33,6 +33,7 @@ struct MultiplayerRoom {
     var joinCode = String(Int.random(in: 1_000...100_000))
     var players: [String: Player] = [:]
     var dungeon: OnlineDungeon?
+    var uploadedDungeonId: String?
 
     mutating func addPlayer(userId: String, displayName: String) {
         let player = Player(id: userId, displayName: displayName)
@@ -59,6 +60,7 @@ struct DungeonRoom {
     @DocumentID var id: String?
     var players: [String: Int] = [:]
     var dungeon: OnlineDungeon
+    var originalDungeonId: String
     var playerLocations: [String: Point] = [:]
     
     mutating func addPlayers(players: [Player]) {
@@ -72,8 +74,7 @@ struct DungeonRoom {
 extension DungeonRoom: Codable {}
 
 struct LevelRoom {
-    @DocumentID var id: String?
-    var persistableLeveL: PersistableLevel
+    var persistableLevel: PersistableLevel
     var winCount: Int = 0
 }
 
