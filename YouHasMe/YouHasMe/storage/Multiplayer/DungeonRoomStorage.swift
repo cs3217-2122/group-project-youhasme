@@ -61,6 +61,7 @@ struct MultiplayerRoomStorage {
     let db = Firestore.firestore()
     static let collectionPath = "rooms"
     static let dungeonCollectionPath = "dungeon"
+    static let levelCollectionPath = "dungeon"
 
     func joinRoom(joinCode: String, displayName: String) async throws -> String {
         guard let currentUserId = Auth.auth().currentUser?.uid else {

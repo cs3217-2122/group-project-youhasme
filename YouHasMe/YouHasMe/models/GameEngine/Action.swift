@@ -10,11 +10,11 @@
 struct Action {
     var playerNum: Int = 1
     var actionType: ActionType
-    
+
     func getMovement() -> (Int, Int) {
         actionType.getMovement()
     }
-    
+
     func getMovementAsVector() -> Vector {
         actionType.getMovementAsVector()
     }
@@ -48,3 +48,5 @@ enum ActionType {
         return Vector(dx: movement.0, dy: movement.1)
     }
 }
+
+extension ActionType: Codable {}

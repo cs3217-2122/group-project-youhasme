@@ -6,10 +6,11 @@
 
 import Foundation
 import FirebaseFirestoreSwift
+import Firebase
 
 enum PlayerStatus {
     case waiting
-    case playing(dungeonRoomId: String)
+    case playing(roomId: String, dungeonRoomId: String)
 }
 
 extension PlayerStatus: Codable {}
@@ -31,7 +32,7 @@ struct MultiplayerRoom {
     var creatorId: String
     var joinCode = String(Int.random(in: 1_000...100_000))
     var players: [String: Player] = [:]
-    var dungeon: PersistableDungeon?
+    var dungeon: OnlineDungeon?
 
     mutating func addPlayer(userId: String, displayName: String) {
         let player = Player(id: userId, displayName: displayName)
@@ -41,10 +42,13 @@ struct MultiplayerRoom {
     mutating func removePlayer(userId: String) {
         players[userId] = nil
     }
-    
+
     mutating func updatePlayerStatusToPlaying(dungeonRoomId: String) {
+        guard let roomId = id else {
+            fatalError("Room ID should exist")
+        }
         for (playerId, _) in players {
-            players[playerId]?.setStatus(status: .playing(dungeonRoomId: dungeonRoomId))
+            players[playerId]?.setStatus(status: .playing(roomId: roomId, dungeonRoomId: dungeonRoomId))
         }
     }
 }
@@ -53,17 +57,37 @@ extension MultiplayerRoom: Codable {}
 
 struct DungeonRoom {
     @DocumentID var id: String?
-    var players: [Int: Player] = [:]
-    var dungeon: PersistableDungeon
-    
+    var players: [String: Int] = [:]
+    var dungeon: OnlineDungeon
+    var playerLocations: [String: Point] = [:]
     
     mutating func addPlayers(players: [Player]) {
         for (index, player) in players.enumerated() {
-            self.players[index+1] = player
+            self.players[player.id] = index+1
+            self.playerLocations[player.id] = dungeon.persistedDungeon.entryLevelPosition
         }
     }
 }
 
-extension DungeonRoom: Codable {
+extension DungeonRoom: Codable {}
+
+struct LevelRoom {
+    @DocumentID var id: String?
+    var persistableLeveL: PersistableLevel
+    var winCount: Int = 0
+}
+
+extension LevelRoom: Codable {}
+
+
+struct LevelMove {
+    @DocumentID var id: String?
+    var playerId: String
+    var move: ActionType
+    @ServerTimestamp var timestamp: Timestamp?
+}
+
+
+extension LevelMove : Codable {
     
 }

@@ -29,7 +29,7 @@ struct MultiplayerWaitRoomView: View {
     var roomView: some View {
         VStack {
             if (viewModel.selectedDungeon != nil) {
-                Text("Selected Dungeon: \(viewModel.selectedDungeon?.name ?? "")")
+                Text("Selected Dungeon: \(viewModel.selectedDungeon?.persistedDungeon.name ?? "")")
             }
             
             Button(action: {

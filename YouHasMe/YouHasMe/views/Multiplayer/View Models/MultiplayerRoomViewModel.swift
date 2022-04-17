@@ -39,7 +39,7 @@ class MultiplayerRoomListener: ObservableObject {
         handle?.remove()
     }
 
-    func updateSelectedDungeon(dungeon: PersistableDungeon) {
+    func updateSelectedDungeon(dungeon: OnlineDungeon) {
         guard var roomCopy = multiplayerRoom else {
             return
         }
@@ -50,7 +50,7 @@ class MultiplayerRoomListener: ObservableObject {
             print("Coudn't update room")
         }
     }
-    
+
     func createDungeonRoom() {
         guard let room = multiplayerRoom else {
             return
@@ -60,7 +60,7 @@ class MultiplayerRoomListener: ObservableObject {
         } catch {
             print("Couldn't create dungeon room")
         }
-        
+
     }
 }
 
@@ -70,7 +70,7 @@ class MultiplayerRoomViewModel: ObservableObject {
     @Published var isHost = false
     @Published var playerStatus: PlayerStatus = .waiting
     @Published var players: [Player] = []
-    @Published var selectedDungeon: PersistableDungeon? = nil
+    @Published var selectedDungeon: OnlineDungeon? = nil
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -95,7 +95,7 @@ class MultiplayerRoomViewModel: ObservableObject {
                 }
                 self.playerStatus = status
             }.store(in: &cancellables)
-        
+
         roomlistener.$isHost
             .sink { [weak self] isHostStatus in
                 guard let self = self else {
@@ -110,9 +110,9 @@ class MultiplayerRoomViewModel: ObservableObject {
     }
 
     func selectDungeon(onlineDungeon: OnlineDungeon) {
-        roomlistener.updateSelectedDungeon(dungeon: onlineDungeon.persistedDungeon)
+        roomlistener.updateSelectedDungeon(dungeon: onlineDungeon)
     }
-    
+
     func startGame() {
         roomlistener.createDungeonRoom()
     }

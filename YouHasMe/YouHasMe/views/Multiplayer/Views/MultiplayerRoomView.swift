@@ -14,8 +14,8 @@ struct MultiplayerRoomView: View {
         switch viewModel.playerStatus {
         case .waiting:
             MultiplayerWaitRoomView(viewModel: viewModel)
-        case .playing(dungeonRoomId: let dungeonRoomId):
-            MultiplayerPlayView(viewModel: MultiplayerPlayViewModel(dungeonRoomId: dungeonRoomId))
+        case .playing(roomId: let roomId, dungeonRoomId: let dungeonRoomId):
+            MultiplayerPlayView(viewModel: MultiplayerPlayViewModel(roomId: roomId, dungeonRoomId: dungeonRoomId))
         }
     }
 }
