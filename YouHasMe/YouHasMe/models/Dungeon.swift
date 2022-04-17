@@ -138,9 +138,7 @@ class Dungeon {
         guard loadedLevels[newPlayerLevelPosition] != nil else {
             return false
         }
-//        guard dimensions.isWithinBounds(newPlayerLevelPosition) else {
-//            return
-//        }
+        
         playerLevelPosition = newPlayerLevelPosition
         return true
     }
