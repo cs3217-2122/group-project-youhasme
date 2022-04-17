@@ -56,6 +56,10 @@ struct EntityState: Hashable {
             $0.action == action && $0.isRejected
         }
     }
+    
+    func isPlayer() -> Bool {
+        entity.isPlayer()
+    }
 
     // Pops intent to perform specified action from intents, returns nil if there is no such intent
     private mutating func popIntent(action: EntityAction) -> EntityIntent? {

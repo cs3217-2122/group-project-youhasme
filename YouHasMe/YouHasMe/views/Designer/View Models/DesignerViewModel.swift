@@ -193,6 +193,18 @@ extension DesignerViewModel {
             return viewModel
         }
     }
+    
+    func getPlayerEntityViewModels() -> [PaletteEntityViewModel] {
+        guard dungeon.numberOfPlayers > 1 else {
+            return []
+        }
+        return Array(1...dungeon.numberOfPlayers).map { num in
+            let entityType = EntityType(classification: .property(.player(num)))
+            let viewModel = PaletteEntityViewModel(entityType: entityType)
+            viewModel.delegate = self
+            return viewModel
+        }
+    }
 
     func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
         let entityViewModel = EntityViewModel(

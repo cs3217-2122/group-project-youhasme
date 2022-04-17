@@ -13,7 +13,7 @@ struct GameView: View {
             switch gameState.state {
             case .mainmenu, .choosingDimensions:
                 break
-            case .selecting, .designing, .playing, .achievements:
+            case .selecting, .designing, .playing, .achievements, .multiplayerEntry, .multiplayer:
                 gameState.stateStack.removeLast()
             }
         })) {
@@ -30,6 +30,10 @@ struct GameView: View {
                 PlayView(viewModel: gameState.getPlayViewModel())
             case .achievements:
                 AchievementMainView(achievementsViewModel: gameState.getAchievementsViewModel())
+            case .multiplayerEntry:
+                MultiplayerEntryView()
+            case .multiplayer:
+                MultiplayerRoomView(viewModel: gameState.getMultiplayerRoomViewModel())
             }
         }
     }

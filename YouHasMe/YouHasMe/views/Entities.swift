@@ -64,6 +64,10 @@ func entityTypeToImageable(type: EntityType) -> Imageable {
             return .string("push")
         case .sink:
             return .string("sink")
+        case .player(let num):
+            return .sfSymbol("\(num).square")
+        default:
+            break
         }
     case .nounInstance(let noun):
         switch noun {

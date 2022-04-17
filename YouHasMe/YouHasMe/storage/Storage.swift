@@ -189,6 +189,10 @@ class LevelStorage: JSONStorage {
     override func getDefaultDirectory() -> URL {
         dungeonDirectory.appendingPathComponent(LevelStorage.levelDirectoryName)
     }
+    
+    func loadLevel(_ name: String) -> PersistableLevel? {
+        try? loadAndDecode(filename: name)
+    }
 
     func loadLevel(_ dataStringConvertible: DataStringConvertible) -> PersistableLevel? {
         try? loadAndDecode(filename: dataStringConvertible.dataString)

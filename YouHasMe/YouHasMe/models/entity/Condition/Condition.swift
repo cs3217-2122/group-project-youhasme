@@ -21,7 +21,7 @@ struct Condition {
             print("Failed to evaluate condition")
             return true
         }
-        print("\(lhsValue) \(relation.rawValue) \(rhsValue)")
+//        print("\(lhsValue) \(relation.rawValue) \(rhsValue)")
         return relation.evaluate(lhs: lhsValue, rhs: rhsValue)
     }
 }

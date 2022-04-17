@@ -8,7 +8,8 @@
 import Foundation
 struct PersistableLevelLayer {
     var dimensions: Rectangle
-    var tiles: [[PersistableTile]]
+    var tileMap: [Point: PersistableTile]
+//    var tiles: [[PersistableTile]]
 }
 
 extension PersistableLevelLayer: Codable {}

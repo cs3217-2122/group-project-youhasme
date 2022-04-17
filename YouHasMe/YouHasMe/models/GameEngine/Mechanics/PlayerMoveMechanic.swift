@@ -14,8 +14,9 @@ struct PlayerMoveMechanic: GameMechanic {
     //  - update: What triggered the update (e.g. user moves right)
     //  - state: Current game state
     // Returns new state containing updates triggered by mechanic
-    func apply(update: UpdateType, state: LevelLayerState) -> LevelLayerState {
+    func apply(update: Action, state: LevelLayerState) -> LevelLayerState {
         let (dx, dy) = update.getMovement()
+        let player = update.playerNum
         guard dx != 0 || dy != 0 else {
             return state  // Return original state if no movement
         }
@@ -25,7 +26,10 @@ struct PlayerMoveMechanic: GameMechanic {
         for (i, entityState) in state.entityStates.enumerated() where entityState.has(behaviour: .property(.you)) {
             newState.entityStates[i].add(action: .move(dx: dx, dy: dy))
         }
-
+        for (i, entityState) in state.entityStates.enumerated()
+            where entityState.has(behaviour: .property(.player(player))) {
+            newState.entityStates[i].add(action: .move(dx: dx, dy: dy))
+        }
         return newState
     }
 }
