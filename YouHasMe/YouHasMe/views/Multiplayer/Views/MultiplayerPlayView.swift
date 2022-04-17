@@ -12,9 +12,9 @@ struct MultiplayerPlayView: View {
     var dragGesture: some Gesture {
         DragGesture()
             .onEnded { value in
-//                guard viewModel.state == .normalPlay else {
-//                    return
-//                }
+                guard viewModel.state == .normalPlay else {
+                    return
+                }
                 
                 var actionType : ActionType  = .tick
                 let horizontalAmount = value.translation.width
@@ -36,21 +36,25 @@ struct MultiplayerPlayView: View {
             }
     }
     var body: some View {
-        let _ = print("RERENDER")
-        VStack {
-            Spacer()
-            GridView(viewModel: viewModel)
-                .gesture(dragGesture)
-                .alert("You Win!", isPresented: $viewModel.showingWinAlert) {
-                    Button("yay!", role: .cancel) {
-//                        gameState.state = .mainmenu
-//                        viewModel.deleteRoom()
-                    }
-                }.alert("No infinite loops allowed!", isPresented: $viewModel.showingLoopAlert) {
-                    Button("ok!", role: .cancel) {}
+        if(viewModel.levelLayer == nil) {
+            ProgressView()
+        } else {
+            VStack {
+                Spacer()
+                if let playerNum = viewModel.playerNum {
+                    Text("You are player \(playerNum)")
                 }
-            
-            Spacer()
+                GridView(viewModel: viewModel)
+                    .gesture(dragGesture)
+                    .alert("You Win!", isPresented: $viewModel.showingWinAlert) {
+                        Button("yay!", role: .cancel) {
+                        }
+                    }.alert("No infinite loops allowed!", isPresented: $viewModel.showingLoopAlert) {
+                        Button("ok!", role: .cancel) {}
+                    }
+                
+                Spacer()
+            }
         }
     }
 }

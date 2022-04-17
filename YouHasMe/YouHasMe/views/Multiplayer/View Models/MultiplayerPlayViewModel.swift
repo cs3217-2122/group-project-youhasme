@@ -10,169 +10,6 @@ import Firebase
 import Combine
 import SwiftUI
 
-class LevelRoomListener: ObservableObject {
-    var roomId: String
-    var dungeonRoomId: String
-    var point: Point
-    var roomHandle: ListenerRegistration?
-    var moveHandle: ListenerRegistration?
-    var storage = MultiplayerRoomStorage()
-    let db = Firestore.firestore()
-    @Published var levelRoom: LevelRoom?
-    @Published var levelMoves: [LevelMove] = []
-    
-    init(roomId: String, dungeonRoomId: String, point: Point) {
-        self.roomId = roomId
-        self.dungeonRoomId = dungeonRoomId
-        self.point = point
-        storage.createLevelRoomIfNotExists(roomId: roomId, dungeonRoomId: dungeonRoomId, levelId: point.dataString)
-    }
-    
-    func subscribe() {
-        self.roomHandle = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
-            .collection(MultiplayerRoomStorage.dungeonCollectionPath).document(dungeonRoomId)
-            .collection(MultiplayerRoomStorage.levelCollectionPath).document(point.dataString)
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    print("Couldnt observe level room \(error.localizedDescription)")
-                }
-                if let querySnapshot = querySnapshot {
-                    self.levelRoom = try? querySnapshot.data(as: LevelRoom.self)
-                }
-            }
-
-        self.moveHandle = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
-            .collection(MultiplayerRoomStorage.dungeonCollectionPath).document(dungeonRoomId)
-            .collection(MultiplayerRoomStorage.levelCollectionPath).document(point.dataString)
-            .collection("moves")
-            .order(by: "timestamp")
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    print("Error getting moves: \(error.localizedDescription)")
-                }
-
-                if let querySnapshot = querySnapshot {
-                    var isPendingWrite = false
-                    let levelMoves: [LevelMove] = querySnapshot.documents.compactMap { document in
-//                        return try? document.data(as: LevelMove.self)
-                        if document.metadata.hasPendingWrites  {
-                            isPendingWrite = true
-                            return nil
-                        } else {
-                            return try? document.data(as: LevelMove.self)
-                        }
-                    }
-                    
-                    if !isPendingWrite {
-                        self.levelMoves = levelMoves
-                    }
-                }
-            }
-    }
-    
-    func incrementWinCount() {
-        guard var levelRoomCopy = self.levelRoom else {
-            return
-        }
-        
-        levelRoomCopy.winCount += 1
-        do {
-            try storage.updateLevelRoom(roomId: self.roomId, dungeonRoomId: self.dungeonRoomId, levelRoom: levelRoomCopy)
-        } catch {
-            print("couldnt update win count")
-        }
-        
-    }
-    
-    func sendAction(actionType: ActionType) {
-            guard let currentUserId = Auth.auth().currentUser?.uid else {
-                return
-            }
-        
-            print("SEND ACTION")
-
-            let move = LevelMove(playerId: currentUserId, move: actionType)
-            let moveRef = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
-            .collection(MultiplayerRoomStorage.dungeonCollectionPath).document(dungeonRoomId)
-            .collection(MultiplayerRoomStorage.levelCollectionPath).document(point.dataString)
-            .collection("moves").document()
-            try? moveRef.setData(from: move)
-    }
-
-    func unsubscribe() {
-        self.roomHandle?.remove()
-        self.moveHandle?.remove()
-    }
-}
-
-class DungeonRoomListener: ObservableObject {
-    var roomId: String
-    var dungeonRoomId: String
-    var handle: ListenerRegistration?
-    let db = Firestore.firestore()
-    let storage = MultiplayerRoomStorage()
-    @Published var dungeonRoom: DungeonRoom?
-    @Published var playerPos: Point = Point.zero
-    @Published var playerNumAssignment: [String: Int] = [:]
-
-    init(roomId: String, dungeonRoomId: String) {
-        self.roomId = roomId
-        self.dungeonRoomId = dungeonRoomId
-
-    }
-    
-    func isCurrentPlayer(playerId: String) ->  Bool {
-        guard let currentUserId = Auth.auth().currentUser?.uid else {
-            fatalError("should be logged in")
-        }
-        
-        return currentUserId == playerId
-    }
-
-    func subscribe() {
-        guard let currentUserId = Auth.auth().currentUser?.uid else {
-            fatalError("should be logged in")
-        }
-
-        self.handle = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
-            .collection(MultiplayerRoomStorage.dungeonCollectionPath).document(dungeonRoomId)
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    print("Couldnt observe dungeon room \(error.localizedDescription)")
-                }
-                if let querySnapshot = querySnapshot {
-                    self.dungeonRoom = try? querySnapshot.data(as: DungeonRoom.self)
-                    self.playerPos = self.dungeonRoom?.playerLocations[currentUserId] ?? Point.zero
-                    self.playerNumAssignment = self.dungeonRoom?.players ?? [:]
-                }
-
-            }
-    }
-
-    func updatePosition(pos: Point, playerNum: Int) {
-        guard let currentUserId = Auth.auth().currentUser?.uid else {
-            fatalError("should be logged in")
-        }
-
-        guard var dungeonRoomCopy = self.dungeonRoom else {
-            return
-        }
-        
-        if playerNum == 0 || playerNum == self.playerNumAssignment[currentUserId] {
-            dungeonRoomCopy.playerLocations[currentUserId] = pos
-            do {
-                try storage.updateDungeonRoom(dungeonRoom: dungeonRoomCopy, roomId: self.roomId)
-            } catch {
-                print("Unable to update position")
-            }
-        }
-    }
-
-    func unsubscribe() {
-        self.handle?.remove()
-    }
-}
-
 class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     var roomId: String
     var dungeonRoomId: String
@@ -182,29 +19,21 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     
     var dungeon: Dungeon
     var playerNumAssignment: [String: Int] = [:]
-    var level: Level?
+    @Published var level: Level?
     var moves: [LevelMove] = []
-    var playerPos: Point = Point.zero
+    @Published var playerPos: Point = Point.zero
+    
+    var moveAcrossLevel = false
+    var moveAcrossLevelPlayer = 1
 
-//    @Published var dungeon: Dungeon
-//    @Published var playerNumAssignment: [String: Int] = [:]
-//    @Published var level: Level?
-//    @Published var moves: [LevelMove] = []
-//    @Published var playerPos: Point = Point.zero
     @Published var levelLayer: LevelLayer?
     @Published var showingWinAlert = false
     @Published var showingLoopAlert = false
-    var isReplaying = false
-//    @Published var currLevelLayer: LevelLayer?
-
-//    var gameEngine: GameEngine {
-//        didSet {
-//            setupBindingsWithGameEngine()
-//        }
-//    }
 
     @Published var selectedTile: Tile?
     @Published var state: PlayViewState = .normalPlay
+    
+    @Published var playerNum: Int?
     
     func setupSelectedTileBindings() {
         $selectedTile.sink { [weak self] selectedTile in
@@ -265,8 +94,10 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //            print("GAME EVENT: \(gameEvent.type)")
             switch gameEvent.type {
             case .movingAcrossLevel(let playerNum):
+                self.moveAcrossLevel = true
+                self.moveAcrossLevelPlayer = playerNum
 //                self.levelLayer = nil
-                self.handleMoveAcrossLevel(playerNum: playerNum)
+//                self.handleMoveAcrossLevel(playerNum: playerNum)
 //            case .win:
 //                self.handleWin()
             default:
@@ -292,10 +123,11 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         guard dungeon.dimensions.isWithinBounds(newPlayerLevelPosition) else {
             return
         }
-        dungeonRoomListener?.updatePosition(pos: newPlayerLevelPosition, playerNum: playerNum)
         lastAction = .tick
+        self.moveAcrossLevel = false
+        self.moveAcrossLevelPlayer = 1
+        dungeonRoomListener?.updatePosition(pos: newPlayerLevelPosition, playerNum: playerNum)
     }
-
 
     func setUpDungeonRoomListener() {
         self.dungeonRoomListener = DungeonRoomListener(roomId: self.roomId, dungeonRoomId: self.dungeonRoomId)
@@ -319,7 +151,6 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                     return
                 }
                 self.playerPos = pos
-                print("CHANGED POSITION")
                 self.setUpLevelRoomListener(pos: pos)
             }.store(in: &cancellables)
 
@@ -329,6 +160,13 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                     return
                 }
                 self.playerNumAssignment = playerNumAssignment
+            }.store(in: &cancellables)
+        self.dungeonRoomListener?.$playerNum
+            .sink { [weak self] playerNum in
+                guard let self = self else {
+                    return
+                }
+                self.playerNum = playerNum
             }.store(in: &cancellables)
     }
 
@@ -352,10 +190,9 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //                print(level.name)
                 level.winCount = levelRoom?.winCount ?? 0
                 self.level = level
-                if self.levelLayer == nil {
+                if self.moves.isEmpty {
                     self.levelLayer = level.layer
                 }
-                print("CHANED LEVEL ROOM")
             }.store(in: &cancellables)
 
         self.levelRoomListener?.$levelMoves
@@ -363,8 +200,6 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                 guard let self = self else {
                     return
                 }
-                print("RECIEVED MOVES")
-                print(moves)
                 self.moves = moves
                 self.applyMoves()
             }.store(in: &cancellables)
@@ -376,12 +211,10 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         }
         let levelLayer = level.layer
         var gameEngine = GameEngine(levelLayer: levelLayer, ruleEngineDelegate: self)
-        isReplaying = true
         
         for (index, move) in self.moves.enumerated() {
             
             if index == self.moves.count - 1 {
-//                print("LAST MOVE")
                 setupBindingsWithGameEngine(gameEngine: gameEngine)
             }
             if let playerNum = playerNumAssignment[move.playerId] {
@@ -396,8 +229,10 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                     self.handleWin()
                 }
             }
-           
-            
+        }
+        
+        if moveAcrossLevel {
+            self.handleMoveAcrossLevel(playerNum: moveAcrossLevelPlayer)
         }
         self.showingWinAlert = gameEngine.currentGame.gameStatus == .win
         self.showingLoopAlert = gameEngine.status == .infiniteLoop
@@ -411,7 +246,6 @@ extension MultiplayerPlayViewModel {
         var status = LevelStatus.inactiveAndIncomplete
 
         if let levelLayer = self.levelLayer {
-//            print(level)
             let worldPosition = getWorldPosition(at: viewOffset)
             let positionWithinLevel = dungeon.worldToPositionWithinLevel(worldPosition)
             tile = levelLayer.getTileAt(point: positionWithinLevel)

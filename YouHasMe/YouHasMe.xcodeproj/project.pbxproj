@@ -18,10 +18,6 @@
 		1E5406F428096C56006D546F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 1E5406F328096C56006D546F /* FirebaseStorage */; };
 		1E5406F628096C56006D546F /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 1E5406F528096C56006D546F /* FirebaseStorageCombine-Community */; };
 		1E5406F828096C56006D546F /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 1E5406F728096C56006D546F /* FirebaseStorageSwift-Beta */; };
-		1E5406FD28096D10006D546F /* DungeonRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5406FC28096D10006D546F /* DungeonRoomView.swift */; };
-		1E5406FE28096D10006D546F /* DungeonRoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5406FC28096D10006D546F /* DungeonRoomView.swift */; };
-		1E54070028096D23006D546F /* DungeonRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */; };
-		1E54070128096D23006D546F /* DungeonRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */; };
 		1E54070428096E4A006D546F /* DungeonRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070328096E4A006D546F /* DungeonRoomStorage.swift */; };
 		1E54070528096E4A006D546F /* DungeonRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070328096E4A006D546F /* DungeonRoomStorage.swift */; };
 		1E54070828097049006D546F /* MultiplayerRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54070728097049006D546F /* MultiplayerRoom.swift */; };
@@ -48,6 +44,16 @@
 		1E54072A280B5F98006D546F /* MultiplayerPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540728280B5F98006D546F /* MultiplayerPlayView.swift */; };
 		1E54072C280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */; };
 		1E54072D280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */; };
+		1E540730280C4637006D546F /* MultiplayerRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54072F280C4637006D546F /* MultiplayerRoomStorage.swift */; };
+		1E540732280C4645006D546F /* LevelRoomStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540731280C4645006D546F /* LevelRoomStorage.swift */; };
+		1E540734280C4652006D546F /* OnlineLevelStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540733280C4652006D546F /* OnlineLevelStorage.swift */; };
+		1E540736280C465F006D546F /* OnlineDungeonStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540735280C465F006D546F /* OnlineDungeonStorage.swift */; };
+		1E540738280C479A006D546F /* OnlineDungeonStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540737280C479A006D546F /* OnlineDungeonStorageProtocol.swift */; };
+		1E54073A280C47D0006D546F /* MultiplayerRoomStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540739280C47D0006D546F /* MultiplayerRoomStorageProtocol.swift */; };
+		1E54073C280C4A82006D546F /* MultiplayerRoomListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54073B280C4A81006D546F /* MultiplayerRoomListener.swift */; };
+		1E54073E280C4AB9006D546F /* OnlineDungeonListListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54073D280C4AB9006D546F /* OnlineDungeonListListener.swift */; };
+		1E540740280C4ADD006D546F /* LevelRoomListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E54073F280C4ADD006D546F /* LevelRoomListener.swift */; };
+		1E540742280C4AE9006D546F /* DungeonRoomListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E540741280C4AE9006D546F /* DungeonRoomListener.swift */; };
 		1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C327E5B2BF00161E63 /* CellView.swift */; };
 		1E6B90C627E5B43F00161E63 /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E6B90C527E5B43F00161E63 /* Entities.swift */; };
 		1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E96EB8C27E7254000321BEB /* MainMenuView.swift */; };
@@ -254,8 +260,6 @@
 
 /* Begin PBXFileReference section */
 		1E5406E328096C19006D546F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		1E5406FC28096D10006D546F /* DungeonRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomView.swift; sourceTree = "<group>"; };
-		1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomViewModel.swift; sourceTree = "<group>"; };
 		1E54070328096E4A006D546F /* DungeonRoomStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomStorage.swift; sourceTree = "<group>"; };
 		1E54070728097049006D546F /* MultiplayerRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoom.swift; sourceTree = "<group>"; };
 		1E54070A28097500006D546F /* OnlineDungeon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeon.swift; sourceTree = "<group>"; };
@@ -269,6 +273,16 @@
 		1E540725280B5CFF006D546F /* MultiplayerRoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomView.swift; sourceTree = "<group>"; };
 		1E540728280B5F98006D546F /* MultiplayerPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayView.swift; sourceTree = "<group>"; };
 		1E54072B280B5FB5006D546F /* MultiplayerPlayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerPlayViewModel.swift; sourceTree = "<group>"; };
+		1E54072F280C4637006D546F /* MultiplayerRoomStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomStorage.swift; sourceTree = "<group>"; };
+		1E540731280C4645006D546F /* LevelRoomStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelRoomStorage.swift; sourceTree = "<group>"; };
+		1E540733280C4652006D546F /* OnlineLevelStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineLevelStorage.swift; sourceTree = "<group>"; };
+		1E540735280C465F006D546F /* OnlineDungeonStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeonStorage.swift; sourceTree = "<group>"; };
+		1E540737280C479A006D546F /* OnlineDungeonStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeonStorageProtocol.swift; sourceTree = "<group>"; };
+		1E540739280C47D0006D546F /* MultiplayerRoomStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomStorageProtocol.swift; sourceTree = "<group>"; };
+		1E54073B280C4A81006D546F /* MultiplayerRoomListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerRoomListener.swift; sourceTree = "<group>"; };
+		1E54073D280C4AB9006D546F /* OnlineDungeonListListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineDungeonListListener.swift; sourceTree = "<group>"; };
+		1E54073F280C4ADD006D546F /* LevelRoomListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelRoomListener.swift; sourceTree = "<group>"; };
+		1E540741280C4AE9006D546F /* DungeonRoomListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonRoomListener.swift; sourceTree = "<group>"; };
 		1E6B90C327E5B2BF00161E63 /* CellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellView.swift; sourceTree = "<group>"; };
 		1E6B90C527E5B43F00161E63 /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		1E96EB8C27E7254000321BEB /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
@@ -495,6 +509,7 @@
 		1E5406F928096CE4006D546F /* Multiplayer */ = {
 			isa = PBXGroup;
 			children = (
+				1E54072E280C3142006D546F /* Listeners */,
 				1E5406FB28096CF8006D546F /* View Models */,
 				1E5406FA28096CF2006D546F /* Views */,
 			);
@@ -504,7 +519,6 @@
 		1E5406FA28096CF2006D546F /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1E5406FC28096D10006D546F /* DungeonRoomView.swift */,
 				1E540710280B116E006D546F /* MultiplayerEntryView.swift */,
 				1E540716280B22D5006D546F /* MultiplayerWaitRoomView.swift */,
 				1E54071F280B31AD006D546F /* OnlineDungeonListView.swift */,
@@ -517,7 +531,6 @@
 		1E5406FB28096CF8006D546F /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				1E5406FF28096D23006D546F /* DungeonRoomViewModel.swift */,
 				1E540713280B133D006D546F /* MultiplayerEntryViewModel.swift */,
 				1E54071C280B243B006D546F /* MultiplayerRoomViewModel.swift */,
 				1E540722280B31C0006D546F /* OnlineDungeonListViewModel.swift */,
@@ -530,6 +543,12 @@
 			isa = PBXGroup;
 			children = (
 				1E54070328096E4A006D546F /* DungeonRoomStorage.swift */,
+				1E54072F280C4637006D546F /* MultiplayerRoomStorage.swift */,
+				1E540731280C4645006D546F /* LevelRoomStorage.swift */,
+				1E540733280C4652006D546F /* OnlineLevelStorage.swift */,
+				1E540735280C465F006D546F /* OnlineDungeonStorage.swift */,
+				1E540737280C479A006D546F /* OnlineDungeonStorageProtocol.swift */,
+				1E540739280C47D0006D546F /* MultiplayerRoomStorageProtocol.swift */,
 			);
 			path = Multiplayer;
 			sourceTree = "<group>";
@@ -542,6 +561,17 @@
 				1E54070D28097DE4006D546F /* OnlineLevel.swift */,
 			);
 			path = Multiplayer;
+			sourceTree = "<group>";
+		};
+		1E54072E280C3142006D546F /* Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				1E54073B280C4A81006D546F /* MultiplayerRoomListener.swift */,
+				1E54073D280C4AB9006D546F /* OnlineDungeonListListener.swift */,
+				1E54073F280C4ADD006D546F /* LevelRoomListener.swift */,
+				1E540741280C4AE9006D546F /* DungeonRoomListener.swift */,
+			);
+			path = Listeners;
 			sourceTree = "<group>";
 		};
 		1E6B90C127E5B2A300161E63 /* views */ = {
@@ -1310,11 +1340,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5A28903280AF8E700CC637D /* QuadDirectionalLockGeneratorDecorator.swift in Sources */,
+				1E540730280C4637006D546F /* MultiplayerRoomStorage.swift in Sources */,
 				E5BECBF427E5E8BF00E3952D /* Verb.swift in Sources */,
 				40E2517E27F786B7008CBCE0 /* AchievementImages.swift in Sources */,
 				E581F08B27F760EA00B1CFCB /* AudioPlayer.swift in Sources */,
 				1E540717280B22D5006D546F /* MultiplayerWaitRoomView.swift in Sources */,
-				E585AD5927F964F900A54202 /* MessageView.swift in Sources */,
 				E569FC1D280096FE0042D15B /* LevelMetadata.swift in Sources */,
 				E57A19AA27F9FD0E00312C39 /* ImmediateNeighborhoodChunkNeighborFinder.swift in Sources */,
 				E57A19B327F9FE8600312C39 /* ChunkGeneratorDelegate.swift in Sources */,
@@ -1328,11 +1358,11 @@
 				405467FB280074A400C577EF /* GameNotificationViewUtil.swift in Sources */,
 				40E2518027F8306E008CBCE0 /* GameEventPublisher.swift in Sources */,
 				E574659327F8668000F79A52 /* QuadDirectionalMatchingStrategy.swift in Sources */,
-				E5563C4027E8D09E007D2E86 /* ToolbarViewModel.swift in Sources */,
 				1E540726280B5CFF006D546F /* MultiplayerRoomView.swift in Sources */,
 				E569858C27FE6FC6001C628A /* FlagIsWinGeneratorDecorator.swift in Sources */,
 				E573F43F27F4B806001E9877 /* CaseIterable.swift in Sources */,
 				E574658D27F835D300F79A52 /* PersistableEntityType.swift in Sources */,
+				1E54073C280C4A82006D546F /* MultiplayerRoomListener.swift in Sources */,
 				E57465A327F8691500F79A52 /* HasVerbConcatNounState.swift in Sources */,
 				E5EC5B5627F3696200BAE834 /* PlayView.swift in Sources */,
 				E57B535727FD68A70071E623 /* NamedKeyPath.swift in Sources */,
@@ -1348,13 +1378,13 @@
 				E573E96627EA3548000D10E4 /* PersistableTile.swift in Sources */,
 				E57ACB2927DC582300F73B27 /* ContentView.swift in Sources */,
 				E573E96227EA32F7000D10E4 /* PersistableLevel.swift in Sources */,
-				1E5406FD28096D10006D546F /* DungeonRoomView.swift in Sources */,
 				E574658327F805B100F79A52 /* PaletteEntityView.swift in Sources */,
 				40E2518827F8E22A008CBCE0 /* LevelEventDecorator.swift in Sources */,
 				40E2517C27F72963008CBCE0 /* AchievementView.swift in Sources */,
 				40E2519D27FAD8BA008CBCE0 /* PersistableAbstractGameEvent.swift in Sources */,
 				E5563C4627E8E31B007D2E86 /* Double.swift in Sources */,
 				E57465A527F8693000F79A52 /* IsVerbPrimedState.swift in Sources */,
+				1E540740280C4ADD006D546F /* LevelRoomListener.swift in Sources */,
 				E573E95F27EA27CC000D10E4 /* LoggerWrapper.swift in Sources */,
 				E574659F27F868BC00F79A52 /* HasVerbState.swift in Sources */,
 				E57ACB4227DC677A00F73B27 /* Rule.swift in Sources */,
@@ -1366,6 +1396,7 @@
 				1E96EB8D27E7254000321BEB /* MainMenuView.swift in Sources */,
 				E5A28905280B185500CC637D /* IdentityFinderDecorator.swift in Sources */,
 				E58E836928027FE400C06A59 /* RuleApplicator.swift in Sources */,
+				1E540734280C4652006D546F /* OnlineLevelStorage.swift in Sources */,
 				1E54070828097049006D546F /* MultiplayerRoom.swift in Sources */,
 				1E54071D280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
 				40E2516A27F43C56008CBCE0 /* UnlockCondition.swift in Sources */,
@@ -1374,6 +1405,7 @@
 				E569071927ED4D830010E665 /* PersistenceView.swift in Sources */,
 				E57A19AC27F9FD2000312C39 /* ChunkNeighborFinderReversedDecorator.swift in Sources */,
 				E57B534D27FD35600071E623 /* Tile.swift in Sources */,
+				1E540732280C4645006D546F /* LevelRoomStorage.swift in Sources */,
 				B05687E127F377DC0046C26C /* StopMechanic.swift in Sources */,
 				E5563C3727E8AF69007D2E86 /* DesignerViewModel.swift in Sources */,
 				E5BECBE927E5E7C700E3952D /* RuleParser.swift in Sources */,
@@ -1395,7 +1427,7 @@
 				E57A19A727F9F91900312C39 /* Directions.swift in Sources */,
 				40AD86A627E6E71F00F42C42 /* GameStateManager.swift in Sources */,
 				E5BECBEF27E5E84200E3952D /* DefaultRules.swift in Sources */,
-				1E54070028096D23006D546F /* DungeonRoomViewModel.swift in Sources */,
+				1E540736280C465F006D546F /* OnlineDungeonStorage.swift in Sources */,
 				E578594427F3EA58009A79F9 /* IntegerViewTranslatable.swift in Sources */,
 				E57A19A227F9F10600312C39 /* WrapAroundMatchingStrategy.swift in Sources */,
 				40E2517327F71FCE008CBCE0 /* GameEvent.swift in Sources */,
@@ -1410,6 +1442,7 @@
 				40E2518427F8B324008CBCE0 /* AbstractGameEvent.swift in Sources */,
 				40E2518A27F8E2A9008CBCE0 /* EntityEventDecorator.swift in Sources */,
 				E5BECBEB27E5E7E900E3952D /* NaiveRuleValidationStrategy.swift in Sources */,
+				1E540742280C4AE9006D546F /* DungeonRoomListener.swift in Sources */,
 				E57B535127FD4C720071E623 /* Bool.swift in Sources */,
 				E574658527F805CC00F79A52 /* PaletteEntityViewModel.swift in Sources */,
 				E575264C27E965410045D3D6 /* Chunkable.swift in Sources */,
@@ -1442,7 +1475,7 @@
 				40E2518627F8E134008CBCE0 /* GameEventBaseDecorator.swift in Sources */,
 				40E2519727FAD853008CBCE0 /* UnlockConditionUtil.swift in Sources */,
 				40E2517127F5EB7D008CBCE0 /* GameStatistic.swift in Sources */,
-				40E2517827F72645008CBCE0 /* AchiementMainView.swift in Sources */,
+				40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */,
 				1E540714280B133D006D546F /* MultiplayerEntryViewModel.swift in Sources */,
 				40E2517827F72645008CBCE0 /* AchievementMainView.swift in Sources */,
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
@@ -1485,6 +1518,7 @@
 				40E2519327FAD6CB008CBCE0 /* PersistableUnlockCondition.swift in Sources */,
 				E5563C3927E8B213007D2E86 /* ViewConstants.swift in Sources */,
 				B07AA62D27E658F200918E71 /* EntityAction.swift in Sources */,
+				1E54073E280C4AB9006D546F /* OnlineDungeonListListener.swift in Sources */,
 				405467FD28008D3600C577EF /* GameNotificationPublishingHelper.swift in Sources */,
 				E5EC5B5927F36ACE00BAE834 /* PlayViewModel.swift in Sources */,
 				E58ACBE627FDD05B0035E517 /* ConditionalRuleValidationStrategy.swift in Sources */,
@@ -1499,14 +1533,15 @@
 				405467F72800562800C577EF /* GameNotificationView.swift in Sources */,
 				40E2519B27FAD891008CBCE0 /* PersistableGameStatistic.swift in Sources */,
 				40E2519927FAD875008CBCE0 /* PersistableAchievement.swift in Sources */,
-				E574658927F8098A00F79A52 /* MetaLevelDesignerTileInfoView.swift in Sources */,
 				1E54070428096E4A006D546F /* DungeonRoomStorage.swift in Sources */,
 				E573E95827EA1A34000D10E4 /* Rectangle.swift in Sources */,
 				E585AD5F27F9655C00A54202 /* MaximumLengthParsingStrategy.swift in Sources */,
+				1E54073A280C47D0006D546F /* MultiplayerRoomStorageProtocol.swift in Sources */,
 				E57ACB2727DC582300F73B27 /* YouHasMeApp.swift in Sources */,
 				E57B533F27FD32B90071E623 /* PersistableClassification.swift in Sources */,
 				E5BECBF827E5E8FF00E3952D /* Classification.swift in Sources */,
 				E572AD662805BC8000FC6053 /* DimensionSelectViewModel.swift in Sources */,
+				1E540738280C479A006D546F /* OnlineDungeonStorageProtocol.swift in Sources */,
 				E57CA5E927EE1B2B008A3AFB /* PaletteView.swift in Sources */,
 				40F43B2E28099D79000DCAA5 /* DungeonEventDecorator.swift in Sources */,
 				E57B535527FD688E0071E623 /* AbstractKeyPathIdentifierEnum.swift in Sources */,
@@ -1530,9 +1565,7 @@
 				1E54072D280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */,
 				1E54070F28097DE4006D546F /* OnlineLevel.swift in Sources */,
 				1E54071E280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
-				1E5406FE28096D10006D546F /* DungeonRoomView.swift in Sources */,
 				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
-				1E54070128096D23006D546F /* DungeonRoomViewModel.swift in Sources */,
 				40E2519027F9FAB1008CBCE0 /* GameEventTests.swift in Sources */,
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				1E54070528096E4A006D546F /* DungeonRoomStorage.swift in Sources */,
