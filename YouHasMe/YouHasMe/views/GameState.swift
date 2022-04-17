@@ -14,6 +14,13 @@ struct DungeonParams: Equatable {
     }
 }
 
+struct DungeonPlayParams: Equatable {
+    var neighborFinder: AnyNeighborFinderDelegate<Point>
+    static func == (lhs: DungeonPlayParams, rhs: DungeonPlayParams) -> Bool {
+        lhs.neighborFinder === rhs.neighborFinder
+    }
+}
+
 enum DesignableDungeon {
     case dungeonLoadable(Loadable)
     case newDungeon(DungeonParams)

@@ -64,8 +64,10 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var mostRecentPlayerMove: UpdateType?
     private var playerMovementAcrossLevel: Vector?
 
-    convenience init(playableDungeon: PlayableDungeon, achievementsViewModel: AchievementsViewModel,
-                     gameNotificationsViewModel: GameNotificationsViewModel) {
+    convenience init(playableDungeon: PlayableDungeon,
+                     achievementsViewModel: AchievementsViewModel,
+                     gameNotificationsViewModel: GameNotificationsViewModel
+    ) {
         self.init(dungeon: playableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel,
                   gameNotificationsViewModel: gameNotificationsViewModel)
     }

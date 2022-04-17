@@ -19,7 +19,8 @@ class Dungeon {
     static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
     var levelGenerator: AnyChunkGeneratorDelegate
-    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+    var levelNeighborFinder: AnyNeighborFinderDelegate<Point> =
+        ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
