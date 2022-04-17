@@ -55,7 +55,8 @@ struct GameEngine: GameEventPublisher {
             WinMechanic(),
             StopMechanic(),
             TransformMechanic(),
-            SinkMechanic()
+            SinkMechanic(),
+            HasMechanic()
         ]
     }
 

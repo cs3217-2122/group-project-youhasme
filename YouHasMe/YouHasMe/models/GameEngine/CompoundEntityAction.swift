@@ -10,6 +10,7 @@ struct CompoundEntityAction {
     var dx = 0
     var dy = 0
     var transformTarget: Noun?
+    var spawnTargets: [Noun] = []
     var isDestroy = false
 
     init(actions: [EntityAction]) {
@@ -20,6 +21,8 @@ struct CompoundEntityAction {
                 self.dy += dy
             case let .transform(target):
                 transformTarget = target
+            case let .spawn(target):
+                spawnTargets.append(target)
             case .destroy:
                 isDestroy = true
             }
@@ -32,7 +35,11 @@ struct CompoundEntityAction {
         newState.location.x += dx
         newState.location.y += dy
         if isDestroy {
-            return []
+            // Return entities from spawn targets
+            return spawnTargets.map {
+                let entity = Entity(entityType: EntityType(classification: .nounInstance($0)))
+                return EntityState(entity: entity, location: newState.location)
+            }
         }
         if let target = transformTarget {  // Handle transform
             newState.entity.entityType = EntityType(classification: .nounInstance(target))

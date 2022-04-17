@@ -10,4 +10,5 @@ enum EntityAction: Hashable {
     case move(dx: Int, dy: Int)  // Move by (dx, dy)
     case transform(target: Noun)  // Tranform entity type to target
     case destroy  // Remove entity
+    case spawn(Noun)
 }

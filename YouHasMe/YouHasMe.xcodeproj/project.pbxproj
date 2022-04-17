@@ -46,6 +46,7 @@
 		40F43B2E28099D79000DCAA5 /* DungeonEventDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */; };
 		B03ADBBC280C12D70057CCD2 /* SinkMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */; };
 		B03ADBBE280C15A20057CCD2 /* CompoundEntityAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBD280C15A20057CCD2 /* CompoundEntityAction.swift */; };
+		B03ADBC0280C27160057CCD2 /* HasMechanic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03ADBBF280C27160057CCD2 /* HasMechanic.swift */; };
 		B03EEE9927F2CEC50050D295 /* LevelLayerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */; };
 		B03EEE9B27F2CED90050D295 /* EntityState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9A27F2CED90050D295 /* EntityState.swift */; };
 		B03EEE9D27F2CEF10050D295 /* EntityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */; };
@@ -252,6 +253,7 @@
 		40F43B2D28099D79000DCAA5 /* DungeonEventDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DungeonEventDecorator.swift; sourceTree = "<group>"; };
 		B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinkMechanic.swift; sourceTree = "<group>"; };
 		B03ADBBD280C15A20057CCD2 /* CompoundEntityAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundEntityAction.swift; sourceTree = "<group>"; };
+		B03ADBBF280C27160057CCD2 /* HasMechanic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HasMechanic.swift; sourceTree = "<group>"; };
 		B03EEE9827F2CEC50050D295 /* LevelLayerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelLayerState.swift; sourceTree = "<group>"; };
 		B03EEE9A27F2CED90050D295 /* EntityState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityState.swift; sourceTree = "<group>"; };
 		B03EEE9C27F2CEF10050D295 /* EntityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityIntent.swift; sourceTree = "<group>"; };
@@ -591,6 +593,7 @@
 				B05687E027F377DC0046C26C /* StopMechanic.swift */,
 				B0E7962B27F88AB400DE5CBC /* TransformMechanic.swift */,
 				B03ADBBB280C12D70057CCD2 /* SinkMechanic.swift */,
+				B03ADBBF280C27160057CCD2 /* HasMechanic.swift */,
 			);
 			path = Mechanics;
 			sourceTree = "<group>";
@@ -1302,6 +1305,7 @@
 				E58ACBDC27FDC9140035E517 /* IfState.swift in Sources */,
 				1E6B90C427E5B2BF00161E63 /* CellView.swift in Sources */,
 				E569858E27FE7F09001C628A /* RockIsStopGeneratorDecorator.swift in Sources */,
+				B03ADBC0280C27160057CCD2 /* HasMechanic.swift in Sources */,
 				405467F928006DC100C577EF /* GameNotificationsView.swift in Sources */,
 				B07AA62E27E658F200918E71 /* GameEngine.swift in Sources */,
 				E574657C27F8032500F79A52 /* AudioRecorder.swift in Sources */,
