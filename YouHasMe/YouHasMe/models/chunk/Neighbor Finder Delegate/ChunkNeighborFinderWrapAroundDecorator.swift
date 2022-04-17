@@ -8,7 +8,7 @@
 import Foundation
 final class ChunkNeighborFinderWrapAroundDecorator: IdentityFinderDecorator<Point> {
     typealias ChunkIdentifier = Point
-    
+
     override func getNeighborId<T>(of chunk: T) -> NeighborData<Point>
     where T: Chunkable, ChunkIdentifier == T.ChunkIdentifier {
         let extremities = chunk.extremities

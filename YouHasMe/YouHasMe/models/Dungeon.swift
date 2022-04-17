@@ -44,9 +44,9 @@ class Dungeon {
     @Published var loadedLevels: [Point: Level] = [:]
     var totalWins: Int = 0
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     var numberOfPlayers: Int = 1
-    
+
     convenience init() {
         self.init(
             isNewDungeon: true,
@@ -143,7 +143,7 @@ class Dungeon {
         guard loadedLevels[newPlayerLevelPosition] != nil else {
             return false
         }
-        
+
         playerLevelPosition = newPlayerLevelPosition
         return true
     }
@@ -362,26 +362,25 @@ extension Dungeon {
     var youCount: Int {
         getActiveLevel().youCount
     }
-    
+
     var stopCount: Int {
         getActiveLevel().stopCount
     }
-    
+
     var pushCount: Int {
         getActiveLevel().pushCount
     }
-    
+
     var babaCount: Int {
         getActiveLevel().babaCount
     }
-    
+
     var wallCount: Int {
         getActiveLevel().pushCount
     }
 }
 
 extension Dungeon: KeyPathExposable {
-
     static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
             .totalWins: \.totalWins,

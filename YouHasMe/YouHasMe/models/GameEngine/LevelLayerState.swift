@@ -23,7 +23,7 @@ struct LevelLayerState: Equatable {
             }
         }
     }
-    
+
     func playerEntities() -> [EntityState] {
         entityStates.filter {
             $0.isPlayer()

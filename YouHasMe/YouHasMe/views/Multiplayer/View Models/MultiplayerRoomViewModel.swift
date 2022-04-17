@@ -15,7 +15,7 @@ class MultiplayerRoomViewModel: ObservableObject {
     @Published var isHost = false
     @Published var playerStatus: PlayerStatus = .waiting
     @Published var players: [Player] = []
-    @Published var selectedDungeon: OnlineDungeon? = nil
+    @Published var selectedDungeon: OnlineDungeon?
     @Published var joinCode: String = ""
 
     private var cancellables = Set<AnyCancellable>()
@@ -49,7 +49,7 @@ class MultiplayerRoomViewModel: ObservableObject {
                 }
                 self.isHost = isHostStatus
             }.store(in: &cancellables)
-        
+
         roomlistener.$joinCode
             .sink { [weak self] code in
                 guard let self = self else {

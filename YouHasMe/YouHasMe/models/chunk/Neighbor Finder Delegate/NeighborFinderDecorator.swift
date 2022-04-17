@@ -12,7 +12,9 @@ protocol NeighborFinderDecorator: NeighborFinderDelegate {
 }
 
 extension NeighborFinderDelegate {
-    func decorateWith<T: NeighborFinderDecorator>(_ decoratorClass: T.Type)  -> AnyNeighborFinderDelegate<T.ChunkIdentifier> where T.ChunkIdentifier == Self.ChunkIdentifier {
+    func decorateWith<T: NeighborFinderDecorator>(_ decoratorClass: T.Type)
+    -> AnyNeighborFinderDelegate<T.ChunkIdentifier>
+    where T.ChunkIdentifier == Self.ChunkIdentifier {
         decoratorClass.init(finder: self).eraseToAnyNeighborFinder()
     }
 }

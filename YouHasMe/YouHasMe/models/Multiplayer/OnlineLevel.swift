@@ -13,5 +13,5 @@ struct OnlineLevel {
 }
 
 extension OnlineLevel: Codable {
-    
+
 }

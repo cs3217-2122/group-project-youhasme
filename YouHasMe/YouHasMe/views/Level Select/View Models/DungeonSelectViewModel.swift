@@ -14,7 +14,7 @@ class DungeonSelectViewModel: ObservableObject {
     func getAllDungeons() -> [Loadable] {
         dungeonStorage.getAllLoadables()
     }
-    
+
     func upload(loadable: Loadable) {
         guard let dungeon = dungeonStorage.loadDungeon(name: loadable.name) else {
             return

@@ -169,7 +169,7 @@ enum ConditionType: String {
             return nil
         }
     }
-    
+
     func getSortedKeyPaths() -> [AnyNamedKeyPath]? {
         guard let keyPaths = getKeyPaths() else {
             return nil

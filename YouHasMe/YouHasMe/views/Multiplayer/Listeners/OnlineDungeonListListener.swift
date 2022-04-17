@@ -20,7 +20,7 @@ class OnlineDungeonListListener: ObservableObject {
                 if let error = error {
                     print("Cant retrieve online dungeons \(error.localizedDescription)")
                 }
-                
+
                 if let querySnapshot = querySnapshot {
                     self.onlineDungeons = querySnapshot.documents.compactMap { document in
                         try? document.data(as: OnlineDungeon.self)
@@ -28,7 +28,7 @@ class OnlineDungeonListListener: ObservableObject {
                 }
             }
     }
-    
+
     func unsubscribe() {
         handle?.remove()
     }

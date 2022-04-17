@@ -11,7 +11,7 @@ import Firebase
 struct OnlineLevelStorage {
     let db = Firestore.firestore()
     static let collectionPath = "levels"
-    
+
     private func getOnlineLevels(dungeon: Dungeon) -> [OnlineLevel] {
         let levelStorage = dungeon.levelStorage
         let levelLodables = levelStorage.getAllLoadables()
@@ -23,8 +23,10 @@ struct OnlineLevelStorage {
         }
         return onlineLevels
     }
-    
-    func uploadOnlineLevels(dungeon: Dungeon, batch: WriteBatch, parentRef: DocumentReference) throws -> [DocumentReference] {
+
+    func uploadOnlineLevels(
+        dungeon: Dungeon, batch: WriteBatch, parentRef: DocumentReference
+    ) throws -> [DocumentReference] {
         let onlineLevels = getOnlineLevels(dungeon: dungeon)
         var levelRefs: [DocumentReference] = []
         for onlineLevel in onlineLevels {

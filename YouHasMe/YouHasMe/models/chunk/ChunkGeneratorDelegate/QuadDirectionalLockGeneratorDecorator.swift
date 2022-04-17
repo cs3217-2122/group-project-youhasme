@@ -27,7 +27,7 @@ final class QuadDirectionalLockGeneratorDecorator: IdentityGeneratorDecorator {
             .conditionRelation(.leq),
             .conditionEvaluable(ConditionEvaluable(evaluableType: .numericLiteral(0)))
         ]
-        
+
         var coord = Point(x: 0, y: 1)
         tiles[coord].entities.removeAll()
         for i in 0..<blocks.count {

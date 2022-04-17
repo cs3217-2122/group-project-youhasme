@@ -10,7 +10,7 @@ struct Entity {
     func has(behaviour: Behaviour) -> Bool {
         activeBehaviours.contains(behaviour)
     }
-    
+
     func isPlayer() -> Bool {
         for behaviour in activeBehaviours {
             switch behaviour {

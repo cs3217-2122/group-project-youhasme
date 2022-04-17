@@ -15,7 +15,7 @@ class DungeonRoomListener: ObservableObject {
     let db = Firestore.firestore()
     let storage = MultiplayerRoomStorage()
     @Published var dungeonRoom: DungeonRoom?
-    @Published var playerPos: Point = Point.zero
+    @Published var playerPos = Point.zero
     @Published var playerNumAssignment: [String: Int] = [:]
     @Published var playerNum: Int?
 
@@ -24,12 +24,12 @@ class DungeonRoomListener: ObservableObject {
         self.dungeonRoomId = dungeonRoomId
 
     }
-    
-    func isCurrentPlayer(playerId: String) ->  Bool {
+
+    func isCurrentPlayer(playerId: String) -> Bool {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             fatalError("should be logged in")
         }
-        
+
         return currentUserId == playerId
     }
 
@@ -62,7 +62,7 @@ class DungeonRoomListener: ObservableObject {
         guard var dungeonRoomCopy = self.dungeonRoom else {
             return
         }
-        
+
         if playerNum == 0 || playerNum == self.playerNumAssignment[currentUserId] {
             dungeonRoomCopy.playerLocations[currentUserId] = pos
             do {

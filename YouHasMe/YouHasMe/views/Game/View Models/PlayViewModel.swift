@@ -226,11 +226,11 @@ extension PlayViewModel {
         if activeRulesViewModel == nil {
             activeRulesViewModel = ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
         }
-        
+
         guard let activeRulesViewModel = activeRulesViewModel else {
             fatalError("should not be nil")
         }
-        
+
         return activeRulesViewModel
     }
 }

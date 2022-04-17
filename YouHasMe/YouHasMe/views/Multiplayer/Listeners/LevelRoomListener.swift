@@ -18,14 +18,14 @@ class LevelRoomListener: ObservableObject {
     let db = Firestore.firestore()
     @Published var levelRoom: LevelRoom?
     @Published var levelMoves: [LevelMove] = []
-    
+
     init(roomId: String, dungeonRoomId: String, point: Point) {
         self.roomId = roomId
         self.dungeonRoomId = dungeonRoomId
         self.point = point
         storage.createLevelRoom(roomId: roomId, dungeonRoomId: dungeonRoomId, levelId: point.dataString)
     }
-    
+
     func subscribe() {
         self.roomHandle = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
             .collection(DungeonRoomStorage.collectionPath).document(dungeonRoomId)
@@ -52,35 +52,38 @@ class LevelRoomListener: ObservableObject {
                 if let querySnapshot = querySnapshot {
                     var isPendingWrite = false
                     let levelMoves: [LevelMove] = querySnapshot.documents.compactMap { document in
-                        if document.metadata.hasPendingWrites  {
+                        if document.metadata.hasPendingWrites {
                             isPendingWrite = true
                             return nil
                         } else {
                             return try? document.data(as: LevelMove.self)
                         }
                     }
-                    
+
                     if !isPendingWrite {
                         self.levelMoves = levelMoves
                     }
                 }
             }
     }
-    
+
     func incrementWinCount() {
         guard var levelRoomCopy = self.levelRoom else {
             return
         }
-        
+
         levelRoomCopy.winCount += 1
         do {
-            try storage.updateLevelRoom(roomId: self.roomId, dungeonRoomId: self.dungeonRoomId, levelRoom: levelRoomCopy)
+            try storage.updateLevelRoom(
+                roomId: self.roomId,
+                dungeonRoomId: self.dungeonRoomId, levelRoom: levelRoomCopy
+            )
         } catch {
             print("couldnt update win count")
         }
-        
+
     }
-    
+
     func sendAction(actionType: ActionType) {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             return

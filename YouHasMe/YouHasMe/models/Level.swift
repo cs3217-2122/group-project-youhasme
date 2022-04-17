@@ -124,13 +124,13 @@ extension Level {
             for y in 0..<dimensions.height {
                 let point = Point(x: x, y: y)
                 count += layer.tiles[point].entities.filter { entity in
-                    return entity.has(behaviour: .property(property))
+                    entity.has(behaviour: .property(property))
                 }.count
             }
         }
         return count
     }
-    
+
     private func countByNounInstance(_ noun: Noun) -> Int {
         var count = 0
         for x in 0..<dimensions.width {
@@ -146,23 +146,23 @@ extension Level {
         }
         return count
     }
-    
+
     var youCount: Int {
         countByProperty(.you)
     }
-    
+
     var stopCount: Int {
         countByProperty(.stop)
     }
-    
+
     var pushCount: Int {
         countByProperty(.push)
     }
-    
+
     var babaCount: Int {
         countByNounInstance(.baba)
     }
-    
+
     var wallCount: Int {
         countByNounInstance(.wall)
     }

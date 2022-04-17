@@ -12,8 +12,8 @@ class IdentityFinderDecorator<T>: NeighborFinderDecorator where T: DataStringCon
     required init<N>(finder: N) where N: NeighborFinderDelegate, N.ChunkIdentifier == T {
         backingFinder = finder.eraseToAnyNeighborFinder()
     }
-    
-    func getNeighborId<C>(of chunk: C) -> NeighborData<T> where C : Chunkable, C.ChunkIdentifier == T {
+
+    func getNeighborId<C>(of chunk: C) -> NeighborData<T> where C: Chunkable, C.ChunkIdentifier == T {
         backingFinder.getNeighborId(of: chunk)
     }
 }

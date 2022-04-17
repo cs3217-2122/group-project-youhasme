@@ -68,7 +68,7 @@ class EntityViewModel: CellViewModel {
         guard tile.entities.isEmpty else {
             return
         }
-        
+
         guard let delegate = basicCRUDDelegate, let worldPosition = worldPosition else {
             return
         }

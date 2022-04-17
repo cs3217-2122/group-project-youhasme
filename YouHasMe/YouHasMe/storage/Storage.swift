@@ -189,7 +189,7 @@ class LevelStorage: JSONStorage {
     override func getDefaultDirectory() -> URL {
         dungeonDirectory.appendingPathComponent(LevelStorage.levelDirectoryName)
     }
-    
+
     func loadLevel(_ name: String) -> PersistableLevel? {
         try? loadAndDecode(filename: name)
     }
@@ -233,7 +233,7 @@ class DungeonStorage: JSONStorage {
         )
         try delete(file: levelDirectory)
     }
-    
+
     func getLoadable(name: String) throws -> Loadable {
         Loadable(url: try getURL(filename: name), name: name)
     }

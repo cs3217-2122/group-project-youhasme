@@ -10,13 +10,15 @@ enum DesignerState {
 enum PlayMode {
     case normal
     case endlessWrap
-    
+
     func getConfig() -> DungeonPlayParams? {
         switch self {
         case .normal:
             return nil
         case .endlessWrap:
-            return DungeonPlayParams(neighborFinder: ImmediateNeighborhoodChunkNeighborFinder().decorateWith(ChunkNeighborFinderWrapAroundDecorator.self)
+            return DungeonPlayParams(
+                neighborFinder: ImmediateNeighborhoodChunkNeighborFinder()
+                    .decorateWith(ChunkNeighborFinderWrapAroundDecorator.self)
             )
         }
     }
@@ -61,7 +63,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     var isExistingLevel = true
 
     private var subscriptions: Set<AnyCancellable> = []
-
 
     var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
@@ -211,7 +212,7 @@ extension DesignerViewModel {
             return viewModel
         }
     }
-    
+
     func getPlayerEntityViewModels() -> [PaletteEntityViewModel] {
         guard dungeon.numberOfPlayers > 1 else {
             return []
