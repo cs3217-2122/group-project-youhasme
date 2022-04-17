@@ -120,6 +120,14 @@ class DungeonRoomListener: ObservableObject {
         self.dungeonRoomId = dungeonRoomId
 
     }
+    
+    func isCurrentPlayer(playerId: String) ->  Bool {
+        guard let currentUserId = Auth.auth().currentUser?.uid else {
+            fatalError("should be logged in")
+        }
+        
+        return currentUserId == playerId
+    }
 
     func subscribe() {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
@@ -198,16 +206,6 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     @Published var selectedTile: Tile?
     @Published var state: PlayViewState = .normalPlay
     
-    var contextualData: [ContextualMenuData] {
-        guard let entities = selectedTile?.entities else {
-            return []
-        }
-
-        let data = Array(Set(entities.compactMap { ContextualMenuData(entityType: $0.entityType) })).sorted()
-        data.forEach { $0.delegate = self }
-        return data
-    }
-    
     func setupSelectedTileBindings() {
         $selectedTile.sink { [weak self] selectedTile in
             guard let self = self else {
@@ -267,7 +265,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //            print("GAME EVENT: \(gameEvent.type)")
             switch gameEvent.type {
             case .movingAcrossLevel(let playerNum):
-                self.levelLayer = nil
+//                self.levelLayer = nil
                 self.handleMoveAcrossLevel(playerNum: playerNum)
 //            case .win:
 //                self.handleWin()
@@ -289,7 +287,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     }
 
     func handleMoveAcrossLevel(playerNum: Int) {
-        self.levelLayer = nil
+//        self.levelLayer = nil
         let newPlayerLevelPosition = playerPos.translate(by: lastAction.getMovementAsVector())
         guard dungeon.dimensions.isWithinBounds(newPlayerLevelPosition) else {
             return
@@ -335,7 +333,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     }
 
     func setUpLevelRoomListener(pos: Point) {
-        self.levelLayer = nil
+//        self.levelLayer = nil
         self.levelRoomListener?.unsubscribe()
         self.levelRoomListener = LevelRoomListener(roomId: self.roomId, dungeonRoomId: self.dungeonRoomId, point: pos)
         self.levelRoomListener?.subscribe()
@@ -354,7 +352,9 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //                print(level.name)
                 level.winCount = levelRoom?.winCount ?? 0
                 self.level = level
-                self.applyMoves()
+                if self.levelLayer == nil {
+                    self.levelLayer = level.layer
+                }
                 print("CHANED LEVEL ROOM")
             }.store(in: &cancellables)
 
@@ -391,9 +391,15 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 
         self.levelLayer = gameEngine.currentGame.levelLayer
         if gameEngine.currentGame.gameStatus == .win {
-            self.handleWin()
-            self.showingWinAlert = gameEngine.currentGame.gameStatus == .win
+            if let lastMove = moves.last, let listener = dungeonRoomListener {
+                if listener.isCurrentPlayer(playerId: lastMove.playerId) {
+                    self.handleWin()
+                }
+            }
+           
+            
         }
+        self.showingWinAlert = gameEngine.currentGame.gameStatus == .win
         self.showingLoopAlert = gameEngine.status == .infiniteLoop
     }
 }
@@ -432,15 +438,5 @@ extension MultiplayerPlayViewModel : RuleEngineDelegate {
 
     func getLevelName(by id: Point) -> String? {
         self.level?.name
-    }
-}
-
-extension MultiplayerPlayViewModel: ContextualMenuDelegate {
-    func closeOverlay() {
-        state = .normalPlay
-    }
-
-    func showMessages() {
-        state = .messages
     }
 }

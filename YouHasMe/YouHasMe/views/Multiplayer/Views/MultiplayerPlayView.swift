@@ -50,12 +50,6 @@ struct MultiplayerPlayView: View {
                     Button("ok!", role: .cancel) {}
                 }
             
-            HStack(alignment: .center) {
-                ForEach(viewModel.contextualData) { data in
-                    Button(data.description, action: data.action)
-                }
-            }
-            
             Spacer()
         }
     }

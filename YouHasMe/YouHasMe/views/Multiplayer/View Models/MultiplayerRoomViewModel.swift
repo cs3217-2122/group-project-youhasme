@@ -16,6 +16,7 @@ class MultiplayerRoomListener: ObservableObject {
     @Published var multiplayerRoom: MultiplayerRoom?
     @Published var playerStatus: PlayerStatus = .waiting
     @Published var isHost = false
+    @Published var joinCode = ""
 
     func subscribe(roomId: String) {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
@@ -31,6 +32,7 @@ class MultiplayerRoomListener: ObservableObject {
                     self.multiplayerRoom = try? querySnapshot.data(as: MultiplayerRoom.self)
                     self.playerStatus = self.multiplayerRoom?.players[currentUserId]?.status ?? .waiting
                     self.isHost = self.multiplayerRoom?.creatorId == currentUserId
+                    self.joinCode = self.multiplayerRoom?.joinCode ?? ""
                 }
             }
     }
@@ -72,6 +74,7 @@ class MultiplayerRoomViewModel: ObservableObject {
     @Published var playerStatus: PlayerStatus = .waiting
     @Published var players: [Player] = []
     @Published var selectedDungeon: OnlineDungeon? = nil
+    @Published var joinCode: String = ""
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -103,6 +106,14 @@ class MultiplayerRoomViewModel: ObservableObject {
                     return
                 }
                 self.isHost = isHostStatus
+            }.store(in: &cancellables)
+        
+        roomlistener.$joinCode
+            .sink { [weak self] code in
+                guard let self = self else {
+                    return
+                }
+                self.joinCode = code
             }.store(in: &cancellables)
     }
 

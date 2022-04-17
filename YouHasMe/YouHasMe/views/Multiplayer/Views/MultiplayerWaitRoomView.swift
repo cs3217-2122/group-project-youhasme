@@ -37,10 +37,16 @@ struct MultiplayerWaitRoomView: View {
             }) {
                 Text("Select a online dungeon")
             }
-        
-            List {
-                ForEach(viewModel.players, id: \.self.id) { player in
-                    Text(player.displayName)
+            
+            Section("Join Code") {
+                Text(viewModel.joinCode)
+            }
+            
+            Section("Players") {
+                List {
+                    ForEach(viewModel.players, id: \.self.id) { player in
+                        Text(player.displayName)
+                    }
                 }
             }
             
