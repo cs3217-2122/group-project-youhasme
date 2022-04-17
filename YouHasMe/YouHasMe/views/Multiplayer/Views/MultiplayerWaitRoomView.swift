@@ -28,33 +28,35 @@ struct MultiplayerWaitRoomView: View {
     
     var roomView: some View {
         VStack {
-            if (viewModel.selectedDungeon != nil) {
-                Text("Selected Dungeon: \(viewModel.selectedDungeon?.persistedDungeon.name ?? "")")
-            }
-            
-            Button(action: {
-                selectingDungeon = true
-            }) {
-                Text("Select a online dungeon")
-            }
-            
-            Section("Join Code") {
-                Text(viewModel.joinCode)
-            }
-            
-            Section("Players") {
-                List {
+            Text("Join Code: \(viewModel.joinCode)")
+                .font(.title)
+
+            List {
+                Section("Players") {
                     ForEach(viewModel.players, id: \.self.id) { player in
                         Text(player.displayName)
                     }
                 }
-            }
-            
-            if(viewModel.isHost) {
-                Button(action: {
-                    viewModel.startGame()
-                }) {
-                    Text("Start Dungeon")
+                
+                Section("Select a dungeon") {
+                    if (viewModel.selectedDungeon != nil) {
+                        Text("Selected Dungeon: \(viewModel.selectedDungeon?.persistedDungeon.name ?? "")")
+                    }
+                    Button(action: {
+                        selectingDungeon = true
+                    }) {
+                        Text("Select a online dungeon")
+                    }
+                }
+                
+                Section("Start dungeon") {
+                    if(viewModel.isHost) {
+                        Button(action: {
+                            viewModel.startGame()
+                        }) {
+                            Text("Start Dungeon")
+                        }.disabled(viewModel.selectedDungeon == nil)
+                    }
                 }
             }
         }
