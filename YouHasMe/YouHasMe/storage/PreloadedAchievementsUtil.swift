@@ -75,7 +75,7 @@ struct PreloadedAchievementsUtil {
         let statistic = GameStatistic(value: 0, statisticType: .lifetime, gameEvent: event)
         let unlockCondition = IntegerUnlockCondition(statistic: statistic, comparison: .moreThanOrEqualTo,
                                                      unlockValue: 1)
-        return Achievement(name: "GOGO IS YOU", description: "Win a level as Gogo",
+        return Achievement(name: "BABA IS YOU", description: "Win a level as Baba",
                            unlockConditions: [unlockCondition], isHidden: true)
     }
 
