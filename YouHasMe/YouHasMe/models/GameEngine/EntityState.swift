@@ -56,7 +56,7 @@ struct EntityState: Hashable {
             $0.action == action && $0.isRejected
         }
     }
-    
+
     func isPlayer() -> Bool {
         entity.isPlayer()
     }

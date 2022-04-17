@@ -11,7 +11,7 @@ import Firebase
 struct MultiplayerRoomStorage: MultiplayerRoomStorageProtocol {
     let db = Firestore.firestore()
     static let collectionPath = "rooms"
-    
+
     let dungeonRoomStorage = DungeonRoomStorage()
 
     func joinRoom(joinCode: String, displayName: String) async throws -> String {
@@ -65,12 +65,12 @@ struct MultiplayerRoomStorage: MultiplayerRoomStorageProtocol {
         updatedRoom.updatePlayerStatusToPlaying(dungeonRoomId: dungeonRoomId)
         try updateRoom(room: updatedRoom)
     }
-    
+
     func updateDungeonRoom(dungeonRoom: DungeonRoom, roomId: String) throws {
         let roomRef = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
         try dungeonRoomStorage.updateDungeonRoom(dungeonRoom: dungeonRoom, parentRef: roomRef)
     }
-    
+
     func createLevelRoom(roomId: String, dungeonRoomId: String, levelId: String) {
         let roomRef = db.collection(MultiplayerRoomStorage.collectionPath).document(roomId)
         dungeonRoomStorage.createLevelRoom(dungeonRoomId: dungeonRoomId, levelId: levelId, parentRef: roomRef)

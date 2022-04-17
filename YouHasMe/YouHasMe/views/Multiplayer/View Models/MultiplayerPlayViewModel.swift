@@ -16,13 +16,13 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     var dungeonRoomListener: DungeonRoomListener?
     var levelRoomListener: LevelRoomListener?
     var lastAction: ActionType = .tick
-    
+
     var dungeon: Dungeon
     var playerNumAssignment: [String: Int] = [:]
     @Published var level: Level?
     var moves: [LevelMove] = []
-    @Published var playerPos: Point = Point.zero
-    
+    @Published var playerPos = Point.zero
+
     var moveAcrossLevel = false
     var moveAcrossLevelPlayer = 1
 
@@ -32,9 +32,9 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 
     @Published var selectedTile: Tile?
     @Published var state: PlayViewState = .normalPlay
-    
+
     @Published var playerNum: Int?
-    
+
     func setupSelectedTileBindings() {
         $selectedTile.sink { [weak self] selectedTile in
             guard let self = self else {
@@ -52,7 +52,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         }
     }
 
-    @Published var viewPosition: Point = Point.zero
+    @Published var viewPosition = Point.zero
 
     var viewableDimensions = Dungeon.defaultLevelDimensions
 
@@ -83,7 +83,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         gridDisplayMode = .fixedDimensionsInCells(dimensions: dungeon.levelDimensions)
         self.setUpDungeonRoomListener()
     }
-    
+
     private var gameEngineSubscription: AnyCancellable?
 
     func setupBindingsWithGameEngine(gameEngine: GameEngine) {
@@ -107,12 +107,12 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //        achievementsViewModel.resetSubscriptions()
 //        achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
-    
+
     func sendAction(actionType: ActionType) {
         lastAction = actionType
         levelRoomListener?.sendAction(actionType: actionType)
     }
-    
+
     func handleWin() {
         levelRoomListener?.incrementWinCount()
     }
@@ -211,9 +211,9 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         }
         let levelLayer = level.layer
         var gameEngine = GameEngine(levelLayer: levelLayer, ruleEngineDelegate: self)
-        
+
         for (index, move) in self.moves.enumerated() {
-            
+
             if index == self.moves.count - 1 {
                 setupBindingsWithGameEngine(gameEngine: gameEngine)
             }
@@ -230,7 +230,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
                 }
             }
         }
-        
+
         if moveAcrossLevel {
             self.handleMoveAcrossLevel(playerNum: moveAcrossLevelPlayer)
         }
@@ -242,7 +242,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 extension MultiplayerPlayViewModel {
     func getTileViewModel(at viewOffset: Vector) -> EntityViewModel {
         let worldPosition = getWorldPosition(at: viewOffset)
-        var tile: Tile? = nil
+        var tile: Tile?
         var status = LevelStatus.inactiveAndIncomplete
 
         if let levelLayer = self.levelLayer {
@@ -261,7 +261,7 @@ extension MultiplayerPlayViewModel {
     }
 }
 
-extension MultiplayerPlayViewModel : RuleEngineDelegate {
+extension MultiplayerPlayViewModel: RuleEngineDelegate {
     var dungeonName: String {
         self.dungeon.name
     }

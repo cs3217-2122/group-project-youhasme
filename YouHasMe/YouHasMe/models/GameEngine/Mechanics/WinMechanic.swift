@@ -27,7 +27,7 @@ struct WinMechanic: GameMechanic {
                 newState.gameStatus = .win
             }
         }
-        
+
         for playerEntity in playerEntities {
             let playerLocation = playerEntity.location
             if winEntities.contains(where: { $0.location.isOverlapping(with: playerLocation) }) {

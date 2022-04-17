@@ -62,10 +62,10 @@ struct DungeonRoom {
     var dungeon: OnlineDungeon
     var originalDungeonId: String
     var playerLocations: [String: Point] = [:]
-    
+
     mutating func addPlayers(players: [Player]) {
         for (index, player) in players.enumerated() {
-            self.players[player.id] = index+1
+            self.players[player.id] = index + 1
             self.playerLocations[player.id] = dungeon.persistedDungeon.entryLevelPosition
         }
     }
@@ -80,7 +80,6 @@ struct LevelRoom {
 
 extension LevelRoom: Codable {}
 
-
 struct LevelMove {
     @DocumentID var id: String?
     var playerId: String
@@ -88,7 +87,6 @@ struct LevelMove {
     @ServerTimestamp var timestamp: Timestamp?
 }
 
+extension LevelMove: Codable {
 
-extension LevelMove : Codable {
-    
 }

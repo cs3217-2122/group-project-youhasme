@@ -11,7 +11,7 @@ import Firebase
 @main
 struct YouHasMeApp: App {
     @StateObject var gameState = GameState()
-    
+
     init() {
         FirebaseApp.configure()
         Auth.auth().signInAnonymously()

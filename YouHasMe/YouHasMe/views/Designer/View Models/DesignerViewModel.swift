@@ -7,6 +7,23 @@ enum DesignerState {
     case choosingConditionEvaluable(worldPosition: Point)
 }
 
+enum PlayMode {
+    case normal
+    case endlessWrap
+
+    func getConfig() -> DungeonPlayParams? {
+        switch self {
+        case .normal:
+            return nil
+        case .endlessWrap:
+            return DungeonPlayParams(
+                neighborFinder: ImmediateNeighborhoodChunkNeighborFinder()
+                    .decorateWith(ChunkNeighborFinderWrapAroundDecorator.self)
+            )
+        }
+    }
+}
+
 class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     let baseViewOffset: Vector = .zero
     @Published var gridDisplayMode: GridDisplayMode = .scaleToFitCellSize(
@@ -47,7 +64,6 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
 
     private var subscriptions: Set<AnyCancellable> = []
 
-
     var gameEventPublisher: AnyPublisher<AbstractGameEvent, Never> {
         gameEventSubject.eraseToAnyPublisher()
     }
@@ -79,9 +95,12 @@ class DesignerViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
         setupBindings()
     }
 
-    func getPlayableDungeon() -> PlayableDungeon {
+    func getPlayableDungeon(_ playMode: PlayMode) -> PlayableDungeon {
         guard let dungeon: Dungeon = dungeonStorage.loadDungeon(name: dungeon.name) else {
             fatalError("Failed to load current meta level")
+        }
+        if let config = playMode.getConfig() {
+            dungeon.levelNeighborFinder = config.neighborFinder
         }
         return .dungeon(dungeon)
     }
@@ -193,7 +212,7 @@ extension DesignerViewModel {
             return viewModel
         }
     }
-    
+
     func getPlayerEntityViewModels() -> [PaletteEntityViewModel] {
         guard dungeon.numberOfPlayers > 1 else {
             return []

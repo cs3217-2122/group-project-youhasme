@@ -1339,7 +1339,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --lenient\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nif which swiftlint >/dev/null; then\n  swiftlint --lenient && swiftlint --fix\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1578,7 +1578,6 @@
 				1E54072D280B5FB5006D546F /* MultiplayerPlayViewModel.swift in Sources */,
 				1E54070F28097DE4006D546F /* OnlineLevel.swift in Sources */,
 				1E54071E280B243B006D546F /* MultiplayerRoomViewModel.swift in Sources */,
-				E5BECBDB27E59B2400E3952D /* LevelLayerTests.swift in Sources */,
 				40E2519027F9FAB1008CBCE0 /* GameEventTests.swift in Sources */,
 				E5BECBD427E599F100E3952D /* YouHasMeTests.swift in Sources */,
 				1E54070528096E4A006D546F /* DungeonRoomStorage.swift in Sources */,

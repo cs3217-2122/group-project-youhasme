@@ -11,7 +11,7 @@ import Combine
 enum LevelTransitionStyle: String {
     case quadDirectional = "The Quad"
     case snakeLike = "Snakey Likey"
-    
+
     func toGeneratorDecorators() -> [IdentityGeneratorDecorator.Type] {
         switch self {
         case .quadDirectional:
@@ -43,7 +43,7 @@ enum RuleBlocks: String {
     case babaIsYou = "Baba Is You"
     case flagIsWin = "Flag Is Win"
     case rockIsStop = "Rock Is Stop"
-    
+
     func toGeneratorDecorators() -> [IdentityGeneratorDecorator.Type] {
         switch self {
         case .babaIsYou:
@@ -80,13 +80,13 @@ class DimensionSelectViewModel: ObservableObject {
     let ruleBlocks = RuleBlocks.allCases
     @Published var requiresOverwrite = false
     @Published var generatedPreview: [[Tile]]?
-    
+
     var dungeonStorage = DungeonStorage()
-    
+
     init() {
         setupBindings()
     }
-    
+
     private func setupBindings() {
         Publishers.CombineLatest(self.$levelTransitionStyle, self.$initialRuleBlocks)
             .sink { [weak self] levelTransitionStyle, initialRuleBlocks in
@@ -99,20 +99,20 @@ class DimensionSelectViewModel: ObservableObject {
                 )
             }.store(in: &subscriptions)
     }
-    
+
     func aboutToCreateLevel() {
         if dungeonStorage.existsDungeon(name: dungeonName) {
             requiresOverwrite = true
         }
     }
-    
+
     func getDimensions() -> Rectangle {
         Rectangle(
             width: widthRange.index(widthRange.startIndex, offsetBy: widthSelection),
             height: heightRange.index(heightRange.startIndex, offsetBy: heightSelection)
         )
     }
-    
+
     func getGenerators(
         levelTransitionStyle: LevelTransitionStyle,
         initialRuleBlocks: Set<RuleBlocks>
@@ -134,7 +134,7 @@ class DimensionSelectViewModel: ObservableObject {
 
         let dimensions = getDimensions()
         let generators = getGenerators(levelTransitionStyle: levelTransitionStyle, initialRuleBlocks: initialRuleBlocks)
-        
+
         return .newDungeon(
             DungeonParams(
                 name: dungeonName,
@@ -143,7 +143,7 @@ class DimensionSelectViewModel: ObservableObject {
             )
         )
     }
-    
+
     func getPreviewLevel(
         levelTransitionStyle: LevelTransitionStyle,
         initialRuleBlocks: Set<RuleBlocks>
@@ -157,7 +157,7 @@ class DimensionSelectViewModel: ObservableObject {
             extremities: Rectangle(width: 6, height: 6)
         )
     }
-    
+
     func getTileViewModel(at position: Point) -> EntityViewModel {
         guard let generatedPreview = generatedPreview else {
             return EntityViewModel(tile: nil, status: nil)

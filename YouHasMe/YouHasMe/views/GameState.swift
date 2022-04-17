@@ -9,8 +9,15 @@ struct DungeonParams: Equatable {
     var name: String
     var dimensions: Rectangle
     var generators: [IdentityGeneratorDecorator.Type]
-    static func ==(lhs: DungeonParams, rhs: DungeonParams) -> Bool {
+    static func == (lhs: DungeonParams, rhs: DungeonParams) -> Bool {
         lhs.name == rhs.name
+    }
+}
+
+struct DungeonPlayParams: Equatable {
+    var neighborFinder: AnyNeighborFinderDelegate<Point>
+    static func == (lhs: DungeonPlayParams, rhs: DungeonPlayParams) -> Bool {
+        lhs.neighborFinder === rhs.neighborFinder
     }
 }
 
@@ -161,7 +168,7 @@ extension GameState {
     func getGameNotificationsViewModel() -> GameNotificationsViewModel {
         GameNotificationsViewModel()
     }
-    
+
     func getMultiplayerRoomViewModel() -> MultiplayerRoomViewModel {
         if case let .multiplayer(roomId: roomId) = state {
             return MultiplayerRoomViewModel(roomId: roomId)

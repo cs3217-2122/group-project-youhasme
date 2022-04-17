@@ -19,7 +19,8 @@ class Dungeon {
     static let defaultEntryLevelPosition: Point = .zero
     weak var viewableDelegate: DungeonViewableDelegate?
     var levelGenerator: AnyChunkGeneratorDelegate
-    var levelNeighborFinder = ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
+    var levelNeighborFinder: AnyNeighborFinderDelegate<Point> =
+        ImmediateNeighborhoodChunkNeighborFinder().eraseToAnyNeighborFinder()
     /// Uniform dimensions of each level within a dungeon.
     let levelDimensions: Rectangle
     /// Dimensions of the dungeon in terms of levels.
@@ -43,9 +44,9 @@ class Dungeon {
     @Published var loadedLevels: [Point: Level] = [:]
     var totalWins: Int = 0
     private var subscriptions: Set<AnyCancellable> = []
-    
+
     var numberOfPlayers: Int = 1
-    
+
     convenience init() {
         self.init(
             isNewDungeon: true,
@@ -87,15 +88,17 @@ class Dungeon {
         }
     }
 
-    func renameDungeon(to newName: String) {
+    func renameDungeon(to newName: String) -> Loadable? {
         let oldName = name
         do {
             globalLogger.info("Attempting to rename from \(oldName) to \(newName)")
             try dungeonStorage.renameDungeon(from: oldName, to: newName)
             name = newName
             try dungeonStorage.saveDungeon(self)
+            return try dungeonStorage.getLoadable(name: name)
         } catch {
             globalLogger.error("\(error.localizedDescription)")
+            return nil
         }
     }
 
@@ -140,7 +143,7 @@ class Dungeon {
         guard loadedLevels[newPlayerLevelPosition] != nil else {
             return false
         }
-        
+
         playerLevelPosition = newPlayerLevelPosition
         return true
     }
@@ -359,26 +362,25 @@ extension Dungeon {
     var youCount: Int {
         getActiveLevel().youCount
     }
-    
+
     var stopCount: Int {
         getActiveLevel().stopCount
     }
-    
+
     var pushCount: Int {
         getActiveLevel().pushCount
     }
-    
+
     var babaCount: Int {
         getActiveLevel().babaCount
     }
-    
+
     var wallCount: Int {
         getActiveLevel().pushCount
     }
 }
 
 extension Dungeon: KeyPathExposable {
-
     static var exposedNumericKeyPathsMap: [DungeonKeyPathKeys: KeyPath<Dungeon, Int>] {
         [
             .totalWins: \.totalWins,

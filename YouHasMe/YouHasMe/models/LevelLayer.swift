@@ -97,12 +97,12 @@ extension LevelLayer {
         var tiles = Array(
             repeatingFactory:
                 Array(repeatingFactory: Tile(), count: persistableLevelLayer.dimensions.width),
-            count:persistableLevelLayer.dimensions.height)
-        
+            count: persistableLevelLayer.dimensions.height)
+
         for (point, persistedTile) in persistableLevelLayer.tileMap {
             tiles[point] = Tile.fromPersistable(persistedTile)
         }
-    
+
         return LevelLayer(dimensions: persistableLevelLayer.dimensions, tiles: tiles)
     }
 }

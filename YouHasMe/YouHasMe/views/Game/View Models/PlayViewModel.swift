@@ -64,8 +64,10 @@ class PlayViewModel: AbstractGridViewModel, DungeonManipulableViewModel {
     private var mostRecentPlayerMove: ActionType?
     private var playerMovementAcrossLevel: Vector?
 
-    convenience init(playableDungeon: PlayableDungeon, achievementsViewModel: AchievementsViewModel,
-                     gameNotificationsViewModel: GameNotificationsViewModel) {
+    convenience init(playableDungeon: PlayableDungeon,
+                     achievementsViewModel: AchievementsViewModel,
+                     gameNotificationsViewModel: GameNotificationsViewModel
+    ) {
         self.init(dungeon: playableDungeon.getDungeon(), achievementsViewModel: achievementsViewModel,
                   gameNotificationsViewModel: gameNotificationsViewModel)
     }
@@ -224,11 +226,11 @@ extension PlayViewModel {
         if activeRulesViewModel == nil {
             activeRulesViewModel = ActiveRulesViewModel(lastActiveRulesPublisher: gameEngine.lastActiveRulesPublisher)
         }
-        
+
         guard let activeRulesViewModel = activeRulesViewModel else {
             fatalError("should not be nil")
         }
-        
+
         return activeRulesViewModel
     }
 }

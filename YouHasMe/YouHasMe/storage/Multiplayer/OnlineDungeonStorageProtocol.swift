@@ -8,5 +8,5 @@
 import Foundation
 
 protocol OnlineDungeonStorageProtocol {
-    func upload(dungeon: Dungeon) throws 
+    func upload(dungeon: Dungeon) throws
 }

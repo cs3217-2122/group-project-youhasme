@@ -20,7 +20,7 @@ struct PersistenceView: View {
     @State var isChangingDungeonName = false
     @State var dungeonButtonText: String = ""
     @State var unconfirmedDungeonName = ""
-
+    @State var showPlayConfigAlert = false
     var body: some View {
         HStack {
             Button("Load") {
@@ -42,8 +42,13 @@ struct PersistenceView: View {
             if isChangingDungeonName {
                 TextField("", text: $unconfirmedDungeonName)
                 Button("Confirm new name") {
-                    viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
+                    let loadable = viewModel.dungeon.renameDungeon(to: unconfirmedDungeonName)
                     isChangingDungeonName = false
+                    guard let loadable = loadable else {
+                        return
+                    }
+
+                    gameState.state = .designing(designableDungeon: .dungeonLoadable(loadable))
                 }
             } else {
                 DungeonNameButton(viewModel: viewModel.getNameButtonViewModel()) {
@@ -55,14 +60,30 @@ struct PersistenceView: View {
             Spacer()
             
             Button("Play") {
-                do {
-                    try viewModel.save()
-                    gameState.stateStack.append(
-                        .playing(playableDungeon: viewModel.getPlayableDungeon())
-                    )
-                } catch {
-                    showSaveErrorAlert = true
-                }
+                showPlayConfigAlert = true
+            }
+            .alert("Select Play Mode", isPresented: $showPlayConfigAlert) {
+                Button("Normal", action: {
+                    do {
+                        try viewModel.save()
+                        gameState.stateStack.append(
+                            .playing(playableDungeon: viewModel.getPlayableDungeon(.normal))
+                        )
+                    } catch {
+                        showSaveErrorAlert = true
+                    }
+                })
+                
+                Button("Endlessly Wrap", action: {
+                    do {
+                        try viewModel.save()
+                        gameState.stateStack.append(
+                            .playing(playableDungeon: viewModel.getPlayableDungeon(.endlessWrap))
+                        )
+                    } catch {
+                        showSaveErrorAlert = true
+                    }
+                })
             }
         }
         .padding([.leading, .trailing], 10.0)

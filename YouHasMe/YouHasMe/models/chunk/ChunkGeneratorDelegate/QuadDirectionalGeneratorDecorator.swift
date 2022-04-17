@@ -27,28 +27,28 @@ final class QuadDirectionalGeneratorDecorator: IdentityGeneratorDecorator {
         var creationCoords: [Point] = [
             topConnector, leftConnector, rightConnector, bottomConnector
         ]
-        
+
         if levelPosition.x == 0 {
             creationCoords.removeAll(leftConnector)
         }
-        
+
         if levelPosition.y == 0 {
             creationCoords.removeAll(topConnector)
         }
-        
+
         if levelPosition.x == extremities.width - 1 {
             creationCoords.removeAll(rightConnector)
         }
-        
+
         if levelPosition.y == extremities.height - 1 {
             creationCoords.removeAll(bottomConnector)
         }
-        
+
         for coord in creationCoords {
             tiles[coord].entities.removeAll()
             tiles[coord].entities.append(connectorEntity)
         }
-        
+
         return tiles
     }
 }

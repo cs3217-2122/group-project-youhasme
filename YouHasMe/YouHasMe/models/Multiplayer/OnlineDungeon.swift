@@ -14,5 +14,5 @@ struct OnlineDungeon {
 }
 
 extension OnlineDungeon: Codable, Identifiable {
-    
+
 }
