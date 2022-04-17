@@ -8,6 +8,7 @@ enum Property: Hashable {
     case pull
     case player(Int)
     case sink
+    case defeat
 }
 
 extension Property: CustomDebugStringConvertible {
@@ -27,6 +28,8 @@ extension Property: CustomDebugStringConvertible {
             return "pull"
         case .player(let num):
             return "player\(num)"
+        case .sink:
+            return "sink"
         }
     }
 }
