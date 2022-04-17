@@ -40,6 +40,21 @@ struct MultiplayerPlayView: View {
             Spacer()
             GridView(viewModel: viewModel)
                 .gesture(dragGesture)
+                .alert("You Win!", isPresented: $viewModel.showingWinAlert) {
+                    Button("yay!", role: .cancel) {
+//                        gameState.state = .mainmenu
+//                        viewModel.deleteRoom()
+                    }
+                }.alert("No infinite loops allowed!", isPresented: $viewModel.showingLoopAlert) {
+                    Button("ok!", role: .cancel) {}
+                }
+            
+            HStack(alignment: .center) {
+                ForEach(viewModel.contextualData) { data in
+                    Button(data.description, action: data.action)
+                }
+            }
+            
             Spacer()
         }
         

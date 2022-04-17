@@ -15,9 +15,9 @@ protocol AbstractGameEvent {
     func toPersistable() -> PersistableAbstractGameEvent
 }
 
-enum GameEventType: Int, Codable {
+enum GameEventType: Codable, Equatable {
     case move
     case win
     case designLevel
-    case movingAcrossLevel
+    case movingAcrossLevel(playerNum: Int)
 }

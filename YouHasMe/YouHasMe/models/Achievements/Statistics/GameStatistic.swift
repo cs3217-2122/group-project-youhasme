@@ -38,7 +38,7 @@ class GameStatistic: Hashable {
 
     func handleGameEvent(event: AbstractGameEvent) {
         if gameEvent.type == .win {
-            print(event.type)
+//            print(event.type)
         }
 
         if !event.containsGameEvent(otherGameEvent: self.gameEvent) {

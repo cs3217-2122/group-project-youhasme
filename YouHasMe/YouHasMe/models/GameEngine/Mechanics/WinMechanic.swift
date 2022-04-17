@@ -17,6 +17,7 @@ struct WinMechanic: GameMechanic {
     func apply(update: Action, state: LevelLayerState) -> LevelLayerState {
         let youEntities = state.entitiesWith(behaviour: .property(.you))
         let winEntities = state.entitiesWith(behaviour: .property(.win))
+        let playerEntities = state.playerEntities()
 
         // Check for overlap of any YOU block with any WIN block
         var newState = state
@@ -26,7 +27,13 @@ struct WinMechanic: GameMechanic {
                 newState.gameStatus = .win
             }
         }
+        
+        for playerEntity in playerEntities {
+            let playerLocation = playerEntity.location
+            if winEntities.contains(where: { $0.location.isOverlapping(with: playerLocation) }) {
+                newState.gameStatus = .win
+            }
+        }
         return newState
     }
-
 }

@@ -25,9 +25,12 @@ struct BoundaryMechanic: GameMechanic {
                 let newX = entityState.location.x + dx
                 let newY = entityState.location.y + dy
                 let isYouTryingToCrossBoundary = entityState.has(behaviour: .property(.you))
+                let isPlayerTryingToCrossBoundary = entityState.has(behaviour: .property(.player(update.playerNum)))
                 if !state.dimensions.isWithinBounds(x: newX, y: newY) {  // If moving out of bounds
                     if isYouTryingToCrossBoundary {
-                        publishingDelegate?.send(GameEvent(type: .movingAcrossLevel))
+                        publishingDelegate?.send(GameEvent(type: .movingAcrossLevel(playerNum: 0)))
+                    } else if isPlayerTryingToCrossBoundary {
+                        publishingDelegate?.send(GameEvent(type: .movingAcrossLevel(playerNum: update.playerNum)))
                     }
                     newState.entityStates[i].reject(action: action)
                 }

@@ -20,7 +20,7 @@ class LevelRoomListener: ObservableObject {
     let db = Firestore.firestore()
     @Published var levelRoom: LevelRoom?
     @Published var levelMoves: [LevelMove] = []
-
+    
     init(roomId: String, dungeonRoomId: String, point: Point) {
         self.roomId = roomId
         self.dungeonRoomId = dungeonRoomId
@@ -53,7 +53,12 @@ class LevelRoomListener: ObservableObject {
 
                 if let querySnapshot = querySnapshot {
                     self.levelMoves = querySnapshot.documents.compactMap { document in
-                        try? document.data(as: LevelMove.self)
+                        return try? document.data(as: LevelMove.self)
+//                        if document.metadata.hasPendingWrites {
+//                            return nil
+//                        } else {
+//                            return try? document.data(as: LevelMove.self)
+//                        }
                     }
                 }
             }
@@ -128,23 +133,23 @@ class DungeonRoomListener: ObservableObject {
             }
     }
 
-    func updatePosition(pos: Point) {
+    func updatePosition(pos: Point, playerNum: Int) {
         guard let currentUserId = Auth.auth().currentUser?.uid else {
             fatalError("should be logged in")
         }
-        
+
         guard var dungeonRoomCopy = self.dungeonRoom else {
             return
         }
         
-        dungeonRoomCopy.playerLocations[currentUserId] = pos
-        do {
-            try storage.updateDungeonRoom(dungeonRoom: dungeonRoomCopy, roomId: self.roomId)
-        } catch {
-            print("Unable to update position")
+        if playerNum == 0 || playerNum == self.playerNumAssignment[currentUserId] {
+            dungeonRoomCopy.playerLocations[currentUserId] = pos
+            do {
+                try storage.updateDungeonRoom(dungeonRoom: dungeonRoomCopy, roomId: self.roomId)
+            } catch {
+                print("Unable to update position")
+            }
         }
-       
-        
     }
 
     func unsubscribe() {
@@ -164,6 +169,10 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
     @Published var level: Level?
     @Published var moves: [LevelMove] = []
     @Published var playerPos: Point = Point.zero
+    @Published var levelLayer: LevelLayer?
+    @Published var showingWinAlert = false
+    @Published var showingLoopAlert = false
+    var isReplaying = false
 //    @Published var currLevelLayer: LevelLayer?
 
 //    var gameEngine: GameEngine {
@@ -171,6 +180,30 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //            setupBindingsWithGameEngine()
 //        }
 //    }
+
+    @Published var selectedTile: Tile?
+    @Published var state: PlayViewState = .normalPlay
+    
+    var contextualData: [ContextualMenuData] {
+        guard let entities = selectedTile?.entities else {
+            return []
+        }
+
+        let data = Array(Set(entities.compactMap { ContextualMenuData(entityType: $0.entityType) })).sorted()
+        data.forEach { $0.delegate = self }
+        return data
+    }
+    
+    func setupSelectedTileBindings() {
+        $selectedTile.sink { [weak self] selectedTile in
+            guard let self = self else {
+                return
+            }
+            if selectedTile == nil {
+                self.state = .normalPlay
+            }
+        }.store(in: &cancellables)
+    }
 
     var cumulativeTranslation: CGVector = .zero {
         didSet {
@@ -209,23 +242,24 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         gridDisplayMode = .fixedDimensionsInCells(dimensions: dungeon.levelDimensions)
         self.setUpDungeonRoomListener()
     }
+    
+    private var gameEngineSubscription: AnyCancellable?
 
     func setupBindingsWithGameEngine(gameEngine: GameEngine) {
-        gameEngine.gameEventPublisher.sink { [weak self] gameEvent in
+        gameEngineSubscription = gameEngine.gameEventPublisher.sink { [weak self] gameEvent in
             guard let self = self else {
                 return
             }
-
+            print("GAME EVENT: \(gameEvent.type)")
             switch gameEvent.type {
-            case .movingAcrossLevel:
-                self.handleMoveAcrossLevel()
-            case .win:
-                self.handleWin()
+            case .movingAcrossLevel(let playerNum):
+                self.handleMoveAcrossLevel(playerNum: playerNum)
+//            case .win:
+//                self.handleWin()
             default:
                 break
             }
         }
-
 //        achievementsViewModel.resetSubscriptions()
 //        achievementsViewModel.setSubscriptionsFor(gameEngine.gameEventPublisher)
     }
@@ -239,10 +273,13 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         levelRoomListener?.incrementWinCount()
     }
 
-    func handleMoveAcrossLevel() {
-        //HOW?
-//        dungeonRoomListener?.updatePosition(pos: <#T##Point#>)
-//        lastAction = .tick
+    func handleMoveAcrossLevel(playerNum: Int) {
+        let newPlayerLevelPosition = playerPos.translate(by: lastAction.getMovementAsVector())
+        guard dungeon.dimensions.isWithinBounds(newPlayerLevelPosition) else {
+            return
+        }
+        dungeonRoomListener?.updatePosition(pos: newPlayerLevelPosition, playerNum: playerNum)
+        lastAction = .tick
     }
 
 
@@ -299,6 +336,7 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
 //                print(level.name)
                 level.winCount = levelRoom?.winCount ?? 0
                 self.level = level
+                self.applyMoves()
             }.store(in: &cancellables)
 
         self.levelRoomListener?.$levelMoves
@@ -317,17 +355,25 @@ class MultiplayerPlayViewModel: AbstractGridViewModel, IntegerViewTranslatable {
         }
         let levelLayer = level.layer
         var gameEngine = GameEngine(levelLayer: levelLayer, ruleEngineDelegate: self)
+        isReplaying = true
         
-        for move in self.moves {
-            print("HERE")
-            print(move)
+        for (index, move) in self.moves.enumerated() {
+            
+            if index == self.moves.count - 1 {
+                print("LAST MOVE")
+                setupBindingsWithGameEngine(gameEngine: gameEngine)
+            }
             if let playerNum = playerNumAssignment[move.playerId] {
                 gameEngine.apply(action: Action(playerNum: playerNum, actionType: move.move))
-                setupBindingsWithGameEngine(gameEngine: gameEngine)
             }
         }
 
-        level.layer = gameEngine.currentGame.levelLayer
+        self.levelLayer = gameEngine.currentGame.levelLayer
+        if gameEngine.currentGame.gameStatus == .win {
+            self.handleWin()
+            self.showingWinAlert = gameEngine.currentGame.gameStatus == .win
+        }
+        self.showingLoopAlert = gameEngine.status == .infiniteLoop
     }
 }
 
@@ -337,18 +383,19 @@ extension MultiplayerPlayViewModel {
         var tile: Tile? = nil
         var status = LevelStatus.inactiveAndIncomplete
 
-        if let level = self.level {
+        if let levelLayer = self.levelLayer {
 //            print(level)
             let worldPosition = getWorldPosition(at: viewOffset)
             let positionWithinLevel = dungeon.worldToPositionWithinLevel(worldPosition)
-            tile = level.getTileAt(point: positionWithinLevel)
+            tile = levelLayer.getTileAt(point: positionWithinLevel)
             status = LevelStatus.active
         }
 
         return EntityViewModel(
             tile: tile,
             worldPosition: worldPosition,
-            status: status
+            status: status,
+            conditionEvaluableDelegate: self
         )
     }
 }
@@ -364,5 +411,15 @@ extension MultiplayerPlayViewModel : RuleEngineDelegate {
 
     func getLevelName(by id: Point) -> String? {
         self.level?.name
+    }
+}
+
+extension MultiplayerPlayViewModel: ContextualMenuDelegate {
+    func closeOverlay() {
+        state = .normalPlay
+    }
+
+    func showMessages() {
+        state = .messages
     }
 }
